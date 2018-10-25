@@ -1,0 +1,8 @@
+.vscode/
+frameworks/*
+frameworks/**/
+!.gitkeep
+tmp/
+*.old
+*.bak
+*.tmp
