@@ -1,9 +1,14 @@
 
-var res	= {
-	HelloWorld_png : "res/HelloWorld.png",
+const res	= {
+	"img"	: {
+		"player"	: { path:"res/player.png",	width:96,	height:48,	nSplitX:2,	nSplitY:1,	},
+	},
+	"se"	: {
+	},
 };
 
+
 var g_resources = [];
-for(let i in res) {
-	g_resources.push(res[i]);
+for(let i in res.img) {
+	g_resources.push(res.img[i].path);
 }
