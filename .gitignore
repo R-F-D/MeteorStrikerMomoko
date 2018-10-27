@@ -3,6 +3,8 @@ frameworks/*
 frameworks/**/
 !.gitkeep
 tmp/
+private
+private/
 *.old
 *.bak
 *.tmp
