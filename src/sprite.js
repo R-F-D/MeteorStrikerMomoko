@@ -33,10 +33,19 @@ class Sprite{
 		return new Sprite(img);
 	}
 
-	/** cc.Sprite.attrのラッパ
-	 * @param {*} idx
-	 * @param {*} attr
+	/** インスタンス取得
+	 * @param {number} [idx=0]
 	 * @returns
+	 * @memberof Sprite
+	 */
+	GetInstance(idx=0){
+		return this.entities[idx];
+	}
+
+	/** cc.Sprite.attrのラッパ
+	 * @param {Number} idx
+	 * @param {*} attr
+	 * @returns this
 	 * @memberof Sprite
 	 */
 	Attr(idx,attr){
@@ -45,13 +54,24 @@ class Sprite{
 	}
 
 	/** レイヤに自身を追加
-	 * @param {*} idx
+	 * @param {Number} idx
 	 * @param {*} layer
-	 * @returns
+	 * @returns this
 	 * @memberof Sprite
 	 */
 	AddToLayer(idx,layer){
 		layer.addChild(this.entities[idx]);
+		return this;
+	}
+
+	/** イベントリスナを追加
+	 * @param {Number} idx
+	 * @param {*} listener
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	AddEventListener(idx,listener){
+		cc.eventManager.addListener(listener,this.entities[idx]);
 		return this;
 	}
 }
