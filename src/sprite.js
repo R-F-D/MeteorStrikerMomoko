@@ -4,9 +4,17 @@
 class Sprite{
 
 	constructor(img){
-		this.img			= img;
+		this.img	= {
+			"path"		: img[0],
+			"nSplitX"	: img[1] || 1,
+			"nSplitY"	: img[2] || 1,
+		};
+
 		this.currentIndex	= -1;
-		this.entity			= new cc.Sprite(img.path);
+		this.entity			= new cc.Sprite(this.img.path);
+
+		this.img.width		= this.entity.getContentSize().width;
+		this.img.height		= this.entity.getContentSize().height;
 		this.setIndex(0);
 	}
 
@@ -67,7 +75,6 @@ class Sprite{
 		if(this.currentIndex===idx)	return this;
 
 		if(this.img.width>0 && this.img.height>0 && this.img.nSplitX>0 && this.img.nSplitY>0){
-			console.log("Update Texture Rect");
 			const x	= parseInt( idx % this.img.nSplitX );
 			const y	= parseInt( idx / this.img.nSplitX );
 			const w	= parseInt( this.img.width /this.img.nSplitX );

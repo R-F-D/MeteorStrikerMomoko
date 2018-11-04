@@ -1,7 +1,7 @@
 
 const res	= {
 	"img"	: {
-		"player"	: { path:"res/player.png",	width:96,	height:48,	nSplitX:2,	nSplitY:1,	},
+		"player"	: [ "res/player.png",	2,	1,	],
 	},
 	"se"	: {
 	},
@@ -10,5 +10,5 @@ const res	= {
 
 var g_resources = [];
 for(let i in res.img) {
-	g_resources.push(res.img[i].path);
+	g_resources.push(res.img[i][0]);
 }
