@@ -34,6 +34,10 @@ const BlowPower	= {
 	/**主動作の速度*/	MOTION_SPEED: 4*256,
 	/**主動作の加速度*/	ACCELERATION: 1.20,
 };
+/** リンクされたレイヤーのタグ */
+const LinkedLayerTags	= {
+	MAIN	: 0,
+};
 
 Scenes.GamePlay	= class{
 
@@ -55,9 +59,7 @@ Scenes.GamePlay	= class{
 			/** 生成 */
 			onEnter:function (){
 				this._super();
-
-				_this.ccLayerInstances.push(new _this.ccLayers.main());
-				for(let i in _this.ccLayerInstances)	this.addChild(_this.ccLayerInstances[i]);
+				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
 
 				this.scheduleUpdate();
 			},
@@ -91,26 +93,30 @@ Scenes.GamePlay	= class{
 			},
 		}))();
 
+		this.sprites	= {};
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
 			main	: cc.Layer.extend({
-				sprites	: {},
-
 				/**	生成 */
 				ctor:function(){
 					this._super();
 					this.init();
 					this.scheduleUpdate();
-
 					return true;
 				},
 				/** 初期化 */
 				init	: function(){
 					this._super();
 
-					this.sprites.aimGauge		= Sprite.CreateInstance(res.img.aimGauge).AddToLayer(this);
-					this.sprites.aimCursor		= Sprite.CreateInstance(res.img.aimCursor).AddToLayer(this);
-					this.sprites.player			= Sprite.CreateInstance(res.img.player).AddToLayer(this);
+					_this.chargingCount		= BlowPower.INITIAL;
+					_this.chargedPower		= 0;
+					_this.motionSpeed		= 0;
+					_this.impactSeq			= ImpactSequence.INITIAL;
+					_this.aiming			= AimingGauge.INITIAL;
+
+					_this.sprites.aimGauge		= Sprite.CreateInstance(res.img.aimGauge).AddToLayer(this);
+					_this.sprites.aimCursor		= Sprite.CreateInstance(res.img.aimCursor).AddToLayer(this);
+					_this.sprites.player			= Sprite.CreateInstance(res.img.player).AddToLayer(this);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
 					_this.labels.impactSeq		= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
@@ -127,18 +133,25 @@ Scenes.GamePlay	= class{
 					switch(_this.impactSeq){
 						case ImpactSequence.ACTION:
 						case ImpactSequence.IMPACTED:
-							this.sprites.player.setIndex(1);
+							_this.sprites.player.setIndex(1);
 							break;
 						default:
-							this.sprites.player.setIndex(0);
+							_this.sprites.player.setIndex(0);
 					}
-					this.sprites.player.Attr({x:100-_this.chargingCount/1024,y:100,});
-					this.sprites.aimGauge.Attr( {x:120,y:100,});
-					this.sprites.aimCursor.Attr({x:120,y:100+_this.aiming/512,});
+					_this.sprites.player.Attr({x:100-_this.chargingCount/1024,y:100,});
+					_this.sprites.aimGauge.Attr( {x:120,y:100,});
+					_this.sprites.aimCursor.Attr({x:120,y:100+_this.aiming/512,});
 
 					_this.labels.chargedPower.setString("Score: " + _this.chargingCount + " -> " + _this.chargedPower);
 					_this.labels.impactSeq.setString("Sequence: " + _this.impactSeq);
 					_this.labels.aiming.setString("Aiming: " + _this.aiming);
+					return true;
+				},
+			}),
+
+			main2	: cc.Layer.extend({
+				ctor:function(){
+					this._super();
 					return true;
 				},
 			}),
@@ -195,6 +208,7 @@ Scenes.GamePlay	= class{
 				onKeyReleased: function(code,event){
 					if(code==82){
 						_this.impactSeq		= ImpactSequence.INITIAL;
+						_this.SetLayer(0,_this.ccLayers.main);
 					}
 				},
 			}),
@@ -206,6 +220,24 @@ Scenes.GamePlay	= class{
 	static Create(){return new Scenes.GamePlay();}
 	/** Get cc.Scene Instance */
 	GetCcSceneInstance(){return this.ccSceneInstance;}
+
+	/** レイヤ内容の変更
+	 * @param {*} layerTag,
+	 * @param {*} nextLayerInstance
+	 * @param {Number} zOrder Zオーダー
+	 */
+	SetLayer(layerTag,nextLayer,zOrder=0){
+		if(!nextLayer)	return null;
+
+		if(this.ccLayerInstances[layerTag]){
+			this.ccLayerInstances[layerTag].unscheduleUpdate();
+			_this.ccSceneInstance.removeChildByTag(layerTag);
+		}
+		this.ccLayerInstances[layerTag]	= new nextLayer();
+		_this.ccSceneInstance.addChild(_this.ccLayerInstances[layerTag],zOrder,layerTag);
+
+		return this.ccLayerInstances[layerTag];
+	}
 
 }//class
 })();	//File Scope
