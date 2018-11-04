@@ -59,7 +59,7 @@ Scenes.GamePlay	= class{
 			/** 生成 */
 			onEnter:function (){
 				this._super();
-				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
+				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
 
 				this.scheduleUpdate();
 			},
@@ -74,7 +74,10 @@ Scenes.GamePlay	= class{
 					case ImpactSequence.ACTION:
 						_this.motionSpeed *= BlowPower.ACCELERATION;
 						_this.chargingCount -= _this.motionSpeed;
-						if(_this.chargingCount < BlowPower.MIN)	_this.impactSeq		= ImpactSequence.IMPACTED;
+						if(_this.chargingCount < BlowPower.MIN){
+							_this.impactSeq		= ImpactSequence.IMPACTED;
+							_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.emitEnergy);
+						}
 						break;
 					case ImpactSequence.FAILED:
 						_this.chargingCount-=BlowPower.DECREMENT;
@@ -96,7 +99,7 @@ Scenes.GamePlay	= class{
 		this.sprites	= {};
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
-			main	: cc.Layer.extend({
+			impact	: cc.Layer.extend({
 				/**	生成 */
 				ctor:function(){
 					this._super();
@@ -149,10 +152,20 @@ Scenes.GamePlay	= class{
 				},
 			}),
 
-			main2	: cc.Layer.extend({
+			emitEnergy	: cc.Layer.extend({
 				ctor:function(){
 					this._super();
+					console.log("EmitEnery Layer Constructor");
+					this.init();
+					this.scheduleUpdate();
 					return true;
+				},
+				init	: function(){
+					this._super();
+					_this.sprites.player.AddToLayer(this);
+				},
+				update	: function(){
+					this._super();
 				},
 			}),
 		};
