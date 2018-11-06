@@ -32,6 +32,7 @@ class Label{
 	 * @memberof Label
 	 */
 	AddToLayer(layer){
+		this.entity.removeFromParent();
 		layer.addChild(this.entity);
 		return this;
 	}
