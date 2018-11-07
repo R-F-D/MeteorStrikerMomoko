@@ -12,12 +12,12 @@ const Sequence	= {
 	/**初期状態*/		INITIAL			: 0,
 	/**エイム作動*/		START_AIM		: 1,
 	/**打撃予備動作*/	PRELIMINARY		: 2,
-	/**打撃動作*/		MOTION			: 3,
+	/**打撃動作*/		ACTION			: 3,
 	/**打撃ヒット後*/	IMPACTED		: 4,
 	/**エミット中*/		EMIT			: 5,
 	/**吹き飛ばし*/		BLOW_AWAY		: 6,
 	/**測定中*/			MEASURE			: 7,
-	/**動作失敗*/		MOTION_FAILED	: -1,
+	/**動作失敗*/		ACTION_FAILED	: -1,
 };
 /** エイミングゲージ定数 */
 const AimingGauge	= {
@@ -34,7 +34,7 @@ const BlowPower	= {
 	/**初期値*/			INITIAL		: 0,
 	/**増分*/			INCREMENT	: 1*256,
 	/**失敗時の減少*/	DECREMENT	: 1*256,
-	/**主動作の速度*/	MOTION_SPEED: 4*256,
+	/**主動作の速度*/	ACTION_SPEED: 4*256,
 	/**主動作の加速度*/	ACCELERATION: 1.20,
 };
 /** エミットエナジー定数*/
@@ -46,17 +46,17 @@ const LinkedLayerTags	= {
 	MAIN	: 0,
 };
 
-Scenes.GamePlay	= class{
+Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	constructor(){
+		super();
 		_this					= this;
-		this.ccSceneInstance	= null;
-		this.ccLayerInstances	= [];
 		this.seq				= Sequence.INITIAL;
+
 		//インパクトシークエンス
 		this.chargingCount		= BlowPower.INITIAL;
 		this.chargedPower		= 0;
-		this.motionSpeed		= 0;
+		this.actionSpeed		= 0;
 		this.aiming				= AimingGauge.INITIAL;
 		//エミットエナジーシークエンス
 		this.acceptEmitting		= 0;
@@ -80,7 +80,7 @@ Scenes.GamePlay	= class{
 			update:function(dt){
 
 				//エイミングカーソル作動
-				if(IsAnyOf( _this.seq, [Sequence.START_AIM,Sequence.PRELIMINARY,Sequence.MOTION,Sequence.MOTION_FAILED] )){
+				if(IsAnyOf( _this.seq, [Sequence.START_AIM,Sequence.PRELIMINARY,Sequence.ACTION,Sequence.ACTION_FAILED] )){
 					_this.aiming+=AimingGauge.INCREMENT;
 					if     (_this.aiming < AimingGauge.MIN)	_this.aiming = AimingGauge.MAX;
 					else if(_this.aiming > AimingGauge.MAX)	_this.aiming = AimingGauge.MIN;
@@ -89,14 +89,14 @@ Scenes.GamePlay	= class{
 				switch(_this.seq){
 					case Sequence.PRELIMINARY:
 						_this.chargingCount+=BlowPower.INCREMENT;
-						if(_this.chargingCount > BlowPower.MAX)	_this.seq		= Sequence.MOTION_FAILED;
+						if(_this.chargingCount > BlowPower.MAX)	_this.seq		= Sequence.ACTION_FAILED;
 						break;
-					case Sequence.MOTION:
-						_this.motionSpeed *= BlowPower.ACCELERATION;
-						_this.chargingCount -= _this.motionSpeed;
+					case Sequence.ACTION:
+						_this.actionSpeed *= BlowPower.ACCELERATION;
+						_this.chargingCount -= _this.actionSpeed;
 						if(_this.chargingCount < BlowPower.MIN)	_this.seq	= Sequence.IMPACTED;
 						break;
-					case Sequence.MOTION_FAILED:
+					case Sequence.ACTION_FAILED:
 						_this.chargingCount-=BlowPower.DECREMENT;
 						if(_this.chargingCount < BlowPower.MIN)	_this.seq		= Sequence.START_AIM;
 						break;
@@ -130,7 +130,6 @@ Scenes.GamePlay	= class{
 			},
 		}))();
 
-		this.sprites	= {};
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
 			/** インパクトシークエンスのメインレイヤ */
@@ -148,7 +147,7 @@ Scenes.GamePlay	= class{
 
 					_this.chargingCount		= BlowPower.INITIAL;
 					_this.chargedPower		= 0;
-					_this.motionSpeed		= 0;
+					_this.actionSpeed		= 0;
 					_this.seq				= Sequence.INITIAL;
 					_this.aiming			= AimingGauge.INITIAL;
 
@@ -170,7 +169,7 @@ Scenes.GamePlay	= class{
 				update	: function(dt){
 					this._super();
 					switch(_this.seq){
-						case Sequence.MOTION:
+						case Sequence.ACTION:
 						case Sequence.IMPACTED:
 							_this.sprites.player.setIndex(1);
 							break;
@@ -242,16 +241,16 @@ Scenes.GamePlay	= class{
 				onTouchEnded	: function(touch,event)	{
 					switch(_this.seq){
 						case Sequence.PRELIMINARY:
-							_this.seq			= Sequence.MOTION;
+							_this.seq			= Sequence.ACTION;
 							_this.chargedPower	= _this.chargingCount;
-							_this.motionSpeed	= BlowPower.MOTION_SPEED;
+							_this.actionSpeed	= BlowPower.ACTION_SPEED;
 							break;
 						default:
 					}
 				},
 				onTouchCanceled	: function(touch,event)	{
 					switch(_this.seq){
-						case Sequence.PRELIMINARY:	_this.seq	= Sequence.MOTION_FAILED;	break;
+						case Sequence.PRELIMINARY:	_this.seq	= Sequence.ACTION_FAILED;	break;
 						default:
 					}
 				},
@@ -262,7 +261,6 @@ Scenes.GamePlay	= class{
 				onMouseDown: function(touch,event){
 					switch(_this.seq){
 						case Sequence.EMIT:
-						console.log("Click");
 							_this.emittingPower++;
 							break;
 						default:
@@ -286,28 +284,8 @@ Scenes.GamePlay	= class{
 
 	/** Create Instance */
 	static Create(){return new Scenes.GamePlay();}
-	/** Get cc.Scene Instance */
-	GetCcSceneInstance(){return this.ccSceneInstance;}
 
-	/** レイヤ内容の変更
-	 * @param {*} layerTag,
-	 * @param {*} nextLayerInstance
-	 * @param {Number} zOrder Zオーダー
-	 */
-	SetLayer(layerTag,nextLayer,zOrder=0){
-		if(!nextLayer)	return null;
-
-		if(this.ccLayerInstances[layerTag]){
-			this.ccLayerInstances[layerTag].unscheduleUpdate();
-			_this.ccSceneInstance.removeChildByTag(layerTag);
-		}
-		this.ccLayerInstances[layerTag]	= new nextLayer();
-		_this.ccSceneInstance.addChild(_this.ccLayerInstances[layerTag],zOrder,layerTag);
-
-		return this.ccLayerInstances[layerTag];
-	}
-
-}//clasz
+}//class
 })();	//File Scope
 
 
