@@ -27,6 +27,8 @@ Scenes.SceneBase	= class {
 		this.listeners	= {};
 	}
 
+	/** Create Instance */
+	static Create(){return new this();}
 	/** Get cc.Scene Instance */
 	GetCcSceneInstance(){return this.ccSceneInstance;	}
 

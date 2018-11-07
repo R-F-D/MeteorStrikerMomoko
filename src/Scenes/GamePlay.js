@@ -282,9 +282,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	}
 
-	/** Create Instance */
-	static Create(){return new Scenes.GamePlay();}
-
 }//class
 })();	//File Scope
 
