@@ -10,7 +10,7 @@ Scenes.SceneBase	= class {
 	constructor(){
 
 		/** @var number シーン内のシークエンス */
-		this.seq				= 0;
+		this.sequence			= 0;
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;

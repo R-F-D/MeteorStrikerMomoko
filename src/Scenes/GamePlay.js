@@ -12,12 +12,12 @@ const Sequence	= {
 	/**初期状態*/		INITIAL			: 0,
 	/**エイム作動*/		START_AIM		: 1,
 	/**打撃予備動作*/	PRELIMINARY		: 2,
-	/**打撃動作*/		ACTION			: 3,
+	/**打撃動作*/		DISCHARGE		: 3,
 	/**打撃ヒット後*/	IMPACTED		: 4,
 	/**エミット中*/		EMIT			: 5,
 	/**吹き飛ばし*/		BLOW_AWAY		: 6,
 	/**測定中*/			MEASURE			: 7,
-	/**動作失敗*/		ACTION_FAILED	: -1,
+	/**動作失敗*/		DISCHARGE_FAILED: -1,
 };
 /** エイミングゲージ定数 */
 const AimingGauge	= {
@@ -34,7 +34,7 @@ const BlowPower	= {
 	/**初期値*/			INITIAL		: 0,
 	/**増分*/			INCREMENT	: 1*256,
 	/**失敗時の減少*/	DECREMENT	: 1*256,
-	/**主動作の速度*/	ACTION_SPEED: 4*256,
+	/**主動作の速度*/	DISCHARGE_SPEED: 4*256,
 	/**主動作の加速度*/	ACCELERATION: 1.20,
 };
 /** エミットエナジー定数*/
@@ -51,19 +51,30 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	constructor(){
 		super();
 		_this					= this;
-		this.seq				= Sequence.INITIAL;
+		this.sequence				= Sequence.INITIAL;
 
 		//インパクトシークエンス
+		/** @var チャージ時間 */
 		this.chargingCount		= BlowPower.INITIAL;
+		/** @var チャージ量 */
 		this.chargedPower		= 0;
-		this.actionSpeed		= 0;
+		/** 打撃動作のアニメーション速度 */
+		this.dischargeSpeed		= 0;
+		/** @var エイミングゲージ */
 		this.aiming				= AimingGauge.INITIAL;
+
 		//エミットエナジーシークエンス
+		/** @var エミット受付時間*/
 		this.acceptEmitting		= 0;
+		/** @var エミット値 */
 		this.emittingPower		= 0;
+
 		//結果表示用
+		/** @var インパクト時の威力*/
 		this.impactPower		= 0;
+		/** @var 最終的に与えられた威力 */
 		this.totalPower			= 0;
+		/** @var 隕石の移動距離 */
 		this.meteorX			= 0;
 
 
@@ -80,28 +91,28 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			update:function(dt){
 
 				//エイミングカーソル作動
-				if(IsAnyOf( _this.seq, [Sequence.START_AIM,Sequence.PRELIMINARY,Sequence.ACTION,Sequence.ACTION_FAILED] )){
+				if(IsAnyOf( _this.sequence, [Sequence.START_AIM,Sequence.PRELIMINARY,Sequence.DISCHARGE,Sequence.DISCHARGE_FAILED] )){
 					_this.aiming+=AimingGauge.INCREMENT;
 					if     (_this.aiming < AimingGauge.MIN)	_this.aiming = AimingGauge.MAX;
 					else if(_this.aiming > AimingGauge.MAX)	_this.aiming = AimingGauge.MIN;
 				}
 
-				switch(_this.seq){
+				switch(_this.sequence){
 					case Sequence.PRELIMINARY:
 						_this.chargingCount+=BlowPower.INCREMENT;
-						if(_this.chargingCount > BlowPower.MAX)	_this.seq		= Sequence.ACTION_FAILED;
+						if(_this.chargingCount > BlowPower.MAX)	_this.sequence	= Sequence.DISCHARGE_FAILED;
 						break;
-					case Sequence.ACTION:
-						_this.actionSpeed *= BlowPower.ACCELERATION;
-						_this.chargingCount -= _this.actionSpeed;
-						if(_this.chargingCount < BlowPower.MIN)	_this.seq	= Sequence.IMPACTED;
+					case Sequence.DISCHARGE:
+						_this.dischargeSpeed *= BlowPower.ACCELERATION;
+						_this.chargingCount -= _this.dischargeSpeed;
+						if(_this.chargingCount < BlowPower.MIN)	_this.sequence	= Sequence.IMPACTED;
 						break;
-					case Sequence.ACTION_FAILED:
+					case Sequence.DISCHARGE_FAILED:
 						_this.chargingCount-=BlowPower.DECREMENT;
-						if(_this.chargingCount < BlowPower.MIN)	_this.seq		= Sequence.START_AIM;
+						if(_this.chargingCount < BlowPower.MIN)	_this.sequence	= Sequence.START_AIM;
 						break;
 					case Sequence.IMPACTED:
-						_this.seq				= Sequence.EMIT;
+						_this.sequence				= Sequence.EMIT;
 						_this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
 						_this.emittingPower		= 0;
 						_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.emitEnergy);
@@ -109,7 +120,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					case Sequence.EMIT:
 						_this.acceptEmitting--;
 						if(_this.acceptEmitting < 0){
-							_this.seq	= Sequence.BLOW_AWAY;
+							_this.sequence	= Sequence.BLOW_AWAY;
 							console.log(_this.emittingPower);
 
 							_this.impactPower	= (65536 - Math.abs(_this.aiming))/256 * (65536 - Math.abs(_this.aiming))/256 * (_this.chargedPower/256 + 30);
@@ -147,8 +158,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.chargingCount		= BlowPower.INITIAL;
 					_this.chargedPower		= 0;
-					_this.actionSpeed		= 0;
-					_this.seq				= Sequence.INITIAL;
+					_this.dischargeSpeed	= 0;
+					_this.sequence				= Sequence.INITIAL;
 					_this.aiming			= AimingGauge.INITIAL;
 
 					_this.sprites.aimGauge		= Sprite.CreateInstance(res.img.aimGauge).AddToLayer(this).Attr({x:120,y:100});
@@ -168,8 +179,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				/** 更新 */
 				update	: function(dt){
 					this._super();
-					switch(_this.seq){
-						case Sequence.ACTION:
+					switch(_this.sequence){
+						case Sequence.DISCHARGE:
 						case Sequence.IMPACTED:
 							_this.sprites.player.setIndex(1);
 							break;
@@ -180,7 +191,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.aimCursor.Attr({x:120,y:100+_this.aiming/512,});
 
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
-					_this.labels.seq.setString("Sequence: " + _this.seq);
+					_this.labels.seq.setString("Sequence: " + _this.sequence);
 					_this.labels.aiming.setString("Aiming: " + _this.aiming);
 					return true;
 				},
@@ -209,7 +220,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				update	: function(){
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
-					_this.labels.seq.setString("Sequence: " + _this.seq);
+					_this.labels.seq.setString("Sequence: " + _this.sequence);
 					_this.labels.aiming.setString("Aiming: " + _this.aiming);
 					_this.labels.emittingPower.setString("Emitting: " + _this.emittingPower);
 					this._super();
@@ -231,26 +242,26 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			impact	: cc.EventListener.create({
 				event		: cc.EventListener.TOUCH_ONE_BY_ONE,
 				onTouchBegan: function(touch,event){
-					switch(_this.seq){
-						case Sequence.INITIAL:		_this.seq	= Sequence.START_AIM;		break;
-						case Sequence.START_AIM:	_this.seq	= Sequence.PRELIMINARY;	break;
+					switch(_this.sequence){
+						case Sequence.INITIAL:		_this.sequence	= Sequence.START_AIM;	break;
+						case Sequence.START_AIM:	_this.sequence	= Sequence.PRELIMINARY;	break;
 						default:
 					}
 					return true;
 				},
 				onTouchEnded	: function(touch,event)	{
-					switch(_this.seq){
+					switch(_this.sequence){
 						case Sequence.PRELIMINARY:
-							_this.seq			= Sequence.ACTION;
-							_this.chargedPower	= _this.chargingCount;
-							_this.actionSpeed	= BlowPower.ACTION_SPEED;
+							_this.sequence				= Sequence.DISCHARGE;
+							_this.chargedPower		= _this.chargingCount;
+							_this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 							break;
 						default:
 					}
 				},
 				onTouchCanceled	: function(touch,event)	{
-					switch(_this.seq){
-						case Sequence.PRELIMINARY:	_this.seq	= Sequence.ACTION_FAILED;	break;
+					switch(_this.sequence){
+						case Sequence.PRELIMINARY:	_this.sequence	= Sequence.DISCHARGE_FAILED;	break;
 						default:
 					}
 				},
@@ -259,7 +270,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			emitEnergy	: cc.EventListener.create({
 				event		: cc.EventListener.MOUSE,
 				onMouseDown: function(touch,event){
-					switch(_this.seq){
+					switch(_this.sequence){
 						case Sequence.EMIT:
 							_this.emittingPower++;
 							break;
@@ -273,7 +284,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				event		: cc.EventListener.KEYBOARD,
 				onKeyReleased: function(code,event){
 					if(code==82){
-						_this.seq		= Sequence.INITIAL;
+						_this.sequence		= Sequence.INITIAL;
 						_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
 					}
 				},
