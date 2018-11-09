@@ -16,7 +16,8 @@
 		"src/sprite.js",
 		"src/label.js",
 		"src/Scenes/SceneBase.js",
-		"src/Scenes/GamePlay.js",
+		"src/Scenes/GamePlay/Aiming.js",
+		"src/Scenes/GamePlay/GamePlay.js",
 		"src/app.js"
 	]
 }

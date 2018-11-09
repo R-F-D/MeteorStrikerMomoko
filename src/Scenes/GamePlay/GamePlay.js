@@ -19,14 +19,6 @@ const Sequence	= {
 	/**測定中*/			MEASURE			: 7,
 	/**動作失敗*/		DISCHARGE_FAILED: -1,
 };
-/** エイミングゲージ定数 */
-const AimingGauge	= {
-	/**下限値*/		MIN			: -32767,
-	/**ジャスト*/	JUST		: 0,
-	/**上限値*/		MAX			: 32768,
-	/**初期値*/		INITIAL		: 32768,
-	/**増分*/		INCREMENT	: -1024,
-};
 /** 打撃定数 */
 const BlowPower	= {
 	/**上限値*/			MIN			: 0,
@@ -51,7 +43,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	constructor(){
 		super();
 		_this					= this;
-		this.sequence				= Sequence.INITIAL;
+		this.sequence			= Sequence.INITIAL;
 
 		//インパクトシークエンス
 		/** @var チャージ時間 */
@@ -61,7 +53,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** 打撃動作のアニメーション速度 */
 		this.dischargeSpeed		= 0;
 		/** @var エイミングゲージ */
-		this.aiming				= AimingGauge.INITIAL;
+		this.aiming				= null;
 
 		//エミットエナジーシークエンス
 		/** @var エミット受付時間*/
@@ -83,6 +75,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			/** 生成 */
 			onEnter:function (){
 				this._super();
+				_this.aiming	= Scenes.Aiming.Create();
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
 
 				this.scheduleUpdate();
@@ -92,9 +85,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				//エイミングカーソル作動
 				if(IsAnyOf( _this.sequence, [Sequence.START_AIM,Sequence.PRELIMINARY,Sequence.DISCHARGE,Sequence.DISCHARGE_FAILED] )){
-					_this.aiming+=AimingGauge.INCREMENT;
-					if     (_this.aiming < AimingGauge.MIN)	_this.aiming = AimingGauge.MAX;
-					else if(_this.aiming > AimingGauge.MAX)	_this.aiming = AimingGauge.MIN;
+					_this.aiming.Update();
 				}
 
 				switch(_this.sequence){
@@ -123,9 +114,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 							_this.sequence	= Sequence.BLOW_AWAY;
 							console.log(_this.emittingPower);
 
-							_this.impactPower	= (65536 - Math.abs(_this.aiming))/256 * (65536 - Math.abs(_this.aiming))/256 * (_this.chargedPower/256 + 30);
-							_this.totalPower	= (65536 - Math.abs(_this.aiming))/256 * (65536 - Math.abs(_this.aiming))/256 * (_this.chargedPower/256 + 30 + _this.emittingPower*2);
-							console.log("AimingRate: "+(65536 - Math.abs(_this.aiming))*(65536 - Math.abs(_this.aiming))/(256*128*256*128*2));
+							_this.impactPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30);
+							_this.totalPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30 + _this.emittingPower*2);
+							console.log("AimingRate: "+_this.aiming.GetRate());
 							console.log("Impact: "+_this.impactPower);
 							console.log("Total: "+_this.totalPower);
 						}
@@ -159,12 +150,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.chargingCount		= BlowPower.INITIAL;
 					_this.chargedPower		= 0;
 					_this.dischargeSpeed	= 0;
-					_this.sequence				= Sequence.INITIAL;
-					_this.aiming			= AimingGauge.INITIAL;
-
-					_this.sprites.aimGauge		= Sprite.CreateInstance(res.img.aimGauge).AddToLayer(this).Attr({x:120,y:100});
-					_this.sprites.aimCursor		= Sprite.CreateInstance(res.img.aimCursor).AddToLayer(this).Attr( {x:120,y:100,});
-					_this.sprites.player		= Sprite.CreateInstance(res.img.player).AddToLayer(this);
+					_this.sequence			= Sequence.INITIAL;
+					_this.sprites.player	= Sprite.CreateInstance(res.img.player).AddToLayer(this).Attr({x:100,y:100,});
+					_this.aiming.Init().SetLayer(this).SetSpritePosition(120,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
 					_this.labels.seq			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
@@ -188,11 +176,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 							_this.sprites.player.setIndex(0);
 					}
 					_this.sprites.player.Attr({x:100-_this.chargingCount/1024,y:100,});
-					_this.sprites.aimCursor.Attr({x:120,y:100+_this.aiming/512,});
 
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
 					_this.labels.seq.setString("Sequence: " + _this.sequence);
-					_this.labels.aiming.setString("Aiming: " + _this.aiming);
+					//_this.labels.aiming.setString("Aiming: " + _this.aiming.position);
 					return true;
 				},
 			}),
@@ -206,8 +193,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				init	: function(){
 					this._super();
-					_this.sprites.aimGauge.AddToLayer(this).Attr({x:120,y:100});
-					_this.sprites.aimCursor.AddToLayer(this).Attr( {x:120,y:100+_this.aiming/512,});
+					_this.aiming.SetLayer(this);
 					_this.sprites.player.AddToLayer(this);
 
 					_this.labels.chargedPower.AddToLayer(this);
@@ -221,7 +207,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				update	: function(){
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
 					_this.labels.seq.setString("Sequence: " + _this.sequence);
-					_this.labels.aiming.setString("Aiming: " + _this.aiming);
+					_this.labels.aiming.setString("Aiming: " + _this.aiming.position);
 					_this.labels.emittingPower.setString("Emitting: " + _this.emittingPower);
 					this._super();
 				},
@@ -252,7 +238,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				onTouchEnded	: function(touch,event)	{
 					switch(_this.sequence){
 						case Sequence.PRELIMINARY:
-							_this.sequence				= Sequence.DISCHARGE;
+							_this.sequence			= Sequence.DISCHARGE;
 							_this.chargedPower		= _this.chargingCount;
 							_this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 							break;
@@ -294,6 +280,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	}
 
 }//class
+
+
 })();	//File Scope
 
 
