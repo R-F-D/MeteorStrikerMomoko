@@ -152,7 +152,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.dischargeSpeed	= 0;
 					_this.sequence			= Sequence.INITIAL;
 					_this.sprites.player	= Sprite.CreateInstance(res.img.player).AddToLayer(this).Attr({x:100,y:100,});
-					_this.aiming.Init().SetLayer(this).SetSpritePosition(120,100);
+					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
 					_this.labels.seq			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
@@ -175,11 +175,11 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						default:
 							_this.sprites.player.setIndex(0);
 					}
-					_this.sprites.player.Attr({x:100-_this.chargingCount/1024,y:100,});
+					_this.sprites.player.Attr({x:100-_this.chargingCount/512,y:100,});
 
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
 					_this.labels.seq.setString("Sequence: " + _this.sequence);
-					//_this.labels.aiming.setString("Aiming: " + _this.aiming.position);
+					_this.labels.aiming.setString("Aiming: " + _this.aiming.position);
 					return true;
 				},
 			}),
@@ -193,8 +193,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				init	: function(){
 					this._super();
-					_this.aiming.SetLayer(this);
 					_this.sprites.player.AddToLayer(this);
+					_this.aiming.SetLayer(this);
 
 					_this.labels.chargedPower.AddToLayer(this);
 					_this.labels.seq.AddToLayer(this);
