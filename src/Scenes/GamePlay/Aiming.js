@@ -103,11 +103,7 @@ Scenes.Aiming	= class {
 	}
 	/** @private */
 	UpdateCursorSpritePos(){
-		const angle	= this.position /this.MAX * Math.PI/4;
-		this.sprites.cursor.Attr({
-			x	: this.spritePos.x + Math.cos(angle) *this.RADIUS -this.RADIUS,
-			y	: this.spritePos.y + Math.sin(angle) *this.RADIUS,
-		});
+		this.sprites.cursor.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4,	this.RADIUS	);
 		return this;
 	}
 

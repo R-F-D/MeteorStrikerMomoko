@@ -4,17 +4,26 @@
 class Sprite{
 
 	constructor(img){
+		//座標
+		this.x		= 0;
+		this.y		= 0;
+		this.radius	= 0;
+		this.angle	= 0;
+
+		//スプライト本体
+		this.currentIndex	= -1;
+		this.entity			= new cc.Sprite(img[0]);
+
+		//リソースデータ
 		this.img	= {
 			"path"		: img[0],
 			"nSplitX"	: img[1] || 1,
 			"nSplitY"	: img[2] || 1,
 		};
-
-		this.currentIndex	= -1;
-		this.entity			= new cc.Sprite(this.img.path);
-
 		this.img.width		= this.entity.getContentSize().width;
 		this.img.height		= this.entity.getContentSize().height;
+
+		//初期化
 		this.setIndex(0);
 	}
 
@@ -36,13 +45,45 @@ class Sprite{
 		return this.entity;
 	}
 
+	/** 座標設定
+	 * @param {number} x x座標。null時は設定しない。
+	 * @param {number} y y座標。null時は設定しない。
+	 * @param {number} [a=null] 角度。null時は設定しない。
+	 * @param {number} [r=null] 半径。null時は設定しない。
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	SetPosition(x,y,a=null,r=null){
+		this.x		= x!=null	? x	: this.x;
+		this.y		= y!=null	? y	: this.y;
+		this.angle	= a!=null	? a	: this.angle;
+		this.radius	= r!=null	? r	: this.radius;
+
+		if(this.radius==0){
+			this.entity.attr({	x:this.x,	y:this.y,	});
+		}
+		else{
+			this.entity.attr({
+				x	: this.x + Math.cos(this.angle) *this.radius,
+				y	: this.y + Math.sin(this.angle) *this.radius,
+			});
+		}
+		return this;
+	}
+
 	/** cc.Sprite.attrのラッパ
 	 * @param {*} attr
 	 * @returns this
 	 * @memberof Sprite
 	 */
 	Attr(attr){
+		if(attr.x!=null || attr.y!=null){
+			this.SetPosition(	attr.x!=null?attr.x:null,	attr.y!=null?attr.y:null	);
+			delete attr.x;
+			delete attr.y;
+		}
 		this.entity.attr(attr);
+
 		return this;
 	}
 

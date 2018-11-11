@@ -151,7 +151,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.chargedPower		= 0;
 					_this.dischargeSpeed	= 0;
 					_this.sequence			= Sequence.INITIAL;
-					_this.sprites.player	= Sprite.CreateInstance(res.img.player).AddToLayer(this).Attr({x:100,y:100,});
+					_this.sprites.player	= Sprite.CreateInstance(res.img.player).AddToLayer(this).SetPosition(100,100);
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
@@ -175,7 +175,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						default:
 							_this.sprites.player.setIndex(0);
 					}
-					_this.sprites.player.Attr({x:100-_this.chargingCount/512,y:100,});
+					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 
 					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
 					_this.labels.seq.setString("Sequence: " + _this.sequence);
@@ -205,11 +205,11 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					cc.eventManager.addListener(_this.listeners.reset,this);
 				},
 				update	: function(){
-					_this.labels.chargedPower.setString("Charged: " + _this.chargedPower);
-					_this.labels.seq.setString("Sequence: " + _this.sequence);
-					_this.labels.aiming.setString("Aiming: " + _this.aiming.position);
-					_this.labels.emittingPower.setString("Emitting: " + _this.emittingPower);
 					this._super();
+					_this.labels.chargedPower.setString(	"Charged: " + _this.chargedPower	);
+					_this.labels.seq.setString(				"Sequence: "+ _this.sequence		);
+					_this.labels.aiming.setString(			"Aiming: "  + _this.aiming.position	);
+					_this.labels.emittingPower.setString(	"Emitting: "+ _this.emittingPower	);
 				},
 			}),
 		};
