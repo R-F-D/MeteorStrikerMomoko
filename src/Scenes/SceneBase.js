@@ -51,5 +51,16 @@ Scenes.SceneBase	= class {
 	}
 
 
-}//class
+	/** シークエンスの変更
+	 * @param {*} nextSeq 次のシークエンス
+	 * @param {boolean} [isForce=false] 同一シークエンスの場合でも強制的に変更する
+	 * @returns this
+	 */
+	SetSequence(nextSeq,isForce=true){
+		if(!isForce && this.sequence===nextSeq)	return this;
 
+		this.sequence	= nextSeq;
+		return this;
+	}
+
+}//class
