@@ -43,7 +43,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	constructor(){
 		super();
 		_this					= this;
-		this.SetSequence(Sequences.INITIAL);
 
 		//インパクトシークエンス
 		/** @var チャージ時間 */
@@ -76,6 +75,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this._super();
 				_this.aiming	= Scenes.Aiming.Create();
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
+				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
+				_this.sequence.Init();
 
 				this.scheduleUpdate();
 			},
@@ -97,7 +98,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						_this.chargingCount -= _this.dischargeSpeed;
 						if(_this.chargingCount < BlowPower.MIN){
 							_this.SetSequence(Sequences.IMPACTED);
-							cc.eventManager.removeListener(_this.listeners.impact);
 						}
 						break;
 					case Sequences.DISCHARGE_FAILED:
@@ -108,9 +108,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						_this.SetSequence(Sequences.EMIT);
 						_this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
 						_this.emittingPower		= 0;
-
-						cc.eventManager.removeListener(_this.ccLayerInstances[LinkedLayerTags.MAIN]);
-						cc.eventManager.addListener(_this.listeners.emitEnergy,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
 						break;
 					case Sequences.EMIT:
 						_this.acceptEmitting--;
@@ -120,10 +117,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 							_this.impactPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30);
 							_this.totalPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30 + _this.emittingPower*2);
 
-							console.log("Emit: "		+ _this.emittingPower	);
-							console.log("AimingRate: "	+ _this.aiming.GetRate());
-							console.log("Impact: "		+ _this.impactPower		);
-							console.log("Total: "		+ _this.totalPower		);
+							debug("Emit: "		+ _this.emittingPower	);
+							debug("AimingRate: "+ _this.aiming.GetRate());
+							debug("Impact: "	+ _this.impactPower		);
+							debug("Total: "		+ _this.totalPower		);
 						}
 						break;
 					case Sequences.BLOW_AWAY:
@@ -163,10 +160,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.seq			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
 					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
 					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,40).AddToLayer(this);
-
-					cc.eventManager.removeListeners(this);
-					cc.eventManager.addListener(_this.listeners.impact,this);
-					cc.eventManager.addListener(_this.listeners.reset,this);
 
 					return true;
 				},
@@ -256,13 +249,24 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				event		: cc.EventListener.KEYBOARD,
 				onKeyReleased: function(code,event){
 					if(code==82){
-						console.log("[DEBUG] Reset Scene ----------");
+						debug("[DEBUG] Reset Scene ----------");
 						_this.SetSequence(Sequences.INITIAL);
 						_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
 					}
 				},
 			}),
 		};
+
+		//シーケンス-イベント対応設定
+		Sequences.INITIAL.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
+		Sequences.START_AIM.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
+		Sequences.PRELIMINARY.SetEventListeners(		[this.listeners.impact,		this.listeners.reset,	]);
+		Sequences.DISCHARGE.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
+		Sequences.IMPACTED.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
+		Sequences.EMIT.SetEventListeners(				[this.listeners.emitEnergy,	this.listeners.reset,	]);
+		Sequences.BLOW_AWAY.SetEventListeners(			[this.listeners.reset,	]);
+		Sequences.MEASURE.SetEventListeners(			[this.listeners.reset,	]);
+		Sequences.DISCHARGE_FAILED.SetEventListeners(	[this.listeners.reset,	]);
 
 	}
 

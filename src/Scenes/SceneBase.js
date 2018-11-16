@@ -60,6 +60,22 @@ Scenes.SceneBase	= class {
 		if(!isForce && this.sequence===nextSeq)	return this;
 
 		this.sequence	= nextSeq;
+		this.sequence.Init();
+
+		return this;
+	}
+
+	/** シークエンス初期化
+	 * @param {*} initialSeq シークエンス初期値
+	 * @param {*} seqContainer シークエンスのコンテナ
+	 * @param {*} layerInstance イベントリスナの対象レイヤ
+	 * @returns
+	 */
+	InitSequence(initialSeq,seqContainer,layerInstance){
+		this.sequence	= initialSeq;
+		for(let i in seqContainer){
+			seqContainer[i].SetListenerTarget(layerInstance);
+		}
 		return this;
 	}
 

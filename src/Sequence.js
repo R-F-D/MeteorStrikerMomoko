@@ -43,7 +43,7 @@ class Sequence{
 	 * @memberof Sequence
 	 */
 	SetListenerTarget(layer){
-		Scenes.SetListenerTarget(layer);
+		this.listenTargetLayer	= layer;
 		return this;
 	}
 
@@ -53,7 +53,7 @@ class Sequence{
 	 * @memberof Sequence
 	 */
 	SetEventListeners(listeners){
-		if(typeof listeners==='array')	this.eventListeners	= listeners;
+		if(Array.isArray(listeners))	this.eventListeners	= listeners;
 		else							this.eventListeners	= [listeners];
 		return this;
 	}
