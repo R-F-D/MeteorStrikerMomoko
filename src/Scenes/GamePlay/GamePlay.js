@@ -191,83 +191,66 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			emittingPower	: null,
 		}
 
-		/** イベントリスナ */
+		this.InitEventListeners();
+	}
+
+
+	/** イベントリスナ初期設定
+	 * @returns this
+	 */
+	InitEventListeners(){
+
+		/**イベントリスナ*/
 		this.listeners	= {
 			/** インパクトフェイズ */
-			impact	: cc.EventListener.create({
-				event		: cc.EventListener.TOUCH_ONE_BY_ONE,
-				onTouchBegan: function(touch,event){
-					switch(_this.sequence){
-						case Sequences.INITIAL:		_this.SetSequence(Sequences.START_AIM);		break;
-						case Sequences.START_AIM:	_this.SetSequence(Sequences.PRELIMINARY);	break;
-						default:
-					}
-					return true;
-				},
-				onTouchEnded	: function(touch,event)	{
-					switch(_this.sequence){
-						case Sequences.PRELIMINARY:
-							_this.SetSequence(Sequences.DISCHARGE);
-							_this.chargedPower		= _this.chargingCount;
-							_this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
-							break;
-						default:
-					}
-				},
-				onTouchCanceled	: function(touch,event)	{
-					switch(_this.sequence){
-						case Sequences.PRELIMINARY:	_this.SetSequence(Sequences.DISCHARGE_FAILED);	break;
-						default:
-					}
+			discharge	: cc.EventListener.create({
+				event		: cc.EventListener.MOUSE,
+				onMouseUp	: function(touch,event)	{
+					_this.SetSequence(Sequences.DISCHARGE);
+					_this.chargedPower		= _this.chargingCount;
+					_this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 				},
 			}),
 			/** エミットエナジーフェイズ */
 			emitEnergy	: cc.EventListener.create({
 				event		: cc.EventListener.MOUSE,
 				onMouseDown: function(touch,event){
-					switch(_this.sequence){
-						case Sequences.EMIT:
-							_this.emittingPower++;
-							break;
-						default:
-					}
-					return true;
+					_this.emittingPower++;
 				},
 			}),
 			/** ブローフェイズ */
 			blowAway	: cc.EventListener.create({
 				event		: cc.EventListener.MOUSE,
 				onMouseDown: function(touch,event){
-					switch(_this.sequence){
-						default:
-					}
-					return true;
 				},
 			}),
 			/** リセット */
 			reset		:cc.EventListener.create({
 				event		: cc.EventListener.KEYBOARD,
 				onKeyReleased: function(code,event){
-					if(code==82){
+					if(code==82){	//'R'key
 						debug("[DEBUG] Reset Scene ----------");
 						_this.SetSequence(Sequences.INITIAL);
-						_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
 					}
+				},
+			}),
+			/** 次フェイズへの単純遷移 */
+			transionToNext	:cc.EventListener.create({
+				event		: cc.EventListener.TOUCH_ONE_BY_ONE,
+				onTouchBegan: function(touch,event){
+					if(_this.sequence.NextPhase())	_this.SetSequence(_this.sequence.NextPhase());
 				},
 			}),
 		};
 
-		//シーケンス-イベント対応設定
-		Sequences.INITIAL.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
-		Sequences.START_AIM.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
-		Sequences.PRELIMINARY.SetEventListeners(		[this.listeners.impact,		this.listeners.reset,	]);
-		Sequences.DISCHARGE.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
-		Sequences.IMPACTED.SetEventListeners(			[this.listeners.impact,		this.listeners.reset,	]);
-		Sequences.EMIT.SetEventListeners(				[this.listeners.emitEnergy,	this.listeners.reset,	]);
-		Sequences.BLOW_AWAY.SetEventListeners(			[this.listeners.reset,	]);
-		Sequences.MEASURE.SetEventListeners(			[this.listeners.reset,	]);
-		Sequences.DISCHARGE_FAILED.SetEventListeners(	[this.listeners.reset,	]);
+		//シークエンス-イベント対応設定
+		Sequence.SetCommonEventListeners(this.listeners.reset);
+		Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
+		Sequences.START_AIM.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.PRELIMINARY);
+		Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
+		Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
 
+		return this;
 	}
 
 }//class
