@@ -3,14 +3,18 @@
 ********************************************************************************/
 var cc;
 
-
 /** シークエンス実体クラス
  * @class Sequence
  */
 class Sequence{
 	constructor(){
+		/** @var 単純遷移における次フェイズ */
+		this.nextSequence		= null;
+		/** @var イベントリスナの対象レイヤ */
 		this.listenTargetLayer	= null;
+		/** @var 設定されたイベントリスナ群 */
 		this.eventListeners		= [];
+
 		this.Init();
 	}
 
@@ -29,6 +33,11 @@ class Sequence{
 		//イベントリスナ
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
+			//共通イベント
+			for(let i in Sequence._commonEventListeners){
+				cc.eventManager.addListener(Sequence._commonEventListeners[i],this.listenTargetLayer);
+			}
+			//個別イベント
 			for(let i in this.eventListeners){
 				cc.eventManager.addListener(this.eventListeners[i],this.listenTargetLayer);
 			}
@@ -57,5 +66,32 @@ class Sequence{
 		else							this.eventListeners	= [listeners];
 		return this;
 	}
+
+	/** 共通イベントリスナを設定
+	 * @static
+	 * @param {*} listeners
+	 * @memberof Sequence
+	 */
+	static SetCommonEventListeners(listeners){
+		if(Array.isArray(listeners))	Sequence._commonEventListeners	= listeners;
+		else							Sequence._commonEventListeners	= [listeners];
+	}
+
+	/** 単純遷移における次フェイズを設定または取得
+	 * @param {*} nextSeq 省略時はゲッタとして機能
+	 * @returns {this|Sequenxe} セッタ時this、ゲッタ時Sequenceインスタンス
+	 * @memberof Sequence
+	 */
+	NextPhase(nextSeq=undefined){
+		if(nextSeq==undefined){
+			return this.nextSequence;
+		}
+		else{
+			this.nextSequence	= nextSeq;
+			return this;
+		}
+	}
+
 }
 
+Sequence._commonEventListeners	= [];
