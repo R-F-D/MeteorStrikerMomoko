@@ -157,9 +157,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
-					_this.labels.seq			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
-					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
-					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,40).AddToLayer(this);
+					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
+					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
 
 					return true;
 				},
@@ -175,7 +174,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 
 					_this.labels.chargedPower.setString(	"Charged: "	+ _this.chargedPower	);
-					_this.labels.seq.setString(				"Sequence: "+ _this.sequence		);
 					_this.labels.aiming.setString(			"Aiming: "	+ _this.aiming.position	);
 					_this.labels.emittingPower.setString(	"Emitting: "+ _this.emittingPower	);
 					return true;
@@ -186,12 +184,16 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** ラベル */
 		this.labels	= {
 			chargedPower	: null,
-			seq				: null,
 			aiming			: null,
 			emittingPower	: null,
 		}
 
+		//シークエンス設定
 		this.InitEventListeners();
+		Sequences.DISCHARGE.PushStartingFunctions((seq)=>{
+			this.chargedPower	= this.chargingCount;
+			this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
+		});
 	}
 
 
@@ -207,8 +209,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				event		: cc.EventListener.MOUSE,
 				onMouseUp	: function(touch,event)	{
 					_this.SetSequence(Sequences.DISCHARGE);
-					_this.chargedPower		= _this.chargingCount;
-					_this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 				},
 			}),
 			/** エミットエナジーフェイズ */
@@ -216,12 +216,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				event		: cc.EventListener.MOUSE,
 				onMouseDown: function(touch,event){
 					_this.emittingPower++;
-				},
-			}),
-			/** ブローフェイズ */
-			blowAway	: cc.EventListener.create({
-				event		: cc.EventListener.MOUSE,
-				onMouseDown: function(touch,event){
 				},
 			}),
 			/** リセット */
