@@ -17,6 +17,8 @@ class Sequence{
 
 		/** @var {function[]} シーケンス開始時に行われる処理 */
 		this.onStartFunctions	= [];
+		/** @var {function[]} 当該シーケンスでのシーン更新時に呼ばれる処理 */
+		this.updateFunctions	= [];
 
 		this.Init();
 	}
@@ -54,21 +56,52 @@ class Sequence{
 		return this;
 	}
 
-	/** シーケンス開始時の処理を追加
-	 * @param {function|function[]} [onStart=null] Func(Sequence) またはその配列。省略時は処理をクリア。
+	/** 当該シーケンスのシーン更新処理
+	 * @param {*} dt
 	 * @returns this
 	 * @memberof Sequence
 	 */
-	PushStartingFunctions(onStart=null){
+	Update(dt){
+		for(let i in this.updateFunctions){
+			if(typeof this.updateFunctions[i]==='function')	this.updateFunctions[i](dt,this);
+		}
+		return this;
+	}
+
+	/** シーケンス開始時の処理を追加
+	 * @param {function|function[]} [funcs=null] Func(Sequence) またはその配列。省略時は処理をクリア。
+	 * @returns this
+	 * @memberof Sequence
+	 */
+	PushStartingFunctions(funcs=null){
 		//初期化
-		if(onStart==null){
+		if(funcs==null){
 			this.onStartFunctions	= [];
 			return this;
 		}
 		//追加
-		if(!Array.isArray(onStart))	onStart	= [onStart];
-		for(let i in onStart){
-			if(typeof onStart[i]==='function')	this.onStartFunctions.push(onStart[i]);
+		if(!Array.isArray(funcs))	funcs	= [funcs];
+		for(let i in funcs){
+			if(typeof funcs[i]==='function')	this.onStartFunctions.push(funcs[i]);
+		}
+		return this;
+	}
+
+	/** シーケンス毎のシーン更新処理を追加
+	 * @param {function|function[]} [funcs=null] Func(dt,Sequence) またはその配列。省略時は処理をクリア。
+	 * @returns this
+	 * @memberof Sequence
+	 */
+	PushUpdatingFunctions(funcs=null){
+		//初期化
+		if(funcs==null){
+			this.updateFunctions	= [];
+			return this;
+		}
+		//追加
+		if(!Array.isArray(funcs))	funcs	= [funcs];
+		for(let i in funcs){
+			if(typeof funcs[i]==='function')	this.updateFunctions.push(funcs[i]);
 		}
 		return this;
 	}

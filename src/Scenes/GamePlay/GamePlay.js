@@ -81,7 +81,11 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.scheduleUpdate();
 			},
 			/** 更新 */
-			update	: function(dt){_this.Update(dt);},
+			update	: function(dt){
+				_this.OnUpdating(dt);
+				_this.sequence.Update(dt);
+				_this.OnUpdated(dt);
+			},
 		}))();
 
 		/** ccLayerに渡す用 */
@@ -139,49 +143,72 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		//シークエンス設定
-		this.InitEventListeners();
-		Sequences.DISCHARGE.PushStartingFunctions((seq)=>{
-			this.chargedPower	= this.chargingCount;
-			this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
-		});
+		this.SetSequenceFunctions().InitEventListeners();
 	}
 
-	/** シーンの更新処理
-	 * @param {*} dt
+
+	/** シーケンス毎の処理を定義
+	 * @returns this
 	 */
-	Update(dt){
-		super.Update(dt);
-		const canvasSize	= cc.director.getWinSize();
+	SetSequenceFunctions(){
+		//初期状態
+	//	Sequences.INITIAL.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
 
-		//エイミングカーソル作動
-		if(IsAnyOf( this.sequence, [Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE,Sequences.DISCHARGE_FAILED] )){
-			this.aiming.Update();
-		}
+		//エイム作動
+		Sequences.START_AIM
+		//	.PushStartingFunctions(()=>{})
+			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update();
+			});
 
-		switch(this.sequence){
-			case Sequences.PRELIMINARY:
+		//打撃予備動作
+		Sequences.PRELIMINARY
+		//	.PushStartingFunctions(()=>{})
+			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update();
 				this.chargingCount += BlowPower.INCREMENT;
 				if(this.chargingCount > BlowPower.MAX)	this.SetSequence(Sequences.DISCHARGE_FAILED);
-				break;
-			case Sequences.DISCHARGE:
+			});
+
+		//打撃動作
+		Sequences.DISCHARGE
+			.PushStartingFunctions(()=>{
+				this.chargedPower	= this.chargingCount;
+				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
+			})
+			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update();
 				this.dischargeSpeed *= BlowPower.ACCELERATION;
 				this.chargingCount -= this.dischargeSpeed;
 				if(this.chargingCount < BlowPower.MIN){
 					this.SetSequence(Sequences.IMPACTED);
 				}
-				break;
-			case Sequences.DISCHARGE_FAILED:
+			});
+
+		//打撃動作失敗
+		Sequences.DISCHARGE_FAILED
+		//	.PushStartingFunctions(()=>{})
+			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update();
 				this.chargingCount-=BlowPower.DECREMENT;
 				if(this.chargingCount < BlowPower.MIN)	this.SetSequence(Sequences.START_AIM);
-				break;
-			case Sequences.IMPACTED:
+			});
+
+		//打撃ヒット
+		Sequences.IMPACTED
+		//	.PushStartingFunctions(()=>{})
+			.PushUpdatingFunctions((dt)=>{
 				this.SetSequence(Sequences.EMIT);
 				this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
 				this.emittingPower		= 0;
-				break;
-			case Sequences.EMIT:
+			});
+
+		//エミット中
+		Sequences.EMIT
+		//	.PushStartingFunctions(()=>{})
+			.PushUpdatingFunctions((dt)=>{
 				this.acceptEmitting--;
-				if(this.acceptEmitting < 0){
+					if(this.acceptEmitting < 0){
 					this.SetSequence(Sequences.BLOW_AWAY);
 
 					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/256 + 30);
@@ -192,14 +219,17 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					debug("Impact: "	+ this.impactPower		);
 					debug("Total: "		+ this.totalPower		);
 				}
-				break;
-			case Sequences.BLOW_AWAY:
-				break;
-			case Sequences.MEASURE:
-				break;
-			default:
-		}
+			});
+
+		//吹き飛ばし
+	//	Sequences.BLOW_AWAY.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
+
+		//計測中
+	//	Sequences.MEASURE.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
+
+		return this;
 	}
+
 
 	/** イベントリスナ初期設定
 	 * @returns this
