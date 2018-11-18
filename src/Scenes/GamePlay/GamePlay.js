@@ -207,32 +207,32 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			/** インパクトフェイズ */
 			discharge	: cc.EventListener.create({
 				event		: cc.EventListener.MOUSE,
-				onMouseUp	: function(touch,event)	{
-					_this.SetSequence(Sequences.DISCHARGE);
+				onMouseUp	: (event)=>{
+					this.SetSequence(Sequences.DISCHARGE);
 				},
 			}),
 			/** エミットエナジーフェイズ */
 			emitEnergy	: cc.EventListener.create({
 				event		: cc.EventListener.MOUSE,
-				onMouseDown: function(touch,event){
-					_this.emittingPower++;
+				onMouseDown: (event)=>{
+					this.emittingPower++;
 				},
 			}),
 			/** リセット */
 			reset		:cc.EventListener.create({
 				event		: cc.EventListener.KEYBOARD,
-				onKeyReleased: function(code,event){
+				onKeyReleased: (code,event)=>{
 					if(code==82){	//'R'key
 						debug("[DEBUG] Reset Scene ----------");
-						_this.SetSequence(Sequences.INITIAL);
+						this.SetSequence(Sequences.INITIAL);
 					}
 				},
 			}),
 			/** 次フェイズへの単純遷移 */
 			transionToNext	:cc.EventListener.create({
 				event		: cc.EventListener.TOUCH_ONE_BY_ONE,
-				onTouchBegan: function(touch,event){
-					if(_this.sequence.NextPhase())	_this.SetSequence(_this.sequence.NextPhase());
+				onTouchBegan: (touch,event)=>{
+					if(this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
 				},
 			}),
 		};
