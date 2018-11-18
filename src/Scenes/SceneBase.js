@@ -27,6 +27,12 @@ Scenes.SceneBase	= class {
 		this.listeners	= {};
 	}
 
+	/** シーンの更新処理
+	 * @param {*} dt
+	 */
+	Update(dt){
+	}
+
 	/** Create Instance */
 	static Create(){return new this();}
 	/** Get cc.Scene Instance */

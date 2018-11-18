@@ -71,7 +71,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** ccSceneのインスタンス */
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			/** 生成 */
-			onEnter:function (){
+			onEnter	: function (){
 				this._super();
 				_this.aiming	= Scenes.Aiming.Create();
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
@@ -81,57 +81,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.scheduleUpdate();
 			},
 			/** 更新 */
-			update:function(dt){
-
-				//エイミングカーソル作動
-				if(IsAnyOf( _this.sequence, [Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE,Sequences.DISCHARGE_FAILED] )){
-					_this.aiming.Update();
-				}
-
-				switch(_this.sequence){
-					case Sequences.PRELIMINARY:
-						_this.chargingCount += BlowPower.INCREMENT;
-						if(_this.chargingCount > BlowPower.MAX)	_this.SetSequence(Sequences.DISCHARGE_FAILED);
-						break;
-					case Sequences.DISCHARGE:
-						_this.dischargeSpeed *= BlowPower.ACCELERATION;
-						_this.chargingCount -= _this.dischargeSpeed;
-						if(_this.chargingCount < BlowPower.MIN){
-							_this.SetSequence(Sequences.IMPACTED);
-						}
-						break;
-					case Sequences.DISCHARGE_FAILED:
-						_this.chargingCount-=BlowPower.DECREMENT;
-						if(_this.chargingCount < BlowPower.MIN)	_this.SetSequence(Sequences.START_AIM);
-						break;
-					case Sequences.IMPACTED:
-						_this.SetSequence(Sequences.EMIT);
-						_this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
-						_this.emittingPower		= 0;
-						break;
-					case Sequences.EMIT:
-						_this.acceptEmitting--;
-						if(_this.acceptEmitting < 0){
-							_this.SetSequence(Sequences.BLOW_AWAY);
-
-							_this.impactPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30);
-							_this.totalPower	= _this.aiming.GetTotalRate() * (_this.chargedPower/256 + 30 + _this.emittingPower*2);
-
-							debug("Emit: "		+ _this.emittingPower	);
-							debug("AimingRate: "+ _this.aiming.GetRate());
-							debug("Impact: "	+ _this.impactPower		);
-							debug("Total: "		+ _this.totalPower		);
-						}
-						break;
-					case Sequences.BLOW_AWAY:
-						break;
-					case Sequences.MEASURE:
-						break;
-					default:
-				}
-
-				const canvasSize	= cc.director.getWinSize();
-			},
+			update	: function(dt){_this.Update(dt);},
 		}))();
 
 		/** ccLayerに渡す用 */
@@ -196,6 +146,60 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		});
 	}
 
+	/** シーンの更新処理
+	 * @param {*} dt
+	 */
+	Update(dt){
+		super.Update(dt);
+		const canvasSize	= cc.director.getWinSize();
+
+		//エイミングカーソル作動
+		if(IsAnyOf( this.sequence, [Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE,Sequences.DISCHARGE_FAILED] )){
+			this.aiming.Update();
+		}
+
+		switch(this.sequence){
+			case Sequences.PRELIMINARY:
+				this.chargingCount += BlowPower.INCREMENT;
+				if(this.chargingCount > BlowPower.MAX)	this.SetSequence(Sequences.DISCHARGE_FAILED);
+				break;
+			case Sequences.DISCHARGE:
+				this.dischargeSpeed *= BlowPower.ACCELERATION;
+				this.chargingCount -= this.dischargeSpeed;
+				if(this.chargingCount < BlowPower.MIN){
+					this.SetSequence(Sequences.IMPACTED);
+				}
+				break;
+			case Sequences.DISCHARGE_FAILED:
+				this.chargingCount-=BlowPower.DECREMENT;
+				if(this.chargingCount < BlowPower.MIN)	this.SetSequence(Sequences.START_AIM);
+				break;
+			case Sequences.IMPACTED:
+				this.SetSequence(Sequences.EMIT);
+				this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
+				this.emittingPower		= 0;
+				break;
+			case Sequences.EMIT:
+				this.acceptEmitting--;
+				if(this.acceptEmitting < 0){
+					this.SetSequence(Sequences.BLOW_AWAY);
+
+					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/256 + 30);
+					this.totalPower	= this.aiming.GetTotalRate() * (this.chargedPower/256 + 30 + this.emittingPower*2);
+
+					debug("Emit: "		+ this.emittingPower	);
+					debug("AimingRate: "+ this.aiming.GetRate());
+					debug("Impact: "	+ this.impactPower		);
+					debug("Total: "		+ this.totalPower		);
+				}
+				break;
+			case Sequences.BLOW_AWAY:
+				break;
+			case Sequences.MEASURE:
+				break;
+			default:
+		}
+	}
 
 	/** イベントリスナ初期設定
 	 * @returns this
