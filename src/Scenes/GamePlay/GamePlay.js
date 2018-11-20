@@ -107,7 +107,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.chargedPower		= 0;
 					_this.dischargeSpeed	= 0;
 					_this.SetSequence(Sequences.INITIAL);
-					_this.sprites.player	= Sprite.CreateInstance(res.img.player).AddToLayer(this).SetPosition(100,100);
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
