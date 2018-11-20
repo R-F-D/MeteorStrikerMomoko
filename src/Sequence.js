@@ -40,11 +40,11 @@ class Sequence{
 			cc.eventManager.removeListeners(this.listenTargetLayer);
 			//共通イベント
 			for(let i in Sequence._commonEventListeners){
-				cc.eventManager.addListener(Sequence._commonEventListeners[i],this.listenTargetLayer);
+				if(Sequence._commonEventListeners[i] instanceof cc.EventListener)	cc.eventManager.addListener(Sequence._commonEventListeners[i],this.listenTargetLayer);
 			}
 			//個別イベント
 			for(let i in this.eventListeners){
-				cc.eventManager.addListener(this.eventListeners[i],this.listenTargetLayer);
+				if(this.eventListeners[i] instanceof cc.EventListener)	cc.eventManager.addListener(this.eventListeners[i],this.listenTargetLayer);
 			}
 		}
 

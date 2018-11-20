@@ -253,7 +253,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 			}),
 			/** リセット */
-			reset		:cc.EventListener.create({
+			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
 				event		: cc.EventListener.KEYBOARD,
 				onKeyReleased: (code,event)=>{
 					if(code==82){	//'R'key
