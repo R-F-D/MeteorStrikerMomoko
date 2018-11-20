@@ -12,7 +12,7 @@ class Sprite{
 
 		//スプライト本体
 		this.currentIndex	= -1;
-		this.entity			= new cc.Sprite(img[0]);
+		this.entity			= new cc.Sprite(`../res/${img[0]}`);
 
 		//リソースデータ
 		this.img	= {

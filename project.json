@@ -1,20 +1,20 @@
 {
-	"project_type": "javascript",
+	"project_type"	: "javascript",
 
-	"debugMode" : 1,
-	"showFPS" : true,
-	"frameRate" : 60,
-	"noCache" : false,
-	"id" : "gameCanvas",
-	"renderMode" : 1,
-	"engineDir":"frameworks/cocos2d-html5",
+	"debugMode"		: 1,
+	"showFPS"		: true,
+	"frameRate"		: 60,
+	"noCache"		: false,
+	"id"			: "gameCanvas",
+	"renderMode"	: 1,
+	"engineDir"		:"frameworks/cocos2d-html5",
 
-	"modules" : ["cocos2d"],
+	"modules"		: ["cocos2d"],
 
-	"jsList" : [
+	"jsList"		: [
 		"src/resource.js",
-		"src/sprite.js",
-		"src/label.js",
+		"src/Sprite.js",
+		"src/Label.js",
 		"src/Sequence.js",
 		"src/Scenes/SceneBase.js",
 		"src/Scenes/GamePlay/Aiming.js",
