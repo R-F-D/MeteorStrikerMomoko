@@ -90,7 +90,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
-			/** インパクトシークエンスのメインレイヤ */
 			impact	: cc.Layer.extend({
 				/**	生成 */
 				ctor:function(){
@@ -102,6 +101,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				/** 初期化 */
 				init	: function(){
 					this._super();
+					_this.SetBackgroundColor(this,"#000000");
 
 					_this.chargingCount		= BlowPower.INITIAL;
 					_this.chargedPower		= 0;
@@ -196,12 +196,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//打撃ヒット
 		Sequences.IMPACTED
-		//	.PushStartingFunctions(()=>{})
-			.PushUpdatingFunctions((dt)=>{
+			.PushStartingFunctions(()=>{
 				this.SetSequence(Sequences.EMIT);
 				this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
 				this.emittingPower		= 0;
 			});
+		//	.PushUpdatingFunctions((dt)=>);
 
 		//エミット中
 		Sequences.EMIT

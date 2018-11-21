@@ -88,4 +88,15 @@ Scenes.SceneBase	= class {
 		return this;
 	}
 
+	/** レイヤに背景色を設定
+	 * @param {*} layer
+	 * @param {*} color
+	 * @returns this
+	 */
+	SetBackgroundColor(layer,color){
+		const size	= cc.director.getWinSize();
+		layer.addChild(new cc.LayerColor(typeof color==='string'?cc.color(color):color, size.width,size.height));
+		return this;
+	}
+
 }//class
