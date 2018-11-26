@@ -31,7 +31,8 @@ const BlowPower	= {
 };
 /** エミットエナジー定数*/
 const EmitEnergy	= {
-	/**エミット受付期間*/	ACCEPTION_COUNT:	300,
+	/**エミット受付期間*/	ACCEPTION_COUNT		: 300,
+	/**エミット加算値*/		ADDITIONAL_POWER	: 128,
 };
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
@@ -57,8 +58,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//エミットエナジーシークエンス
 		/** @var エミット受付時間*/
 		this.acceptEmitting		= 0;
-		/** @var エミット値 */
-		this.emittingPower		= 0;
+		/** @var エミットカウンタ */
+		this.nEmits	= {
+			/**合計 */		total		: 0,
+			/**同時*/		simul		: 0,
+			/**同時最大*/	maxSimul	: 1,
+		};
 
 		//結果表示用
 		/** @var インパクト時の威力*/
@@ -74,7 +79,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			onEnter	: function (){
 				this._super();
 				_this.aiming	= Scenes.Aiming.Create();
-				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.impact);
+				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
 				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
 				_this.sequence.Init();
 
@@ -90,7 +95,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
-			impact	: cc.Layer.extend({
+			main	: cc.Layer.extend({
 				/**	生成 */
 				ctor:function(){
 					this._super();
@@ -127,9 +132,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 
-					_this.labels.chargedPower.setString(	"Charged: "	+ _this.chargedPower	);
-					_this.labels.aiming.setString(			"Aiming: "	+ _this.aiming.position	);
-					_this.labels.emittingPower.setString(	"Emitting: "+ _this.emittingPower	);
+					_this.labels.chargedPower.setString(	`Charged:${_this.chargedPower}`		);
+					_this.labels.aiming.setString(			`Aiming:${_this.aiming.position}`	);
+					_this.labels.emittingPower.setString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
 					return true;
 				},
 			}),
@@ -198,27 +203,35 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		Sequences.IMPACTED
 			.PushStartingFunctions(()=>{
 				this.SetSequence(Sequences.EMIT);
-				this.acceptEmitting	= EmitEnergy.ACCEPTION_COUNT;
-				this.emittingPower		= 0;
 			});
 		//	.PushUpdatingFunctions((dt)=>);
 
 		//エミット中
 		Sequences.EMIT
-		//	.PushStartingFunctions(()=>{})
+			.PushStartingFunctions(()=>{
+				this.nEmits.simul		= 0;
+				this.nEmits.maxSimul	= 1;
+				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
+				this.nEmits.total		= 0;
+			})
 			.PushUpdatingFunctions((dt)=>{
 				this.acceptEmitting--;
-					if(this.acceptEmitting < 0){
+
+				if(this.acceptEmitting < 0){
 					this.SetSequence(Sequences.BLOW_AWAY);
 
-					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/256 + 30);
-					this.totalPower	= this.aiming.GetTotalRate() * (this.chargedPower/256 + 30 + this.emittingPower*2);
+					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/EmitEnergy.ADDITIONAL_POWER + 20);
+					this.totalPower		= this.aiming.GetTotalRate() * this.GetEmittingRate() + this.impactPower;
 
-					debug("Emit: "		+ this.emittingPower	);
-					debug("AimingRate: "+ this.aiming.GetRate());
-					debug("Impact: "	+ this.impactPower		);
-					debug("Total: "		+ this.totalPower		);
+					debug(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
+					debug(`AimingRate: ${this.aiming.GetRate()}`);
+					debug(`Impact: ${this.impactPower}`);
+					debug(`Total: ${this.totalPower}`);
 				}
+
+				//マルチタッチ検出
+				this.nEmits.maxSimul	= Math.max(this.nEmits.simul,this.nEmits.maxSimul);
+				this.nEmits.simul	= 0;
 			});
 
 		//吹き飛ばし
@@ -240,16 +253,17 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.listeners	= {
 			/** インパクトフェイズ */
 			discharge	: cc.EventListener.create({
-				event		: cc.EventListener.MOUSE,
-				onMouseUp	: (event)=>{
+				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touch,event)=>{
 					this.SetSequence(Sequences.DISCHARGE);
 				},
 			}),
 			/** エミットエナジーフェイズ */
 			emitEnergy	: cc.EventListener.create({
-				event		: cc.EventListener.MOUSE,
-				onMouseDown: (event)=>{
-					this.emittingPower++;
+				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan: (touch,event)=>{
+					this.nEmits.simul++;
+					this.nEmits.total++;
 				},
 			}),
 			/** リセット */
@@ -264,9 +278,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			}),
 			/** 次フェイズへの単純遷移 */
 			transionToNext	:cc.EventListener.create({
-				event		: cc.EventListener.TOUCH_ONE_BY_ONE,
-				onTouchBegan: (touch,event)=>{
+				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan: (touch,event)=>{
 					if(this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
+					return true;
 				},
 			}),
 		};
@@ -279,6 +294,23 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
 
 		return this;
+	}
+
+
+	/** エミット倍率を取得
+	 * @returns number
+	 */
+	GetEmittingRate(){
+		let power	= 0;
+		let add		= EmitEnergy.ADDITIONAL_POWER;
+
+		for(let i=0; i<this.nEmits.total; ++i){
+			power	+= add;
+			add		= Math.max(1,--add);
+		}
+
+		const rateSimul	= this.nEmits.maxSimul + (this.nEmits.maxSimul-1)/2;
+		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER);
 	}
 
 }//class
