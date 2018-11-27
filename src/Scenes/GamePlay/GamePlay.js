@@ -219,7 +219,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				if(this.acceptEmitting < 0){
 					this.SetSequence(Sequences.BLOW_AWAY);
-
 					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/EmitEnergy.ADDITIONAL_POWER + 20);
 					this.totalPower		= this.aiming.GetTotalRate() * this.GetEmittingRate() + this.impactPower;
 
@@ -231,7 +230,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				//マルチタッチ検出
 				this.nEmits.maxSimul	= Math.max(this.nEmits.simul,this.nEmits.maxSimul);
-				this.nEmits.simul	= 0;
+				this.nEmits.simul		= 0;
 			});
 
 		//吹き飛ばし
@@ -296,7 +295,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//シークエンス-イベント対応設定
 		Sequence.SetCommonEventListeners(this.listeners.reset);
 		Sequences.INITIAL.SetEventListeners(	this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
-		Sequences.START_AIM.SetEventListeners(	this.listeners.discharge		).NextPhase(Sequences.PRELIMINARY);
+		Sequences.START_AIM.SetEventListeners(	this.listeners.discharge		);
 		Sequences.PRELIMINARY.SetEventListeners(this.listeners.discharge		);
 		Sequences.EMIT.SetEventListeners(		this.listeners.emitEnergy		);
 
@@ -310,13 +309,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	GetEmittingRate(){
 		let power	= 0;
 		let add		= EmitEnergy.ADDITIONAL_POWER;
-
+		//エミット値の加算
 		for(let i=0; i<this.nEmits.total; ++i){
 			power	+= add;
 			add		= Math.max(1,--add);
 		}
-
+		//マルチタッチ補正
 		const rateSimul	= this.nEmits.maxSimul + (this.nEmits.maxSimul-1)/2;
+
 		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER);
 	}
 
