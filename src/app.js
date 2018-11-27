@@ -16,6 +16,10 @@ function IsAnyOf(one,list){
 	return list.indexOf(one) >= 0;
 }
 
-function debug(arg){
-	console.log(arg);
-}
+
+//デバッグ
+function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
+function Debug(callback){	if(isDebug()) callback();	}
+function Log(arg){			Debug(()=>console.log(arg));}
+function Msg(arg){			Debug(()=>alert(JSON.stringify(arg)));	}
+

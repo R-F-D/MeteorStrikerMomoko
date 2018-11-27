@@ -222,10 +222,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/EmitEnergy.ADDITIONAL_POWER + 20);
 					this.totalPower		= this.aiming.GetTotalRate() * this.GetEmittingRate() + this.impactPower;
 
-					debug(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
-					debug(`AimingRate: ${this.aiming.GetRate()}`);
-					debug(`Impact: ${this.impactPower}`);
-					debug(`Total: ${this.totalPower}`);
+					Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
+					Log(`AimingRate: ${this.aiming.GetRate()}`);
+					Log(`Impact: ${this.impactPower}`);
+					Log(`Total: ${this.totalPower}`);
 				}
 
 				//マルチタッチ検出
@@ -277,7 +277,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				event			: cc.EventListener.KEYBOARD,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
-						debug("[DEBUG] Reset Scene ----------");
+						Log("[DEBUG] Reset Scene ----------");
 						this.SetSequence(Sequences.INITIAL);
 					}
 				},
