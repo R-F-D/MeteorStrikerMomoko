@@ -253,23 +253,30 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.listeners	= {
 			/** インパクトフェイズ */
 			discharge	: cc.EventListener.create({
-				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
-					this.SetSequence(Sequences.DISCHARGE);
+					if(this.sequence===Sequences.START_AIM){
+						this.SetSequence(Sequences.PRELIMINARY);
+						return true;
+					}
+					return false;
+				},
+				onTouchesEnded	: (touch,event)=>{
+					if(this.sequence===Sequences.PRELIMINARY)	this.SetSequence(Sequences.DISCHARGE);
 				},
 			}),
 			/** エミットエナジーフェイズ */
 			emitEnergy	: cc.EventListener.create({
-				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan: (touch,event)=>{
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touch,event)=>{
 					this.nEmits.simul++;
 					this.nEmits.total++;
 				},
 			}),
 			/** リセット */
 			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
-				event		: cc.EventListener.KEYBOARD,
-				onKeyReleased: (code,event)=>{
+				event			: cc.EventListener.KEYBOARD,
+				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
 						debug("[DEBUG] Reset Scene ----------");
 						this.SetSequence(Sequences.INITIAL);
@@ -278,8 +285,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			}),
 			/** 次フェイズへの単純遷移 */
 			transionToNext	:cc.EventListener.create({
-				event		: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan: (touch,event)=>{
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touch,event)=>{
 					if(this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
 					return true;
 				},
@@ -288,10 +295,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//シークエンス-イベント対応設定
 		Sequence.SetCommonEventListeners(this.listeners.reset);
-		Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
-		Sequences.START_AIM.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.PRELIMINARY);
-		Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
-		Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
+		Sequences.INITIAL.SetEventListeners(	this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
+		Sequences.START_AIM.SetEventListeners(	this.listeners.discharge		).NextPhase(Sequences.PRELIMINARY);
+		Sequences.PRELIMINARY.SetEventListeners(this.listeners.discharge		);
+		Sequences.EMIT.SetEventListeners(		this.listeners.emitEnergy		);
 
 		return this;
 	}
