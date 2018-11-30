@@ -147,15 +147,14 @@ Scenes.Aiming	= class {
 	 * @returns this
 	 */
 	PushHitArea(tagName,min=1,max=1){
-		const tags	= Object.values(this.AREAS).map( v=>v.tag );
-		if(IsAnyOf(tagName,tags)){
-			if(max<min)	min	= [max,max=min][0];	//swap
-			this.hitAreas.push({
-				"tag"	: tagName,
-				"min"	: min * this.LENGTH/2,
-				"max"	: max * this.LENGTH/2,
-			});
-		}
+		if(!Object.values(this.AREAS).map(v=>v.tag).includes(tagName))	return this;
+
+		if(max<min)	min	= [max,max=min][0];	//swap
+		this.hitAreas.push({
+			"tag"	: tagName,
+			"min"	: min * this.LENGTH/2,
+			"max"	: max * this.LENGTH/2,
+		});
 		return this;
 	}
 

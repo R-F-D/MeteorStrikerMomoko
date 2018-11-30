@@ -130,8 +130,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				/** 更新 */
 				update	: function(dt){
 					this._super();
-					if(IsAnyOf(_this.sequence,[Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED])){
-						_this.sprites.player.setIndex(0);
+					if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(_this.sequence)){
+							_this.sprites.player.setIndex(0);
 					}
 					else{
 						_this.sprites.player.setIndex(1);
