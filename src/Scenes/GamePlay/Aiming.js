@@ -19,10 +19,10 @@ Scenes.Aiming	= class {
 		/**増分サイ*/		this.INCREMENT_RANDAM	= 1024;
 		/**基本倍率*/		this.BASE_RATE			= 256*256*128*128*2;
 		/**ゲージ半径*/		this.RADIUS				= 64;
-		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.2,	addRate:0.5	},
-														GOOD	: {tag:"GOOD",		rate:1.2,	addRate:0	},
-														NORMAL	: {tag:"NORMAL",	rate:1.0,	addRate:0	},
-														BAD		: {tag:"BAD",		rate:1.0,	addRate:0	}};
+		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.2,	addRate:0.5,	idxSprite:3,	},
+														GOOD	: {tag:"GOOD",		rate:1.2,	addRate:0,		idxSprite:2,	},
+														NORMAL	: {tag:"NORMAL",	rate:1.0,	addRate:0,		idxSprite:1,	},
+														BAD		: {tag:"BAD",		rate:1.0,	addRate:0,		idxSprite:0,	}};
 
 		/** @var エイミング位置 */
 		this.position	= 0;
@@ -30,8 +30,11 @@ Scenes.Aiming	= class {
 		/** @var boolean ゲージ移動方向が正方向か */
 		this.isIncrementPositive	= true;
 
-		/**ヒット領域*/
+		/** @var ヒット領域 */
 		this.hitAreas	= [];
+
+		/** @var 現在のヒット領域 */
+		this.currentArea	= null;
 
 		/** @var 増分 */
 		this.increment	= 0;
@@ -59,6 +62,7 @@ Scenes.Aiming	= class {
 		this.position				= this.INITIAL + Math.random()*this.LENGTH - this.LENGTH/2;
 		this.isIncrementPositive	= Math.random() < 0.5;
 		this.increment				= this.DEFAULT_INCREMENT + (Math.random()+Math.random())*this.INCREMENT_RANDAM/2;
+		this.currentArea			= null;
 
 		this.sprites.gauge			= Sprite.CreateInstance(rc.img.aimGauge);
 		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor);
@@ -73,7 +77,7 @@ Scenes.Aiming	= class {
 	SetLayer(layer){
 		this.sprites.gauge.AddToLayer(layer).Attr({x:this.spritePos.x, y:this.spritePos.y,});
 		this.sprites.cursor.AddToLayer(layer);
-		this.UpdateCursorSpritePos();
+		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
 	}
 	/** スプライト座標を設定
@@ -86,7 +90,7 @@ Scenes.Aiming	= class {
 		this.spritePos.x	= x;
 		this.spritePos.y	= y;
 		this.sprites.gauge.Attr({x:x,y:y});
-		this.UpdateCursorSpritePos();
+		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
 	}
 
@@ -95,6 +99,8 @@ Scenes.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	Update(){
+		this.currentArea			= null;
+
 		//エイミングターゲット移動
 		this.position += this.isIncrementPositive	? +this.increment	: -this.increment;
 		if     (this.position < this.MIN){
@@ -105,14 +111,24 @@ Scenes.Aiming	= class {
 			this.position			= this.MAX;
 			this.isIncrementPositive= !this.isIncrementPositive;
 		}
+		this.UpdateCurrentArea();
+
 		//表示
 		this.UpdateCursorSpritePos();
 
 		return this;
 	}
-	/** @private */
+
+	/** カーソル画像の位置を更新
+	 * @returns this
+	 * @private */
 	UpdateCursorSpritePos(){
-		this.sprites.cursor.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4,	this.RADIUS	);
+		this.UpdateCurrentArea(false);
+
+		this.sprites.cursor
+			.setIndex(this.currentArea.idxSprite)
+			.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4,	this.RADIUS	);
+
 		return this;
 	}
 
@@ -172,7 +188,15 @@ Scenes.Aiming	= class {
 	 * @returns
 	 */
 	GetCurrentArea(){
-		return this.GetArea(this.position);
+		if(this.currentArea==null)	this.UpdateCurrentArea();
+		return this.currentArea;
+	}
+	/** 現在のヒット領域を更新
+	 * @private
+	 * @returns this */
+	UpdateCurrentArea(isForce=true){
+		if(isForce || this.currentArea==null)	this.currentArea	= this.GetArea(this.position);
+		return this;
 	}
 
 	/** ヒット領域を初期化

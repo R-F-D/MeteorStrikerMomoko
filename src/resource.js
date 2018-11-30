@@ -6,7 +6,7 @@ const rc	= {
 	/** 画像 */
 	img	: {
 		"player"	: [ "player.png",	2,	1,	],	//プレイヤーキャラクター
-		"aimCursor"	: [ "aimcur.png",	1,	1,	],	//エイミングカーソル
+		"aimCursor"	: [ "aimcur.png",	2,	2,	],	//エイミングカーソル
 		"aimGauge"	: [ "aimgauge.png",	1,	1,	],	//エイミングゲージ
 	},
 
