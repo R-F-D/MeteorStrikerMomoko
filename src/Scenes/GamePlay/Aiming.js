@@ -5,6 +5,8 @@ var Scenes	= Scenes || {};
 var cc;
 (function(){	//File Scope
 
+//	Bad	Normal	Good Critical
+
 /** エイミングクラス */
 Scenes.Aiming	= class {
 
@@ -13,17 +15,23 @@ Scenes.Aiming	= class {
 		/**下限値*/			this.MIN				= -this.LENGTH/2;
 		/**上限値*/			this.MAX				= +this.LENGTH/2;
 		/**初期値*/			this.INITIAL			= 0;
-		/**クリティカル幅*/	this.CRITICAL_LENGTH	= 1024*3;	//絶対値
 		/**デフォルト増分*/	this.DEFAULT_INCREMENT	= 1024;
 		/**増分サイ*/		this.INCREMENT_RANDAM	= 1024;
 		/**基本倍率*/		this.BASE_RATE			= 256*256*128*128*2;
 		/**ゲージ半径*/		this.RADIUS				= 64;
+		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.2,	addRate:0.5	},
+														GOOD	: {tag:"GOOD",		rate:1.2,	addRate:0	},
+														NORMAL	: {tag:"NORMAL",	rate:1.0,	addRate:0	},
+														BAD		: {tag:"BAD",		rate:1.0,	addRate:0	}};
 
-		/** @var エイミングのズレ */
+		/** @var エイミング位置 */
 		this.position	= 0;
 
 		/** @var boolean ゲージ移動方向が正方向か */
 		this.isIncrementPositive	= true;
+
+		/**ヒット領域*/
+		this.hitAreas	= [];
 
 		/** @var 増分 */
 		this.increment	= 0;
@@ -39,6 +47,7 @@ Scenes.Aiming	= class {
 			/**ゲージ*/		gauge	: null,
 			/**カーソル*/	cursor	: null,
 		};
+
 	}
 
 
@@ -124,9 +133,55 @@ Scenes.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	GetTotalRate(){
-		let gap			= this.GetGap();
-		let critical	= gap <= this.CRITICAL_LENGTH	? this.increment/this.DEFAULT_INCREMENT	: 1.0;
-		return (this.LENGTH - gap) * (this.LENGTH - gap) * critical;
+		const area		= this.GetCurrentArea();
+		const base		= (this.LENGTH - this.GetGap()) * area.rate;
+		const critical	= area.addRate * this.increment / this.DEFAULT_INCREMENT +1;	//クリティカル倍率
+
+		return Math.max(0, base * critical);
+	}
+
+	/** ヒット領域を追加
+	 * @param {*} tagName
+	 * @param {*} [min=1] 0.0-1.0
+	 * @param {*} [max=1] 0.0-1.0
+	 * @returns this
+	 */
+	PushHitArea(tagName,min=1,max=1){
+		const tags	= Object.values(this.AREAS).map( v=>v.tag );
+		if(IsAnyOf(tagName,tags)){
+			if(max<min)	min	= [max,max=min][0];	//swap
+			this.hitAreas.push({
+				"tag"	: tagName,
+				"min"	: min * this.LENGTH/2,
+				"max"	: max * this.LENGTH/2,
+			});
+		}
+		return this;
+	}
+
+	/** ヒット領域を取得
+	 * @param {*} pos
+	 * @returns
+	 */
+	GetArea(pos){
+		for(let v of this.hitAreas){
+			if(v.min<=pos && pos<=v.max)	return this.AREAS[v.tag];
+		}
+		return this.AREAS.BAD;
+	}
+	/** 現在のエイミング位置に該当するヒット領域を得る
+	 * @returns
+	 */
+	GetCurrentArea(){
+		return this.GetArea(this.position);
+	}
+
+	/** ヒット領域を初期化
+	 * @returns this
+	 */
+	InitHitAreas(){
+		this.hitAreas	= [];
+		return this;
 	}
 
 	/** コンストラクタのラッパ

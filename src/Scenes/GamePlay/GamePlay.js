@@ -78,7 +78,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			/** 生成 */
 			onEnter	: function (){
 				this._super();
-				_this.aiming	= Scenes.Aiming.Create();
+				_this.aiming	= Scenes.Aiming
+									.Create()
+									.PushHitArea( "CRITICAL",	-0.10,	0.10 )
+									.PushHitArea( "GOOD",		-0.25,	0.25 )
+									.PushHitArea( "NORMAL",		-0.75,	0.75 );
+
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
 				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
 				_this.sequence.Init();
@@ -116,8 +121,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
-					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
-					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
+					_this.labels.hitArea		= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
+					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
+					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,40).AddToLayer(this);
 
 					return true;
 				},
@@ -133,6 +139,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 
 					_this.labels.chargedPower.setString(	`Charged:${_this.chargedPower}`		);
+					_this.labels.hitArea.setString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
 					_this.labels.aiming.setString(			`Aiming:${_this.aiming.position}`	);
 					_this.labels.emittingPower.setString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
 					return true;
@@ -143,6 +150,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** ラベル */
 		this.labels	= {
 			chargedPower	: null,
+			hitArea			: null,
 			aiming			: null,
 			emittingPower	: null,
 		}
@@ -219,7 +227,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				if(this.acceptEmitting < 0){
 					this.SetSequence(Sequences.BLOW_AWAY);
-					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/EmitEnergy.ADDITIONAL_POWER + 20);
+					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/BlowPower.INCREMENT + 20);
 					this.totalPower		= this.aiming.GetTotalRate() * this.GetEmittingRate() + this.impactPower;
 
 					Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
