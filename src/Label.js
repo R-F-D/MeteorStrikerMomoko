@@ -37,8 +37,8 @@ class Label{
 		return this;
 	}
 
-	setPosition(x,y)	{ this.entity.setPosition(x,y);	return this;	}
-	setString(text)		{ this.entity.setString(text);	return this;	}
-	setColor(color)		{ this.entity.setColor( typeof color==='string'?cc.color(color):color );	return this;	}
+	SetPosition(x,y)	{ this.entity.setPosition(x,y);	return this;	}
+	SetString(text)		{ this.entity.setString(text);	return this;	}
+	SetColor(color)		{ this.entity.setColor( typeof color==='string'?cc.color(color):color );	return this;	}
 
 }

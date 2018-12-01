@@ -120,10 +120,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
-					_this.labels.chargedPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,100).AddToLayer(this);
-					_this.labels.hitArea		= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,80).AddToLayer(this);
-					_this.labels.aiming			= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,60).AddToLayer(this);
-					_this.labels.emittingPower	= Label.CreateInstance().setColor("#FFFFFF").setPosition(300,40).AddToLayer(this);
+					_this.labels.chargedPower	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,100).AddToLayer(this);
+					_this.labels.hitArea		= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,80).AddToLayer(this);
+					_this.labels.aiming			= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,60).AddToLayer(this);
+					_this.labels.emittingPower	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,40).AddToLayer(this);
 
 					return true;
 				},
@@ -138,10 +138,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 
-					_this.labels.chargedPower.setString(	`Charged:${_this.chargedPower}`		);
-					_this.labels.hitArea.setString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
-					_this.labels.aiming.setString(			`Aiming:${_this.aiming.position}`	);
-					_this.labels.emittingPower.setString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
+					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
+					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
+					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position}`	);
+					_this.labels.emittingPower.SetString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
 					return true;
 				},
 			}),
