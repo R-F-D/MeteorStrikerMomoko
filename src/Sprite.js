@@ -88,17 +88,39 @@ class Sprite{
 	 */
 	SetRotate(angle){
 		this.angle	= Cycle(angle,0,360);
-		this.entity.attr({rotation:this.angle});
-		return this;
+		return this.Attr({rotation:this.angle});
 	}
 	/** 画像を回転させる
 	 * @param {number} increment 角度の増分
 	 * @returns this
 	 * @memberof Sprite
 	 */
-	Rotate(increment){
-		return this.SetRotate(this.angle+increment);
+	Rotate(increment){return this.SetRotate(this.angle+increment);}
+
+	/** スケール設定
+	 * @param {number} rate
+	 * @returns {this}
+	 * @memberof Sprite
+	 */
+	SetScale(rate){return this.Attr({scale:rate});}
+
+	/** 不透明度
+	 * @param {number} opac 0-255
+	 * @returns {ths} this
+	 * @memberof Sprite
+	 */
+	SetOpacity(opac){return this.Attr({opacity:opac});}
+
+	/** テクスチャの色設定
+	 * @param {string} color
+	 * @returns {this} this
+	 * @memberof Sprite
+	 */
+	SetColor(color){
+		this.entity.setColor( typeof color==='string'?cc.color(color):color );
+		return this;
 	}
+
 
 	/** cc.Sprite.attrのラッパ
 	 * @param {*} attr
@@ -106,17 +128,7 @@ class Sprite{
 	 * @memberof Sprite
 	 */
 	Attr(attr){
-		if(attr.x!=null || attr.y!=null){
-			this.SetPosition(	attr.x!=null?attr.x:null,	attr.y!=null?attr.y:null	);
-			delete attr.x;
-			delete attr.y;
-		}
-		if(attr.rotate!=null){
-			this.Rotate(attr.rotate);
-			delete attr.rotate;
-		}
 		this.entity.attr(attr);
-
 		return this;
 	}
 
