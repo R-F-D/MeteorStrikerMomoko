@@ -14,8 +14,12 @@ class Sprite{
 		/** @var 極座標の偏角 */
 		this.polaerAngle	= 0;
 
+		//回転
+		/** @var 回転角度(0-360) */
+		this.angle			= 0;
+
 		//スプライト本体
-		/** @var */
+		/** @var 並列画像のインデックス */
 		this.currentIndex	= -1;
 		/** @var cc.Spriteクラスのインスタンス */
 		this.entity			= new cc.Sprite(`${rc.DIRECTORY}${img[0]}`);
@@ -52,10 +56,10 @@ class Sprite{
 	}
 
 	/** 座標設定
-	 * @param {number} x x座標。null時は設定しない。
-	 * @param {number} y y座標。null時は設定しない。
-	 * @param {number} [a=null] 角度。null時は設定しない。
-	 * @param {number} [r=null] 半径。null時は設定しない。
+	 * @param {number} x 直交座標、または極座標の原点でのx。null時は設定しない。
+	 * @param {number} y 直交座標、または極座標の原点でのy。null時は設定しない。
+	 * @param {number} [a=null] 極座標の偏角。null時は設定しない。
+	 * @param {number} [r=null] 極座標の半径。null時は設定しない。
 	 * @returns this
 	 * @memberof Sprite
 	 */
@@ -77,6 +81,25 @@ class Sprite{
 		return this;
 	}
 
+	/** 画像の回転角度を設定
+	 * @param {number} angle 回転角度
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	SetRotate(angle){
+		this.angle	= Cycle(angle,0,360);
+		this.entity.attr({rotation:this.angle});
+		return this;
+	}
+	/** 画像を回転させる
+	 * @param {number} increment 角度の増分
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	Rotate(increment){
+		return this.SetRotate(this.angle+increment);
+	}
+
 	/** cc.Sprite.attrのラッパ
 	 * @param {*} attr
 	 * @returns this
@@ -87,6 +110,10 @@ class Sprite{
 			this.SetPosition(	attr.x!=null?attr.x:null,	attr.y!=null?attr.y:null	);
 			delete attr.x;
 			delete attr.y;
+		}
+		if(attr.rotate!=null){
+			this.Rotate(attr.rotate);
+			delete attr.rotate;
 		}
 		this.entity.attr(attr);
 
