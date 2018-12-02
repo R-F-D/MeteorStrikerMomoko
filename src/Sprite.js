@@ -5,16 +5,22 @@ class Sprite{
 
 	constructor(img){
 		//座標
-		this.x		= 0;
-		this.y		= 0;
-		this.radius	= 0;
-		this.angle	= 0;
+		/** @var X座標 */
+		this.x				= 0;
+		/** @var Y座標*/
+		this.y				= 0;
+		/** @var 極座標の径 */
+		this.polarRadius	= 0;
+		/** @var 極座標の偏角 */
+		this.polaerAngle	= 0;
 
 		//スプライト本体
+		/** @var */
 		this.currentIndex	= -1;
+		/** @var cc.Spriteクラスのインスタンス */
 		this.entity			= new cc.Sprite(`${rc.DIRECTORY}${img[0]}`);
 
-		//リソースデータ
+		/** @var 画像リソース */
 		this.img	= {
 			"path"		: img[0],
 			"nSplitX"	: img[1] || 1,
@@ -54,18 +60,18 @@ class Sprite{
 	 * @memberof Sprite
 	 */
 	SetPosition(x,y,a=null,r=null){
-		this.x		= x!=null	? x	: this.x;
-		this.y		= y!=null	? y	: this.y;
-		this.angle	= a!=null	? a	: this.angle;
-		this.radius	= r!=null	? r	: this.radius;
+		this.x				= x!=null	? x	: this.x;
+		this.y				= y!=null	? y	: this.y;
+		this.polaerAngle	= a!=null	? a	: this.polaerAngle;
+		this.polarRadius	= r!=null	? r	: this.polarRadius;
 
-		if(this.radius==0){
+		if(this.polarRadius==0){
 			this.entity.attr({	x:this.x,	y:this.y,	});
 		}
 		else{
 			this.entity.attr({
-				x	: this.x + Math.cos(this.angle) *this.radius,
-				y	: this.y + Math.sin(this.angle) *this.radius,
+				x	: this.x + Math.cos(this.polaerAngle) *this.polarRadius,
+				y	: this.y + Math.sin(this.polaerAngle) *this.polarRadius,
 			});
 		}
 		return this;
