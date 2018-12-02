@@ -4,7 +4,11 @@
 class Label{
 
 	constructor(text,fontName,fontSize){
+		/** @const Z座標 */
+		const Z	= 65535;
+
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
+		this.entity.attr({zIndex:Z});
 	}
 
 	/** インスタンス生成
