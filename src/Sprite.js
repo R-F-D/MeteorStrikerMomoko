@@ -33,6 +33,9 @@ class Sprite{
 		this.img.width		= this.entity.getContentSize().width;
 		this.img.height		= this.entity.getContentSize().height;
 
+		/* @var カスタムデータ */
+		this.data	= {};
+
 		//初期化
 		this.setIndex(0);
 	}
@@ -173,6 +176,13 @@ class Sprite{
 		else{
 			this.currentIndex	= 0;
 		}
+		return this;
+	}
+
+	GetCustomData(key){return this.data[key]}
+	SetCustomData(key,value){
+		if(value===undefined)	delete this.data[key];
+		else					this.data[key]	= value;
 		return this;
 	}
 }
