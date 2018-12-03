@@ -11,6 +11,16 @@ class Label{
 		this.entity.attr({zIndex:Z});
 	}
 
+	/** 可視設定
+	 * @param {boolean} visible
+	 * @returns {this}
+	 * @memberof Label
+	 */
+	SetVisible(visible){
+		this.entity.setVisible(!!visible);
+		return this;
+	}
+
 	/** インスタンス生成
 	 * @static
 	 * @param {String} text

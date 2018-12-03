@@ -114,6 +114,16 @@ class Sprite{
 	 */
 	SetOpacity(opac){return this.Attr({opacity:opac});}
 
+	/** 可視設定
+	 * @param {boolean} visible
+	 * @returns {this}
+	 * @memberof Sprite
+	 */
+	SetVisible(visible){
+		this.entity.setVisible(!!visible);
+		return this;
+	}
+
 	/** テクスチャの色設定
 	 * @param {string} color
 	 * @returns {this} this
@@ -123,7 +133,6 @@ class Sprite{
 		this.entity.setColor( typeof color==='string'?cc.color(color):color );
 		return this;
 	}
-
 
 	/** cc.Sprite.attrのラッパ
 	 * @param {*} attr
