@@ -71,7 +71,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** @var 最終的に与えられた威力 */
 		this.totalPower			= 0;
 		/** @var 隕石の移動距離 */
-		this.meteorX			= 0;
+		this.distanceOfMeteor	= 0;
 
 		/** ccSceneのインスタンス */
 		this.ccSceneInstance	= new (cc.Scene.extend({
@@ -118,12 +118,25 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.dischargeSpeed	= 0;
 					_this.SetSequence(Sequences.INITIAL);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
+					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
+												.SetScale(2.0).SetPosition(250,100).SetRotate(0)
+												.SetCustomData("angularV",-7)
+												.Attr({zIndex:3,opacity:255});
+
+					/*
+					_this.sprites.meteor	= MeteorImages.map(
+						v=>	Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
+								.SetScale(2.0).SetPosition(250+v.x,100).SetRotate(v.angle).SetColor(v.color)
+								.SetCustomData("angularV",v.angularV)
+								.Attr({zIndex:v.z,opacity:v.opac})
+					);*/
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
-					_this.labels.chargedPower	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,100).AddToLayer(this);
-					_this.labels.hitArea		= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,80).AddToLayer(this);
-					_this.labels.aiming			= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,60).AddToLayer(this);
-					_this.labels.emittingPower	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(300,40).AddToLayer(this);
+					//Labels
+					{let i=0; for(let key in _this.labels){
+						_this.labels[key]	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(120,270-i*20).AddToLayer(this);
+						++i;
+					}};
 
 					return true;
 				},
@@ -137,6 +150,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						_this.sprites.player.setIndex(1);
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
+					_this.sprites.meteor.Rotate(_this.sprites.meteor.GetCustomData("angularV"));
+					//_this.sprites.meteor.map( v=>v.Rotate(v.GetCustomData("angularV")) );
 
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
 					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
@@ -148,12 +163,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		};
 
 		/** ラベル */
-		this.labels	= {
-			chargedPower	: null,
-			hitArea			: null,
-			aiming			: null,
-			emittingPower	: null,
-		}
+		this.labels	= {	chargedPower:null,	hitArea:null,	aiming:null,	emittingPower:null,	}
 
 		//シークエンス設定
 		this.SetSequenceFunctions().InitEventListeners();
@@ -301,11 +311,11 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		};
 
 		//シークエンス-イベント対応設定
-		Sequence.SetCommonEventListeners(this.listeners.reset);
-		Sequences.INITIAL.SetEventListeners(	this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
-		Sequences.START_AIM.SetEventListeners(	this.listeners.discharge		);
-		Sequences.PRELIMINARY.SetEventListeners(this.listeners.discharge		);
-		Sequences.EMIT.SetEventListeners(		this.listeners.emitEnergy		);
+		Debug(()=>Sequence.SetCommonEventListeners(	this.listeners.reset			));
+		Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
+		Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);
+		Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
+		Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
 
 		return this;
 	}
