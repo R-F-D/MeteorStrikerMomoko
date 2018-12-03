@@ -33,6 +33,27 @@ function Cycle(value,lower,upper){
 	return isArray	? value	: value[0];
 }
 
+/** 数値を一定範囲内に収める（クランプ）
+ * @param {number} value
+ * @param {number} [lower=null] 下限値（以上）
+ * @param {number} [upper=null] 上限値（以下）
+ * @returns
+ */
+function Clamp(value,lower=null,upper=null){
+	if(lower!=null && upper!=null && upper<lower) upper = [lower,lower=upper][0];	//Swap
+
+	//To Array
+	const isArray	= Array.isArray(value);
+	if(!isArray)	value	= [value];
+	//クランプ処理
+	value	= value.map((v)=>{
+		if     (lower!=null && v<lower)	return lower;
+		else if(upper!=null && v>upper)	return upper;
+		return v;
+	});
+	return isArray	? value	: value[0];
+}
+
 /** 配列作成
  * @param {number} length
  * @returns {array}
