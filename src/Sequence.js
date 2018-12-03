@@ -8,6 +8,8 @@ var cc;
  */
 class Sequence{
 	constructor(){
+		/** @var このフェイズ開始してからのフレーム数 */
+		this.count				= 0;
 		/** @var 単純遷移における次フェイズ */
 		this.nextSequence		= null;
 		/** @var イベントリスナの対象レイヤ */
@@ -35,6 +37,8 @@ class Sequence{
 	 * @memberof Sequence
 	 */
 	Init(){
+		this.count	= 0;
+
 		//イベントリスナ初期化＆設定
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
@@ -65,6 +69,7 @@ class Sequence{
 		for(let i in this.updateFunctions){
 			if(typeof this.updateFunctions[i]==='function')	this.updateFunctions[i](dt,this);
 		}
+		--this.count;
 		return this;
 	}
 
