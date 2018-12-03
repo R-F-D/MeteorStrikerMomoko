@@ -38,6 +38,7 @@ class Sprite{
 
 		//初期化
 		this.setIndex(0);
+		this.entity.getTexture().setAliasTexParameters();	//アンチエイリアスOFF
 	}
 
 	/** インスタンス生成
