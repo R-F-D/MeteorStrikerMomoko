@@ -7,7 +7,6 @@ Scenes.SceneFactory	= ()=>{
 	return sceneClass.Create();
 }
 
-
 /** 数値を一定範囲内に収める（サイクル）
  * @param {number|number[]} value
  * @param {number} lower 下限値（以上）
@@ -34,6 +33,15 @@ function Cycle(value,lower,upper){
 	return isArray	? value	: value[0];
 }
 
+/** 配列作成
+ * @param {number} length
+ * @returns {array}
+ */
+function CreateArray(length){
+	let list	= [];
+	for(let i=0; i<length; ++i)	list.push(null);
+	return list;
+}
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
