@@ -37,6 +37,7 @@ const EmitEnergy	= {
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
 	MAIN	: 0,
+	BG		: 1,
 };
 
 Scenes.GamePlay	= class extends Scenes.SceneBase {
@@ -84,6 +85,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 									.PushHitArea( "GOOD",		-0.25,	0.25 )
 									.PushHitArea( "NORMAL",		-0.75,	0.75 );
 
+				_this.SetLayer(LinkedLayerTags.BG,  _this.ccLayers.bg);
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
 				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
 				_this.sequence.Init();
@@ -92,6 +94,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			},
 			/** 更新 */
 			update	: function(dt){
+				if(_this.sequence.count%10==0)_this.SpawnMeteorEffects();
 				_this.OnUpdating(dt);
 				_this.sequence.Update(dt);
 				_this.OnUpdated(dt);
@@ -101,17 +104,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		/** ccLayerに渡す用 */
 		this.ccLayers	= {
 			main	: cc.Layer.extend({
-				/**	生成 */
 				ctor:function(){
 					this._super();
 					this.init();
 					this.scheduleUpdate();
 					return true;
 				},
-				/** 初期化 */
 				init	: function(){
 					this._super();
-					_this.SetBackgroundColor(this,"#000000");
 
 					_this.chargingCount		= BlowPower.INITIAL;
 					_this.chargedPower		= 0;
@@ -119,17 +119,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.SetSequence(Sequences.INITIAL);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2.0).SetPosition(250,100).SetRotate(0)
-												.SetCustomData("angularV",-7)
-												.Attr({zIndex:3,opacity:255});
+												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
+					_this.sprites.meteorEffects	= [];
+					for(let i=0; i<5; ++i){
+						_this.sprites.meteorEffects[i]	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
+															.SetScale(2).SetPosition(250,120).Attr({zIndex:0,opacity:128}).SetColor("#FF0000")
+															.SetCustomData("count",0).SetVisible(false);
+					}
 
-					/*
-					_this.sprites.meteor	= MeteorImages.map(
-						v=>	Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-								.SetScale(2.0).SetPosition(250+v.x,100).SetRotate(v.angle).SetColor(v.color)
-								.SetCustomData("angularV",v.angularV)
-								.Attr({zIndex:v.z,opacity:v.opac})
-					);*/
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
 					//Labels
@@ -140,7 +137,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					return true;
 				},
-				/** 更新 */
 				update	: function(dt){
 					this._super();
 					if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(_this.sequence)){
@@ -150,14 +146,43 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						_this.sprites.player.setIndex(1);
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
-					_this.sprites.meteor.Rotate(_this.sprites.meteor.GetCustomData("angularV"));
-					//_this.sprites.meteor.map( v=>v.Rotate(v.GetCustomData("angularV")) );
+					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
+0
+					for(let v of _this.sprites.meteorEffects){
+						if(!v.GetCustomData("exists")) continue;
+
+						let count	= v.GetCustomData("count") || 0;
+						v.SetPosition(250+count*8,120+count).SetOpacity(255-count*8).SetScale(2);
+						++count;
+						const exists	= count < 30;
+						v.SetCustomData("count",count).SetCustomData("exists",exists).SetVisible(exists);
+					}
 
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
 					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
 					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position}`	);
 					_this.labels.emittingPower.SetString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
 					return true;
+				},
+			}),
+			bg	: cc.Layer.extend({
+				ctor:function(){
+					this._super();
+					this.init();
+					this.scheduleUpdate();
+					return true;
+				},
+				init	: function(){
+					this._super();
+					_this.SetBackgroundColor(this,"#000000");
+					const size	= cc.director.getWinSize();
+					_this.sprites.bg	= [0,1].map(i=>Sprite.CreateInstance(rc.img.bg).AddToLayer(this).SetPosition(size.width/2,size.height/2));
+				},
+				update	: function(){
+					this._super();
+					const size	= cc.director.getWinSize();
+					_this.sprites.bg[0].SetPosition(size.width/2-Cycle(_this.sequence.count*8,0,640),size.height/2);
+					_this.sprites.bg[1].SetPosition(size.width/2-Cycle(_this.sequence.count*8,0,640)+640,size.height/2);
 				},
 			}),
 		};
@@ -336,6 +361,19 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		const rateSimul	= this.nEmits.maxSimul + (this.nEmits.maxSimul-1)/2;
 
 		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER);
+	}
+
+	/** 隕石エフェクトをスポーン
+	 * @returns {this}
+	 */
+	SpawnMeteorEffects(){
+		for(let v of this.sprites.meteorEffects){
+			if(v.GetCustomData("exists"))	continue;
+
+			v.SetCustomData("exists",true).SetCustomData("count",0).SetRotate(this.sprites.meteor.GetRotate()).SetVisible(true);
+			break;
+		};
+		return this;
 	}
 
 }//class
