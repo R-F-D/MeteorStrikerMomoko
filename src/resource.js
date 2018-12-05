@@ -10,6 +10,7 @@ const rc	= {
 		aimCursor	: [ "aimcur.png",	2,	2,	],	//エイミングカーソル
 		aimGauge	: [ "aimgauge.png",	1,	1,	],	//エイミングゲージ
 		meteor		: [ "meteor.png",	1,	1,	],	//メテオ
+		flare		: [ "flare.png",	1,	1,	],	//隕石エフェクト
 	},
 
 	/** サウンド */

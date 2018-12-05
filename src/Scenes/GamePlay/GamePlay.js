@@ -94,7 +94,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			},
 			/** 更新 */
 			update	: function(dt){
-				if(_this.sequence.count%10==0)_this.SpawnMeteorEffects();
+				if(_this.sequence.count%20==0)_this.SpawnMeteorEffects();
 				_this.OnUpdating(dt);
 				_this.sequence.Update(dt);
 				_this.OnUpdated(dt);
@@ -122,8 +122,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
 					_this.sprites.meteorEffects	= [];
 					for(let i=0; i<5; ++i){
-						_this.sprites.meteorEffects[i]	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-															.SetScale(2).SetPosition(250,120).Attr({zIndex:0,opacity:128}).SetColor("#FF0000")
+						_this.sprites.meteorEffects[i]	= Sprite.CreateInstance(rc.img.flare).AddToLayer(this)
+															.SetScale(2).SetPosition(250,120).Attr({zIndex:0,opacity:255}).SetColor("#FF0000")
 															.SetCustomData("count",0).SetVisible(false);
 					}
 
@@ -152,9 +152,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						if(!v.GetCustomData("exists")) continue;
 
 						let count	= v.GetCustomData("count") || 0;
-						v.SetPosition(250+count*8,120+count).SetOpacity(255-count*8).SetScale(2);
+						v.SetPosition(250+count*8,120+count).SetOpacity(255-count*4).SetScale(1.5+0.1*count);
 						++count;
-						const exists	= count < 30;
+						const exists	= count < 60;
 						v.SetCustomData("count",count).SetCustomData("exists",exists).SetVisible(exists);
 					}
 
@@ -174,7 +174,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				init	: function(){
 					this._super();
-					_this.SetBackgroundColor(this,"#000000");
+					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
 					_this.sprites.bg	= [0,1].map(i=>Sprite.CreateInstance(rc.img.bg).AddToLayer(this).SetPosition(size.width/2,size.height/2));
 				},
