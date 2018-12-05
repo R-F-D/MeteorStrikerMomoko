@@ -100,6 +100,11 @@ class Sprite{
 	 * @memberof Sprite
 	 */
 	Rotate(increment){return this.SetRotate(this.angle+increment);}
+	/** スプライトの回転角度を得る
+	 * @returns {number} 0-360
+	 * @memberof Sprite
+	 */
+	GetRotate(){return this.angle;}
 
 	/** スケール設定
 	 * @param {number} rate
@@ -133,6 +138,30 @@ class Sprite{
 	SetColor(color){
 		this.entity.setColor( typeof color==='string'?cc.color(color):color );
 		return this;
+	}
+
+	/** ブレンドモード設定
+	 * @param {*} mode cc.BlendFunc.xxx
+	 * @returns {this}
+	 * @memberof Sprite
+	 */
+	SetBlend(mode){
+		this.entity.setBlendFunc(mode);
+		return this;
+	}
+	/** ブレンドモードを加算に設定
+	 * @returns {this}
+	 * @memberof Sprite
+	 */
+	EnableAdditiveBlend(){
+		return this.SetBlend(cc.BlendFunc.ADDITIVE);
+	}
+	/** ブレンドモード初期化
+	 * @returns {this}
+	 * @memberof Sprite
+	 */
+	InitBlend(){
+		return this.SetBlend(cc.BlendFunc.ALPHA_NON_PREMULTIPLIED);
 	}
 
 	/** cc.Sprite.attrのラッパ
