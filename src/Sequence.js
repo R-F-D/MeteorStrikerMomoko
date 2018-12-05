@@ -43,18 +43,18 @@ class Sequence{
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
 			//共通イベント
-			for(let i in Sequence._commonEventListeners){
-				if(Sequence._commonEventListeners[i] instanceof cc.EventListener)	cc.eventManager.addListener(Sequence._commonEventListeners[i],this.listenTargetLayer);
+			for(let e of Sequence._commonEventListeners){
+				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
 			}
 			//個別イベント
-			for(let i in this.eventListeners){
-				if(this.eventListeners[i] instanceof cc.EventListener)	cc.eventManager.addListener(this.eventListeners[i],this.listenTargetLayer);
+			for(let e of this.eventListeners){
+				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
 			}
 		}
 
 		//シーケンス開始時処理
-		for(let i in this.onStartFunctions){
-			if(typeof this.onStartFunctions[i]==='function')	this.onStartFunctions[i](this);
+		for(let f of this.onStartFunctions){
+			if(typeof f==='function')	f(this);
 		}
 
 		return this;
@@ -66,8 +66,8 @@ class Sequence{
 	 * @memberof Sequence
 	 */
 	Update(dt){
-		for(let i in this.updateFunctions){
-			if(typeof this.updateFunctions[i]==='function')	this.updateFunctions[i](dt,this);
+		for(let f of this.updateFunctions){
+			if(typeof f==='function')	f(dt,this);
 		}
 		--this.count;
 		return this;
@@ -86,8 +86,8 @@ class Sequence{
 		}
 		//追加
 		if(!Array.isArray(funcs))	funcs	= [funcs];
-		for(let i in funcs){
-			if(typeof funcs[i]==='function')	this.onStartFunctions.push(funcs[i]);
+		for(let f of funcs){
+			if(typeof f==='function')	this.onStartFunctions.push(f);
 		}
 		return this;
 	}
@@ -105,8 +105,8 @@ class Sequence{
 		}
 		//追加
 		if(!Array.isArray(funcs))	funcs	= [funcs];
-		for(let i in funcs){
-			if(typeof funcs[i]==='function')	this.updateFunctions.push(funcs[i]);
+		for(let f of funcs){
+			if(typeof f==='function')	this.updateFunctions.push(f);
 		}
 		return this;
 	}
