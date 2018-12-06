@@ -94,7 +94,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			},
 			/** 更新 */
 			update	: function(dt){
-				if(_this.sequence.count%20==0)_this.SpawnMeteorEffects();
+				if(_this.sequence.count%20==0)	_this.meteorEffect.Spawn();
 				_this.OnUpdating(dt);
 				_this.sequence.Update(dt);
 				_this.OnUpdated(dt);
@@ -120,12 +120,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
-					_this.sprites.meteorEffects	= [];
-					for(let i=0; i<5; ++i){
-						_this.sprites.meteorEffects[i]	= Sprite.CreateInstance(rc.img.flare).AddToLayer(this)
-															.SetScale(2).SetPosition(250,120).Attr({zIndex:0,opacity:255}).SetColor("#FF0000")
-															.SetCustomData("count",0).SetVisible(false);
-					}
+					_this.meteorEffect	= Scenes.MeteorEffect.Create(5).Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
@@ -147,17 +142,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
+					_this.meteorEffect.Update();
 0
-					for(let v of _this.sprites.meteorEffects){
-						if(!v.GetCustomData("exists")) continue;
-
-						let count	= v.GetCustomData("count") || 0;
-						v.SetPosition(250+count*8,120+count).SetOpacity(255-count*4).SetScale(1.5+0.1*count);
-						++count;
-						const exists	= count < 60;
-						v.SetCustomData("count",count).SetCustomData("exists",exists).SetVisible(exists);
-					}
-
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
 					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
 					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position}`	);
@@ -364,8 +350,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	}
 
 	/** 隕石エフェクトをスポーン
-	 * @returns {this}
-	 */
+
 	SpawnMeteorEffects(){
 		for(let v of this.sprites.meteorEffects){
 			if(v.GetCustomData("exists"))	continue;
@@ -375,6 +360,20 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		};
 		return this;
 	}
+
+	UpdateMeteorEffects(){
+		for(let v of this.sprites.meteorEffects){
+			if(!v.GetCustomData("exists")) continue;
+
+			let count	= v.GetCustomData("count") || 0;
+			v.SetPosition(250+count*8,120+count).SetOpacity(255-count*4).SetScale(1.5+0.1*count);
+			++count;
+			const exists	= count < 60;
+			v.SetCustomData("count",count).SetCustomData("exists",exists).SetVisible(exists);
+		}
+		return this;
+	}
+	*/
 
 }//class
 

@@ -18,6 +18,7 @@
 		"src/Sequence.js",
 		"src/Scenes/SceneBase.js",
 		"src/Scenes/GamePlay/Aiming.js",
+		"src/Scenes/GamePlay/MeteorEffect.js",
 		"src/Scenes/GamePlay/GamePlay.js",
 		"src/app.js"
 	]
