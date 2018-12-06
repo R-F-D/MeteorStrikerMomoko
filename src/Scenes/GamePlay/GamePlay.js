@@ -94,7 +94,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			},
 			/** 更新 */
 			update	: function(dt){
-				if(_this.sequence.count%20==0)	_this.meteorEffect.Spawn();
 				_this.OnUpdating(dt);
 				_this.sequence.Update(dt);
 				_this.OnUpdated(dt);
@@ -142,7 +141,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					}
 					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
-					_this.meteorEffect.Update();
+					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
 0
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
 					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
