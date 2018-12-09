@@ -69,7 +69,7 @@ class Sequence{
 		for(let f of this.updateFunctions){
 			if(typeof f==='function')	f(dt,this);
 		}
-		--this.count;
+		++this.count;
 		return this;
 	}
 
