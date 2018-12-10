@@ -116,7 +116,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.chargedPower		= 0;
 					_this.dischargeSpeed	= 0;
 					_this.SetSequence(Sequences.INITIAL);
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetPosition(100,100);
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
+												.SetScale(2).SetPosition(100,100);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
 					_this.meteorEffect	= Scenes.MeteorEffect.Create(5).Init(this);
@@ -133,16 +134,29 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				update	: function(dt){
 					this._super();
+
+					//Player
+					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
 					if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(_this.sequence)){
-							_this.sprites.player.setIndex(0);
+						_this.sprites.player.setIndex( parseInt(_this.sequence.count/15)%2 );
+					}
+					else if([Sequences.DISCHARGE].includes(_this.sequence)){
+						_this.sprites.player.setIndex( _this.chargedPower<BlowPower.MAX/2 ? 2:5 );
 					}
 					else{
-						_this.sprites.player.setIndex(1);
+						//打撃 強
+						if(_this.chargedPower >= BlowPower.MAX/2){
+							_this.sprites.player.setIndex(	_this.sequence.count<15	? 6 : 7 );
+						}
+						//打撃 弱
+						else{
+							_this.sprites.player.setIndex(3);
+						}
 					}
-					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
+
 					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
-0
+
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
 					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
 					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position}`	);
