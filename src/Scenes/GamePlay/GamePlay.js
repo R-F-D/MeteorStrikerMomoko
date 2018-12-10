@@ -117,7 +117,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.dischargeSpeed	= 0;
 					_this.SetSequence(Sequences.INITIAL);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).SetPosition(100,100);
+												.SetScale(2).SetPosition(100,70);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
 					_this.meteorEffect	= Scenes.MeteorEffect.Create(5).Init(this);
@@ -136,23 +136,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 
 					//Player
-					_this.sprites.player.SetPosition(100-_this.chargingCount/512,null);
-					if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(_this.sequence)){
-						_this.sprites.player.setIndex( parseInt(_this.sequence.count/15)%2 );
-					}
-					else if([Sequences.DISCHARGE].includes(_this.sequence)){
-						_this.sprites.player.setIndex( _this.chargedPower<BlowPower.MAX/2 ? 2:5 );
-					}
-					else{
-						//打撃 強
-						if(_this.chargedPower >= BlowPower.MAX/2){
-							_this.sprites.player.setIndex(	_this.sequence.count<15	? 6 : 7 );
-						}
-						//打撃 弱
-						else{
-							_this.sprites.player.setIndex(3);
-						}
-					}
+					_this.UpdatePlayerSprite();
 
 					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
@@ -362,31 +346,32 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER);
 	}
 
-	/** 隕石エフェクトをスポーン
+	/**プレイヤー画像の表示*/
+	UpdatePlayerSprite(){
+		//ｙ座標
+		let dy	= this.sprites.player.GetCustomData("dy");
+		if(dy==null) dy=0.25;
+		if(this.sprites.player.y<100)	dy+=0.005;
+		else							dy-=0.005;
+		if     (dy> 0.25) dy= 0.25;
+		else if(dy<-0.25) dy=-0.25;
 
-	SpawnMeteorEffects(){
-		for(let v of this.sprites.meteorEffects){
-			if(v.GetCustomData("exists"))	continue;
-
-			v.SetCustomData("exists",true).SetCustomData("count",0).SetRotate(this.sprites.meteor.GetRotate()).SetVisible(true);
-			break;
-		};
-		return this;
-	}
-
-	UpdateMeteorEffects(){
-		for(let v of this.sprites.meteorEffects){
-			if(!v.GetCustomData("exists")) continue;
-
-			let count	= v.GetCustomData("count") || 0;
-			v.SetPosition(250+count*8,120+count).SetOpacity(255-count*4).SetScale(1.5+0.1*count);
-			++count;
-			const exists	= count < 60;
-			v.SetCustomData("count",count).SetCustomData("exists",exists).SetVisible(exists);
+		//スプライト番号
+		let idx	= 0;
+		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
+			idx	= parseInt(this.sequence.count/15) % 2;
 		}
+		else if([Sequences.DISCHARGE].includes(this.sequence)){
+			idx	= this.chargedPower<BlowPower.MAX/2	? 2	: 5;
+		}
+		else{
+			idx	= 3;
+			if(this.chargedPower >= BlowPower.MAX/2)	idx	= this.sequence.count<15	? 6 : 7;
+		}
+
+		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,null).SetRelativePosition(null,dy).SetCustomData("dy",dy);
 		return this;
 	}
-	*/
 
 }//class
 

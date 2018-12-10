@@ -126,7 +126,7 @@ Scenes.Aiming	= class {
 		this.UpdateCurrentArea(false);
 
 		this.sprites.cursor
-			.setIndex(this.currentArea.idxSprite)
+			.SetIndex(this.currentArea.idxSprite)
 			.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4,	this.RADIUS	);
 
 		return this;

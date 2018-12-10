@@ -37,7 +37,7 @@ class Sprite{
 		this.data	= {};
 
 		//初期化
-		this.setIndex(0);
+		this.SetIndex(0);
 		this.entity.getTexture().setAliasTexParameters();	//アンチエイリアスOFF
 	}
 
@@ -217,7 +217,7 @@ class Sprite{
 	 * @returns this
 	 * @memberof Sprite
 	 */
-	setIndex(idx){
+	SetIndex(idx){
 		if(this.currentIndex===idx)	return this;
 
 		if(this.img.width>0 && this.img.height>0 && this.img.nSplitX>0 && this.img.nSplitY>0){
