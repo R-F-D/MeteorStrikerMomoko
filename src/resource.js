@@ -11,6 +11,7 @@ const rc	= {
 		aimGauge	: [ "aimgauge.png",	1,	1,	],	//エイミングゲージ
 		meteor		: [ "meteor.png",	1,	1,	],	//メテオ
 		flare		: [ "flare.png",	1,	1,	],	//隕石エフェクト
+		flyFx		: [ "flyfx.png",	1,	1,	],	//プレイヤーエフェクト
 	},
 
 	/** サウンド */
