@@ -136,7 +136,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 
 					//Player
-					_this.sprites.player.SetPosition(100-_this.chargingCount/512,100);
+					_this.sprites.player.SetPosition(100-_this.chargingCount/512,null);
 					if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(_this.sequence)){
 						_this.sprites.player.setIndex( parseInt(_this.sequence.count/15)%2 );
 					}

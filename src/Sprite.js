@@ -59,7 +59,7 @@ class Sprite{
 		return this.entity;
 	}
 
-	/** 座標設定
+	/** 座標設定（絶対座標）
 	 * @param {number} x 直交座標、または極座標の原点でのx。null時は設定しない。
 	 * @param {number} y 直交座標、または極座標の原点でのy。null時は設定しない。
 	 * @param {number} [a=null] 極座標の偏角。null時は設定しない。
@@ -83,6 +83,23 @@ class Sprite{
 			});
 		}
 		return this;
+	}
+
+	/** 座標設定（相対座標）
+	 * @param {number} x 直交座標、または極座標の原点でのx増分。null時は変更しない。
+	 * @param {number} y 直交座標、または極座標の原点でのy増分。null時は変更しない。
+	 * @param {number} [a=null] 極座標の偏角増分。null時は変更しない。
+	 * @param {number} [r=null] 極座標の半径増分。null時は変更しない。
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	SetRelativePosition(x,y,a=null,r=null){
+		x	= x!=null	? x+this.x				: null;
+		y	= y!=null	? y+this.y				: null;
+		a	= a!=null	? a+this.polaerAngle	: null;
+		r	= r!=null	? r+this.polarRadius	: null;
+
+		return this.SetPosition(x,y,a,r);
 	}
 
 	/** 画像の回転角度を設定
