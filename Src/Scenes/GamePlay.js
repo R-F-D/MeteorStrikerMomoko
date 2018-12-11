@@ -27,7 +27,7 @@ const BlowPower	= {
 	/**増分*/			INCREMENT		: 1*256,
 	/**失敗時の減少*/	DECREMENT		: 1*256,
 	/**主動作の速度*/	DISCHARGE_SPEED	: 4*256,
-	/**主動作の加速度*/	ACCELERATION	: 1.20,
+	/**主動作の加速度*/	ACCELERATION	: 1.10,
 };
 /** エミットエナジー定数*/
 const EmitEnergy	= {
@@ -139,7 +139,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random())*4)-4).Rotate(-7);
+					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random()))*4-4).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
