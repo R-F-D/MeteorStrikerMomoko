@@ -1,20 +1,13 @@
 /* *******************************************************************************
 	プレイヤー飛行エフェクトクラス
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Effects	= Effects || {};
 var cc;
 (function(){	//File Scope
 
-//	Bad	Normal	Good Critical
 
 /** @class プレイヤー飛行エフェクトクラス */
-Scenes.FlyEffect	= class{
-
-	constructor(nEntities=5){
-		this.nEntities	= nEntities;
-		this.entities	= []
-	}
-	static Create(nEntities){return new Scenes.FlyEffect(nEntities);}
+Effects.Fly	= class extends Effects.EffectBase{
 
 	Init(layer){
 		for(let i=0; i<this.nEntities; ++i){

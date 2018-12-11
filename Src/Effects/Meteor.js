@@ -1,20 +1,13 @@
 /* *******************************************************************************
 	隕石エフェクトクラス
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Effects	= Effects || {};
 var cc;
 (function(){	//File Scope
 
-//	Bad	Normal	Good Critical
 
 /** @class 隕石エフェクトクラス */
-Scenes.MeteorEffect	= class{
-
-	constructor(nEntities=5){
-		this.nEntities	= nEntities;
-		this.entities	= []
-	}
-	static Create(nEntities){return new Scenes.MeteorEffect(nEntities);}
+Effects.Meteor	= class extends Effects.EffectBase{
 
 	Init(layer){
 		for(let i=0; i<this.nEntities; ++i){

@@ -120,8 +120,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 												.SetScale(2).SetPosition(100,70);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
-					_this.meteorEffect	= Scenes.MeteorEffect.Create(5).Init(this);
-					_this.playerEffect	= Scenes.FlyEffect.Create(20).Init(this);
+					_this.meteorEffect	= Effects.Meteor.Create(5).Init(this);
+					_this.playerEffect	= Effects.Fly.Create(20).Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 

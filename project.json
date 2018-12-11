@@ -16,6 +16,7 @@
 		"Src/Label.js",
 		"Src/Sequence.js",
 
+		"Src/Effects/EffectBase.js",
 		"Src/Effects/Fly.js",
 		"Src/Effects/Meteor.js",
 
