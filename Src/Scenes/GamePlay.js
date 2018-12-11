@@ -139,7 +139,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(250,120+((Math.random()+Math.random()))*4-4).Rotate(-7);
+					_this.sprites.meteor.SetPosition(250,120+NormalRandom(4)).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);

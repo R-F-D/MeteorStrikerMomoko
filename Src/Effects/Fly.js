@@ -33,10 +33,10 @@ Effects.Fly	= class extends Effects.EffectBase{
 			if(v.exists)	continue;
 
 			v.sprite
-				.SetPosition(x+(Math.random()+Math.random())*32-16, y+(Math.random()+Math.random())*8-4 )
+				.SetPosition(x+NormalRandom(16), y+NormalRandom(4) )
 				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true);
 			v.dx		= -0.5;
-			v.dy		= (Math.random()+Math.random())*2-2 -1;
+			v.dy		= NormalRandom(2) -1;
 			v.exists	= true;
 			v.count		= 0;
 			break;

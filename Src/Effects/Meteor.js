@@ -32,7 +32,7 @@ Effects.Meteor	= class extends Effects.EffectBase{
 			if(v.exists)	continue;
 
 			v.sprite.SetPosition(250,120).SetRotate(Math.random()*360).SetVisible(true);
-			v.dy		= (Math.random()+Math.random())*4-2;
+			v.dy		= NormalRandom(2);
 			v.exists	= true;
 			v.count		= 0;
 			break;

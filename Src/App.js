@@ -71,6 +71,15 @@ function CreateArray(length){
 	return list;
 }
 
+
+/** 正規乱数
+ * @param {number} halfWidth 半幅
+ * @returns {number}
+ */
+function NormalRandom(halfWidth){
+	return (Math.random()+Math.random()-1) * halfWidth;
+}
+
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
 function Debug(callback){	if(isDebug()) callback();	}
