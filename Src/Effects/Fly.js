@@ -35,7 +35,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 			v.sprite
 				.SetPosition(x+(Math.random()+Math.random()*32)-16, y+(Math.random()+Math.random()*8)-4 )
 				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true);
-			v.dx		= 0.5;
+			v.dx		= -0.5;
 			v.dy		= (Math.random()+Math.random()*2)-2;
 			v.exists	= true;
 			v.count		= 0;
@@ -54,7 +54,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 				.SetRelativePosition(v.dx,v.dy)
 				.SetOpacity(255-v.count*4);
 			++v.count;
-			v.dx-=0.2;
+			v.dx+=0.2;
 			v.exists	= v.count < 30;
 			v.sprite.SetVisible(v.exists);
 		}

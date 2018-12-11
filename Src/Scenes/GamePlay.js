@@ -165,8 +165,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				update	: function(){
 					this._super();
 					const size	= cc.director.getWinSize();
-					_this.sprites.bg[0].SetPosition(size.width/2-Cycle(_this.sequence.count*8,0,640),size.height/2);
-					_this.sprites.bg[1].SetPosition(size.width/2-Cycle(_this.sequence.count*8,0,640)+640,size.height/2);
+					_this.sprites.bg[0].SetPosition(size.width/2-Cycle(-_this.sequence.count*8,0,640),size.height/2);
+					_this.sprites.bg[1].SetPosition(size.width/2-Cycle(-_this.sequence.count*8,0,640)+640,size.height/2);
 				},
 			}),
 		};
