@@ -11,13 +11,12 @@ var cc;
 Scenes.Aiming	= class {
 
 	constructor(){
-		/**ゲージ長*/		this.LENGTH				= 65536;	//this.MAX - this.MIN +1;	//正部＋負部＋０
+		/**ゲージ長*/		this.LENGTH				= 65536;
 		/**下限値*/			this.MIN				= -this.LENGTH/2;
 		/**上限値*/			this.MAX				= +this.LENGTH/2;
 		/**初期値*/			this.INITIAL			= 0;
 		/**デフォルト増分*/	this.DEFAULT_INCREMENT	= 1024;
 		/**増分サイ*/		this.INCREMENT_RANDAM	= 1024;
-		/**基本倍率*/		this.BASE_RATE			= 256*256*128*128*2;
 		/**ゲージ半径*/		this.RADIUS				= 64;
 		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.2,	addRate:0.5,	idxSprite:3,	},
 														GOOD	: {tag:"GOOD",		rate:1.2,	addRate:0,		idxSprite:2,	},
@@ -137,23 +136,21 @@ Scenes.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	GetGap(){ return Math.abs(this.position);	}
-	/** エイミング倍率を取得
+	/** エイミング倍率（精度のみ）倍率を取得
 	 * @returns number
 	 * @memberof Aiming
 	 */
 	GetRate(){
-		return this.GetTotalRate() / this.BASE_RATE;
+		return (this.LENGTH - this.GetGap()) / this.LENGTH;
 	}
-	/** エイミング倍率✕基本倍率の値を取得
+	/** エイミング倍率（精度・エリア倍率・クリティカル込み）を取得
 	 * @returns
 	 * @memberof Aiming
 	 */
 	GetTotalRate(){
 		const area		= this.GetCurrentArea();
-		const base		= (this.LENGTH - this.GetGap()) * area.rate;
 		const critical	= area.addRate * this.increment / this.DEFAULT_INCREMENT +1;	//クリティカル倍率
-
-		return Math.max(0, base * critical);
+		return Math.max(0, this.GetRate() * area.rate * critical);
 	}
 
 	/** ヒット領域を追加
