@@ -1,10 +1,10 @@
 .vscode/
-frameworks/*
-frameworks/**/
+[Ff]rameworks/*
+[Ff]rameworks/**/
 !.gitkeep
-tmp/
-private
-private/
+[Tt]mp/
+[Pp]rivate
+[Pp]rivate/
 *.old
 *.bak
 *.tmp

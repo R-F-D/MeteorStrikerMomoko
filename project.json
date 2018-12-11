@@ -7,20 +7,24 @@
 	"noCache"		: false,
 	"id"			: "gameCanvas",
 	"renderMode"	: 0,
-	"engineDir"		:"frameworks/cocos2d-html5",
+	"engineDir"		:"Frameworks/cocos2d-html5",
 
 	"modules"		: ["cocos2d"],
 
 	"jsList"		: [
-		"src/resource.js",
-		"src/Sprite.js",
-		"src/Label.js",
-		"src/Sequence.js",
-		"src/Scenes/SceneBase.js",
-		"src/Scenes/GamePlay/Aiming.js",
-		"src/Scenes/GamePlay/FlyEffect.js",
-		"src/Scenes/GamePlay/MeteorEffect.js",
-		"src/Scenes/GamePlay/GamePlay.js",
-		"src/app.js"
+		"Src/Sprite.js",
+		"Src/Label.js",
+		"Src/Sequence.js",
+
+		"Src/Effects/Fly.js",
+		"Src/Effects/Meteor.js",
+
+		"Src/Aiming.js",
+
+		"Src/Scenes/SceneBase.js",
+		"Src/Scenes/GamePlay.js",
+
+		"Src/Resource.js",
+		"Src/App.js"
 	]
 }
