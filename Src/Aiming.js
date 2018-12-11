@@ -64,8 +64,8 @@ Scenes.Aiming	= class {
 		this.increment				= this.DEFAULT_INCREMENT + (Math.random()+Math.random())*this.INCREMENT_RANDAM/2;
 		this.currentArea			= null;
 
-		this.sprites.gauge			= Sprite.CreateInstance(rc.img.aimGauge);
-		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor);
+		this.sprites.gauge			= Sprite.CreateInstance(rc.img.aimGauge).Attr({zIndex:100});;
+		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor).Attr({zIndex:100});;
 		return this;
 	}
 
