@@ -16,12 +16,12 @@ Scenes.Aiming	= class {
 		/**上限値*/			this.MAX				= +this.LENGTH/2;
 		/**初期値*/			this.INITIAL			= 0;
 		/**デフォルト増分*/	this.DEFAULT_INCREMENT	= 1024;
-		/**増分サイ*/		this.INCREMENT_RANDAM	= 1024;
+		/**増分サイ*/		this.INCREMENT_RANDAM	= this.DEFAULT_INCREMENT/2;
 		/**ゲージ半径*/		this.RADIUS				= 64;
-		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.2,	addRate:0.5,	idxSprite:3,	},
-														GOOD	: {tag:"GOOD",		rate:1.2,	addRate:0,		idxSprite:2,	},
-														NORMAL	: {tag:"NORMAL",	rate:1.0,	addRate:0,		idxSprite:1,	},
-														BAD		: {tag:"BAD",		rate:1.0,	addRate:0,		idxSprite:0,	}};
+		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL: {tag:"CRITICAL",	rate:1.20,	addRate:0.5,	idxSprite:3,	},
+														GOOD	: {tag:"GOOD",		rate:1.20,	addRate:0,		idxSprite:2,	},
+														NORMAL	: {tag:"NORMAL",	rate:1.05,	addRate:0,		idxSprite:1,	},
+														BAD		: {tag:"BAD",		rate:1.00,	addRate:0,		idxSprite:0,	}};
 
 		/** @var エイミング位置 */
 		this.position	= 0;
@@ -60,7 +60,7 @@ Scenes.Aiming	= class {
 	Init(){
 		this.position				= this.INITIAL + Math.random()*this.LENGTH - this.LENGTH/2;
 		this.isIncrementPositive	= Math.random() < 0.5;
-		this.increment				= this.DEFAULT_INCREMENT + NormalRandom(this.INCREMENT_RANDAM/2) + this.INCREMENT_RANDAM/2;
+		this.increment				= this.DEFAULT_INCREMENT + NormalRandom(this.INCREMENT_RANDAM) + this.INCREMENT_RANDAM;
 		this.currentArea			= null;
 
 		this.sprites.gauge			= Sprite.CreateInstance(rc.img.aimGauge).Attr({zIndex:100});;
@@ -137,11 +137,18 @@ Scenes.Aiming	= class {
 	 */
 	GetGap(){ return Math.abs(this.position);	}
 	/** エイミング倍率（精度のみ）倍率を取得
-	 * @returns number
+	 * @param {boolean} [isForDisplay=false] 表示用に補正する
+	 * @returns {number} 倍率
 	 * @memberof Aiming
 	 */
-	GetRate(){
-		return (this.LENGTH - this.GetGap()) / this.LENGTH;
+	GetRate(isForDisplay=false){
+		let rate	= (this.LENGTH - this.GetGap()) / this.LENGTH;
+		if(isForDisplay){
+			if     (rate < 0.505)	rate = 0.500;
+			else if(rate > 0.995)	rate = 1.000;
+			rate	= rate.toFixed(3);
+		}
+		return Clamp(rate, 0.500, 1.000);
 	}
 	/** エイミング倍率（精度・エリア倍率・クリティカル込み）を取得
 	 * @returns

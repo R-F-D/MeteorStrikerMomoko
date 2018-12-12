@@ -142,9 +142,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.meteor.SetPosition(250,120+NormalRandom(4)).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
 
-					_this.labels.chargedPower.SetString(	`Charged:${_this.chargedPower}`		);
-					_this.labels.hitArea.SetString(			`HitArea:${_this.aiming.GetCurrentArea().tag}`	);
-					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position}`	);
+					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
+					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
+					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position.toFixed(2)}`	);
 					_this.labels.emittingPower.SetString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
 					return true;
 				},
@@ -243,17 +243,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.acceptEmitting--;
-
-				if(this.acceptEmitting < 0){
-					this.SetSequence(Sequences.BLOW_AWAY);
-					this.impactPower	= this.aiming.GetTotalRate() * (this.chargedPower/BlowPower.INCREMENT + 20);
-					this.totalPower		= this.aiming.GetTotalRate() * this.GetEmittingRate() + this.impactPower;
-
-					Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
-					Log(`AimingRate: ${this.aiming.GetRate()}`);
-					Log(`Impact: ${this.impactPower}`);
-					Log(`Total: ${this.totalPower}`);
-				}
+				if(this.acceptEmitting < 0)	this.SetSequence(Sequences.BLOW_AWAY);
 
 				//マルチタッチ検出
 				this.nEmits.maxSimul	= Math.max(this.nEmits.simul,this.nEmits.maxSimul);
@@ -261,7 +251,16 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			});
 
 		//吹き飛ばし
-	//	Sequences.BLOW_AWAY.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
+		Sequences.BLOW_AWAY.PushStartingFunctions(()=>{
+			this.impactPower	= this.GetChargingRate() * this.aiming.GetTotalRate();
+			this.totalPower		= this.GetEmittingRate() * this.impactPower;
+
+			Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
+			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
+			Log(`Impact: ${this.impactPower}`);
+			Log(`Total: ${this.totalPower}`);
+		});
+		//.PushUpdatingFunctions((dt)=>{});
 
 		//計測中
 	//	Sequences.MEASURE.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
@@ -344,7 +343,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//マルチタッチ補正
 		const rateSimul	= this.nEmits.maxSimul + (this.nEmits.maxSimul-1)/2;
 
-		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER);
+		return power / (rateSimul * EmitEnergy.ADDITIONAL_POWER *50) + 1;
+	}
+
+	/** チャージ倍率を取得
+	 * @returns {number} 20-80
+	 */
+	GetChargingRate(){
+		return this.chargedPower/BlowPower.INCREMENT + 20;
 	}
 
 	/**プレイヤー画像の表示*/
