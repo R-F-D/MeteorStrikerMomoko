@@ -116,13 +116,13 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.dischargeSpeed	= 0;
 					_this.SetSequence(Sequences.INITIAL);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).SetPosition(100,70);
+												.SetScale(2).SetPosition(100,50).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
+												.SetScale(2).SetPosition(224,150).Attr({zIndex:2});
 					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect	= Effects.Fly.Create(32).Init(this);
 
-					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
+					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80);
 
 					//Labels
 					{let i=0; for(let key in _this.labels){
@@ -138,7 +138,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(250,120+NormalRandom(4)).Rotate(-7);
+					_this.sprites.meteor.SetPosition(224,150+NormalRandom(4)).Rotate(-7);
 					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
@@ -350,7 +350,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//ｙ座標
 		let dy	= this.sprites.player.GetCustomData("dy");
 		if(dy==null) dy=0.25;
-		if(this.sprites.player.y<100)	dy+=0.005;
+		if(this.sprites.player.y<80)	dy+=0.005;
 		else							dy-=0.005;
 		if     (dy> 0.25) dy= 0.25;
 		else if(dy<-0.25) dy=-0.25;

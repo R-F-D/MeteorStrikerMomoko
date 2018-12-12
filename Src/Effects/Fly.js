@@ -57,7 +57,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 				.SetRelativePosition(v.dx,v.dy)
 				.SetScale(v.scale)
 				.SetOpacity(255-v.count*8);
-			v.dx	+= 0.2;
+			v.dx	+= 1;
 			v.scale	+= 0.02;
 			++v.count;
 			v.exists= v.count < 32;
