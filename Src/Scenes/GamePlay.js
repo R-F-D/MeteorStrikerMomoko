@@ -13,7 +13,6 @@ const Sequences	= {
 	/**エイム作動*/		START_AIM		: Sequence.Create(),
 	/**打撃予備動作*/	PRELIMINARY		: Sequence.Create(),
 	/**打撃動作*/		DISCHARGE		: Sequence.Create(),
-	/**打撃ヒット後*/	IMPACTED		: Sequence.Create(),
 	/**エミット中*/		EMIT			: Sequence.Create(),
 	/**吹き飛ばし*/		BLOW_AWAY		: Sequence.Create(),
 	/**測定中*/			MEASURE			: Sequence.Create(),
@@ -213,7 +212,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.dischargeSpeed *= BlowPower.ACCELERATION;
 				this.chargingCount -= this.dischargeSpeed;
 				if(this.chargingCount < BlowPower.MIN){
-					this.SetSequence(Sequences.IMPACTED);
+					this.SetSequence(Sequences.EMIT);
 				}
 			});
 
@@ -225,13 +224,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.chargingCount-=BlowPower.DECREMENT;
 				if(this.chargingCount < BlowPower.MIN)	this.SetSequence(Sequences.START_AIM);
 			});
-
-		//打撃ヒット
-		Sequences.IMPACTED
-			.PushStartingFunctions(()=>{
-				this.SetSequence(Sequences.EMIT);
-			});
-		//	.PushUpdatingFunctions((dt)=>);
 
 		//エミット中
 		Sequences.EMIT
