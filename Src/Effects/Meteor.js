@@ -35,7 +35,7 @@ Effects.Meteor	= class extends Effects.EffectBase{
 			v.dy		= NormalRandom(2);
 			v.exists	= true;
 			v.count		= 0;
-			break;
+			return this;
 		};
 		return this;
 	}

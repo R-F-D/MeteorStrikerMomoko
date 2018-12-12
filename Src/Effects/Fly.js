@@ -18,6 +18,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 				count	: 0,
 				dy		: 0,
 				dx		: 0,
+				scale	: 1.0,
 			}
 		}
 		return this;
@@ -26,20 +27,22 @@ Effects.Fly	= class extends Effects.EffectBase{
 	/** プレイヤー飛行エフェクトをスポーン
 	 * @returns {this}
 	 */
-	Spawn(spawns=true,x,y){
+	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
 
 		for(let v of this.entities){
 			if(v.exists)	continue;
 
+			v.dx		= -0.5;
+			v.dy		= NormalRandom(2)   -1;
+			v.scale		= NormalRandom(0.5) +1;
+			v.exists	= true;
+			v.count		= 0;
+
 			v.sprite
 				.SetPosition(x+NormalRandom(16), y+NormalRandom(4) )
 				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true);
-			v.dx		= -0.5;
-			v.dy		= NormalRandom(2) -1;
-			v.exists	= true;
-			v.count		= 0;
-			break;
+			return this;
 		};
 		return this;
 	}
@@ -52,10 +55,12 @@ Effects.Fly	= class extends Effects.EffectBase{
 
 			v.sprite
 				.SetRelativePosition(v.dx,v.dy)
-				.SetOpacity(255-v.count*4);
+				.SetScale(v.scale)
+				.SetOpacity(255-v.count*8);
+			v.dx	+= 0.2;
+			v.scale	+= 0.02;
 			++v.count;
-			v.dx+=0.2;
-			v.exists	= v.count < 30;
+			v.exists= v.count < 32;
 			v.sprite.SetVisible(v.exists);
 		}
 		return this;

@@ -120,8 +120,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 												.SetScale(2).SetPosition(100,70);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).SetPosition(250,110).Attr({zIndex:2});
-					_this.meteorEffect	= Effects.Meteor.Create(5).Init(this);
-					_this.playerEffect	= Effects.Fly.Create(20).Init(this);
+					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
+					_this.playerEffect	= Effects.Fly.Create(32).Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(140,100);
 
@@ -377,7 +377,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,null).SetRelativePosition(null,dy).SetCustomData("dy",dy);
-		this.playerEffect.Spawn(this.sequence.count%2==0,this.sprites.player.x,this.sprites.player.y-32).Update();
+		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32).Update();
 		return this;
 	}
 
