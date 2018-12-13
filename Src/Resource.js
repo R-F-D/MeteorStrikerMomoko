@@ -5,7 +5,8 @@ const rc	= {
 
 	/** 画像 */
 	img	: {
-		bg			: [ "bg.png",		1,	1,	],	//背景
+		bg1			: [ "bg1.png",		1,	1,	],	//背景1
+		bg2			: [ "bg2.png",		1,	1,	],	//背景2
 		player		: [ "msmomoko.png",	4,	2,	],	//プレイヤーキャラクター
 		aimCursor	: [ "aimcur.png",	2,	2,	],	//エイミングカーソル
 		aimGauge	: [ "aimgauge.png",	1,	1,	],	//エイミングゲージ
