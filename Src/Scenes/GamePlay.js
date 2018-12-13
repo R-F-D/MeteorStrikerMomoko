@@ -72,6 +72,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.totalPower			= 0;
 		/** @var 隕石の移動距離 */
 		this.distanceOfMeteor	= 0;
+		this.isOnGround			= true;
 
 		/** ccSceneのインスタンス */
 		this.ccSceneInstance	= new (cc.Scene.extend({
@@ -159,13 +160,25 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
-					_this.sprites.bg	= [0,1].map(i=>Sprite.CreateInstance(rc.img.bg).AddToLayer(this).SetPosition(size.width/2,size.height/2));
+					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
+					_this.sprites.bg2	= CreateArray(4).map(i=> Sprite.CreateInstance(rc.img.bg2).AddToLayer(this).SetVisible(false)	);
 				},
 				update	: function(){
 					this._super();
-					const size	= cc.director.getWinSize();
-					_this.sprites.bg[0].SetPosition(size.width/2-Cycle(-_this.sequence.count*8,0,640),size.height/2);
-					_this.sprites.bg[1].SetPosition(size.width/2-Cycle(-_this.sequence.count*8,0,640)+640,size.height/2);
+					const size		= cc.director.getWinSize();
+					const bgWidth	= [_this.sprites.bg1[0].img.width, _this.sprites.bg2[0].img.width, ];
+					for(let i=0; i<2; ++i){
+						_this.sprites.bg1[i]
+							.SetPosition(	size.width /2 - Cycle(-_this.sequence.count*8, 0, bgWidth[0]) + bgWidth[0]*i,
+											size.height/2	)
+							.SetVisible( _this.isOnGround );
+					}
+					for(let i=0; i<4; ++i){
+						_this.sprites.bg2[i]
+							.SetPosition(	size.width /2 - Cycle(_this.sequence.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
+											size.height/2 - Cycle(_this.sequence.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	)
+							.SetVisible( !_this.isOnGround );
+					}
 				},
 			}),
 		};
@@ -244,19 +257,32 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//吹き飛ばし
 		Sequences.BLOW_AWAY.PushStartingFunctions(()=>{
-			this.impactPower	= this.GetChargingRate() * this.aiming.GetTotalRate();
-			this.totalPower		= this.GetEmittingRate() * this.impactPower;
+			this.impactPower		= this.GetChargingRate() * this.aiming.GetTotalRate();
+			this.totalPower			= this.GetEmittingRate() * this.impactPower;
+			this.distanceOfMeteor	= 0;
 
 			Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 			Log(`Impact: ${this.impactPower}`);
 			Log(`Total: ${this.totalPower}`);
+		})
+		.PushUpdatingFunctions((dt)=>{
+			this.distanceOfMeteor++;
+			if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
+		});
+
+		//計測中
+		Sequences.MEASURE.PushStartingFunctions(()=>{
+			Log("Measure");
 		});
 		//.PushUpdatingFunctions((dt)=>{});
 
-		//計測中
-	//	Sequences.MEASURE.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
+		return this;
+	}
 
+	OnUpdating(dt){
+		super.OnUpdating(dt);
+		this.isOnGround	= ![Sequences.BLOW_AWAY,Sequences.MEASURE ].includes(_this.sequence);
 		return this;
 	}
 
