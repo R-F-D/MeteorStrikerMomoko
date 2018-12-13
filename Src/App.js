@@ -63,11 +63,12 @@ Array.prototype.Clamp	= function(lower=null,upper=null){
 
 /** 配列作成
  * @param {number} length
+ * @param {number} [isNumbering=null] 値を連番にする
  * @returns {array}
  */
-function CreateArray(length){
+function CreateArray(length,isNumbering=null){
 	let list	= [];
-	for(let i=0; i<length; ++i)	list.push(null);
+	for(let i=0; i<length; ++i)	list.push( isNumbering ? i : null );
 	return list;
 }
 
