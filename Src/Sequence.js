@@ -8,6 +8,8 @@ var cc;
  */
 class Sequence{
 	constructor(){
+		this.DEFAULT_FUNCTION_TAG	= "_DEFAULT";
+
 		/** @var このフェイズ開始してからのフレーム数 */
 		this.count				= 0;
 		/** @var 単純遷移における次フェイズ */
@@ -18,9 +20,9 @@ class Sequence{
 		this.eventListeners		= [];
 
 		/** @var {function[]} シーケンス開始時に行われる処理 */
-		this.onStartFunctions	= [];
+		this.onStartFunctions	= {};
 		/** @var {function[]} 当該シーケンスでのシーン更新時に呼ばれる処理 */
-		this.updateFunctions	= [];
+		this.updateFunctions	= {};
 
 		this.Init();
 	}
@@ -53,10 +55,15 @@ class Sequence{
 		}
 
 		//シーケンス開始時処理
-		for(let f of this.onStartFunctions){
+		this.Start(null);
+		return this;
+	}
+
+	Start(tag=null){
+		tag	= tag || this.DEFAULT_FUNCTION_TAG;
+		for(let f of this.onStartFunctions[tag]||[]){
 			if(typeof f==='function')	f(this);
 		}
-
 		return this;
 	}
 
@@ -65,8 +72,9 @@ class Sequence{
 	 * @returns this
 	 * @memberof Sequence
 	 */
-	Update(dt){
-		for(let f of this.updateFunctions){
+	Update(dt,tag=null){
+		tag	= tag || this.DEFAULT_FUNCTION_TAG;
+		for(let f of this.updateFunctions[tag]||[]){
 			if(typeof f==='function')	f(dt,this);
 		}
 		++this.count;
@@ -78,16 +86,22 @@ class Sequence{
 	 * @returns this
 	 * @memberof Sequence
 	 */
-	PushStartingFunctions(funcs=null){
+	PushStartingFunctions(arg1=null,arg2=null){
+		const tag	= typeof arg1==='string'	? arg1	: this.DEFAULT_FUNCTION_TAG;
+		let funcs	= typeof arg1==='string'	? arg2	: arg1;
 		//初期化
 		if(funcs==null){
-			this.onStartFunctions	= [];
+			this.onStartFunctions[tag]	= [];
 			return this;
 		}
+
 		//追加
 		if(!Array.isArray(funcs))	funcs	= [funcs];
 		for(let f of funcs){
-			if(typeof f==='function')	this.onStartFunctions.push(f);
+			if(typeof f==='function'){
+				if(tag in this.onStartFunctions)	this.onStartFunctions[tag].push(f);
+				else								this.onStartFunctions[tag] = [f];
+			}
 		}
 		return this;
 	}
@@ -97,16 +111,21 @@ class Sequence{
 	 * @returns this
 	 * @memberof Sequence
 	 */
-	PushUpdatingFunctions(funcs=null){
+	PushUpdatingFunctions(arg1=null,arg2=null){
+		const tag	= typeof arg1==='string'	? arg1	: this.DEFAULT_FUNCTION_TAG;
+		let funcs	= typeof arg1==='string'	? arg2	: arg1;
 		//初期化
 		if(funcs==null){
-			this.updateFunctions	= [];
+			this.updateFunctions[tag]	= [];
 			return this;
 		}
 		//追加
-		if(!Array.isArray(funcs))	funcs	= [funcs];
+		if(!Array.isArray(funcs))	funcs = [funcs];
 		for(let f of funcs){
-			if(typeof f==='function')	this.updateFunctions.push(f);
+			if(typeof f==='function'){
+				if(tag in this.updateFunctions)	this.updateFunctions[tag].push(f);
+				else							this.updateFunctions[tag] = [f];
+			}
 		}
 		return this;
 	}
