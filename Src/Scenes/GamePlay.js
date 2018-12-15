@@ -140,7 +140,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.UpdatePlayerSprite();
 
 					_this.sprites.meteor.SetPosition(224,150+NormalRandom(4)).Rotate(-7);
-					_this.meteorEffect.Spawn(_this.sequence.count%15==0).Update();
+					_this.meteorEffect.Spawn(_this.isOnGround && _this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
 					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
@@ -160,25 +160,13 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
-					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
 					_this.sprites.bg2	= CreateArray(4).map(i=> Sprite.CreateInstance(rc.img.bg2).AddToLayer(this).SetVisible(false)	);
+					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
 				},
-				update	: function(){
+				update	: function(dt){
 					this._super();
-					const size		= cc.director.getWinSize();
-					const bgWidth	= [_this.sprites.bg1[0].img.width, _this.sprites.bg2[0].img.width, ];
-					for(let i=0; i<2; ++i){
-						_this.sprites.bg1[i]
-							.SetPosition(	size.width /2 - Cycle(-_this.sequence.count*8, 0, bgWidth[0]) + bgWidth[0]*i,
-											size.height/2	)
-							.SetVisible( _this.isOnGround );
-					}
-					for(let i=0; i<4; ++i){
-						_this.sprites.bg2[i]
-							.SetPosition(	size.width /2 - Cycle(_this.sequence.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
-											size.height/2 - Cycle(_this.sequence.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	)
-							.SetVisible( !_this.isOnGround );
-					}
+					_this.UpdateBgLayer(dt);
+					_this.sequence.Update(dt,"layer-bg");
 				},
 			}),
 		};
@@ -196,7 +184,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	 */
 	SetSequenceFunctions(){
 		//初期状態
-	//	Sequences.INITIAL.PushStartingFunctions(()=>{}).PushUpdatingFunctions((dt)=>{});
+		Sequences.INITIAL.PushStartingFunctions(()=>{
+			const size	= cc.director.getWinSize();
+			for(let s of this.sprites.bg1)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(true);
+			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
+		});
+	//	.PushUpdatingFunctions((dt)=>{});
 
 		//エイム作動
 		Sequences.START_AIM
@@ -265,15 +258,25 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 			Log(`Impact: ${this.impactPower}`);
 			Log(`Total: ${this.totalPower}`);
+
+			for(let s of this.sprites.bg2)	s.SetVisible(true);
 		})
 		.PushUpdatingFunctions((dt)=>{
-			this.distanceOfMeteor++;
-			if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
+			this.distanceOfMeteor+=0.2;
+			if(this.totalPower+10 <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
+		})
+		.PushUpdatingFunctions("layer-bg", (dt)=>{
+			for(let s of this.sprites.bg1){
+				s
+					.SetRelativePosition(null,-8)
+					.SetOpacity(Math.max(0,255-this.sequence.count*8));
+			}
 		});
 
 		//計測中
 		Sequences.MEASURE.PushStartingFunctions(()=>{
 			Log("Measure");
+			for(let s of this.sprites.bg1)	s.SetVisible(false);
 		});
 		//.PushUpdatingFunctions((dt)=>{});
 
@@ -282,7 +285,24 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
-		this.isOnGround	= ![Sequences.BLOW_AWAY,Sequences.MEASURE ].includes(_this.sequence);
+		this.isOnGround	= ![Sequences.BLOW_AWAY,Sequences.MEASURE ].includes(this.sequence);
+		return this;
+	}
+
+	UpdateBgLayer(dt){
+		const size		= cc.director.getWinSize();
+		const bgWidth	= [this.sprites.bg1[0].img.width, this.sprites.bg2[0].img.width, ];
+
+		for(let i=0; i<2; ++i){
+			this.sprites.bg1[i]
+				.SetPosition(	size.width /2 - Cycle(-this.sequence.count*8, 0, bgWidth[0]) + bgWidth[0]*i,
+								null);
+		}
+		for(let i=0; i<4; ++i){
+			this.sprites.bg2[i]
+				.SetPosition(	size.width /2 - Cycle(this.sequence.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
+								size.height/2 - Cycle(this.sequence.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	);
+		}
 		return this;
 	}
 
@@ -395,9 +415,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,null).SetRelativePosition(null,dy).SetCustomData("dy",dy);
-		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32).Update();
+		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,_this.isOnGround).Update();
 		return this;
 	}
+
 
 }//class
 
