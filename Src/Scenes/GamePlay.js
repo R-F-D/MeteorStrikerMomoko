@@ -119,7 +119,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
 												.SetScale(2).SetPosition(100,50).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2).SetPosition(224,150).Attr({zIndex:2});
+												.SetScale(2).Attr({zIndex:2});
 					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect	= Effects.Fly.Create(32).Init(this);
 
@@ -139,8 +139,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(224,150+NormalRandom(4)).Rotate(-7);
-					_this.meteorEffect.Spawn(_this.isOnGround && _this.sequence.count%15==0).Update();
+					_this.sprites.meteor.SetPosition(180,160+NormalRandom(4)).Rotate(-7);
+					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.isOnGround && _this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
 					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);

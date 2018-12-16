@@ -13,7 +13,7 @@ Effects.Meteor	= class extends Effects.EffectBase{
 		for(let i=0; i<this.nEntities; ++i){
 			this.entities[i]	= {
 				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
-								.SetScale(2).SetPosition(250,120).Attr({zIndex:0,opacity:255}).SetColor("#FF0000").SetVisible(false),
+								.SetScale(2).Attr({zIndex:0,opacity:255}).SetColor("#FF0000").SetVisible(false),
 				exist	: false,
 				count	: 0,
 				dy		: 0,
@@ -25,13 +25,13 @@ Effects.Meteor	= class extends Effects.EffectBase{
 	/** 隕石エフェクトをスポーン
 	 * @returns {this}
 	 */
-	Spawn(spawns=true){
+	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
 
 		for(let v of this.entities){
 			if(v.exists)	continue;
 
-			v.sprite.SetPosition(224,150).SetRotate(Math.random()*360).SetVisible(true);
+			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true);
 			v.dy		= NormalRandom(2)+3;
 			v.exists	= true;
 			v.count		= 0;
