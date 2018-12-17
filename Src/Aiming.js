@@ -41,6 +41,11 @@ Scenes.Aiming	= class {
 		/** @var スプライト位置 */
 		this.spritePos	= {x:0,y:0,}
 
+		/** @var スプライトの可視 */
+		this.isVisible	= true;
+		/** @var スプライト不透明度 */
+		this.opacity	= 255;
+
 		/** @var レイヤ */
 		this.layer		= null;
 
@@ -113,6 +118,9 @@ Scenes.Aiming	= class {
 		this.UpdateCurrentArea();
 
 		//表示
+		if(this.isVisible)	this.opacity	= Math.min(this.opacity+4,255);
+		else				this.opacity	= Math.max(this.opacity-4,0);
+		this.sprites.gauge.SetOpacity(this.opacity);
 		this.UpdateCursorSpritePos();
 
 		return this;
@@ -126,7 +134,8 @@ Scenes.Aiming	= class {
 
 		this.sprites.cursor
 			.SetIndex(this.currentArea.idxSprite)
-			.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4 + Math.PI/4,	this.RADIUS	);
+			.SetPosition( this.spritePos.x-this.RADIUS,	this.spritePos.y,	this.position /this.MAX * Math.PI/4 + Math.PI/4,	this.RADIUS	)
+			.SetOpacity(this.opacity);
 
 		return this;
 	}
@@ -208,6 +217,16 @@ Scenes.Aiming	= class {
 	 */
 	InitHitAreas(){
 		this.hitAreas	= [];
+		return this;
+	}
+
+	SetVisible(isVisible,isGradually=false){
+		if(isVisible)	this.opacity	= isGradually ? 0 : 255;
+		else			this.opacity	= isGradually ? 255 : 0;
+
+		this.isVisible	= isVisible;
+		this.sprites.gauge.SetVisible( true).SetOpacity(this.opacity);
+		this.sprites.cursor.SetVisible(true).SetOpacity(this.opacity);
 		return this;
 	}
 

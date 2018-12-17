@@ -112,18 +112,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				init	: function(){
 					this._super();
 
-					_this.chargingCount		= BlowPower.INITIAL;
-					_this.chargedPower		= 0;
-					_this.dischargeSpeed	= 0;
-					_this.SetSequence(Sequences.INITIAL);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).SetPosition(100,50).SetRotate(-5);
+												.SetScale(2).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).Attr({zIndex:2});
 					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect	= Effects.Fly.Create(32).Init(this);
 
-					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80);
+					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
 					//Labels
 					{let i=0; for(let key in _this.labels){
@@ -131,6 +127,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						++i;
 					}};
 
+					_this.SetSequence(Sequences.INITIAL);
 					return true;
 				},
 				update	: function(dt){
@@ -185,15 +182,25 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	SetSequenceFunctions(){
 		//初期状態
 		Sequences.INITIAL.PushStartingFunctions(()=>{
+			this.chargingCount		= BlowPower.INITIAL;
+			this.chargedPower		= 0;
+			this.dischargeSpeed		= 0;
+			this.sprites.player.SetCustomData("adjY",-30);
+
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(true);
 			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
+			this.aiming.SetVisible(false);
+		})
+		.PushUpdatingFunctions((dt)=>{
+			if(this.sequence.count > 60)	this.SetSequence(Sequences.START_AIM);
 		});
-	//	.PushUpdatingFunctions((dt)=>{});
 
 		//エイム作動
 		Sequences.START_AIM
-		//	.PushStartingFunctions(()=>{})
+			.PushStartingFunctions(()=>{
+				this.aiming.SetVisible(true,true);
+			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
 			});
@@ -350,7 +357,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			transionToNext	:cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
-					if(this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
+					if(this.isSequenceMovable && this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
 					return true;
 				},
 			}),
@@ -393,18 +400,21 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	/**プレイヤー画像の表示*/
 	UpdatePlayerSprite(){
-		//ｙ座標
-		let dy	= this.sprites.player.GetCustomData("dy");
-		if(dy==null) dy=0.25;
-		if(this.sprites.player.y<80)	dy+=0.005;
-		else							dy-=0.005;
-		if     (dy> 0.25) dy= 0.25;
-		else if(dy<-0.25) dy=-0.25;
+		//座標修正
+		let adjY	= this.sprites.player.GetCustomData("adjY",-30);	//修正
+		let dy		= this.sprites.player.GetCustomData("dy",  0.25);	//増分
+
+		if(adjY < 0)	dy = Math.min(dy+0.005, 0.25);
+		else			dy = Math.max(dy-0.005,-0.25);
+		adjY += dy;
 
 		//スプライト番号
 		let idx	= 0;
-		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.PRELIMINARY,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
-			idx	= parseInt(this.sequence.count/15) % 2;
+		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
+			idx	= parseInt(this.sequence.count/30) % 2;
+		}
+		else if([Sequences.PRELIMINARY].includes(this.sequence)){
+			idx	= this.chargingCount<BlowPower.MAX/2	? 2	: 5;
 		}
 		else if([Sequences.DISCHARGE].includes(this.sequence)){
 			idx	= this.chargedPower<BlowPower.MAX/2	? 2	: 5;
@@ -414,7 +424,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			if(this.chargedPower >= BlowPower.MAX/2)	idx	= this.sequence.count<15	? 6 : 7;
 		}
 
-		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,null).SetRelativePosition(null,dy).SetCustomData("dy",dy);
+		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,80+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,_this.isOnGround).Update();
 		return this;
 	}

@@ -11,6 +11,8 @@ Scenes.SceneBase	= class {
 
 		/** @var number シーン内のシークエンス */
 		this.sequence			= 0;
+		/** @var {boolean} シークエンス遷移が可能か */
+		this.isSequenceMovable	= false;
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;

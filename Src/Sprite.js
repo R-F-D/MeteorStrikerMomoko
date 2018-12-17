@@ -235,7 +235,9 @@ class Sprite{
 		return this;
 	}
 
-	GetCustomData(key){return this.data[key]}
+	GetCustomData(key,defaultValue=undefined){
+		return key in this.data	? this.data[key]	: defaultValue;
+	}
 	SetCustomData(key,value){
 		if(value===undefined)	delete this.data[key];
 		else					this.data[key]	= value;
