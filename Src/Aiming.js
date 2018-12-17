@@ -102,20 +102,21 @@ Scenes.Aiming	= class {
 	 * @returns this
 	 * @memberof Aiming
 	 */
-	Update(){
-		this.currentArea			= null;
-
+	Update(movesCursor=true){
 		//エイミングターゲット移動
-		this.position += this.isIncrementPositive	? +this.increment	: -this.increment;
-		if     (this.position < this.MIN){
-			this.position			= this.MIN;
-			this.isIncrementPositive= !this.isIncrementPositive;
+		if(movesCursor){
+			this.currentArea			= null;
+			this.position += this.isIncrementPositive	? +this.increment	: -this.increment;
+			if     (this.position < this.MIN){
+				this.position			= this.MIN;
+				this.isIncrementPositive= !this.isIncrementPositive;
+			}
+			else if(this.position > this.MAX){
+				this.position			= this.MAX;
+				this.isIncrementPositive= !this.isIncrementPositive;
+			}
+			this.UpdateCurrentArea();
 		}
-		else if(this.position > this.MAX){
-			this.position			= this.MAX;
-			this.isIncrementPositive= !this.isIncrementPositive;
-		}
-		this.UpdateCurrentArea();
 
 		//表示
 		if(this.isVisible)	this.opacity	= Math.min(this.opacity+4,255);

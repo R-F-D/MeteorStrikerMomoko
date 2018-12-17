@@ -20,13 +20,13 @@ const Sequences	= {
 };
 /** 打撃定数 */
 const BlowPower	= {
-	/**上限値*/			MIN				: 0,
+	/**下限値*/			MIN				: -30*256,
 	/**上限値*/			MAX				: 60*256,
 	/**初期値*/			INITIAL			: 0,
 	/**増分*/			INCREMENT		: 1*256,
 	/**失敗時の減少*/	DECREMENT		: 1*256,
 	/**主動作の速度*/	DISCHARGE_SPEED	: 4*256,
-	/**主動作の加速度*/	ACCELERATION	: 1.10,
+	/**主動作の加速度*/	ACCELERATION	: 1.20,
 };
 /** エミットエナジー定数*/
 const EmitEnergy	= {
@@ -113,7 +113,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).SetRotate(-5);
+												.SetScale(2).Attr({zIndex:5}).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
 												.SetScale(2).Attr({zIndex:2});
 					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
@@ -185,7 +185,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.chargingCount		= BlowPower.INITIAL;
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
-			this.sprites.player.SetCustomData("adjY",-30);
+			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(true);
@@ -193,6 +193,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.aiming.SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
+			this.aiming.Update(false);
 			if(this.sequence.count > 60)	this.SetSequence(Sequences.START_AIM);
 		});
 
@@ -235,7 +236,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
 				this.chargingCount-=BlowPower.DECREMENT;
-				if(this.chargingCount < BlowPower.MIN)	this.SetSequence(Sequences.START_AIM);
+				if(this.chargingCount < 0)	this.SetSequence(Sequences.START_AIM);
 			});
 
 		//エミット中
@@ -247,6 +248,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.nEmits.total		= 0;
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update(false);
+
 				this.acceptEmitting--;
 				if(this.acceptEmitting < 0)	this.SetSequence(Sequences.BLOW_AWAY);
 
@@ -267,8 +270,11 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			Log(`Total: ${this.totalPower}`);
 
 			for(let s of this.sprites.bg2)	s.SetVisible(true);
+			this.aiming.SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
+			this.aiming.Update(false);
+
 			this.distanceOfMeteor+=0.2;
 			if(this.totalPower+10 <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
 		})
@@ -365,7 +371,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//シークエンス-イベント対応設定
 		Debug(()=>Sequence.SetCommonEventListeners(	this.listeners.reset			));
-		Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
+		//Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
 		Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);
 		Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
 		Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
@@ -401,12 +407,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	/**プレイヤー画像の表示*/
 	UpdatePlayerSprite(){
 		//座標修正
-		let adjY	= this.sprites.player.GetCustomData("adjY",-30);	//修正
-		let dy		= this.sprites.player.GetCustomData("dy",  0.25);	//増分
-
-		if(adjY < 0)	dy = Math.min(dy+0.005, 0.25);
-		else			dy = Math.max(dy-0.005,-0.25);
-		adjY += dy;
+		let adjY	= this.sprites.player.GetCustomData("adjY",-100);	//修正
+		let dy		= this.sprites.player.GetCustomData("dy",  3);		//増分
+		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
+			dy += adjY < 0	? 0.005	: -0.005;
+			if     (dy <-0.25) dy = MoveTo(dy,-0.25,0.05);
+			else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
+			adjY += dy;
+		}
 
 		//スプライト番号
 		let idx	= 0;
@@ -424,7 +432,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			if(this.chargedPower >= BlowPower.MAX/2)	idx	= this.sequence.count<15	? 6 : 7;
 		}
 
-		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,80+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
+		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,96-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,_this.isOnGround).Update();
 		return this;
 	}
