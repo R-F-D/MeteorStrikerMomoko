@@ -27,7 +27,6 @@ function Cycle(value,lower,upper){
 }
 
 /** 配列の全ての数値を一定範囲内に収める（サイクル）
- * @param {number} value 対象の値
  * @param {number} lower 下限値（以上）
  * @param {number} upper 上限値（未満）
  * @returns {number[]}
@@ -52,13 +51,35 @@ function Clamp(value,lower=null,upper=null){
 }
 
 /** 配列の全ての数値を一定範囲内に収める（クランプ）
- * @param {number[]} value 対象の値
  * @param {number} [lower=null] 下限値（以上）
  * @param {number} [upper=null] 上限値（以下）
  * @returns {number[]} 新しい値
  */
 Array.prototype.Clamp	= function(lower=null,upper=null){
 	return this.map(v=>Clamp(v,lower,upper));
+}
+
+/** 値を一定値に近づける
+ * @param {number} src 現在値
+ * @param {number} dest 目標値
+ * @param {number} [distance=1] 変化量
+ * @returns {number} 新しい値
+ */
+function MoveTo(src,dest,distance=1){
+	if(distance <= 0)	return src;
+
+	else if(src < dest)	return Math.min( src+distance, dest );
+	else if(src > dest)	return Math.max( src-distance, dest );
+	else				return dest;
+}
+
+/** 配列の全ての値を一定値に近づける
+ * @param {number} dest 目標値
+ * @param {number} [distance=1] 変化量
+ * @returns {number[]} 新しい値
+ */
+Array.prototype.MoveTo	= function(dest,distance=1){
+	return this.map(v=>MoveTo(v,dest,distance));
 }
 
 /** 配列作成
@@ -71,7 +92,6 @@ function CreateArray(length,isNumbering=null){
 	for(let i=0; i<length; ++i)	list.push( isNumbering ? i : null );
 	return list;
 }
-
 
 /** 正規乱数
  * @param {number} halfWidth 半幅
