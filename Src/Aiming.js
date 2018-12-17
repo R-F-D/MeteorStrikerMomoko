@@ -145,7 +145,10 @@ Scenes.Aiming	= class {
 	 * @returns number
 	 * @memberof Aiming
 	 */
-	GetGap(){ return Math.abs(this.position);	}
+	GetGap(){
+		return Math.abs(this.position);
+	}
+
 	/** エイミング倍率（精度のみ）倍率を取得
 	 * @param {boolean} [isForDisplay=false] 表示用に補正する
 	 * @returns {number} 倍率
@@ -198,6 +201,7 @@ Scenes.Aiming	= class {
 		}
 		return this.AREAS.BAD;
 	}
+
 	/** 現在のエイミング位置に該当するヒット領域を得る
 	 * @returns
 	 */
@@ -205,6 +209,7 @@ Scenes.Aiming	= class {
 		if(this.currentArea==null)	this.UpdateCurrentArea();
 		return this.currentArea;
 	}
+
 	/** 現在のヒット領域を更新
 	 * @private
 	 * @returns this */
@@ -222,8 +227,10 @@ Scenes.Aiming	= class {
 	}
 
 	SetVisible(isVisible,isGradually=false){
-		if(isVisible)	this.opacity	= isGradually ? 0 : 255;
-		else			this.opacity	= isGradually ? 255 : 0;
+		if(isVisible != this.isVisible){
+			if(isVisible)	this.opacity	= isGradually ? 0 : 255;
+			else			this.opacity	= isGradually ? 255 : 0;
+		}
 
 		this.isVisible	= isVisible;
 		this.sprites.gauge.SetVisible( true).SetOpacity(this.opacity);
