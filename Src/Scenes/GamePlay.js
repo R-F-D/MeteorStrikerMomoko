@@ -65,6 +65,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			/**同時最大*/	maxSimul	: 1,
 		};
 
+		//背景スクロール
+		this.bgScroll		= 0;
+		this.bgScrollSpeed	= -8;
+
 		//結果表示用
 		/** @var インパクト時の威力*/
 		this.impactPower		= 0;
@@ -182,13 +186,15 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	SetSequenceFunctions(){
 		//初期状態
 		Sequences.INITIAL.PushStartingFunctions(()=>{
+			this.bgScroll			= 0;
+			this.bgScrollSpeed		= -8;
 			this.chargingCount		= BlowPower.INITIAL;
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 
 			const size	= cc.director.getWinSize();
-			for(let s of this.sprites.bg1)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(true);
+			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
 			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
 			this.aiming.SetVisible(false);
 		})
@@ -279,10 +285,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			if(this.totalPower+10 <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
 		})
 		.PushUpdatingFunctions("layer-bg", (dt)=>{
-			for(let s of this.sprites.bg1){
-				s
-					.SetRelativePosition(null,-8)
-					.SetOpacity(Math.max(0,255-this.sequence.count*8));
+			for(let sprite of this.sprites.bg1){
+				sprite
+					.SetRelativePosition(null,-4)
+					.SetOpacity(Math.max(0,255-this.sequence.count*4));
 			}
 		});
 
@@ -306,15 +312,17 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		const size		= cc.director.getWinSize();
 		const bgWidth	= [this.sprites.bg1[0].img.width, this.sprites.bg2[0].img.width, ];
 
+		this.bgScroll	+= this.bgScrollSpeed;
+		if([Sequences.EMIT,Sequences.BLOW_AWAY,Sequences.MEASURE].includes(this.sequence)) this.bgScrollSpeed = MoveTo(this.bgScrollSpeed,8,0.25);
 		for(let i=0; i<2; ++i){
 			this.sprites.bg1[i]
-				.SetPosition(	size.width /2 - Cycle(-this.sequence.count*8, 0, bgWidth[0]) + bgWidth[0]*i,
+				.SetPosition(	size.width /2 - Cycle(this.bgScroll, 0, bgWidth[0]) + bgWidth[0]*i,
 								null);
 		}
 		for(let i=0; i<4; ++i){
 			this.sprites.bg2[i]
-				.SetPosition(	size.width /2 - Cycle(this.sequence.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
-								size.height/2 - Cycle(this.sequence.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	);
+				.SetPosition(	size.width /2 - Cycle(this.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
+								size.height/2 - Cycle(this.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	);
 		}
 		return this;
 	}

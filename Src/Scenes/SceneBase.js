@@ -13,6 +13,8 @@ Scenes.SceneBase	= class {
 		this.sequence			= 0;
 		/** @var {boolean} シークエンス遷移が可能か */
 		this.isSequenceMovable	= false;
+		/** @var シーン開始からのカウント */
+		this.count				= 0;
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;
@@ -32,11 +34,14 @@ Scenes.SceneBase	= class {
 	/** シーンの更新処理 共通部分
 	 * @param {*} dt
 	 */
-	OnUpdating(dt){}
+	OnUpdating(dt){return this;}
 	/** シーンの更新処理 共通部分
 	 * @param {*} dt
 	 */
-	OnUpdated(dt){}
+	OnUpdated(dt){
+		++this.count;
+		return this;
+	}
 
 	/** Create Instance */
 	static Create(){return new this();}
