@@ -9,7 +9,12 @@ var cc;
 /** @class プレイヤー飛行エフェクトクラス */
 Effects.Fly	= class extends Effects.EffectBase{
 
+	constructor(nEntities=5){
+		super(nEntities);
+	}
+
 	Init(layer){
+		super.Init();
 		for(let i=0; i<this.nEntities; ++i){
 			this.entities[i]	= {
 				sprite	: Sprite.CreateInstance(rc.img.flyFx).AddToLayer(layer)
@@ -29,13 +34,14 @@ Effects.Fly	= class extends Effects.EffectBase{
 	 */
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
+		super.Spawn();
 
 		for(let v of this.entities){
 			if(v.exists)	continue;
 
-			v.dx		= -0.5;
-			v.dy		= NormalRandom(2)   -1;
-			v.scale		= NormalRandom(0.5) +1;
+			v.dx		= this.initialVelocity.x;
+			v.dy		= NormalRandom(2)   + this.initialVelocity.y
+			v.scale		= NormalRandom(0.5) + 1;
 			v.exists	= true;
 			v.count		= 0;
 
@@ -49,6 +55,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 
 	Update(updates=true){
 		if(!updates)	return this;
+		super.Update();
 
 		for(let v of this.entities){
 			if(!v.exists)	continue;
@@ -57,7 +64,8 @@ Effects.Fly	= class extends Effects.EffectBase{
 				.SetRelativePosition(v.dx,v.dy)
 				.SetScale(v.scale)
 				.SetOpacity(255-v.count*8);
-			v.dx	+= 1;
+			v.dx	+= this.acceleration.x;
+			v.dy	+= this.acceleration.y;
 			v.scale	+= 0.02;
 			++v.count;
 			v.exists= v.count < 32;

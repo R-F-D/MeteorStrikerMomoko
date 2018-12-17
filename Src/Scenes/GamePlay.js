@@ -45,6 +45,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		super();
 		_this					= this;
 
+		/** @var 座標 */
+		this.POSITIONS	= {
+			PLAYER	: {	X:96,	Y:96,	},
+			METEOR	: {	X:192,	Y:144,	},
+		};
+
 		//インパクトシークエンス
 		/** @var チャージ時間 */
 		this.chargingCount		= BlowPower.INITIAL;
@@ -140,8 +146,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(180,160+NormalRandom(4)).Rotate(-7);
-					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.isOnGround && _this.sequence.count%15==0).Update();
+					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
+					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0).Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
 					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
@@ -193,7 +199,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.chargingCount		= BlowPower.INITIAL;
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
+			this.distanceOfMeteor	= 0;
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
+			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
+			this.meteorEffect.SetVelocity(8,3);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
@@ -254,6 +263,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.nEmits.maxSimul	= 1;
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
+
+				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
+				this.meteorEffect.SetVelocity(-8,-4);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update(false);
@@ -442,8 +454,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			if(this.chargedPower >= BlowPower.MAX/2)	idx	= this.sequence.count<15	? 6 : 7;
 		}
 
-		this.sprites.player.SetIndex(idx).SetPosition(100-this.chargingCount/512,96-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
-		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,_this.isOnGround).Update();
+		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
+		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32).Update();
 		return this;
 	}
 
