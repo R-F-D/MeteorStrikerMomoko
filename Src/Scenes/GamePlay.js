@@ -8,15 +8,15 @@ var cc;
 /** classへのthis */
 let _this	= null;
 /** シークエンス列挙型 */
-const Sequences	= {
-	/**初期状態*/		INITIAL			: Sequence.Create(),
-	/**エイム作動*/		START_AIM		: Sequence.Create(),
-	/**打撃予備動作*/	PRELIMINARY		: Sequence.Create(),
-	/**打撃動作*/		DISCHARGE		: Sequence.Create(),
-	/**エミット中*/		EMIT			: Sequence.Create(),
-	/**吹き飛ばし*/		BLOW_AWAY		: Sequence.Create(),
-	/**測定中*/			MEASURE			: Sequence.Create(),
-	/**動作失敗*/		DISCHARGE_FAILED: Sequence.Create(),
+let Sequences	= {
+	/**初期状態*/		INITIAL			: null,
+	/**エイム作動*/		START_AIM		: null,
+	/**打撃予備動作*/	PRELIMINARY		: null,
+	/**打撃動作*/		DISCHARGE		: null,
+	/**エミット中*/		EMIT			: null,
+	/**吹き飛ばし*/		BLOW_AWAY		: null,
+	/**測定中*/			MEASURE			: null,
+	/**動作失敗*/		DISCHARGE_FAILED: null,
 };
 /** 打撃定数 */
 const BlowPower	= {
@@ -176,6 +176,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.labels	= {	chargedPower:null,	hitArea:null,	aiming:null,	emittingPower:null,	}
 
 		//シークエンス設定
+		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListeners();
 	}
 
@@ -184,6 +185,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	 * @returns this
 	 */
 	SetSequenceFunctions(){
+
 		//初期状態
 		Sequences.INITIAL.PushStartingFunctions(()=>{
 			this.bgScroll			= 0;
