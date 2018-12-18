@@ -19,6 +19,7 @@
 		"Src/Effects/EffectBase.js",
 		"Src/Effects/Fly.js",
 		"Src/Effects/Meteor.js",
+		"Src/Effects/Explosion.js",
 
 		"Src/Aiming.js",
 
