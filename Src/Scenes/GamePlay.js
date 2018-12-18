@@ -147,7 +147,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.UpdatePlayerSprite();
 
 					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
-					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0).Update();
+					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
 					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
@@ -311,6 +311,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		Sequences.MEASURE.PushStartingFunctions(()=>{
 			Log("Measure");
 			for(let s of this.sprites.bg1)	s.SetVisible(false);
+			this.sprites.meteor.SetVisible(false);
 		});
 		//.PushUpdatingFunctions((dt)=>{});
 
@@ -328,7 +329,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		const bgWidth	= [this.sprites.bg1[0].img.width, this.sprites.bg2[0].img.width, ];
 
 		this.bgScroll	+= this.bgScrollSpeed;
-		if([Sequences.EMIT,Sequences.BLOW_AWAY,Sequences.MEASURE].includes(this.sequence)) this.bgScrollSpeed = MoveTo(this.bgScrollSpeed,8,0.25);
+		if     ([Sequences.MEASURE].includes(this.sequence))					this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,0,0.05);
+		else if([Sequences.EMIT,Sequences.BLOW_AWAY].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,8,0.25);
 		for(let i=0; i<2; ++i){
 			this.sprites.bg1[i]
 				.SetPosition(	size.width /2 - Cycle(this.bgScroll, 0, bgWidth[0]) + bgWidth[0]*i,
@@ -336,8 +338,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 		for(let i=0; i<4; ++i){
 			this.sprites.bg2[i]
-				.SetPosition(	size.width /2 - Cycle(this.count*4,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
-								size.height/2 - Cycle(this.count*2, 0,bgWidth[1]) + bgWidth[1]*(i%2),	);
+				.SetPosition(	size.width /2 - Cycle(this.bgScroll/2,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
+								size.height/2 - Cycle(this.bgScroll/4,0,bgWidth[1]) + bgWidth[1]*(i%2),	);
 		}
 		return this;
 	}
@@ -456,7 +458,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
-		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32).Update();
+		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==Sequences.MEASURE).Update();
 		return this;
 	}
 
