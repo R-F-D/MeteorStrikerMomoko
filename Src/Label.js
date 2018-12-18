@@ -23,12 +23,11 @@ class Label{
 
 	/** インスタンス生成
 	 * @static
-	 * @param {String} text
 	 * @returns
 	 * @memberof Labe;
 	 */
-	static CreateInstance(text="",fontSize=16,fontName="Arial"){
-		return new Label(text,fontName,fontSize);
+	static CreateInstance(fontSize=16,fontName="Arial"){
+		return new Label("",fontName,fontSize);
 	}
 
 	/** インスタンス取得

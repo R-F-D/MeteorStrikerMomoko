@@ -133,14 +133,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
 					//Labels
-					_this.labels.hitArea		= Label.CreateInstance().SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
-					_this.labels.aimingResult	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
-					/*
-					{let i=0; for(let key in _this.labels){
-						_this.labels[key]	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(128,256-i*20).AddToLayer(this);
-						++i;
-					}};
-					*/
+					_this.labels.hitArea		= Label.CreateInstance(  ).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
+					_this.labels.aimingResult	= Label.CreateInstance(  ).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
+					_this.labels.distance		= Label.CreateInstance(32).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
@@ -157,6 +152,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
+					_this.labels.distance.SetString( `${_this.GetDistanceString()} km` );
 					return true;
 				},
 			}),
@@ -184,7 +180,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		/** ラベル */
 		this.labels	= {
-			aimingResult:null,hitArea:null,
+			aimingResult:null, hitArea:null, distance:null,
 		}
 
 		//シークエンス設定
@@ -213,6 +209,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.meteorEffect.SetColor();
 			this.labels.aimingResult.SetVisible(false);
 			this.labels.hitArea.SetVisible(false);
+			this.labels.distance.SetVisible(false);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
@@ -294,24 +291,20 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//吹き飛ばし
 		Sequences.BLOW_AWAY.PushStartingFunctions(()=>{
 			this.impactPower		= this.GetChargingRate() * this.aiming.GetTotalRate();
-			this.totalPower			= this.GetEmittingRate() * this.impactPower;
+			this.totalPower			= this.GetEmittingRate() * this.impactPower + 10;
 			this.distanceOfMeteor	= 0;
-
-			Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
-			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
-			Log(`Impact: ${this.impactPower}`);
-			Log(`Total: ${this.totalPower}`);
 
 			for(let s of this.sprites.bg2)	s.SetVisible(true);
 			this.aiming.SetVisible(false);
 			this.labels.aimingResult.SetVisible(false);
 			this.labels.hitArea.SetVisible(false);
+			this.labels.distance.SetVisible(true);
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.aiming.Update(false);
 
-			this.distanceOfMeteor+=0.2;
-			if(this.totalPower+10 <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
+			this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
+			if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
 		})
 		.PushUpdatingFunctions("layer-bg", (dt)=>{
 			for(let sprite of this.sprites.bg1){
@@ -323,10 +316,15 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//計測中
 		Sequences.MEASURE.PushStartingFunctions(()=>{
-			Log("Measure");
 			for(let s of this.sprites.bg1)	s.SetVisible(false);
 			this.sprites.meteor.SetVisible(false);
 			this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
+
+			Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
+			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
+			Log(`Impact: ${this.impactPower}`);
+			Log(`Total: ${this.totalPower}`);
+
 		});
 		//.PushUpdatingFunctions((dt)=>{});
 
@@ -475,6 +473,22 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==Sequences.MEASURE).Update();
 		return this;
+	}
+
+	GetDistanceString(){
+		let distance	= Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 );
+		let chunk	= [
+			parseInt( distance % 10000			),
+			parseInt( (distance/10000) % 10000	),
+			parseInt( distance / 100000000		),
+		];
+
+		let result	= '';
+		if(chunk[2] > 0)	result += `${chunk[2]}億 `
+		if(chunk[1] > 0)	result += `${chunk[1]}万 `
+		result += `${chunk[0]}`
+
+		return result;
 	}
 
 
