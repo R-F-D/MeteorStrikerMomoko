@@ -133,10 +133,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
 					//Labels
+					_this.labels.hitArea		= Label.CreateInstance().SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
+					_this.labels.aimingResult	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
+					/*
 					{let i=0; for(let key in _this.labels){
-						_this.labels[key]	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(120,270-i*20).AddToLayer(this);
+						_this.labels[key]	= Label.CreateInstance().SetColor("#FFFFFF").SetPosition(128,256-i*20).AddToLayer(this);
 						++i;
 					}};
+					*/
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
@@ -151,10 +155,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
 
-					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
-					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
-					_this.labels.aiming.SetString(			`Aiming:${_this.aiming.position.toFixed(2)}`	);
-					_this.labels.emittingPower.SetString(	`Emitting:${_this.nEmits.total}c, ${_this.nEmits.maxSimul}c/f, ${_this.GetEmittingRate()}x`	);
+					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
+					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
 					return true;
 				},
 			}),
@@ -181,7 +183,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		};
 
 		/** ラベル */
-		this.labels	= {	chargedPower:null,	hitArea:null,	aiming:null,	emittingPower:null,	}
+		this.labels	= {
+			aimingResult:null,hitArea:null,
+		}
 
 		//シークエンス設定
 		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
@@ -207,6 +211,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
 			this.meteorEffect.SetColor();
+			this.labels.aimingResult.SetVisible(false);
+			this.labels.hitArea.SetVisible(false);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
@@ -268,6 +274,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
+				this.labels.aimingResult.SetVisible(true);
+				this.labels.hitArea.SetVisible(true);
+
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
 				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
@@ -295,6 +304,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 			for(let s of this.sprites.bg2)	s.SetVisible(true);
 			this.aiming.SetVisible(false);
+			this.labels.aimingResult.SetVisible(false);
+			this.labels.hitArea.SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.aiming.Update(false);

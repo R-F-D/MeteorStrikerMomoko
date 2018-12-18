@@ -159,7 +159,7 @@ Scenes.Aiming	= class {
 		if(isForDisplay){
 			if     (rate < 0.505)	rate = 0.500;
 			else if(rate > 0.995)	rate = 1.000;
-			rate	= rate.toFixed(3);
+			return (rate*100).toFixed(1);
 		}
 		return Clamp(rate, 0.500, 1.000);
 	}
