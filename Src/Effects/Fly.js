@@ -44,7 +44,8 @@ Effects.Fly	= class extends Effects.EffectBase{
 
 			v.sprite
 				.SetPosition(x+NormalRandom(16), y+NormalRandom(4) )
-				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true);
+				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true)
+				.SetColor(this.color);
 			return this;
 		};
 		return this;

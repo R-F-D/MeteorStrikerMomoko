@@ -12,6 +12,7 @@ Effects.EffectBase	= class{
 		this.entities			= [];
 		this.initialVelocity	= { x:0, y:0, };
 		this.acceleration		= { x:0, y:0, };
+		this.color				= "#FFFFFF";
 	}
 	static Create(nEntities){return new this(nEntities);}
 
@@ -47,12 +48,16 @@ Effects.EffectBase	= class{
 	}
 
 	/** パーティクルの色設定
-	 * @param {string} color
+	 * @param {string} color 文字コード
+	 * @param {boolean} delays 遅延
 	 * @returns {this}
 	 */
-	SetColor(color="#FFFFFF"){
-		for(let entity of this.entities){
-			entity.sprite.SetColor(color);
+	SetColor(color="#FFFFFF",delays=true){
+		this.color	= color;
+		if(!delays){
+			for(let entity of this.entities){
+				entity.sprite.SetColor(this.color);
+			}
 		}
 		return this;
 	}

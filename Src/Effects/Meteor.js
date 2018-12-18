@@ -35,7 +35,7 @@ Effects.Meteor	= class extends Effects.EffectBase{
 		for(let v of this.entities){
 			if(v.exists)	continue;
 
-			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true);
+			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
 			v.dx		= this.initialVelocity.x;
 			v.dy		= NormalRandom(2)+this.initialVelocity.y;
 			v.exists	= true;
@@ -65,8 +65,8 @@ Effects.Meteor	= class extends Effects.EffectBase{
 		return this;
 	}
 
-	SetColor(color="#FF0000"){
-		return super.SetColor(color);
+	SetColor(color="#FF0000",delays=true){
+		return super.SetColor(color,delays);
 	}
 
 }

@@ -203,6 +203,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
+			this.meteorEffect.SetColor();
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
@@ -265,7 +266,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.nEmits.total		= 0;
 
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
-				this.meteorEffect.SetVelocity(-8,-4);
+				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update(false);
