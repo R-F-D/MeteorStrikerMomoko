@@ -15,17 +15,14 @@ Effects.Fly	= class extends Effects.EffectBase{
 
 	Init(layer){
 		super.Init();
-		for(let i=0; i<this.nEntities; ++i){
-			this.entities[i]	= {
+		for(let entity of this.entities){
+			entity	= Object.assign(entity,{
 				sprite	: Sprite.CreateInstance(rc.img.flyFx).AddToLayer(layer)
 								.SetPosition(100,100).Attr({zIndex:3,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
-				exist	: false,
-				count	: 0,
-				dy		: 0,
-				dx		: 0,
 				scale	: 1.0,
-			}
+			});
 		}
+		this.SetColor("#FFFFFF");
 		return this;
 	}
 

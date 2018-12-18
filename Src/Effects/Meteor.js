@@ -15,16 +15,13 @@ Effects.Meteor	= class extends Effects.EffectBase{
 
 	Init(layer){
 		super.Init();
-		for(let i=0; i<this.nEntities; ++i){
-			this.entities[i]	= {
+		for(let entity of this.entities){
+			entity	= Object.assign(entity,{
 				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
-								.SetScale(2).Attr({zIndex:0,opacity:255}).SetColor("#FF0000").SetVisible(false),
-				exist	: false,
-				count	: 0,
-				dx		: 0,
-				dy		: 0,
-			}
+							.SetScale(2).Attr({zIndex:0,opacity:255}).SetVisible(false),
+			});
 		}
+		this.SetColor();
 		return this;
 	}
 
@@ -67,6 +64,11 @@ Effects.Meteor	= class extends Effects.EffectBase{
 		}
 		return this;
 	}
+
+	SetColor(color="#FF0000"){
+		return super.SetColor(color);
+	}
+
 }
 
 })();	//File Scope
