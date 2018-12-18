@@ -125,9 +125,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
 												.SetScale(2).Attr({zIndex:5}).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2).Attr({zIndex:2});
-					_this.meteorEffect	= Effects.Meteor.Create(8).Init(this);
-					_this.playerEffect	= Effects.Fly.Create(32).Init(this);
+												.SetScale(2).Attr({zIndex:2}).SetVisible(true);
+					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
+					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
+					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
@@ -148,6 +149,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
+					_this.explosionEffect.Update();
 
 					_this.labels.chargedPower.SetString(	`Charge Rate:${_this.GetChargingRate().toFixed(2)}`		);
 					_this.labels.hitArea.SetString(			`Hit Area:${_this.aiming.GetCurrentArea().tag}`	);
@@ -200,6 +202,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
 			this.distanceOfMeteor	= 0;
+			this.sprites.meteor.SetVisible(true);
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
@@ -312,6 +315,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			Log("Measure");
 			for(let s of this.sprites.bg1)	s.SetVisible(false);
 			this.sprites.meteor.SetVisible(false);
+			this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 		});
 		//.PushUpdatingFunctions((dt)=>{});
 
