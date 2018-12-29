@@ -136,6 +136,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.hitArea		= Label.CreateInstance(  ).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
 					_this.labels.aimingResult	= Label.CreateInstance(  ).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(32).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
+					_this.labels.navigation		= Label.CreateInstance(20).SetColor("#FFFFFF").SetPosition(256,32).AddToLayer(this);
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
@@ -180,7 +181,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		/** ラベル */
 		this.labels	= {
-			aimingResult:null, hitArea:null, distance:null,
+			aimingResult:null, hitArea:null, distance:null,	navigation:null,
 		}
 
 		//シークエンス設定
@@ -210,6 +211,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.labels.aimingResult.SetVisible(false);
 			this.labels.hitArea.SetVisible(false);
 			this.labels.distance.SetVisible(false);
+			this.labels.navigation.SetVisible(false);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
@@ -224,6 +226,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//エイム作動
 		Sequences.START_AIM
 			.PushStartingFunctions(()=>{
+				this.labels.navigation.SetString("長押し＆離して攻撃！").SetVisible(true);
 				this.aiming.SetVisible(true,true);
 			})
 			.PushUpdatingFunctions((dt)=>{
