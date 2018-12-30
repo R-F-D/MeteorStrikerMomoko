@@ -27,11 +27,11 @@ SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-    その他のファイル群について
-    About Other Files
+    「Frameworks/」ディレクトリ以下のファイル群について
+    About The Files Below "Frameworks/" Directory
 --------------------------------------------------------------------------------
-licenses/ディレクトリのファイルを参照してください。
-Refer to license files in "licenses" directory.
+Frameworks/**/licenses/ディレクトリのファイルを参照してください。
+Refer to license files in "Frameworks/**/licenses/" directory.
 
 
 --------------------------------------------------------------------------------
