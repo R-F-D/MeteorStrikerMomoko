@@ -2,7 +2,6 @@
 	GamePlayシーン
 ********************************************************************************/
 var Scenes	= Scenes || {};
-var cc;
 (function(){	//File Scope
 
 /** classへのthis */
@@ -136,7 +135,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.hitArea		= Label.CreateInstance(  ).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
 					_this.labels.aimingResult	= Label.CreateInstance(  ).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(32).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(20).SetColor("#FFFFFF").SetPosition(256,32).AddToLayer(this);
+					_this.labels.navigation		= Label.CreateInstance(20).SetColor("#FFFFFF").SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
@@ -154,6 +153,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
 					_this.labels.distance.SetString( `${_this.GetDistanceString()} km` );
+					_this.labels.navigation.Update();
 					return true;
 				},
 			}),
@@ -226,7 +226,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//エイム作動
 		Sequences.START_AIM
 			.PushStartingFunctions(()=>{
-				this.labels.navigation.SetString("長押し＆離して攻撃！").SetVisible(true);
+				this.labels.navigation.SetString("・").SetVisible(true);
 				this.aiming.SetVisible(true,true);
 			})
 			.PushUpdatingFunctions((dt)=>{
