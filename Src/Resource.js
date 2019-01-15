@@ -1,7 +1,7 @@
 /** @const リソースファイル設定 */
 const rc	= {
 	/** リソースディレクトリ */
-	DIRECTORY	: "../res/",
+	DIRECTORY	: "../Res/",
 
 	/** 画像 */
 	img	: {
@@ -18,10 +18,15 @@ const rc	= {
 	/** サウンド */
 	se	: {
 	},
+
+	/** システム用 */
+	sysImg	: {
+		labelBg	: "Sys/labelbg.png",
+	},
+
 };
 
 
 var g_resources = [];
-for(let i in rc.img) {
-	g_resources.push(`${rc.DIRECTORY}${rc.img[i][0]}`);
-}
+for(let i in rc.sysImg)	g_resources.push(`${rc.DIRECTORY}${rc.sysImg[i]}`);
+for(let i in rc.img)	g_resources.push(`${rc.DIRECTORY}${rc.img[i][0]}`);

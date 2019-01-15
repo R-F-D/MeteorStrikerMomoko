@@ -132,10 +132,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
 					//Labels
-					_this.labels.hitArea		= Label.CreateInstance(  ).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
-					_this.labels.aimingResult	= Label.CreateInstance(  ).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
-					_this.labels.distance		= Label.CreateInstance(32).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(20).SetColor("#FFFFFF").SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
+					_this.labels.hitArea		= Label.CreateInstance(15).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
+					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
+					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
+					_this.labels.navigation		= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
@@ -226,7 +226,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//エイム作動
 		Sequences.START_AIM
 			.PushStartingFunctions(()=>{
-				this.labels.navigation.SetString("・").SetVisible(true);
+				this.labels.navigation.SetString("長押し＆離して攻撃！").SetVisible(true);
 				this.aiming.SetVisible(true,true);
 			})
 			.PushUpdatingFunctions((dt)=>{

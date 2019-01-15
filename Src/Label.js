@@ -8,7 +8,7 @@ var Label;
 Label	= class Label{
 
 	constructor(text,fontName,fontSize){
-		/** @var Z座標 */
+		/** @const Z座標 */
 		this.Z	= 65535;
 
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
@@ -117,7 +117,7 @@ Label	= class Label{
 		return this;
 	}
 
-}
+};
 
 
 //ラベル背景
@@ -125,9 +125,15 @@ class LabelBg{
 
 	constructor(parent){
 		/** @var 紐付いているLabel */
-		this.parent	= parent;
-		/** @var 描画するZ座標*/
-		this.Z		= this.parent.Z - 1;
+		this.parent		= parent;
+		/** @const 描画するZ座標*/
+		this.Z			= this.parent.Z - 1;
+		/** @const 不透明度 */
+		this.OPACITY	= 128;
+		/** @const 背景色 */
+		this.COLOR		= new cc.color(0,0,0);
+		/** @const パディング  */
+		this.PADDING	= { horizon:4,	vertical:2	};
 
 		/** @var cc.DwarNodeクラスのインスタンス */
 		this.entity	= null;
@@ -135,6 +141,10 @@ class LabelBg{
 		this.upper	= {width:null,	height:null,};
 		/** @var サイズ下限*/
 		this.lower	= {width:0,		height:0,	};
+
+		this.imgWidth	= 128;
+		this.imgHeight	= 128;
+
 	}
 
 	/** 背景インスタンスの生成
@@ -144,9 +154,11 @@ class LabelBg{
 	Create(){
 		if(this.entity)	this.entity.clear();
 
-		this.entity		= new cc.DrawNode();
-		this.entity.drawRect(cc.p(-50,-50),cc.p(50,50),cc.color(0,0,0),0);
-		this.entity.attr({zIndex:this.Z, opacity:0, });
+		this.entity		= new cc.Sprite(`${rc.DIRECTORY}${rc.sysImg.labelBg}`);
+		this.imgWidth	= this.entity.getContentSize().width;
+		this.imgHeight	= this.entity.getContentSize().height;
+		this.entity.setColor(this.COLOR);
+		this.entity.attr({zIndex:this.Z, opacity:this.OPACITY, });
 
 		let size	= this.parent.GetContentSize();
 		this.SetSize(size.width,size.height);
@@ -184,12 +196,10 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	SetSize(width=0,height=0){
-		width	= Clamp(width, this.lower.width, this.upper.width);
-		height	= Clamp(height,this.lower.height,this.upper.height);
+		width	= Clamp(width +this.PADDING.horizon*2, this.lower.width, this.upper.width);
+		height	= Clamp(height+this.PADDING.vertical*2,this.lower.height,this.upper.height);
 
-		this.entity.setScale(width/100,height/100);
-		this.entity.setContentSize(width,height);
-
+		this.entity.setScale(width/this.imgWidth,height/this.imgHeight);
 		this.ApplicatePosition();
 		return this;
 	}
@@ -204,7 +214,8 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	ApplicatePosition(){
-		this.entity.setPosition( this.parent.entity.getPosition() );
+		let pos	= this.parent.entity.getPosition();
+		this.entity.setPosition(pos.x,pos.y+3);
 		return this;
 	}
 
