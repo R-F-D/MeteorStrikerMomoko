@@ -24,6 +24,11 @@ const rc	= {
 		labelBg	: "Sys/labelbg.png",
 	},
 
+	/** フォント名 */
+	font	: {
+		talk	: "Kosugi Maru",
+	},
+
 };
 
 
