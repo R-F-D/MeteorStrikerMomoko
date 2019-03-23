@@ -23,7 +23,7 @@ Label	= class Label{
 	 * @returns
 	 * @memberof Labe;
 	 */
-	static CreateInstance(fontSize=16,fontName="Arial"){
+	static CreateInstance(fontSize=16,fontName=""){
 		return new Label("",fontName,fontSize);
 	}
 
@@ -48,6 +48,7 @@ Label	= class Label{
 	/** 更新 */
 	Update(dt){
 		if(this.bg.IsEnabled()){
+			this.bg.Update();
 		}
 		return this;
 	}
@@ -103,7 +104,7 @@ Label	= class Label{
 	 */
 	SetString(text){
 		this.entity.setString(text);
-		if(this.bg.IsEnabled())	this.bg.ApplicateSize();
+		if(this.bg.IsEnabled())	this.bg.SetSize();
 		return this;
 	}
 
@@ -137,10 +138,12 @@ class LabelBg{
 
 		/** @var cc.DwarNodeクラスのインスタンス */
 		this.entity	= null;
+		/** @var サイズ */
+		this.size			= {width:0,					height:0,					};
 		/** @var サイズ上限*/
-		this.upper	= {width:null,	height:null,};
+		this.upper			= {width:null,				height:null,				};
 		/** @var サイズ下限*/
-		this.lower	= {width:0,		height:0,	};
+		this.lower			= {width:0,					height:0,					};
 
 		this.imgWidth	= 128;
 		this.imgHeight	= 128;
@@ -158,11 +161,19 @@ class LabelBg{
 		this.imgWidth	= this.entity.getContentSize().width;
 		this.imgHeight	= this.entity.getContentSize().height;
 		this.entity.setColor(this.COLOR);
+		this.entity.setScale(0);
 		this.entity.attr({zIndex:this.Z, opacity:this.OPACITY, });
 
-		let size	= this.parent.GetContentSize();
-		this.SetSize(size.width,size.height);
-		this.ApplicateLayer();
+		this.SetSize().ApplicateLayer();
+		return this;
+	}
+
+	/** 更新
+	 * @param {*} dt
+	 * @returns
+	 * @memberof LabelBg
+	 */
+	Update(dt){
 		return this;
 	}
 
@@ -189,26 +200,48 @@ class LabelBg{
 		return this.entity!=null;
 	}
 
-	/** 背景サイズ設定
-	 * @param {number} [width=0]
-	 * @param {number} [height=0]
-	 * @returns
+	/**背景サイズ設定
+	 * @param {number|null|undefined} [width=undefined]		幅。未指定で自動設定、nullで変更なし。
+	 * @param {number|null|undefined} [height=undefined]	高さ。未指定で自動設定、nullで変更なし。
+	 * @returns this
 	 * @memberof LabelBg
 	 */
-	SetSize(width=0,height=0){
-		width	= Clamp(width +this.PADDING.horizon*2, this.lower.width, this.upper.width);
-		height	= Clamp(height+this.PADDING.vertical*2,this.lower.height,this.upper.height);
+	SetSize(width=undefined,height=undefined){
+		let parentSize	= this.parent.GetContentSize();
 
-		this.entity.setScale(width/this.imgWidth,height/this.imgHeight);
+		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
+		this.size.width		= width === undefined	? parentSize.width	:
+							  width === null		? this.size.width	: Clamp(width +this.PADDING.horizon*2, this.lower.width, this.upper.width);
+		this.size.height	= height=== undefined	? parentSize.height	:
+							  height=== null		? this.size.height	: Clamp(height+this.PADDING.vertical*2,this.lower.height,this.upper.height);
+
+		//背景サイズ調整
+		this.entity.runAction(
+			cc.ScaleTo
+				.create(0.5,this.size.width/this.imgWidth, this.size.height/this.imgHeight)
+				.easing(cc.easeBackOut(10))
+		);
+
 		this.ApplicatePosition();
 		return this;
 	}
 
-	ApplicateSize(){
-		let size	= this.parent.GetContentSize();
-		this.SetSize(size.width,size.height);
+	/** 背景サイズの下限＆上限設定。nullは限界なし
+	 * @param {*} [lowerWidth=null] 幅の下限
+	 * @param {*} [lowerHeight=null] 高さの下限
+	 * @param {*} [upperWidth=null] 幅の上限
+	 * @param {*} [upperHeight=null] 高さの上限
+	 * @returns this
+	 * @memberof LabelBg
+	 */
+	SetLimitSize(lowerWidth=null,lowerHeight=null,upperWidth=null,upperHeight=null){
+		this.lower.width	= lowerWidth >0	? lowerWidth	: null;
+		this.upper.width	= lowerHeight>0	? lowerHeight	: null;
+		this.lower.height	= upperWidth >0	? upperWidth	: null;
+		this.upper.height	= upperHeight>0	? upperHeight	: null;
 		return this;
 	}
+
 	/** 背景座標を更新
 	 * @returns
 	 * @memberof LabelBg
