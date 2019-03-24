@@ -27,6 +27,15 @@ Label	= class Label{
 		return new Label("",fontName,fontSize);
 	}
 
+	/** 初期化
+	 * @returns {this}
+	 * @memberof Label
+	 */
+	Init(){
+		if(this.bg.IsEnabled())	this.bg.Init();
+		return this;
+	}
+
 	/** インスタンス取得
 	 * @returns cc.LabelAtlas
 	 * @memberof Label
@@ -148,6 +157,16 @@ class LabelBg{
 		this.imgWidth	= 128;
 		this.imgHeight	= 128;
 
+		this.Init();
+	}
+
+	/** 初期化
+	 * @returns {this}
+	 * @memberof LabelBg
+	 */
+	Init(){
+		this.SetSize(0,0,false,false);
+		return this;
 	}
 
 	/** 背景インスタンスの生成
@@ -203,24 +222,39 @@ class LabelBg{
 	/**背景サイズ設定
 	 * @param {number|null|undefined} [width=undefined]		幅。未指定で自動設定、nullで変更なし。
 	 * @param {number|null|undefined} [height=undefined]	高さ。未指定で自動設定、nullで変更なし。
+	 * @param {boolean} [animates=true]						イージング処理を使用する。
+	 * @param {boolean} [pads=true]							パディング値を考慮する。
 	 * @returns this
 	 * @memberof LabelBg
 	 */
-	SetSize(width=undefined,height=undefined){
+	SetSize(width=undefined,height=undefined,animates=true,pads=true){
 		let parentSize	= this.parent.GetContentSize();
+
+		//パディング
+		const adjust	= {
+			width:	pads	? this.PADDING.horizon  * 2	: 0,
+			height:	pads	? this.PADDING.vertical * 2	: 0,
+		};
 
 		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
 		this.size.width		= width === undefined	? parentSize.width	:
-							  width === null		? this.size.width	: Clamp(width +this.PADDING.horizon*2, this.lower.width, this.upper.width);
+							  width === null		? this.size.width	: Clamp(width +adjust.width, this.lower.width, this.upper.width);
 		this.size.height	= height=== undefined	? parentSize.height	:
-							  height=== null		? this.size.height	: Clamp(height+this.PADDING.vertical*2,this.lower.height,this.upper.height);
+							  height=== null		? this.size.height	: Clamp(height+adjust.height,this.lower.height,this.upper.height);
 
-		//背景サイズ調整
-		this.entity.runAction(
-			cc.ScaleTo
-				.create(0.5,this.size.width/this.imgWidth, this.size.height/this.imgHeight)
-				.easing(cc.easeBackOut(10))
-		);
+		if(!this.IsEnabled())	return this;
+
+		//イージング処理
+		if(animates){
+			this.entity.runAction(
+				cc.ScaleTo
+					.create(0.5,this.size.width/this.imgWidth, this.size.height/this.imgHeight)
+					.easing(cc.easeBackOut(10))
+			);
+		}
+		else{
+			this.entity.setScale(this.size.width/this.imgWidth, this.size.height/this.imgHeight);
+		}
 
 		this.ApplicatePosition();
 		return this;
@@ -247,6 +281,8 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	ApplicatePosition(){
+		if(!this.IsEnabled())	return this;
+
 		let pos	= this.parent.entity.getPosition();
 		this.entity.setPosition(pos.x,pos.y+3);
 		return this;

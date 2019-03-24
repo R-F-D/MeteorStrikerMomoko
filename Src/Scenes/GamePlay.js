@@ -211,7 +211,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.labels.aimingResult.SetVisible(false);
 			this.labels.hitArea.SetVisible(false);
 			this.labels.distance.SetVisible(false);
-			this.labels.navigation.SetVisible(false);
+			this.labels.navigation.Init().SetVisible(false);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
