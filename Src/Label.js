@@ -56,9 +56,13 @@ Label	= class Label{
 
 	/** 更新 */
 	Update(dt){
+		let visible	= true;	//背景アニメ中は表示しない
+
 		if(this.bg.IsEnabled()){
 			this.bg.Update();
+			if(this.bg.entity.getNumberOfRunningActions()>0) visible=false;
 		}
+		if(visible)	this.entity.attr({opacity:255});
 		return this;
 	}
 
@@ -113,7 +117,10 @@ Label	= class Label{
 	 */
 	SetString(text){
 		this.entity.setString(text);
-		if(this.bg.IsEnabled())	this.bg.SetSize();
+		if(this.bg.IsEnabled()){
+			this.entity.attr({opacity:0});
+			this.bg.SetSize();
+		}
 		return this;
 	}
 
@@ -183,7 +190,7 @@ class LabelBg{
 		this.entity.setScale(0);
 		this.entity.attr({zIndex:this.Z, opacity:this.OPACITY, });
 
-		this.SetSize().ApplicateLayer();
+		this.Init().ApplicateLayer();
 		return this;
 	}
 
@@ -237,10 +244,14 @@ class LabelBg{
 		};
 
 		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
-		this.size.width		= width === undefined	? parentSize.width	:
-							  width === null		? this.size.width	: Clamp(width +adjust.width, this.lower.width, this.upper.width);
-		this.size.height	= height=== undefined	? parentSize.height	:
-							  height=== null		? this.size.height	: Clamp(height+adjust.height,this.lower.height,this.upper.height);
+		this.size.width		= width === undefined	? parentSize.width +adjust.width	:
+							  width === null		? this.size.width					: width +adjust.width;
+		this.size.height	= height=== undefined	? parentSize.height+adjust.height	:
+							  height=== null		? this.size.height					: height+adjust.height;
+
+		//Clamp
+		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);
+		this.size.height	= Clamp(this.size.height,this.lower.height,this.upper.height)
 
 		if(!this.IsEnabled())	return this;
 
