@@ -60,7 +60,7 @@ Label	= class Label{
 
 		if(this.bg.IsEnabled()){
 			this.bg.Update();
-			if(this.bg.entity.getNumberOfRunningActions()>0) visible=false;
+			if(this.bg.IsRunningActions()) visible=false;
 		}
 		if(visible)	this.entity.attr({opacity:255});
 		return this;
@@ -310,6 +310,15 @@ class LabelBg{
 			layer.addChild(this.entity);
 		}
 		return this;
+	}
+
+	/** 実行中のアクションがあるか
+	 * @returns {boolean}
+	 * @memberof LabelBg
+	 */
+	IsRunningActions(){
+		if(this.IsEnabled() && this.entity.getNumberOfRunningActions()>0) return true;
+		return false;
 	}
 }
 
