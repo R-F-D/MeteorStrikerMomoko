@@ -16,6 +16,7 @@ Label	= class Label{
 
 		//アイコン
 		this.icon	= null;
+		this.iconAdjust	= {x:0,y:0};
 
 		//背景
 		this.bg	= new LabelBg(this);
@@ -124,7 +125,7 @@ Label	= class Label{
 
 		const pos	= this.entity.getPosition();
 		const size	= this.GetContentSize();
-		this.icon.SetPosition(pos.x-(size.width+this.icon.img.width)/2,pos.y);
+		this.icon.SetPosition(	pos.x-(size.width+this.icon.img.width)/2+this.iconAdjust.x,	pos.y+this.iconAdjust.y	);
 
 		return this;
 	}
