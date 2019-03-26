@@ -14,6 +14,9 @@ Label	= class Label{
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
 		this.entity.attr({zIndex:this.Z});
 
+		//アイコン
+		this.icon	= null;
+
 		//背景
 		this.bg	= new LabelBg(this);
 	}
@@ -32,6 +35,7 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	Init(){
+		if(this.icon)this.icon.Attr({opacity:0});
 		if(this.bg.IsEnabled())	this.bg.Init();
 		return this;
 	}
@@ -51,6 +55,9 @@ Label	= class Label{
 	 */
 	SetVisible(visible){
 		this.entity.setVisible(!!visible);
+		if(this.icon){
+			this.icon.SetVisible(!!visible);
+		}
 		return this;
 	}
 
@@ -62,7 +69,10 @@ Label	= class Label{
 			this.bg.Update();
 			if(this.bg.IsRunningActions()) visible=false;
 		}
-		if(visible)	this.entity.attr({opacity:255});
+		if(visible){
+			this.entity.attr({opacity:255});
+			if(this.icon)	this.icon.Attr({opacity:192});
+		}
 		return this;
 	}
 
@@ -83,7 +93,12 @@ Label	= class Label{
 	AddToLayer(layer){
 		this.entity.removeFromParent();
 		layer.addChild(this.entity);
-		if(this.bg.IsEnabled())	this.bg.ApplicateLayer();
+		if(this.icon)	this.icon.AddToLayer(layer);
+
+		if(this.bg.IsEnabled()){
+			this.bg.ApplicateLayer();
+		}
+
 		return this;
 	}
 
@@ -95,7 +110,21 @@ Label	= class Label{
 	 */
 	SetPosition(x,y){
 		this.entity.setPosition(x,y);
+		this.ApplicateIconPosition();
 		if(this.bg.IsEnabled())	this.bg.ApplicatePosition();
+
+		return this;
+	}
+
+	/** アイコン位置の更新
+	 * @returns {this}
+	 */
+	ApplicateIconPosition(){
+		if(!this.icon)	return this;
+
+		const pos	= this.entity.getPosition();
+		const size	= this.GetContentSize();
+		this.icon.SetPosition(pos.x-(size.width+this.icon.img.width)/2,pos.y);
 
 		return this;
 	}
@@ -117,6 +146,10 @@ Label	= class Label{
 	 */
 	SetString(text){
 		this.entity.setString(text);
+		if(this.icon){
+			this.ApplicateIconPosition();
+			this.icon.Attr({opacity:0});
+		}
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
 			this.bg.SetSize();
@@ -134,8 +167,24 @@ Label	= class Label{
 		return this;
 	}
 
-};
+	/** アイコン画像のセット
+	 * @param {*} img
+	 * @returns {this}
+	 */
+	SetIcon(img){
 
+		this.icon	= Sprite
+						.CreateInstance(img)
+						.Attr({opacity:0,zIndex:this.Z-1})
+						.SetScale(1);
+
+		let layer	= this.entity.getParent();
+		if(layer)	this.icon.AddToLayer(layer);
+
+		return this;
+	}
+
+};
 
 //ラベル背景
 class LabelBg{
@@ -144,7 +193,7 @@ class LabelBg{
 		/** @var 紐付いているLabel */
 		this.parent		= parent;
 		/** @const 描画するZ座標*/
-		this.Z			= this.parent.Z - 1;
+		this.Z			= this.parent.Z - 2;
 		/** @const 不透明度 */
 		this.OPACITY	= 128;
 		/** @const 背景色 */
