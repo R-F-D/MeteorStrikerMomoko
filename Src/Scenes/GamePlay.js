@@ -137,7 +137,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15).SetColor("#FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
-					_this.SetSequence(Sequences.INITIAL);
+					_this.CreateUIs(this).SetSequence(Sequences.INITIAL);
 					return true;
 				},
 				update	: function(dt){
@@ -390,13 +390,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.nEmits.total++;
 				},
 			}),
-			/** リセット */
+			/** キーボードリセット */
 			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
 				event			: cc.EventListener.KEYBOARD,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
-						Log("[DEBUG] Reset Scene ----------");
-						this.SetSequence(Sequences.INITIAL);
+						this.Reset();
 					}
 				},
 			}),
@@ -408,6 +407,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					return true;
 				},
 			}),
+			/**リセットボタン*/
+			resetButton:	(sender,type)=>{
+				if(type===ccui.Widget.TOUCH_ENDED){
+					this.Reset();
+				}
+			},
 		};
 
 		//シークエンス-イベント対応設定
@@ -492,6 +497,33 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		result += `${chunk[0]}`
 
 		return result;
+	}
+
+	/** リセット
+	 * @returns this 
+	 */
+	Reset(){
+		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
+		this.SetSequence(Sequences.INITIAL);
+		return this;
+	}
+
+	/** UIパーツ作成
+	 * @param {cc.Layer} layer
+	 * @returns
+	 */
+	CreateUIs(layer){
+		const size	= cc.director.getWinSize();
+		let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
+
+		button.setPosition(0+16+2,size.height-16-2);
+		button.setScale(1);
+		button.setOpacity(128);
+		button.setContentSize(32,32);
+		button.addTouchEventListener(this.listeners.resetButton,layer);
+		layer.addChild(button);
+
+		return this;
 	}
 
 
