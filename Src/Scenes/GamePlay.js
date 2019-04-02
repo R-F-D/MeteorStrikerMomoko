@@ -128,6 +128,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
+					_this.touchedEffect		= Effects.Touched.Create().Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
@@ -135,7 +136,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.hitArea		= Label.CreateInstance(15).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
 					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(15).SetColor("#FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
+					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
 					_this.CreateUIs(this).SetSequence(Sequences.INITIAL);
 					return true;
@@ -149,6 +150,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
+					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
@@ -292,44 +294,46 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			});
 
 		//吹き飛ばし
-		Sequences.BLOW_AWAY.PushStartingFunctions(()=>{
-			this.impactPower		= this.GetChargingRate() * this.aiming.GetTotalRate();
-			this.totalPower			= this.GetEmittingRate() * this.impactPower + 10;
-			this.distanceOfMeteor	= 0;
+		Sequences.BLOW_AWAY
+			.PushStartingFunctions(()=>{
+				this.impactPower		= this.GetChargingRate() * this.aiming.GetTotalRate();
+				this.totalPower			= this.GetEmittingRate() * this.impactPower + 10;
+				this.distanceOfMeteor	= 0;
 
-			for(let s of this.sprites.bg2)	s.SetVisible(true);
-			this.aiming.SetVisible(false);
-			this.labels.aimingResult.SetVisible(false);
-			this.labels.hitArea.SetVisible(false);
-			this.labels.distance.SetVisible(true);
-		})
-		.PushUpdatingFunctions((dt)=>{
-			this.aiming.Update(false);
+				for(let s of this.sprites.bg2)	s.SetVisible(true);
+				this.aiming.SetVisible(false);
+				this.labels.aimingResult.SetVisible(false);
+				this.labels.hitArea.SetVisible(false);
+				this.labels.distance.SetVisible(true);
+			})
+			.PushUpdatingFunctions((dt)=>{
+				this.aiming.Update(false);
 
-			this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
-			if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
-		})
-		.PushUpdatingFunctions("layer-bg", (dt)=>{
-			for(let sprite of this.sprites.bg1){
-				sprite
-					.SetRelativePosition(null,-4)
-					.SetOpacity(Math.max(0,255-this.sequence.count*4));
-			}
-		});
+				this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
+				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
+			})
+			.PushUpdatingFunctions("layer-bg", (dt)=>{
+				for(let sprite of this.sprites.bg1){
+					sprite
+						.SetRelativePosition(null,-4)
+						.SetOpacity(Math.max(0,255-this.sequence.count*4));
+				}
+			});
 
 		//計測中
-		Sequences.MEASURE.PushStartingFunctions(()=>{
-			for(let s of this.sprites.bg1)	s.SetVisible(false);
-			this.sprites.meteor.SetVisible(false);
-			this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
+		Sequences.MEASURE
+			.PushStartingFunctions(()=>{
+				for(let s of this.sprites.bg1)	s.SetVisible(false);
+				this.sprites.meteor.SetVisible(false);
+				this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 
-			Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
-			Log(`AimingRate: ${this.aiming.GetRate(true)}`);
-			Log(`Impact: ${this.impactPower}`);
-			Log(`Total: ${this.totalPower}`);
+				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
+				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
+				Log(`Impact: ${this.impactPower}`);
+				Log(`Total: ${this.totalPower}`);
 
-		});
-		//.PushUpdatingFunctions((dt)=>{});
+			});
+			//.PushUpdatingFunctions((dt)=>{});
 
 		return this;
 	}
@@ -390,15 +394,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.nEmits.total++;
 				},
 			}),
-			/** キーボードリセット */
-			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
-				event			: cc.EventListener.KEYBOARD,
-				onKeyReleased	: (code,event)=>{
-					if(code==82){	//'R'key
-						this.Reset();
-					}
-				},
-			}),
 			/** 次フェイズへの単純遷移 */
 			transionToNext	:cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -413,10 +408,37 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.Reset();
 				}
 			},
+			/**タッチエフェクト用*/
+			touched		: cc.EventListener.create({
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touches,event)=>{
+					for(let t of touches){
+						const pos	= t.getLocation();
+						this.touchedEffect.Spawn(pos.x,pos.y);
+					}
+					return true;
+				},
+			}),
+			/** キーボードリセット */
+			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
+				event			: cc.EventListener.KEYBOARD,
+				onKeyReleased	: (code,event)=>{
+					if(code==82){	//'R'key
+						this.Reset();
+					}
+				},
+			}),
 		};
 
+		//共通イベント対応設定
+		let commonEvents	= [];
+		commonEvents.push(this.listeners.touched);
+		Debug(()=>{
+			commonEvents.push(this.listeners.reset);
+		});
+		Sequence.SetCommonEventListeners(commonEvents);
+
 		//シークエンス-イベント対応設定
-		Debug(()=>Sequence.SetCommonEventListeners(	this.listeners.reset			));
 		//Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
 		Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);
 		Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);

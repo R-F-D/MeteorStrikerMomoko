@@ -49,7 +49,7 @@ Effects.EffectBase	= class{
 
 	/** パーティクルの色設定
 	 * @param {string} color 文字コード
-	 * @param {boolean} delays 遅延
+	 * @param {boolean} delays 現在表示されているパーティクルは変化させない
 	 * @returns {this}
 	 */
 	SetColor(color="#FFFFFF",delays=true){
