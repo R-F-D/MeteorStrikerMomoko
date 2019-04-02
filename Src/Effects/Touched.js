@@ -12,7 +12,7 @@ const _nParticles	= 5;
 Effects.Touched	= class extends Effects.EffectBase{
 
 	constructor(nEntities=5){
-		super(_nParticles);
+		super(_nParticles*nEntities);
 	}
 
 	Init(layer){
