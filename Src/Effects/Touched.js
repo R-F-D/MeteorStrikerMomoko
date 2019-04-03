@@ -32,10 +32,19 @@ Effects.Touched	= class extends Effects.EffectBase{
 	/** エフェクトをスポーン
 	 * @returns {this}
 	 */
-	Spawn(x,y,spawns=true){
-		if(!spawns)	return this;
-		super.Spawn();
+	Spawn(x,y){
+		this.ActivateParticles(_nParticles,(v,i)=>{
+			let angle	= GetRandamAngle(2/_nParticles,i*2/_nParticles);
 
+			v.sprite
+				.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(parseInt(Math.random()*8))
+				.SetVisible(true).SetColor(this.color);
+			v.dx		= this.initialVelocity.x * Math.cos(angle);
+			v.dy		= this.initialVelocity.y * Math.sin(angle);
+			return true;
+		})
+
+		/*
 		for(let i=0; i<_nParticles; ++i){
 			for(let v of this.entities){
 				if(v.exists)	continue;
@@ -51,6 +60,7 @@ Effects.Touched	= class extends Effects.EffectBase{
 				break;
 			};
 		}
+		*/
 		return this;
 	}
 

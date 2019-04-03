@@ -65,12 +65,39 @@ Effects.EffectBase	= class{
 	/** パーティクル生成
 	 * @returns {this}
 	 */
-	Spawn(){return this;}
+	Spawn(){
+		this.ActivateParticles(1,(v,i)=>false)
+		return this;
+	}
+
+	/** パーティクルをアクティブにする
+	 * @param {number} nParticles 一度にアクティブ化するパーティクル数。1以上。
+	 * @param {function(particle,i)} activator アクティブ化させる関数。f(p,i):boolean p:パーティクルオブジェクト、i:インデックス。真を返すこと。
+	 * @returns this
+	 */
+	ActivateParticles(nParticles,activator){
+		if(typeof(activator)!=="function") throw new Error("Argument2 is not function.");
+
+		for(let i=0; i<nParticles; ++i){
+			for(let v of this.entities){
+				if(v.exists)	continue;
+				if(activator(v,i)){
+					//アクティブ化に成功
+					v.exists	= true;
+					v.count		= 0;
+					break;
+				}
+				continue;
+			}
+		}
+		return this;
+	}
 
 	/** パーティクル更新
 	 * @returns {this}
 	 */
 	Update(){return this;}
+
 
 } //class
 

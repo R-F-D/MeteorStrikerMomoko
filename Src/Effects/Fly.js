@@ -31,23 +31,18 @@ Effects.Fly	= class extends Effects.EffectBase{
 	 */
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
-		super.Spawn();
 
-		for(let v of this.entities){
-			if(v.exists)	continue;
-
+		this.ActivateParticles(1,(v,i)=>{
 			v.dx		= this.initialVelocity.x;
 			v.dy		= NormalRandom(2)   + this.initialVelocity.y
 			v.scale		= NormalRandom(0.5) + 1;
-			v.exists	= true;
-			v.count		= 0;
 
 			v.sprite
 				.SetPosition(x+NormalRandom(16), y+NormalRandom(4) )
 				.SetRotate(Math.random()*360).SetScale(1+Math.random()).SetVisible(true)
 				.SetColor(this.color);
-			return this;
-		};
+			return true;
+		});
 		return this;
 	}
 

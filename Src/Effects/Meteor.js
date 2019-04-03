@@ -30,18 +30,13 @@ Effects.Meteor	= class extends Effects.EffectBase{
 	 */
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
-		super.Spawn();
 
-		for(let v of this.entities){
-			if(v.exists)	continue;
-
+		this.ActivateParticles(2,(v,i)=>{
 			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
 			v.dx		= this.initialVelocity.x;
 			v.dy		= NormalRandom(2)+this.initialVelocity.y;
-			v.exists	= true;
-			v.count		= 0;
-			return this;
-		};
+			return true;
+		});
 		return this;
 	}
 

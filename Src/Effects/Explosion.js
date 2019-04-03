@@ -31,20 +31,13 @@ Effects.Explosion	= class extends Effects.EffectBase{
 	 */
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
-		super.Spawn();
 
-		for(let i=0; i<2; ++i){
-			for(let v of this.entities){
-				if(v.exists)	continue;
-
-				v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
-				v.dx		= this.initialVelocity.x;
-				v.dy		= this.initialVelocity.y;
-				v.exists	= true;
-				v.count		= 0;
-				break;
-			};
-		}
+		this.ActivateParticles(2,(v,i)=>{
+			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
+			v.dx		= this.initialVelocity.x;
+			v.dy		= this.initialVelocity.y;
+			return true;
+		});
 		return this;
 	}
 
