@@ -39,7 +39,7 @@ Effects.Touched	= class extends Effects.EffectBase{
 		for(let i=0; i<_nParticles; ++i){
 			for(let v of this.entities){
 				if(v.exists)	continue;
-				let angle	= this.GetRandamAngle(2/_nParticles,i*2/_nParticles);
+				let angle	= GetRandamAngle(2/_nParticles,i*2/_nParticles);
 
 				v.sprite
 					.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(parseInt(Math.random()*8))
@@ -72,16 +72,6 @@ Effects.Touched	= class extends Effects.EffectBase{
 			v.sprite.SetVisible(v.exists);
 		}
 		return this;
-	}
-
-	/** ランダムな角度を出力する
-	 * @param {number} [piradRange=2]			出力する範囲。単位はπrad。省略すると2（2πrad=360°）。
-	 * @param {number} [piradStandardAngle=0]	出力範囲の中央となる値。単位はπrad。省略すると0。
-	 * @returns {number} 						単位はrad
-	 */
-	GetRandamAngle(piradRange=2,piradStandardAngle=0){
-		let pirad	= Math.random() * piradRange - piradRange/2 + piradStandardAngle;
-		return Cycle(pirad,0,2) * Math.PI;
 	}
 
 }

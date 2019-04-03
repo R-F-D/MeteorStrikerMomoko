@@ -101,6 +101,17 @@ function NormalRandom(halfWidth){
 	return (Math.random()+Math.random()-1) * halfWidth;
 }
 
+/** ランダムな角度を出力する
+ * @param {number} [piradRange=2]			出力する範囲。単位はπrad。省略すると2（2πrad=360°）。
+ * @param {number} [piradStandardAngle=0]	出力範囲の中央となる値。単位はπrad。省略すると0。
+ * @returns {number} 						単位はrad
+ */
+function GetRandamAngle(piradRange=2,piradStandardAngle=0){
+	let pirad	= Math.random() * piradRange - piradRange/2 + piradStandardAngle;
+	return Cycle(pirad,0,2) * Math.PI;
+}
+
+
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
 function Debug(callback){	if(isDebug()) callback();	}
