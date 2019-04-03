@@ -43,47 +43,26 @@ Effects.Touched	= class extends Effects.EffectBase{
 			v.dy		= this.initialVelocity.y * Math.sin(angle);
 			return true;
 		})
-
-		/*
-		for(let i=0; i<_nParticles; ++i){
-			for(let v of this.entities){
-				if(v.exists)	continue;
-				let angle	= GetRandamAngle(2/_nParticles,i*2/_nParticles);
-
-				v.sprite
-					.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(parseInt(Math.random()*8))
-					.SetVisible(true).SetColor(this.color);
-				v.dx		= this.initialVelocity.x * Math.cos(angle);
-				v.dy		= this.initialVelocity.y * Math.sin(angle);
-				v.exists	= true;
-				v.count		= 0;
-				break;
-			};
-		}
-		*/
 		return this;
 	}
 
+	/** 更新
+	 * @param {boolean} [updates=true] 真値のときのみ実行
+	 * @returns this
+	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		super.Update();
-
-		for(let v of this.entities){
-			if(!v.exists)	continue;
-
+		
+		this.UpdateParticles((v)=>{
 			v.dx	*= 0.9;
 			v.dy	*= 0.9;
 
 			v.sprite
 				.SetPosition(v.sprite.x+v.dx,v.sprite.y+v.dy)
 				.SetOpacity(255-v.count*8);
-			++v.count;
-			v.exists	= v.count < 32;
-			v.sprite.SetVisible(v.exists);
-		}
+		},32);
 		return this;
 	}
-
 }
 
 })();	//File Scope

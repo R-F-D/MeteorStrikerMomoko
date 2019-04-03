@@ -65,10 +65,7 @@ Effects.EffectBase	= class{
 	/** パーティクル生成
 	 * @returns {this}
 	 */
-	Spawn(){
-		this.ActivateParticles(1,(v,i)=>false)
-		return this;
-	}
+	Spawn(){ return this.ActivateParticles(1,(v,i)=>false) }
 
 	/** パーティクルをアクティブにする
 	 * @param {number} nParticles 一度にアクティブ化するパーティクル数。1以上。
@@ -96,8 +93,28 @@ Effects.EffectBase	= class{
 	/** パーティクル更新
 	 * @returns {this}
 	 */
-	Update(){return this;}
+	Update(){ return this.UpdateParticles(()=>{}) }
 
+	/** パーティクル更新
+	 * @param {function(particle)} updater パーティクルを更新する述語関数。f(p)、pはパーティクルオブジェクト。
+	 * @param {number} lifetime パーティクルの寿命
+	 * @returns
+	 */
+	UpdateParticles(updater,lifetime){
+		if(typeof(updater)!=="function") throw new Error("Argument0 is not function.");
+
+		for(let v of this.entities){
+			if(!v.exists)	continue;
+
+			//パーティクル更新
+			updater(v);
+			++v.count;
+			v.exists= v.count < lifetime;
+			v.sprite.SetVisible(v.exists);
+			continue;
+		}
+		return this;
+	}
 
 } //class
 

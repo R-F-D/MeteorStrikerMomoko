@@ -46,13 +46,14 @@ Effects.Fly	= class extends Effects.EffectBase{
 		return this;
 	}
 
+	/** 更新
+	 * @param {boolean} [updates=true] 真値のときのみ実行
+	 * @returns this
+	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		super.Update();
 
-		for(let v of this.entities){
-			if(!v.exists)	continue;
-
+		this.UpdateParticles((v)=>{
 			v.sprite
 				.SetRelativePosition(v.dx,v.dy)
 				.SetScale(v.scale)
@@ -60,10 +61,7 @@ Effects.Fly	= class extends Effects.EffectBase{
 			v.dx	+= this.acceleration.x;
 			v.dy	+= this.acceleration.y;
 			v.scale	+= 0.02;
-			++v.count;
-			v.exists= v.count < 32;
-			v.sprite.SetVisible(v.exists);
-		}
+		},32);
 		return this;
 	}
 }

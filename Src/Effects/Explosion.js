@@ -41,13 +41,14 @@ Effects.Explosion	= class extends Effects.EffectBase{
 		return this;
 	}
 
+	/** 更新
+	 * @param {boolean} [updates=true] 真値のときのみ実行
+	 * @returns this
+	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		super.Update();
 
-		for(let v of this.entities){
-			if(!v.exists)	continue;
-
+		this.UpdateParticles((v)=>{
 			v.dx	+= this.acceleration.x;
 			v.dy	+= this.acceleration.y;
 
@@ -55,17 +56,13 @@ Effects.Explosion	= class extends Effects.EffectBase{
 				.SetPosition(v.sprite.x+v.dx,v.sprite.y+v.dy)
 				.SetOpacity(255-v.count*4)
 				.SetScale(1.0+0.4*v.count);
-			++v.count;
-			v.exists	= v.count < 64;
-			v.sprite.SetVisible(v.exists);
-		}
+		},64);
 		return this;
 	}
 
 	SetColor(color="#FF7F00",delays=true){
 		return super.SetColor(color,delays);
 	}
-
 }
 
 })();	//File Scope

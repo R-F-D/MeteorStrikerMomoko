@@ -40,30 +40,27 @@ Effects.Meteor	= class extends Effects.EffectBase{
 		return this;
 	}
 
+	/** 更新
+	 * @param {boolean} [updates=true] 真値のときのみ実行
+	 * @returns this
+	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		super.Update();
 
-		for(let v of this.entities){
-			if(!v.exists)	continue;
-
+		this.UpdateParticles((v)=>{
 			v.sprite
 				.SetPosition(v.sprite.x+v.dx,v.sprite.y+v.dy)
 				.SetOpacity(255-v.count*4)
 				.SetScale(1.5+0.1*v.count);
 			v.dx	+= this.acceleration.x;
 			v.dy	+= this.acceleration.y;
-			++v.count;
-			v.exists	= v.count < 60;
-			v.sprite.SetVisible(v.exists);
-		}
+		},60);
 		return this;
 	}
 
 	SetColor(color="#FF0000",delays=true){
 		return super.SetColor(color,delays);
 	}
-
 }
 
 })();	//File Scope
