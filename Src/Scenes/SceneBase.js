@@ -109,7 +109,7 @@ Scenes.SceneBase	= class {
 	/** レイヤ一覧初期化
 	 * @returns this
 	 */
-	InitLayers(){
+	InitLayerList(){
 		this.ccLayers	= null;
 		this.AddEventListerProperties("touchFx",{
 			ctor:function(){
@@ -139,7 +139,7 @@ Scenes.SceneBase	= class {
 	 * @param {object} layerProperties 追加するcc.Layerのプロパティ
 	 * @returns this
 	 */
-	AddLayer(key,layerProperties){
+	AddToLayerList(key,layerProperties){
 		this.ccLayers[key]	= cc.Layer.extend(layerProperties);
 		return this;
 	}
@@ -147,7 +147,7 @@ Scenes.SceneBase	= class {
 	/** イベントリスナ一覧初期化
 	 * @returns this
 	 */
-	InitEventListeners(){
+	InitEventListenerList(){
 		this.listeners	= null;
 		this.AddEventListerProperties("touched",{
 			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
@@ -161,21 +161,23 @@ Scenes.SceneBase	= class {
 		});
 		return this;
 	}
+
 	/** イベントリスナ一覧にイベントリスナ追加（生イベントリスナ）
 	 * @param {*} key
 	 * @param {*} rawEventListener イベントリスナ
 	 * @returns this
 	 */
-	AddEventLister(key,rawEventListener){
+	AddToEventListerList(key,rawEventListener){
 		this.listeners[key]	= rawEventListener
 		return this;
 	}
+	
 	/** イベントリスナ一覧にイベントリスナ追加（プロパティで追加）
 	 * @param {*} key イベントリスナ一覧のキー
 	 * @param {*} listerProperties 追加するcc.EventListenerのプロパティ
 	 * @returns this
 	 */
-	AddEventListerProperties(key,listerProperties){
+	AddPropertiesToEventListerList(key,listerProperties){
 		this.listeners[key]	= cc.EventListener.create(listerProperties);
 		return this;
 	}
