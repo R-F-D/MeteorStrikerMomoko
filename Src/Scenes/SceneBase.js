@@ -106,48 +106,77 @@ Scenes.SceneBase	= class {
 		return this;
 	}
 
+	/** レイヤ一覧初期化
+	 * @returns this
+	 */
 	InitLayers(){
-		this.ccLayers	= {
-			//タッチエフェクト表示レイヤ
-			touxhFx: cc.Layer.extend({
-				ctor:function(){
-					this._super();
-					this.scheduleUpdate();
+		this.ccLayers	= null;
+		this.AddEventListerProperties("touchFx",{
+			ctor:function(){
+				this._super();
+				this.scheduleUpdate();
 
-					const size	= cc.director.getWinSize();
-					let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
+				const size	= cc.director.getWinSize();
+				let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
 			
-					button.setPosition(0+16+2,size.height-16-2);
-					button.setScale(1);
-					button.setOpacity(128);
-					button.setContentSize(32,32);
-					button.addTouchEventListener(this.listeners.resetButton,layer);
-					layer.addChild(button);
+				button.setPosition(0+16+2,size.height-16-2);
+				button.setScale(1);
+				button.setOpacity(128);
+				button.setContentSize(32,32);
+				button.addTouchEventListener(this.listeners.resetButton,layer);
+				layer.addChild(button);
 
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-				},
-			}),
-		};
+				return true;
+			},
+			update	: function(dt){
+				this._super();
+			},
+		});
+		return this;
+	}
+	/** レイヤ一覧にレイヤ追加
+	 * @param {string} key レイヤ一覧のキー
+	 * @param {object} layerProperties 追加するcc.Layerのプロパティ
+	 * @returns this
+	 */
+	AddLayer(key,layerProperties){
+		this.ccLayers[key]	= cc.Layer.extend(layerProperties);
 		return this;
 	}
 
+	/** イベントリスナ一覧初期化
+	 * @returns this
+	 */
 	InitEventListeners(){
-		this.listeners	= {
-			/**タッチエフェクト用*/
-			touched		: cc.EventListener.create({
-				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touches,event)=>{
-					for(let t of touches){
-						const pos	= t.getLocation();
-						this.touchedEffect.Spawn(pos.x,pos.y);
-					}
-					return true;
-				},
-			}),
-		};
+		this.listeners	= null;
+		this.AddEventListerProperties("touched",{
+			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+			onTouchesBegan	: (touches,event)=>{
+				for(let t of touches){
+					const pos	= t.getLocation();
+					this.touchedEffect.Spawn(pos.x,pos.y);
+				}
+				return true;
+			},
+		});
+		return this;
+	}
+	/** イベントリスナ一覧にイベントリスナ追加（生イベントリスナ）
+	 * @param {*} key
+	 * @param {*} rawEventListener イベントリスナ
+	 * @returns this
+	 */
+	AddEventLister(key,rawEventListener){
+		this.listeners[key]	= rawEventListener
+		return this;
+	}
+	/** イベントリスナ一覧にイベントリスナ追加（プロパティで追加）
+	 * @param {*} key イベントリスナ一覧のキー
+	 * @param {*} listerProperties 追加するcc.EventListenerのプロパティ
+	 * @returns this
+	 */
+	AddEventListerProperties(key,listerProperties){
+		this.listeners[key]	= cc.EventListener.create(listerProperties);
 		return this;
 	}
 
