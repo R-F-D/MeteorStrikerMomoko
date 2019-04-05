@@ -34,8 +34,8 @@ const EmitEnergy	= {
 };
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: 0,
-	BG		: 1,
+	MAIN	: 1000,
+	BG		: 1001,
 };
 
 Scenes.GamePlay	= class extends Scenes.SceneBase {
@@ -128,7 +128,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
-					_this.touchedEffect		= Effects.Touched.Create().Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
@@ -138,7 +137,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
-					_this.CreateUIs(this).SetSequence(Sequences.INITIAL);
+					_this.SetSequence(Sequences.INITIAL);
 					return true;
 				},
 				update	: function(dt){
@@ -150,7 +149,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
-					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
@@ -408,17 +406,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.Reset();
 				}
 			},
-			/**タッチエフェクト用*/
-			touched		: cc.EventListener.create({
-				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touches,event)=>{
-					for(let t of touches){
-						const pos	= t.getLocation();
-						this.touchedEffect.Spawn(pos.x,pos.y);
-					}
-					return true;
-				},
-			}),
 			/** キーボードリセット */
 			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
 				event			: cc.EventListener.KEYBOARD,
@@ -432,7 +419,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//共通イベント対応設定
 		let commonEvents	= [];
-		commonEvents.push(this.listeners.touched);
 		Debug(()=>{
 			commonEvents.push(this.listeners.reset);
 		});
@@ -529,25 +515,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.SetSequence(Sequences.INITIAL);
 		return this;
 	}
-
-	/** UIパーツ作成
-	 * @param {cc.Layer} layer
-	 * @returns
-	 */
-	CreateUIs(layer){
-		const size	= cc.director.getWinSize();
-		let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
-
-		button.setPosition(0+16+2,size.height-16-2);
-		button.setScale(1);
-		button.setOpacity(128);
-		button.setContentSize(32,32);
-		button.addTouchEventListener(this.listeners.resetButton,layer);
-		layer.addChild(button);
-
-		return this;
-	}
-
 
 }//class
 

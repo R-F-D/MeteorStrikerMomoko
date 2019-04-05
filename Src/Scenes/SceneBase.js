@@ -106,4 +106,49 @@ Scenes.SceneBase	= class {
 		return this;
 	}
 
+	InitLayers(){
+		this.ccLayers	= {
+			//タッチエフェクト表示レイヤ
+			touxhFx: cc.Layer.extend({
+				ctor:function(){
+					this._super();
+					this.scheduleUpdate();
+
+					const size	= cc.director.getWinSize();
+					let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
+			
+					button.setPosition(0+16+2,size.height-16-2);
+					button.setScale(1);
+					button.setOpacity(128);
+					button.setContentSize(32,32);
+					button.addTouchEventListener(this.listeners.resetButton,layer);
+					layer.addChild(button);
+
+					return true;
+				},
+				update	: function(dt){
+					this._super();
+				},
+			}),
+		};
+		return this;
+	}
+
+	InitEventListeners(){
+		this.listeners	= {
+			/**タッチエフェクト用*/
+			touched		: cc.EventListener.create({
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touches,event)=>{
+					for(let t of touches){
+						const pos	= t.getLocation();
+						this.touchedEffect.Spawn(pos.x,pos.y);
+					}
+					return true;
+				},
+			}),
+		};
+		return this;
+	}
+
 }//class
