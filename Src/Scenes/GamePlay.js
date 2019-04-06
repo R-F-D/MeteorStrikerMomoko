@@ -84,31 +84,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.isOnGround			= true;
 
 		/** ccSceneのインスタンス */
-		this.ccSceneInstance	= new (cc.Scene.extend({
-			/** 生成 */
-			onEnter	: function (){
-				this._super();
-				_this.aiming	= Scenes.Aiming
-									.Create()
-									.PushHitArea( "CRITICAL",	-0.10,	0.10 )
-									.PushHitArea( "GOOD",		-0.25,	0.25 )
-									.PushHitArea( "NORMAL",		-0.75,	0.75 );
-
-				_this.SetLayer(LinkedLayerTags.BG,  _this.ccLayers.bg);
-				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
-				_this.SetLayer("SceneBase.TouchFx", _this.ccLayers.touchFx);
-				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
-				_this.sequence.Init();
-
-				this.scheduleUpdate();
-			},
-			/** 更新 */
-			update	: function(dt){
-				_this.OnUpdating(dt);
-				_this.sequence.Update(dt);
-				_this.OnUpdated(dt);
-			},
-		}))();
+		this.ApplicateCcSceneInstance(this).InitLayerList();;		
 
 		/** ラベル */
 		this.labels	= {
@@ -119,7 +95,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
 
-		this.InitLayerList();
+		//this.InitLayerList();
 	}
 
 
@@ -265,6 +241,22 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 			});
 			//.PushUpdatingFunctions((dt)=>{});
+
+		return this;
+	}
+
+	OnEnter(){
+		super.OnEnter();
+		this.aiming	= Scenes.Aiming
+							.Create()
+							.PushHitArea( "CRITICAL",	-0.10,	0.10 )
+							.PushHitArea( "GOOD",		-0.25,	0.25 )
+							.PushHitArea( "NORMAL",		-0.75,	0.75 );
+
+		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg);
+		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main);
+		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
+		this.sequence.Init();
 
 		return this;
 	}

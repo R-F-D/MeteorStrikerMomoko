@@ -188,4 +188,28 @@ Scenes.SceneBase	= class {
 		return this;
 	}
 
+	ApplicateCcSceneInstance(childScene=null){
+		const _this	= this;
+		if(!childScene instanceof Scenes.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
+		
+		this.ccSceneInstance	= new (cc.Scene.extend({
+			onEnter	: function (){
+				this._super();
+				childScene.SetLayer("SceneBase.TouchFx", _this.ccLayers.touchFx);
+				childScene.OnEnter();
+				this.scheduleUpdate();
+			},
+			update	: function(dt){
+				childScene.OnUpdating(dt);
+				childScene.sequence.Update(dt);
+				childScene.OnUpdated(dt);
+			},	
+		}))();
+		return this;
+	}
+
+	OnEnter(){return this}
+	OnUpdating(dt){return this}
+	OnUpdated(dt){return this}
+
 }//class
