@@ -34,8 +34,8 @@ const EmitEnergy	= {
 };
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: 1000,
-	BG		: 1001,
+	MAIN	: "GamePlay.Main",
+	BG		: "GamePlay.Bg",
 };
 
 Scenes.GamePlay	= class extends Scenes.SceneBase {
@@ -96,6 +96,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				_this.SetLayer(LinkedLayerTags.BG,  _this.ccLayers.bg);
 				_this.SetLayer(LinkedLayerTags.MAIN,_this.ccLayers.main);
+				_this.SetLayer("SceneBase.TouchFx", _this.ccLayers.touchFx);
 				_this.InitSequence(Sequences.INITIAL,Sequences,_this.ccLayerInstances[LinkedLayerTags.MAIN]);
 				_this.sequence.Init();
 
@@ -109,76 +110,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			},
 		}))();
 
-		/** ccLayerに渡す用 */
-		this.ccLayers	= {
-			main	: cc.Layer.extend({
-				ctor:function(){
-					this._super();
-					this.init();
-					this.scheduleUpdate();
-					return true;
-				},
-				init	: function(){
-					this._super();
-
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).Attr({zIndex:5}).SetRotate(-5);
-					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2).Attr({zIndex:2}).SetVisible(true);
-					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
-					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
-					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
-
-					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
-
-					//Labels
-					_this.labels.hitArea		= Label.CreateInstance(15).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
-					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
-					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
-
-					_this.SetSequence(Sequences.INITIAL);
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-
-					//Player
-					_this.UpdatePlayerSprite();
-
-					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
-					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
-					_this.explosionEffect.Update();
-
-					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
-					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
-					_this.labels.distance.SetString( `${_this.GetDistanceString()} km` );
-					_this.labels.navigation.Update();
-					return true;
-				},
-			}),
-			bg	: cc.Layer.extend({
-				ctor:function(){
-					this._super();
-					this.init();
-					this.scheduleUpdate();
-					return true;
-				},
-				init	: function(){
-					this._super();
-					//_this.SetBackgroundColor(this,"#000000");
-					const size	= cc.director.getWinSize();
-					_this.sprites.bg2	= CreateArray(4).map(i=> Sprite.CreateInstance(rc.img.bg2).AddToLayer(this).SetVisible(false)	);
-					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
-				},
-				update	: function(dt){
-					this._super();
-					_this.UpdateBgLayer(dt);
-					_this.sequence.Update(dt,"layer-bg");
-				},
-			}),
-		};
-
 		/** ラベル */
 		this.labels	= {
 			aimingResult:null, hitArea:null, distance:null,	navigation:null,
@@ -186,7 +117,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//シークエンス設定
 		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
-		this.SetSequenceFunctions().InitEventListeners();
+		this.SetSequenceFunctions().InitEventListenerList();
+
+		this.InitLayerList();
 	}
 
 
@@ -362,16 +295,87 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		return this;
 	}
 
+	/** ccLayerに渡す用 */
+	InitLayerList(){
+		super.InitLayerList()
+			.AddToLayerList("main",{
+				ctor:function(){
+					this._super();
+					this.init();
+					this.scheduleUpdate();
+					return true;
+				},
+				init	: function(){
+					this._super();
+
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
+												.SetScale(2).Attr({zIndex:5}).SetRotate(-5);
+					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
+												.SetScale(2).Attr({zIndex:2}).SetVisible(true);
+					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
+					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
+					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
+
+					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
+
+					//Labels
+					_this.labels.hitArea		= Label.CreateInstance(15).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
+					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
+					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
+					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
+
+					_this.SetSequence(Sequences.INITIAL);
+					return true;
+				},
+				update	: function(dt){
+					this._super();
+
+					//Player
+					_this.UpdatePlayerSprite();
+
+					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
+					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
+					_this.explosionEffect.Update();
+					_this.touchedEffect.Update();
+
+					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
+					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
+					_this.labels.distance.SetString( `${_this.GetDistanceString()} km` );
+					_this.labels.navigation.Update();
+					return true;
+				},
+			})
+			.AddToLayerList("bg",{
+				ctor:function(){
+					this._super();
+					this.init();
+					this.scheduleUpdate();
+					return true;
+				},
+				init	: function(){
+					this._super();
+					//_this.SetBackgroundColor(this,"#000000");
+					const size	= cc.director.getWinSize();
+					_this.sprites.bg2	= CreateArray(4).map(i=> Sprite.CreateInstance(rc.img.bg2).AddToLayer(this).SetVisible(false)	);
+					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
+				},
+				update	: function(dt){
+					this._super();
+					_this.UpdateBgLayer(dt);
+					_this.sequence.Update(dt,"layer-bg");
+				},
+			});
+		return this;
+	}
+
 
 	/** イベントリスナ初期設定
 	 * @returns this
 	 */
-	InitEventListeners(){
-
-		/**イベントリスナ*/
-		this.listeners	= {
+	InitEventListenerList(){
+		super.InitEventListenerList()
 			/** インパクトフェイズ */
-			discharge	: cc.EventListener.create({
+			.AddPropertiesToEventListenerList("discharge",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
 					if(this.sequence===Sequences.START_AIM){
@@ -383,42 +387,42 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				onTouchesEnded	: (touch,event)=>{
 					if(this.sequence===Sequences.PRELIMINARY)	this.SetSequence(Sequences.DISCHARGE);
 				},
-			}),
+			})
 			/** エミットエナジーフェイズ */
-			emitEnergy	: cc.EventListener.create({
+			.AddPropertiesToEventListenerList("emitEnergy",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
 					this.nEmits.simul++;
 					this.nEmits.total++;
 				},
-			}),
+			})
 			/** 次フェイズへの単純遷移 */
-			transionToNext	:cc.EventListener.create({
+			.AddPropertiesToEventListenerList("transionToNext",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
 					if(this.isSequenceMovable && this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
 					return true;
 				},
-			}),
+			})
 			/**リセットボタン*/
-			resetButton:	(sender,type)=>{
+			.AddToEventListenerList("resetButton",(sender,type)=>{
 				if(type===ccui.Widget.TOUCH_ENDED){
 					this.Reset();
 				}
-			},
-			/** キーボードリセット */
-			reset		: !cc._EventListenerKeyboard ? null : cc.EventListener.create({
+			})
+			
+			.AddPropertiesToEventListenerList("reset",{
 				event			: cc.EventListener.KEYBOARD,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
 						this.Reset();
 					}
 				},
-			}),
-		};
+			});
 
 		//共通イベント対応設定
 		let commonEvents	= [];
+		commonEvents.push(this.listeners.touched);
 		Debug(()=>{
 			commonEvents.push(this.listeners.reset);
 		});

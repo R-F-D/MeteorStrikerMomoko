@@ -110,8 +110,9 @@ Scenes.SceneBase	= class {
 	 * @returns this
 	 */
 	InitLayerList(){
-		this.ccLayers	= null;
-		this.AddEventListerProperties("touchFx",{
+		const _this	= this;
+		this.ccLayers	= {};
+		this.AddToLayerList("touchFx",{
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
@@ -123,8 +124,10 @@ Scenes.SceneBase	= class {
 				button.setScale(1);
 				button.setOpacity(128);
 				button.setContentSize(32,32);
-				button.addTouchEventListener(this.listeners.resetButton,layer);
-				layer.addChild(button);
+				button.addTouchEventListener(_this.listeners.resetButton,this);
+				this.addChild(button);
+
+				_this.touchedEffect	= Effects.Touched.Create().Init(this);
 
 				return true;
 			},
@@ -140,6 +143,7 @@ Scenes.SceneBase	= class {
 	 * @returns this
 	 */
 	AddToLayerList(key,layerProperties){
+		if(this.ccLayers==null) this.ccLayers = {};
 		this.ccLayers[key]	= cc.Layer.extend(layerProperties);
 		return this;
 	}
@@ -148,8 +152,8 @@ Scenes.SceneBase	= class {
 	 * @returns this
 	 */
 	InitEventListenerList(){
-		this.listeners	= null;
-		this.AddEventListerProperties("touched",{
+		this.listeners	= {};
+		this.AddPropertiesToEventListenerList("touched",{
 			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 			onTouchesBegan	: (touches,event)=>{
 				for(let t of touches){
@@ -167,18 +171,20 @@ Scenes.SceneBase	= class {
 	 * @param {*} rawEventListener イベントリスナ
 	 * @returns this
 	 */
-	AddToEventListerList(key,rawEventListener){
+	AddToEventListenerList(key,rawEventListener){
+		if(this.listeners==null) this.listeners = {};
 		this.listeners[key]	= rawEventListener
 		return this;
 	}
-	
+
 	/** イベントリスナ一覧にイベントリスナ追加（プロパティで追加）
 	 * @param {*} key イベントリスナ一覧のキー
-	 * @param {*} listerProperties 追加するcc.EventListenerのプロパティ
+	 * @param {*} listenerProperties 追加するcc.EventListenerのプロパティ
 	 * @returns this
 	 */
-	AddPropertiesToEventListerList(key,listerProperties){
-		this.listeners[key]	= cc.EventListener.create(listerProperties);
+	AddPropertiesToEventListenerList(key,listenerProperties){
+		if(this.listeners==null) this.listeners = {};
+		this.listeners[key]	= cc.EventListener.create(listenerProperties);
 		return this;
 	}
 
