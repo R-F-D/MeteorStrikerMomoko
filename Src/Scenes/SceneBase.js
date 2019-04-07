@@ -49,21 +49,21 @@ Scenes.SceneBase	= class {
 	GetCcSceneInstance(){return this.ccSceneInstance;	}
 
 	/** レイヤ内容の変更
-	 * @param {*} layerTag,
-	 * @param {*} nextLayerInstance
-	 * @param {Number} zOrder Zオーダー
+	 * @param {*} layerTag		変更されるレイヤのタグ
+	 * @param {*} layerInst 	変更するレイヤのインスタンス
+	 * @param {Number} zOrder	Zオーダー
 	 */
-	SetLayer(layerTag,nextLayer,zOrder=0){
-		if(!nextLayer)	return null;
+	SetLayer(layerTag,layerInst,zOrder=0){
+		if(!layerInst)	return null;
 
 		if(this.ccLayerInstances[layerTag]){
 			this.ccLayerInstances[layerTag].unscheduleUpdate();
 			this.ccSceneInstance.removeChildByTag(layerTag);
 		}
-		this.ccLayerInstances[layerTag]	= new nextLayer();
+		this.ccLayerInstances[layerTag]	= new layerInst();
 		this.ccSceneInstance.addChild(this.ccLayerInstances[layerTag], zOrder, layerTag	);
 
-		return this.ccLayerInstances[layerTag];
+		return this;
 	}
 
 
@@ -188,14 +188,13 @@ Scenes.SceneBase	= class {
 		return this;
 	}
 
-	ApplicateCcSceneInstance(childScene=null){
-		const _this	= this;
+	ApplicateCcSceneInstance(childScene){
 		if(!childScene instanceof Scenes.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
 		
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
-				childScene.SetLayer("SceneBase.TouchFx", _this.ccLayers.touchFx);
+				childScene.SetLayer("SceneBase.TouchFx", childScene.ccLayers.touchFx,0x0100);
 				childScene.OnEnter();
 				this.scheduleUpdate();
 			},

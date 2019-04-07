@@ -84,7 +84,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.isOnGround			= true;
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();;		
+		this.ApplicateCcSceneInstance(this).InitLayerList();		
 
 		/** ラベル */
 		this.labels	= {
@@ -94,8 +94,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//シークエンス設定
 		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
-
-		//this.InitLayerList();
 	}
 
 
@@ -253,10 +251,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 							.PushHitArea( "GOOD",		-0.25,	0.25 )
 							.PushHitArea( "NORMAL",		-0.75,	0.75 );
 
-		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg);
-		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main);
-		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.sequence.Init();
+		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
+			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN])
+			.sequence.Init();
 
 		return this;
 	}
