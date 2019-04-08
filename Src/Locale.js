@@ -1,4 +1,4 @@
-/* *******************************************************************************
+/********************************************************************************
 	地域設定
 ********************************************************************************/
 var LocaleSetting	= LocaleSetting | {};
@@ -14,6 +14,16 @@ LocaleSettings	= class{
 		this.numericSeparation	= 'JP';
 
 		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_';
+	}
+
+
+	/** テキスト番号に対応したテキストを返す
+	 * @param {number} textCode	テキスト番号
+	 * @returns {string}		対応するテキスト
+	 */
+	Text(textCode){
+		if(!Texts[textCode])	throw new Error(`Text #${textCode} is not found.`);
+		return Texts[textCode][this.language] || Texts[textCode][`_`];
 	}
 
 
@@ -70,9 +80,9 @@ LocaleSettings	= class{
 };
 
 
-/**
+/********************************************************************************
  * 数値の区切り
- */
+ *******************************************************************************/
 NumericSeparators	= {
 	//国際度量衡総会 General Conference on Weights and Measures
 	_:{
@@ -95,10 +105,16 @@ NumericSeparators	= {
 };
 
 
+/********************************************************************************
+ * テキスト
+ *******************************************************************************/
+Texts	= {
+	10000:	{	_: "km",		},	//
+}
+
+
+
 
 })();	//File Scope
 
-var Locale	= new LocaleSettings();
-
-
-
+var L	= new LocaleSettings();
