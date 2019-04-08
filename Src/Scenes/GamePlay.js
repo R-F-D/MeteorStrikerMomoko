@@ -330,7 +330,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}％`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
-					_this.labels.distance.SetString( `${_this.GetDistanceString()} km` );
+					_this.labels.distance.SetString( `${_this.GetDistanceString()}km` );
 					_this.labels.navigation.Update();
 					return true;
 				},
@@ -487,6 +487,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	GetDistanceString(){
 		let distance	= Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 );
+		/*
 		let chunk	= [
 			parseInt( distance % 10000			),
 			parseInt( (distance/10000) % 10000	),
@@ -497,8 +498,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		if(chunk[2] > 0)	result += `${chunk[2]}億 `
 		if(chunk[1] > 0)	result += `${chunk[1]}万 `
 		result += `${chunk[0]}`
-
 		return result;
+		*/
+		return Locale.NumToStr(distance);
 	}
 
 	/** リセット
