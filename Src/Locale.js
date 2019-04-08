@@ -13,7 +13,7 @@ LocaleSettings	= class{
 		/**数値の区切り方法*/
 		this.numericSeparation	= 'JP';
 
-		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_default';
+		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_';
 	}
 
 
@@ -75,7 +75,7 @@ LocaleSettings	= class{
  */
 NumericSeparators	= {
 	//国際度量衡総会 General Conference on Weights and Measures
-	_default:{
+	_:{
 		nDigits:	3,
 		integer:	' ',
 		decimal:	'.',
@@ -93,6 +93,8 @@ NumericSeparators	= {
 		decimal:	'.',
 	},
 };
+
+
 
 })();	//File Scope
 
