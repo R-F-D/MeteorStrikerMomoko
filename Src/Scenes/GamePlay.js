@@ -133,7 +133,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//エイム作動
 		Sequences.START_AIM
 			.PushStartingFunctions(()=>{
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.1")).SetVisible(true);
+				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
 				this.aiming.SetVisible(true,true);
 			})
 			.PushUpdatingFunctions((dt)=>{
@@ -154,6 +154,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.chargedPower	= this.chargingCount;
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
+				this.labels.navigation.SetString().SetVisible(false);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
@@ -166,7 +167,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//打撃動作失敗
 		Sequences.DISCHARGE_FAILED
-		//	.PushStartingFunctions(()=>{})
+			.PushStartingFunctions(()=>{
+				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Fail")).SetVisible(true);
+			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
 				this.chargingCount-=BlowPower.DECREMENT;
@@ -183,6 +186,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				this.labels.aimingResult.SetVisible(true);
 				this.labels.hitArea.SetVisible(true);
+				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
 				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
@@ -210,6 +214,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.labels.aimingResult.SetVisible(false);
 				this.labels.hitArea.SetVisible(false);
 				this.labels.distance.SetVisible(true);
+				this.labels.navigation.SetVisible(false);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update(false);

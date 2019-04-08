@@ -22,7 +22,7 @@ LocaleSettings	= class{
 	 * @returns {string}		対応するテキスト
 	 */
 	Text(textCode){
-		if(!Texts[textCode])	throw new Error(`Text #${textCode} is not found.`);
+		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 		return Texts[textCode][this.language] || Texts[textCode][`_`] || '';
 	}
 
@@ -116,11 +116,10 @@ Texts	= {
 	"GamePlay.HitArea.Normal":	{	_: "NORMAL",	},
 	"GamePlay.HitArea.Bad":	{	_: "BAD",	},
 
-	"GamePlay.Navigator.1":	{	_:"Hold and release to attack",	ja:"長押しのあと離して攻撃",	},
+	"GamePlay.Navigator.Aim":	{	_:"Hold and release to attack",	ja:"長押しのあと離して攻撃",	},
+	"GamePlay.Navigator.Fail":	{	_:"Release at the right time",	ja:"タイミングよく離して",	},
+	"GamePlay.Navigator.Emit":	{	_:"The power rises with taps",	ja:"タップでパワー上昇",	},
 }
-
-
-
 
 })();	//File Scope
 
