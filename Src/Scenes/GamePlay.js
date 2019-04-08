@@ -154,7 +154,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.chargedPower	= this.chargingCount;
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
-				this.labels.navigation.SetString().SetVisible(false);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();

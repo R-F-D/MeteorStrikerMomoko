@@ -56,6 +56,9 @@ Label	= class Label{
 	 */
 	SetVisible(visible){
 		this.entity.setVisible(!!visible);
+		if(this.bg.IsEnabled()){
+			if(!visible)	this.bg.SetSize(0,0,true,false);
+		}
 		if(this.icon){
 			this.icon.SetVisible(!!visible);
 		}
