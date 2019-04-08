@@ -109,7 +109,14 @@ NumericSeparators	= {
  * テキスト
  *******************************************************************************/
 Texts	= {
-	10000:	{	_: "km",		},	//
+	"GamePlay.Distance.Unit":	{	_: "km",	},
+	"GamePlay.Charge.Unit":	{	_: "%",	},
+	"GamePlay.HitArea.Critical":	{	_: "CRITICAL",	},
+	"GamePlay.HitArea.Good":	{	_: "GOOD",	},
+	"GamePlay.HitArea.Normal":	{	_: "NORMAL",	},
+	"GamePlay.HitArea.Bad":	{	_: "BAD",	},
+
+	"GamePlay.Navigator.1":	{	_:"Hold and release to attack",	ja:"長押しのあと離して攻撃",	},
 }
 
 
