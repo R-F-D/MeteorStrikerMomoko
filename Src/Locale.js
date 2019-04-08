@@ -11,7 +11,7 @@ LocaleSettings	= class{
 		/**テキストの言語*/
 		this.language			= 'ja';
 		/**数値の区切り方法*/
-		this.numericSeparation	= 'JP';
+		this.numericSeparation	= 'ja';
 
 		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_';
 	}
@@ -91,13 +91,13 @@ NumericSeparators	= {
 		decimal:	'.',
 	},
 	//アメリカ USA
-	US:{
+	en:{
 		nDigits:	3,
 		integer:	',',
 		decimal:	'.',
 	},
 	//日本 Japan
-	JP:{
+	ja:{
 		nDigits:	4,
 		integer:	['万','億','兆',],
 		decimal:	'.',

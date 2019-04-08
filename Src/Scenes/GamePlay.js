@@ -329,7 +329,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().tag );
+					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().text );
 					_this.labels.distance.SetString( _this.GetDistanceString() );
 					_this.labels.navigation.Update();
 					return true;
