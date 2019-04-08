@@ -23,7 +23,7 @@ LocaleSettings	= class{
 	 */
 	Text(textCode){
 		if(!Texts[textCode])	throw new Error(`Text #${textCode} is not found.`);
-		return Texts[textCode][this.language] || Texts[textCode][`_`];
+		return Texts[textCode][this.language] || Texts[textCode][`_`] || '';
 	}
 
 
