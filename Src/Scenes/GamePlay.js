@@ -142,7 +142,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 		//打撃予備動作
 		Sequences.PRELIMINARY
-		//	.PushStartingFunctions(()=>{})
+			.PushStartingFunctions(()=>{
+				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
+			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
 				this.chargingCount += BlowPower.INCREMENT;
@@ -218,7 +220,32 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update(false);
 
+				const oldDistance	= this.GetDistanceInKm();
 				this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
+				const newDistance	= this.GetDistanceInKm();
+
+				const checkpoints	= [
+					{	distance: 42000000,	text:L.Text("GamePlay.Navigator.BrowAway.Venus"),	},
+					{	distance: 72000000,	text:null,	},
+					{	distance: 78000000,	text:L.Text("GamePlay.Navigator.BrowAway.Mars"),	},
+					{	distance: 91500000,	text:L.Text("GamePlay.Navigator.BrowAway.Mercury"),	},
+					{	distance:121500000,	text:null,	},
+					{	distance:149600000,	text:L.Text("GamePlay.Navigator.BrowAway.Sun"),		},
+					{	distance:179600000,	text:null,	},
+					{	distance:186200000,	text:L.Text("GamePlay.Navigator.BrowAway.Kirari"),	},
+					{	distance:216200000,	text:null,	},
+				];
+
+				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
+				for(let i=0; i<checkpoints.length; ++i){
+					if(oldDistance < checkpoints[i].distance && checkpoints[i].distance<=newDistance)
+					{
+						if(checkpoints[i].text)	this.labels.navigation.SetString(checkpoints[i].text).SetVisible(true);
+						else					this.labels.navigation.SetVisible(false);
+						break;
+					}
+				}
+				
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(Sequences.MEASURE);
 			})
 			.PushUpdatingFunctions("layer-bg", (dt)=>{
@@ -491,7 +518,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	GetDistanceInKm(){
 		return Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 );
-		//return L.NumToStr() + L.Text("GamePlay.Distance.Unit");
 	}
 
 	/** リセット
