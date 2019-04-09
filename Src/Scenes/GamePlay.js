@@ -334,7 +334,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
 					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().text );
-					_this.labels.distance.SetString( _this.GetDistanceString() );
+					_this.labels.distance.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") );
 					_this.labels.navigation.Update();
 					return true;
 				},
@@ -489,8 +489,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		return this;
 	}
 
-	GetDistanceString(){
-		return L.NumToStr(Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 )) + L.Text("GamePlay.Distance.Unit");
+	GetDistanceInKm(){
+		return Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 );
+		//return L.NumToStr() + L.Text("GamePlay.Distance.Unit");
 	}
 
 	/** リセット
