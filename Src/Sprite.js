@@ -243,4 +243,11 @@ class Sprite{
 		else					this.data[key]	= value;
 		return this;
 	}
+
+	RunAction(action){
+		this.entity.runAction(action);
+		return this;
+	}
+
+
 }

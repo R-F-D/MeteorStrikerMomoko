@@ -185,7 +185,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
-				this.sprites.hitArea.SetIndex(this.aiming.GetCurrentArea().imgIndex).SetVisible(true).entity.runAction(
+				this.sprites.hitArea.SetIndex(this.aiming.GetCurrentArea().imgIndex).SetVisible(true).RunAction(
 					cc.ScaleTo.create(0.25,1).easing(cc.easeBackOut(10))
 				);
 
