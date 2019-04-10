@@ -110,13 +110,13 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
 			this.distanceOfMeteor	= 0;
+			this.sprites.hitArea.SetVisible(false).SetScale(0);
 			this.sprites.meteor.SetVisible(true);
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
 			this.meteorEffect.SetColor();
 			this.labels.aimingResult.SetVisible(false);
-			this.labels.hitArea.SetVisible(false);
 			this.labels.distance.SetVisible(false);
 			this.labels.navigation.Init().SetVisible(false);
 
@@ -185,8 +185,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
+				this.sprites.hitArea.SetIndex(this.aiming.GetCurrentArea().imgIndex).SetVisible(true).SetScale(1);
 				this.labels.aimingResult.SetVisible(true);
-				this.labels.hitArea.SetVisible(true);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
@@ -212,8 +212,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				for(let s of this.sprites.bg2)	s.SetVisible(true);
 				this.aiming.SetVisible(false);
+				this.sprites.hitArea.SetVisible(false);
 				this.labels.aimingResult.SetVisible(false);
-				this.labels.hitArea.SetVisible(false);
 				this.labels.distance.SetVisible(true);
 				this.labels.navigation.SetVisible(false);
 			})
@@ -329,10 +329,9 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				init	: function(){
 					this._super();
 
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
-												.SetScale(2).Attr({zIndex:5}).SetRotate(-5);
-					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this)
-												.SetScale(2).Attr({zIndex:2}).SetVisible(true);
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetScale(2).Attr({zIndex:5}).SetRotate(-5);
+					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).SetScale(2).Attr({zIndex:2}).SetVisible(true);
+					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110}).SetVisible(false).SetPosition(48,140);
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
@@ -340,8 +339,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
 					//Labels
-					_this.labels.hitArea		= Label.CreateInstance(15).SetColor("#FF7F00").SetPosition(64,150).AddToLayer(this);
-					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,130).AddToLayer(this);
+					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,110).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
 
@@ -360,7 +358,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.hitArea.SetString( _this.aiming.GetCurrentArea().text );
 					_this.labels.distance.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") );
 					_this.labels.navigation.Update();
 					return true;

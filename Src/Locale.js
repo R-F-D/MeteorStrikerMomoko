@@ -111,10 +111,6 @@ NumericSeparators	= {
 Texts	= {
 	"GamePlay.Distance.Unit":	{	_: "km",	},
 	"GamePlay.Charge.Unit":	{	_: "%",	},
-	"GamePlay.HitArea.Critical":	{	_: "CRITICAL",	},
-	"GamePlay.HitArea.Good":	{	_: "GOOD",	},
-	"GamePlay.HitArea.Normal":	{	_: "NORMAL",	},
-	"GamePlay.HitArea.Bad":	{	_: "BAD",	},
 
 	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	},
 	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	},
