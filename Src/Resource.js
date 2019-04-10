@@ -11,6 +11,7 @@ const rc	= {
 		navigator	: [ "navigator.png",	1,	1,	],	//ナビゲータ
 		aimCursor	: [ "aimcur.png",		2,	2,	],	//エイミングカーソル
 		aimGauge	: [ "aimgauge.png",		1,	1,	],	//エイミングゲージ
+		hitArea	: [ "hitarea.png",		1,	4,	],	//ヒット領域
 		meteor		: [ "meteor.png",		1,	1,	],	//メテオ
 		flare		: [ "flare.png",		1,	1,	],	//隕石エフェクト
 		flyFx		: [ "flyfx.png",		1,	1,	],	//プレイヤーエフェクト

@@ -1,9 +1,23 @@
 --------------------------------------------------------------------------------
+    フォントについて
+    About Fonts
+--------------------------------------------------------------------------------
+ Kosugi Maru
+    lisenced by Apache License 2.0
+    https://fonts.google.com/specimen/Kosugi+Maru?selection.family=Kosugi+Maru
+Gagalin
+    FONTFABRICTM FREE FONT END USER LICENSE AGREEMENT FFF EULA ver. 2.1
+    https://www.fontfabric.com/fonts/gagalin/
+
+--------------------------------------------------------------------------------
     特定のファイルについて
     About Specific Files
 --------------------------------------------------------------------------------
 Res/touched.png
     Icon made by Freepik(www.freepik.com) from Flaticon(www.flaticon.com) is licensed by CC 3.0 BY.
+Res/hitarea.png
+    Gagalin
+    Fukidashi Defign (http://fukidesign.com/()
 
 --------------------------------------------------------------------------------
     「Src/」ディレクトリ以下のファイル群について
