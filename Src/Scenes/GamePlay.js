@@ -278,7 +278,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		super.OnEnter();
 		this.aiming	= Scenes.Aiming
 							.Create()
-							.PushHitArea( "CRITICAL",	-0.10,	0.10 )
+							.PushHitArea( "PERFECT",	-0.10,	0.10 )
 							.PushHitArea( "GOOD",		-0.25,	0.25 )
 							.PushHitArea( "NORMAL",		-0.75,	0.75 );
 

@@ -5,8 +5,6 @@ var Scenes	= Scenes || {};
 var cc;
 (function(){	//File Scope
 
-//	Bad	Normal	Good Critical
-
 /** エイミングクラス */
 Scenes.Aiming	= class {
 
@@ -18,7 +16,7 @@ Scenes.Aiming	= class {
 		/**デフォルト増分*/	this.DEFAULT_INCREMENT	= 1024;
 		/**増分サイ*/		this.INCREMENT_RANDAM	= this.DEFAULT_INCREMENT/2;
 		/**ゲージ半径*/		this.RADIUS				= 64;
-		/**ヒット領域タグ*/	this.AREAS				= {	CRITICAL:	{tag:"CRITICAL",rate:1.20,	addRate:0.5,idxSprite:3,	imgIndex:0,	},
+		/**ヒット領域タグ*/	this.AREAS				= {	PERFECT:	{tag:"PERFECT",	rate:1.20,	addRate:0.5,idxSprite:3,	imgIndex:0,	},
 														GOOD:		{tag:"GOOD",	rate:1.20,	addRate:0,	idxSprite:2,	imgIndex:1,	},
 														NORMAL: 	{tag:"NORMAL",	rate:1.05,	addRate:0,	idxSprite:1,	imgIndex:2,	},
 														BAD: 		{tag:"BAD",		rate:1.00,	addRate:0,	idxSprite:0,	imgIndex:3,	}};
