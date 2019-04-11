@@ -53,8 +53,8 @@ Effects.Hit	= class extends Effects.EffectBase{
 		this.UpdateParticles((v)=>{
             v.sprite.SetIndex(v.index);
             if(v.count%2==0)    v.index++;
-        },16*2);
-		return this;
+        },8*2);
+		return this;ß
 	}
 }
 
