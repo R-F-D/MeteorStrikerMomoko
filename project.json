@@ -20,6 +20,7 @@
 		"Src/Effects/Fly.js",
 		"Src/Effects/Meteor.js",
 		"Src/Effects/Explosion.js",
+		"Src/Effects/Hit.js",
 		"Src/Effects/Touched.js",
 
 		"Src/Locale.js",

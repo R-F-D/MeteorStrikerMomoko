@@ -15,6 +15,7 @@ const rc	= {
 		meteor		: [ "meteor.png",		1,	1,	],	//メテオ
 		flare		: [ "flare.png",		1,	1,	],	//隕石エフェクト
 		flyFx		: [ "flyfx.png",		1,	1,	],	//プレイヤーエフェクト
+		hitFx		: [ "hitfx.png",		4,	4,	],	//ヒットエフェクト
 		touched		: [ "touched.png",		4,	2,	],	//タッチエフェクト
 		resetIcon	: [ "reload-icon.png",	1,	1,	],	//更新アイコン
 	},
