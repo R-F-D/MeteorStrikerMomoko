@@ -219,7 +219,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.sprites.hitArea.SetVisible(false);
 				this.labels.aimingResult.SetVisible(false);
 				this.labels.distance.SetVisible(true);
-				this.labels.navigation.SetVisible(false);
+				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.BrowAway.Start")).SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update(false);
