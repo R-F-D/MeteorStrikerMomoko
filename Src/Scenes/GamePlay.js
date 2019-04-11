@@ -192,6 +192,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.labels.aimingResult.SetVisible(true);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
+				this.hitEffect.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.chargedPower<BlowPower.MAX/2?0.5:1.0 );
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
 				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
@@ -338,6 +339,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
+					_this.hitEffect			= Effects.Hit.Create().Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
@@ -358,6 +360,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
+					_this.hitEffect.Update();
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);

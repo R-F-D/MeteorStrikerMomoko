@@ -20,7 +20,7 @@ Effects.Hit	= class extends Effects.EffectBase{
 
 			entity	= Object.assign(entity,{
 				sprite	: Sprite.CreateInstance(rc.img.hitFx).AddToLayer(layer)
-							.SetScale(1).Attr({zIndex:50,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
+							.SetScale(1).Attr({zIndex:120,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				index	: 0,
 	
 			});
@@ -32,11 +32,12 @@ Effects.Hit	= class extends Effects.EffectBase{
 	/** エフェクトをスポーン
 	 * @returns {this}
 	 */
-	Spawn(x,y){
+	Spawn(x,y,scale){
 		this.ActivateParticles(_nParticles,(v,i)=>{
 			v.sprite
-				.SetPosition(x,y).SetRotate(GetRandamAngle()).SetIndex(0)
-				.SetVisible(true).SetColor(this.color);
+				.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(0)
+                .SetVisible(true).SetScale(scale).SetColor(this.color);
+                v.index=0;
 			return true;
 		})
 		return this;
@@ -51,8 +52,8 @@ Effects.Hit	= class extends Effects.EffectBase{
 		
 		this.UpdateParticles((v)=>{
             v.sprite.SetIndex(v.index);
-            v.index++;
-		},16);
+            if(v.count%2==0)    v.index++;
+        },16*2);
 		return this;
 	}
 }
