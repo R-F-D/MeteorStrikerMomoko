@@ -340,6 +340,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
 					_this.hitEffect			= Effects.Hit.Create().Init(this);
+					_this.emitEffect		= Effects.Emit.Create().Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
@@ -361,6 +362,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
 					_this.hitEffect.Update();
+					_this.emitEffect.Update();
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
@@ -418,6 +420,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				onTouchesBegan	: (touch,event)=>{
 					this.nEmits.simul++;
 					this.nEmits.total++;
+					this.emitEffect.Spawn(this.sprites.player.x,this.sprites.player.y);
 				},
 			})
 			/** 次フェイズへの単純遷移 */
