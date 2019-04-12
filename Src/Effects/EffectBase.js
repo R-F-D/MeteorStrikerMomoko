@@ -109,10 +109,27 @@ Effects.EffectBase	= class{
 			//パーティクル更新
 			updater(v);
 			++v.count;
-			v.exists= v.count < lifetime;
-			v.sprite.SetVisible(v.exists);
+			if(v.count >= lifetime)	this.DestroyParticle(v);
 			continue;
 		}
+		return this;
+	}
+
+	/** パーティクル削除
+	 * @param {*} particle パーティクルオブジェクト
+	 * @returns this
+	 */
+	DestroyParticle(particle){
+		particle.exists	= false;
+		particle.sprite.SetVisible(false);
+		return this;
+	}
+
+	/** 全てのパーティクルを削除
+	 * @returns this
+	 */
+	Destroy(){
+		for(let v of this.entities)	this.DestroyParticle(v);
 		return this;
 	}
 
