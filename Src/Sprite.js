@@ -221,12 +221,11 @@ class Sprite{
 		if(this.currentIndex===idx)	return this;
 
 		if(this.img.width>0 && this.img.height>0 && this.img.nSplitX>0 && this.img.nSplitY>0){
-			const x	= parseInt( idx % this.img.nSplitX );
-			const y	= parseInt( idx / this.img.nSplitX );
-			const w	= parseInt( this.img.width /this.img.nSplitX );
-			const h	= parseInt( this.img.height/this.img.nSplitY );
+			const x			= parseInt( idx % this.img.nSplitX );
+			const y			= parseInt( idx / this.img.nSplitX );
+			const pieceSize	= this.GetPieceSize();
 
-			this.entity.setTextureRect(cc.rect( x*w, y*h, w, h)	);
+			this.entity.setTextureRect(cc.rect( x*pieceSize.width, y*pieceSize.height, pieceSize.width, pieceSize.height)	);
 			this.currentIndex	= idx;
 		}
 		else{
@@ -247,6 +246,16 @@ class Sprite{
 	RunAction(action){
 		this.entity.runAction(action);
 		return this;
+	}
+
+	/** 分割画像のサイズを取得
+	 * @memberof Sprite
+	 */
+	GetPieceSize(){
+		return {
+			width:	parseInt( this.img.width /this.img.nSplitX ),
+			height:	parseInt( this.img.height/this.img.nSplitY ),
+		};
 	}
 
 
