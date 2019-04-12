@@ -208,7 +208,5 @@ Scenes.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
-	OnUpdating(dt){return this}
-	OnUpdated(dt){return this}
 
 }//class
