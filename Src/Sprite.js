@@ -135,7 +135,7 @@ class Sprite{
 	 * @returns {ths} this
 	 * @memberof Sprite
 	 */
-	SetOpacity(opac){return this.Attr({opacity:opac});}
+	SetOpacity(opac){return this.Attr({opacity:Clamp(opac,0,255)});}
 
 	/** 可視設定
 	 * @param {boolean} visible
