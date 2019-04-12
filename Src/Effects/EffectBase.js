@@ -19,7 +19,13 @@ Effects.EffectBase	= class{
 	/** entities配列の初期化
 	 * @returns {this}
 	 */
-	Init(){
+	Init(){return this.InitParticles();}
+
+	/** 全パーティクルの初期化
+	 * @param {function(particle)} [initializer=null] 初期化関数 f(particle)
+	 * @returns
+	 */
+	InitParticles(initializer=null){
 		for(let i=0; i<this.nEntities; ++i){
 			this.entities[i]	= {
 				sprite	: null,
@@ -27,10 +33,11 @@ Effects.EffectBase	= class{
 				count	: 0,
 				dx		: 0,
 				dy		: 0,
-			}
+			};
+			if(initializer)	initializer(this.entities[i]);
 		}
 		return this;
-	}
+}
 
 	/** パーティクルの速度設定
 	 * @param {number} initDx x初速度

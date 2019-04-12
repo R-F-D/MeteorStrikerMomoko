@@ -15,16 +15,14 @@ Effects.Hit	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.hitFx).AddToLayer(layer)
 							.SetScale(1).Attr({zIndex:120,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				index	: 0,
 	
 			});
-		}
+		});
 		this.SetVelocity(4,4).SetColor();
 		return this;
 	}

@@ -15,14 +15,12 @@ Effects.Preliminary	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.preliminaryFx).AddToLayer(layer)
 							.Attr({zIndex:120,opacity:255}).SetVisible(false),
 			});
-		}
+		});
 		this.SetVelocity(4,4).SetColor();
 		return this;
 	}

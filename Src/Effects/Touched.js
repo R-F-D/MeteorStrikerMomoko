@@ -16,15 +16,14 @@ Effects.Touched	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.touched).AddToLayer(layer)
 							.SetScale(0.5).Attr({zIndex:65535,opacity:255}).SetVisible(false),
 				index	: 0,
 	
 			});
-		}
+		});
 		this.SetVelocity(4,4).SetColor();
 		return this;
 	}

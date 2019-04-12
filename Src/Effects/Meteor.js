@@ -14,13 +14,12 @@ Effects.Meteor	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
 							.SetScale(2).Attr({zIndex:0,opacity:255}).SetVisible(false),
 			});
-		}
+		});
 		this.SetColor();
 		return this;
 	}

@@ -15,16 +15,13 @@ Effects.Emit	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.emitFx).AddToLayer(layer)
 							.SetScale(1).Attr({zIndex:120,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				index	: 0,
-	
 			});
-		}
+		});
 		this.SetVelocity(4,4).SetColor();
 		return this;
 	}
@@ -35,7 +32,7 @@ Effects.Emit	= class extends Effects.EffectBase{
 	Spawn(x,y){
 		this.ActivateParticles(_nParticles,(v,i)=>{
 			v.sprite
-				.SetPosition(x+3,y).SetIndex(0)
+				.SetPosition(x+6,y).SetIndex(0)
                 .SetVisible(true).SetColor(this.color);
                 v.index=0;
 			return true;

@@ -14,14 +14,13 @@ Effects.Explosion	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		super.Init();
-		for(let entity of this.entities){
-			entity	= Object.assign(entity,{
+		this.InitParticles((particle)=>{
+			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
 							.SetScale(2).Attr({zIndex:0,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				scale:	1.0,
 			});
-		}
+		});
 		this.SetColor();
 		return this;
 	}
