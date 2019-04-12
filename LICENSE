@@ -1,27 +1,27 @@
 --------------------------------------------------------------------------------
-    フォントについて
-    About Fonts
+	フォントについて
+	About Fonts
 --------------------------------------------------------------------------------
  Kosugi Maru
-    lisenced by Apache License 2.0
-    https://fonts.google.com/specimen/Kosugi+Maru?selection.family=Kosugi+Maru
+	lisenced by Apache License 2.0
+	https://fonts.google.com/specimen/Kosugi+Maru?selection.family=Kosugi+Maru
 Gagalin
-    FONTFABRICTM FREE FONT END USER LICENSE AGREEMENT FFF EULA ver. 2.1
-    https://www.fontfabric.com/fonts/gagalin/
+	FONTFABRICTM FREE FONT END USER LICENSE AGREEMENT FFF EULA ver. 2.1
+	https://www.fontfabric.com/fonts/gagalin/
 
 --------------------------------------------------------------------------------
-    特定のファイルについて
-    About Specific Files
+	特定のファイルについて
+	About Specific Files
 --------------------------------------------------------------------------------
 Res/touched.png
-    Icon made by Freepik(www.freepik.com) from Flaticon(www.flaticon.com) is licensed by CC 3.0 BY.
+	Icon made by Freepik(www.freepik.com) from Flaticon(www.flaticon.com) is licensed by CC 3.0 BY.
 Res/hitarea.png
-    Gagalin
-    Fukidashi Defign (http://fukidesign.com/()
+	Gagalin
+	Fukidashi Defign (http://fukidesign.com/()
 
 --------------------------------------------------------------------------------
-    「Src/」ディレクトリ以下のファイル群について
-    About The Files Below "Src/" Directory
+	「Src/」ディレクトリ以下のファイル群について
+	About The Files Below "Src/" Directory
 --------------------------------------------------------------------------------
 
 MIT License
@@ -48,16 +48,16 @@ SOFTWARE.
 
 
 --------------------------------------------------------------------------------
-    「Frameworks/」ディレクトリ以下のファイル群について
-    About The Files Below "Frameworks/" Directory
+	「Frameworks/」ディレクトリ以下のファイル群について
+	About The Files Below "Frameworks/" Directory
 --------------------------------------------------------------------------------
 Frameworks/**/licenses/ディレクトリのファイルを参照してください。
 Refer to license files in "Frameworks/**/licenses/" directory.
 
 
 --------------------------------------------------------------------------------
-    その他のファイル群について
-    About Other Files
+	その他のファイル群について
+	About Other Files
 --------------------------------------------------------------------------------
 原則としてコピー禁止。
 Copying is prohibited in principle.

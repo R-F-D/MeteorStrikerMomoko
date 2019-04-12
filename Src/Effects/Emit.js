@@ -33,8 +33,8 @@ Effects.Emit	= class extends Effects.EffectBase{
 		this.ActivateParticles(_nParticles,(v,i)=>{
 			v.sprite
 				.SetPosition(x+6,y).SetIndex(0)
-                .SetVisible(true).SetColor(this.color);
-                v.index=0;
+				.SetVisible(true).SetColor(this.color);
+				v.index=0;
 			return true;
 		})
 		return this;
@@ -48,9 +48,9 @@ Effects.Emit	= class extends Effects.EffectBase{
 		if(!updates)	return this;
 		
 		this.UpdateParticles((v)=>{
-            v.sprite.SetIndex(v.index);
-            if(v.count%4==0)    v.index++;
-        },8*4);
+			v.sprite.SetIndex(v.index);
+			if(v.count%4==0)    v.index++;
+		},8*4);
 		return this;ß
 	}
 }

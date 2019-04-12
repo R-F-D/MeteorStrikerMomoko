@@ -34,8 +34,8 @@ Effects.Hit	= class extends Effects.EffectBase{
 		this.ActivateParticles(_nParticles,(v,i)=>{
 			v.sprite
 				.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(0)
-                .SetVisible(true).SetScale(scale).SetColor(this.color);
-                v.index=0;
+				.SetVisible(true).SetScale(scale).SetColor(this.color);
+				v.index=0;
 			return true;
 		})
 		return this;
@@ -49,9 +49,9 @@ Effects.Hit	= class extends Effects.EffectBase{
 		if(!updates)	return this;
 		
 		this.UpdateParticles((v)=>{
-            v.sprite.SetIndex(v.index);
-            if(v.count%2==0)    v.index++;
-        },8*2);
+			v.sprite.SetIndex(v.index);
+			if(v.count%2==0)    v.index++;
+		},8*2);
 		return this;ß
 	}
 }
