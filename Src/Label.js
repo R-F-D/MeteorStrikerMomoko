@@ -126,9 +126,10 @@ Label	= class Label{
 	ApplicateIconPosition(){
 		if(!this.icon)	return this;
 
-		const pos	= this.entity.getPosition();
-		const size	= this.GetContentSize();
-		this.icon.SetPosition(	pos.x-(size.width+this.icon.img.width)/2+this.iconAdjust.x,	pos.y+this.iconAdjust.y	);
+		const pos		= this.entity.getPosition();
+		const size		= this.GetContentSize();
+		const imgSize	= this.icon.GetPieceSize();
+		this.icon.SetPosition(	pos.x-(size.width+imgSize.width)/2+this.iconAdjust.x,	pos.y+this.iconAdjust.y	);
 
 		return this;
 	}
@@ -194,6 +195,17 @@ Label	= class Label{
 	 */
 	SetIconIndex(index=0){
 		if(this.icon)	this.icon.SetIndex(index);
+		return this;
+	}
+
+	/** アイコン画像の座標修正
+	 * @param {number} [x=null]
+	 * @param {number} [y=null]
+	 * @returns this
+	 */
+	SetIconPosition(x=null,y=null){	
+		if(x!==null)	this.iconAdjust.x = x;
+		if(y!==null)	this.iconAdjust.y = y;
 		return this;
 	}
 

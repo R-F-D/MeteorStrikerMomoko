@@ -354,7 +354,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,110).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true);
+					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true).SetIconPosition(-4,0);
 
 					_this.SetSequence(Sequences.INITIAL);
 					return true;
