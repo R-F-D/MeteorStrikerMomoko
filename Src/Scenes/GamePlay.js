@@ -116,6 +116,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
 			this.meteorEffect.SetColor();
+			this.preliminaryEffect.Destroy();
 			this.labels.aimingResult.SetVisible(false);
 			this.labels.distance.SetVisible(false);
 			this.labels.navigation.Init().SetVisible(false);
@@ -143,10 +144,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//打撃予備動作
 		Sequences.PRELIMINARY
 			.PushStartingFunctions(()=>{
+				this.preliminaryEffect.Spawn(64,48);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
+				this.preliminaryEffect.Update();
 				this.chargingCount += BlowPower.INCREMENT;
 				if(this.chargingCount > BlowPower.MAX)	this.SetSequence(Sequences.DISCHARGE_FAILED);
 			});
@@ -156,6 +159,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.chargedPower	= this.chargingCount;
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
+				this.preliminaryEffect.Destroy();
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
@@ -169,7 +173,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//打撃動作失敗
 		Sequences.DISCHARGE_FAILED
 			.PushStartingFunctions(()=>{
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Fail")).SetVisible(true);
+				this.preliminaryEffect.Destroy();
+			//	this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Fail")).SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.aiming.Update();
@@ -267,6 +272,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.sprites.meteor.SetVisible(false);
 				this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 
+//				this.labels.navigation.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit")  ).SetVisible(true);
+
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 				Log(`Impact: ${this.impactPower}`);
@@ -332,13 +339,13 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				},
 				init	: function(){
 					this._super();
-
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetScale(2).Attr({zIndex:5}).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).SetScale(2).Attr({zIndex:2}).SetVisible(true);
 					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110}).SetVisible(false).SetPosition(48,140);
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
 					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
+					_this.preliminaryEffect	= Effects.Preliminary.Create().Init(this);
 					_this.hitEffect			= Effects.Hit.Create().Init(this);
 					_this.emitEffect		= Effects.Emit.Create().Init(this);
 
