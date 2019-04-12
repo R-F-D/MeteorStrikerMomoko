@@ -374,7 +374,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
 					_this.labels.distance.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") );
-					_this.labels.navigation.Update();
+					_this.labels.navigation.SetIconIndex(_this.count%256>16?0:1).Update();
 					return true;
 				},
 			})

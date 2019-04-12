@@ -8,7 +8,7 @@ const rc	= {
 		bg1				: [ "bg1.png",			1,	1,	],	//背景1
 		bg2				: [ "bg2.png",			1,	1,	],	//背景2
 		player			: [ "msmomoko.png",		4,	2,	],	//プレイヤーキャラクター
-		navigator		: [ "navigator.png",	1,	1,	],	//ナビゲータ
+		navigator		: [ "navigator.png",	2,	1,	],	//ナビゲータ
 		aimCursor		: [ "aimcur.png",		2,	2,	],	//エイミングカーソル
 		aimGauge		: [ "aimgauge.png",		1,	1,	],	//エイミングゲージ
 		hitArea			: [ "hitarea.png",		1,	4,	],	//ヒット領域

@@ -188,6 +188,15 @@ Label	= class Label{
 		return this;
 	}
 
+	/** アイコン画像のインデックスを設定
+	 * @param {number} [index=0] インデックス
+	 * @returns this
+	 */
+	SetIconIndex(index=0){
+		if(this.icon)	this.icon.SetIndex(index);
+		return this;
+	}
+
 };
 
 //ラベル背景
