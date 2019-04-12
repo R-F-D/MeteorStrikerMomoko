@@ -29,6 +29,7 @@ Effects.EffectBase	= class{
 		for(let i=0; i<this.nEntities; ++i){
 			this.entities[i]	= {
 				sprite	: null,
+				sprites	: [],
 				exist	: false,
 				count	: 0,
 				dx		: 0,
@@ -63,7 +64,8 @@ Effects.EffectBase	= class{
 		this.color	= color;
 		if(!delays){
 			for(let entity of this.entities){
-				entity.sprite.SetColor(this.color);
+				if(enitity.sprite)	entity.sprite.SetColor(this.color);
+				for(let s of entity.sprites)	if(s) s.SetColor(this.color);
 			}
 		}
 		return this;
@@ -128,7 +130,8 @@ Effects.EffectBase	= class{
 	 */
 	DestroyParticle(particle){
 		particle.exists	= false;
-		particle.sprite.SetVisible(false);
+		if(particle.sprite)	particle.sprite.SetVisible(false);
+		for(let s of particle.sprites)	if(s) s.SetVisible(false);
 		return this;
 	}
 
