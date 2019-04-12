@@ -51,7 +51,7 @@ Effects.Emit	= class extends Effects.EffectBase{
 			v.sprite.SetIndex(v.index);
 			if(v.count%4==0)    v.index++;
 		},8*4);
-		return this;ß
+		return this;
 	}
 }
 

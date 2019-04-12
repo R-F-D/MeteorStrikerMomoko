@@ -52,7 +52,7 @@ Effects.Hit	= class extends Effects.EffectBase{
 			v.sprite.SetIndex(v.index);
 			if(v.count%2==0)    v.index++;
 		},8*2);
-		return this;ß
+		return this;
 	}
 }
 
