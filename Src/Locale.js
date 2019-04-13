@@ -17,13 +17,28 @@ LocaleSettings	= class{
 	}
 
 
-	/** テキスト番号に対応したテキストを返す
-	 * @param {number} textCode	テキスト番号
+	/** テキスト識別子に対応したテキストを返す
+	 * @param {string} textCode	テキスト識別子
 	 * @returns {string}		対応するテキスト
 	 */
 	Text(textCode){
 		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 		return Texts[textCode][this.language] || Texts[textCode][`_`] || '';
+	}
+
+	/** テキスト識別子に対応したテキストを返す（フォーマット付き）
+	 * @param {*string} textCode		テキスト識別子（置換箇所は$0 $1 $2...）
+	 * @param {array} [replacements=[]]	置換文字列の配列
+	 * @returns							対応するテキスト
+	 */
+	Textf(textCode,replacements=[]){
+		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
+
+		let	text	= this.Text(textCode);
+		for(let i=replacements.length-1; i>=0; --i){
+			text	= text.replace(`$${i}`,replacements[i]);
+		}
+		return text;
 	}
 
 
