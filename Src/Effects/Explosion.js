@@ -52,7 +52,7 @@ Effects.Explosion	= class extends Effects.EffectBase{
 				v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
 			}
 			else{
-				v.sprite.SetPosition(x,y).SetScale(0.25).SetVisible(true).RunAction(
+				v.sprite.SetPosition(x,y).SetScale(0.25).SetOpacity(255).SetVisible(true).RunAction(
 					new cc.Sequence(
 						cc.ScaleTo.create(1.0,0.5).easing(cc.easeBackOut(100)),
 						cc.FadeTo.create(1.0,0)
@@ -83,7 +83,9 @@ Effects.Explosion	= class extends Effects.EffectBase{
 				if(v.count>64)	v.exists = false;
 			}
 			else{
-				if(!v.sprite.IsRunningActions())	v.exists = false;
+				if(!v.sprite.IsRunningActions()){
+					v.exists = false;
+				}
 			}
 		},null);
 		return this;
