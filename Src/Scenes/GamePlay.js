@@ -272,7 +272,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.sprites.meteor.SetVisible(false);
 				this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 
-//				this.labels.navigation.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit")  ).SetVisible(true);
+				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Measure", [L.NumToStr(_this.GetDistanceInKm())+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);

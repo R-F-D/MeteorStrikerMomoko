@@ -137,6 +137,7 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"Mercury!\nI needa douse myself in water and repent.",	ja:"水星！ 水をかぶって反省しなきゃ…",	},
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
+	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the space",	ja:"桃子ちゃんは地球からはるか\n$0彼方の宇宙にいるよ",	},
 
 
 }
