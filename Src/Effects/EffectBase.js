@@ -22,7 +22,7 @@ Effects.EffectBase	= class{
 	Init(){return this.InitParticles();}
 
 	/** 全パーティクルの初期化
-	 * @param {function(particle)} [initializer=null] 初期化関数 f(particle)
+	 * @param {function(particle,index)} [initializer=null] 初期化関数 f(particle,index)
 	 * @returns
 	 */
 	InitParticles(initializer=null){
@@ -35,7 +35,7 @@ Effects.EffectBase	= class{
 				dx		: 0,
 				dy		: 0,
 			};
-			if(initializer)	initializer(this.entities[i]);
+			if(initializer)	initializer(this.entities[i],i);
 		}
 		return this;
 }
@@ -106,10 +106,10 @@ Effects.EffectBase	= class{
 
 	/** パーティクル更新
 	 * @param {function(particle)} updater パーティクルを更新する述語関数。f(p)、pはパーティクルオブジェクト。
-	 * @param {number} lifetime パーティクルの寿命
+	 * @param {number|null} [lifetime=null] パーティクルの寿命。nulで無限
 	 * @returns
 	 */
-	UpdateParticles(updater,lifetime){
+	UpdateParticles(updater,lifetime=null){
 		if(typeof(updater)!=="function") throw new Error("Argument0 is not function.");
 
 		for(let v of this.entities){
@@ -118,7 +118,7 @@ Effects.EffectBase	= class{
 			//パーティクル更新
 			updater(v);
 			++v.count;
-			if(v.count >= lifetime)	this.DestroyParticle(v);
+			if(!v.exists || (lifetime!==null && v.count >= lifetime))	this.DestroyParticle(v);
 			continue;
 		}
 		return this;
