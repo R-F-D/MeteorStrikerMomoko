@@ -112,6 +112,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			this.distanceOfMeteor	= 0;
 			this.sprites.hitArea.SetVisible(false).SetScale(0);
 			this.sprites.meteor.SetVisible(true);
+			this.sprites.distance.SetVisible(false);
 			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
 			this.playerEffect.SetVelocity(-1,-0.5,0.5,0);
 			this.meteorEffect.SetVelocity(8,3);
@@ -221,6 +222,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 				for(let s of this.sprites.bg2)	s.SetVisible(true);
 				this.aiming.SetVisible(false);
+				this.sprites.distance.SetVisible(true);
 				this.sprites.hitArea.SetVisible(false);
 				this.labels.aimingResult.SetVisible(false);
 				this.labels.distance.SetVisible(true);
@@ -270,8 +272,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.PushStartingFunctions(()=>{
 				for(let s of this.sprites.bg1)	s.SetVisible(false);
 				this.sprites.meteor.SetVisible(false);
+				this.sprites.distance.SetVisible(false);
 				this.explosionEffect.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 
+				this.labels.distance.SetVisible(false);
 				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Measure", [L.NumToStr(_this.GetDistanceInKm())+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
@@ -341,6 +345,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this._super();
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetScale(2).Attr({zIndex:5}).SetRotate(-5);
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).SetScale(2).Attr({zIndex:2}).SetVisible(true);
+					_this.sprites.distance	= Sprite.CreateInstance(rc.img.distance).AddToLayer(this).SetScale(1).Attr({zIndex:3}).SetVisible(false);
 					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110}).SetVisible(false).SetPosition(48,140);
 					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
 					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
@@ -353,7 +358,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15).SetColor("#FFFFFF").SetPosition(64,110).AddToLayer(this);
-					_this.labels.distance		= Label.CreateInstance(31).SetColor("#FFFFFF").SetPosition(256,256).AddToLayer(this);
+					_this.labels.distance		= Label.CreateInstance(10).SetColor("#00FF00").AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true).SetIconPosition(-4,0);
 
 					_this.SetSequence(Sequences.INITIAL);
@@ -365,7 +370,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					//Player
 					_this.UpdatePlayerSprite();
 
-					_this.sprites.meteor.SetPosition(_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),_this.POSITIONS.METEOR.Y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
+					const m	={
+						x:_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),
+						y:_this.POSITIONS.METEOR.Y,
+					}; 
+					_this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
+					_this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
 					_this.meteorEffect.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==Sequences.MEASURE).Update();
 					_this.explosionEffect.Update();
 					_this.hitEffect.Update();
@@ -373,7 +383,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.distance.SetString( L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") );
+					_this.labels.distance.SetString( "Meteor: "+L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") ).SetPosition(m.x+96+8,m.y-48+6);
 					_this.labels.navigation.SetIconIndex(_this.count%256>16?0:1).Update();
 					return true;
 				},
