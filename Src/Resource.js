@@ -14,6 +14,7 @@ const rc	= {
 		hitArea			: [ "hitarea.png",		1,	4,	],	//ヒット領域
 		meteor			: [ "meteor.png",		1,	1,	],	//メテオ
 		flare			: [ "flare.png",		1,	1,	],	//隕石エフェクト
+		explosion		: [ "explosion.png",	1,	1,	],	//爆発エフェクト
 		flyFx			: [ "flyfx.png",		1,	1,	],	//プレイヤーエフェクト
 		hitFx			: [ "hitfx.png",		2,	4,	],	//ヒットエフェクト
 		preliminaryFx	: [ "preliminary.png",	1,	1,	],	//予備動作エフェクト
