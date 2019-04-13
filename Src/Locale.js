@@ -14,7 +14,6 @@ LocaleSettings	= class{
 		this.numericSeparation	= 'ja';
 
 		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_';
-		console.log(this.NumToStr(100000010));
 	}
 
 
@@ -61,6 +60,7 @@ LocaleSettings	= class{
 		else{									//配列のときは１つずつ区切り文字を変える
 			let str	= '';
 			for(let i=0; i<chunks.length; ++i){
+				if(chunks[i]===0)	continue;
 				if(i==0){
 					str	= `${chunks[0]}`;
 				}
