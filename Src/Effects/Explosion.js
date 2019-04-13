@@ -6,6 +6,10 @@ var cc;
 (function(){	//File Scope
 
 
+const FxType	= {
+	Particle:0,	Letters:1,
+};
+
 /** @class 爆発エフェクトクラス */
 Effects.Explosion	= class extends Effects.EffectBase{
 
@@ -14,12 +18,24 @@ Effects.Explosion	= class extends Effects.EffectBase{
 	}
 
 	Init(layer){
-		this.InitParticles((particle)=>{
-			particle	= Object.assign(particle,{
-				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
-							.SetScale(2).Attr({zIndex:0,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
-				scale:	1.0,
-			});
+		this.InitParticles((particle,i)=>{
+			if(i%2==0){
+				particle	= Object.assign(particle,{
+					sprite:	Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
+								.SetScale(2).Attr({zIndex:0,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
+					scale:	1,
+					type:	FxType.Particle,
+				});
+			}
+			else{
+				particle	= Object.assign(particle,{
+					sprite:	Sprite.CreateInstance(rc.img.explosion).AddToLayer(layer)
+								.SetScale(1).Attr({zIndex:1,opacity:255}).SetVisible(false),
+					scale:	1,
+					type:	FxType.Letters,
+				});
+
+			}
 		});
 		this.SetColor();
 		return this;
@@ -32,9 +48,17 @@ Effects.Explosion	= class extends Effects.EffectBase{
 		if(!spawns)	return this;
 
 		this.ActivateParticles(2,(v,i)=>{
-			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
-			v.dx		= this.initialVelocity.x;
-			v.dy		= this.initialVelocity.y;
+			if((v.type==FxType.Particle)){
+				v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
+			}
+			else{
+				v.sprite.SetPosition(x,y).SetScale(0.25).SetVisible(true).RunAction(
+					new cc.Sequence(
+						cc.ScaleTo.create(1.0,0.5).easing(cc.easeBackOut(100)),
+						cc.FadeTo.create(1.0,0)
+					)
+				);
+			}
 			return true;
 		});
 		return this;
@@ -51,11 +75,17 @@ Effects.Explosion	= class extends Effects.EffectBase{
 			v.dx	+= this.acceleration.x;
 			v.dy	+= this.acceleration.y;
 
-			v.sprite
-				.SetPosition(v.sprite.x+v.dx,v.sprite.y+v.dy)
-				.SetOpacity(255-v.count*4)
-				.SetScale(1.0+0.4*v.count);
-		},64);
+			if(v.type==FxType.Particle){
+				v.sprite
+					.SetRelativePosition(v.dx,v.dy)
+					.SetOpacity(255-v.count*4)
+					.SetScale(1.0+0.4*v.count);
+				if(v.count>64)	v.exists = false;
+			}
+			else{
+				if(!v.sprite.IsRunningActions())	v.exists = false;
+			}
+		},null);
 		return this;
 	}
 
