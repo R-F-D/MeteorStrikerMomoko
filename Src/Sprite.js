@@ -247,7 +247,14 @@ class Sprite{
 		this.entity.runAction(action);
 		return this;
 	}
-
+	/** 実行中のアクションがあるか
+	 * @returns {boolean}
+	 */
+	IsRunningActions(){
+		if(this.entity.getNumberOfRunningActions()>0) return true;
+		return false;
+	}
+	
 	/** 分割画像のサイズを取得
 	 * @memberof Sprite
 	 */
