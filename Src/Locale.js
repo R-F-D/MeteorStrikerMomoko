@@ -145,7 +145,7 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
 	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the space",	ja:"桃子ちゃんは地球からはるか\n$0彼方の宇宙にいるよ",	},
-
+	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
 
 }
 

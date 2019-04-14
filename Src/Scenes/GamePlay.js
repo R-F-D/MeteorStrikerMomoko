@@ -382,7 +382,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString( `Meteor: ${L.NumToStr(_this.GetDistanceInKm(),"en")} ${L.Text("GamePlay.Distance.Unit","_")}`);
+					_this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(
+						L.Textf("GamePlay.Distance.Emit",[
+							L.NumToStr(_this.GetDistanceInKm(),"en"),
+							L.Text("GamePlay.Distance.Unit","_")
+						],"-")
+					);
 
 					let naviIcon	= Math.trunc(_this.count/4) % 32;
 					naviIcon		= naviIcon<=3 ? naviIcon : 0;
