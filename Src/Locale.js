@@ -58,7 +58,10 @@ LocaleSettings	= class{
 
 		//区切りを挿入
 		if(!Array.isArray(separation.integer)){	//区切りが文字のときは全ての区切りに挿入
-			return chunks.reverse().map(x=>`${x}`.padStart(nDigits,'0')).join(separation.integer);
+			return	chunks
+						.reverse()
+						.map((v,i)=>{ return i==0 ? `${v}` : `${v}`.padStart(nDigits,'0') })
+						.join(separation.integer);
 		}
 		else{									//配列のときは１つずつ区切り文字を変える
 			let str	= '';
