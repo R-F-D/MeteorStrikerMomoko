@@ -18,23 +18,25 @@ LocaleSettings	= class{
 
 
 	/** テキスト識別子に対応したテキストを返す
-	 * @param {string} textCode	テキスト識別子
+	 * @param {string} textCode		テキスト識別子
+	 * @param {string?} [lang=null]	言語。省略時はすでに設定されている言語。
 	 * @returns {string}		対応するテキスト
 	 */
-	Text(textCode){
+	Text(textCode,lang=null){
 		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
-		return Texts[textCode][this.language] || Texts[textCode][`_`] || '';
+		return Texts[textCode][lang||this.language] || Texts[textCode][`_`] || '';
 	}
 
 	/** テキスト識別子に対応したテキストを返す（フォーマット付き）
 	 * @param {*string} textCode		テキスト識別子（置換箇所は$0 $1 $2...）
 	 * @param {array} [replacements=[]]	置換文字列の配列
+	 * @param {string?} [lang=null]		言語。省略時はすでに設定されている言語。
 	 * @returns							対応するテキスト
 	 */
-	Textf(textCode,replacements=[]){
+	Textf(textCode,replacements=[],lang=null){
 		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 
-		let	text	= this.Text(textCode);
+		let	text	= this.Text(textCode,lang);
 		for(let i=replacements.length-1; i>=0; --i){
 			text	= text.replace(`$${i}`,replacements[i]);
 		}
@@ -43,11 +45,12 @@ LocaleSettings	= class{
 
 
 	/** 数値に区切り文字を挿入
-	 * @param {number} value 整数
+	 * @param {number} value		整数
+	 * @param {string?} [lang=null]	言語。省略時はすでに設定されている言語。
 	 * @returns {string}
 	 */
-	NumToStr(value){
-		const separation	= NumericSeparators[this.numericSeparation];
+	NumToStr(value,lang){
+		const separation	= NumericSeparators[lang||this.numericSeparation] || NumericSeparators["_"];
 
 		//数値を区切りごとに配列に分割
 		const nDigits	= Math.trunc(Math.max(1,separation.nDigits));	//区切り桁数

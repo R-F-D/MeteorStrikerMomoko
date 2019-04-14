@@ -383,7 +383,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.touchedEffect.Update();
 
 					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.distance.SetString( "Meteor: "+L.NumToStr(_this.GetDistanceInKm()) + L.Text("GamePlay.Distance.Unit") ).SetPosition(m.x+96+8,m.y-48+6);
+					_this.labels.distance.SetString( "Meteor: "+L.NumToStr(_this.GetDistanceInKm(),"en") + L.Text("GamePlay.Distance.Unit","_")).SetPosition(m.x+96+8,m.y-48+6);
 					_this.labels.navigation.SetIconIndex(_this.count%256>16?0:1).Update();
 					return true;
 				},
