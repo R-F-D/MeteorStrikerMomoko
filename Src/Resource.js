@@ -22,6 +22,8 @@ const rc	= {
 		emitFx			: [ "emitfx.png",		4,	2,	],	//エミットエフェクト
 		touched			: [ "touched.png",		4,	2,	],	//タッチエフェクト
 		resetIcon		: [ "reload-icon.png",	1,	1,	],	//更新アイコン
+		retryButton		: [ "retrybtn.png",		1,	1,	],	//リトライボタン
+		shareButton		: [ "sharebtn.png",		1,	1,	],	//シェアボタン
 	},
 
 	/** サウンド */
