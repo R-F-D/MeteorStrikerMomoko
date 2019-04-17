@@ -2,6 +2,7 @@
 [Ff]rameworks/*
 [Ff]rameworks/**/
 !.gitkeep
+!cocos2d-js-v*.js
 [Tt]mp/
 [Pp]rivate
 [Pp]rivate/
