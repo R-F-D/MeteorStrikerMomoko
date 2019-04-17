@@ -4,17 +4,100 @@
 var LocaleSetting	= LocaleSetting | {};
 (function(){	//File Scope
 
+/********************************************************************************
+ * 数値の区切り
+ *******************************************************************************/
+NumericSeparators	= {
+	//国際度量衡総会 General Conference on Weights and Measures
+	_:{
+		nDigits:	3,	//How many every digits
+		integer:	' ',	//Integer separator
+		//integer:	["T","M","B"],	//	If the separators are different, set an array
+		decimal:	'.',	//Decimal separator
+	},
+	//英語 English
+	en:{
+		nDigits:	3,
+		integer:	',',
+		decimal:	'.',
+	},
+	//日本 Japanese
+	ja:{
+		nDigits:	4,
+		integer:	['万','億',],
+		decimal:	'.',
+	},
+};
+
+
+/********************************************************************************
+ * テキスト
+ *******************************************************************************/
+Texts	= {
+	//単位 Unit
+	"GamePlay.Distance.Unit":	{	_: "km",	},
+	"GamePlay.Charge.Unit":	{	_: "%",	},
+
+	//ゲームプレイ GamePlay
+	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
+
+	//ナビゲータ Navigator
+	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	},
+	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	},
+	"GamePlay.Navigator.Fail":	{	_:"Release at the right time.",	ja:"タイミングよく はなしてね",	},
+	"GamePlay.Navigator.Emit":	{	_:"The power rises with taps.",	ja:"タップでパワーアップするよ",	},
+	"GamePlay.Navigator.BrowAway.Start":	{	_:"Please Momoko!",	ja:"おねがい☆桃子ちゃん",	},
+	"GamePlay.Navigator.BrowAway.Venus":	{	_:"Are you looking at Venus, Momoko?",	ja:"金星を見ておいでですか、桃子ちゃん",	},
+	"GamePlay.Navigator.BrowAway.Mars":	{	_:"Here is a place futher than Mars.",	ja:"火星よりも遠い場所だね",	},
+	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"Mercury!\nI needa douse myself in water and repent.",	ja:"水星！ 水をかぶって反省しなきゃ…",	},
+	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
+	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
+	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	},
+
+	//シェア Share
+	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},
+	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
+	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
+	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
+	
+
+}
+
+
+
 /**地域設定クラス*/
 LocaleSettings	= class{
+	/** @const グローバルの言語コード  */
+	GLOBAL_CODE		= "_";
+
 	constructor(){
 
 		/**テキストの言語*/
-		this.language			= 'ja';
+		this.language			= this.GLOBAL_CODE;
 		/**数値の区切り方法*/
-		this.numericSeparation	= 'ja';
-
-		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= '_';
+		this.numericSeparation	= this.GLOBAL_CODE;
 	}
+
+	/** 言語コードをセットする
+	 * @param {string} langCode
+	 */
+	SetLanguage(langCode=this.GLOBAL_CODE){
+		this.language	= langCode;
+		return this;
+	}
+	/** 設定されている言語コードを取得 */
+	GetLanguageCode(){return this.language};
+
+	/** 数字区切りの言語をセットする
+	 * @param {string} langCode
+	 */
+	SetNumberSeparation(langCode=this.GLOBAL_CODE){
+		this.numericSeparation	= langCode;
+		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= this.GLOBAL_CODE;
+		return this;
+	}
+	/** 設定されている数値区切りの言語コードを取得*/
+	GetNumberSepararionCode(){return this.numericSeparation;}
 
 
 	/** テキスト識別子に対応したテキストを返す
@@ -97,70 +180,9 @@ LocaleSettings	= class{
 		if(truncated > 0)	return this._SplitNumber(truncated,nDigits,chunks);
 		else				return chunks;
 	}
-
-
 };
 
-
-/********************************************************************************
- * 数値の区切り
- *******************************************************************************/
-NumericSeparators	= {
-	//国際度量衡総会 General Conference on Weights and Measures
-	_:{
-		nDigits:	3,	//How many every digits
-		integer:	' ',	//Integer separator
-		//integer:	["T","M","B"],	//	If the separators are different, set an array
-		decimal:	'.',	//Decimal separator
-	},
-	//英語 English
-	en:{
-		nDigits:	3,
-		integer:	',',
-		decimal:	'.',
-	},
-	//日本 Japanese
-	ja:{
-		nDigits:	4,
-		integer:	['万','億',],
-		decimal:	'.',
-	},
-};
-
-
-/********************************************************************************
- * テキスト
- *******************************************************************************/
-Texts	= {
-	//単位 Unit
-	"GamePlay.Distance.Unit":	{	_: "km",	},
-	"GamePlay.Charge.Unit":	{	_: "%",	},
-
-	//ゲームプレイ GamePlay
-	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
-
-	//ナビゲータ Navigator
-	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	},
-	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	},
-	"GamePlay.Navigator.Fail":	{	_:"Release at the right time.",	ja:"タイミングよく はなしてね",	},
-	"GamePlay.Navigator.Emit":	{	_:"The power rises with taps.",	ja:"タップでパワーアップするよ",	},
-	"GamePlay.Navigator.BrowAway.Start":	{	_:"Please Momoko!",	ja:"おねがい☆桃子ちゃん",	},
-	"GamePlay.Navigator.BrowAway.Venus":	{	_:"Are you looking at Venus, Momoko?",	ja:"金星を見ておいでですか、桃子ちゃん",	},
-	"GamePlay.Navigator.BrowAway.Mars":	{	_:"Here is a place futher than Mars.",	ja:"火星よりも遠い場所だね",	},
-	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"Mercury!\nI needa douse myself in water and repent.",	ja:"水星！ 水をかぶって反省しなきゃ…",	},
-	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
-	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
-	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	},
-
-	//シェア Share
-	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},
-	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
-	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
-	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
-	
-
-}
 
 })();	//File Scope
 
-var L	= new LocaleSettings();
+var L	= (new LocaleSettings()).SetLanguage("ja").SetNumberSeparation("ja");
