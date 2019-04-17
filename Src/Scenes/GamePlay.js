@@ -499,7 +499,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			})
 			//キーボードリセット
 			.AddPropertiesToEventListenerList("reset",{
-				event			: cc.EventListener.KEYBOARD,
+				event			: cc.EventListener.KEYBOARD || null,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
 						this.Reset();
@@ -528,7 +528,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
 		Debug(()=>{
-			commonEvents.push(this.listeners.reset);
+			//commonEvents.push(this.listeners.reset);
 		});
 		Sequence.SetCommonEventListeners(commonEvents);
 

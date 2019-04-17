@@ -184,7 +184,7 @@ Scenes.SceneBase	= class {
 	 */
 	AddPropertiesToEventListenerList(key,listenerProperties){
 		if(this.listeners==null) this.listeners = {};
-		this.listeners[key]	= cc.EventListener.create(listenerProperties);
+		if(listenerProperties.event)	this.listeners[key]	= cc.EventListener.create(listenerProperties);
 		return this;
 	}
 
