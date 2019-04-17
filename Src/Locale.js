@@ -132,9 +132,14 @@ NumericSeparators	= {
  * テキスト
  *******************************************************************************/
 Texts	= {
+	//単位 Unit
 	"GamePlay.Distance.Unit":	{	_: "km",	},
 	"GamePlay.Charge.Unit":	{	_: "%",	},
 
+	//ゲームプレイ GamePlay
+	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
+
+	//ナビゲータ Navigator
 	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	},
 	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	},
 	"GamePlay.Navigator.Fail":	{	_:"Release at the right time.",	ja:"タイミングよく はなしてね",	},
@@ -145,15 +150,14 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"Mercury!\nI needa douse myself in water and repent.",	ja:"水星！ 水をかぶって反省しなきゃ…",	},
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
-	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の宇宙に位置してるよ",	},
-	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
+	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	},
 
+	//シェア Share
 	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},
 	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
 	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
 	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
 	
-
 
 }
 
