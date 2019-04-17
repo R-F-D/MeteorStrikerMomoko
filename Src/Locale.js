@@ -108,20 +108,21 @@ LocaleSettings	= class{
 NumericSeparators	= {
 	//国際度量衡総会 General Conference on Weights and Measures
 	_:{
-		nDigits:	3,
-		integer:	' ',
-		decimal:	'.',
+		nDigits:	3,	//How many every digits
+		integer:	' ',	//Integer separator
+		//integer:	["T","M","B"],	//	If the separators are different, set an array
+		decimal:	'.',	//Decimal separator
 	},
-	//アメリカ USA
+	//英語 English
 	en:{
 		nDigits:	3,
 		integer:	',',
 		decimal:	'.',
 	},
-	//日本 Japan
+	//日本 Japanese
 	ja:{
 		nDigits:	4,
-		integer:	['万','億','兆',],
+		integer:	['万','億',],
 		decimal:	'.',
 	},
 };
