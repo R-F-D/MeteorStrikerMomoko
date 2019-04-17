@@ -36,6 +36,7 @@ const EmitEnergy	= {
 const LinkedLayerTags	= {
 	MAIN	: "GamePlay.Main",
 	BG		: "GamePlay.Bg",
+	UI		: "GamePlay.Ui",
 };
 
 Scenes.GamePlay	= class extends Scenes.SceneBase {
@@ -83,6 +84,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.distanceOfMeteor	= 0;
 		this.isOnGround			= true;
 
+		this.UIs	= {};
+
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();		
 
@@ -126,6 +129,8 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
 			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
 			this.aiming.SetVisible(false);
+
+			(this.UIs.resultButtons||[]).forEach( button=>button.removeFromParent() );	//リザルト画面のボタンを初期化
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.aiming.Update(false);
@@ -282,6 +287,20 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				Log(`Impact: ${this.impactPower}`);
 				Log(`Total: ${this.totalPower}`);
 
+				const size	= cc.director.getWinSize();
+				this.UIs.resultButtons	= this.UIs.resultButtons || [];
+				for(let i=0;i<2;++i){
+					const imgs		= [rc.img.retryButton,rc.img.shareButton];
+					const listeners	= [this.listeners.retryButton,this.listeners.shareButton];
+					this.UIs.resultButtons[i]	= new ccui.Button(`${rc.DIRECTORY}${imgs[i][0]}`);
+			
+					this.UIs.resultButtons[i].setPosition(size.width/2-128+256*i,size.height/2);
+					this.UIs.resultButtons[i].setScale(1);
+					this.UIs.resultButtons[i].setContentSize(128,128);
+					this.UIs.resultButtons[i].addTouchEventListener(listeners[i],this.ccLayerInstances[LinkedLayerTags.UI]);
+					this.ccLayerInstances[LinkedLayerTags.UI].addChild(this.UIs.resultButtons[i]);
+				}
+
 			});
 			//.PushUpdatingFunctions((dt)=>{});
 
@@ -297,9 +316,10 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 							.PushHitArea( "NORMAL",		-0.75,	0.75 );
 
 		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
+			.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
-		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN])
-			.sequence.Init();
+		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
+		this.sequence.Init()
 
 		return this;
 	}
@@ -415,8 +435,23 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					_this.UpdateBgLayer(dt);
 					_this.sequence.Update(dt,"layer-bg");
 				},
+			})
+			.AddToLayerList("ui",{
+				ctor:function(){
+					this._super();
+					//this.init();
+					this.scheduleUpdate();
+					return true;
+				},/*
+				init	: function(){
+					this._super();
+				},*/
+				update	: function(dt){
+					this._super();
+					_this.sequence.Update(dt,"layer-ui");
+				},
 			});
-		return this;
+			return this;
 	}
 
 
@@ -462,7 +497,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.Reset();
 				}
 			})
-			
+			//キーボードリセット
 			.AddPropertiesToEventListenerList("reset",{
 				event			: cc.EventListener.KEYBOARD,
 				onKeyReleased	: (code,event)=>{
@@ -470,7 +505,24 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 						this.Reset();
 					}
 				},
+			})
+			//リトライボタン
+			.AddToEventListenerList("retryButton",(sender,type)=>{
+				if(type===ccui.Widget.TOUCH_ENDED){
+					this.Reset();
+				}
+			})
+			//シェアボタン
+			.AddToEventListenerList("shareButton",(sender,type)=>{
+				if(type===ccui.Widget.TOUCH_ENDED){
+					cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
+										L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
+										L.Text("GamePlay.Share.URL"),
+										L.Text("GamePlay.Share.Tags")
+									]));
+				}
 			});
+
 
 		//共通イベント対応設定
 		let commonEvents	= [];
@@ -559,6 +611,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.SetSequence(Sequences.INITIAL);
 		return this;
 	}
+
 
 }//class
 

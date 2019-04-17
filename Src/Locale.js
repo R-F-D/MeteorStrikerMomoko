@@ -147,6 +147,13 @@ Texts	= {
 	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の宇宙に位置してるよ",	},
 	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
 
+	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},
+	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
+	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
+	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
+	
+
+
 }
 
 })();	//File Scope
