@@ -298,7 +298,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.UIs.resultButtons[i].setScale(1);
 					this.UIs.resultButtons[i].setContentSize(128,128);
 					this.UIs.resultButtons[i].addTouchEventListener(listeners[i],this.ccLayerInstances[LinkedLayerTags.UI]);
-
+					this.UIs.resultButtons[i].setSwallowTouches(false);
 					this.ccLayerInstances[LinkedLayerTags.UI].addChild(this.UIs.resultButtons[i]);
 				}
 
@@ -496,7 +496,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.AddToEventListenerList("resetButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset"));
-					return true;
 				}
 				else if(type===ccui.Widget.TOUCH_ENDED){
 					this.Reset();
@@ -504,6 +503,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
 				}
+				return true;
 			})
 			//キーボードリセット
 			.AddPropertiesToEventListenerList("reset",{
@@ -518,7 +518,6 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			.AddToEventListenerList("retryButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry"));
-					return true;
 				}
 				else if(type===ccui.Widget.TOUCH_ENDED){
 					this.Reset();
@@ -526,12 +525,12 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
 				}
+				return true;
 			})
 			//シェアボタン
 			.AddToEventListenerList("shareButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share"));
-					return true;
 				}
 				else if (type===ccui.Widget.TOUCH_ENDED){
 					this.labels.navigation.RemoveTempText();
@@ -544,6 +543,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
 				}
+				return true;
 			});
 
 

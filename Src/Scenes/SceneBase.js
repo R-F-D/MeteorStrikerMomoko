@@ -124,6 +124,7 @@ Scenes.SceneBase	= class {
 				button.setScale(1);
 				button.setOpacity(128);
 				button.setContentSize(32,32);
+				//button.setSwallowTouches(false);
 				button.addTouchEventListener(_this.listeners.resetButton,this);
 				this.addChild(button);
 
