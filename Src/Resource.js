@@ -46,6 +46,9 @@ const rc	= {
 };
 
 
+
+function GetResPath(res){return `${rc.DIRECTORY}${res[0]}`}
+
 var g_resources = [];
 for(let i in rc.sysImg)	g_resources.push(`${rc.DIRECTORY}${rc.sysImg[i]}`);
-for(let i in rc.img)	g_resources.push(`${rc.DIRECTORY}${rc.img[i][0]}`);
+for(let i in rc.img)	g_resources.push(GetResPath(rc.img[i]));

@@ -118,7 +118,7 @@ Scenes.SceneBase	= class {
 				this.scheduleUpdate();
 
 				const size	= cc.director.getWinSize();
-				let button	= new ccui.Button(`${rc.DIRECTORY}${rc.img.resetIcon[0]}`);
+				let button	= new ccui.Button(GetResPath(rc.img.resetIcon));
 			
 				button.setPosition(0+16+2,size.height-16-2);
 				button.setScale(1);

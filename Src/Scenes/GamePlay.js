@@ -292,7 +292,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				for(let i=0;i<2;++i){
 					const imgs		= [rc.img.retryButton,rc.img.shareButton];
 					const listeners	= [this.listeners.retryButton,this.listeners.shareButton];
-					this.UIs.resultButtons[i]	= new ccui.Button(`${rc.DIRECTORY}${imgs[i][0]}`);
+					this.UIs.resultButtons[i]	= new ccui.Button(GetResPath(imgs[i]));
 			
 					this.UIs.resultButtons[i].setPosition(size.width/2-128+256*i,size.height/2);
 					this.UIs.resultButtons[i].setScale(1);
