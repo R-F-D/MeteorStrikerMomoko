@@ -11,6 +11,8 @@ Label	= class Label{
 		/** @const Z座標 */
 		this.Z	= 65535;
 
+		this.text	= "";
+
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
 		this.entity.attr({zIndex:this.Z});
 
@@ -149,7 +151,8 @@ Label	= class Label{
 	 * @returns
 	 * @memberof Label
 	 */
-	SetString(text){
+	SetString(text,isTemp=false){
+		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
 		if(this.icon){
 			this.ApplicateIconPosition();
@@ -161,6 +164,9 @@ Label	= class Label{
 		}
 		return this;
 	}
+
+	SetTempText(text){return this.SetString(text,true)}
+	RemoveTempText(text){return this.SetString(this.text,false)}
 
 	/** カラー設定
 	 * @param {strinf|cc.color} color
