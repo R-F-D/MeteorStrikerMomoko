@@ -376,6 +376,17 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 
+					//リセットボタン
+					const size	= cc.director.getWinSize();
+					let button	= new ccui.Button(GetResPath(rc.img.resetIcon));				
+					button.setPosition(0+16+2,size.height-16-2);
+					button.setScale(1);
+					button.setOpacity(128);
+					button.setContentSize(32,32);
+					//button.setSwallowTouches(false);
+					button.addTouchEventListener(_this.listeners.resetButton,this);
+					this.addChild(button);
+
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).SetColor("#FFFFFF").SetPosition(64,110).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).SetColor("#00FF00").AddToLayer(this);

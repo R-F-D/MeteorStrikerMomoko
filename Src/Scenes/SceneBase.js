@@ -116,20 +116,7 @@ Scenes.SceneBase	= class {
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
-
-				const size	= cc.director.getWinSize();
-				let button	= new ccui.Button(GetResPath(rc.img.resetIcon));
-			
-				button.setPosition(0+16+2,size.height-16-2);
-				button.setScale(1);
-				button.setOpacity(128);
-				button.setContentSize(32,32);
-				//button.setSwallowTouches(false);
-				button.addTouchEventListener(_this.listeners.resetButton,this);
-				this.addChild(button);
-
 				_this.touchedEffect	= Effects.Touched.Create().Init(this);
-
 				return true;
 			},
 			update	: function(dt){
