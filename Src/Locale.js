@@ -10,10 +10,10 @@ var LocaleSetting	= LocaleSetting | {};
 NumericSeparators	= {
 	//国際度量衡総会 General Conference on Weights and Measures
 	_:{
-		nDigits:	3,	//How many every digits
-		integer:	' ',	//Integer separator
-		//integer:	["T","M","B"],	//	If the separators are different, set an array
-		decimal:	'.',	//Decimal separator
+		nDigits:	3,	//何桁ごとに区切るか How many every digits
+		integer:	' ',	//整数の区切り Integer separator
+		//integer:	["T","M","B"],	//	整数の区切りが毎回異なるなら配列に If the separators are different, set an array
+		decimal:	'.',	//小数点 Decimal separator
 	},
 	//英語 English
 	en:{
@@ -53,6 +53,9 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
 	"GamePlay.Navigator.Measure":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	},
+	"GamePlay.Navigator.Result.Reset":	{	_:"You go back to the title screen.", ja:"タイトル画面にもどるよ",	},
+	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	},
+	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	},
 
 	//シェア Share
 	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},

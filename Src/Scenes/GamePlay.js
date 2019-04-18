@@ -298,6 +298,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 					this.UIs.resultButtons[i].setScale(1);
 					this.UIs.resultButtons[i].setContentSize(128,128);
 					this.UIs.resultButtons[i].addTouchEventListener(listeners[i],this.ccLayerInstances[LinkedLayerTags.UI]);
+
 					this.ccLayerInstances[LinkedLayerTags.UI].addChild(this.UIs.resultButtons[i]);
 				}
 
@@ -493,8 +494,15 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			})
 			/**リセットボタン*/
 			.AddToEventListenerList("resetButton",(sender,type)=>{
-				if(type===ccui.Widget.TOUCH_ENDED){
+				if      (type===ccui.Widget.TOUCH_BEGAN){
+					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset"));
+					return true;
+				}
+				else if(type===ccui.Widget.TOUCH_ENDED){
 					this.Reset();
+				}
+				else if (type===ccui.Widget.TOUCH_CANCELED){
+					this.labels.navigation.RemoveTempText();
 				}
 			})
 			//キーボードリセット
@@ -508,18 +516,33 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			})
 			//リトライボタン
 			.AddToEventListenerList("retryButton",(sender,type)=>{
-				if(type===ccui.Widget.TOUCH_ENDED){
+				if      (type===ccui.Widget.TOUCH_BEGAN){
+					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry"));
+					return true;
+				}
+				else if(type===ccui.Widget.TOUCH_ENDED){
 					this.Reset();
+				}
+				else if (type===ccui.Widget.TOUCH_CANCELED){
+					this.labels.navigation.RemoveTempText();
 				}
 			})
 			//シェアボタン
 			.AddToEventListenerList("shareButton",(sender,type)=>{
-				if(type===ccui.Widget.TOUCH_ENDED){
+				if      (type===ccui.Widget.TOUCH_BEGAN){
+					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share"));
+					return true;
+				}
+				else if (type===ccui.Widget.TOUCH_ENDED){
+					this.labels.navigation.RemoveTempText();
 					cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
 										L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
 										L.Text("GamePlay.Share.URL"),
 										L.Text("GamePlay.Share.Tags")
 									]));
+				}
+				else if (type===ccui.Widget.TOUCH_CANCELED){
+					this.labels.navigation.RemoveTempText();
 				}
 			});
 
