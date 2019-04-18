@@ -5,25 +5,27 @@ const rc	= {
 
 	/** 画像 */
 	img	: {
-		bg1				: [ "bg1.png",			1,	1,	],	//背景1
-		bg2				: [ "bg2.png",			1,	1,	],	//背景2
-		player			: [ "msmomoko.png",		4,	2,	],	//プレイヤーキャラクター
-		navigator		: [ "navigator.png",	2,	2,	],	//ナビゲータ
-		aimCursor		: [ "aimcur.png",		2,	2,	],	//エイミングカーソル
-		aimGauge		: [ "aimgauge.png",		1,	1,	],	//エイミングゲージ
-		hitArea			: [ "hitarea.png",		1,	4,	],	//ヒット領域
-		meteor			: [ "meteor.png",		1,	1,	],	//メテオ
-		distance		: [ "distance.png",		1,	1,	],	//飛距離表示
-		flare			: [ "flare.png",		1,	1,	],	//隕石エフェクト
-		explosion		: [ "explosion.png",	1,	1,	],	//爆発エフェクト
-		flyFx			: [ "flyfx.png",		1,	1,	],	//プレイヤーエフェクト
-		hitFx			: [ "hitfx.png",		2,	4,	],	//ヒットエフェクト
-		preliminaryFx	: [ "preliminary.png",	1,	1,	],	//予備動作エフェクト
-		emitFx			: [ "emitfx.png",		4,	2,	],	//エミットエフェクト
-		touched			: [ "touched.png",		4,	2,	],	//タッチエフェクト
-		resetIcon		: [ "reload-icon.png",	1,	1,	],	//更新アイコン
-		retryButton		: [ "retrybtn.png",		1,	1,	],	//リトライボタン
-		shareButton		: [ "sharebtn.png",		1,	1,	],	//シェアボタン
+		bg1				: [ "bg1.png",				1,	1,	],	//背景1
+		bg2				: [ "bg2.png",				1,	1,	],	//背景2
+		player			: [ "momoko.png",			4,	2,	],	//プレイヤーキャラクター
+		navigator		: [ "navigator.png",		2,	2,	],	//ナビゲータ
+		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
+		aimGauge		: [ "aimgauge.png",			1,	1,	],	//エイミングゲージ
+		hitArea			: [ "hitarea.png",			1,	4,	],	//ヒット領域
+		meteor			: [ "meteor.png",			1,	1,	],	//メテオ
+		distance		: [ "distance.png",			1,	1,	],	//飛距離表示
+
+		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
+		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト
+		flyFx			: [ "Fx/fxFly.png",			1,	1,	],	//プレイヤーエフェクト
+		hitFx			: [ "Fx/fxHit.png",			2,	4,	],	//ヒットエフェクト
+		preliminaryFx	: [ "Fx/fxPreliminary.png",	1,	1,	],	//予備動作エフェクト
+		emitFx			: [ "Fx/fxEmit.png",		4,	2,	],	//エミットエフェクト
+		touched			: [ "Fx/fxTouch.png",		4,	2,	],	//タッチエフェクト
+
+		resetIcon		: [ "Ui/btnReset.png",		1,	1,	],	//リセットボタン
+		retryButton		: [ "Ui/btnRetry.png",		1,	1,	],	//リトライボタン
+		shareButton		: [ "Ui/btnShare.png",		1,	1,	],	//シェアボタン
 	},
 
 	/** サウンド */
