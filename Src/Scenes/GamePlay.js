@@ -345,7 +345,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 		for(let i=0; i<4; ++i){
 			this.sprites.bg2[i]
-				.SetPosition(	size.width /2 - Cycle(this.bgScroll/2,0,bgWidth[1]) + bgWidth[1]*parseInt(i/2),
+				.SetPosition(	size.width /2 - Cycle(this.bgScroll/2,0,bgWidth[1]) + bgWidth[1]*Math.trunc(i/2),
 								size.height/2 - Cycle(this.bgScroll/4,0,bgWidth[1]) + bgWidth[1]*(i%2),	);
 		}
 		return this;
@@ -615,7 +615,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//スプライト番号
 		let idx	= 0;
 		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
-			idx	= parseInt(this.sequence.count/30) % 2;
+			idx	= Math.trunc(this.sequence.count/30) % 2;
 		}
 		else if([Sequences.PRELIMINARY].includes(this.sequence)){
 			idx	= this.playerHardblows(this.chargingCount)	? 2	: 5;

@@ -36,7 +36,7 @@ Effects.Touched	= class extends Effects.EffectBase{
 			let angle	= GetRandamAngle(2/_nParticles,i*2/_nParticles);
 
 			v.sprite
-				.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(parseInt(Math.random()*8))
+				.SetPosition(x,y).SetRotate(Math.random()*360).SetIndex(Math.trunc(Math.random()*8))
 				.SetVisible(true).SetColor(this.color);
 			v.dx		= this.initialVelocity.x * Math.cos(angle);
 			v.dy		= this.initialVelocity.y * Math.sin(angle);

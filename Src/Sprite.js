@@ -221,8 +221,8 @@ class Sprite{
 		if(this.currentIndex===idx)	return this;
 
 		if(this.img.width>0 && this.img.height>0 && this.img.nSplitX>0 && this.img.nSplitY>0){
-			const x			= parseInt( idx % this.img.nSplitX );
-			const y			= parseInt( idx / this.img.nSplitX );
+			const x			= Math.trunc( idx % this.img.nSplitX );
+			const y			= Math.trunc( idx / this.img.nSplitX );
 			const pieceSize	= this.GetPieceSize();
 
 			this.entity.setTextureRect(cc.rect( x*pieceSize.width, y*pieceSize.height, pieceSize.width, pieceSize.height)	);
@@ -260,8 +260,8 @@ class Sprite{
 	 */
 	GetPieceSize(){
 		return {
-			width:	parseInt( this.img.width /this.img.nSplitX ),
-			height:	parseInt( this.img.height/this.img.nSplitY ),
+			width:	Math.trunc( this.img.width /this.img.nSplitX ),
+			height:	Math.trunc( this.img.height/this.img.nSplitY ),
 		};
 	}
 
