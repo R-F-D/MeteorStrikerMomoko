@@ -202,7 +202,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.labels.aimingResult.SetVisible(true);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
-				this.hitEffect.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.chargedPower<BlowPower.MAX/2?0.5:1.0 );
+				this.hitEffect.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?0.5:1.0 );
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
 				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
@@ -618,14 +618,14 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			idx	= parseInt(this.sequence.count/30) % 2;
 		}
 		else if([Sequences.PRELIMINARY].includes(this.sequence)){
-			idx	= this.chargingCount<BlowPower.MAX/2	? 2	: 5;
+			idx	= this.playerHardblows(this.chargingCount)	? 2	: 5;
 		}
 		else if([Sequences.DISCHARGE].includes(this.sequence)){
-			idx	= this.chargedPower<BlowPower.MAX/2	? 2	: 5;
+			idx	= this.playerHardblows()	? 2	: 5;
 		}
 		else{
 			idx	= 3;
-			if(this.chargedPower >= BlowPower.MAX/2)	idx	= this.sequence.count<15	? 6 : 7;
+			if(!this.playerHardblows())	idx	= this.sequence.count<15	? 6 : 7;
 		}
 
 		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
@@ -645,6 +645,15 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		this.SetSequence(Sequences.INITIAL);
 		return this;
 	}
+
+	/** プレイヤーが強打モーションを行うか
+	 * @param {number?} [power=this.chargedPowerl]	検証するパワー値。省略時
+	 * @returns {boolean}
+	 */
+	playerHardblows(power=this.chargedPower){
+		return !!(power < BlowPower.MAX/2);
+	}
+
 
 
 }//class
