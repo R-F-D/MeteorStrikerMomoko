@@ -202,7 +202,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 				this.labels.aimingResult.SetVisible(true);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
-				this.hitEffect.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?0.5:1.0 );
+				this.hitEffect.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
 				this.playerEffect.SetVelocity(+1,+0.5,-2,-1);
 				this.meteorEffect.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
@@ -620,16 +620,16 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		//スプライト番号
 		let idx	= this.sequence.count%512<64 ? 2 : 0;
 		if([Sequences.PRELIMINARY].includes(this.sequence)){	//振りかぶり
-			idx	= this.playerHardblows(this.chargingCount)	? 0	: 8;
+			idx	= this.playerHardblows(this.chargingCount)	? 8	: 0;
 		}
 		else if([Sequences.DISCHARGE_FAILED].includes(this.sequence)){	//攻撃失敗
 			idx	= 2;
 		}
 		else if([Sequences.DISCHARGE].includes(this.sequence)){	//攻撃中
-			idx	= this.playerHardblows()	? 6	: 8;
+			idx	= this.playerHardblows()	? 8	: 6;
 		}
 		else if([Sequences.EMIT,Sequences.BLOW_AWAY,Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後	
-			idx	= this.playerHardblows()	? 6	: 10;
+			idx	= this.playerHardblows()	? 10	: 6;
 		}
 		if(Math.trunc(this.sequence.count/32) % 2) ++idx;
 
@@ -656,7 +656,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 	 * @returns {boolean}
 	 */
 	playerHardblows(power=this.chargedPower){
-		return !!(power < BlowPower.MAX/2);
+		return !(power < BlowPower.MAX/2);
 	}
 
 
