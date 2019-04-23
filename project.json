@@ -14,7 +14,6 @@
 	"jsList"		: [
 		"Src/Sprite.js",
 		"Src/Label.js",
-		"Src/Sequence.js",
 
 		"Src/Effects/EffectBase.js",
 		"Src/Effects/Fly.js",
@@ -28,6 +27,7 @@
 		"Src/Locale.js",
 		"Src/Aiming.js",
 
+		"Src/Scenes/Sequence.js",
 		"Src/Scenes/SceneBase.js",
 		"Src/Scenes/GamePlay.js",
 		"Src/Scenes/Title.js",

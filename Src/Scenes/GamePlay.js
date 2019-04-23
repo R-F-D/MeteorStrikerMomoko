@@ -95,7 +95,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		//シークエンス設定
-		for(let i in Sequences){ Sequences[i] = Sequence.Create() }
+		for(let i in Sequences){ Sequences[i] = Scenes.Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
 	}
 
@@ -564,7 +564,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		Debug(()=>{
 			//commonEvents.push(this.listeners.reset);
 		});
-		Sequence.SetCommonEventListeners(commonEvents);
+		Scenes.Sequence.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
 		//Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);
