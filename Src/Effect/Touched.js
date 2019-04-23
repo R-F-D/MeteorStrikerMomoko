@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	タッチエフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
@@ -9,7 +9,7 @@ var cc;
 const _nParticles	= 5;
 
 /** @class タッチエフェクトクラス */
-Effects.Touched	= class extends Effects.EffectBase{
+Effect.Touched	= class extends Effect.EffectBase{
 
 	constructor(nEntities=5){
 		super(_nParticles*nEntities);

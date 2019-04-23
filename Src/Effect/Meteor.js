@@ -1,13 +1,13 @@
 /* *******************************************************************************
 	隕石エフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
 
 /** @class 隕石エフェクトクラス */
-Effects.Meteor	= class extends Effects.EffectBase{
+Effect.Meteor	= class extends Effect.EffectBase{
 
 	constructor(nEntities=5){
 		super(nEntities);

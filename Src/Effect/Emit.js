@@ -1,14 +1,14 @@
 /* *******************************************************************************
 	エミットエフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
 const _nParticles   = 1;
 
 /** @class エミットエフェクトクラス */
-Effects.Emit	= class extends Effects.EffectBase{
+Effect.Emit	= class extends Effect.EffectBase{
 
 	constructor(nEntities=10){
 		super(nEntities*_nParticles);

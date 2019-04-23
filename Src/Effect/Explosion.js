@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	爆発エフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
@@ -11,7 +11,7 @@ const FxType	= {
 };
 
 /** @class 爆発エフェクトクラス */
-Effects.Explosion	= class extends Effects.EffectBase{
+Effect.Explosion	= class extends Effect.EffectBase{
 
 	constructor(nEntities=5){
 		super(nEntities*2);

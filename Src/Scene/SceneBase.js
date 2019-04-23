@@ -116,7 +116,7 @@ Scene.SceneBase	= class {
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
-				_this.touchedEffect	= Effects.Touched.Create().Init(this);
+				_this.touchedEffect	= Effect.Touched.Create().Init(this);
 				return true;
 			},
 			update	: function(dt){

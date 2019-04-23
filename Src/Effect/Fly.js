@@ -1,13 +1,13 @@
 /* *******************************************************************************
 	プレイヤー飛行エフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
 
 /** @class プレイヤー飛行エフェクトクラス */
-Effects.Fly	= class extends Effects.EffectBase{
+Effect.Fly	= class extends Effect.EffectBase{
 
 	constructor(nEntities=5){
 		super(nEntities);

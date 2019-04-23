@@ -367,12 +367,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).SetScale(2).Attr({zIndex:2}).SetVisible(true);
 					_this.sprites.distance	= Sprite.CreateInstance(rc.img.distance).AddToLayer(this).SetScale(1).Attr({zIndex:3}).SetVisible(false);
 					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110}).SetVisible(false).SetPosition(48,140);
-					_this.meteorEffect		= Effects.Meteor.Create(8).Init(this);
-					_this.playerEffect		= Effects.Fly.Create(32).Init(this);
-					_this.explosionEffect	= Effects.Explosion.Create(1).Init(this);
-					_this.preliminaryEffect	= Effects.Preliminary.Create().Init(this);
-					_this.hitEffect			= Effects.Hit.Create().Init(this);
-					_this.emitEffect		= Effects.Emit.Create().Init(this);
+					_this.meteorEffect		= Effect.Meteor.Create(8).Init(this);
+					_this.playerEffect		= Effect.Fly.Create(32).Init(this);
+					_this.explosionEffect	= Effect.Explosion.Create(1).Init(this);
+					_this.preliminaryEffect	= Effect.Preliminary.Create().Init(this);
+					_this.hitEffect			= Effect.Hit.Create().Init(this);
+					_this.emitEffect		= Effect.Emit.Create().Init(this);
 
 					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
 

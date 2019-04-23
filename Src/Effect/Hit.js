@@ -1,14 +1,14 @@
 /* *******************************************************************************
 	ヒットエフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
 const _nParticles   = 1;
 
 /** @class ヒットエフェクトクラス */
-Effects.Hit	= class extends Effects.EffectBase{
+Effect.Hit	= class extends Effect.EffectBase{
 
 	constructor(nEntities=1){
 		super(nEntities*_nParticles);

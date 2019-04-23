@@ -1,11 +1,11 @@
 /* *******************************************************************************
 	パーティクルエフェクト基本クラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
-Effects.EffectBase	= class{
+Effect.EffectBase	= class{
 
 	constructor(nEntities=5){
 		this.nEntities			= nEntities;

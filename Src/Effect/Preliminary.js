@@ -1,14 +1,14 @@
 /* *******************************************************************************
 	予備動作エフェクトクラス
 ********************************************************************************/
-var Effects	= Effects || {};
+var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
 const _nParticles   = 1;
 
 /** @class 予備動作エフェクトクラス */
-Effects.Preliminary	= class extends Effects.EffectBase{
+Effect.Preliminary	= class extends Effect.EffectBase{
 
 	constructor(nEntities=1){
 		super(nEntities*_nParticles);
