@@ -612,21 +612,26 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 			adjY += dy;
 		}
 
+		// 0 1 2 3 		構え
+		// 4  5			飛行
+		// 6 7			弱
+		// 8 9 10 11	強
+
 		//スプライト番号
-		let idx	= 0;
-		if([Sequences.INITIAL,Sequences.START_AIM,Sequences.DISCHARGE_FAILED].includes(this.sequence)){
-			idx	= Math.trunc(this.sequence.count/30) % 2;
+		let idx	= this.sequence.count%512<64 ? 2 : 0;
+		if([Sequences.PRELIMINARY].includes(this.sequence)){	//振りかぶり
+			idx	= this.playerHardblows(this.chargingCount)	? 0	: 8;
 		}
-		else if([Sequences.PRELIMINARY].includes(this.sequence)){
-			idx	= this.playerHardblows(this.chargingCount)	? 2	: 5;
+		else if([Sequences.DISCHARGE_FAILED].includes(this.sequence)){	//攻撃失敗
+			idx	= 2;
 		}
-		else if([Sequences.DISCHARGE].includes(this.sequence)){
-			idx	= this.playerHardblows()	? 2	: 5;
+		else if([Sequences.DISCHARGE].includes(this.sequence)){	//攻撃中
+			idx	= this.playerHardblows()	? 6	: 8;
 		}
-		else{
-			idx	= 3;
-			if(!this.playerHardblows())	idx	= this.sequence.count<15	? 6 : 7;
+		else if([Sequences.EMIT,Sequences.BLOW_AWAY,Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後	
+			idx	= this.playerHardblows()	? 6	: 10;
 		}
+		if(Math.trunc(this.sequence.count/32) % 2) ++idx;
 
 		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		this.playerEffect.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==Sequences.MEASURE).Update();
