@@ -3,7 +3,7 @@ var Scenes	= Scenes || {};
 
 /** Scenesクラスのファクトリ */
 Scenes.SceneFactory	= ()=>{
-	const sceneClass	= Scenes.GamePlay;
+	const sceneClass	= Scenes.Title;
 	return sceneClass.Create();
 }
 

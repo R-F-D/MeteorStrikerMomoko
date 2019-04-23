@@ -30,6 +30,7 @@
 
 		"Src/Scenes/SceneBase.js",
 		"Src/Scenes/GamePlay.js",
+		"Src/Scenes/Title.js",
 
 		"Src/Resource.js",
 		"Src/App.js"

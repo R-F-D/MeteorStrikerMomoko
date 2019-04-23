@@ -188,7 +188,7 @@ Scenes.SceneBase	= class {
 			},
 			update	: function(dt){
 				childScene.OnUpdating(dt);
-				childScene.sequence.Update(dt);
+				if(childScene.sequence.Update)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
 			},	
 		}))();
@@ -196,5 +196,6 @@ Scenes.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
+	SetSequenceFunctions(){return this;}
 
 }//class
