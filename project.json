@@ -27,10 +27,10 @@
 		"Src/Locale.js",
 		"Src/Aiming.js",
 
-		"Src/Scenes/Sequence.js",
-		"Src/Scenes/SceneBase.js",
-		"Src/Scenes/GamePlay.js",
-		"Src/Scenes/Title.js",
+		"Src/Scene/Sequence.js",
+		"Src/Scene/SceneBase.js",
+		"Src/Scene/GamePlay.js",
+		"Src/Scene/Title.js",
 
 		"Src/Resource.js",
 		"Src/App.js"
