@@ -1,12 +1,12 @@
 /* *******************************************************************************
 	GamePlayシーン
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 var cc;
 (function(){	//File Scope
 
 /** エイミングクラス */
-Scenes.Aiming	= class {
+Scene.Aiming	= class {
 
 	constructor(){
 		/**ゲージ長*/this.LENGTH				= 65536;

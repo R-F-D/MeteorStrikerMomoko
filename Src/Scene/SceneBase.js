@@ -1,11 +1,11 @@
 /* *******************************************************************************
 	シーン基本クラス
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 var cc;
 
 /** シーン基本クラス */
-Scenes.SceneBase	= class {
+Scene.SceneBase	= class {
 
 	constructor(){
 
@@ -177,7 +177,7 @@ Scenes.SceneBase	= class {
 	}
 
 	ApplicateCcSceneInstance(childScene){
-		if(!childScene instanceof Scenes.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
+		if(!childScene instanceof Scene.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
 		
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){

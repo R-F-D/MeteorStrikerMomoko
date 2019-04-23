@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	GamePlayシーン
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 (function(){	//File Scope
 
 /** classへのthis */
@@ -39,7 +39,7 @@ const LinkedLayerTags	= {
 	UI		: "GamePlay.Ui",
 };
 
-Scenes.GamePlay	= class extends Scenes.SceneBase {
+Scene.GamePlay	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();
@@ -95,7 +95,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		}
 
 		//シークエンス設定
-		for(let i in Sequences){ Sequences[i] = Scenes.Sequence.Create() }
+		for(let i in Sequences){ Sequences[i] = Scene.Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
 	}
 
@@ -310,7 +310,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 
 	OnEnter(){
 		super.OnEnter();
-		this.aiming	= Scenes.Aiming
+		this.aiming	= Scene.Aiming
 							.Create()
 							.PushHitArea( "PERFECT",	-0.10,	0.10 )
 							.PushHitArea( "GOOD",		-0.25,	0.25 )
@@ -564,7 +564,7 @@ Scenes.GamePlay	= class extends Scenes.SceneBase {
 		Debug(()=>{
 			//commonEvents.push(this.listeners.reset);
 		});
-		Scenes.Sequence.SetCommonEventListeners(commonEvents);
+		Scene.Sequence.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
 		//Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(Sequences.START_AIM);

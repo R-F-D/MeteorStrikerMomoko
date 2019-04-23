@@ -28,7 +28,7 @@ cc.game.onStart = function(){
 
 	//load resources
 	cc.LoaderScene.preload(g_resources, function () {
-		cc.director.runScene( Scenes.SceneFactory().GetCcSceneInstance() );
+		cc.director.runScene( Scene.SceneFactory().GetCcSceneInstance() );
 	}, this);
 };
 cc.game.run();

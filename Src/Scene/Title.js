@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	Titleシーン
 ********************************************************************************/
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 (function(){	//File Scope
 
 /** classへのthis */
@@ -13,7 +13,7 @@ let Sequences	= {
 };
 
 
-Scenes.Title	= class extends Scenes.SceneBase {
+Scene.Title	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();

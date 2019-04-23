@@ -2,12 +2,12 @@
 	シークエンスクラス
 ********************************************************************************/
 var cc;
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 
 /** シークエンス実体クラス
  * @class Sequence
  */
-Scenes.Sequence	= class Sequence{
+Scene.Sequence	= class Sequence{
 
 	constructor(){
 		this.DEFAULT_FUNCTION_TAG	= "_DEFAULT";
@@ -181,4 +181,4 @@ Scenes.Sequence	= class Sequence{
 
 }
 
-Scenes.Sequence._commonEventListeners	= [];
+Scene.Sequence._commonEventListeners	= [];

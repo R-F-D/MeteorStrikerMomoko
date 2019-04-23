@@ -1,9 +1,9 @@
 var cc;
-var Scenes	= Scenes || {};
+var Scene	= Scene || {};
 
 /** Scenesクラスのファクトリ */
-Scenes.SceneFactory	= ()=>{
-	const sceneClass	= Scenes.GamePlay;
+Scene.SceneFactory	= ()=>{
+	const sceneClass	= Scene.GamePlay;
 	return sceneClass.Create();
 }
 
