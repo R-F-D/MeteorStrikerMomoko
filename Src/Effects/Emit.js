@@ -32,7 +32,7 @@ Effects.Emit	= class extends Effects.EffectBase{
 	Spawn(x,y){
 		this.ActivateParticles(_nParticles,(v,i)=>{
 			v.sprite
-				.SetPosition(x+6,y).SetIndex(0)
+				.SetPosition(x+4,y).SetIndex(0)
 				.SetVisible(true).SetColor(this.color);
 				v.index=0;
 			return true;
