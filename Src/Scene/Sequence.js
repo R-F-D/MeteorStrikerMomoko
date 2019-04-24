@@ -79,7 +79,7 @@ Scene.Sequence	= class Sequence{
 		for(let f of this.updateFunctions[tag]||[]){
 			if(typeof f==='function')	f(dt,this);
 		}
-		++this.count;
+		if(tag===this.DEFAULT_FUNCTION_TAG)	++this.count;
 		return this;
 	}
 
