@@ -531,7 +531,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry"));
 				}
 				else if(type===ccui.Widget.TOUCH_ENDED){
-					this.Reset();
+					this.SetSequence(Sequences.INITIAL);
 				}
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
@@ -647,7 +647,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	Reset(){
 		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
-		this.SetSequence(Sequences.INITIAL);
+		//this.SetSequence(Sequences.INITIAL);
+		cc.director.runScene(Scene.Title.Create().GetCcSceneInstance());
 		return this;
 	}
 

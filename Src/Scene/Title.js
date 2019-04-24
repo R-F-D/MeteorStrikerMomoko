@@ -79,6 +79,8 @@ Scene.Title	= class extends Scene.SceneBase {
 						.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 
 					_this.flyFx.Spawn(_this.sprites.player.x-16,_this.sprites.player.y-8).Update();
+
+					_this.touchedEffect.Update();
 					return true;
 				},
 			});
@@ -90,6 +92,30 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.sequence.Init()
+		return this;
+	}
+
+	InitEventListenerList(){
+		super.InitEventListenerList()
+			/** 次フェイズへの単純遷移 */
+			.AddPropertiesToEventListenerList("toGamePlay",{
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touch,event)=>{
+					cc.director.runScene(Scene.GamePlay.Create().GetCcSceneInstance());
+					return true;
+				},
+			})
+		//共通イベント対応設定
+		let commonEvents	= [];
+		commonEvents.push(this.listeners.touched);
+		Debug(()=>{
+			//commonEvents.push(this.listeners.reset);
+		});
+		Scene.Sequence.SetCommonEventListeners(commonEvents);
+
+		//シークエンス-イベント対応設定
+		Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(Sequences.START_AIM);
+
 		return this;
 	}
 
