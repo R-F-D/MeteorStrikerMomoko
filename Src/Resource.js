@@ -5,6 +5,8 @@ const rc	= {
 
 	/** 画像 */
 	img	: {
+		logo			: [ "logo.png",				1,	1,	],	//タイトルロゴ
+
 		bg1				: [ "bg1.png",				1,	1,	],	//背景1
 		bg2				: [ "bg2.png",				1,	1,	],	//背景2
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
