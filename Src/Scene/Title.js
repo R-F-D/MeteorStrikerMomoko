@@ -80,7 +80,7 @@ Scene.Title	= class extends Scene.SceneBase {
 
 					_this.flyFx.Spawn(_this.sprites.player.x-16,_this.sprites.player.y-8).Update();
 
-					_this.touchedEffect.Update();
+					_this.fx.touched.Update();
 					return true;
 				},
 			});

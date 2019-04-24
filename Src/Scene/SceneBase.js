@@ -116,7 +116,8 @@ Scene.SceneBase	= class {
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
-				_this.touchedEffect	= Effect.Touched.Create().Init(this);
+				_this.fx	= _this.fx||{};
+				_this.fx.touched	= Effect.Touched.Create().Init(this);
 				return true;
 			},
 			update	: function(dt){
@@ -146,7 +147,7 @@ Scene.SceneBase	= class {
 			onTouchesBegan	: (touches,event)=>{
 				for(let t of touches){
 					const pos	= t.getLocation();
-					this.touchedEffect.Spawn(pos.x,pos.y);
+					this.fx.touched.Spawn(pos.x,pos.y);
 				}
 				return true;
 			},
