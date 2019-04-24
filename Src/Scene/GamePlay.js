@@ -622,7 +622,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		// 8 9 10 11	強
 
 		//スプライト番号
-		let idx	= this.sequence.count%512<64 ? 2 : 0;
+		let idx	= this.sequence.count%128<16 ? 2 : 0;
 		if([Sequences.PRELIMINARY].includes(this.sequence)){	//振りかぶり
 			idx	= this.playerHardblows(this.chargingCount)	? 8	: 0;
 		}
@@ -635,7 +635,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([Sequences.EMIT,Sequences.BLOW_AWAY,Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後	
 			idx	= this.playerHardblows()	? 10	: 6;
 		}
-		if(Math.trunc(this.sequence.count/32) % 2) ++idx;
+		if(Math.trunc(this.count/8) % 2) ++idx;
 
 		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(_this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		this.fx.player.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==Sequences.MEASURE).Update();
