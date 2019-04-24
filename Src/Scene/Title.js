@@ -45,8 +45,12 @@ Scene.Title	= class extends Scene.SceneBase {
 					this._super();
 					const size	= cc.director.getWinSize();
 					_this.sprites.bg		= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(true)	);
-					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this).SetScale(1).Attr({zIndex:0}).SetPositionLT(0,size.height);
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetScale(2).Attr({zIndex:5}).SetPosition(128,64).SetRotate(-5).SetCustomData("adjY").SetCustomData("dy");;
+					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this).SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this)
+												.SetScale(0).Attr({zIndex:5}).SetRotate(-5)
+												.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
+												.RunAction(cc.ScaleTo.create(10,2).easing(cc.easeBackOut(10)));
+					_this.flyFx				= Effect.Fly.Create(32).Init(this).SetVelocity(1,-0.5,-0.5,0);;
 					return true;
 				},
 				update	: function(dt){
@@ -58,17 +62,23 @@ Scene.Title	= class extends Scene.SceneBase {
 						v.SetPosition(	width /2 - Cycle(_this.count*4, 0, bgWidth) + bgWidth*i,	256);
 					});
 
-					let adjY	= _this.sprites.player.GetCustomData("adjY",+100);	//修正
-					let dy		= _this.sprites.player.GetCustomData("dy",  -3);		//増分
-					dy += adjY < 0	? 0.01	: -0.01;
-					if     (dy <-0.25) dy = MoveTo(dy,-0.25,0.05);
-					else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
-					adjY += dy;
+					let adj	= {	x:_this.sprites.player.GetCustomData("adj.x",-100),	//修正
+								y:_this.sprites.player.GetCustomData("adj.y",+100)};	//修正
+					let d	= { x:_this.sprites.player.GetCustomData("dx",  +1),	//増分
+								y:_this.sprites.player.GetCustomData("dy",  -1)};	//増分
+					d.x	= Math.max(0,d.x*0.99);
+					adj.x += d.x;
+					d.y += adj.y < 0	? 0.01	: -0.01;
+					if     (d.y <-0.99) d.y = MoveTo(d.y,-0.99,0.01);
+					else if(d.y > 0.99) d.y = MoveTo(d.y, 0.99,0.01);
+					adj.y += d.y;
 					
-
 					_this.sprites.player
 						.SetIndex(Math.trunc(_this.count/8)%2+4)
-						.SetPosition(128,64+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
+						.SetPosition(128+adj.x,80+adj.y)
+						.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
+
+					_this.flyFx.Spawn(_this.sprites.player.x-16,_this.sprites.player.y-8).Update();
 					return true;
 				},
 			});
