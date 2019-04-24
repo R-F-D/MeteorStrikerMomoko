@@ -188,7 +188,7 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				childScene.OnUpdating(dt);
-				if(childScene.sequence.Update)	childScene.sequence.Update(dt);
+				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
 			},	
 		}))();
