@@ -85,6 +85,12 @@ class Sprite{
 		return this;
 	}
 
+	SetPositionLT(x,y){
+		const size	= this.GetPieceSize();
+		this.SetPosition(x+size.width/2,y-size.height/2);
+		return this;
+	}
+
 	/** 座標設定（相対座標）
 	 * @param {number} x 直交座標、または極座標の原点でのx増分。null時は変更しない。
 	 * @param {number} y 直交座標、または極座標の原点でのy増分。null時は変更しない。
