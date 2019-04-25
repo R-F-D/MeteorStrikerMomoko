@@ -4,13 +4,6 @@
 var Scene	= Scene || {};
 (function(){	//File Scope
 
-/** classへのthis */
-let _this	= null;
-
-/** シークエンス列挙型 */
-let Sequences	= {
-	/**初期状態*/		INITIAL			: null,
-};
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
 	MAIN	: "Title.Main",
@@ -18,21 +11,25 @@ const LinkedLayerTags	= {
 
 Scene.Title	= class extends Scene.SceneBase {
 
+	Sequences	= {
+		/**初期状態*/		INITIAL			: null,
+	};
+
 	constructor(){
 		super();
-		_this	= this;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
 
 		//シークエンス設定
-		for(let i in Sequences){ Sequences[i] = Scene.Sequence.Create() }
+		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
 	}
 
 
 	/** ccLayerに渡す用 */
 	InitLayerList(){
+		const _this	= this;
 		super.InitLayerList()
 			.AddToLayerList("main",{
 				ctor:function(){
@@ -90,7 +87,7 @@ Scene.Title	= class extends Scene.SceneBase {
 	OnEnter(){
 		super.OnEnter();
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
-		this.InitSequence(Sequences.INITIAL,Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
+		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.sequence.Init()
 		return this;
 	}
@@ -114,7 +111,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		Scene.Sequence.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
-		Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(Sequences.START_AIM);
+		this.Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(this.Sequences.START_AIM);
 
 		return this;
 	}
