@@ -196,6 +196,10 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
+	/** シーン遷移
+	 * @param {*} newSceneClass シーンクラスの型
+	 * @returns  this
+	 */
 	ReplaceScene(newSceneClass){
 		cc.director.runScene( cc.TransitionFade.create(1,newSceneClass.Create().GetCcSceneInstance()));
 		return this;

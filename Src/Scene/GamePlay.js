@@ -534,7 +534,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry"));
 				}
 				else if(type===ccui.Widget.TOUCH_ENDED){
-					this.SetSequence(this.Sequences.INITIAL);
+					this.ReplaceScene(Scene.GamePlay);
 				}
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
