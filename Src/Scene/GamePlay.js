@@ -498,14 +498,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.fx.emit.Spawn(this.sprites.player.x,this.sprites.player.y);
 				},
 			})
-			/** 次フェイズへの単純遷移 */
-			.AddPropertiesToEventListenerList("transionToNext",{
-				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touch,event)=>{
-					if(this.isSequenceMovable && this.sequence.NextPhase())	this.SetSequence(this.sequence.NextPhase());
-					return true;
-				},
-			})
 			/**リセットボタン*/
 			.AddToEventListenerList("resetButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
@@ -570,7 +562,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		Scene.Sequence.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
-		//this.Sequences.INITIAL.SetEventListeners(		this.listeners.transionToNext	).NextPhase(this.Sequences.START_AIM);
 		this.Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);
 		this.Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
 		this.Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
@@ -614,11 +605,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
 			adjY += dy;
 		}
-
-		// 0 1 2 3 		構え
-		// 4  5			飛行
-		// 6 7			弱
-		// 8 9 10 11	強
 
 		//スプライト番号
 		let idx	= this.sequence.count%128<16 ? 2 : 0;
