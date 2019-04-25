@@ -70,8 +70,11 @@ Scene.Title	= class extends Scene.SceneBase {
 					else if(d.y > 0.99) d.y = MoveTo(d.y, 0.99,0.01);
 					adj.y += d.y;
 					
+					let idx	= _this.count%128<16 ? 6 : 4;
+					if(Math.trunc(_this.count/8)%2)	++idx;
+
 					_this.sprites.player
-						.SetIndex(Math.trunc(_this.count/8)%2+4)
+						.SetIndex(idx)
 						.SetPosition(128+adj.x,80+adj.y)
 						.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 

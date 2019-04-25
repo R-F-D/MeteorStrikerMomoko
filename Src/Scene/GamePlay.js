@@ -609,16 +609,16 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//スプライト番号
 		let idx	= this.sequence.count%128<16 ? 2 : 0;
 		if([this.Sequences.PRELIMINARY].includes(this.sequence)){	//振りかぶり
-			idx	= this.playerHardblows(this.chargingCount)	? 8	: 0;
+			idx	= this.playerHardblows(this.chargingCount)	? 10	: 0;
 		}
 		else if([this.Sequences.DISCHARGE_FAILED].includes(this.sequence)){	//攻撃失敗
 			idx	= 2;
 		}
 		else if([this.Sequences.DISCHARGE].includes(this.sequence)){	//攻撃中
-			idx	= this.playerHardblows()	? 8	: 6;
+			idx	= this.playerHardblows()	? 10	: 8;
 		}
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY,this.Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後	
-			idx	= this.playerHardblows()	? 10	: 6;
+			idx	= this.playerHardblows()	? 12	: 8;
 		}
 		if(Math.trunc(this.count/8) % 2) ++idx;
 
