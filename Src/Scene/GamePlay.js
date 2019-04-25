@@ -112,10 +112,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				init	: function(){
 					this._super();
 					_this.sprites			= _this.sprites||{};
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).SetScale(2).Attr({zIndex:5}).SetRotate(-5);
-					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).SetScale(2).Attr({zIndex:2}).SetVisible(true);
-					_this.sprites.distance	= Sprite.CreateInstance(rc.img.distance).AddToLayer(this).SetScale(1).Attr({zIndex:3}).SetVisible(false);
-					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110}).SetVisible(false).SetPosition(48,140);
+					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this).Attr({zIndex:5});
+					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).Attr({zIndex:2});
+					_this.sprites.distance	= Sprite.CreateInstance(rc.img.distance).AddToLayer(this).Attr({zIndex:3});
+					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110});
 
 					_this.fx			= _this.fx||{};
 					_this.fx.meteor		= Effect.Meteor.Create(8).Init(this);
@@ -125,7 +125,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.fx.hit		= Effect.Hit.Create().Init(this);
 					_this.fx.emit		= Effect.Emit.Create().Init(this);
 
-					_this.aiming.Init().SetLayer(this).SetSpritePosition(164,80).SetVisible(false);
+					_this.aiming.Init().SetLayer(this);
 
 					//リセットボタン
 					const size	= cc.director.getWinSize();
@@ -139,43 +139,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.addChild(button);
 
 					//Labels
-					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).SetColor("#FFFFFF").SetPosition(64,105).AddToLayer(this);
-					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).SetColor("#00FF00").AddToLayer(this);
-					_this.labels.navigation		= Label.CreateInstance(15,rc.font.talk).SetColor("FFFFFF").SetIcon(rc.img.navigator).SetPosition(256,32).AddToLayer(this).SetBgEnabled(true).SetIconPosition(-4,0);
+					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).AddToLayer(this);
+					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).AddToLayer(this);
+					_this.labels.navigation		= Label.CreateInstance(15,rc.font.talk).SetIcon(rc.img.navigator).AddToLayer(this);
 
 					_this.SetSequence(_this.Sequences.INITIAL);
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-
-					//Player
-					_this.UpdatePlayerSprite();
-
-					const m	={
-						x:_this.POSITIONS.METEOR.X+Math.min(_this.distanceOfMeteor,250),
-						y:_this.POSITIONS.METEOR.Y,
-					}; 
-					_this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(_this.isOnGround?-7:1);
-					_this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
-					_this.fx.meteor.Spawn(_this.sprites.meteor.x,_this.sprites.meteor.y, _this.sequence.count%15==0 && _this.sequence!==_this.Sequences.MEASURE).Update();
-					_this.fx.explosion.Update();
-					_this.fx.hit.Update();
-					_this.fx.emit.Update();
-					_this.fx.touched.Update();
-
-					_this.labels.aimingResult.SetString(`${_this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-					_this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(
-						L.Textf("GamePlay.Distance.Emit",[
-							L.NumToStr(_this.GetDistanceInKm(),"en"),
-							L.Text("GamePlay.Distance.Unit","_")
-						],"-")
-					);
-
-					let naviIcon	= Math.trunc(_this.count/4) % 32;
-					naviIcon		= naviIcon<=3 ? naviIcon : 0;
-					_this.labels.navigation.SetIconIndex(naviIcon).Update();
-
 					return true;
 				},
 			})
@@ -203,13 +171,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.AddToLayerList("ui",{
 				ctor:function(){
 					this._super();
-					//this.init();
 					this.scheduleUpdate();
 					return true;
-				},/*
-				init	: function(){
-					this._super();
-				},*/
+				},
 				update	: function(dt){
 					this._super();
 					_this.sequence.Update(dt,"layer-ui");
@@ -225,28 +189,32 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
+			this.sprites.player.SetScale(2).SetRotate(-5).SetCustomData("adjY",-100).SetCustomData("dy",3);
+			this.sprites.meteor.SetScale(2).SetVisible(true);
+			this.sprites.distance.SetScale(1).SetVisible(false);
+			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
+
+			this.fx.player.SetVelocity(-1,-0.5,0.5,0);
+			this.fx.meteor.SetVelocity(8,3);
+			this.fx.meteor.SetColor();
+			this.fx.preliminary.Destroy();
+
+			this.labels.aimingResult.SetVisible(false).SetColor("#FFFFFF").SetPosition(64,105);
+			this.labels.distance.SetVisible(false).SetColor("#00FF00");
+			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
+
+			this.aiming.SetSpritePosition(164,80).SetVisible(false);
+
 			this.bgScroll			= 0;
 			this.bgScrollSpeed		= -8;
 			this.chargingCount		= BlowPower.INITIAL;
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
 			this.distanceOfMeteor	= 0;
-			this.sprites.hitArea.SetVisible(false).SetScale(0);
-			this.sprites.meteor.SetVisible(true);
-			this.sprites.distance.SetVisible(false);
-			this.sprites.player.SetCustomData("adjY",-100).SetCustomData("dy",3);
-			this.fx.player.SetVelocity(-1,-0.5,0.5,0);
-			this.fx.meteor.SetVelocity(8,3);
-			this.fx.meteor.SetColor();
-			this.fx.preliminary.Destroy();
-			this.labels.aimingResult.SetVisible(false);
-			this.labels.distance.SetVisible(false);
-			this.labels.navigation.Init().SetVisible(false);
 
 			const size	= cc.director.getWinSize();
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
 			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
-			this.aiming.SetVisible(false);
 
 			(this.UIs.resultButtons||[]).forEach( button=>button.removeFromParent() );	//リザルト画面のボタンを初期化
 		})
@@ -445,6 +413,27 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
+		//Player
+		this.UpdatePlayerSprite();
+
+		const m	={
+			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
+			y:this.POSITIONS.METEOR.Y,
+		}; 
+		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
+		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
+		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y, this.sequence.count%15==0 && this.sequence!==this.Sequences.MEASURE).Update();
+		this.fx.explosion.Update();
+		this.fx.hit.Update();
+		this.fx.emit.Update();
+
+		this.labels.aimingResult.SetString(`${this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
+		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
+
+		let naviIcon	= Math.trunc(this.count/4) % 32;
+		naviIcon		= naviIcon<=3 ? naviIcon : 0;
+		this.labels.navigation.SetIconIndex(naviIcon).Update();
+
 		this.isOnGround	= ![this.Sequences.BLOW_AWAY,this.Sequences.MEASURE ].includes(this.sequence);
 		return this;
 	}

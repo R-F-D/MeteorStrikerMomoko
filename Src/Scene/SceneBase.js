@@ -116,12 +116,13 @@ Scene.SceneBase	= class {
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
-				_this.fx	= _this.fx||{};
+				_this.fx			= _this.fx||{};
 				_this.fx.touched	= Effect.Touched.Create().Init(this);
 				return true;
 			},
 			update	: function(dt){
 				this._super();
+				_this.fx.touched.Update();
 			},
 		});
 		return this;
@@ -188,6 +189,7 @@ Scene.SceneBase	= class {
 				this.scheduleUpdate();
 			},
 			update	: function(dt){
+				this._super();
 				childScene.OnUpdating(dt);
 				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
