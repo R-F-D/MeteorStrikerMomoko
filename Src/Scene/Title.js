@@ -101,7 +101,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.AddPropertiesToEventListenerList("toGamePlay",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
-					cc.director.runScene(Scene.GamePlay.Create().GetCcSceneInstance());
+					this.ReplaceScene(Scene.GamePlay);
 					return true;
 				},
 			})

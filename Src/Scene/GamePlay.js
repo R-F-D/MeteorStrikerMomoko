@@ -651,8 +651,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	Reset(){
 		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
-		//this.SetSequence(Sequences.INITIAL);
-		cc.director.runScene(Scene.Title.Create().GetCcSceneInstance());
+		this.ReplaceScene(Scene.Title);
 		return this;
 	}
 

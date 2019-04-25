@@ -196,6 +196,11 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
+	ReplaceScene(newSceneClass){
+		cc.director.runScene( cc.TransitionFade.create(1,newSceneClass.Create().GetCcSceneInstance()));
+		return this;
+	}
+
 	OnEnter(){return this}
 	SetSequenceFunctions(){return this;}
 
