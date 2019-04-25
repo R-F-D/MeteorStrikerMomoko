@@ -208,4 +208,13 @@ Scene.SceneBase	= class {
 	OnEnter(){return this}
 	SetSequenceFunctions(){return this;}
 
+	/** 強制リセット
+	 * @returns this 
+	 */
+	ResetForce(){
+		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
+		this.ReplaceScene(Scene.Title);
+		return this;
+	}
+
 }//class

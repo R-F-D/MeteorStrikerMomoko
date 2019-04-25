@@ -504,7 +504,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset"));
 				}
 				else if(type===ccui.Widget.TOUCH_ENDED){
-					this.Reset();
+					this.ResetForce();
 				}
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 					this.labels.navigation.RemoveTempText();
@@ -516,7 +516,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				event			: cc.EventListener.KEYBOARD || null,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
-						this.Reset();
+						this.ResetForce();
 					}
 				},
 			})
@@ -631,15 +631,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		return Math.round( Math.min(this.distanceOfMeteor,this.totalPower)*1000000 );
 	}
 
-	/** リセット
-	 * @returns this 
-	 */
-	Reset(){
-		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
-		this.ReplaceScene(Scene.Title);
-		return this;
-	}
-
 	/** プレイヤーが強打モーションを行うか
 	 * @param {number?} [power=this.chargedPowerl]	検証するパワー値。省略時
 	 * @returns {boolean}
@@ -647,8 +638,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	playerHardblows(power=this.chargedPower){
 		return !(power < BlowPower.MAX/2);
 	}
-
-
 
 }//class
 
