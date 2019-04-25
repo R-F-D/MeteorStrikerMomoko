@@ -10,7 +10,7 @@ Scene.SceneBase	= class {
 	constructor(){
 
 		/** @var number シーン内のシークエンス */
-		this.sequence			= 0;
+		this.sequence			= null;
 		/** @var {boolean} シークエンス遷移が可能か */
 		this.isSequenceMovable	= false;
 		/** @var シーン開始からのカウント */

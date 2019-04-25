@@ -149,8 +149,13 @@ Scene.Sequence	= class Sequence{
 	 * @memberof Sequence
 	 */
 	SetEventListeners(listeners){
-		if(Array.isArray(listeners))	this.eventListeners	= listeners;
-		else							this.eventListeners	= [listeners];
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		this.eventListeners	= listeners;
+		return this;
+	}
+	PushEventListeners(listeners){
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		this.eventListeners.push(...listeners);
 		return this;
 	}
 
@@ -160,8 +165,14 @@ Scene.Sequence	= class Sequence{
 	 * @memberof Sequence
 	 */
 	static SetCommonEventListeners(listeners){
-		if(Array.isArray(listeners))	Sequence._commonEventListeners	= listeners;
-		else							Sequence._commonEventListeners	= [listeners];
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		Sequence._commonEventListeners	= listeners;
+		return;
+	}
+	static PushCommonEventListeners(listeners){
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		Sequence._commonEventListeners.push(...listenrs);
+		return;
 	}
 
 	/** 単純遷移における次フェイズを設定または取得
