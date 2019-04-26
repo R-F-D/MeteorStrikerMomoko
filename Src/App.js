@@ -3,8 +3,8 @@ var Scene	= Scene || {};
 
 /** Scenesクラスのファクトリ */
 Scene.SceneFactory	= ()=>{
-	const sceneClass	= Scene.Title;
-	return sceneClass.Create();
+	Scene.SceneBase._FirstScene	= Scene.Title;
+	return Scene.SceneBase._FirstScene.Create();
 }
 
 

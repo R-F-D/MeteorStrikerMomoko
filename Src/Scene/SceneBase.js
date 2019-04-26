@@ -3,6 +3,8 @@
 ********************************************************************************/
 var Scene	= Scene || {};
 var cc;
+(function(){	//File Scope
+
 
 /** シーン基本クラス */
 Scene.SceneBase	= class {
@@ -215,8 +217,12 @@ Scene.SceneBase	= class {
 	 */
 	ResetForce(){
 		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
-		this.ReplaceScene(Scene.Title);
+		this.ReplaceScene(Scene.SceneBase._FirstScene);
 		return this;
 	}
 
 }//class
+Scene.SceneBase._FirstScene	= Scene.SceneBase._FirstScene || null;
+
+})();	//File Scope
+
