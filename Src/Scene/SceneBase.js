@@ -9,6 +9,9 @@ var cc;
 /** シーン基本クラス */
 Scene.SceneBase	= class {
 
+	static first	= null;
+	static resetTo	= null;
+
 	constructor(){
 
 		/** @var number シーン内のシークエンス */
@@ -217,12 +220,11 @@ Scene.SceneBase	= class {
 	 */
 	ResetForce(){
 		Debug(()=>Log("[DEBUG] Reset Scene ----------"));
-		this.ReplaceScene(Scene.SceneBase._FirstScene);
+		this.ReplaceScene(Scene.SceneBase.resetTo);
 		return this;
 	}
 
 }//class
-Scene.SceneBase._FirstScene	= Scene.SceneBase._FirstScene || null;
 
 })();	//File Scope
 

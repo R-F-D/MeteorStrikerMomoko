@@ -3,8 +3,9 @@ var Scene	= Scene || {};
 
 /** Scenesクラスのファクトリ */
 Scene.SceneFactory	= ()=>{
-	Scene.SceneBase._FirstScene	= Scene.Title;
-	return Scene.SceneBase._FirstScene.Create();
+	Scene.SceneBase.first	= Scene.Title;
+	Scene.SceneBase.resetTo	= Scene.Title;
+	return Scene.SceneBase.first.Create();
 }
 
 
