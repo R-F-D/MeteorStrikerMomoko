@@ -50,7 +50,7 @@ Button	= class Button{
 	 * @returns this
 	 */
 	at(idx){
-		return this.items[i];
+		return this.items[idx];
 	}
 
 	/** forEachのラッパ
@@ -60,6 +60,10 @@ Button	= class Button{
 	forEach(predicate){
 		this.items.forEach(predicate);
 		return this;
+	}
+
+	FindWithTag(tag){
+		return this.items.find(v=>v.tag===tag);
 	}
 
 	/** 座標を設定
@@ -99,6 +103,8 @@ class ButtonItem{
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
+
+		this.SetTag();
 	}
 
 	/**レイヤに自身を追加*/
@@ -128,6 +134,16 @@ class ButtonItem{
 	/**相対座標を設定*/
 	Move(x,y){
 		return this.SetPosition(this.x+x,this.y+y);
+	}
+
+	/** 検索用タグ
+	 * @param {string?} [tag=null] タグ設定、省略時タグ削除
+	 * @returns {this}
+	 * @memberof ButtonItem
+	 */
+	SetTag(tag=null){
+		this.tag	= tag;
+		return this;
 	}
 }
 
