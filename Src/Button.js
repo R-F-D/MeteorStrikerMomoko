@@ -15,12 +15,13 @@ Button	= class Button{
 
 		this.x	= 0;
 		this.y	= 0;
+		this.layer	= null;
 	}
 
 	/** インスタンス生成
 	 * @static
 	 * @returns
-	 * @memberof Labe;
+	 * @memberof Button
 	 */
 	static CreateInstance(nItems){
 		return new this(nItems);
@@ -30,9 +31,11 @@ Button	= class Button{
 	 * @param {Number} idx
 	 * @param {*} layer
 	 * @returns this
-	 * @memberof Label
+	 * @memberof Button
 	 */
 	AddToLayer(layer){
+		if(layer==null)	return this;
+		this.layer	= layer;
 		this.forEach(v=>v.AddToLayer(layer));
 		return this;
 	}
@@ -103,15 +106,19 @@ class ButtonItem{
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
+		this.sprite	= null;
+		this.layer	= null;
 
 		this.SetTag();
 	}
 
 	/**レイヤに自身を追加*/
 	AddToLayer(layer){
+		this.layer	= layer;
 		this.entity.removeFromParent();
 		//this.entity.addTouchEventListener(listeners[i],layer);
 		layer.addChild(this.entity);
+		if(this.sprite)	this.sprite.AddToLayer(layer)
 		return this;
 	}
 
@@ -123,12 +130,28 @@ class ButtonItem{
 		return this;
 	}
 
+	CreateSprite(res){
+		this.sprite	= Sprite.CreateInstance(res);
+		this.ApplySpriteSettings();
+		return this;
+	}
+
 	/**座標を設定*/
 	SetPosition(x,y){
 		this.x	= x;
 		this.y	= y;
 		this.entity.setPosition(this.container.x+x,this.container.y+y);
+		this.ApplySpriteSettings();
 		return this;
+	}
+
+	ApplySpriteSettings(){
+		if(!this.sprite)	return this;
+		const position	= this.entity.getPosition();
+		this.sprite
+			.SetPosition(position.x,position.y)
+			.AddToLayer(this.layer);
+		return;
 	}
 
 	/**相対座標を設定*/

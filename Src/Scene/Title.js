@@ -52,6 +52,9 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.sequence.Init()
 
+		this.btn.SetPosition(384,128);
+		this.btn.at(0).CreateSprite(rc.img.retryButton);
+
 		return this;
 	}
 
