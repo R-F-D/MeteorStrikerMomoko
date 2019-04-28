@@ -143,7 +143,7 @@ class ButtonItem{
 		this.sprite
 			.SetPosition(this.container.x+this.x,this.container.y+this.y)
 			.AddToLayer(this.container.layer);
-		this.AddEvent(this.listener);
+		this.ApplyEvents();
 		return this;
 	}
 
@@ -168,25 +168,33 @@ class ButtonItem{
 		return this;
 	}
 
-	AddEvent(listener){
-		if(listener==null)	return this;
-		this.listener	= listener;
-		if(!this.sprite)	return this;
+	ApplyEvents(){
+		if(this.listeners==null || !this.sprite)	return this;
 
-		cc.eventManager.addListener(listener,this.sprite.entity);
+		cc.eventManager.addListener(
+			cc.EventListener.create({
+				event			: cc.EventListener.TOUCH_ONE_BY_ONE,
+				onTouchBegan	: (touch,event)=>{
+					if(!this.listeners.onTouchBegan)	return true;
+					const target		= event.getCurrentTarget();
+					const location		= target.convertToNodeSpace(touch.getLocation());
+					const spriteSize	= target.getContentSize();
+					const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
+
+					if(cc.rectContainsPoint(spriteRect,location))	this.listeners.onTouchBegan();
+					return true;
+				},
+			}),
+			this.sprite.entity
+		);
 		return this;
 	}
 
-	/*
-	OnTouchEnded(onTouchEnded){
-		let listener	= (sender,type)=>{
-			if (type===ccui.Widget.TOUCH_ENDED)	onTouchEnded();
-			return true;
-		};
-		this.AddEvent(listener);
+	OnTouchBegan(event=null){
+		this.listeners	= this.listeners||{};
+		this.listeners.onTouchBegan	= event;
 		return this;
 	}
-	*/
 }
 
 })();	//File Scope

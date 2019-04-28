@@ -39,7 +39,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
-					_this.btn				= Button.CreateInstance(1).AddToLayer(this);
+					_this.buttons			= Button.CreateInstance(1).AddToLayer(this);
 
 					return true;
 				},
@@ -53,13 +53,12 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.sequence.Init()
 
-		this.btn.SetPosition(384,128);
-
+		this.buttons.SetPosition(384,128);
 		
-		
-		
-		this.btn.at(0).CreateSprite(rc.img.retryButton).OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay));
-
+		this.buttons.at(0)
+			.CreateSprite(rc.img.retryButton)
+			.OnTouchBegan(()=>this.ReplaceScene(Scene.GamePlay))
+			.ApplyEvents();
 
 		return this;
 	}
