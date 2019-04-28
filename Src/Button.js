@@ -143,7 +143,7 @@ class ButtonItem{
 		this.sprite
 			.SetPosition(this.container.x+this.x,this.container.y+this.y)
 			.AddToLayer(this.container.layer);
-		this.ApplyEvents();
+		this._ApplyEvents();
 		return this;
 	}
 
@@ -168,7 +168,7 @@ class ButtonItem{
 		return this;
 	}
 
-	ApplyEvents(){
+	_ApplyEvents(){
 		if(this.listeners==null || !this.sprite)	return this;
 
 		cc.eventManager.addListener(
@@ -193,6 +193,7 @@ class ButtonItem{
 	OnTouchBegan(event=null){
 		this.listeners	= this.listeners||{};
 		this.listeners.onTouchBegan	= event;
+		this._ApplyEvents();
 		return this;
 	}
 }
