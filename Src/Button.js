@@ -94,7 +94,7 @@ Button	= class Button{
 }
 
 /********************************************************************************
- * ccui.Buttonのラッパクラス
+ * 画像ボタンクラス
  * @class ButtonItem
  ********************************************************************************/
 class ButtonItem{
@@ -103,13 +103,11 @@ class ButtonItem{
 	 * @memberof ButtonItem
 	 */
 	constructor(container){		
-		this.entity		= new ccui.Button(`${rc.DIRECTORY}${rc.sysImg.labelBg}`);
-		this.entity.setOpacity(0);
+		this.sprite		= null;
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
-		this.sprite	= null;
-		this.layer	= null;
+		this.layer	- null;
 
 		this.SetTag();
 	}
@@ -117,24 +115,35 @@ class ButtonItem{
 	/**レイヤに自身を追加*/
 	AddToLayer(layer){
 		this.layer	= layer;
-		this.entity.removeFromParent();
-		//this.entity.addTouchEventListener(listeners[i],layer);
-		layer.addChild(this.entity);
-		this.ApplySprite();
+		if(!this.sprite)	return this;
+
+		this.sprite.removeFromParent();
+		layer.addChild(this.sprite);	
+		this.Apply();		
 		return this;
 	}
 
 	/**初期化*/
 	Init(){
-		this.entity.setScale(1);
-		this.entity.setContentSize(64,64);
+	//	this.entity.setScale(1);
+	//	this.entity.setContentSize(64,64);
 		//this.entity.setSwallowTouches(false);
 		return this;
 	}
 
 	CreateSprite(res){
 		this.sprite	= Sprite.CreateInstance(res);
-		this.ApplySprite();
+		this.Apply();
+		return this;
+	}
+
+	Apply(){
+		if(!this.sprite)	return this;
+
+		this.sprite
+			.SetPosition(this.container.x+this.x,this.container.y+this.y)
+			.AddToLayer(this.container.layer);
+		this.AddEvent(this.listener);
 		return this;
 	}
 
@@ -142,26 +151,8 @@ class ButtonItem{
 	SetPosition(x,y){
 		this.x	= x;
 		this.y	= y;
-		this.entity.setPosition(this.container.x+x,this.container.y+y);
-		this.ApplySprite();
-		return this;
+		return this.Apply();
 	}
-
-	Apply(){
-		this.AddEvent(this.listener);
-		this.ApplySprite();
-		return this;
-	}
-
-	ApplySprite(){
-		if(!this.sprite)	return this;
-		const position	= this.entity.getPosition();
-		this.sprite
-			.SetPosition(position.x,position.y)
-			.AddToLayer(this.layer);
-		return;
-	}
-
 	/**相対座標を設定*/
 	Move(x,y){
 		return this.SetPosition(this.x+x,this.y+y);
@@ -179,12 +170,14 @@ class ButtonItem{
 
 	AddEvent(listener){
 		if(listener==null)	return this;
-
 		this.listener	= listener;
-		this.entity.addTouchEventListener(listener,this.layer);
+		if(!this.sprite)	return this;
+
+		cc.eventManager.addListener(listener,this.sprite.entity);
 		return this;
 	}
 
+	/*
 	OnTouchEnded(onTouchEnded){
 		let listener	= (sender,type)=>{
 			if (type===ccui.Widget.TOUCH_ENDED)	onTouchEnded();
@@ -193,6 +186,7 @@ class ButtonItem{
 		this.AddEvent(listener);
 		return this;
 	}
+	*/
 }
 
 })();	//File Scope
