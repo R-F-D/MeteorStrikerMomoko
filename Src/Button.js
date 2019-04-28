@@ -22,8 +22,8 @@ Button	= class Button{
 	 * @returns
 	 * @memberof Labe;
 	 */
-	static CreateInstance(){
-		return new this();
+	static CreateInstance(nItems){
+		return new this(nItems);
 	}
 
 	/** レイヤに自身を追加
