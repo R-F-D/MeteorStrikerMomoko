@@ -16,6 +16,7 @@ Button	= class Button{
 		this.x	= 0;
 		this.y	= 0;
 		this.layer	= null;
+		this.listener	- null;
 	}
 
 	/** インスタンス生成
@@ -102,7 +103,8 @@ class ButtonItem{
 	 * @memberof ButtonItem
 	 */
 	constructor(container){		
-		this.entity		= new ccui.Button(/*`${rc.DIRECTORY}${rc.sysImg.labelBg}`*/);
+		this.entity		= new ccui.Button(`${rc.DIRECTORY}${rc.sysImg.labelBg}`);
+		this.entity.setOpacity(0);
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
@@ -118,7 +120,7 @@ class ButtonItem{
 		this.entity.removeFromParent();
 		//this.entity.addTouchEventListener(listeners[i],layer);
 		layer.addChild(this.entity);
-		if(this.sprite)	this.sprite.AddToLayer(layer)
+		this.ApplySprite();
 		return this;
 	}
 
@@ -126,13 +128,13 @@ class ButtonItem{
 	Init(){
 		this.entity.setScale(1);
 		this.entity.setContentSize(64,64);
-		//this.entity..setSwallowTouches(false);
+		//this.entity.setSwallowTouches(false);
 		return this;
 	}
 
 	CreateSprite(res){
 		this.sprite	= Sprite.CreateInstance(res);
-		this.ApplySpriteSettings();
+		this.ApplySprite();
 		return this;
 	}
 
@@ -141,11 +143,17 @@ class ButtonItem{
 		this.x	= x;
 		this.y	= y;
 		this.entity.setPosition(this.container.x+x,this.container.y+y);
-		this.ApplySpriteSettings();
+		this.ApplySprite();
 		return this;
 	}
 
-	ApplySpriteSettings(){
+	Apply(){
+		this.AddEvent(this.listener);
+		this.ApplySprite();
+		return this;
+	}
+
+	ApplySprite(){
 		if(!this.sprite)	return this;
 		const position	= this.entity.getPosition();
 		this.sprite
@@ -166,6 +174,23 @@ class ButtonItem{
 	 */
 	SetTag(tag=null){
 		this.tag	= tag;
+		return this;
+	}
+
+	AddEvent(listener){
+		if(listener==null)	return this;
+
+		this.listener	= listener;
+		this.entity.addTouchEventListener(listener,this.layer);
+		return this;
+	}
+
+	OnTouchEnded(onTouchEnded){
+		let listener	= (sender,type)=>{
+			if (type===ccui.Widget.TOUCH_ENDED)	onTouchEnded();
+			return true;
+		};
+		this.AddEvent(listener);
 		return this;
 	}
 }

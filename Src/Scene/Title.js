@@ -40,6 +40,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
 					_this.btn				= Button.CreateInstance(1).AddToLayer(this);
+
 					return true;
 				},
 			});
@@ -53,7 +54,12 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.sequence.Init()
 
 		this.btn.SetPosition(384,128);
-		this.btn.at(0).CreateSprite(rc.img.retryButton);
+
+		
+		
+		
+		this.btn.at(0).CreateSprite(rc.img.retryButton).OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay));
+
 
 		return this;
 	}
@@ -121,6 +127,22 @@ Scene.Title	= class extends Scene.SceneBase {
 					return true;
 				},
 			})
+			//シェアボタン
+			.AddToEventListenerList("shareButton",(sender,type)=>{
+				if      (type===ccui.Widget.TOUCH_BEGAN){
+				}
+				else if (type===ccui.Widget.TOUCH_ENDED){
+					cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
+										L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
+										L.Text("GamePlay.Share.URL"),
+										L.Text("GamePlay.Share.Tags")
+									]));
+				}
+				else if (type===ccui.Widget.TOUCH_CANCELED){
+				}
+				return true;
+			});
+
 		//共通イベント対応設定
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
@@ -130,7 +152,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		Scene.Sequence.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
-		this.Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(this.Sequences.START_AIM);
+		//this.Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(this.Sequences.START_AIM);
 
 		return this;
 	}
