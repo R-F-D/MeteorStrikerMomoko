@@ -51,7 +51,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		super.OnEnter();
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 		this.InitSequences(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.ApplyCommonEventListeners(this.ccLayerInstances[LinkedLayerTags.MAIN]);	//シークエンス初期化後に共通イベントをセット
+		this.ApplyCommonEventListeners(this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
 
 		this.buttons.SetPosition(384,128);
 		
