@@ -52,7 +52,9 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		//レイヤのイベント削除
-		cc.eventManager.removeListeners(this.ccLayerInstances["SceneBase.TouchFx"]);
+		this.ccSceneInstance.getChildren()
+			.filter(child=>child instanceof cc.Layer)
+			.forEach(layer=>cc.eventManager.removeListeners(layer));
 
 		this.InitSequences(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
