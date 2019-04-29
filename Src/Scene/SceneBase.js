@@ -96,17 +96,12 @@ Scene.SceneBase	= class {
 	}
 
 	/** シークエンス初期化
-	 * @param {*} initialSeq シークエンス初期値
 	 * @param {*} seqContainer シークエンスのコンテナ
 	 * @param {*} layerInstance イベントリスナの対象レイヤ
 	 * @returns
 	 */
-	InitSequences(initialSeq,seqContainer,layerInstance){
-		this.sequence	= initialSeq;
-		for(let i in seqContainer){
-			seqContainer[i].SetListenerTarget(layerInstance);
-		}
-		this.sequence.Init();
+	InitSequences(seqContainer,layerInstance){
+		_.forEach(seqContainer,seq=>seq.SetListenerTarget(layerInstance));
 		return this;
 	}
 
