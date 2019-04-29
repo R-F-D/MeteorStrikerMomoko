@@ -35,7 +35,8 @@ Scene.SceneBase	= class {
 		/** @var イベントリスナのコンテナ*/
 		this.listeners	= {};
 		/** @var シーン共通イベントリスナ*/
-		this.commonEventListeners	= [];
+		this.commonEventListeners	= {};
+		this.commonEventListeners["SceneBase.TouchFx"]	= [];
 	}
 
 	/** シーンの更新処理 共通部分
@@ -81,10 +82,13 @@ Scene.SceneBase	= class {
 	 */
 	SetSequence(nextSeq,isForce=true){
 		if(!isForce && this.sequence===nextSeq)	return this;
-
 		this.sequence	= nextSeq;
+
+		//レイヤのイベント削除
+		cc.eventManager.removeListeners(this.ccLayerInstances["SceneBase.TouchFx"]);
+
 		this.sequence.Init();
-		this.ApplyCommonEventListeners();
+		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);
 
 		return this;
 	}
@@ -219,26 +223,22 @@ Scene.SceneBase	= class {
 	OnEnter(){return this}
 	SetSequenceFunctions(){return this;}
 
-	SetCommonEventListeners(listeners){
+	SetCommonEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
-		this.commonEventListeners	= listeners;
+		this.commonEventListeners[tag]	= listeners;
 		return this;
 	}
-	PushCommonEventListeners(listeners){
+	PushCommonEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
-		this.commonEventListeners.push(...listenrs);
+		this.commonEventListeners[tag].push(...listenrs);
 		return this;
 	}
 	
-	ApplyCommonEventListeners(layer=null){
-		//イベントリスナ初期化＆設定
-		layer	= layer||this.eventLayer;
-		if(!layer)	return this;
-		
-		this.eventLayer	= layer;
-		//cc.eventManager.removeListeners(layer);
-		//共通イベント
-		this.commonEventListeners
+	/**共通イベントリスナの設定*/
+	ApplyCommonEventListeners(tag,layer){
+		if(!layer||!tag)	return this;
+
+		(this.commonEventListeners[tag]||[])
 			.filter(e=>e instanceof cc.EventListener)
 			.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),layer));
 		return this;

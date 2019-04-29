@@ -50,8 +50,12 @@ Scene.Title	= class extends Scene.SceneBase {
 	OnEnter(){
 		super.OnEnter();
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+
+		//レイヤのイベント削除
+		cc.eventManager.removeListeners(this.ccLayerInstances["SceneBase.TouchFx"]);
+
 		this.InitSequences(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.ApplyCommonEventListeners(this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
+		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
 
 		this.buttons.SetPosition(384,128);
 		
@@ -149,10 +153,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		Debug(()=>{
 			//commonEvents.push(this.listeners.reset);
 		});
-		this.SetCommonEventListeners(commonEvents);
-
-		//シークエンス-イベント対応設定
-		//this.Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(this.Sequences.START_AIM);
+		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
 	}

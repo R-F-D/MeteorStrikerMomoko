@@ -410,7 +410,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.ApplyCommonEventListeners(this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
+		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);	//シークエンス初期化後に共通イベントをセット
 
 		return this;
 	}
@@ -555,12 +555,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		Debug(()=>{
 			commonEvents.push(this.listeners.keyboardReset);
 		});
-		this.SetCommonEventListeners(commonEvents);
+		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		//シークエンス-イベント対応設定
-		this.Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);
-		this.Sequences.PRELIMINARY.SetEventListeners(	this.listeners.discharge		);
-		this.Sequences.EMIT.SetEventListeners(			this.listeners.emitEnergy		);
+		this.Sequences.START_AIM.SetEventListeners(  LinkedLayerTags.MAIN, this.listeners.discharge		);
+		this.Sequences.PRELIMINARY.SetEventListeners(LinkedLayerTags.MAIN, this.listeners.discharge		);
+		this.Sequences.EMIT.SetEventListeners(       LinkedLayerTags.MAIN, this.listeners.emitEnergy	);
 
 		return this;
 	}

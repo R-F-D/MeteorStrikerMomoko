@@ -44,20 +44,29 @@ Scene.Sequence	= class Sequence{
 		this.count	= 0;
 
 		//イベントリスナ初期化＆設定
+		/*
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
 			//個別イベント
 			this.eventListeners
 				.filter(e=>e instanceof cc.EventListener)
 				.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),this.listenTargetLayer));
-
-			for(let e of this.eventListeners){
-				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
-			}
 		}
+		*/
+		this.ApplyEvents("GamePlay.Main",this.listenTargetLayer);
 
 		//シーケンス開始時処理
 		this.Start(null);
+		return this;
+	}
+
+	/**シークエンス個別イベントの適用*/
+	ApplyEvents(eventTag,layer){
+		if(!layer)	return this;
+		cc.eventManager.removeListeners(layer);
+		(this.eventListeners[eventTag]||[])
+			.filter(e=>e instanceof cc.EventListener)
+			.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),layer));
 		return this;
 	}
 
@@ -148,14 +157,14 @@ Scene.Sequence	= class Sequence{
 	 * @returns
 	 * @memberof Sequence
 	 */
-	SetEventListeners(listeners){
+	SetEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
-		this.eventListeners	= listeners;
+		this.eventListeners[tag]	= listeners;
 		return this;
 	}
-	PushEventListeners(listeners){
+	PushEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
-		this.eventListeners.push(...listeners);
+		this.eventListeners[tag].push(...listeners);
 		return this;
 	}
 
@@ -176,5 +185,3 @@ Scene.Sequence	= class Sequence{
 	}
 
 }
-
-//Scene.Sequence._commonEventListeners	= [];
