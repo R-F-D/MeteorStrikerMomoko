@@ -129,7 +129,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					//ボタン
 					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.resetIcon).SetTag("Reset").OnTouchBegan(()=>_this.ResetForce());
+					_this.buttons.at(0).CreateSprite(rc.img.resetIcon).SetTag("Reset");
 					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
 					_this.buttons.at(2).CreateSprite(rc.img.shareButton).SetTag("Share");
 
@@ -154,8 +154,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
 					_this.sprites		= _this.sprites||{};
-					_this.sprites.bg2	= CreateArray(4).map(i=> Sprite.CreateInstance(rc.img.bg2).AddToLayer(this).SetVisible(false)	);
-					_this.sprites.bg1	= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this).SetVisible(false)	);
+					_this.sprites.bgSpace	= CreateArray(4).map(()=>{return Sprite.CreateInstance(rc.img.bgSpace).AddToLayer(this).SetVisible(false)	});
+					_this.sprites.bgGround	= CreateArray(2).map(()=>{return Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(false)	});
 				},
 				update	: function(dt){
 					this._super();
@@ -184,21 +184,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			this.sprites.player.SetScale(2).SetRotate(-5).SetCustomData("adjY",-100).SetCustomData("dy",3);
-			this.sprites.meteor.SetScale(2).SetVisible(true);
-			this.sprites.distance.SetScale(1).SetVisible(false);
-			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
-
-			this.fx.player.SetVelocity(-1,-0.5,0.5,0);
-			this.fx.meteor.SetVelocity(8,3);
-			this.fx.meteor.SetColor();
-			this.fx.preliminary.Destroy();
-
-			this.labels.aimingResult.SetVisible(false).SetColor("#FFFFFF").SetPosition(64,105);
-			this.labels.distance.SetVisible(false).SetColor("#00FF00");
-			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
-
-			this.aiming.SetSpritePosition(164,80).SetVisible(false);
+			const size	= cc.director.getWinSize();
 
 			this.bgScroll			= 0;
 			this.bgScrollSpeed		= -8;
@@ -207,10 +193,29 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.dischargeSpeed		= 0;
 			this.distanceOfMeteor	= 0;
 
-			const size	= cc.director.getWinSize();
-			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
-			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
+			this.aiming.SetSpritePosition(164,80).SetVisible(false);
 
+			//スプライト
+			this.sprites.player.SetScale(2).SetRotate(-5).SetCustomData("adjY",-100).SetCustomData("dy",3);
+			this.sprites.meteor.SetScale(2).SetVisible(true);
+			this.sprites.distance.SetScale(1).SetVisible(false);
+			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
+			this.sprites.bgGround.forEach(s=>s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true));
+			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
+
+			//エフェクト
+			this.fx.player.SetVelocity(-1,-0.5,0.5,0);
+			this.fx.meteor.SetVelocity(8,3);
+			this.fx.meteor.SetColor();
+			this.fx.preliminary.Destroy();
+
+			//ラベル
+			this.labels.aimingResult.SetVisible(false).SetColor("#FFFFFF").SetPosition(64,105);
+			this.labels.distance.SetVisible(false).SetColor("#00FF00");
+			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
+
+			//インタフェース
+			this.buttons.FindWithTag("Reset").SetVisible(true).OnTouchBegan(()=>this.ResetForce());
 			this.buttons.FindWithTag("Retry").SetVisible(false);
 			this.buttons.FindWithTag("Share").SetVisible(false);
 		})
@@ -306,7 +311,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.totalPower			= this.GetEmittingRate() * this.impactPower + 10;
 				this.distanceOfMeteor	= 0;
 
-				for(let s of this.sprites.bg2)	s.SetVisible(true);
+				this.sprites.bgSpace.forEach(s=>s.SetVisible(true));
 				this.aiming.SetVisible(false);
 				this.sprites.distance.SetVisible(true);
 				this.sprites.hitArea.SetVisible(false);
@@ -346,17 +351,17 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.MEASURE);
 			})
 			.PushUpdatingFunctions("layer-bg", (dt)=>{
-				for(let sprite of this.sprites.bg1){
+				this.sprites.bgGround.forEach(sprite=>{
 					sprite
 						.SetRelativePosition(null,-4)
 						.SetOpacity(Math.max(0,255-this.sequence.count*4));
-				}
+				})
 			});
 
 		//計測中
 		this.Sequences.MEASURE
 			.PushStartingFunctions(()=>{
-				for(let s of this.sprites.bg1)	s.SetVisible(false);
+				this.sprites.bgGround.forEach(s=>s.SetVisible(false));
 				this.sprites.meteor.SetVisible(false);
 				this.sprites.distance.SetVisible(false);
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
@@ -439,21 +444,22 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	UpdateBgLayer(dt){
 		const size		= cc.director.getWinSize();
-		const bgWidth	= [this.sprites.bg1[0].img.width, this.sprites.bg2[0].img.width, ];
+		const bgWidth	= [this.sprites.bgGround[0].img.width, this.sprites.bgSpace[0].img.width, ];
 
 		this.bgScroll	+= this.bgScrollSpeed;
 		if     ([this.Sequences.MEASURE].includes(this.sequence))					this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,0,0.05);
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,8,0.25);
-		for(let i=0; i<2; ++i){
-			this.sprites.bg1[i]
+
+		this.sprites.bgGround.forEach((sprite,i)=>{
+			sprite
 				.SetPosition(	size.width /2 - Cycle(this.bgScroll, 0, bgWidth[0]) + bgWidth[0]*i,
 								null);
-		}
-		for(let i=0; i<4; ++i){
-			this.sprites.bg2[i]
+		});
+		this.sprites.bgSpace.forEach((sprite,i)=>{
+			sprite
 				.SetPosition(	size.width /2 - Cycle(this.bgScroll/2,0,bgWidth[1]) + bgWidth[1]*Math.trunc(i/2),
 								size.height/2 - Cycle(this.bgScroll/4,0,bgWidth[1]) + bgWidth[1]*(i%2),	);
-		}
+		});
 		return this;
 	}
 

@@ -35,7 +35,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.sprites.bg		= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bg1).AddToLayer(this));
+					_this.sprites.bg		= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
