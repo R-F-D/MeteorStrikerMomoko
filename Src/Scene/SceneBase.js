@@ -238,9 +238,9 @@ Scene.SceneBase	= class {
 		this.eventLayer	= layer;
 		//cc.eventManager.removeListeners(layer);
 		//共通イベント
-		for(let e of this.commonEventListeners){
-			if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,layer);
-		}
+		this.commonEventListeners
+			.filter(e=>e instanceof cc.EventListener)
+			.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),layer));
 		return this;
 	}
 

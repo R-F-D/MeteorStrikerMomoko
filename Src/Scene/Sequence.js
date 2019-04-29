@@ -46,11 +46,11 @@ Scene.Sequence	= class Sequence{
 		//イベントリスナ初期化＆設定
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
-			//共通イベント
-//			for(let e of Sequence._commonEventListeners){
-//				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
-//			}
 			//個別イベント
+			this.eventListeners
+				.filter(e=>e instanceof cc.EventListener)
+				.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),layer));
+
 			for(let e of this.eventListeners){
 				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
 			}
