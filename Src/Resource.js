@@ -7,8 +7,8 @@ const rc	= {
 	img	: {
 		logo			: [ "logo.png",				1,	1,	],	//タイトルロゴ
 
-		bgGround		: [ "bg1.png",			1,	1,	],	//背景（地上）
-		bgSpace			: [ "bg2.png",			1,	1,	],	//背景（宇宙）
+		bgGround		: [ "bgGround.png",			1,	1,	],	//背景（地上）
+		bgSpace			: [ "bgSpace.png",			1,	1,	],	//背景（宇宙）
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
 		navigator		: [ "navigator.png",		2,	2,	],	//ナビゲータ
 		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
