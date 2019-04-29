@@ -82,7 +82,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.distanceOfMeteor	= 0;
 		this.isOnGround			= true;
 
-		this.UIs	= {};
+		this.buttons	= {};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();		
@@ -127,16 +127,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					_this.aiming.Init().SetLayer(this);
 
-					//リセットボタン
-					const size	= cc.director.getWinSize();
-					let button	= new ccui.Button(GetResPath(rc.img.resetIcon));				
-					button.setPosition(0+16+2,size.height-16-2);
-					button.setScale(1);
-					button.setOpacity(128);
-					button.setContentSize(32,32);
-					//button.setSwallowTouches(false);
-					button.addTouchEventListener(_this.listeners.resetButton,this);
-					this.addChild(button);
+					//ボタン
+					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
+					_this.buttons.at(0).CreateSprite(rc.img.resetIcon).SetTag("Reset").OnTouchBegan(()=>_this.ResetForce());
+					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
+					_this.buttons.at(2).CreateSprite(rc.img.shareButton).SetTag("Share");
 
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).AddToLayer(this);
@@ -216,7 +211,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			for(let s of this.sprites.bg1)	s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true);
 			for(let s of this.sprites.bg2)	s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false);
 
-			(this.UIs.resultButtons||[]).forEach( button=>button.removeFromParent() );	//リザルト画面のボタンを初期化
+			this.buttons.FindWithTag("Retry").SetVisible(false);
+			this.buttons.FindWithTag("Share").SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.aiming.Update(false);
@@ -374,19 +370,21 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Log(`Total: ${this.totalPower}`);
 
 				const size	= cc.director.getWinSize();
-				this.UIs.resultButtons	= this.UIs.resultButtons || [];
-				for(let i=0;i<2;++i){
-					const imgs		= [rc.img.retryButton,rc.img.shareButton];
-					const listeners	= [this.listeners.retryButton,this.listeners.shareButton];
-					this.UIs.resultButtons[i]	= new ccui.Button(GetResPath(imgs[i]));
-			
-					this.UIs.resultButtons[i].setPosition(size.width/2-128+256*i,size.height/2);
-					this.UIs.resultButtons[i].setScale(1);
-					this.UIs.resultButtons[i].setContentSize(128,128);
-					this.UIs.resultButtons[i].addTouchEventListener(listeners[i],this.ccLayerInstances[LinkedLayerTags.UI]);
-					this.UIs.resultButtons[i].setSwallowTouches(false);
-					this.ccLayerInstances[LinkedLayerTags.UI].addChild(this.UIs.resultButtons[i]);
-				}
+				this.buttons.FindWithTag("Retry")
+					.SetVisible(true)
+					.SetPosition(size.width/2-128,size.height/2)
+					.OnTouchBegan(()=>this.ReplaceScene(Scene.GamePlay));
+				this.buttons.FindWithTag("Share")
+					.SetVisible(true)
+					.SetPosition(size.width/2+128,size.height/2)
+					.OnTouchBegan(()=>{
+						this.labels.navigation.RemoveTempText();
+						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
+											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
+											L.Text("GamePlay.Share.URL"),
+											L.Text("GamePlay.Share.Tags")
+										]));
+					});
 
 			});
 			//.PushUpdatingFunctions((dt)=>{});
@@ -489,7 +487,17 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.fx.emit.Spawn(this.sprites.player.x,this.sprites.player.y);
 				},
 			})
-			/**リセットボタン*/
+			//キーボードリセット
+			.AddPropertiesToEventListenerList("reset",{
+				event			: cc.EventListener.KEYBOARD || null,
+				onKeyReleased	: (code,event)=>{
+					if(code==82){	//'R'key
+						this.ResetForce();
+					}
+				},
+			})
+			/*
+			//リセットボタン
 			.AddToEventListenerList("resetButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset"));
@@ -501,15 +509,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation.RemoveTempText();
 				}
 				return true;
-			})
-			//キーボードリセット
-			.AddPropertiesToEventListenerList("reset",{
-				event			: cc.EventListener.KEYBOARD || null,
-				onKeyReleased	: (code,event)=>{
-					if(code==82){	//'R'key
-						this.ResetForce();
-					}
-				},
 			})
 			//リトライボタン
 			.AddToEventListenerList("retryButton",(sender,type)=>{
@@ -541,8 +540,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation.RemoveTempText();
 				}
 				return true;
-			});
-
+			})*/
+			;
 
 		//共通イベント対応設定
 		let commonEvents	= [];
