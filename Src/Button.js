@@ -158,6 +158,11 @@ class ButtonItem{
 		return this.SetPosition(this.x+x,this.y+y);
 	}
 
+	SetVisible(isVisible){
+		this.sprite.SetVisible(isVisible);
+		return this;
+	}
+
 	/** 検索用タグ
 	 * @param {string?} [tag=null] タグ設定、省略時タグ削除
 	 * @returns {this}
@@ -176,7 +181,7 @@ class ButtonItem{
 			cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ONE_BY_ONE,
 				onTouchBegan	: (touch,event)=>{
-					if(!this.listeners.onTouchBegan)	return true;
+					if(!this.sprite.entity.isVisible() || !this.listeners.onTouchBegan)	return true;
 					const target		= event.getCurrentTarget();
 					const location		= target.convertToNodeSpace(touch.getLocation());
 					const spriteSize	= target.getContentSize();
