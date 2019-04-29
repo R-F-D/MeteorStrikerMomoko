@@ -180,17 +180,19 @@ class ButtonItem{
 
 		cc.eventManager.removeListeners(this.sprite.entity);
 		cc.eventManager.addListener(
-			cc.EventListener.create({
+				cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touches,event)=>{
 					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
 						this._isButtonDown	= true;
+						event.stopPropagation();
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 					}
 					return true;
 				},
 				onTouchesEnded	: (touches,event)=>{
 					if(this._isButtonDown && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 					}
 					this._isButtonDown	= false;
