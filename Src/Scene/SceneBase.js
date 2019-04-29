@@ -193,7 +193,7 @@ Scene.SceneBase	= class {
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
-				childScene.SetLayer("SceneBase.TouchFx", childScene.ccLayers.touchFx,0x0100);
+				childScene.SetLayer("SceneBase.TouchFx", childScene.ccLayers.touchFx,0x0200);
 				childScene.OnEnter();
 				this.scheduleUpdate();
 			},

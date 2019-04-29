@@ -99,6 +99,8 @@ Button	= class Button{
  * @class ButtonItem
  ********************************************************************************/
 class ButtonItem{
+	Z	= 0x0100;
+
 	/** コンストラクタ
 	 * @param {Button} container 紐付けするコンテナクラス
 	 * @memberof ButtonItem
@@ -124,14 +126,6 @@ class ButtonItem{
 		return this;
 	}
 
-	/**初期化*/
-	Init(){
-	//	this.entity.setScale(1);
-	//	this.entity.setContentSize(64,64);
-		//this.entity.setSwallowTouches(false);
-		return this;
-	}
-
 	CreateSprite(res){
 		this.sprite	= Sprite.CreateInstance(res);
 		this.Apply();
@@ -143,7 +137,9 @@ class ButtonItem{
 
 		this.sprite
 			.SetPosition(this.container.x+this.x,this.container.y+this.y)
-			.AddToLayer(this.container.layer);
+			.AddToLayer(this.container.layer)
+			.SetScale(1)
+			.Attr({zIndex:this.Z});	
 		this._ApplyEvents();
 		return this;
 	}
@@ -159,9 +155,15 @@ class ButtonItem{
 		return this.SetPosition(this.x+x,this.y+y);
 	}
 
+	/** 表示設定 */
 	SetVisible(isVisible){
 		this.sprite.SetVisible(isVisible);
 		return this;
+	}
+	/** 不透明度の設定 */
+	SetOpacity(opacity){
+		this.sprite.SetOpacity(opacity);
+		return;
 	}
 
 	/** 検索用タグ
