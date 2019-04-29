@@ -171,6 +171,7 @@ class ButtonItem{
 	_ApplyEvents(){
 		if(this.listeners==null || !this.sprite)	return this;
 
+		cc.eventManager.removeListeners(this.sprite.entity);
 		cc.eventManager.addListener(
 			cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ONE_BY_ONE,
