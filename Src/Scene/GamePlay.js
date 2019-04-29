@@ -129,9 +129,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					//ボタン
 					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.resetIcon).SetTag("Reset");
+					_this.buttons.at(0).CreateSprite(rc.img.resetButton).SetTag("Reset");
 					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
-					_this.buttons.at(2).CreateSprite(rc.img.shareButton).SetTag("Share");
+					_this.buttons.at(2).CreateSprite(rc.img.shareScoreButton).SetTag("Share");
 
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).AddToLayer(this);
@@ -494,7 +494,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				},
 			})
 			//キーボードリセット
-			.AddPropertiesToEventListenerList("reset",{
+			.AddPropertiesToEventListenerList("keyboardReset",{
 				event			: cc.EventListener.KEYBOARD || null,
 				onKeyReleased	: (code,event)=>{
 					if(code==82){	//'R'key
@@ -530,7 +530,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				return true;
 			})
 			//シェアボタン
-			.AddToEventListenerList("shareButton",(sender,type)=>{
+			.AddToEventListenerList("shareScoreButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share"));
 				}
@@ -553,7 +553,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
 		Debug(()=>{
-			commonEvents.push(this.listeners.reset);
+			commonEvents.push(this.listeners.keyboardReset);
 		});
 		this.SetCommonEventListeners(commonEvents);
 

@@ -117,7 +117,7 @@ Scene.Title	= class extends Scene.SceneBase {
 
 	InitEventListenerList(){
 		super.InitEventListenerList()
-			/** 次フェイズへの単純遷移 */
+			/** ゲームプレイシーンへ遷移 */
 			.AddPropertiesToEventListenerList("toGamePlay",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touch,event)=>{
@@ -125,8 +125,9 @@ Scene.Title	= class extends Scene.SceneBase {
 					return true;
 				},
 			})
+			/*
 			//シェアボタン
-			.AddToEventListenerList("shareButton",(sender,type)=>{
+			.AddToEventListenerList("shareGameButton",(sender,type)=>{
 				if      (type===ccui.Widget.TOUCH_BEGAN){
 				}
 				else if (type===ccui.Widget.TOUCH_ENDED){
@@ -139,7 +140,8 @@ Scene.Title	= class extends Scene.SceneBase {
 				else if (type===ccui.Widget.TOUCH_CANCELED){
 				}
 				return true;
-			});
+			})*/
+			;
 
 		//共通イベント対応設定
 		let commonEvents	= [];

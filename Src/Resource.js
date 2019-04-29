@@ -25,9 +25,9 @@ const rc	= {
 		emitFx			: [ "Fx/fxEmit.png",		4,	2,	],	//エミットエフェクト
 		touched			: [ "Fx/fxTouch.png",		4,	2,	],	//タッチエフェクト
 
-		resetIcon		: [ "Ui/btnReset.png",		1,	1,	],	//リセットボタン
+		resetButton		: [ "Ui/btnReset.png",		1,	1,	],	//リセットボタン
 		retryButton		: [ "Ui/btnRetry.png",		1,	1,	],	//リトライボタン
-		shareButton		: [ "Ui/btnShare.png",		1,	1,	],	//シェアボタン
+		shareScoreButton: [ "Ui/btnShare.png",		1,	1,	],	//結果シェアボタン
 	},
 
 	/** サウンド */
