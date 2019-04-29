@@ -51,7 +51,8 @@ Scene.Title	= class extends Scene.SceneBase {
 		super.OnEnter();
 		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.sequence.Init()
+		this.sequence.Init();
+		this.ApplyCommonEventListeners(this.ccLayerInstances[LinkedLayerTags.MAIN]);	//シークエンス初期化後に共通イベントをセット
 
 		this.buttons.SetPosition(384,128);
 		
@@ -147,7 +148,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		Debug(()=>{
 			//commonEvents.push(this.listeners.reset);
 		});
-		Scene.Sequence.SetCommonEventListeners(commonEvents);
+		this.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
 		//this.Sequences.INITIAL.SetEventListeners(		this.listeners.toGamePlay	).NextPhase(this.Sequences.START_AIM);

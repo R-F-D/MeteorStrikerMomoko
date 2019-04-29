@@ -405,8 +405,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
 			.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+
 		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.sequence.Init()
+		this.ApplyCommonEventListeners(this.ccLayerInstances[LinkedLayerTags.MAIN]);	//シークエンス初期化後に共通イベントをセット
 
 		return this;
 	}
@@ -547,9 +549,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
 		Debug(()=>{
-			//commonEvents.push(this.listeners.reset);
+			commonEvents.push(this.listeners.reset);
 		});
-		Scene.Sequence.SetCommonEventListeners(commonEvents);
+		this.SetCommonEventListeners(commonEvents);
 
 		//シークエンス-イベント対応設定
 		this.Sequences.START_AIM.SetEventListeners(		this.listeners.discharge		);

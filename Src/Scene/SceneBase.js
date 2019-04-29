@@ -34,6 +34,8 @@ Scene.SceneBase	= class {
 		this.labels		= {};
 		/** @var イベントリスナのコンテナ*/
 		this.listeners	= {};
+		/** @var シーン共通イベントリスナ*/
+		this.commonEventListeners	= [];
 	}
 
 	/** シーンの更新処理 共通部分
@@ -82,6 +84,7 @@ Scene.SceneBase	= class {
 
 		this.sequence	= nextSeq;
 		this.sequence.Init();
+		this.ApplyCommonEventListeners();
 
 		return this;
 	}
@@ -214,6 +217,31 @@ Scene.SceneBase	= class {
 
 	OnEnter(){return this}
 	SetSequenceFunctions(){return this;}
+
+	SetCommonEventListeners(listeners){
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		this.commonEventListeners	= listeners;
+		return this;
+	}
+	PushCommonEventListeners(listeners){
+		if(!Array.isArray(listeners))	listeners	= [listeners];
+		this.commonEventListeners.push(...listenrs);
+		return this;
+	}
+	
+	ApplyCommonEventListeners(layer=null){
+		//イベントリスナ初期化＆設定
+		layer	= layer||this.eventLayer;
+		if(!layer)	return this;
+		
+		this.eventLayer	= layer;
+		//cc.eventManager.removeListeners(layer);
+		//共通イベント
+		for(let e of this.commonEventListeners){
+			if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,layer);
+		}
+		return this;
+	}
 
 	/** 強制リセット
 	 * @returns this 

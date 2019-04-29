@@ -47,9 +47,9 @@ Scene.Sequence	= class Sequence{
 		if(this.listenTargetLayer){
 			cc.eventManager.removeListeners(this.listenTargetLayer);
 			//共通イベント
-			for(let e of Sequence._commonEventListeners){
-				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
-			}
+//			for(let e of Sequence._commonEventListeners){
+//				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
+//			}
 			//個別イベント
 			for(let e of this.eventListeners){
 				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
@@ -159,21 +159,6 @@ Scene.Sequence	= class Sequence{
 		return this;
 	}
 
-	/** 共通イベントリスナを設定
-	 * @static
-	 * @param {*} listeners
-	 * @memberof Sequence
-	 */
-	static SetCommonEventListeners(listeners){
-		if(!Array.isArray(listeners))	listeners	= [listeners];
-		Sequence._commonEventListeners	= listeners;
-		return;
-	}
-	static PushCommonEventListeners(listeners){
-		if(!Array.isArray(listeners))	listeners	= [listeners];
-		Sequence._commonEventListeners.push(...listenrs);
-		return;
-	}
 
 	/** 単純遷移における次フェイズを設定または取得
 	 * @param {*} nextSeq 省略時はゲッタとして機能
@@ -192,4 +177,4 @@ Scene.Sequence	= class Sequence{
 
 }
 
-Scene.Sequence._commonEventListeners	= [];
+//Scene.Sequence._commonEventListeners	= [];
