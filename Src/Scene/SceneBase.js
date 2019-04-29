@@ -85,8 +85,10 @@ Scene.SceneBase	= class {
 		this.sequence	= nextSeq;
 
 		//レイヤのイベント削除
-		cc.eventManager.removeListeners(this.ccLayerInstances["SceneBase.TouchFx"]);
-
+		this.ccSceneInstance.getChildren()
+			.filter(child=>child instanceof cc.Layer)
+			.forEach(layer=>cc.eventManager.removeListeners(layer));
+			
 		this.sequence.Init();
 		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);
 
