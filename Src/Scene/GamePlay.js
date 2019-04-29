@@ -406,8 +406,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
-		this.InitSequence(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
-		this.sequence.Init()
+		this.InitSequences(this.Sequences.INITIAL,this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN]);
 		this.ApplyCommonEventListeners(this.ccLayerInstances[LinkedLayerTags.MAIN]);	//シークエンス初期化後に共通イベントをセット
 
 		return this;
