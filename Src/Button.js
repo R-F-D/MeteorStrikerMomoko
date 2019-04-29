@@ -181,21 +181,21 @@ class ButtonItem{
 		cc.eventManager.removeListeners(this.sprite.entity);
 		cc.eventManager.addListener(
 			cc.EventListener.create({
-				event			: cc.EventListener.TOUCH_ONE_BY_ONE,
-				onTouchBegan	: (touch,event)=>{
-					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touch,event)){
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesBegan	: (touches,event)=>{
+					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
 						this._isButtonDown	= true;
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 					}
 					return true;
 				},
-				onTouchEnded	: (touch,event)=>{
-					if(this._isButtonDown && this.sprite.entity.isVisible() && this._EventIsOnSprite(touch,event)){
+				onTouchesEnded	: (touches,event)=>{
+					if(this._isButtonDown && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 					}
 					this._isButtonDown	= false;
 				},
-				onTouchCanceled	: (touch,event)=>this._isButtonDown	= false,
+				onTouchesCanceled	: (touches,event)=>this._isButtonDown	= false,
 			}),
 			this.sprite.entity
 		);
@@ -203,12 +203,15 @@ class ButtonItem{
 	}
 
 	/**イベントはスプライト上で発生しているか*/
-	_EventIsOnSprite(touch,event){
-		const target		= event.getCurrentTarget();
-		const location		= target.convertToNodeSpace(touch.getLocation());
-		const spriteSize	= target.getContentSize();
-		const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
-		return !!cc.rectContainsPoint(spriteRect,location);
+	_EventIsOnSprite(touches,event){
+		if(!Array.isArray(touches))	touches	= [touches];
+		return !!touches.some(touch=>{
+			const target		= event.getCurrentTarget();
+			const location		= target.convertToNodeSpace(touch.getLocation());
+			const spriteSize	= target.getContentSize();
+			const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
+			return !!cc.rectContainsPoint(spriteRect,location);
+		});
 	}
 
 	/** タッチ開始のコールバックを設定
