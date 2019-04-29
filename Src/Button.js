@@ -50,11 +50,12 @@ Button	= class Button{
 	}
 
 	/** 任意の要素を１つ取り出す
-	 * @param {number} idx インデックス
+	 * @param {number|string} idx インデックスまたはタグ名
 	 * @returns this
 	 */
 	at(idx){
-		return this.items[idx];
+		if(Number.isInteger(idx))	return this.items[idx];
+		else						return this.FindWithTag(idx);
 	}
 
 	/** forEachのラッパ

@@ -215,9 +215,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
 
 			//インタフェース
-			this.buttons.FindWithTag("Reset").SetVisible(true).OnTouchBegan(()=>this.ResetForce());
-			this.buttons.FindWithTag("Retry").SetVisible(false);
-			this.buttons.FindWithTag("Share").SetVisible(false);
+			this.buttons.at("Reset").SetVisible(true).OnTouchBegan(()=>this.ResetForce());
+			this.buttons.at("Retry").SetVisible(false);
+			this.buttons.at("Share").SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.aiming.Update(false);
@@ -375,11 +375,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Log(`Total: ${this.totalPower}`);
 
 				const size	= cc.director.getWinSize();
-				this.buttons.FindWithTag("Retry")
+				this.buttons.at("Retry")
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
 					.OnTouchBegan(()=>this.ReplaceScene(Scene.GamePlay));
-				this.buttons.FindWithTag("Share")
+				this.buttons.at("Share")
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
 					.OnTouchBegan(()=>{
