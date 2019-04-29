@@ -49,7 +49,7 @@ Scene.Sequence	= class Sequence{
 			//個別イベント
 			this.eventListeners
 				.filter(e=>e instanceof cc.EventListener)
-				.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),layer));
+				.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),this.listenTargetLayer));
 
 			for(let e of this.eventListeners){
 				if(e instanceof cc.EventListener)	cc.eventManager.addListener(e,this.listenTargetLayer);
