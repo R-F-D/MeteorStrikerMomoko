@@ -57,7 +57,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		
 		this.buttons.at(0)
 			.CreateSprite(rc.img.retryButton)
-			.OnTouchBegan(()=>this.ReplaceScene(Scene.GamePlay));
+			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay));
 
 		return this;
 	}

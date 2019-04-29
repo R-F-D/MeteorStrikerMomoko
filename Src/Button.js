@@ -112,6 +112,8 @@ class ButtonItem{
 		this.y	= 0;
 		this.layer	- null;
 
+		this._isButtonDown	= false;
+
 		this.SetTag();
 	}
 
@@ -166,16 +168,13 @@ class ButtonItem{
 		return;
 	}
 
-	/** 検索用タグ
-	 * @param {string?} [tag=null] タグ設定、省略時タグ削除
-	 * @returns {this}
-	 * @memberof ButtonItem
-	 */
+	/** 検索用タグ */
 	SetTag(tag=null){
 		this.tag	= tag;
 		return this;
 	}
 
+	/** イベントリスナ適用 */
 	_ApplyEvents(){
 		if(this.listeners==null || !this.sprite)	return this;
 
@@ -184,24 +183,53 @@ class ButtonItem{
 			cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ONE_BY_ONE,
 				onTouchBegan	: (touch,event)=>{
-					if(!this.sprite.entity.isVisible() || !this.listeners.onTouchBegan)	return true;
-					const target		= event.getCurrentTarget();
-					const location		= target.convertToNodeSpace(touch.getLocation());
-					const spriteSize	= target.getContentSize();
-					const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
-
-					if(cc.rectContainsPoint(spriteRect,location))	this.listeners.onTouchBegan();
+					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touch,event)){
+						this._isButtonDown	= true;
+						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
+					}
 					return true;
 				},
+				onTouchEnded	: (touch,event)=>{
+					if(this._isButtonDown && this.sprite.entity.isVisible() && this._EventIsOnSprite(touch,event)){
+						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
+					}
+					this._isButtonDown	= false;
+				},
+				onTouchCanceled	: (touch,event)=>this._isButtonDown	= false,
 			}),
 			this.sprite.entity
 		);
 		return this;
 	}
 
-	OnTouchBegan(event=null){
+	/**イベントはスプライト上で発生しているか*/
+	_EventIsOnSprite(touch,event){
+		const target		= event.getCurrentTarget();
+		const location		= target.convertToNodeSpace(touch.getLocation());
+		const spriteSize	= target.getContentSize();
+		const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
+		return !!cc.rectContainsPoint(spriteRect,location);
+	}
+
+	/** タッチ開始のコールバックを設定
+	 * @param {function} [callback=null] コールバック関数
+	 * @returns this
+	 * @memberof ButtonItem
+	 */
+	OnTouchBegan(callback=null){
 		this.listeners	= this.listeners||{};
-		this.listeners.onTouchBegan	= event;
+		this.listeners.onTouchBegan	= callback;
+		this._ApplyEvents();
+		return this;
+	}
+	/** タッチ終了のコールバックを設定
+	 * @param {function} [callback=null] コールバック関数
+	 * @returns this
+	 * @memberof ButtonItem
+	 */
+	OnTouchEnded(callback=null){
+		this.listeners	= this.listeners||{};
+		this.listeners.onTouchEnded	= callback;
 		this._ApplyEvents();
 		return this;
 	}
