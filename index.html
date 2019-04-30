@@ -2,6 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
 	<title>Project MSM</title>
 	<link rel="icon" type="image/png" href="res/favicon.png" />
 
@@ -9,23 +11,29 @@
 		@import url('https://fonts.googleapis.com/css?family=VT323');
 		@import url('https://fonts.googleapis.com/css?family=Kosugi+Maru');
 		body{
-			color	:#FFFFFF;
+			color	:#EFB854;
 			background-color	: #333333;
+			padding :0;
+			margin:0;
 		}
 		h1{
 			font-family: 'Kosugi Maru', sans-serif;
+			font-size: 150%;
 		}
-		#canvasContainer{
+		div#canvasContainer{
 			text-align:center;
+			padding :0;
+			margin:0;
 		}
 		canvas{
+			padding :0;
+			margin:0;
 			outline:none;
 			background-color	: #000000;
 		}
 	</style>
 </head>
 <body>
-	<h1>Project MSM</h1>
 	<div id="canvasContainer">
 		<canvas id="gameCanvas" width="1024" height="576"></canvas>
 		<script src="Src/Loading.js"></script>
