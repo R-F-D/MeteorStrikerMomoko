@@ -28,25 +28,27 @@ const LinkedLayerTags	= {
 
 Scene.GamePlay	= class extends Scene.SceneBase {
 
-	/** シークエンス列挙型 */
-	Sequences	= {
-		/**初期状態*/		INITIAL			: null,
-		/**エイム作動*/		START_AIM		: null,
-		/**打撃予備動作*/	PRELIMINARY		: null,
-		/**打撃動作*/		DISCHARGE		: null,
-		/**エミット中*/		EMIT			: null,
-		/**吹き飛ばし*/		BLOW_AWAY		: null,
-		/**測定中*/			MEASURE			: null,
-		/**動作失敗*/		DISCHARGE_FAILED: null,
-	};
 
 	constructor(){
 		super();
+		Log("GamePlay");
 
 		/** @var 座標 */
 		this.POSITIONS	= {
 			PLAYER	: {	X:96,	Y:96,	},
 			METEOR	: {	X:192,	Y:144,	},
+		};
+
+		/** シークエンス列挙型 */
+		this.Sequences	= {
+			/**初期状態*/		INITIAL			: null,
+			/**エイム作動*/		START_AIM		: null,
+			/**打撃予備動作*/	PRELIMINARY		: null,
+			/**打撃動作*/		DISCHARGE		: null,
+			/**エミット中*/		EMIT			: null,
+			/**吹き飛ばし*/		BLOW_AWAY		: null,
+			/**測定中*/			MEASURE			: null,
+			/**動作失敗*/		DISCHARGE_FAILED: null,
 		};
 
 		//インパクトシークエンス

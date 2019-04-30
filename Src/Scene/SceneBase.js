@@ -9,9 +9,6 @@ var cc;
 /** シーン基本クラス */
 Scene.SceneBase	= class {
 
-	static first	= null;
-	static resetTo	= null;
-
 	constructor(){
 
 		/** @var number シーン内のシークエンス */
@@ -251,6 +248,9 @@ Scene.SceneBase	= class {
 	}
 
 }//class
+
+Scene.SceneBase.first	= null;
+Scene.SceneBase.resetTo	= null;
 
 })();	//File Scope
 

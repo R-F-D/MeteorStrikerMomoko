@@ -70,10 +70,11 @@ Texts	= {
 
 /**地域設定クラス*/
 LocaleSettings	= class{
-	/** @const グローバルの言語コード  */
-	GLOBAL_CODE		= "_";
 
 	constructor(){
+
+		/** @const グローバルの言語コード  */
+		this.GLOBAL_CODE		= "_";
 
 		/**テキストの言語*/
 		this.language			= this.GLOBAL_CODE;

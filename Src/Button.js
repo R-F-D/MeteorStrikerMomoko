@@ -99,7 +99,6 @@ Button	= class Button{
  * @class ButtonItem
  ********************************************************************************/
 class ButtonItem{
-	Z	= 0x0100;
 
 	/** コンストラクタ
 	 * @param {Button} container 紐付けするコンテナクラス
@@ -110,6 +109,7 @@ class ButtonItem{
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
+		this.Z	= 0x0100;
 		this.layer	- null;
 
 		this._isButtonDown	= false;

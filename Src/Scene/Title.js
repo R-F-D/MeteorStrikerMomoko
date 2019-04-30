@@ -9,14 +9,15 @@ const LinkedLayerTags	= {
 	MAIN	: "Title.Main",
 };
 
-Scene.Title	= class extends Scene.SceneBase {
 
-	Sequences	= {
-		/**初期状態*/		INITIAL			: null,
-	};
+Scene.Title	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();
+
+		this.Sequences	= {
+			/**初期状態*/		INITIAL			: null,
+		};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
