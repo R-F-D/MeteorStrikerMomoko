@@ -15,6 +15,7 @@ Button	= class Button{
 
 		this.x	= 0;
 		this.y	= 0;
+		this.scale	= 1.0;
 		this.layer	= null;
 		this.listener	- null;
 	}
@@ -83,6 +84,12 @@ Button	= class Button{
 		return this;
 	}
 
+	SetScale(scale=1.0){
+		this.scale=scale;
+		this.items.forEach(v=>SetScale(null));
+		return this;
+	}
+
 	/** 相対座標を設定
 	 * @param {number} x x増分
 	 * @param {number} y y増分
@@ -111,6 +118,7 @@ class ButtonItem{
 		this.y	= 0;
 		this.Z	= 0x0100;
 		this.layer	- null;
+		this.scale	= 1.0;
 
 		this._isButtonDown	= false;
 
@@ -140,7 +148,6 @@ class ButtonItem{
 		this.sprite
 			.SetPosition(this.container.x+this.x,this.container.y+this.y)
 			.AddToLayer(this.container.layer)
-			.SetScale(1)
 			.Attr({zIndex:this.Z});	
 		this._ApplyEvents();
 		return this;
@@ -166,6 +173,14 @@ class ButtonItem{
 	SetOpacity(opacity){
 		this.sprite.SetOpacity(opacity);
 		return;
+	}
+
+	/**拡大率設定*/
+	SetScale(scale){
+		if(scale===undefined)	this.scale = 1.0;
+		else if(scale!==null)	this.scale = scale;		
+		this.sprite.SetScale(this.scale*this.container.scale);
+		return this;
 	}
 
 	/** 検索用タグ */
