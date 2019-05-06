@@ -174,6 +174,11 @@ class ButtonItem{
 		this.sprite.SetOpacity(opacity);
 		return;
 	}
+	/** 画像のインデックス */
+	SetIndex(idx){
+		this.sprite.SetIndex(idx);
+		return this;
+	}
 
 	/**拡大率設定*/
 	SetScale(scale){
