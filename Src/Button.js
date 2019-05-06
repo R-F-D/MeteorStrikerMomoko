@@ -7,6 +7,10 @@ var Button	= Button||{};
  ********************************************************************************/
 Button	= class Button{
 
+	static get OFF() 	{return 0x01}
+	static get ON()		{return 0x02}
+	static get HOVER()	{return 0x04}
+
 	constructor(nItems=1){
 		this.items	= [];
 		for(let i=0; i<nItems; ++i){
@@ -119,8 +123,8 @@ class ButtonItem{
 		this.Z	= 0x0100;
 		this.layer	- null;
 		this.scale	= 1.0;
-
-		this._isButtonDown	= false;
+		this.indexes	= {};
+		this.status		= Button.OFF;
 
 		this.SetTag();
 	}
@@ -175,7 +179,13 @@ class ButtonItem{
 		return;
 	}
 	/** 画像のインデックス */
-	SetIndex(idx){
+	SetIndex(status,idx){
+		this.indexes			= this.indexes||{};
+		this.indexes[status]	= idx;
+		return this._ApplyIndex();
+	}
+	_ApplyIndex(){
+		let idx = this.indexes[this.status] || this.indexes[Button.OFF] || 0;
 		this.sprite.SetIndex(idx);
 		return this;
 	}
@@ -204,20 +214,25 @@ class ButtonItem{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touches,event)=>{
 					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
-						this._isButtonDown	= true;
+						this.status			= Button.ON;
+						this._ApplyIndex();
 						event.stopPropagation();
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 					}
 					return true;
 				},
 				onTouchesEnded	: (touches,event)=>{
-					if(this._isButtonDown && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+					if(this.status==Button.ON && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
 						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 					}
-					this._isButtonDown	= false;
+					this.status			= Button.OFF;
+					this._ApplyIndex();
 				},
-				onTouchesCanceled	: (touches,event)=>this._isButtonDown	= false,
+				onTouchesCanceled	: (touches,event)=>{
+					this.status			= Button.OFF;
+					this._ApplyIndex();
+				}
 			}),
 			this.sprite.entity
 		);

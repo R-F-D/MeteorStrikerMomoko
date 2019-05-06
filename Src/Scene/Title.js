@@ -58,8 +58,11 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.buttons.SetPosition(384,128);
 		
 		this.buttons.at(0)
-			.CreateSprite(rc.img.retryButton)
-			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay));
+			.CreateSprite(rc.img.titleButton)
+			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay))
+			.SetScale(1)
+			.SetIndex(Button.OFF,0)
+			.SetIndex(Button.ON, 1);
 
 		return this;
 	}
