@@ -28,6 +28,7 @@ const rc	= {
 		resetButton		: [ "Ui/btnReset.png",		1,	1,	],	//リセットボタン
 		retryButton		: [ "Ui/btnRetry.png",		1,	1,	],	//リトライボタン
 		shareScoreButton: [ "Ui/btnShare.png",		1,	1,	],	//結果シェアボタン
+		titleButton		: [ "Ui/btnTitle.png",		4,	4,	],	//タイトル画面等のボタン
 	},
 
 	/** サウンド */
