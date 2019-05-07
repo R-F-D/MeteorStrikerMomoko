@@ -124,6 +124,7 @@ class ButtonItem{
 		this.Z	= 0x0100;
 		this.layer	- null;
 		this.scale	= 1.0;
+		this.scaleAtOn	= 0.9;
 		this.indexes	= {};
 		this.status		= Button.OFF;
 
@@ -220,6 +221,7 @@ class ButtonItem{
 						this._ApplyIndex();
 						event.stopPropagation();
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
+						this.SetScale(this.scale*this.scaleAtOn,true);
 					}
 					return true;
 				},
@@ -228,10 +230,12 @@ class ButtonItem{
 						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 					}
+					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
 					this._ApplyIndex();
 				},
 				onTouchesCanceled	: (touches,event)=>{
+					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
 					this._ApplyIndex();
 				}
