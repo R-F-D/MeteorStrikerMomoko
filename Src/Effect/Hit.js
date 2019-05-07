@@ -20,7 +20,7 @@ Effect.Hit	= class extends Effect.EffectBase{
 				sprite	: Sprite.CreateInstance(rc.img.hitFx).AddToLayer(layer)
 							.SetScale(1).Attr({zIndex:120,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				index	: 0,
-	
+
 			});
 		});
 		this.SetVelocity(4,4).SetColor();
@@ -47,7 +47,7 @@ Effect.Hit	= class extends Effect.EffectBase{
 	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		
+
 		this.UpdateParticles((v)=>{
 			v.sprite.SetIndex(v.index);
 			if(v.count%2==0)    v.index++;

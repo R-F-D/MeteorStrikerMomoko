@@ -116,7 +116,7 @@ class ButtonItem{
 	 * @param {Button} container 紐付けするコンテナクラス
 	 * @memberof ButtonItem
 	 */
-	constructor(container){		
+	constructor(container){
 		this.sprite		= null;
 		this.container	= container;
 		this.x	= 0;
@@ -137,8 +137,8 @@ class ButtonItem{
 		if(!this.sprite)	return this;
 
 		this.sprite.removeFromParent();
-		layer.addChild(this.sprite);	
-		this.Apply();		
+		layer.addChild(this.sprite);
+		this.Apply();
 		return this;
 	}
 
@@ -154,7 +154,7 @@ class ButtonItem{
 		this.sprite
 			.SetPosition(this.container.x+this.x,this.container.y+this.y)
 			.AddToLayer(this.container.layer)
-			.Attr({zIndex:this.Z});	
+			.Attr({zIndex:this.Z});
 		this._ApplyEvents();
 		return this;
 	}
@@ -214,7 +214,7 @@ class ButtonItem{
 
 		cc.eventManager.removeListeners(this.sprite.entity);
 		cc.eventManager.addListener(
-				cc.EventListener.create({
+			cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touches,event)=>{
 					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){

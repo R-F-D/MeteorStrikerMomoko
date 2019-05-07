@@ -87,7 +87,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.buttons	= {};
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();		
+		this.ApplicateCcSceneInstance(this).InitLayerList();
 
 		/** ラベル */
 		this.labels	= {
@@ -350,7 +350,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						break;
 					}
 				}
-				
+
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.MEASURE);
 			})
 			.PushUpdatingFunctions("layer-bg", (dt)=>{
@@ -425,7 +425,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		const m	={
 			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
 			y:this.POSITIONS.METEOR.Y,
-		}; 
+		};
 		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
 		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y, this.sequence.count%15==0 && this.sequence!==this.Sequences.MEASURE).Update();
@@ -615,7 +615,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([this.Sequences.DISCHARGE].includes(this.sequence)){	//攻撃中
 			idx	= this.playerHardblows()	? 10	: 8;
 		}
-		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY,this.Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後	
+		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY,this.Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後
 			idx	= this.playerHardblows()	? 12	: 8;
 		}
 		if(Math.trunc(this.count/8) % 2) ++idx;

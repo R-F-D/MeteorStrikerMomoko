@@ -62,8 +62,6 @@ Texts	= {
 	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
 	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
 	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
-	
-
 }
 
 

@@ -85,7 +85,7 @@ Scene.SceneBase	= class {
 		this.ccSceneInstance.getChildren()
 			.filter(child=>child instanceof cc.Layer)
 			.forEach(layer=>cc.eventManager.removeListeners(layer));
-			
+
 		this.sequence.Init();
 		this.ApplyCommonEventListeners("SceneBase.TouchFx",this.ccLayerInstances["SceneBase.TouchFx"]);
 
@@ -187,7 +187,7 @@ Scene.SceneBase	= class {
 
 	ApplicateCcSceneInstance(childScene){
 		if(!childScene instanceof Scene.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
-		
+
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
@@ -200,7 +200,7 @@ Scene.SceneBase	= class {
 				childScene.OnUpdating(dt);
 				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
-			},	
+			},
 		}))();
 		return this;
 	}
@@ -227,7 +227,7 @@ Scene.SceneBase	= class {
 		this.commonEventListeners[tag].push(...listenrs);
 		return this;
 	}
-	
+
 	/**共通イベントリスナの設定*/
 	ApplyCommonEventListeners(tag,layer){
 		if(!layer||!tag)	return this;
@@ -239,7 +239,7 @@ Scene.SceneBase	= class {
 	}
 
 	/** 強制リセット
-	 * @returns this 
+	 * @returns this
 	 */
 	ResetForce(){
 		Debug(()=>Log("[DEBUG] Reset Scene ----------"));

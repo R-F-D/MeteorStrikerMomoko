@@ -260,7 +260,7 @@ class Sprite{
 		if(this.entity.getNumberOfRunningActions()>0) return true;
 		return false;
 	}
-	
+
 	/** 分割画像のサイズを取得
 	 * @memberof Sprite
 	 */

@@ -5,7 +5,6 @@ var Effect	= Effect || {};
 var cc;
 (function(){	//File Scope
 
-
 const _nParticles	= 5;
 
 /** @class タッチエフェクトクラス */
@@ -21,7 +20,7 @@ Effect.Touched	= class extends Effect.EffectBase{
 				sprite	: Sprite.CreateInstance(rc.img.touched).AddToLayer(layer)
 							.SetScale(0.5).Attr({zIndex:65535,opacity:255}).SetVisible(false),
 				index	: 0,
-	
+
 			});
 		});
 		this.SetVelocity(4,4).SetColor();
@@ -51,7 +50,7 @@ Effect.Touched	= class extends Effect.EffectBase{
 	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		
+
 		this.UpdateParticles((v)=>{
 			v.dx	*= 0.9;
 			v.dy	*= 0.9;

@@ -46,7 +46,7 @@ Effect.Emit	= class extends Effect.EffectBase{
 	 */
 	Update(updates=true){
 		if(!updates)	return this;
-		
+
 		this.UpdateParticles((v)=>{
 			v.sprite.SetIndex(v.index);
 			if(v.count%4==0)    v.index++;

@@ -45,7 +45,6 @@ const rc	= {
 		talk		: "Kosugi Maru",
 		distance	: "VT323",
 	},
-
 };
 
 

@@ -56,7 +56,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetSequence(this.Sequences.INITIAL);
 
 		this.buttons.SetPosition(384,128);
-		
+
 		this.buttons.at(0)
 			.CreateSprite(rc.img.titleButton)
 			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay))
@@ -87,7 +87,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		if     (d.y <-0.99) d.y = MoveTo(d.y,-0.99,0.01);
 		else if(d.y > 0.99) d.y = MoveTo(d.y, 0.99,0.01);
 		adj.y += d.y;
-		
+
 		let idx	= this.count%128<16 ? 6 : 4;
 		if(Math.trunc(this.count/8)%2)	++idx;
 
@@ -104,7 +104,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		const size		= cc.director.getWinSize();
 
 		//初期状態
-		this.Sequences.INITIAL.PushStartingFunctions(()=>{			
+		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 			this.sprites.bg.forEach(v=>v.SetVisible(true));
 			this.sprites.logo
 				.SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);

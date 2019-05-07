@@ -209,7 +209,7 @@ Label	= class Label{
 	 * @param {number} [y=null]
 	 * @returns this
 	 */
-	SetIconPosition(x=null,y=null){	
+	SetIconPosition(x=null,y=null){
 		if(x!==null)	this.iconAdjust.x = x;
 		if(y!==null)	this.iconAdjust.y = y;
 		return this;
