@@ -192,10 +192,11 @@ class ButtonItem{
 	}
 
 	/**拡大率設定*/
-	SetScale(scale){
-		if(scale===undefined)	this.scale = 1.0;
-		else if(scale!==null)	this.scale = scale;		
-		this.sprite.SetScale(this.scale*this.container.scale);
+	SetScale(scale,isTemp=false){
+		if(scale===undefined)	scale = 1.0;
+		else if(scale===null)	scale = this.scale;
+		if(!isTemp)	this.scale = scale;
+		this.sprite.SetScale(scale*this.container.scale);
 		return this;
 	}
 
