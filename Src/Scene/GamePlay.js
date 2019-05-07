@@ -129,12 +129,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					_this.aiming.Init().SetLayer(this);
 
-					//ボタン
-					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.resetButton).SetTag("Reset");
-					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
-					_this.buttons.at(2).CreateSprite(rc.img.shareScoreButton).SetTag("Share");
-
 					//Labels
 					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).AddToLayer(this);
@@ -169,6 +163,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
+
+					//ボタン
+					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
+					_this.buttons.at(0).CreateSprite(rc.img.resetButton).SetTag("Reset");
+					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
+					_this.buttons.at(2).CreateSprite(rc.img.shareScoreButton).SetTag("Share");
+
 					return true;
 				},
 				update	: function(dt){
