@@ -31,7 +31,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();
-		Log("GamePlay");
 
 		/** @var 座標 */
 		this.POSITIONS	= {
