@@ -20,6 +20,7 @@ Button	= class Button{
 		this.x	= 0;
 		this.y	= 0;
 		this.scale	= 1.0;
+		this.scaleAtOn	= 0.9;
 		this.layer	= null;
 		this.listener	- null;
 	}
@@ -236,6 +237,24 @@ class ButtonItem{
 			}),
 			this.sprite.entity
 		);
+		cc.eventManager.addListener(
+			cc.EventListener.create({
+				event			: cc.EventListener.MOUSE,
+				onMouseMove	: (event)=>{
+					if(this.status & (Button.OFF|Button.HOVER) && this.sprite.entity.isVisible() && this._EventIsOnSprite(null,event)){
+						this.status			= Button.HOVER;
+						this._ApplyIndex();
+						if(this.listeners.onMouseHover)	this.listeners.onMouseHover();
+					}
+					else if(this.status==Button.HOVER){
+						this.status			= Button.OFF;
+						this._ApplyIndex();
+					}
+					return;
+				}
+			}),
+			this.sprite.entity
+		);
 		return this;
 	}
 
@@ -244,7 +263,8 @@ class ButtonItem{
 		if(!Array.isArray(touches))	touches	= [touches];
 		return !!touches.some(touch=>{
 			const target		= event.getCurrentTarget();
-			const location		= target.convertToNodeSpace(touch.getLocation());
+			const pointer		= touch || event;
+			const location		= target.convertToNodeSpace(pointer.getLocation());
 			const spriteSize	= target.getContentSize();
 			const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
 			return !!cc.rectContainsPoint(spriteRect,location);
@@ -270,6 +290,17 @@ class ButtonItem{
 	OnTouchEnded(callback=null){
 		this.listeners	= this.listeners||{};
 		this.listeners.onTouchEnded	= callback;
+		this._ApplyEvents();
+		return this;
+	}
+	/** マウスホバーのコールバックを設定
+	 * @param {function} [callback=null] コールバック関数
+	 * @returns this
+	 * @memberof ButtonItem
+	 */
+	OnMouseHover(callback=null){
+		this.listeners	= this.listeners||{};
+		this.listeners.onMouseHover	= callback;
 		this._ApplyEvents();
 		return this;
 	}

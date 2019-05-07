@@ -61,8 +61,9 @@ Scene.Title	= class extends Scene.SceneBase {
 			.CreateSprite(rc.img.titleButton)
 			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay))
 			.SetScale(1)
-			.SetIndex(Button.OFF,0)
-			.SetIndex(Button.ON, 1);
+			.SetIndex(Button.OFF,  0)
+			.SetIndex(Button.ON,   1)
+			.SetIndex(Button.HOVER,1);
 
 		return this;
 	}
