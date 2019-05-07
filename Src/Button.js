@@ -209,7 +209,8 @@ class ButtonItem{
 
 	/** イベントリスナ適用 */
 	_ApplyEvents(){
-		if(this.listeners==null || !this.sprite)	return this;
+		if(!this.sprite)	return this;
+		this.listeners	= this.listeners || {};
 
 		cc.eventManager.removeListeners(this.sprite.entity);
 		cc.eventManager.addListener(
