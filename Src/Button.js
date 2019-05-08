@@ -104,6 +104,14 @@ Button	= class Button{
 		return this.SetPosition(this.x+x,this.y+y);
 	}
 
+	/** 更新
+	 * @returns this
+	 */
+	Update(dt){
+		this.items.forEach(v=>v.Update(dt));
+		return this;
+	}
+
 }
 
 /********************************************************************************
@@ -127,6 +135,7 @@ class ButtonItem{
 		this.scaleAtOn	= 0.9;
 		this.indexes	= {};
 		this.status		= Button.OFF;
+		this.listensButtonUp	= false;
 
 		this.SetTag();
 	}
@@ -230,6 +239,7 @@ class ButtonItem{
 					if(this.status==Button.ON && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
 						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
+						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
@@ -277,6 +287,14 @@ class ButtonItem{
 		});
 	}
 
+	Update(dt){
+		if(this.listensButtonUp && this.listeners.onButtonUp && !this.sprite.IsRunningActions()){
+			this.listeners.onButtonUp();
+			this.listensButtonUp	= false;
+		}
+		return this;
+	}
+
 	/** タッチ開始のコールバックを設定
 	 * @param {function} [callback=null] コールバック関数
 	 * @returns this
@@ -307,6 +325,17 @@ class ButtonItem{
 	OnMouseHover(callback=null){
 		this.listeners	= this.listeners||{};
 		this.listeners.onMouseHover	= callback;
+		this._ApplyEvents();
+		return this;
+	}
+	/** ボタンアップのコールバックを設定
+	 * @param {function} [callback=null] コールバック関数
+	 * @returns this
+	 * @memberof ButtonItem
+	 */
+	OnButtonUp(callback=null){
+		this.listeners	= this.listeners||{};
+		this.listeners.onButtonUp	= callback;
 		this._ApplyEvents();
 		return this;
 	}

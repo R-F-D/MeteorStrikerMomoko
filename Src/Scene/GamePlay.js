@@ -173,6 +173,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				},
 				update	: function(dt){
 					this._super();
+					_this.buttons.Update(dt);
 					_this.sequence.Update(dt,"layer-ui");
 				},
 			});
@@ -217,7 +218,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
 
 			//インタフェース
-			this.buttons.at("Reset").SetVisible(true).SetPosition(16,size.height-16).OnTouchEnded(()=>this.ResetForce());
+			this.buttons.at("Reset").SetVisible(true).SetPosition(16,size.height-16).OnButtonUp(()=>this.ResetForce());
 			this.buttons.at("Retry").SetVisible(false);
 			this.buttons.at("Share").SetVisible(false);
 		})
@@ -380,11 +381,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.buttons.at("Retry")
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
-					.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay));
+					.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
 				this.buttons.at("Share")
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
-					.OnTouchEnded(()=>{
+					.OnButtonUp(()=>{
 						this.labels.navigation.RemoveTempText();
 						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
 											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),

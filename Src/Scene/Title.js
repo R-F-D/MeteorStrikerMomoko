@@ -59,7 +59,7 @@ Scene.Title	= class extends Scene.SceneBase {
 
 		this.buttons.at(0)
 			.CreateSprite(rc.img.titleButton)
-			.OnTouchEnded(()=>this.ReplaceScene(Scene.GamePlay))
+			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
 			.SetScale(1)
 			.SetIndex(Button.OFF,  0)
 			.SetIndex(Button.ON,   1)
@@ -97,6 +97,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 		this.flyFx.Spawn(this.sprites.player.x-16,this.sprites.player.y-8).Update();
 
+		this.buttons.Update(dt);
 		return this;
 	}
 
