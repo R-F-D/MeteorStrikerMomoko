@@ -73,6 +73,14 @@ Button	= class Button{
 		return this;
 	}
 
+	/** filterのラッパ
+	 * @param {function} callback コルバック。真を返した要素のみ抽出される。
+	 * @returns ButtonItem[]
+	 */
+	filter(callback){
+		return this.items.filter(callback);
+	}
+
 	FindWithTag(tag){
 		return this.items.find(v=>v.tag===tag);
 	}
