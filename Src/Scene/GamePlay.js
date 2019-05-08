@@ -166,8 +166,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					//ボタン
 					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
 					_this.buttons.at(0).CreateSprite(rc.img.resetButton).SetTag("Reset");
-					_this.buttons.at(1).CreateSprite(rc.img.retryButton).SetTag("Retry");
-					_this.buttons.at(2).CreateSprite(rc.img.shareScoreButton).SetTag("Share");
+					_this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Retry");
+					_this.buttons.at(2).CreateSprite(rc.img.titleButton).SetTag("Share");
 
 					return true;
 				},
@@ -381,10 +381,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.buttons.at("Retry")
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
+					.SetIndex(Button.OFF,12).SetIndex(Button.ON,13).SetIndex(Button.HOVER,13)
 					.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
 				this.buttons.at("Share")
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
+					.SetIndex(Button.OFF,14).SetIndex(Button.ON,14).SetIndex(Button.HOVER,15)
 					.OnButtonUp(()=>{
 						this.labels.navigation.RemoveTempText();
 						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
