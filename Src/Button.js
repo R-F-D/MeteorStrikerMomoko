@@ -240,9 +240,12 @@ class ButtonItem{
 						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
+						this.status			= Button.HOVER;
+					}
+					else{
+						this.status			= Button.OFF;
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
-					this.status			= Button.OFF;
 					this._ApplyIndex();
 				},
 				onTouchesCanceled	: (touches,event)=>{
