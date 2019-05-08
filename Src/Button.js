@@ -130,6 +130,8 @@ class ButtonItem{
 		this.x	= 0;
 		this.y	= 0;
 		this.Z	= 0x0100;
+		this.polaerAngle	= 0;
+		this.polarRadius	= 0;
 		this.layer	- null;
 		this.scale	= 1.0;
 		this.scaleAtOn	= 0.9;
@@ -161,17 +163,39 @@ class ButtonItem{
 		if(!this.sprite)	return this;
 
 		this.sprite
-			.SetPosition(this.container.x+this.x,this.container.y+this.y)
 			.AddToLayer(this.container.layer)
-			.Attr({zIndex:this.Z});
+			.Attr({zIndex:this.Z})
+			.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius);
 		this._ApplyEvents();
 		return this;
 	}
 
+/*
+	SetPosition(x,y,a=null,r=null){
+		this.x				= x!=null	? x	: this.x;
+		this.y				= y!=null	? y	: this.y;
+		this.polaerAngle	= a!=null	? a	: this.polaerAngle;
+		this.polarRadius	= r!=null	? r	: this.polarRadius;
+
+		if(this.polarRadius==0){
+			this.entity.attr({	x:this.x,	y:this.y,	});
+		}
+		else{
+			this.entity.attr({
+				x	: this.x + Math.cos(this.polaerAngle) *this.polarRadius,
+				y	: this.y + Math.sin(this.polaerAngle) *this.polarRadius,
+			});
+		}
+		return this;
+	}
+	*/
+
 	/**座標を設定*/
-	SetPosition(x,y){
-		this.x	= x;
-		this.y	= y;
+	SetPosition(x,y,a=null,r=null){
+		this.x				= x!=null	? x	: this.x;
+		this.y				= y!=null	? y	: this.y;
+		this.polaerAngle	= a!=null	? a	: this.polaerAngle;
+		this.polarRadius	= r!=null	? r	: this.polarRadius;
 		return this.Apply();
 	}
 	/**相対座標を設定*/
