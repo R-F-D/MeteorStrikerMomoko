@@ -40,7 +40,13 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
-					_this.buttons			= Button.CreateInstance(1).AddToLayer(this);
+					_this.buttons			= Button.CreateInstance(6).AddToLayer(this);
+					_this.buttons.at(0).SetTag("Play");
+					_this.buttons.at(1).SetTag("Score");
+					_this.buttons.at(2).SetTag("Help");
+					_this.buttons.at(3).SetTag("Settings");
+					_this.buttons.at(4).SetTag("Share");
+					_this.buttons.at(5).SetTag("Credits");
 
 					return true;
 				},
@@ -64,6 +70,19 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetIndex(Button.OFF,  0)
 			.SetIndex(Button.ON,   1)
 			.SetIndex(Button.HOVER,1);
+
+
+		this.buttons.filter(v=>{return v.tag!="Play"}).forEach((button,i)=>{
+			button
+				.CreateSprite(rc.img.titleButton)
+				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
+				.SetScale(0.5)
+				.SetIndex(Button.OFF,  i*2+2)
+				.SetIndex(Button.ON,   i*2+3)
+				.SetIndex(Button.HOVER,i*2+3);
+		});
+		this.buttons.at("Play").OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
+
 
 		return this;
 	}
