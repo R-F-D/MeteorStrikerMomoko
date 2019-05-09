@@ -40,14 +40,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
-					_this.buttons			= Button.CreateInstance(6).AddToLayer(this);
-					_this.buttons.at(0).SetTag("Play");
-					_this.buttons.at(1).SetTag("Score");
-					_this.buttons.at(2).SetTag("Help");
-					_this.buttons.at(3).SetTag("Settings");
-					_this.buttons.at(4).SetTag("Share");
-					_this.buttons.at(5).SetTag("Credits");
-
+					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags(["Play","Score","Help","Settings","Share","Credits",]);
 					return true;
 				},
 			});
