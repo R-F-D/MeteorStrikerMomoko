@@ -301,10 +301,10 @@ class ButtonItem{
 		if(!Array.isArray(touches))	touches	= [touches];
 		return !!touches.some(touch=>{
 			const target		= event.getCurrentTarget();
-			const pointer		= touch || event;
-			const location		= target.convertToNodeSpace(pointer.getLocation());
+			const location		= target.convertToNodeSpace( (touch||event).getLocation());
 			const spriteSize	= target.getContentSize();
-			const spriteRect	= cc.rect(0,0,spriteSize.width,spriteSize.height);
+			const spriteRect	= this.status==Button.ON	? cc.rect(0,0,spriteSize.width,               spriteSize.height)
+															: cc.rect(0,0,spriteSize.width*this.scaleAtOn,spriteSize.height*this.scaleAtOn);
 			return !!cc.rectContainsPoint(spriteRect,location);
 		});
 	}
