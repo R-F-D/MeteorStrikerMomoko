@@ -264,7 +264,7 @@ class LabelBg{
 	Create(){
 		if(this.entity)	this.entity.clear();
 
-		this.entity		= new cc.Sprite(`${rc.DIRECTORY}${rc.sysImg.labelBg}`);
+		this.entity		= new cc.Sprite(`${rc.DIRECTORY}${rc.sysImg.white}`);
 		this.imgWidth	= this.entity.getContentSize().width;
 		this.imgHeight	= this.entity.getContentSize().height;
 		this.entity.setColor(this.COLOR);
