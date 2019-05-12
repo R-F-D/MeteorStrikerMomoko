@@ -35,7 +35,7 @@ const rc	= {
 
 	/** システム用 */
 	sysImg	: {
-		labelBg	: "Sys/labelbg.png",
+		labelBg	: "Sys/white.png",
 	},
 
 	/** フォント名 */
