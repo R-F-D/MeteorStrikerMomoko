@@ -165,7 +165,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					//ボタン
 					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.resetButton).SetTag("Reset");
+					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
 					_this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Retry");
 					_this.buttons.at(2).CreateSprite(rc.img.titleButton).SetTag("Share");
 
