@@ -148,7 +148,7 @@ class ButtonItem{
 		this.polarRadius	= 0;
 		this.layer	- null;
 		this.scale	= 1.0;
-		this.scaleAtOn	= 0.9;
+		this.scaleOnActive	= 0.9;
 		this.opacity		= 255;
 		this.opacityOnHover	= 255;
 		this.indexes	= {};
@@ -257,7 +257,7 @@ class ButtonItem{
 						this._ApplyIndex();
 						event.stopPropagation();
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
-						this.SetScale(this.scale*this.scaleAtOn,true);
+						this.SetScale(this.scale*this.scaleOnActive,true);
 						this.SetOpacity(this.opacityOnHover,false,true);
 					}
 					return true;
@@ -320,7 +320,7 @@ class ButtonItem{
 			const location		= target.convertToNodeSpace( (touch||event).getLocation());
 			const spriteSize	= target.getContentSize();
 			const spriteRect	= this.status==Button.ON	? cc.rect(0,0,spriteSize.width,               spriteSize.height)
-															: cc.rect(0,0,spriteSize.width*this.scaleAtOn,spriteSize.height*this.scaleAtOn);
+															: cc.rect(0,0,spriteSize.width*this.scaleOnActive,spriteSize.height*this.scaleOnActive);
 			return !!cc.rectContainsPoint(spriteRect,location);
 		});
 	}
