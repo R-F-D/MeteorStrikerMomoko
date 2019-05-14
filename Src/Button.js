@@ -20,7 +20,6 @@ Button	= class Button{
 		this.x	= 0;
 		this.y	= 0;
 		this.scale	= 1.0;
-		this.scaleAtOn	= 0.9;
 		this.layer	= null;
 		this.listener	- null;
 	}
@@ -150,6 +149,8 @@ class ButtonItem{
 		this.layer	- null;
 		this.scale	= 1.0;
 		this.scaleAtOn	= 0.9;
+		this.opacity		= 255;
+		this.opacityOnHover	= 255;
 		this.indexes	= {};
 		this.status		= Button.OFF;
 		this.listensButtonUp	= false;
@@ -180,7 +181,8 @@ class ButtonItem{
 		this.sprite
 			.AddToLayer(this.container.layer)
 			.Attr({zIndex:this.Z})
-			.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius);
+			.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+			.SetOpacity(this.opacity);
 		this._ApplyEvents();
 		return this;
 	}
@@ -203,11 +205,6 @@ class ButtonItem{
 		this.sprite.SetVisible(isVisible);
 		return this;
 	}
-	/** 不透明度の設定 */
-	SetOpacity(opacity){
-		this.sprite.SetOpacity(opacity);
-		return;
-	}
 	/** 画像のインデックス */
 	SetIndex(status,idx){
 		this.indexes			= this.indexes||{};
@@ -226,6 +223,16 @@ class ButtonItem{
 		else if(scale===null)	scale = this.scale;
 		if(!isTemp)	this.scale = scale;
 		this.sprite.SetScale(scale*this.container.scale);
+		return this;
+	}
+
+	/** 不透明度設定 */
+	SetOpacity(opacity,isSlowly=false,isTemp=false){
+		if(opacity===undefined)	opacity = 255;
+		else if(opacity===null)	opacity = this.opacity;
+		if(!isTemp)	this.opacity = opacity;
+		if(!isSlowly)	this.sprite.SetOpacity(opacity);
+		else			this.sprite.RunAction(cc.FadeTo.create(0.2,opacity));
 		return this;
 	}
 
@@ -251,6 +258,7 @@ class ButtonItem{
 						event.stopPropagation();
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 						this.SetScale(this.scale*this.scaleAtOn,true);
+						this.SetOpacity(this.opacityOnHover,false,true);
 					}
 					return true;
 				},
@@ -260,9 +268,11 @@ class ButtonItem{
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 						this.status			= Button.HOVER;
+						this.SetOpacity(this.opacityOnHover,true,true);
 					}
 					else{
 						this.status			= Button.OFF;
+						this.SetOpacity(this.opacity,true,false);
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this._ApplyIndex();
@@ -270,6 +280,7 @@ class ButtonItem{
 				onTouchesCanceled	: (touches,event)=>{
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
+					this.SetOpacity(this.opacityAt,true,false);
 					this._ApplyIndex();
 				}
 			}),
@@ -283,10 +294,15 @@ class ButtonItem{
 						this.status			= Button.HOVER;
 						this._ApplyIndex();
 						if(this.listeners.onMouseHover)	this.listeners.onMouseHover();
+						this.SetOpacity(this.opacityOnHover,false,true);
 					}
 					else if(this.status==Button.HOVER){
 						this.status			= Button.OFF;
+						this.SetOpacity(this.opacity,true,false);
 						this._ApplyIndex();
+					}
+					else{
+						this.SetOpacity(this.opacity,true,false);
 					}
 					return;
 				}
