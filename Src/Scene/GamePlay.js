@@ -404,11 +404,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	OnEnter(){
 		super.OnEnter();
-		this.aiming	= Scene.Aiming
-							.Create()
-							.PushHitArea( "PERFECT",	-0.10,	0.10 )
-							.PushHitArea( "GOOD",		-0.25,	0.25 )
-							.PushHitArea( "NORMAL",		-0.75,	0.75 );
+		this.aiming	= Scene.Aiming.Create();
 
 		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
 			.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)

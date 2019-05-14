@@ -61,6 +61,10 @@ Scene.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	Init(){
+		this.PushHitArea( "PERFECT",	-0.10,	0.10 )
+			.PushHitArea( "GOOD",		-0.25,	0.25 )
+			.PushHitArea( "NORMAL",		-0.75,	0.75 );
+
 		this.position				= this.INITIAL + Math.random()*this.LENGTH - this.LENGTH/2;
 		this.isIncrementPositive	= Math.random() < 0.5;
 		this.increment				= this.DEFAULT_INCREMENT + NormalRandom(this.INCREMENT_RANDAM) + this.INCREMENT_RANDAM;
