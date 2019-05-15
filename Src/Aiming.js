@@ -95,7 +95,7 @@ Scene.Aiming	= class {
 	SetSpritePosition(x,y){
 		this.spritePos.x	= x;
 		this.spritePos.y	= y;
-		this.sprites.gauge.SetPosition(x-this.RADIUS,y,Math.PI/4,this.RADIUS).SetRotate(-45);
+		this.sprites.gauge.SetPosition(x-this.RADIUS,y,Math.PI/4,this.RADIUS);
 		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
 	}

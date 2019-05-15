@@ -12,7 +12,7 @@ const rc	= {
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
 		navigator		: [ "navigator.png",		2,	2,	],	//ナビゲータ
 		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
-		aimGauge		: [ "aimgauge.png",			1,	1,	],	//エイミングゲージ
+		aimGauge		: [ "aimBar.png",			1,	1,	],	//エイミングゲージ
 		hitArea			: [ "hitarea.png",			1,	4,	],	//ヒット領域
 		meteor			: [ "meteor.png",			1,	1,	],	//メテオ
 		distance		: [ "distance.png",			1,	1,	],	//飛距離表示
