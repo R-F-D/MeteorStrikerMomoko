@@ -49,7 +49,7 @@ Scene.Aiming	= class {
 
 		/** @var スプライト */
 		this.sprites	= {
-			/**ゲージ*/		gauge	: null,
+			/**ゲージ*/		bar	: null,
 			/**カーソル*/	cursor	: null,
 		};
 
@@ -70,7 +70,7 @@ Scene.Aiming	= class {
 		this.increment				= this.DEFAULT_INCREMENT + NormalRandom(this.INCREMENT_RANDAM) + this.INCREMENT_RANDAM;
 		this.currentArea			= null;
 
-		this.sprites.gauge			= Sprite.CreateInstance(rc.img.aimGauge).Attr({zIndex:100});;
+		this.sprites.bar			= Sprite.CreateInstance(rc.img.aimBar).Attr({zIndex:100});;
 		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor).Attr({zIndex:100});;
 		return this;
 	}
@@ -81,7 +81,7 @@ Scene.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	SetLayer(layer){
-		this.sprites.gauge.AddToLayer(layer).Attr({x:this.spritePos.x, y:this.spritePos.y,});
+		this.sprites.bar.AddToLayer(layer).Attr({x:this.spritePos.x, y:this.spritePos.y,});
 		this.sprites.cursor.AddToLayer(layer);
 		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
@@ -95,7 +95,7 @@ Scene.Aiming	= class {
 	SetSpritePosition(x,y){
 		this.spritePos.x	= x;
 		this.spritePos.y	= y;
-		this.sprites.gauge.SetPosition(x-this.RADIUS,y,Math.PI/4,this.RADIUS);
+		this.sprites.bar.SetPosition(x-this.RADIUS,y,Math.PI/4,this.RADIUS);
 		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
 	}
@@ -123,7 +123,7 @@ Scene.Aiming	= class {
 		//表示
 		if(this.isVisible)	this.opacity	= Math.min(this.opacity+4,255);
 		else				this.opacity	= Math.max(this.opacity-4,0);
-		this.sprites.gauge.SetOpacity(this.opacity);
+		this.sprites.bar.SetOpacity(this.opacity);
 		this.UpdateCursorSpritePos();
 
 		return this;
@@ -235,7 +235,7 @@ Scene.Aiming	= class {
 		}
 
 		this.isVisible	= isVisible;
-		this.sprites.gauge.SetVisible( true).SetOpacity(this.opacity);
+		this.sprites.bar.SetVisible( true).SetOpacity(this.opacity);
 		this.sprites.cursor.SetVisible(true).SetOpacity(this.opacity);
 		return this;
 	}
