@@ -221,8 +221,7 @@ class ButtonItem{
 
 	/**拡大率設定*/
 	SetScale(scale,isTemp=false){
-		if(scale===undefined)	scale = 1.0;
-		else if(scale===null)	scale = this.scale;
+		scale = DefinedOr(scale,this.scale,1.0);
 		if(!isTemp)	this.scale = scale;
 		this.sprite.SetScale(scale*this.container.scale);
 		return this;
@@ -230,8 +229,7 @@ class ButtonItem{
 
 	/** 不透明度設定 */
 	SetOpacity(opacity,isSlowly=false,isTemp=false){
-		if(opacity===undefined)	opacity = 255;
-		else if(opacity===null)	opacity = this.opacity;
+		opacity	= DefinedOr(opacity,this.opacity,255);
 		if(!isTemp)	this.opacity = opacity;
 		if(!isSlowly)	this.sprite.SetOpacity(opacity);
 		else			this.sprite.RunAction(cc.FadeTo.create(0.2,opacity));
@@ -240,8 +238,7 @@ class ButtonItem{
 
 	/**画像のカラー設定*/
 	SetColor(color,isTemp=false){
-		if(color===undefined)	color = "FFFFFF";
-		else if(color===null)	color = this.color;
+		color	= DefinedOr(color,this.color,"FFFFFF");
 		if(!isTemp)	this.color = color;
 		this.sprite.SetColor(color);
 		return this;
