@@ -151,6 +151,8 @@ class ButtonItem{
 		this.scaleOnActive	= 0.9;
 		this.opacity		= 255;
 		this.opacityOnHover	= 255;
+		this.color			= "FFFFFF";
+		this.colorOnHover	= this.color;
 		this.indexes	= {};
 		this.status		= Button.OFF;
 		this.listensButtonUp	= false;
@@ -236,6 +238,16 @@ class ButtonItem{
 		return this;
 	}
 
+	/**画像のカラー設定*/
+	SetColor(color,isTemp=false){
+		if(color===undefined)	color = "FFFFFF";
+		else if(color===null)	color = this.color;
+		if(!isTemp)	this.color = color;
+		this.sprite.SetColor(color);
+		return this;
+	}
+	SetColorOnHover(color){this.colorOnHover=color; return this;}
+
 	/** 検索用タグ */
 	SetTag(tag=null){
 		this.tag	= tag;
@@ -259,6 +271,7 @@ class ButtonItem{
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 						this.SetScale(this.scale*this.scaleOnActive,true);
 						this.SetOpacity(this.opacityOnHover,false,true);
+						this.SetColor(this.colorOnHover,true);
 					}
 					return true;
 				},
@@ -269,10 +282,12 @@ class ButtonItem{
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 						this.status			= Button.HOVER;
 						this.SetOpacity(this.opacityOnHover,true,true);
+						this.SetColor(this.colorOnHover,true);
 					}
 					else{
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
+						this.SetColor(this.color,false);
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this._ApplyIndex();
@@ -281,6 +296,7 @@ class ButtonItem{
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
 					this.SetOpacity(this.opacityAt,true,false);
+					this.SetColor(this.colorOnHover,false);
 					this._ApplyIndex();
 				}
 			}),
@@ -295,14 +311,17 @@ class ButtonItem{
 						this._ApplyIndex();
 						if(this.listeners.onMouseHover)	this.listeners.onMouseHover();
 						this.SetOpacity(this.opacityOnHover,false,true);
+						this.SetColor(this.colorOnHover,true);
 					}
 					else if(this.status==Button.HOVER){
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
+						this.SetColor(this.color,false);
 						this._ApplyIndex();
 					}
 					else{
 						this.SetOpacity(this.opacity,true,false);
+						this.SetColor(this.color,false);
 					}
 					return;
 				}
