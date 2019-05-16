@@ -94,6 +94,18 @@ function CreateArray(length,isNumbering=null){
 	return list;
 }
 
+/** null時やundefined時に値を切り替える
+ * @param {*} value			基準となる変数
+ * @param {*} valueNull		null時の値
+ * @param {*} valueUndef	undefined時の値
+ * @returns value、ないしnull/undefine時はそれぞれの値
+ */
+function DefinedOr(value,valueNull,valueUndef){
+	if(value===undefined)	return valueUndef;
+	else if(value===null)	return valueNull;
+	else					return value;
+}
+
 /** 正規乱数
  * @param {number} halfWidth 半幅
  * @returns {number}
