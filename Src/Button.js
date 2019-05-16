@@ -295,8 +295,8 @@ class ButtonItem{
 				onTouchesCanceled	: (touches,event)=>{
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
-					this.SetOpacity(this.opacityAt,true,false);
-					this.SetColor(this.colorOnHover,false);
+					this.SetOpacity(this.opacity,true,false);
+					this.SetColor(this.color,false);
 					this._ApplyIndex();
 				}
 			}),
