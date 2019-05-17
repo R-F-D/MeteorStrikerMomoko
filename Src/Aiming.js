@@ -49,7 +49,7 @@ Scene.Aiming	= class {
 
 		/** @var スプライト */
 		this.sprites	= {
-			/**ゲージ*/		bar	: null,
+			/**ゲージ*/		bar		: null,
 			/**カーソル*/	cursor	: null,
 		};
 
@@ -235,7 +235,7 @@ Scene.Aiming	= class {
 		}
 
 		this.isVisible	= isVisible;
-		this.sprites.bar.SetVisible( true).SetOpacity(this.opacity);
+		this.sprites.bar.SetVisible(true).SetOpacity(this.opacity);
 		this.sprites.cursor.SetVisible(true).SetOpacity(this.opacity);
 		return this;
 	}
