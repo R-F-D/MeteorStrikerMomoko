@@ -25,7 +25,7 @@ const rc	= {
 		emitFx			: [ "Fx/fxEmit.png",		4,	2,	],	//エミットエフェクト
 		touched			: [ "Fx/fxTouch.png",		4,	2,	],	//タッチエフェクト
 
-		navigationButton: [ "Ui/btnNavigation.png",	2,	1,	],	//ナビゲーションボタン
+		navigationButton: [ "Ui/btnNavigation.png",	2,	2,	],	//ナビゲーションボタン
 		titleButton		: [ "Ui/btnTitle.png",		4,	4,	],	//タイトル画面等のボタン
 	},
 
