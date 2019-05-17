@@ -151,7 +151,7 @@ class ButtonItem{
 		this.scaleOnActive	= 0.9;
 		this.opacity		= 255;
 		this.opacityOnHover	= 255;
-		this.color			= "FFFFFF";
+		this.color			= {r:0xFF,g:0xFF,b:0xFF,};
 		this.colorOnHover	= this.color;
 		this.indexes	= {};
 		this.status		= Button.OFF;
@@ -238,12 +238,24 @@ class ButtonItem{
 
 	/**画像のカラー設定*/
 	SetColor(color,isTemp=false){
-		color	= DefinedOr(color,this.color,"FFFFFF");
-		if(!isTemp)	this.color = color;
-		this.sprite.SetColor(color);
+		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],}
+		color.r	= DefinedOr( color.r, this.color.r, 255);
+		color.g	= DefinedOr( color.g, this.color.g, 255);
+		color.b	= DefinedOr( color.b, this.color.b, 255);
+
+		if(!isTemp)	this.color = {r:color.r,g:color.g,b:color.b,};
+		this.sprite.SetColor(new cc.Color(color.r,color.g,color.b,0xFF));
 		return this;
 	}
-	SetColorOnHover(color){this.colorOnHover=color; return this;}
+	SetColorOnHover(color){
+		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],}
+		this.colorOnHover	= {
+			r	: DefinedOr( color.r, this.colorOnHover.r, 255),
+			g	: DefinedOr( color.g, this.colorOnHover.g, 255),
+			b	: DefinedOr( color.b, this.colorOnHover.b, 255),
+		}
+		return this;
+	}
 
 	/** 検索用タグ */
 	SetTag(tag=null){
