@@ -237,14 +237,15 @@ class ButtonItem{
 	}
 
 	/**画像のカラー設定*/
-	SetColor(color,isTemp=false){
+	SetColor(color,isSlowly=false,isTemp=false){
 		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],};
 		color.r	= DefinedOr( color.r, this.color.r, 255);
 		color.g	= DefinedOr( color.g, this.color.g, 255);
 		color.b	= DefinedOr( color.b, this.color.b, 255);
 
 		if(!isTemp)	this.color = {r:color.r,g:color.g,b:color.b,};
-		this.sprite.SetColor(new cc.Color(color.r,color.g,color.b,0xFF));
+		if(!isSlowly)	this.sprite.SetColor(new cc.Color(color.r,color.g,color.b,0xFF));
+		else			this.sprite.RunAction(cc.TintTo.create(0.2,color.r,color.g,color.b));
 		return this;
 	}
 	SetColorOnHover(color){
@@ -280,7 +281,7 @@ class ButtonItem{
 						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
 						this.SetScale(this.scale*this.scaleOnActive,true);
 						this.SetOpacity(this.opacityOnHover,false,true);
-						this.SetColor(this.colorOnHover,true);
+						this.SetColor(this.colorOnHover,false,true);
 					}
 					return true;
 				},
@@ -291,12 +292,12 @@ class ButtonItem{
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 						this.status			= Button.HOVER;
 						this.SetOpacity(this.opacityOnHover,true,true);
-						this.SetColor(this.colorOnHover,true);
+						this.SetColor(this.colorOnHover,true,true);
 					}
 					else{
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
-						this.SetColor(this.color,false);
+						this.SetColor(this.color,true,false);
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this._ApplyIndex();
@@ -305,7 +306,7 @@ class ButtonItem{
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this.status			= Button.OFF;
 					this.SetOpacity(this.opacity,true,false);
-					this.SetColor(this.color,false);
+					this.SetColor(this.color,true,false);
 					this._ApplyIndex();
 				}
 			}),
@@ -320,17 +321,17 @@ class ButtonItem{
 						this._ApplyIndex();
 						if(this.listeners.onMouseHover)	this.listeners.onMouseHover();
 						this.SetOpacity(this.opacityOnHover,false,true);
-						this.SetColor(this.colorOnHover,true);
+						this.SetColor(this.colorOnHover,false,true);
 					}
 					else if(this.status==Button.HOVER){
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
-						this.SetColor(this.color,false);
+						this.SetColor(this.color,true,false);
 						this._ApplyIndex();
 					}
 					else{
 						this.SetOpacity(this.opacity,true,false);
-						this.SetColor(this.color,false);
+						this.SetColor(this.color,true,false);
 					}
 					return;
 				}
