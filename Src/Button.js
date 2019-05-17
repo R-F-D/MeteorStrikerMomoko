@@ -238,7 +238,7 @@ class ButtonItem{
 
 	/**画像のカラー設定*/
 	SetColor(color,isTemp=false){
-		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],}
+		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],};
 		color.r	= DefinedOr( color.r, this.color.r, 255);
 		color.g	= DefinedOr( color.g, this.color.g, 255);
 		color.b	= DefinedOr( color.b, this.color.b, 255);
@@ -248,7 +248,7 @@ class ButtonItem{
 		return this;
 	}
 	SetColorOnHover(color){
-		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],}
+		if(Array.isArray(color))	color = {r:color[0],g:color[1],b:color[2],};
 		this.colorOnHover	= {
 			r	: DefinedOr( color.r, this.colorOnHover.r, 255),
 			g	: DefinedOr( color.g, this.colorOnHover.g, 255),
