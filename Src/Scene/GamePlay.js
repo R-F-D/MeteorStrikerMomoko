@@ -339,6 +339,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					{	distance:179600000,	text:null,	},
 					{	distance:186200000,	text:L.Text("GamePlay.Navigator.BrowAway.Kirari"),	},
 					{	distance:216200000,	text:null,	},
+					{	distance:256000000,	text:L.Text("GamePlay.Navigator.BrowAway.Unicorn"),	},
+					{	distance:286000000,	text:null,	},
 				];
 
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
