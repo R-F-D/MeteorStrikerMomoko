@@ -152,6 +152,7 @@ class Sprite{
 		this.entity.setVisible(!!visible);
 		return this;
 	}
+	get visible(){return !!this.entity.isVisible();}
 
 	/** テクスチャの色設定
 	 * @param {string} color
