@@ -46,6 +46,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			/**打撃動作*/		DISCHARGE		: null,
 			/**エミット中*/		EMIT			: null,
 			/**吹き飛ばし*/		BLOW_AWAY		: null,
+			/**プレイヤー退場*/	LEAVE			: null,
 			/**ダイアログ表示*/	DIALOG			: null,
 			/**動作失敗*/		DISCHARGE_FAILED: null,
 		};
@@ -360,7 +361,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					}
 				}
 
-				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.DIALOG);
+				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
 			.PushUpdatingFunctions("layer-bg", (dt)=>{
 				this.sprites.bgGround.forEach(sprite=>{
@@ -370,8 +371,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				})
 			});
 
-		//ダイアログ表示
-		this.Sequences.DIALOG
+		//プレイヤー退場
+		this.Sequences.LEAVE
 			.PushStartingFunctions(()=>{
 				const size	= cc.director.getWinSize();
 
@@ -383,14 +384,27 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					cc.ScaleTo.create(5.0,0.5).easing(cc.easeBackIn(10))
 				));
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
+				this.fx.player.SetVelocity(0,0,0,0);
 
 				this.labels.distance.SetVisible(false);
-				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Dialog", [L.NumToStr(this.GetDistanceInKm())+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
+				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(this.GetDistanceInKm())+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 				Log(`Impact: ${this.impactPower}`);
 				Log(`Total: ${this.totalPower}`);
+			})
+			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(false);
+				if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.DIALOG);
+			});
+
+		//ダイアログ表示
+		this.Sequences.DIALOG
+			.PushStartingFunctions(()=>{
+				const size	= cc.director.getWinSize();
+
+				this.sprites.player.SetVisible(false);
 
 				this.buttons.at("Retry")
 					.SetVisible(true)
@@ -440,7 +454,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		};
 		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
-		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y, this.sequence.count%15==0 && this.sequence!==this.Sequences.DIALOG).Update();
+		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
 		this.fx.explosion.Update();
 		this.fx.hit.Update();
 		this.fx.emit.Update();
@@ -452,7 +466,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		naviIcon		= naviIcon<=3 ? naviIcon : 0;
 		this.labels.navigation.SetIconIndex(naviIcon).Update();
 
-		this.isOnGround	= ![this.Sequences.BLOW_AWAY,this.Sequences.DIALOG ].includes(this.sequence);
+		this.isOnGround	= ![this.Sequences.BLOW_AWAY,this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence);
 		return this;
 	}
 
@@ -461,7 +475,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		const bgWidth	= [this.sprites.bgGround[0].img.width, this.sprites.bgSpace[0].img.width, ];
 
 		this.bgScroll	+= this.bgScrollSpeed;
-		if     ([this.Sequences.DIALOG].includes(this.sequence))					this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,0,0.05);
+		if     ([this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,0,0.05);
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,8,0.25);
 
 		this.sprites.bgGround.forEach((sprite,i)=>{
@@ -635,14 +649,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence)){ //攻撃ヒット後
 			idx	= this.playerHardblows()	? 12	: 8;
 		}
-		else if([this.Sequences.DIALOG].includes(this.sequence)){ //ダイアログ表示
+		else if([this.Sequences.LEAVE].includes(this.sequence)){ //プレイヤー退場
 			idx	= this.count%128<16 ? 6 : 4;
 		}
 		if(Math.trunc(this.count/8) % 2) ++idx;
 		this.sprites.player.SetIndex(idx);
 
 		//Other
-		this.fx.player.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==this.Sequences.DIALOG).Update();
+		let fxAdj	= 4<=idx && idx<8 	? {x:-16,y:-8,}	:  {x:0,y:-32,};
+		this.fx.player.Spawn(this.sprites.player.entity.x+fxAdj.x,this.sprites.player.entity.y+fxAdj.y,this.sprites.player.visible).Update();
 		return this;
 	}
 
