@@ -380,8 +380,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.meteor.SetVisible(false);
 				this.sprites.distance.SetVisible(false);
 				this.sprites.player.RunAction(cc.Spawn.create(
-					cc.MoveTo.create(5.0,cc.p(size.width+32,size.height-32)).easing(cc.easeBackIn(10)),
-					cc.ScaleTo.create(5.0,0.5).easing(cc.easeBackIn(10))
+					cc.MoveTo.create(3.0,cc.p(size.width+32,size.height-32)).easing(cc.easeBackIn(10)),
+					cc.ScaleTo.create(3.0,0.5).easing(cc.easeBackIn(10))
 				));
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 				this.fx.player.SetVelocity(0,0,0,0);
