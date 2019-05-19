@@ -223,6 +223,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.buttons.at("Share").SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
+			this.UpdatePlayerSprite(true);
 			this.aiming.Update(false);
 			if(this.sequence.count > 60)	this.SetSequence(this.Sequences.START_AIM);
 		});
@@ -234,6 +235,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.aiming.SetVisible(true,true);
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update();
 			});
 
@@ -244,6 +246,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update();
 				this.fx.preliminary.Update();
 				this.chargingCount += BlowPower.INCREMENT;
@@ -258,6 +261,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Destroy();
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update();
 				this.dischargeSpeed *= BlowPower.ACCELERATION;
 				this.chargingCount -= this.dischargeSpeed;
@@ -272,6 +276,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Destroy();
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update();
 				this.chargingCount-=BlowPower.DECREMENT;
 				if(this.chargingCount < 0)	this.SetSequence(this.Sequences.START_AIM);
@@ -297,6 +302,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update(false);
 
 				this.acceptEmitting--;
@@ -323,6 +329,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.BrowAway.Start")).SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(true);
 				this.aiming.Update(false);
 
 				const oldDistance	= this.GetDistanceInKm();
@@ -366,9 +373,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//計測中
 		this.Sequences.MEASURE
 			.PushStartingFunctions(()=>{
+				const size	= cc.director.getWinSize();
+
 				this.sprites.bgGround.forEach(s=>s.SetVisible(false));
 				this.sprites.meteor.SetVisible(false);
 				this.sprites.distance.SetVisible(false);
+				this.sprites.player.RunAction(cc.Spawn.create(
+					cc.MoveTo.create(5.0,cc.p(size.width+32,size.height-32)).easing(cc.easeBackIn(10)),
+					cc.ScaleTo.create(5.0,0.5).easing(cc.easeBackIn(10))
+				));
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 
 				this.labels.distance.SetVisible(false);
@@ -379,7 +392,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Log(`Impact: ${this.impactPower}`);
 				Log(`Total: ${this.totalPower}`);
 
-				const size	= cc.director.getWinSize();
 				this.buttons.at("Retry")
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
@@ -398,8 +410,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 										]));
 					});
 
+			})
+			.PushUpdatingFunctions((dt)=>{
+				this.UpdatePlayerSprite(false);
 			});
-			//.PushUpdatingFunctions((dt)=>{});
 
 		return this;
 	}
@@ -419,8 +433,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
-		//Player
-		this.UpdatePlayerSprite();
 
 		const m	={
 			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
@@ -593,15 +605,20 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	}
 
 	/**プレイヤー画像の表示*/
-	UpdatePlayerSprite(){
+	UpdatePlayerSprite(changesPosition=true){
 		//座標修正
-		let adjY	= this.sprites.player.GetCustomData("adjY",-100);	//修正
-		let dy		= this.sprites.player.GetCustomData("dy",  3);		//増分
-		if([this.Sequences.INITIAL,this.Sequences.START_AIM,this.Sequences.DISCHARGE_FAILED].includes(this.sequence)){
-			dy += adjY < 0	? 0.005	: -0.005;
-			if     (dy <-0.25) dy = MoveTo(dy,-0.25,0.05);
-			else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
-			adjY += dy;
+		if(changesPosition){
+			let adjY	= this.sprites.player.GetCustomData("adjY",-100);	//修正
+			let dy		= this.sprites.player.GetCustomData("dy",  3);		//増分
+			if([this.Sequences.INITIAL,this.Sequences.START_AIM,this.Sequences.DISCHARGE_FAILED].includes(this.sequence)){
+				dy += adjY < 0	? 0.005	: -0.005;
+				if     (dy <-0.25) dy = MoveTo(dy,-0.25,0.05);
+				else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
+				adjY += dy;
+			}
+			this.sprites.player
+				.SetPosition(this.POSITIONS.PLAYER.X+Math.min(this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY)
+				.SetCustomData("adjY",adjY).SetCustomData("dy",dy);
 		}
 
 		//スプライト番号
@@ -615,12 +632,16 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([this.Sequences.DISCHARGE].includes(this.sequence)){	//攻撃中
 			idx	= this.playerHardblows()	? 10	: 8;
 		}
-		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY,this.Sequences.MEASURE].includes(this.sequence)){ //攻撃ヒット後
+		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence)){ //攻撃ヒット後
 			idx	= this.playerHardblows()	? 12	: 8;
 		}
+		else if([this.Sequences.MEASURE].includes(this.sequence)){ //計測中
+			idx	= this.count%128<16 ? 6 : 4;
+		}
 		if(Math.trunc(this.count/8) % 2) ++idx;
+		this.sprites.player.SetIndex(idx);
 
-		this.sprites.player.SetIndex(idx).SetPosition(this.POSITIONS.PLAYER.X+Math.min(this.distanceOfMeteor,250)-this.chargingCount/512,this.POSITIONS.PLAYER.Y-this.chargingCount/1024+adjY).SetCustomData("adjY",adjY).SetCustomData("dy",dy);
+		//Other
 		this.fx.player.Spawn(this.sprites.player.x,this.sprites.player.y-32,this.sequence!==this.Sequences.MEASURE).Update();
 		return this;
 	}
