@@ -298,6 +298,7 @@ class ButtonItem{
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
 						this.SetColor(this.color,true,false);
+						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
 					this._ApplyIndex();
@@ -308,6 +309,7 @@ class ButtonItem{
 					this.SetOpacity(this.opacity,true,false);
 					this.SetColor(this.color,true,false);
 					this._ApplyIndex();
+					if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 				}
 			}),
 			this.sprite.entity
@@ -319,7 +321,7 @@ class ButtonItem{
 					if(this.status & (Button.OFF|Button.HOVER) && this.sprite.entity.isVisible() && this._EventIsOnSprite(null,event)){
 						this.status			= Button.HOVER;
 						this._ApplyIndex();
-						if(this.listeners.onMouseHover)	this.listeners.onMouseHover();
+						if(this.listeners.onMouseOver)	this.listeners.onMouseOver();
 						this.SetOpacity(this.opacityOnHover,false,true);
 						this.SetColor(this.colorOnHover,false,true);
 					}
@@ -327,6 +329,7 @@ class ButtonItem{
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
 						this.SetColor(this.color,true,false);
+						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 						this._ApplyIndex();
 					}
 					else{
@@ -385,13 +388,15 @@ class ButtonItem{
 		return this;
 	}
 	/** マウスホバーのコールバックを設定
-	 * @param {function} [callback=null] コールバック関数
+	 * @param {function} [callbackOver=null] マウスオーバー時のコールバック関数
+	 * @param {function} [callbackOut=null] コールバック関数
 	 * @returns this
 	 * @memberof ButtonItem
 	 */
-	OnMouseHover(callback=null){
+	OnMouseHover(callbackOver=null,callbackOut=null){
 		this.listeners	= this.listeners||{};
-		this.listeners.onMouseHover	= callback;
+		this.listeners.onMouseOver	= callbackOver;
+		this.listeners.onMouseOut	= callbackOut;
 		this._ApplyEvents();
 		return this;
 	}
