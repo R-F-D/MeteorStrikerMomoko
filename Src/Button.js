@@ -275,6 +275,7 @@ class ButtonItem{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touches,event)=>{
 					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+						if(this.status!==Button.HOVER && this.listeners.onMouseOver)	this.listeners.onMouseOver();
 						this.status			= Button.ON;
 						this._ApplyIndex();
 						event.stopPropagation();
