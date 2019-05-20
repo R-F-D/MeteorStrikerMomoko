@@ -340,7 +340,7 @@ class LabelBg{
 		if(animates){
 			this.entity.runAction(
 				cc.ScaleTo
-					.create(0.5,this.size.width/this.imgWidth, this.size.height/this.imgHeight)
+					.create(0.3,this.size.width/this.imgWidth, this.size.height/this.imgHeight)
 					.easing(cc.easeBackOut(10))
 			);
 		}
