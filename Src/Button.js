@@ -286,22 +286,23 @@ class ButtonItem{
 					return true;
 				},
 				onTouchesEnded	: (touches,event)=>{
-					if(this.status==Button.ON && this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
-						event.stopPropagation();
-						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
-						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
-						this.status			= Button.HOVER;
-						this.SetOpacity(this.opacityOnHover,true,true);
-						this.SetColor(this.colorOnHover,true,true);
-					}
-					else{
+					if(this.status==Button.ON){
+						if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+							event.stopPropagation();
+							if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
+							if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
+							this.status			= Button.HOVER;
+							this.SetOpacity(this.opacityOnHover,true,true);
+							this.SetColor(this.colorOnHover,true,true);
+						}
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
 						this.SetColor(this.color,true,false);
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
+
+						this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
+						this._ApplyIndex();
 					}
-					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
-					this._ApplyIndex();
 				},
 				onTouchesCanceled	: (touches,event)=>{
 					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
