@@ -219,7 +219,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
 
 			//インタフェース
-			this.buttons.at("Reset").SetVisible(true).SetPosition(16,size.height-16).SetColorOnHover([0xFF,0xA0,0x00]).OnButtonUp(()=>this.ResetForce());
+			this.buttons.at("Reset")
+				.SetVisible(true)
+				.SetPosition(16,size.height-16)
+				.SetColorOnHover([0xFF,0xA0,0x00])
+				.OnMouseHover(
+					()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
+					()=>this.labels.navigation.RemoveTempText()
+				)
+				.OnButtonUp(()=>this.ResetForce());
 			this.buttons.at("Retry").SetVisible(false);
 			this.buttons.at("Share").SetVisible(false);
 		})
@@ -410,11 +418,20 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
 					.SetIndex(Button.OFF,12).SetIndex(Button.ON,13).SetIndex(Button.HOVER,13)
+					.OnMouseHover(
+						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
+						()=>this.labels.navigation.RemoveTempText()
+					)
 					.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
+
 				this.buttons.at("Share")
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
 					.SetIndex(Button.OFF,14).SetIndex(Button.ON,14).SetIndex(Button.HOVER,15)
+					.OnMouseHover(
+						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
+						()=>this.labels.navigation.RemoveTempText()
+					)
 					.OnButtonUp(()=>{
 						this.labels.navigation.RemoveTempText();
 						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
