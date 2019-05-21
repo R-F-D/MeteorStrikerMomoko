@@ -508,8 +508,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		return this;
 	}
 
-
-
 	/** イベントリスナ初期設定
 	 * @returns this
 	 */
@@ -546,53 +544,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						this.ResetForce();
 					}
 				},
-			})
-			/*
-			//リセットボタン
-			.AddToEventListenerList("resetButton",(sender,type)=>{
-				if      (type===ccui.Widget.TOUCH_BEGAN){
-					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset"));
-				}
-				else if(type===ccui.Widget.TOUCH_ENDED){
-					this.ResetForce();
-				}
-				else if (type===ccui.Widget.TOUCH_CANCELED){
-					this.labels.navigation.RemoveTempText();
-				}
-				return true;
-			})
-			//リトライボタン
-			.AddToEventListenerList("retryButton",(sender,type)=>{
-				if      (type===ccui.Widget.TOUCH_BEGAN){
-					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry"));
-				}
-				else if(type===ccui.Widget.TOUCH_ENDED){
-					this.ReplaceScene(Scene.GamePlay);
-				}
-				else if (type===ccui.Widget.TOUCH_CANCELED){
-					this.labels.navigation.RemoveTempText();
-				}
-				return true;
-			})
-			//シェアボタン
-			.AddToEventListenerList("shareScoreButton",(sender,type)=>{
-				if      (type===ccui.Widget.TOUCH_BEGAN){
-					this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share"));
-				}
-				else if (type===ccui.Widget.TOUCH_ENDED){
-					this.labels.navigation.RemoveTempText();
-					cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
-										L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
-										L.Text("GamePlay.Share.URL"),
-										L.Text("GamePlay.Share.Tags")
-									]));
-				}
-				else if (type===ccui.Widget.TOUCH_CANCELED){
-					this.labels.navigation.RemoveTempText();
-				}
-				return true;
-			})*/
-			;
+			});
 
 		//共通イベント対応設定
 		let commonEvents	= [];
@@ -609,7 +561,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		return this;
 	}
-
 
 	/** エミット倍率を取得
 	 * @returns number
@@ -694,6 +645,3 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 
 })();	//File Scope
-
-
-

@@ -44,15 +44,6 @@ Scene.Sequence	= class Sequence{
 		this.count	= 0;
 
 		//イベントリスナ初期化＆設定
-		/*
-		if(this.listenTargetLayer){
-			cc.eventManager.removeListeners(this.listenTargetLayer);
-			//個別イベント
-			this.eventListeners
-				.filter(e=>e instanceof cc.EventListener)
-				.forEach(e=>cc.eventManager.addListener(_.cloneDeep(e),this.listenTargetLayer));
-		}
-		*/
 		this.ApplyEvents("GamePlay.Main",this.listenTargetLayer);
 
 		//シーケンス開始時処理
