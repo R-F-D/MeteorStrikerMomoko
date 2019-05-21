@@ -25,8 +25,6 @@ Scene.Sequence	= class Sequence{
 		this.onStartFunctions	= {};
 		/** @var {function[]} 当該シーケンスでのシーン更新時に呼ばれる処理 */
 		this.updateFunctions	= {};
-
-		this.Init();
 	}
 
 	/** インスタンス生成

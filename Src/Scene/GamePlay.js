@@ -134,7 +134,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15,rc.font.talk).SetIcon(rc.img.navigator).AddToLayer(this);
 
-					_this.SetSequence(_this.Sequences.INITIAL);
 					return true;
 				},
 			})
