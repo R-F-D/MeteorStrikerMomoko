@@ -469,19 +469,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	OnUpdating(dt){
 		super.OnUpdating(dt);
 
-		const m	={
-			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
-			y:this.POSITIONS.METEOR.Y,
-		};
-		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
-		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
-		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
+		this.UpdateMeteorSprite();
 		this.fx.explosion.Update();
 		this.fx.hit.Update();
 		this.fx.emit.Update();
 
 		this.labels.aimingResult.SetString(`${this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
-		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
 
 		let naviIcon	= Math.trunc(this.count/4) % 32;
 		naviIcon		= naviIcon<=3 ? naviIcon : 0;
@@ -628,6 +621,19 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//Other
 		let fxAdj	= 4<=idx && idx<8 	? {x:-16,y:-8,}	:  {x:0,y:-32,};
 		this.fx.player.Spawn(this.sprites.player.entity.x+fxAdj.x,this.sprites.player.entity.y+fxAdj.y,this.sprites.player.visible).Update();
+		return this;
+	}
+
+	/** 隕石画像の更新 */
+	UpdateMeteorSprite(changesPosition=true){
+		const m	={
+			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
+			y:this.POSITIONS.METEOR.Y,
+		};
+		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
+		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
+		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
+		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
 		return this;
 	}
 
