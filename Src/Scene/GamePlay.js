@@ -627,6 +627,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		//Other
 		let fxAdj	= 4<=idx && idx<8 	? {x:-16,y:-8,}	:  {x:0,y:-32,};
+		if(this.sprites.player.entity.isFlippedX())	fxAdj.x*=-1;
 		this.fx.player.Spawn(this.sprites.player.entity.x+fxAdj.x,this.sprites.player.entity.y+fxAdj.y,this.sprites.player.visible).Update();
 		return this;
 	}
