@@ -201,7 +201,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			//スプライト
 			this.sprites.player
 				.SetPosition(-128,0).SetScale(2).SetRotate(-5)
-				.SetCustomData("adjY").SetCustomData("dy")
+				.SetCustomData("isFlying",true).SetCustomData("adjY").SetCustomData("dy")
 				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
 			this.sprites.meteor.SetScale(2).SetVisible(true);
@@ -243,6 +243,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//エイム作動
 		this.Sequences.START_AIM
 			.PushStartingFunctions(()=>{
+				this.sprites.player.SetCustomData("isFlying",false)
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
 				this.aiming.SetVisible(true,true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
@@ -391,9 +392,17 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.bgGround.forEach(s=>s.SetVisible(false));
 				this.sprites.meteor.SetVisible(false);
 				this.sprites.distance.SetVisible(false);
-				this.sprites.player.RunAction(cc.Spawn.create(
-					cc.MoveTo.create(3.0,cc.p(size.width+32,size.height-32)).easing(cc.easeBackIn(10)),
-					cc.ScaleTo.create(3.0,0.5).easing(cc.easeBackIn(10))
+				this.sprites.player.RunAction(cc.Sequence.create(
+					cc.DelayTime.create(1),
+					cc.callFunc(()=>{
+						this.sprites.player
+							.SetCustomData("isFlying",true)
+							.entity.setFlippedX(true);
+					}),
+					cc.Spawn.create(
+						cc.MoveTo.create(3.0,cc.p(-32,size.height-32)).easing(cc.easeBackIn(10)),
+						cc.ScaleTo.create(3.0,0.5).easing(cc.easeBackIn(10))
+					)
 				));
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 				this.fx.player.SetVelocity(0,0,0,0);
@@ -612,9 +621,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence)){ //攻撃ヒット後
 			idx	= this.playerHardblows()	? 12	: 8;
 		}
-		else if([this.Sequences.INITIAL,this.Sequences.LEAVE].includes(this.sequence)){ //初期状態・プレイヤー退場
-			idx	= this.count%128<16 ? 6 : 4;
-		}
+		if(this.sprites.player.GetCustomData("isFlying",false) && idx<4)	idx	+= 4;	//飛行状態
 		if(Math.trunc(this.count/8) % 2) ++idx;
 		this.sprites.player.SetIndex(idx);
 
