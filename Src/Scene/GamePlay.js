@@ -199,7 +199,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.aiming.SetSpritePosition(164,80).SetVisible(false);
 
 			//スプライト
-			this.sprites.player.SetScale(2).SetRotate(-5).SetCustomData("adjY",-100).SetCustomData("dy",3);
+			this.sprites.player
+				.SetPosition(-128,0).SetScale(2).SetRotate(-5)
+				.SetCustomData("adjY").SetCustomData("dy")
+				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
+
 			this.sprites.meteor.SetScale(2).SetVisible(true);
 			this.sprites.distance.SetScale(1).SetVisible(false);
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
@@ -207,7 +211,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
 
 			//エフェクト
-			this.fx.player.SetVelocity(-1,-0.5,0.5,0);
+			this.fx.player.SetVelocity(0,0.5,0.1,0);
 			this.fx.meteor.SetVelocity(8,3);
 			this.fx.meteor.SetColor();
 			this.fx.preliminary.Destroy();
@@ -231,9 +235,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.buttons.at("Share").SetVisible(false);
 		})
 		.PushUpdatingFunctions((dt)=>{
-			this.UpdatePlayerSprite(true);
+			this.UpdatePlayerSprite(false);
 			this.aiming.Update(false);
-			if(this.sequence.count > 60)	this.SetSequence(this.Sequences.START_AIM);
+			if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.START_AIM);
 		});
 
 		//エイム作動
@@ -241,6 +245,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
 				this.aiming.SetVisible(true,true);
+				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
@@ -589,12 +594,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	UpdatePlayerSprite(changesPosition=true){
 		//座標修正
 		if(changesPosition){
-			let adjY	= this.sprites.player.GetCustomData("adjY",-100);	//修正
-			let dy		= this.sprites.player.GetCustomData("dy",  3);		//増分
-			if([this.Sequences.INITIAL,this.Sequences.START_AIM,this.Sequences.DISCHARGE_FAILED].includes(this.sequence)){
+			let adjY	= this.sprites.player.GetCustomData("adjY",0);	//修正
+			let dy		= this.sprites.player.GetCustomData("dy",  -0.25);		//増分
+			if([this.Sequences.START_AIM,this.Sequences.DISCHARGE_FAILED].includes(this.sequence)){
 				dy += adjY < 0	? 0.005	: -0.005;
-				if     (dy <-0.25) dy = MoveTo(dy,-0.25,0.05);
-				else if(dy > 0.25) dy = MoveTo(dy, 0.25,0.05);
 				adjY += dy;
 			}
 			this.sprites.player
@@ -616,7 +619,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence)){ //攻撃ヒット後
 			idx	= this.playerHardblows()	? 12	: 8;
 		}
-		else if([this.Sequences.LEAVE].includes(this.sequence)){ //プレイヤー退場
+		else if([this.Sequences.INITIAL,this.Sequences.LEAVE].includes(this.sequence)){ //初期状態・プレイヤー退場
 			idx	= this.count%128<16 ? 6 : 4;
 		}
 		if(Math.trunc(this.count/8) % 2) ++idx;
