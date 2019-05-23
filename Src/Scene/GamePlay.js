@@ -204,7 +204,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				.SetCustomData("isFlying",true).SetCustomData("adjY").SetCustomData("dy")
 				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
-			this.sprites.meteor.SetScale(2).SetVisible(true);
+			this.sprites.meteor
+				.SetPosition(size.width+128,this.POSITIONS.METEOR.Y+64)
+				.SetScale(2).SetVisible(true)
+				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
+
 			this.sprites.distance.SetScale(1).SetVisible(false);
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
 			this.sprites.bgGround.forEach(s=>s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true));
@@ -236,8 +240,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		})
 		.PushUpdatingFunctions((dt)=>{
 			this.UpdatePlayerSprite(false);
+			this.UpdateMeteorSprite(false);
 			this.aiming.Update(false);
-			if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.START_AIM);
+			if(!this.sprites.player.IsRunningActions() && !this.sprites.meteor.IsRunningActions())	this.SetSequence(this.Sequences.START_AIM);
 		});
 
 		//エイム作動
@@ -250,6 +255,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
 			});
 
@@ -261,6 +267,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
 				this.fx.preliminary.Update();
 				this.chargingCount += BlowPower.INCREMENT;
@@ -276,6 +283,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
 				this.dischargeSpeed *= BlowPower.ACCELERATION;
 				this.chargingCount -= this.dischargeSpeed;
@@ -291,6 +299,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
 				this.chargingCount-=BlowPower.DECREMENT;
 				if(this.chargingCount < 0)	this.SetSequence(this.Sequences.START_AIM);
@@ -317,6 +326,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
 
 				this.acceptEmitting--;
@@ -344,6 +354,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
+				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
 
 				const oldDistance	= this.GetDistanceInKm();
@@ -417,6 +428,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(false);
+				this.UpdateMeteorSprite(false);
 				if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.DIALOG);
 			});
 
@@ -478,7 +490,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	OnUpdating(dt){
 		super.OnUpdating(dt);
 
-		this.UpdateMeteorSprite();
 		this.fx.explosion.Update();
 		this.fx.hit.Update();
 		this.fx.emit.Update();
@@ -494,6 +505,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	}
 
 	UpdateBgLayer(dt){
+		if([this.Sequences.INITIAL].includes(this.sequence))	return this;
+
 		const size		= cc.director.getWinSize();
 		const bgWidth	= [this.sprites.bgGround[0].img.width, this.sprites.bgSpace[0].img.width, ];
 
@@ -638,7 +651,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			x:this.POSITIONS.METEOR.X+Math.min(this.distanceOfMeteor,250),
 			y:this.POSITIONS.METEOR.Y,
 		};
-		this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4)).Rotate(this.isOnGround?-7:1);
+
+		if(changesPosition)	this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4));
+		this.sprites.meteor.Rotate(this.isOnGround?-7:1);
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
 		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
 		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
