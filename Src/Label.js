@@ -59,6 +59,7 @@ Label	= class Label{
 	SetVisible(visible){
 		this.entity.setVisible(!!visible);
 		if(this.bg.IsEnabled()){
+			this.bg.entity.setVisible(visible);
 			if(!visible)	this.bg.SetSize(0,0,true,false);
 		}
 		if(this.icon){
@@ -269,6 +270,7 @@ class LabelBg{
 		this.entity.setColor(this.COLOR);
 		this.entity.setScale(0);
 		this.entity.attr({zIndex:this.Z, opacity:this.OPACITY, });
+		this.entity.setVisible(!!this.parent.entity.isVisible());
 
 		this.Init().ApplicateLayer();
 		return this;
