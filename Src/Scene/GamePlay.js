@@ -205,7 +205,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
 			this.sprites.meteor
-				.SetPosition(size.width+128,this.POSITIONS.METEOR.Y+64)
+				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
 				.SetScale(2).SetVisible(true)
 				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
@@ -215,8 +215,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
 
 			//エフェクト
-			this.fx.player.SetVelocity(0,0.5,0.1,0);
-			this.fx.meteor.SetVelocity(8,3);
+			this.fx.player.SetVelocity(0,0,0.0,0);
+			this.fx.meteor.SetVelocity(0,3);
 			this.fx.meteor.SetColor();
 			this.fx.preliminary.Destroy();
 
@@ -252,6 +252,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
 				this.aiming.SetVisible(true,true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
+				this.fx.meteor.SetVelocity(8,3);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
@@ -653,7 +654,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		if(changesPosition)	this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4));
 		this.sprites.meteor.Rotate(this.isOnGround?-7:1);
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
-		this.fx.meteor.Spawn(this.sprites.meteor.x,this.sprites.meteor.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
+		this.fx.meteor.Spawn(this.sprites.meteor.entity.x,this.sprites.meteor.entity.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
 		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
 		return this;
 	}
