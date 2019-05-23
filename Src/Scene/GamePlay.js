@@ -505,12 +505,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	}
 
 	UpdateBgLayer(dt){
-		if([this.Sequences.INITIAL].includes(this.sequence))	return this;
-
 		const size		= cc.director.getWinSize();
 		const bgWidth	= [this.sprites.bgGround[0].img.width, this.sprites.bgSpace[0].img.width, ];
 
-		this.bgScroll	+= this.bgScrollSpeed;
+		if(![this.Sequences.INITIAL].includes(this.sequence))	this.bgScroll	+= this.bgScrollSpeed;
 		if     ([this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,0,0.05);
 		else if([this.Sequences.EMIT,this.Sequences.BLOW_AWAY].includes(this.sequence))	this.bgScrollSpeed	= MoveTo(this.bgScrollSpeed,8,0.25);
 
