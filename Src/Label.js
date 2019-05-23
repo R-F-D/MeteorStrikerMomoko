@@ -252,7 +252,6 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	Init(){
-		if(this.IsEnabled()) this.entity.getActionManager().removeAllActions();
 		this.SetSize(0,0,false,false);
 		return this;
 	}
