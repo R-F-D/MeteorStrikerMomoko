@@ -91,7 +91,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		/** ラベル */
 		this.labels	= {
-			aimingResult:null, hitArea:null, distance:null,	navigation:null,
+			hitArea:null, distance:null,	navigation:null,
 		}
 
 		//シークエンス設定
@@ -130,7 +130,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.aiming.Init().SetLayer(this);
 
 					//Labels
-					_this.labels.aimingResult	= Label.CreateInstance(15,rc.font.talk).AddToLayer(this);
 					_this.labels.distance		= Label.CreateInstance(12,rc.font.distance).AddToLayer(this);
 					_this.labels.navigation		= Label.CreateInstance(15,rc.font.talk).SetIcon(rc.img.navigator).AddToLayer(this);
 
@@ -221,7 +220,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.fx.preliminary.Destroy();
 
 			//ラベル
-			this.labels.aimingResult.SetVisible(false).SetColor("#FFFFFF").SetPosition(64,105);
 			this.labels.distance.SetVisible(false).SetColor("#00FF00");
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
 
@@ -318,7 +316,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					cc.ScaleTo.create(0.25,1).easing(cc.easeBackOut(10))
 				);
 
-				this.labels.aimingResult.SetVisible(true);
+				this.aiming.SpawnRateValue(24,118);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
@@ -349,7 +347,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.aiming.SetVisible(false);
 				this.sprites.distance.SetVisible(true);
 				this.sprites.hitArea.SetVisible(false);
-				this.labels.aimingResult.SetVisible(false);
+				this.aiming.HideRateValue();
 				this.labels.distance.SetVisible(true);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.BrowAway.Start")).SetVisible(true);
 			})
@@ -494,8 +492,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.fx.explosion.Update();
 		this.fx.hit.Update();
 		this.fx.emit.Update();
-
-		this.labels.aimingResult.SetString(`${this.aiming.GetRate(true)}${L.Text("GamePlay.Charge.Unit")}`);
 
 		let naviIcon	= Math.trunc(this.count/4) % 32;
 		naviIcon		= naviIcon<=3 ? naviIcon : 0;

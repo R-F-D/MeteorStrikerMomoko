@@ -51,6 +51,7 @@ Scene.Aiming	= class {
 		this.sprites	= {
 			/**ゲージ*/		bar		: null,
 			/**カーソル*/	cursor	: null,
+			/**倍率表示*/	rates	: [],
 		};
 
 	}
@@ -72,6 +73,10 @@ Scene.Aiming	= class {
 
 		this.sprites.bar			= Sprite.CreateInstance(rc.img.aimBar).Attr({zIndex:100});;
 		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor).Attr({zIndex:100});;
+		for(let i=0;i<6;++i){
+			this.sprites.rates.push(Sprite.CreateInstance(rc.img.aimValue).Attr({zIndex:111}).SetVisible(false));
+		}
+
 		return this;
 	}
 
@@ -83,6 +88,7 @@ Scene.Aiming	= class {
 	SetLayer(layer){
 		this.sprites.bar.AddToLayer(layer).Attr({x:this.spritePos.x, y:this.spritePos.y,});
 		this.sprites.cursor.AddToLayer(layer);
+		this.sprites.rates.forEach(s=>s.AddToLayer(layer));
 		this.UpdateCurrentArea().UpdateCursorSpritePos();
 		return this;
 	}
@@ -245,6 +251,36 @@ Scene.Aiming	= class {
 	 * @memberof Aiming
 	 */
 	static Create(){return new this;}
+
+	/** エイミング倍率の表示
+	 * @param {number} x
+	 * @param {number} y
+	 * @returns this
+	 */
+	SpawnRateValue(x,y){
+		const rate	= Math.trunc(this.GetRate(true) * 10);
+		//					百			十				一				小数点		小数部		％
+		const indexes	= [	1,			rate%1000/100,	rate%100/10,	10,			rate%10,	11,			];
+		const adjusts	= [	{x:0,y:0},	{x:16,y:1},		{x:31,y:2},		{x:45,y:3},	{x:58,y:4},	{x:70,y:5},	];
+
+		this.sprites.rates.forEach((sprite,i)=>{
+			sprite
+				.SetPosition(x+adjusts[i].x,y+adjusts[i].y)
+				.SetScale(0.75-0.05*i)
+				.SetRotate(-5)
+				.SetIndex(Math.trunc(indexes[i]))
+				.SetVisible(i==0?(rate>=1000) : i==1?(rate>=100) : true);
+		});
+		return this;
+	}
+
+	/** エイミング倍率を非表示
+	 * @returns this
+	 */
+	HideRateValue(){
+		this.sprites.rates.forEach( s=>s.SetVisible(false) );
+		return this;
+	}
 }
 
 
