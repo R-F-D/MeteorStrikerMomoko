@@ -316,7 +316,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					cc.ScaleTo.create(0.25,1).easing(cc.easeBackOut(10))
 				);
 
-				this.aiming.SpawnRateValue(24,118);
+				this.aiming.SpawnRateValue(28,118);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
