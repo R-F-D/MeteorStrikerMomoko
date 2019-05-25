@@ -30,7 +30,7 @@ Effect.Explosion	= class extends Effect.EffectBase{
 			else{
 				particle	= Object.assign(particle,{
 					sprite:	Sprite.CreateInstance(rc.img.explosion).AddToLayer(layer)
-								.SetScale(1).Attr({zIndex:1,opacity:255}).SetVisible(false),
+								.SetScale(1).Attr({zIndex:20,opacity:255}).SetVisible(false),
 					scale:	1,
 					type:	FxType.Letters,
 				});
@@ -53,9 +53,10 @@ Effect.Explosion	= class extends Effect.EffectBase{
 			}
 			else{
 				v.sprite.SetPosition(x,y).SetScale(0.25).SetOpacity(255).SetVisible(true).RunAction(
-					new cc.Sequence(
-						cc.ScaleTo.create(1.0,0.5).easing(cc.easeBackOut(100)),
-						cc.FadeTo.create(1.0,0)
+					cc.Sequence.create(
+						cc.ScaleTo.create(0.5,0.75).easing(cc.easeBackOut(100)),
+						cc.DelayTime.create(1),
+						cc.FadeTo.create(1,0)
 					)
 				);
 			}
