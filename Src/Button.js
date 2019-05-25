@@ -274,7 +274,8 @@ class ButtonItem{
 			cc.EventListener.create({
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
 				onTouchesBegan	: (touches,event)=>{
-					if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+					if(!this.sprite.entity.isVisible())	return false;
+					if(this._EventIsOnSprite(touches,event)){
 						if(this.status!==Button.HOVER && this.listeners.onMouseOver)	this.listeners.onMouseOver();
 						this.status			= Button.ON;
 						this._ApplyIndex();
@@ -288,7 +289,8 @@ class ButtonItem{
 				},
 				onTouchesEnded	: (touches,event)=>{
 					if(this.status==Button.ON){
-						if(this.sprite.entity.isVisible() && this._EventIsOnSprite(touches,event)){
+						if(!this.sprite.entity.isVisible())	return false;
+						if(this._EventIsOnSprite(touches,event)){
 							event.stopPropagation();
 							if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 							if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
@@ -321,12 +323,15 @@ class ButtonItem{
 			cc.EventListener.create({
 				event			: cc.EventListener.MOUSE,
 				onMouseMove	: (event)=>{
-					if(this.status & (Button.OFF|Button.HOVER) && this.sprite.entity.isVisible() && this._EventIsOnSprite(null,event)){
-						this.status			= Button.HOVER;
-						this._ApplyIndex();
-						if(this.listeners.onMouseOver)	this.listeners.onMouseOver();
-						this.SetOpacity(this.opacityOnHover,false,true);
-						this.SetColor(this.colorOnHover,false,true);
+					if(!this.sprite.entity.isVisible())	return false;
+					if(this._EventIsOnSprite(null,event)){
+						if(this.status & (Button.OFF|Button.HOVER)){
+							if(this.status==Button.OFF && this.listeners.onMouseOver)	this.listeners.onMouseOver();
+							this.status			= Button.HOVER;
+							this._ApplyIndex();
+							this.SetOpacity(this.opacityOnHover,false,true);
+							this.SetColor(this.colorOnHover,false,true);
+						}
 					}
 					else if(this.status==Button.HOVER){
 						this.status			= Button.OFF;
