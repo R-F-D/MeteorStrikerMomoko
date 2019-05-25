@@ -128,6 +128,9 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
 function Debug(callback){	if(isDebug()) callback();	}
-function Log(arg){			Debug(()=>console.log(arg));}
 function Msg(arg){			Debug(()=>alert(JSON.stringify(arg)));	}
+function Log(arg){Debug(()=>{
+	const date = new Date();
+	console.log(`[${date.toLocaleTimeString()}.${(date.getMilliseconds()/1000).toFixed(3).slice(2,5)}] ${arg}`);
+})}
 
