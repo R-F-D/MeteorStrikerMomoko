@@ -118,6 +118,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.sprites.meteor	= Sprite.CreateInstance(rc.img.meteor).AddToLayer(this).Attr({zIndex:2});
 					_this.sprites.distance	= Sprite.CreateInstance(rc.img.distance).AddToLayer(this).Attr({zIndex:3});
 					_this.sprites.hitArea	= Sprite.CreateInstance(rc.img.hitArea).AddToLayer(this).Attr({zIndex:110});
+					_this.sprites.txtLaunch	= Sprite.CreateInstance(rc.img.txtLaunch).AddToLayer(this).Attr({zIndex:110});
 
 					_this.fx			= _this.fx||{};
 					_this.fx.meteor		= Effect.Meteor.Create(8).Init(this);
@@ -212,6 +213,25 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
 			this.sprites.bgGround.forEach(s=>s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true));
 			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
+
+			this.sprites.txtLaunch
+				.SetScale(1).SetVisible(true).SetOpacity(0)
+				.SetPosition(size.width+128,size.height/2).SetRotate(-3)
+				.RunAction(
+					cc.Sequence.create(
+						cc.DelayTime.create(0.5),
+						cc.Spawn.create(
+							cc.FadeTo.create(0.5,192),
+							cc.MoveTo.create(0.5,cc.p(size.width/2+16,size.height/2)),
+						),
+						cc.MoveTo.create(1.0,cc.p(size.width/2-16,size.height/2)),
+						cc.Spawn.create(
+							cc.FadeTo.create(0.5,0),
+							cc.MoveTo.create(0.5,cc.p(-128,size.height/2)),
+						),
+						cc.callFunc(()=>this.sprites.txtLaunch.SetVisible(false))
+					)
+				);
 
 			//エフェクト
 			this.fx.player.SetVelocity(0,0,0.0,0);
