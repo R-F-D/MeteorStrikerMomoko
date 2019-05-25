@@ -153,6 +153,8 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	SetString(text,isTemp=false){
+		if(text==this.entity.getString()) return this;
+
 		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
 		if(this.icon){
