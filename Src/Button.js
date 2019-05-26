@@ -340,10 +340,6 @@ class ButtonItem{
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 						this._ApplyIndex();
 					}
-					else{
-						this.SetOpacity(this.opacity,true,false);
-						this.SetColor(this.color,true,false);
-					}
 					return;
 				}
 			}),
