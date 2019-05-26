@@ -49,16 +49,17 @@ Effect.Explosion	= class extends Effect.EffectBase{
 
 		this.ActivateParticles(2,(v,i)=>{
 			if((v.type==FxType.Particle)){
-				v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
+				v.sprite
+					.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
 			}
 			else{
-				v.sprite.SetPosition(x,y).SetScale(0.25).SetOpacity(255).SetVisible(true).RunAction(
-					cc.sequence(
+				v.sprite
+					.SetPosition(x,y).SetScale(0.25).SetOpacity(255).SetVisible(true)
+					.RunActions(
 						cc.scaleTo(0.5,0.75).easing(cc.easeBackOut(100)),
 						cc.delayTime(1),
 						cc.fadeTo(1,0)
-					)
-				);
+					);
 			}
 			return true;
 		});

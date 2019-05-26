@@ -250,8 +250,14 @@ class Sprite{
 		return this;
 	}
 
-	RunAction(action){
-		this.entity.runAction(action);
+	/** アクション設定
+	 * @param {Action|Acrion[]} actions 可変長引数。アクション、またはアクションの配列（並列処理扱い）
+	 * @returns this
+	 * @memberof Sprite
+	 */
+	RunActions(...actions){
+		actions	= actions.map(a=>{ return Array.isArray(a) ? cc.spawn(...a) : a });
+		this.entity.runAction(cc.sequence(actions));
 		return this;
 	}
 	/** 実行中のアクションがあるか

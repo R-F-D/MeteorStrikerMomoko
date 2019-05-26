@@ -124,7 +124,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			this.sprites.player
 				.SetScale(0).Attr({zIndex:5}).SetRotate(-5)
 				.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
-				.RunAction(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
+				.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
 			this.flyFx
 				.SetVelocity(1,-0.5,-0.5,0);;
 		})
