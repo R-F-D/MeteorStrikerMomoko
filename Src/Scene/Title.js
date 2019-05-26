@@ -7,6 +7,7 @@ var Scene	= Scene || {};
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
 	MAIN	: "Title.Main",
+	UI		: "Title.Ui",
 };
 
 
@@ -40,6 +41,13 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
+					return true;
+				},
+			})
+			.AddToLayerList("ui",{
+				ctor:function(){
+					this._super();
+					this.scheduleUpdate();
 					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags(["Play","Score","Help","Settings","Share","Credits",]);
 					return true;
 				},
@@ -49,7 +57,8 @@ Scene.Title	= class extends Scene.SceneBase {
 
 	OnEnter(){
 		super.OnEnter();
-		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,0x0002)
+			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
