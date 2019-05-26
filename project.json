@@ -25,6 +25,7 @@
 		"Src/Effect/Emit.js",
 		"Src/Effect/Touched.js",
 
+		"Src/Const.js",
 		"Src/Locale.js",
 		"Src/Aiming.js",
 
