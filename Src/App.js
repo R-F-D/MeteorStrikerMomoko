@@ -124,6 +124,25 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 	return Cycle(pirad,0,2) * Math.PI;
 }
 
+/** ローカルストレージにインサート
+ * @param {string} key 保存するキー文字列
+ * @param {*} value 保存する値
+ * @param {function} [cond=null] インサート条件（保存時は真を返す）。f(oldValue,newValue):boolean デフォルトでは旧値が取得できない場合に真
+ * @returns {*} 保存時は新値、未保存時は旧値
+ */
+function InsertToStorage(key,value,cond=null){
+	const oldValue	= cc.sys.localStorage.getItem(key);
+
+	if(cond===null)	cond = (oldValue,newValue)=>{return !!oldValue===null}
+	if(cond(oldValue,value)){
+		cc.sys.localStorage.setItem(key,value);
+		return value;
+	}
+	else{
+		return oldValue;
+	}
+}
+
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}

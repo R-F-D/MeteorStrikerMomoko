@@ -437,8 +437,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= cc.sys.localStorage.getItem(C.Store.HighScore) || 0;
-				if(score > highScore)	cc.sys.localStorage.setItem(C.Store.HighScore,score);
+				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=>{return n>(o||0)});
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
