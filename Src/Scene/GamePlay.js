@@ -435,8 +435,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 				this.fx.player.SetVelocity(0,0,0,0);
 
+				//ハイスコア
+				const score 	= this.GetDistanceInKm();
+				const highScore	= cc.sys.localStorage.getItem(C.Store.HighScore) || 0;
+				if(score > highScore)	cc.sys.localStorage.setItem(C.Store.HighScore,score);
+
 				this.labels.distance.SetVisible(false);
-				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(this.GetDistanceInKm())+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
+				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
