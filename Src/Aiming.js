@@ -271,11 +271,11 @@ Scene.Aiming	= class {
 				.SetIndex(Math.trunc(indexes[i]))
 				.SetVisible(i==0?(rate>=1000) : i==1?(rate>=100) : true)
 				.SetOpacity(0)
-				.RunAction(cc.Sequence.create(
-					cc.DelayTime.create(0.1*i),
-					cc.Spawn.create(
-						cc.FadeTo.create(0.3,255),
-						cc.JumpBy.create(0.5,cc.p(0,0),16-i,1),
+				.RunAction(cc.sequence(
+					cc.delayTime(0.1*i),
+					cc.spawn(
+						cc.fadeTo(0.3,255),
+						cc.jumpBy(0.5,cc.p(0,0),16-i,1),
 					)
 				));
 		});

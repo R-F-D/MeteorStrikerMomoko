@@ -232,7 +232,7 @@ class ButtonItem{
 		opacity	= DefinedOr(opacity,this.opacity,255);
 		if(!isTemp)	this.opacity = opacity;
 		if(!isSlowly)	this.sprite.SetOpacity(opacity);
-		else			this.sprite.RunAction(cc.FadeTo.create(0.2,opacity));
+		else			this.sprite.RunAction(cc.fadeTo(0.2,opacity));
 		return this;
 	}
 
@@ -244,8 +244,8 @@ class ButtonItem{
 		color.b	= DefinedOr( color.b, this.color.b, 255);
 
 		if(!isTemp)	this.color = {r:color.r,g:color.g,b:color.b,};
-		if(!isSlowly)	this.sprite.SetColor(new cc.Color(color.r,color.g,color.b,0xFF));
-		else			this.sprite.RunAction(cc.TintTo.create(0.2,color.r,color.g,color.b));
+		if(!isSlowly)	this.sprite.SetColor(cc.color(color.r,color.g,color.b,0xFF));
+		else			this.sprite.RunAction(cc.tintTo(0.2,color.r,color.g,color.b));
 		return this;
 	}
 	SetColorOnHover(color){
@@ -304,12 +304,12 @@ class ButtonItem{
 							this.SetColor(this.color,true,false);
 							if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 						}
-						this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
+						this.sprite.RunAction(cc.scaleTo(0.2,this.scale));
 						this._ApplyIndex();
 					}
 				},
 				onTouchesCanceled	: (touches,event)=>{
-					this.sprite.RunAction(cc.ScaleTo.create(0.2,this.scale));
+					this.sprite.RunAction(cc.scaleTo(0.2,this.scale));
 					this.status			= Button.OFF;
 					this.SetOpacity(this.opacity,true,false);
 					this.SetColor(this.color,true,false);

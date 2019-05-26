@@ -53,10 +53,10 @@ Effect.Explosion	= class extends Effect.EffectBase{
 			}
 			else{
 				v.sprite.SetPosition(x,y).SetScale(0.25).SetOpacity(255).SetVisible(true).RunAction(
-					cc.Sequence.create(
-						cc.ScaleTo.create(0.5,0.75).easing(cc.easeBackOut(100)),
-						cc.DelayTime.create(1),
-						cc.FadeTo.create(1,0)
+					cc.sequence(
+						cc.scaleTo(0.5,0.75).easing(cc.easeBackOut(100)),
+						cc.delayTime(1),
+						cc.fadeTo(1,0)
 					)
 				);
 			}

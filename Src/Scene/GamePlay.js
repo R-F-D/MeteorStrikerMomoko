@@ -202,12 +202,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.player
 				.SetPosition(-128,0).SetScale(2).SetRotate(-5)
 				.SetCustomData("isFlying",true).SetCustomData("adjY").SetCustomData("dy")
-				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
+				.RunAction(cc.moveTo(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
 			this.sprites.meteor
 				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
 				.SetScale(2).SetVisible(true)
-				.RunAction(cc.MoveTo.create(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
+				.RunAction(cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
@@ -218,16 +218,16 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				.SetScale(1).SetVisible(true).SetOpacity(0)
 				.SetPosition(size.width+128,size.height/2).SetRotate(-3)
 				.RunAction(
-					cc.Sequence.create(
-						cc.DelayTime.create(0.5),
-						cc.Spawn.create(
-							cc.FadeTo.create(0.5,192),
-							cc.MoveTo.create(0.5,cc.p(size.width/2+16,size.height/2)),
+					cc.sequence(
+						cc.delayTime(0.5),
+						cc.spawn(
+							cc.fadeTo(0.5,192),
+							cc.moveTo(0.5,cc.p(size.width/2+16,size.height/2)),
 						),
-						cc.MoveTo.create(1.0,cc.p(size.width/2-16,size.height/2)),
-						cc.Spawn.create(
-							cc.FadeTo.create(0.5,0),
-							cc.MoveTo.create(0.5,cc.p(-128,size.height/2)),
+						cc.moveTo(1.0,cc.p(size.width/2-16,size.height/2)),
+						cc.spawn(
+							cc.fadeTo(0.5,0),
+							cc.moveTo(0.5,cc.p(-128,size.height/2)),
 						),
 						cc.callFunc(()=>this.sprites.txtLaunch.SetVisible(false))
 					)
@@ -333,7 +333,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.nEmits.total		= 0;
 
 				this.sprites.hitArea.SetIndex(this.aiming.GetCurrentArea().imgIndex).SetVisible(true).RunAction(
-					cc.ScaleTo.create(0.25,1).easing(cc.easeBackOut(10))
+					cc.scaleTo(0.25,1).easing(cc.easeBackOut(10))
 				);
 
 				this.aiming.SpawnRateValue(28,118);
@@ -422,16 +422,16 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.bgGround.forEach(s=>s.SetVisible(false));
 				this.sprites.meteor.SetVisible(false);
 				this.sprites.distance.SetVisible(false);
-				this.sprites.player.RunAction(cc.Sequence.create(
-					cc.DelayTime.create(1),
+				this.sprites.player.RunAction(cc.sequence(
+					cc.delayTime(1),
 					cc.callFunc(()=>{
 						this.sprites.player
 							.SetCustomData("isFlying",true)
 							.entity.setFlippedX(true);
 					}),
-					cc.Spawn.create(
-						cc.MoveTo.create(3.0,cc.p(-32,size.height-32)).easing(cc.easeBackIn(10)),
-						cc.ScaleTo.create(3.0,0.5).easing(cc.easeBackIn(10))
+					cc.spawn(
+						cc.moveTo(3.0,cc.p(-32,size.height-32)).easing(cc.easeBackIn(10)),
+						cc.scaleTo(3.0,0.5).easing(cc.easeBackIn(10))
 					)
 				));
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
