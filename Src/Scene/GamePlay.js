@@ -367,7 +367,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.hitArea.SetVisible(false);
 				this.aiming.HideRateValue();
 				this.labels.distance.SetVisible(true);
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.BrowAway.Start")).SetVisible(true);
+				this.labels.navigation.SetVisible(true);
 			})
 			.PushUpdatingFunctions((dt)=>{
 				this.UpdatePlayerSprite(true);
@@ -378,24 +378,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
 				const newDistance	= this.GetDistanceInKm();
 
-				const checkpoints	= [
-					{	distance: 42000000,	text:L.Text("GamePlay.Navigator.BrowAway.Venus"),	},
-					{	distance: 72000000,	text:null,	},
-					{	distance: 78000000,	text:L.Text("GamePlay.Navigator.BrowAway.Mars"),	},
-					{	distance: 91500000,	text:L.Text("GamePlay.Navigator.BrowAway.Mercury"),	},
-					{	distance:121500000,	text:null,	},
-					{	distance:149600000,	text:L.Text("GamePlay.Navigator.BrowAway.Sun"),		},
-					{	distance:179600000,	text:null,	},
-					{	distance:186200000,	text:L.Text("GamePlay.Navigator.BrowAway.Kirari"),	},
-					{	distance:216200000,	text:null,	},
-					{	distance:256000000,	text:L.Text("GamePlay.Navigator.BrowAway.Unicorn"),	},
-					{	distance:286000000,	text:null,	},
-				];
-
+				//チェックポイント処理
+				const checkpoints	= this.GenerateCheckPoints();
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
 				for(let i=0; i<checkpoints.length; ++i){
-					if(oldDistance < checkpoints[i].distance && checkpoints[i].distance<=newDistance)
-					{
+					if(oldDistance <= checkpoints[i].distance && checkpoints[i].distance<=newDistance){
 						if(checkpoints[i].text)	this.labels.navigation.SetString(checkpoints[i].text).SetVisible(true);
 						else					this.labels.navigation.SetVisible(false);
 						break;
@@ -620,6 +607,26 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	GetChargingRate(){
 		return this.chargedPower/BlowPower.INCREMENT + 20;
+	}
+
+	/** チェックポイントのデータを生成
+	 * @returns チェックポイントデータの配列
+	 */
+	GenerateCheckPoints(){
+		let checkpoints	= [];
+		C.CheckPoints.forEach((v,i)=>{
+			checkpoints.push({
+				distance	: v.distance,
+				text		: L.Text(`GamePlay.Navigator.BrowAway.${v.key}`),
+			});
+			if(i+1<C.CheckPoints.length && v.distance+30000000 < C.CheckPoints[i+1].distance){
+				checkpoints.push({
+					distance	: v.distance + 30000000,
+					text		: null,
+				});
+			}
+		});
+		return checkpoints;
 	}
 
 	/**プレイヤー画像の表示*/
