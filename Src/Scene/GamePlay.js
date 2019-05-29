@@ -429,6 +429,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
+				//チェックポイント実績
+				C.CheckPoints
+					.filter( c=> c.distance<=highScore )
+					.forEach(c=> Achievement.Set(Achievements.CheckPoint[c.key],1) );
+
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 				Log(`Impact: ${this.impactPower}`);
