@@ -27,6 +27,7 @@
 
 		"Src/Const.js",
 		"Src/Locale.js",
+		"Src/Achievement.js",
 		"Src/Aiming.js",
 
 		"Src/Scene/Sequence.js",

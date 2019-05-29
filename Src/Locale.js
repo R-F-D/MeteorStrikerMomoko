@@ -63,6 +63,29 @@ Texts	= {
 	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",	},
 	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
 	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
+
+	//実績
+	"Achievement.Unlocked" :	{	_:"Mission Completed!",	ja:"ミッション達成!",	},
+	"Achievement.Aiming.ManyPerfects.Title":	{	_:"PERFECT AIMS 05",	},
+	"Achievement.Aiming.ManyPerfects.Description":	{	_:"Aimed to perfect 5 times.",	ja:"5回パーフェクトを出した",	},
+	"Achievement.Aiming.ManyGoods.Title":	{	_:"Good-Aimings, Baby",	},
+	"Achievement.Aiming.ManyGoods.Description":	{	_:"Aimed to good 10 times.",	ja:"10回グッドを出した",	},
+	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	},
+	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	},
+	"Achievement.Check.Venus.Title":	{	_:"Do You Know Venus?",	},
+	"Achievement.Check.Venus.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Check.Mars.Title":	{	_:"Beyond The Mars",	ja:"ビヨンドザマーズ",	},
+	"Achievement.Check.Mars.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Check.Mercury.Title":	{	_:"Go Straight Ahead, Cross Over Mercury", ja:"まっすぐ進め 水星越えて",	},
+	"Achievement.Check.Mercury.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Check.Sun.Title"	:	{	_:"BEYOND THE SUNLIGHT",},
+	"Achievement.Check.Sun.Description"	:	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Check.Kirari.Title":	{	_:"Kirari, The Row of Light",	ja:" キラリ 光の列",	},
+	"Achievement.Check.Kirari.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	},
+	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+	"Achievement.Action.Share.Title" :	{	_:"Shared Your Result",	ja:"結果をシェアして",	},
+	"Achievement.Action.Share.Description" :	{	_:"We post $0 tweets.",	ja:"ツイート✕$0投稿するんだ",	},
 }
 
 
