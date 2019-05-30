@@ -50,7 +50,7 @@ const Achievement = new (class Achievement{
 
 		InsertToStorage(
 			`${this.PrefixStorageKey}${achievement.Key}`,
-			(new Date()).getTime(),
+			Scene.SceneBase.GetDate().getTime(),
 			old=>old===null && achievement.Count<=count	);
 		return this;
 	}

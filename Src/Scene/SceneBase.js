@@ -129,6 +129,7 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				this._super();
+				Scene.SceneBase.date = null;
 				_this.fx.touched.Update();
 			},
 		});
@@ -247,10 +248,20 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
+	/** 現在時刻のDateオブジェクトを取得
+	 * @static
+	 * @returns {Date} 現在時刻
+	 */
+	static GetDate(){
+		if(Scene.SceneBase.date==null)	Scene.SceneBase.date	= new Date();
+		return Scene.SceneBase.date;
+	}
+
 }//class
 
 Scene.SceneBase.first	= null;
 Scene.SceneBase.resetTo	= null;
+Scene.SceneBase._date	= null;
 
 })();	//File Scope
 
