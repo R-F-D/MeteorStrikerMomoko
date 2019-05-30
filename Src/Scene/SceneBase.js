@@ -17,6 +17,8 @@ Scene.SceneBase	= class {
 		this.isSequenceMovable	= false;
 		/** @var シーン開始からのカウント */
 		this.count				= 0;
+		/** @var ポーズ用カウント */
+		this.pauseCount			= 0;
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;
@@ -189,6 +191,7 @@ Scene.SceneBase	= class {
 	ApplicateCcSceneInstance(childScene){
 		if(!childScene instanceof Scene.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
 
+		const _this	= this;
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
@@ -198,6 +201,10 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				this._super();
+				if(_this.pauseCount > 0)	{
+					--_this.pauseCount;
+					return;
+				}
 				childScene.OnUpdating(dt);
 				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);

@@ -342,6 +342,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
 			.PushUpdatingFunctions(dt=>{
+				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 5 : 3;
+
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
