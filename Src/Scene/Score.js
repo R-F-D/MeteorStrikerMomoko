@@ -72,7 +72,7 @@ Scene.Score	= class extends Scene.SceneBase {
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 		})
-		.PushUpdatingFunctions((dt)=>{
+		.PushUpdatingFunctions(dt=>{
 		});
 
 		return this;

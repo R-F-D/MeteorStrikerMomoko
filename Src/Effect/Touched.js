@@ -15,7 +15,7 @@ Effect.Touched	= class extends Effect.EffectBase{
 	}
 
 	Init(layer){
-		this.InitParticles((particle)=>{
+		this.InitParticles(particle=>{
 			particle	= Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.touched).AddToLayer(layer)
 							.SetScale(0.5).Attr({zIndex:65535,opacity:255}).SetVisible(false),
@@ -51,7 +51,7 @@ Effect.Touched	= class extends Effect.EffectBase{
 	Update(updates=true){
 		if(!updates)	return this;
 
-		this.UpdateParticles((v)=>{
+		this.UpdateParticles(v=>{
 			v.dx	*= 0.9;
 			v.dy	*= 0.9;
 

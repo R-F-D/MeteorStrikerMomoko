@@ -74,7 +74,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetIndex(Button.HOVER,1);
 
 
-		this.buttons.filter(v=>{return v.tag!="Play"}).forEach((button,i)=>{
+		this.buttons.filter(v=> v.tag!="Play" ).forEach((button,i)=>{
 			button
 				.CreateSprite(rc.img.titleButton)
 				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
@@ -137,7 +137,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			this.flyFx
 				.SetVelocity(1,-0.5,-0.5,0);;
 		})
-		.PushUpdatingFunctions((dt)=>{
+		.PushUpdatingFunctions(dt=>{
 		});
 
 		return this;

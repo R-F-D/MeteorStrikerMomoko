@@ -149,8 +149,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
 					_this.sprites		= _this.sprites||{};
-					_this.sprites.bgSpace	= CreateArray(4).map(()=>{return Sprite.CreateInstance(rc.img.bgSpace).AddToLayer(this).SetVisible(false)	});
-					_this.sprites.bgGround	= CreateArray(2).map(()=>{return Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(false)	});
+					_this.sprites.bgSpace	= CreateArray(4).map(()=> Sprite.CreateInstance(rc.img.bgSpace).AddToLayer(this).SetVisible(false)	);
+					_this.sprites.bgGround	= CreateArray(2).map(()=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(false)	);
 				},
 				update	: function(dt){
 					this._super();
@@ -254,7 +254,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.buttons.at("Retry").SetVisible(false);
 			this.buttons.at("Share").SetVisible(false);
 		})
-		.PushUpdatingFunctions((dt)=>{
+		.PushUpdatingFunctions(dt=>{
 			this.UpdatePlayerSprite(false);
 			this.UpdateMeteorSprite(false);
 			this.aiming.Update(false);
@@ -270,7 +270,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -282,7 +282,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Spawn(64,48);
 				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -298,7 +298,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 				this.fx.preliminary.Destroy();
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -314,7 +314,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Destroy();
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -341,7 +341,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.player.SetVelocity(+1,+0.5,-2,-1);
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
@@ -369,7 +369,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.distance.SetVisible(true);
 				this.labels.navigation.SetVisible(true);
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
@@ -391,7 +391,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
-			.PushUpdatingFunctions("layer-bg", (dt)=>{
+			.PushUpdatingFunctions("layer-bg", dt=>{
 				this.sprites.bgGround.forEach(sprite=>{
 					sprite
 						.SetRelativePosition(null,-4)
@@ -424,7 +424,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=>{return n>(o||0)});
+				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=> n>(o||0) );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
@@ -439,7 +439,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Log(`Impact: ${this.impactPower}`);
 				Log(`Total: ${this.totalPower}`);
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(false);
 				this.UpdateMeteorSprite(false);
 				if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.DIALOG);
@@ -480,7 +480,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					});
 
 			})
-			.PushUpdatingFunctions((dt)=>{
+			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(false);
 			});
 

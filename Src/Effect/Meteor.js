@@ -46,7 +46,7 @@ Effect.Meteor	= class extends Effect.EffectBase{
 	Update(updates=true){
 		if(!updates)	return this;
 
-		this.UpdateParticles((v)=>{
+		this.UpdateParticles(v=>{
 			v.sprite
 				.SetPosition(v.sprite.x+v.dx,v.sprite.y+v.dy)
 				.SetOpacity(255-v.count*4)
