@@ -129,7 +129,7 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				this._super();
-				Scene.SceneBase.date = null;
+				Scene.SceneBase._date = null;
 				_this.fx.touched.Update();
 			},
 		});
@@ -253,8 +253,8 @@ Scene.SceneBase	= class {
 	 * @returns {Date} 現在時刻
 	 */
 	static GetDate(){
-		if(Scene.SceneBase.date==null)	Scene.SceneBase.date	= new Date();
-		return Scene.SceneBase.date;
+		if(Scene.SceneBase._date==null)	Scene.SceneBase._date	= new Date();
+		return Scene.SceneBase._date;
 	}
 
 }//class
