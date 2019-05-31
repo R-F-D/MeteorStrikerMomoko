@@ -59,6 +59,10 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	SetVisible(visible){
+		if(!visible){
+			this.text	= "";
+			this.logs	= [];
+		}
 		this.entity.setVisible(!!visible);
 		if(this.bg.IsEnabled()){
 			this.bg.entity.setVisible(visible);
