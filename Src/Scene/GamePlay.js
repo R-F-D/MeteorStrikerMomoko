@@ -239,7 +239,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			//ラベル
 			this.labels.distance.SetVisible(false).SetColor("#00FF00");
-			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).nLines=2;
+			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			//インタフェース
 			this.buttons.at("Reset")

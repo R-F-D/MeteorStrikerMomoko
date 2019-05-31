@@ -185,6 +185,15 @@ Label	= class Label{
 		return this;
 	}
 
+	/** ログ形式のときの表示行数を設定
+	 * @param {number} nLines 表示行数。省略時3
+	 * @returns this
+	 */
+	SetNumLogLines(nLines=3){
+		if(nLines>0)	this.nLines = nLines;
+		return this;
+	}
+
 
 
 	/** カラー設定
