@@ -610,26 +610,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		return this.chargedPower/BlowPower.INCREMENT + 20;
 	}
 
-	/** チェックポイントのデータを生成
-	 * @returns チェックポイントデータの配列
-	 */
-	GenerateCheckPoints(){
-		let checkpoints	= [];
-		C.CheckPoints.forEach((v,i)=>{
-			checkpoints.push({
-				distance	: v.distance,
-				text		: L.Text(`GamePlay.Navigator.BrowAway.${v.key}`),
-			});
-			if(i+1<C.CheckPoints.length && v.distance+30000000 < C.CheckPoints[i+1].distance){
-				checkpoints.push({
-					distance	: v.distance + 30000000,
-					text		: null,
-				});
-			}
-		});
-		return checkpoints;
-	}
-
 	/**プレイヤー画像の表示*/
 	UpdatePlayerSprite(changesPosition=true){
 		//座標修正
