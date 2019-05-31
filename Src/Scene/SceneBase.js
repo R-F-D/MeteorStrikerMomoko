@@ -36,6 +36,8 @@ Scene.SceneBase	= class {
 		/** @var シーン共通イベントリスナ*/
 		this.commonEventListeners	= {};
 		this.commonEventListeners["SceneBase.TouchFx"]	= [];
+
+		Scene.SceneBase.OnEnterFirst();
 	}
 
 	/** シーンの更新処理 共通部分
@@ -131,8 +133,18 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				this._super();
-				Scene.SceneBase._date = null;
 				_this.fx.touched.Update();
+			},
+		});
+		this.AddToLayerList("achievement",{
+			ctor:function(){
+				this._super();
+				this.scheduleUpdate();
+				return true;
+			},
+			update	: function(dt){
+				this._super();
+				Scene.SceneBase._date = null;
 			},
 		});
 		return this;
@@ -195,8 +207,11 @@ Scene.SceneBase	= class {
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
-				childScene.SetLayer("SceneBase.TouchFx", childScene.ccLayers.touchFx,0x0200);
-				childScene.OnEnter();
+				childScene
+					.SetLayer("SceneBase.TouchFx",    childScene.ccLayers.touchFx,    0x0201)
+					.SetLayer("SceneBase.Achievement",childScene.ccLayers.achievement,0x0200)
+					.OnEnter();
+				Achievement.SetLayer(_this.ccLayerInstances["SceneBase.Achievement"]);
 				this.scheduleUpdate();
 			},
 			update	: function(dt){
@@ -264,11 +279,22 @@ Scene.SceneBase	= class {
 		return Scene.SceneBase._date;
 	}
 
+	/** ゲーム開始後、最初のシーン開始時に一度だけ行われる初期化処理
+	 * @static
+	 */
+	static OnEnterFirst(){
+		if(Scene.SceneBase._initsFirst)	return;
+		Scene.SceneBase._initsFirst = true;
+
+		Achievement.Init();
+	}
+
 }//class
 
-Scene.SceneBase.first	= null;
-Scene.SceneBase.resetTo	= null;
-Scene.SceneBase._date	= null;
+Scene.SceneBase.first		= null;
+Scene.SceneBase.resetTo		= null;
+Scene.SceneBase._date		= null;
+Scene.SceneBase._initsFirst	= false;
 
 })();	//File Scope
 

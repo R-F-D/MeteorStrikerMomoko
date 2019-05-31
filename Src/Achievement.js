@@ -43,6 +43,15 @@ const Achievement = new (class Achievement{
 	constructor(){
 		this.PrefixStorageKey	= "Achievement.";
 		this.NumItems	= Achievements.Action.Complete.Count+1;
+
+		this.layer	= null;
+		this.label	= null;
+	}
+
+	Init(){
+		this.label	= Label.CreateInstance(12).AddToLayer(this.layer);
+
+		return;
 	}
 
 	Set(achievement,count){
@@ -52,6 +61,12 @@ const Achievement = new (class Achievement{
 			`${this.PrefixStorageKey}${achievement.Key}`,
 			Scene.SceneBase.GetDate().getTime(),
 			old=>old===null && achievement.Count<=count	);
+		return this;
+	}
+
+	SetLayer(layer){
+		this.layer = layer;
+		if(this.label)	this.label.AddToLayer(layer);
 		return this;
 	}
 
