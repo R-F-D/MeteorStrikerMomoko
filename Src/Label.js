@@ -66,7 +66,7 @@ Label	= class Label{
 		this.entity.setVisible(!!visible);
 		if(this.bg.IsEnabled()){
 			this.bg.entity.setVisible(visible);
-			if(!visible)	this.bg.SetSize(0,0,true,false);
+			if(!visible)	this.bg.SetSize(true,0,0,false);
 		}
 		if(this.icon){
 			this.icon.SetVisible(!!visible);
@@ -170,7 +170,7 @@ Label	= class Label{
 		}
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
-			this.bg.SetSize();
+			this.bg.SetSize(true);
 		}
 		return this;
 	}
@@ -284,7 +284,7 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	Init(){
-		this.SetSize(0,0,false,false);
+		this.SetSize(false,0,0,false);
 		return this;
 	}
 
@@ -340,14 +340,14 @@ class LabelBg{
 	}
 
 	/**背景サイズ設定
+	 * @param {boolean} [animates=true]						イージング処理を使用する。
 	 * @param {number|null|undefined} [width=undefined]		幅。未指定で自動設定、nullで変更なし。
 	 * @param {number|null|undefined} [height=undefined]	高さ。未指定で自動設定、nullで変更なし。
-	 * @param {boolean} [animates=true]						イージング処理を使用する。
 	 * @param {boolean} [pads=true]							パディング値を考慮する。
 	 * @returns this
 	 * @memberof LabelBg
 	 */
-	SetSize(width=undefined,height=undefined,animates=true,pads=true){
+	SetSize(animates,width=undefined,height=undefined,pads=true){
 		let parentSize	= this.parent.GetContentSize();
 
 		//パディング
