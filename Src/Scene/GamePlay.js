@@ -239,7 +239,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			//ラベル
 			this.labels.distance.SetVisible(false).SetColor("#00FF00");
-			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0);
+			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).nLines=2;
 
 			//インタフェース
 			this.buttons.at("Reset")
@@ -265,7 +265,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.START_AIM
 			.PushStartingFunctions(()=>{
 				this.sprites.player.SetCustomData("isFlying",false)
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
+				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
 				this.aiming.SetVisible(true,true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
@@ -280,7 +280,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.PRELIMINARY
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Spawn(64,48);
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
+				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
@@ -335,7 +335,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				);
 
 				this.aiming.SpawnRateValue(28,118);
-				this.labels.navigation.SetString(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
+				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
 				this.fx.player.SetVelocity(+1,+0.5,-2,-1);
@@ -385,7 +385,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
 				for(let i=0; i<checkpoints.length; ++i){
 					if(oldDistance <= checkpoints[i].distance && checkpoints[i].distance<=newDistance){
-						if(checkpoints[i].text)	this.labels.navigation.SetString(checkpoints[i].text).SetVisible(true);
+						if(checkpoints[i].text)	this.labels.navigation.PushLog(checkpoints[i].text).SetVisible(true);
 						else					this.labels.navigation.SetVisible(false);
 						break;
 					}
@@ -429,7 +429,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=> n>(o||0) );
 
 				this.labels.distance.SetVisible(false);
-				this.labels.navigation.SetString( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
+				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
 
 				//チェックポイント実績
 				C.CheckPoints
