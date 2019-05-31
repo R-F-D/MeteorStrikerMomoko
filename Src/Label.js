@@ -12,6 +12,8 @@ Label	= class Label{
 		this.Z	= 65535;
 
 		this.text	= "";
+		this.logs	= [];
+		this.nLines	= 3;
 
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
 		this.entity.attr({zIndex:this.Z});
@@ -171,6 +173,19 @@ Label	= class Label{
 
 	SetTempText(text){return this.SetString(text,true)}
 	RemoveTempText(text){return this.SetString(this.text,false)}
+
+	/** ログ形式のテキストを追加
+	 * @param {string[]} lines 文字列の配列（1要素1行）
+	 * @returns
+	 */
+	PushLog(lines){
+		lines.split(/\n/).forEach(l=>this.logs.push(l));
+		while(this.logs.length > this.nLines)	this.logs.shift();
+		this.SetString(this.logs.join("\n"));
+		return this;
+	}
+
+
 
 	/** カラー設定
 	 * @param {strinf|cc.color} color
