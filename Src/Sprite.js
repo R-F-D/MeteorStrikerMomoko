@@ -204,6 +204,7 @@ class Sprite{
 	 * @memberof Sprite
 	 */
 	AddToLayer(layer){
+		if(!layer)	return this;
 		this.entity.removeFromParent();
 		layer.addChild(this.entity);
 		return this;

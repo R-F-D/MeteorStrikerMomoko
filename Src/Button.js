@@ -40,7 +40,7 @@ Button	= class Button{
 	 * @memberof Button
 	 */
 	AddToLayer(layer){
-		if(layer==null)	return this;
+		if(!layer)	return this;
 		this.layer	= layer;
 		this.forEach(v=>v.AddToLayer(layer));
 		return this;
@@ -162,6 +162,7 @@ class ButtonItem{
 
 	/**レイヤに自身を追加*/
 	AddToLayer(layer){
+		if(!layer)	return this;
 		this.layer	= layer;
 		if(!this.sprite)	return this;
 

@@ -98,6 +98,7 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	AddToLayer(layer){
+		if(!layer)	return this;
 		this.entity.removeFromParent();
 		layer.addChild(this.entity);
 		if(this.icon)	this.icon.AddToLayer(layer);
