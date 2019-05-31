@@ -380,16 +380,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.distanceOfMeteor+= 0.2+NormalRandom(0.05);
 				const newDistance	= this.GetDistanceInKm();
 
-				//チェックポイント処理
-				const checkpoints	= this.GenerateCheckPoints();
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
-				for(let i=0; i<checkpoints.length; ++i){
-					if(oldDistance <= checkpoints[i].distance && checkpoints[i].distance<=newDistance){
-						if(checkpoints[i].text)	this.labels.navigation.PushLog(checkpoints[i].text).SetVisible(true);
-						else					this.labels.navigation.SetVisible(false);
-						break;
-					}
-				}
+				C.CheckPoints
+					.filter(c=> oldDistance<=c.distance && c.distance<=newDistance)
+					.forEach(c=> this.labels.navigation.PushLog( L.Text(`GamePlay.Navigator.BrowAway.${c.key}`) ));
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
