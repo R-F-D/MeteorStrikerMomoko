@@ -7,7 +7,7 @@ var Label;
  */
 Label	= class Label{
 
-	constructor(text,fontName,fontSize){
+	constructor(text,font,fontSize){
 		/** @const Z座標 */
 		this.Z	= 65535;
 
@@ -15,6 +15,7 @@ Label	= class Label{
 		this.logs	= [];
 		this.nLines	= 3;
 
+		const fontName	= typeof font=='string' ? font : font.Name;
 		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
 		this.entity.attr({zIndex:this.Z});
 
@@ -31,8 +32,8 @@ Label	= class Label{
 	 * @returns
 	 * @memberof Labe;
 	 */
-	static CreateInstance(fontSize=16,fontName=""){
-		return new Label("",fontName,fontSize);
+	static CreateInstance(fontSize=16,font=""){
+		return new Label("",font,fontSize);
 	}
 
 	/** 初期化
