@@ -215,18 +215,20 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
 
 			this.sprites.txtLaunch
-				.SetScale(1).SetVisible(true).SetOpacity(0)
-				.SetPosition(size.width+128,size.height/2).SetRotate(-3)
+				.SetScale(1.5).SetVisible(true).SetOpacity(0)
+				.SetPosition(-128,size.height/2-25).SetRotate(-3)
 				.RunActions(
 					cc.delayTime(0.5),
 					[
 						cc.fadeTo(0.5,192),
-						cc.moveTo(0.5,cc.p(size.width/2+16,size.height/2)),
+						cc.scaleTo(0.5,1.0),
+						cc.moveTo(0.5,cc.p(size.width/2-16,size.height/2-1)),
 					],
-					cc.moveTo(1.0,cc.p(size.width/2-16,size.height/2)),
+					cc.moveTo(1.0,cc.p(size.width/2+16,size.height/2+1)),
 					[
 						cc.fadeTo(0.5,0),
-						cc.moveTo(0.5,cc.p(-128,size.height/2)),
+						cc.scaleTo(0.5,0.75),
+						cc.moveTo(0.5,cc.p(size.width+128,size.height/2+25)),
 					],
 					cc.callFunc(()=>this.sprites.txtLaunch.SetVisible(false))
 				);
