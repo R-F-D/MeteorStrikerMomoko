@@ -369,7 +369,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.hitArea.SetVisible(false);
 				this.aiming.HideRateValue();
 				this.labels.distance.SetVisible(true);
-				this.labels.navigation.SetVisible(true);
+				this.labels.navigation.SetVisible(false);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
@@ -381,9 +381,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const newDistance	= this.GetDistanceInKm();
 
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
-				C.CheckPoints
-					.filter(c=> oldDistance<=c.distance && c.distance<=newDistance)
-					.forEach(c=> this.labels.navigation.PushLog( L.Text(`GamePlay.Navigator.BrowAway.${c.key}`) ));
+				const passingPoint	= C.CheckPoints.find(c=> oldDistance<=c.distance && c.distance<=newDistance);
+				if(passingPoint)	this.labels.navigation
+										.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
+										.SetVisible(true);
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
