@@ -43,8 +43,8 @@ const rc	= {
 
 	/** フォント名 */
 	font	: {
-		talk		: {Name:"Kosugi Maru",	},
-		distance	: {Name:"VT323",		},
+		talk		: {	Family:"Kosugi Maru",	},
+		distance	: {	Family:"VT323",			},
 	},
 };
 

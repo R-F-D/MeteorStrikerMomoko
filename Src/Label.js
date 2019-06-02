@@ -15,8 +15,7 @@ Label	= class Label{
 		this.logs	= [];
 		this.nLines	= 3;
 
-		const fontName	= typeof font=='string' ? font : font.Name;
-		this.entity	= cc.LabelTTF.create(text,fontName,fontSize);
+		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
 		this.entity.attr({zIndex:this.Z});
 
 		//アイコン
