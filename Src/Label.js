@@ -66,7 +66,8 @@ Label	= class Label{
 		this.entity.setVisible(!!visible);
 		if(this.bg.IsEnabled()){
 			this.bg.entity.setVisible(visible);
-			if(!visible)	this.bg.SetSize(true,0,0,false);
+			if(visible)	this.bg.SetSize(true,undefined,undefined,false);
+			else		this.bg.SetSize(true,0,0,false);
 		}
 		if(this.icon){
 			this.icon.SetVisible(!!visible);
@@ -366,19 +367,18 @@ class LabelBg{
 		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);
 		this.size.height	= Clamp(this.size.height,this.lower.height,this.upper.height)
 
-		if(!this.IsEnabled())	return this;
-
-		//イージング処理
-		if(animates){
-			this.entity.runAction(
-				cc.scaleTo(0.3,this.size.width/this.imgWidth, this.size.height/this.imgHeight).easing(cc.easeBackOut(10))
-			);
+		//Apply
+		if(this.IsEnabled() && this.entity.isVisible){
+			if(animates){
+				this.entity.runAction(
+					cc.scaleTo(0.3,this.size.width/this.imgWidth, this.size.height/this.imgHeight).easing(cc.easeBackOut(10))
+				);
+			}
+			else{
+				this.entity.setScale(this.size.width/this.imgWidth, this.size.height/this.imgHeight);
+			}
+			this.ApplicatePosition();
 		}
-		else{
-			this.entity.setScale(this.size.width/this.imgWidth, this.size.height/this.imgHeight);
-		}
-
-		this.ApplicatePosition();
 		return this;
 	}
 
