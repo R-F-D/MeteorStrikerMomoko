@@ -77,13 +77,11 @@ Label	= class Label{
 
 	/** 更新 */
 	Update(dt){
-		let visible	= true;	//背景アニメ中は表示しない
-
 		if(this.bg.IsEnabled()){
 			this.bg.Update();
-			if(this.bg.IsRunningActions()) visible=false;
 		}
-		if(visible){
+		//背景アニメーション中はテキストを表示しない
+		if(!this.bg.IsRunningActions()){
 			this.entity.attr({opacity:255});
 			if(this.icon)	this.icon.Attr({opacity:192});
 		}
