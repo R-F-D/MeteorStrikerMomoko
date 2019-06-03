@@ -154,6 +154,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				},
 				update	: function(dt){
 					this._super();
+					if(_this.pauseCount > 0){
+						--_this.pauseCount;
+						return;
+					}
 					_this.UpdateBgLayer(dt);
 					_this.sequence.Update(dt,"layer-bg");
 				},
@@ -344,7 +348,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
 			})
 			.PushUpdatingFunctions(dt=>{
-				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 5 : 3;
+				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 10 : 5;
 
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
