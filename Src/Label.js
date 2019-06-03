@@ -86,15 +86,18 @@ Label	= class Label{
 			if(this.icon)	this.icon.Attr({opacity:192});
 		}
 
+		//ログの自動消去
 		const length	= this.logs.length;
-		this.logs	= this.logs.filter(line=>{
-			if(line.lifetime===null)	return true;
-			line.lifetime	= Math.max(0,--line.lifetime);
-			return line.lifetime > 0;
-		});
+		if(length > 0){
+			this.logs	= this.logs.filter(line=>{
+				if(line.lifetime===null)	return true;
+				line.lifetime	= Math.max(0,--line.lifetime);
+				return line.lifetime > 0;
+			});
 
-		if     (this.logs.length==0)		this.SetString("").SetVisible(false);
-		else if(this.logs.length!=length)	this.SetString(_(this.logs).map("line").join("\n"));
+			if     (this.logs.length==0)		this.SetString("").SetVisible(false);
+			else if(this.logs.length!=length)	this.SetString(_(this.logs).map("line").join("\n"));
+		}
 
 		return this;
 	}
