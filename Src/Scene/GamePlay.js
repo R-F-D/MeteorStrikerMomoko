@@ -426,7 +426,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=> n>(o||0) );
 
 				this.labels.distance.SetVisible(false);
-				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] )).SetVisible(true);
+				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
 
 				//チェックポイント実績
 				C.CheckPoints

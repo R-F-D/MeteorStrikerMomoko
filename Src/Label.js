@@ -85,6 +85,17 @@ Label	= class Label{
 			this.entity.attr({opacity:255});
 			if(this.icon)	this.icon.Attr({opacity:192});
 		}
+
+		const length	= this.logs.length;
+		this.logs	= this.logs.filter(line=>{
+			if(line.lifetime===null)	return true;
+			line.lifetime	= Math.max(0,--line.lifetime);
+			return line.lifetime > 0;
+		});
+
+		if     (this.logs.length==0)		this.SetString("").SetVisible(false);
+		else if(this.logs.length!=length)	this.SetString(_(this.logs).map("line").join("\n"));
+
 		return this;
 	}
 
@@ -179,12 +190,13 @@ Label	= class Label{
 
 	/** ログ形式のテキストを追加
 	 * @param {string[]} lines 文字列の配列（1要素1行）
+	 * @param {number|null} lifetime 自動消去までのフレーム数。デフォルト180。nullで消去しない。
 	 * @returns
 	 */
-	PushLog(lines){
-		lines.split(/\n/).forEach(l=>this.logs.push(l));
+	PushLog(lines,lifetime=180){
+		lines.split(/\n/).forEach(l=>this.logs.push( {line:l,lifetime:lifetime} ));
 		while(this.logs.length > this.nLines)	this.logs.shift();
-		this.SetString(this.logs.join("\n"));
+		this.SetString(_(this.logs).map("line").join("\n"));
 		return this;
 	}
 
