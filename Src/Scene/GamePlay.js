@@ -204,7 +204,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			//スプライト
 			this.sprites.player
-				.SetPosition(-128,0).SetScale(2).SetRotate(-5)
+				.SetPosition(-128,0).SetScale(2)
 				.SetCustomData("isFlying",true).SetCustomData("adjY").SetCustomData("dy")
 				.RunActions(cc.moveTo(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
@@ -649,6 +649,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		if(this.sprites.player.GetCustomData("isFlying",false) && idx<4)	idx	+= 4;	//飛行状態
 		if(Math.trunc(this.count/8) % 2) ++idx;
 		this.sprites.player.SetIndex(idx);
+
+		//角度
+		this.sprites.player.SetRotate( this.sprites.player.GetCustomData("isFlying",false) ? 0:-5 );
 
 		//Other
 		let fxAdj	= 4<=idx && idx<8 	? {x:-16,y:-8,}	:  {x:0,y:-32,};

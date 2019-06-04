@@ -131,7 +131,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			this.sprites.logo
 				.SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);
 			this.sprites.player
-				.SetScale(0).Attr({zIndex:5}).SetRotate(-5)
+				.SetScale(0).Attr({zIndex:5})
 				.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
 				.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
 			this.flyFx
