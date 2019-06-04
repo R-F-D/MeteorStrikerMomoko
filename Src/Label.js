@@ -72,9 +72,13 @@ Label	= class Label{
 		}
 		this.entity.setVisible(!!visible);
 		if(this.bg.IsEnabled()){
-			this.bg.entity.setVisible(visible);
-			if(visible)	this.bg.SetSize(true,undefined,undefined,false);
-			else		this.bg.SetSize(true,0,0,false);
+			if(visible)	{
+				this.bg.entity.setVisible(true);
+				this.bg.SetSize(true,undefined,undefined,false);
+			}
+			else{
+				this.bg.SetSize(true,0,0,false);
+			}
 		}
 		if(this.icon){
 			this.icon.SetVisible(!!visible);
@@ -404,8 +408,12 @@ class LabelBg{
 
 		//Apply
 		if(!this.entity.isVisible)	this.entity.setScale(0);
-		else if(animates)			this.entity.runAction(cc.scaleTo(0.3,newScale.x,newScale.y).easing(cc.easeBackOut(10)));
-		else						this.entity.setScale(newScale.x,newScale.y);
+		this.entity.runAction(cc.sequence(
+			cc.scaleTo(animates?0.3:0.1, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
+			cc.callFunc(()=>{
+				if(newScale.x<=0 || newScale.y<=0)	this.entity.setVisible(false);
+			})
+		));
 
 		this.ApplicatePosition();
 		return this;
