@@ -2,6 +2,13 @@ var Label;
 
 (function(){	//File Scope
 
+/** @const 背景アニメーションの種類 */
+const BgAnimation	= {
+	None	: 0x00,	//アニメーションなし
+	Widen	: 0x01,	//拡大アニメーション
+	Narrow	: 0x02,	//縮小アニメーション
+};
+
 /** cc.LabelXXXのラッパクラス
  * @class Label
  */
@@ -183,7 +190,7 @@ Label	= class Label{
 		}
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
-			this.bg.SetSize(true);
+			this.bg.SetSize(false);
 		}
 		return this;
 	}
@@ -279,16 +286,17 @@ class LabelBg{
 		this.PADDING	= { horizon:4,	vertical:2	};
 
 		/** @var cc.DwarNodeクラスのインスタンス */
-		this.entity	= null;
+		this.entity		= null;
 		/** @var サイズ */
-		this.size			= {width:0,					height:0,					};
+		this.size		= {width:0,		height:0,	};
 		/** @var サイズ上限*/
-		this.upper			= {width:null,				height:null,				};
+		this.upper		= {width:null,	height:null,};
 		/** @var サイズ下限*/
-		this.lower			= {width:0,					height:0,					};
+		this.lower		= {width:0,		height:0,	};
 
 		this.imgWidth	= 128;
 		this.imgHeight	= 128;
+		this.animation	= BgAnimation.None;
 
 		this.Init();
 	}
@@ -327,6 +335,9 @@ class LabelBg{
 	 * @memberof LabelBg
 	 */
 	Update(dt){
+		if(!this.IsRunningActions()){
+			this.animation	= BgAnimation.None;
+		}
 		return this;
 	}
 
@@ -380,18 +391,23 @@ class LabelBg{
 		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);
 		this.size.height	= Clamp(this.size.height,this.lower.height,this.upper.height)
 
+		if(!this.IsEnabled())	return this;
+
+		//拡大率
+		const oldScale	= {	x:this.entity.getScaleX(),			y:this.entity.getScaleY(),			};
+		const newScale	= {	x:this.size.width/this.imgWidth,	y:this.size.height/this.imgHeight,	};
+
+		//拡縮アニメーション
+		this.animation	= BgAnimation.None;
+		if(oldScale.x < newScale.x || oldScale.y < newScale.y)	this.animation |= BgAnimation.Widen;
+		if(oldScale.x > newScale.x || oldScale.y > newScale.y)	this.animation |= BgAnimation.Narrow;
+
 		//Apply
-		if(this.IsEnabled() && this.entity.isVisible){
-			if(animates){
-				this.entity.runAction(
-					cc.scaleTo(0.3,this.size.width/this.imgWidth, this.size.height/this.imgHeight).easing(cc.easeBackOut(10))
-				);
-			}
-			else{
-				this.entity.setScale(this.size.width/this.imgWidth, this.size.height/this.imgHeight);
-			}
-			this.ApplicatePosition();
-		}
+		if(!this.entity.isVisible)	this.entity.setScale(0);
+		else if(animates)			this.entity.runAction(cc.scaleTo(0.3,newScale.x,newScale.y).easing(cc.easeBackOut(10)));
+		else						this.entity.setScale(newScale.x,newScale.y);
+
+		this.ApplicatePosition();
 		return this;
 	}
 
