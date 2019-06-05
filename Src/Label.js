@@ -408,6 +408,7 @@ class LabelBg{
 		if(oldScale.x > newScale.x || oldScale.y > newScale.y)	this.animation |= BgAnimation.Narrow;
 
 		//Apply
+		this.entity.stopAllActions();
 		if(!this.entity.isVisible())	this.entity.setScale(0);
 		else if(animates){
 			this.entity.runAction(cc.sequence(
