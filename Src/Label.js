@@ -194,7 +194,7 @@ Label	= class Label{
 		}
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
-			this.bg.SetSize(false);
+			this.bg.SetSize(true);
 		}
 		return this;
 	}
