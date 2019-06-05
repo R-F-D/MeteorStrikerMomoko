@@ -20,7 +20,7 @@ Label	= class Label{
 
 		this.text	= "";
 		this.logs	= [];
-		this.nLines	= 3;
+		this.nLines	= 1;
 
 		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
 		this.entity.attr({zIndex:this.Z});
