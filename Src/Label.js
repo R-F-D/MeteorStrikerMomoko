@@ -86,6 +86,14 @@ Label	= class Label{
 		return this;
 	}
 
+	/** 可視状態を得る
+	 * @returns {boolean}
+	 * @memberof LabelBg
+	 */
+	IsVisible(){
+		return this.entity.isVisible();
+	}
+
 	/** 更新 */
 	Update(dt){
 		if(this.bg.IsEnabled()){
@@ -229,8 +237,6 @@ Label	= class Label{
 		if(nLines>0)	this.nLines = nLines;
 		return this;
 	}
-
-
 
 	/** カラー設定
 	 * @param {strinf|cc.color} color
