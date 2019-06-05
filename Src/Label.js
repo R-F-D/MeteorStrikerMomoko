@@ -402,18 +402,24 @@ class LabelBg{
 		const newScale	= {	x:this.size.width/this.imgWidth,	y:this.size.height/this.imgHeight,	};
 
 		//拡縮アニメーション
-		this.animation	= BgAnimation.None;
+		const isFast	= !!(oldScale.x && oldScale.y && newScale.x && newScale.y);	//速度
+		this.animation	= BgAnimation.None;	//種類
 		if(oldScale.x < newScale.x || oldScale.y < newScale.y)	this.animation |= BgAnimation.Widen;
 		if(oldScale.x > newScale.x || oldScale.y > newScale.y)	this.animation |= BgAnimation.Narrow;
 
 		//Apply
-		if(!this.entity.isVisible)	this.entity.setScale(0);
-		this.entity.runAction(cc.sequence(
-			cc.scaleTo(animates?0.3:0.1, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
-			cc.callFunc(()=>{
-				if(newScale.x<=0 || newScale.y<=0)	this.entity.setVisible(false);
-			})
-		));
+		if(!this.entity.isVisible())	this.entity.setScale(0);
+		else if(animates){
+			this.entity.runAction(cc.sequence(
+				cc.scaleTo(isFast?0.1:0.3, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
+				cc.callFunc(()=>{
+					if(newScale.x<=0 || newScale.y<=0)	this.entity.setVisible(false);
+				})
+			));
+		}
+		else{
+			this.entity.setScale(newScale.x,newScale.y);
+		}
 
 		this.ApplicatePosition();
 		return this;
