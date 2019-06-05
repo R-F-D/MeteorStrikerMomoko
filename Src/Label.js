@@ -18,9 +18,12 @@ Label	= class Label{
 		/** @const Z座標 */
 		this.Z	= 65535;
 
-		this.text	= "";
-		this.logs	= [];
-		this.nLines	= 1;
+		//テキスト・ログ
+		this.text				= "";
+		this.logs				= [];
+		this.logBuffers			= [];
+		this.nLines				= 1;
+		this.pushIntervalToLog	= 0;
 
 		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
 		this.entity.attr({zIndex:this.Z});
@@ -105,17 +108,40 @@ Label	= class Label{
 			if(this.icon)	this.icon.Attr({opacity:192});
 		}
 
-		//ログの自動消去
 		const length	= this.logs.length;
+		let isDirty		= false;
+
+		//バッファにログが残っている場合、1行Pushする
+		if(this.logBuffers.length > 0 && !this.bg.IsRunningActions()){
+			if(this.pushIntervalToLog<=0){
+				this.logs.push( this.logBuffers.shift() );
+				isDirty = true;
+				this.pushIntervalToLog	= 30;
+			}
+			this.pushIntervalToLog--;
+			Log(this.pushIntervalToLog);
+		}
+
+		//ログの自動消去
 		if(length > 0){
 			this.logs	= this.logs.filter(line=>{
 				if(line.lifetime===null)	return true;
 				line.lifetime	= Math.max(0,--line.lifetime);
 				return line.lifetime > 0;
 			});
+			if(length!==this.logs.length)	isDirty = true;
+		}
 
-			if     (this.logs.length==0)		this.SetString("").SetVisible(false);
-			else if(this.logs.length!=length)	this.SetString(_(this.logs).map("line").join("\n"));
+		//ログ表示行数溢れ
+		while(this.logs.length>this.nLines){
+			this.logs.shift();
+			isDirty	= true;
+		}
+
+		//内容が更新された場合、テキストを再設定
+		if(isDirty){
+			if(this.logs.length==0)	this.SetString("").SetVisible(false);
+			else					this.SetString(_(this.logs).map("line").join("\n"));
 		}
 
 		return this;
@@ -218,14 +244,16 @@ Label	= class Label{
 	RemoveTempText(text){return this.SetString(this.text,false)}
 
 	/** ログ形式のテキストを追加
-	 * @param {string[]} lines 文字列の配列（1要素1行）
+	 * @param {string} line 文字列
 	 * @param {number|null} lifetime 自動消去までのフレーム数。デフォルト180。nullで消去しない。
 	 * @returns
 	 */
-	PushLog(lines,lifetime=180){
-		lines.split(/\n/).forEach(l=>this.logs.push( {line:l,lifetime:lifetime} ));
+	PushLog(line,lifetime=180){
+		line.split(/\n/).forEach(l=>this.logBuffers.push( {line:l,lifetime:lifetime} ));
+		this.logs.push(this.logBuffers.shift());
 		while(this.logs.length > this.nLines)	this.logs.shift();
 		this.SetString(_(this.logs).map("line").join("\n"));
+		this.pushIntervalToLog	= 30;
 		return this;
 	}
 
