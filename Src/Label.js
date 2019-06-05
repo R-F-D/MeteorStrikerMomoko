@@ -412,7 +412,7 @@ class LabelBg{
 		if(!this.entity.isVisible())	this.entity.setScale(0);
 		else if(animates){
 			this.entity.runAction(cc.sequence(
-				cc.scaleTo(isFast?0.1:0.3, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
+				cc.scaleTo(isFast?0.2:0.4, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
 				cc.callFunc(()=>{
 					if(newScale.x<=0 || newScale.y<=0)	this.entity.setVisible(false);
 				})

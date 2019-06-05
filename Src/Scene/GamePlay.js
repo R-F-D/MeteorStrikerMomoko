@@ -271,7 +271,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.START_AIM
 			.PushStartingFunctions(()=>{
 				this.sprites.player.SetCustomData("isFlying",false)
-				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Aim")).SetVisible(true);
+				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Aim"),null).SetVisible(true);
 				this.aiming.SetVisible(true,true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
