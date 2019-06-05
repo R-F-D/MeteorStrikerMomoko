@@ -119,7 +119,6 @@ Label	= class Label{
 				this.pushIntervalToLog	= 30;
 			}
 			this.pushIntervalToLog--;
-			Log(this.pushIntervalToLog);
 		}
 
 		//ログの自動消去
