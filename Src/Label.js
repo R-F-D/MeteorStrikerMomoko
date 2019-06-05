@@ -186,6 +186,13 @@ Label	= class Label{
 	SetString(text,isTemp=false){
 		if(text==this.entity.getString()) return this;
 
+		//表示行数の調整
+		text	= (()=>{
+			let lines	= text.split(/\n/).filter((v,i)=>i<this.nLines);
+			for(let i=lines.length; i<this.nLines; ++i)	lines.push("");
+			return lines.join("\n");
+		})();
+
 		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
 		if(this.icon){
