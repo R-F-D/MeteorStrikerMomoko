@@ -49,7 +49,7 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Start":	{	_:"Please Momoko!",	ja:"おねがい☆桃子ちゃん",	},
 	"GamePlay.Navigator.BrowAway.Venus":	{	_:"Are you looking at Venus, Momoko?",	ja:"金星を見ておいでですか、桃子ちゃん",	},
 	"GamePlay.Navigator.BrowAway.Mars":	{	_:"Here is a place futher than Mars.",	ja:"火星よりも遠い場所だね",	},
-	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"Mercury!\nI needa douse myself in water and repent.",	ja:"水星！ 水をかぶって反省しなきゃ…",	},
+	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"I needa douse myself in water and repent.",	ja:"水をかぶって反省しなきゃ…",	},
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
 	"GamePlay.Navigator.BrowAway.Unicorn":	{	_:"I see them! I can see a pink unicorn!",	ja:"みえる！ わたしにもピンクのユニコーンがみえるよ！",	},
