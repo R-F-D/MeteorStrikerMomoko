@@ -244,7 +244,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.fx.preliminary.Destroy();
 
 			//ラベル
-			this.labels.distance.SetVisible(false).SetColor("#00FF00");
+			this.labels.distance.SetVisible(false).SetColor("#00FF00").SetNumLogLines(1);
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			//インタフェース
@@ -670,8 +670,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		if(changesPosition)	this.sprites.meteor.SetPosition(m.x,m.y+NormalRandom(4));
 		this.sprites.meteor.Rotate(this.isOnGround?-7:1);
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
-		this.fx.meteor.Spawn(this.sprites.meteor.entity.x,this.sprites.meteor.entity.y,this.sequence.count%15==0 && this.sprites.meteor.visible/*![this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence)*/).Update();
-		this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
+		this.fx.meteor.Spawn(this.sprites.meteor.entity.x,this.sprites.meteor.entity.y,this.sequence.count%15==0 && this.sprites.meteor.visible).Update();
+		if(this.labels.distance.IsVisible()){
+			this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance.Emit",[L.NumToStr(this.GetDistanceInKm(),"en"),L.Text("GamePlay.Distance.Unit","_")],"-"));
+		}
 		return this;
 	}
 
