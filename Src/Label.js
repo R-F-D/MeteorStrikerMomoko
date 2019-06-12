@@ -50,7 +50,7 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	Init(){
-		if(this.icon)this.icon.Attr({opacity:0});
+		if(this.icon)this.icon.Attr({opacity:192});
 		if(this.bg.IsEnabled())	this.bg.Init();
 		return this;
 	}
@@ -104,8 +104,7 @@ Label	= class Label{
 		}
 		//背景アニメーション中はテキストを表示しない
 		if(!this.bg.IsRunningActions()){
-			this.entity.attr({opacity:255});
-			if(this.icon)	this.icon.Attr({opacity:192});
+		 	this.entity.attr({opacity:255});
 		}
 
 		const length	= this.logs.length;
@@ -228,10 +227,8 @@ Label	= class Label{
 
 		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
-		if(this.icon){
-			this.ApplicateIconPosition();
-			this.icon.Attr({opacity:0});
-		}
+		if(this.icon)	this.ApplicateIconPosition();
+
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
 			this.bg.SetSize(true);
