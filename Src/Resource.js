@@ -18,7 +18,7 @@ const rc	= {
 		meteor			: [ "meteor.png",			1,	1,	],	//メテオ
 		distance		: [ "distance.png",			1,	1,	],	//飛距離表示
 
-		txtLaunch		: [ "txtLaunch.png",		1,	1,	],	//シーン入場テキスト
+		txtLaunch		: [ "txtLaunch.png",		1,	2,	],	//シーン入場テキスト
 
 		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
 		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト
