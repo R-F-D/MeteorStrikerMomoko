@@ -93,6 +93,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.labels	= {
 			hitArea:null, distance:null,	navigation:null,
 		}
+		this.navigatorIsGolem	= false;
 
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
@@ -510,8 +511,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.fx.hit.Update();
 		this.fx.emit.Update();
 
-		let naviIcon	= Math.trunc(this.count/4) % 32;
-		naviIcon		= naviIcon<=3 ? naviIcon : 0;
+		//ナビゲータのアイコン画像
+		const naviIcon	= (()=>{
+			let indexes 	= this.navigatorIsGolem	? [8,9,10,10,8,14,15,15, 8,9,10,10,8,14,15,15, 8,9,10,11,12,13,15,15, ]
+													: [4,1,2,7,4,1,2,7,4,1,2,7,4,5,6,7];
+			let nPatterns	= this.navigatorIsGolem ? 24 : 16;
+			return indexes[ Math.trunc(this.count/8)%nPatterns ];
+		})();
 		this.labels.navigation.SetIconIndex(naviIcon).Update();
 
 		this.isOnGround	= ![this.Sequences.BLOW_AWAY,this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence);

@@ -10,7 +10,7 @@ const rc	= {
 		bgGround		: [ "bgGround.png",			1,	1,	],	//背景（地上）
 		bgSpace			: [ "bgSpace.png",			1,	1,	],	//背景（宇宙）
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
-		navigator		: [ "navigator.png",		2,	2,	],	//ナビゲータ
+		navigator		: [ "navigator.png",		4,	4,	],	//ナビゲータ
 		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
 		aimBar			: [ "aimBar.png",			1,	1,	],	//エイミングゲージ
 		aimValue		: [ "aimValue.png",			4,	3,	],	//エイミング値
