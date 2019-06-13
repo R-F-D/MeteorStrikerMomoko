@@ -223,19 +223,19 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			//開始時テキスト
 			this.sprites.txtLaunch.forEach((sprite,i)=>{
 				sprite
-					.SetIndex(i).SetScale(1.5).SetVisible(true).SetOpacity(0)
+					.SetIndex(i).SetScale(2).SetVisible(true).SetOpacity(0)
 					.SetPosition(-128+i*32,size.height/2-8-i*32).SetRotate(-3)
 					.RunActions(
 						cc.delayTime(0.5+0.3*i),
 						[
 							cc.fadeTo(0.5,192),
-							cc.scaleTo(0.5,1.0),
+							cc.scaleTo(0.5,1.5),
 							cc.moveTo(0.5,cc.p(size.width/2-16+i*32,size.height/2+15-i*32)),
 						],
 						cc.moveTo(1.0,cc.p(size.width/2+16+i*32,size.height/2+17-i*32)),
 						[
 							cc.fadeTo(0.5,0),
-							cc.scaleTo(0.5,0.75),
+							cc.scaleTo(0.5,1.0),
 							cc.moveTo(0.5,cc.p(size.width+128+i*32,size.height/2+41-i*32)),
 						],
 						cc.callFunc(()=>this.sprites.txtLaunch[i].SetVisible(false))
