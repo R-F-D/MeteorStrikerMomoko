@@ -9,6 +9,7 @@ const rc	= {
 
 		bgGround		: [ "bgGround.png",			1,	1,	],	//背景（地上）
 		bgSpace			: [ "bgSpace.png",			1,	1,	],	//背景（宇宙）
+		bgLaunch		: [ "bgLaunch.png",			1,	1,	],	//背景（シーン開始テキスト）
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
 		navigator		: [ "navigator.png",		4,	4,	],	//ナビゲータ
 		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
