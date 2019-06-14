@@ -209,12 +209,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.sprites.player
 				.SetPosition(-128,0).SetScale(2)
 				.SetCustomData("isFlying",true).SetCustomData("adjY").SetCustomData("dy")
-				.RunActions(cc.moveTo(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
+				.RunActions(cc.delayTime(3.0), cc.moveTo(3.0,cc.p(this.POSITIONS.PLAYER.X,this.POSITIONS.PLAYER.Y)).easing(cc.easeBackOut(5)));
 
 			this.sprites.meteor
 				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
 				.SetScale(2).SetVisible(true)
-				.RunActions(cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
+				.RunActions(cc.delayTime(2.5), cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
