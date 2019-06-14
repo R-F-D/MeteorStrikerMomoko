@@ -145,6 +145,7 @@ Scene.SceneBase	= class {
 			update	: function(dt){
 				this._super();
 				Scene.SceneBase._date = null;
+				Achievement.Update(dt);
 			},
 		});
 		return this;

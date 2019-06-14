@@ -49,9 +49,17 @@ const Achievement = new (class Achievement{
 	}
 
 	Init(){
-		this.label	= Label.CreateInstance(12).AddToLayer(this.layer);
+		this.label	= Label.CreateInstance(9)
+						.AddToLayer(this.layer)
+						.SetBgEnabled(true)
+						.SetPosition(512-128,288-16)
+						.SetNumLogLines(2);
 
 		return;
+	}
+
+	Update(dt){
+		if(this.label)	this.label.Update(dt);
 	}
 
 	Set(achievement,count){
@@ -60,7 +68,11 @@ const Achievement = new (class Achievement{
 		InsertToStorage(
 			`${this.PrefixStorageKey}${achievement.Key}`,
 			Scene.SceneBase.GetDate().getTime(),
-			old=>old===null && achievement.Count<=count	);
+			(oldValue,newValue)=> oldValue===null && achievement.Count<=count,	//cond
+			(k,v)=>{	// is OK
+				this.label.PushLog(`Unlocked: ${L.Text(k+".Title")}`);
+			}
+		);
 		return this;
 	}
 
