@@ -23,7 +23,9 @@ Label	= class Label{
 		this.logs				= [];
 		this.logBuffers			= [];
 		this.nLines				= 1;
+
 		this.pushIntervalToLog	= 0;
+		this.nPushedLinesAtOnce	= 1;	//一度にログへプッシュされる行数
 		this.forcedPushesToLog	= true;
 
 		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
@@ -108,27 +110,28 @@ Label	= class Label{
 		 	this.entity.attr({opacity:255});
 		}
 
-		const length	= this.logs.length;
 		let isDirty		= false;
 
-		//バッファにログが残っている場合、1行Pushする
-		if(this.logBuffers.length > 0 && !this.bg.IsRunningActions()){
-			if((this.forcedPushesToLog && this.pushIntervalToLog<=0) || (!this.forcedPushesToLog && this.logs.length<this.nLines)){
-				this.logs.push( this.logBuffers.shift() );
-				isDirty = true;
-				this.pushIntervalToLog	= 30;
-			}
-			this.pushIntervalToLog--;
-		}
-
 		//ログの自動消去
-		if(length > 0){
+		let length	= this.logs.length;
+		if(this.logs.length > 0){
 			this.logs	= this.logs.filter(line=>{
 				if(line.lifetime===null)	return true;
 				line.lifetime	= Math.max(0,--line.lifetime);
 				return line.lifetime > 0;
 			});
 			if(length!==this.logs.length)	isDirty = true;
+		}
+
+		//バッファにログが残っている場合、1行Pushする
+		length	= this.logs.length;
+		if(this.logBuffers.length > 0 && !this.bg.IsRunningActions()){
+			if((this.forcedPushesToLog && this.pushIntervalToLog<=0) || (!this.forcedPushesToLog && this.logs.length<this.nLines)){
+				this._MoveFromBufferToLog(this.forcedPushesToLog);
+				isDirty = true;
+				this.pushIntervalToLog	= 30;
+			}
+			this.pushIntervalToLog--;
 		}
 
 		//ログ表示行数溢れ
@@ -247,10 +250,23 @@ Label	= class Label{
 	 */
 	PushLog(line,lifetime=180){
 		line.split(/\n/).forEach(l=>this.logBuffers.push( {line:l,lifetime:lifetime} ));
-		if(this.forcedPushesToLog)	this.logs.push(this.logBuffers.shift());
+		if(this.forcedPushesToLog)	this._MoveFromBufferToLog(true);
 		while(this.logs.length > this.nLines)	this.logs.shift();
 		this.SetString(_(this.logs).map("line").join("\n"));
 		this.pushIntervalToLog	= 30;
+		return this;
+	}
+
+	/** ログバッファからログに移動 */
+	_MoveFromBufferToLog(isForce){
+		//強制プッシュフラグが偽で、ログの空きが足りない場合は何もしない
+		if(!isForce && this.nLines-this.logs.length < Math.min(this.logBuffers.length,this.nPushedLinesAtOnce)){
+			return this;
+		}
+
+		for(let i=0; i<this.nPushedLinesAtOnce; ++i){
+			if(this.logBuffers.length>0)	this.logs.push(this.logBuffers.shift());
+		}
 		return this;
 	}
 
