@@ -55,6 +55,9 @@ const Achievement = new (class Achievement{
 						.SetPosition(512-128,288-16)
 						.SetNumLogLines(2);
 
+		this.label.forcedPushesToLog	= false;
+		this.label.nPushedLinesAtOnce	= 2;
+
 		return;
 	}
 
@@ -70,7 +73,7 @@ const Achievement = new (class Achievement{
 			Scene.SceneBase.GetDate().getTime(),
 			(oldValue,newValue)=> oldValue===null && achievement.Count<=count,	//cond
 			(k,v)=>{	// is OK
-				this.label.PushLog(`Unlocked: ${L.Text(k+".Title")}`);
+				this.label.PushLog(`Achievement unlocked:\n${L.Text(k+".Title")}`);
 			}
 		);
 		return this;
