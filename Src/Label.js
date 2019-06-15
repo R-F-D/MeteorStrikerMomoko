@@ -142,7 +142,7 @@ Label	= class Label{
 
 		//内容が更新された場合、テキストを再設定
 		if(isDirty){
-			if(this.logs.length==0)	this.SetString("").SetVisible(false);
+			if(this.logs.length==0)	this.SetString("",false,true);
 			else					this.SetString(_(this.logs).map("line").join("\n"));
 		}
 
@@ -219,24 +219,29 @@ Label	= class Label{
 	 * @returns
 	 * @memberof Label
 	 */
-	SetString(text,isTemp=false){
+	SetString(text,isTemp=false,hidesIfEmpty=false){
 		if(text==this.entity.getString()) return this;
 
 		//表示行数の調整
-		text	= (()=>{
+		if(!hidesIfEmpty){
 			let lines	= text.split(/\n/).filter((v,i)=>i<this.nLines);
 			for(let i=lines.length; i<this.nLines; ++i)	lines.push("");
-			return lines.join("\n");
-		})();
+			text		= lines.join("\n");
+		}
 
 		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
-		if(this.icon)	this.ApplicateIconPosition();
+		if(this.icon){
+			this.ApplicateIconPosition();
+			if(hidesIfEmpty && text=="")	this.icon.SetOpacity(0);
+			else							this.icon.SetOpacity(192)
+		}
 
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
-			this.bg.SetSize(true);
+			this.bg.SetSize(true,undefined,undefined, (!hidesIfEmpty || text!="") );
 		}
+
 		return this;
 	}
 
