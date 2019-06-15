@@ -24,6 +24,7 @@ Label	= class Label{
 		this.logBuffers			= [];
 		this.nLines				= 1;
 		this.pushIntervalToLog	= 0;
+		this.forcedPushesToLog	= true;
 
 		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
 		this.entity.attr({zIndex:this.Z});
@@ -112,7 +113,7 @@ Label	= class Label{
 
 		//バッファにログが残っている場合、1行Pushする
 		if(this.logBuffers.length > 0 && !this.bg.IsRunningActions()){
-			if(this.pushIntervalToLog<=0){
+			if((this.forcedPushesToLog && this.pushIntervalToLog<=0) || (!this.forcedPushesToLog && this.logs.length<this.nLines)){
 				this.logs.push( this.logBuffers.shift() );
 				isDirty = true;
 				this.pushIntervalToLog	= 30;
@@ -246,7 +247,7 @@ Label	= class Label{
 	 */
 	PushLog(line,lifetime=180){
 		line.split(/\n/).forEach(l=>this.logBuffers.push( {line:l,lifetime:lifetime} ));
-		this.logs.push(this.logBuffers.shift());
+		if(this.forcedPushesToLog)	this.logs.push(this.logBuffers.shift());
 		while(this.logs.length > this.nLines)	this.logs.shift();
 		this.SetString(_(this.logs).map("line").join("\n"));
 		this.pushIntervalToLog	= 30;
