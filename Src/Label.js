@@ -246,6 +246,7 @@ Label	= class Label{
 		return this;
 	}
 
+	RemoveString(){return this.SetString("",false,true)}
 	SetTempText(text){return this.SetString(text,true)}
 	RemoveTempText(text){return this.SetString(this.text,false)}
 
