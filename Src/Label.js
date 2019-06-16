@@ -94,7 +94,7 @@ Label	= class Label{
 
 	/** 可視状態を得る
 	 * @returns {boolean}
-	 * @memberof LabelBg
+	 * @memberof Label
 	 */
 	IsVisible(){
 		return this.entity.isVisible();
@@ -437,7 +437,6 @@ class LabelBg{
 	 */
 	SetSize(animates,width=undefined,height=undefined,pads=true){
 		let parentSize	= this.parent.GetContentSize();
-		Log(`Parent(${parentSize.width},${parentSize.height}) Arg(${width},${height}) Ani:${animates}`);
 
 		//パディング
 		const adjust	= {
@@ -471,10 +470,11 @@ class LabelBg{
 		this.entity.stopAllActions();
 		if(!this.entity.isVisible())	this.entity.setScale(0);
 		else if(animates){
+			this.entity.attr({opacity:this.OPACITY});
 			this.entity.runAction(cc.sequence(
 				cc.scaleTo(isFast?0.2:0.4, newScale.x,newScale.y).easing(cc.easeBackOut(10)),
 				cc.callFunc(()=>{
-					if(newScale.x<=0 || newScale.y<=0)	this.entity.setVisible(false);
+					if(newScale.x<=0 || newScale.y<=0)	this.entity.attr({opacity:0});
 				})
 			));
 		}
