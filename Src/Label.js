@@ -437,6 +437,7 @@ class LabelBg{
 	 */
 	SetSize(animates,width=undefined,height=undefined,pads=true){
 		let parentSize	= this.parent.GetContentSize();
+		Log(`Parent(${parentSize.width},${parentSize.height}) Arg(${width},${height}) Ani:${animates}`);
 
 		//パディング
 		const adjust	= {

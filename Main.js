@@ -1,5 +1,7 @@
 //Main
 cc.game.onStart = function(){
+	Debug(()=>console.clear());
+
 	var sys = cc.sys;
 	if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
 		document.body.removeChild(document.getElementById("cocosLoading"));
