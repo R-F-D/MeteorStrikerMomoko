@@ -81,7 +81,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				.SetIndex(Button.ON,   i*2+3)
 				.SetIndex(Button.HOVER,i*2+3);
 		});
-		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Text));
+		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
 		this.buttons.at("WebPage").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
 
 		return this;

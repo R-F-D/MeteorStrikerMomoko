@@ -1,17 +1,17 @@
 /* *******************************************************************************
-	Textシーン
+	Helpシーン
 ********************************************************************************/
 var Scene	= Scene || {};
 (function(){	//File Scope
 
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: "Text.Main",
-	UI		: "Text.Ui",
+	MAIN	: "Help.Main",
+	UI		: "Help.Ui",
 };
 
 
-Scene.Text	= class extends Scene.SceneBase {
+Scene.Help	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();
