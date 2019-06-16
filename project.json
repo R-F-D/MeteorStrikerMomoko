@@ -37,7 +37,8 @@
 		"Src/Scene/SceneBase.js",
 		"Src/Scene/GamePlay.js",
 		"Src/Scene/Title.js",
-		"Src/Scene/Score.js"
+		"Src/Scene/Score.js",
+		"Src/Scene/Text.js"
 
 	]
 }
