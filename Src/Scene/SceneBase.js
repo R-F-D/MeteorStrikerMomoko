@@ -231,11 +231,12 @@ Scene.SceneBase	= class {
 
 	/** シーン遷移
 	 * @param {*} newSceneClass シーンクラスの型
-	 * @returns  this
+	 * @returns {Scene.SceneBase} 新シーンクラスのインスタンス
 	 */
 	ReplaceScene(newSceneClass){
-		cc.director.runScene( cc.TransitionFade.create(1,newSceneClass.Create().GetCcSceneInstance()));
-		return this;
+		const sceneInst	= newSceneClass.Create();
+		cc.director.runScene( cc.TransitionFade.create(1,sceneInst.GetCcSceneInstance()));
+		return sceneInst;
 	}
 
 	OnEnter(){return this}
