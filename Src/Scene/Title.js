@@ -150,24 +150,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					this.ReplaceScene(Scene.GamePlay);
 					return true;
 				},
-			})
-			/*
-			//シェアボタン
-			.AddToEventListenerList("shareGameButton",(sender,type)=>{
-				if      (type===ccui.Widget.TOUCH_BEGAN){
-				}
-				else if (type===ccui.Widget.TOUCH_ENDED){
-					cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
-										L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
-										L.Text("GamePlay.Share.URL"),
-										L.Text("GamePlay.Share.Tags")
-									]));
-				}
-				else if (type===ccui.Widget.TOUCH_CANCELED){
-				}
-				return true;
-			})*/
-			;
+			});
 
 		//共通イベント対応設定
 		let commonEvents	= [];
