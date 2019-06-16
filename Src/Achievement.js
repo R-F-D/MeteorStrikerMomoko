@@ -71,10 +71,8 @@ const Achievement = new (class Achievement{
 		InsertToStorage(
 			`${this.PrefixStorageKey}${achievement.Key}`,
 			Scene.SceneBase.GetDate().getTime(),
-			(oldValue,newValue)=> oldValue===null && achievement.Count<=count,	//cond
-			(k,v)=>{	// is OK
-				this.label.PushLog(`Achievement unlocked:\n${L.Text(k+".Title")}`);
-			}
+			(oldValue,newValue)	=> oldValue===null && achievement.Count<=count,	//cond
+			(key,value)			=> this.label.PushLog(`${L.Text("Achievement.Unlocked")}\n${L.Text(key+".Title")}`)
 		);
 		return this;
 	}

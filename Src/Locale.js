@@ -80,7 +80,7 @@ Texts	= {
 	"Achievement.Check.Mercury.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
 	"Achievement.Check.Sun.Title"	:	{	_:"BEYOND THE SUNLIGHT",},
 	"Achievement.Check.Sun.Description"	:	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
-	"Achievement.Check.Kirari.Title":	{	_:"Kirari, The Row of Light",	ja:" キラリ 光の列",	},
+	"Achievement.Check.Kirari.Title":	{	_:"Kirari, The Row of Light",	ja:"キラリ 光の列",	},
 	"Achievement.Check.Kirari.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
 	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	},
 	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
