@@ -41,6 +41,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
 					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.flyFx				= Effect.Fly.Create(32).Init(this);
+					_this.label				= Label.CreateInstance(12,rc.font.talk).AddToLayer(this);
 					return true;
 				},
 			})
@@ -64,14 +65,20 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetSequence(this.Sequences.INITIAL);
 
 		//ボタン
-		this.buttons.SetPosition(384,128);
+		this.buttons
+			.SetPosition(384,128)
+			.forEach((button)=>{
+				button.OnMouseHover(
+					()=>this.label.PushLog(L.Text(`Title.Button.${button.tag}`))
+				);
+			});
 		this.buttons.at("Play")
 			.CreateSprite(rc.img.titleButton)
 			.SetScale(1)
 			.SetIndex(Button.OFF,  0)
 			.SetIndex(Button.ON,   1)
 			.SetIndex(Button.HOVER,1)
-			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
+			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
 		this.buttons.filter(v=> v.tag!="Play" ).forEach((button,i)=>{
 			button
 				.CreateSprite(rc.img.titleButton)
@@ -116,6 +123,10 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 		this.flyFx.Spawn(this.sprites.player.x-16,this.sprites.player.y-8).Update();
 
+		this.label
+			.SetPosition(this.sprites.player.x+40,this.sprites.player.y+32)
+			.Update(dt);
+
 		this.buttons.Update(dt);
 		return this;
 	}
@@ -133,7 +144,9 @@ Scene.Title	= class extends Scene.SceneBase {
 				.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
 				.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
 			this.flyFx
-				.SetVelocity(1,-0.5,-0.5,0);;
+				.SetVelocity(1,-0.5,-0.5,0);
+			this.label
+				.Init().SetVisible(true).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
 		})
 		.PushUpdatingFunctions(dt=>{
 		});

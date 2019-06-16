@@ -38,6 +38,14 @@ Texts	= {
 	"GamePlay.Distance.Unit":	{	_: "km",	},
 	"GamePlay.Charge.Unit":	{	_: "%",	},
 
+	//タイトル画面 Title
+	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	},
+	"Title.Button.Score":	{	_:"Score and achievements",	ja:"スコアと実績",	},
+	"Title.Button.Help":	{	_:"How to play",	ja:"ゲームの遊び方",	},
+	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	},
+	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	},
+	"Title.Button.Credits":	{	_:"Show credits",	ja:"作ったひと",	},
+
 	//ゲームプレイ GamePlay
 	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
 
@@ -64,7 +72,7 @@ Texts	= {
 	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
 	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
 
-	//実績
+	//実績 Achievement
 	"Achievement.Unlocked" :	{	_:"Mission Completed!",	ja:"ミッション達成!",	},
 	"Achievement.Aiming.ManyPerfects.Title":	{	_:"PERFECT AIMS 05",	},
 	"Achievement.Aiming.ManyPerfects.Description":	{	_:"Aimed to perfect 5 times.",	ja:"5回パーフェクトを出した",	},
