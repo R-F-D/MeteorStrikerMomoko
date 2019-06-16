@@ -223,30 +223,30 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			//開始時テキスト
 			this.sprites.bgLaunch
-				.SetPosition(-1020+size.width/2,-89+size.height/2).SetRotate(-5).SetScale(4.4).SetOpacity(255).SetVisible(true)
+				.SetPosition(-1020+size.width/2,-89+size.height/2+32).SetRotate(-5).SetScale(4.4).SetOpacity(255).SetVisible(true)
 				.RunActions(
 					cc.delayTime(0.5),
-					[	cc.scaleTo(0.5,2.2),	cc.fadeTo(0.5,255),	cc.moveTo(0.5,cc.p(size.width/2,size.height/2)),	],
+					[	cc.scaleTo(0.5,2.2),	cc.fadeTo(0.5,255),	cc.moveTo(0.5,cc.p(size.width/2,size.height/2+32)),	],
 					cc.delayTime(2.0),
-					[	cc.scaleTo(0.5,1.1),	cc.fadeTo(0.5,0),	cc.moveTo(0.5,cc.p(510+size.width/2,45+size.height/2)),	],
+					[	cc.scaleTo(0.5,1.1),	cc.fadeTo(0.5,0),	cc.moveTo(0.5,cc.p(510+size.width/2,45+size.height/2+32)),	],
 					cc.callFunc(()=>this.sprites.bgLaunch.SetVisible(false))
 				);
 			this.sprites.txtLaunch.forEach((sprite,i)=>{
 				sprite
 					.SetIndex(i).SetScale(2).SetVisible(true).SetOpacity(0)
-					.SetPosition(-510+size.width/2+i*32,-45+size.height/2+16-i*32).SetRotate(-5)
+					.SetPosition(-510+size.width/2+i*32,-45+size.height/2+16-i*32+40).SetRotate(-5)
 					.RunActions(
 						cc.delayTime(1.0+0.3*i),
 						[
 							cc.fadeTo(0.5,255),
 							cc.scaleTo(0.5,1.5),
-							cc.moveTo(0.5,cc.p(size.width/2-16+i*32,size.height/2+15-i*32)),
+							cc.moveTo(0.5,cc.p(size.width/2-16+i*32,size.height/2+15-i*32+40)),
 						],
-						cc.moveTo(1.0,cc.p(size.width/2+16+i*32,size.height/2+17-i*32)),
+						cc.moveTo(1.0,cc.p(size.width/2+16+i*32,size.height/2+17-i*32+40)),
 						[
 							cc.fadeTo(0.5,0),
 							cc.scaleTo(0.5,0.50),
-							cc.moveTo(0.5,cc.p(512+size.width/2+i*32,45+size.height/2+16-i*32)),
+							cc.moveTo(0.5,cc.p(512+size.width/2+i*32,45+size.height/2+16-i*32+40)),
 						],
 						cc.callFunc(()=>this.sprites.txtLaunch[i].SetVisible(false))
 					);
