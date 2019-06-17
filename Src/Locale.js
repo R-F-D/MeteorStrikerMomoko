@@ -45,6 +45,7 @@ Texts	= {
 	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	},
 	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	},
 	"Title.Button.Credits":	{	_:"Show credits",	ja:"作ったひと",	},
+	"Title.Reaction.Player":	{	_:"Momoko dakedo.",	ja:"桃子だけど。",	},
 
 	//ゲームプレイ GamePlay
 	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},

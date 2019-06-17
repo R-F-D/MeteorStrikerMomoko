@@ -168,10 +168,17 @@ Scene.Title	= class extends Scene.SceneBase {
 
 	InitEventListenerList(){
 		super.InitEventListenerList()
-		.AddPropertiesToEventListenerList("reaction",{
+		.AddPropertiesToEventListenerList("reactions",{
 			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-			onTouchesBegan	: (touch,event)=>{
-				Log("!");
+			onTouchesBegan	: (touches,event)=>{
+				touches.forEach(touch=>{
+					const location		= touch.getLocation();
+
+					//プレイヤーキャラクターをタッチ
+					if((location.x-this.sprites.player.x)**2 + (location.y-this.sprites.player.y)**2 <32**2){
+						this.label.PushLog(L.Text("Title.Reaction.Player"));
+					}
+				});
 				return true;
 			},
 		});
@@ -185,7 +192,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		//シークエンス-イベント対応設定
-		this.Sequences.PROCESS.SetEventListeners(  LinkedLayerTags.UI, this.listeners.reaction		);
+		this.Sequences.PROCESS.SetEventListeners(  LinkedLayerTags.MAIN, this.listeners.reactions		);
 
 		return this;
 	}
