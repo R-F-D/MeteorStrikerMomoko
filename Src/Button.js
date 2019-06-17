@@ -98,7 +98,7 @@ Button	= class Button{
 
 	SetScale(scale=1.0){
 		this.scale=scale;
-		this.items.forEach(v=>SetScale(null));
+		this.items.forEach(b=>b.SetScale(null));
 		return this;
 	}
 
