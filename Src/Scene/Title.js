@@ -17,7 +17,8 @@ Scene.Title	= class extends Scene.SceneBase {
 		super();
 
 		this.Sequences	= {
-			/**初期状態*/		INITIAL			: null,
+			INITIAL	: null,	//初期状態
+			PROCESS	: null,	//メイン処理
 		};
 
 		/** ccSceneのインスタンス */
@@ -135,21 +136,29 @@ Scene.Title	= class extends Scene.SceneBase {
 		const size		= cc.director.getWinSize();
 
 		//初期状態
-		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			this.sprites.bg.forEach(v=>v.SetVisible(true));
-			this.sprites.logo
-				.SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);
-			this.sprites.player
-				.SetScale(0).Attr({zIndex:5})
-				.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
-				.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
-			this.flyFx
-				.SetVelocity(1,-0.5,-0.5,0);
-			this.label
-				.Init().SetVisible(true).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
-		})
-		.PushUpdatingFunctions(dt=>{
-		});
+		this.Sequences.INITIAL
+			.PushStartingFunctions(()=>{
+				this.sprites.bg.forEach(v=>v.SetVisible(true));
+				this.sprites.logo
+					.SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);
+				this.sprites.player
+					.SetScale(0).Attr({zIndex:5})
+					.SetCustomData("adj.x").SetCustomData("adj.y").SetCustomData("dx").SetCustomData("dy")
+					.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
+				this.flyFx
+					.SetVelocity(1,-0.5,-0.5,0);
+				this.label
+					.Init().SetVisible(true).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
+			})
+			.PushUpdatingFunctions(dt=>{
+				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);
+			});
+		//メイン処理
+		this.Sequences.PROCESS
+			.PushStartingFunctions(()=>{
+			})
+			.PushUpdatingFunctions(dt=>{
+			});
 
 		return this;
 	}
