@@ -124,9 +124,11 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 		this.flyFx.Spawn(this.sprites.player.x-16,this.sprites.player.y-8).Update();
 
-		this.label
-			.SetPosition(this.sprites.player.x+40,this.sprites.player.y+32)
-			.Update(dt);
+		if(this.label.IsVisible()){
+			this.label
+				.SetPosition(this.sprites.player.x+40,this.sprites.player.y+32)
+				.Update(dt);
+		}
 
 		this.buttons.Update(dt);
 		return this;
@@ -148,7 +150,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				this.flyFx
 					.SetVelocity(1,-0.5,-0.5,0);
 				this.label
-					.Init().SetVisible(true).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
+					.Init().SetVisible(false).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
 			})
 			.PushUpdatingFunctions(dt=>{
 				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);
@@ -156,6 +158,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		//メイン処理
 		this.Sequences.PROCESS
 			.PushStartingFunctions(()=>{
+				this.label.SetVisible(true);
 			})
 			.PushUpdatingFunctions(dt=>{
 			});
