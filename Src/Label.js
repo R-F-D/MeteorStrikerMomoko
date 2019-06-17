@@ -239,7 +239,6 @@ Label	= class Label{
 
 		if(this.bg.IsEnabled()){
 			this.entity.attr({opacity:0});
-			Log(`Hide:${hidesIfEmpty} Text:${text} Pads:${!hidesIfEmpty || text!=""}`)
 			this.bg.SetSize(true,undefined,undefined, (!hidesIfEmpty || text!="") );
 		}
 
@@ -445,8 +444,6 @@ class LabelBg{
 			width:	pads	? this.PADDING.horizon  * 2	: 0,
 			height:	pads	? this.PADDING.vertical * 2	: 0,
 		};
-
-		Log(`Arg:${width},${height} Pads:${pads} Current:${this.size.width},${this.size.height}`);
 
 		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
 		this.size.width		= width === null		? this.size.width					:

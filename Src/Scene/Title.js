@@ -167,15 +167,7 @@ Scene.Title	= class extends Scene.SceneBase {
 	}
 
 	InitEventListenerList(){
-		super.InitEventListenerList()
-			/** ゲームプレイシーンへ遷移 */
-			.AddPropertiesToEventListenerList("toGamePlay",{
-				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touch,event)=>{
-					this.ReplaceScene(Scene.GamePlay);
-					return true;
-				},
-			});
+		super.InitEventListenerList();
 
 		//共通イベント対応設定
 		let commonEvents	= [];
