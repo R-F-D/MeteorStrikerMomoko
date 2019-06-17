@@ -80,7 +80,7 @@ Label	= class Label{
 		if(this.bg.IsEnabled() && visible!=this.bg.entity.visible){
 			if(visible){
 				this.bg.entity.setVisible(true);
-				this.bg.SetSize(true,undefined,undefined,true);
+				this.bg.SetSize(true,undefined,undefined,this.text!="");
 			}
 			else{
 				this.bg.SetSize(true,0,0,false);
