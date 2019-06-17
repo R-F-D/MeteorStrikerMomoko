@@ -38,11 +38,12 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.sprites.bg		= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
-					_this.sprites.logo		= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
-					_this.sprites.player	= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
-					_this.flyFx				= Effect.Fly.Create(32).Init(this);
-					_this.label				= Label.CreateInstance(12,rc.font.talk).AddToLayer(this);
+					_this.sprites.bg			= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
+					_this.sprites.logo			= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
+					_this.sprites.player		= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
+					_this.sprites.balloonTail	= Sprite.CreateInstance(rc.img.balloonTail).AddToLayer(this);
+					_this.flyFx					= Effect.Fly.Create(32).Init(this);
+					_this.label					= Label.CreateInstance(12,rc.font.talk).AddToLayer(this);
 					return true;
 				},
 			})
@@ -124,10 +125,20 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
 		this.flyFx.Spawn(this.sprites.player.x-16,this.sprites.player.y-8).Update();
 
+		//フキダシ
 		if(this.label.IsVisible()){
 			this.label
 				.SetPosition(this.sprites.player.x+40,this.sprites.player.y+32)
 				.Update(dt);
+		}
+		if(this.label.IsDisplayed() && !this.label.bg.IsRunningActions()){
+			const bg = this.label.bg;
+			this.sprites.balloonTail
+				.SetPosition( bg.entity.x-4, bg.entity.y-bg.size.height+bg.PADDING.vertical*2)
+				.SetVisible(true);
+		}
+		else{
+			this.sprites.balloonTail.SetVisible(false);
 		}
 
 		this.buttons.Update(dt);
@@ -149,8 +160,13 @@ Scene.Title	= class extends Scene.SceneBase {
 					.RunActions(cc.scaleTo(10,2).easing(cc.easeBackOut(10)));
 				this.flyFx
 					.SetVelocity(1,-0.5,-0.5,0);
+
+				//フキダシ
+				this.label.bg.OPACITY	= 255;
+				this.label.bg.COLOR		= cc.color(0x33,0x33,0x33);
+				this.sprites.balloonTail.SetColor(this.label.bg.COLOR).SetOpacity(this.label.bg.OPACITY)
 				this.label
-					.Init().SetVisible(false).SetColor("FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
+					.Init().SetVisible(false).SetColor("#FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
 			})
 			.PushUpdatingFunctions(dt=>{
 				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);

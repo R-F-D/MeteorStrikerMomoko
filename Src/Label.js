@@ -100,6 +100,10 @@ Label	= class Label{
 		return this.entity.isVisible();
 	}
 
+	IsDisplayed(){
+		return !!(this.IsVisible() && this.text!="");
+	}
+
 	/** 更新 */
 	Update(dt){
 		if(this.bg.IsEnabled()){
@@ -453,7 +457,8 @@ class LabelBg{
 
 		//Clamp
 		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);
-		this.size.height	= Clamp(this.size.height,this.lower.height,this.upper.height)
+		this.size.height	= Clamp(this.size.height,this.lower.height,this.upper.height);
+
 
 		if(!this.IsEnabled())	return this;
 

@@ -20,6 +20,7 @@ const rc	= {
 		distance		: [ "distance.png",			1,	1,	],	//飛距離表示
 
 		txtLaunch		: [ "txtLaunch.png",		1,	2,	],	//シーン入場テキスト
+		balloonTail		: [ "balloonTail.png",		1,	1,	],	//フキダシしっぽ
 
 		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
 		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト
