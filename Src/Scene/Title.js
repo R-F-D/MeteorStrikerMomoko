@@ -62,7 +62,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
-		this.InitSequences(this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN])
+		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
 		//ボタン
@@ -167,7 +167,14 @@ Scene.Title	= class extends Scene.SceneBase {
 	}
 
 	InitEventListenerList(){
-		super.InitEventListenerList();
+		super.InitEventListenerList()
+		.AddPropertiesToEventListenerList("reaction",{
+			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+			onTouchesBegan	: (touch,event)=>{
+				Log("!");
+				return true;
+			},
+		});
 
 		//共通イベント対応設定
 		let commonEvents	= [];
@@ -176,6 +183,9 @@ Scene.Title	= class extends Scene.SceneBase {
 			//commonEvents.push(this.listeners.reset);
 		});
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
+
+		//シークエンス-イベント対応設定
+		this.Sequences.PROCESS.SetEventListeners(  LinkedLayerTags.UI, this.listeners.reaction		);
 
 		return this;
 	}

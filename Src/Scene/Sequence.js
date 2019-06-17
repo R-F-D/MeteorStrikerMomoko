@@ -18,6 +18,7 @@ Scene.Sequence	= class Sequence{
 		this.nextSequence		= null;
 		/** @var イベントリスナの対象レイヤ */
 		this.listenTargetLayer	= null;
+		this.eventTag			= null;
 		/** @var 設定されたイベントリスナ群 */
 		this.eventListeners		= [];
 
@@ -42,7 +43,7 @@ Scene.Sequence	= class Sequence{
 		this.count	= 0;
 
 		//イベントリスナ初期化＆設定
-		this.ApplyEvents("GamePlay.Main",this.listenTargetLayer);
+		this.ApplyEvents(this.eventTag,this.listenTargetLayer);
 
 		//シーケンス開始時処理
 		this.Start(null);
@@ -136,7 +137,8 @@ Scene.Sequence	= class Sequence{
 	 * @static
 	 * @memberof Sequence
 	 */
-	SetListenerTarget(layer){
+	SetListenerTarget(eventTag,layer){
+		this.eventTag			= eventTag;
 		this.listenTargetLayer	= layer;
 		return this;
 	}

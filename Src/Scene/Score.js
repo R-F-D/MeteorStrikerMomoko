@@ -55,7 +55,7 @@ Scene.Score	= class extends Scene.SceneBase {
 		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
-		this.InitSequences(this.Sequences,this.ccLayerInstances[LinkedLayerTags.MAIN])
+		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
 		return this;

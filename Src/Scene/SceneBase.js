@@ -101,8 +101,8 @@ Scene.SceneBase	= class {
 	 * @param {*} layerInstance イベントリスナの対象レイヤ
 	 * @returns
 	 */
-	InitSequences(seqContainer,layerInstance){
-		_.forEach(seqContainer,seq=>seq.SetListenerTarget(layerInstance));
+	InitSequences(seqContainer,eventTag,layerInstance){
+		_.forEach(seqContainer,seq=>seq.SetListenerTarget(eventTag,layerInstance));
 		return this;
 	}
 
