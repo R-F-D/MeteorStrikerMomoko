@@ -102,6 +102,11 @@ Button	= class Button{
 		return this;
 	}
 
+	SetVisible(visible){
+		this.items.forEach(b=>b.SetVisible(!!visible));
+		return this;
+	}
+
 	/** 相対座標を設定
 	 * @param {number} x x増分
 	 * @param {number} y y増分
@@ -205,7 +210,7 @@ class ButtonItem{
 
 	/** 表示設定 */
 	SetVisible(isVisible){
-		this.sprite.SetVisible(isVisible);
+		if(this.sprite)	this.sprite.SetVisible(isVisible);
 		return this;
 	}
 	/** 画像のインデックス */
