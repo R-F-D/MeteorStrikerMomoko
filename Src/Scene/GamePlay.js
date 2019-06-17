@@ -586,23 +586,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.nEmits.total++;
 					this.fx.emit.Spawn(this.sprites.player.x,this.sprites.player.y);
 				},
-			})
-			//キーボードリセット
-			.AddPropertiesToEventListenerList("keyboardReset",{
-				event			: cc.EventListener.KEYBOARD || null,
-				onKeyReleased	: (code,event)=>{
-					if(code==82){	//'R'key
-						this.ResetForce();
-					}
-				},
 			});
 
 		//共通イベント対応設定
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
-		Debug(()=>{
-			commonEvents.push(this.listeners.keyboardReset);
-		});
+		commonEvents.push(this.listeners.keyboardReset);
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		//シークエンス-イベント対応設定

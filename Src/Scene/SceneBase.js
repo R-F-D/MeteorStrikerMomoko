@@ -175,6 +175,15 @@ Scene.SceneBase	= class {
 				}
 				return true;
 			},
+		})
+		//キーボードリセット
+		.AddPropertiesToEventListenerList("keyboardReset",{
+			event			: cc.EventListener.KEYBOARD || null,
+			onKeyReleased	: (code,event)=>{
+				if(code==82){	//'R'key
+					this.ResetForce();
+				}
+			},
 		});
 		return this;
 	}

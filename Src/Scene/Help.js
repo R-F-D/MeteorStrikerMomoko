@@ -79,23 +79,12 @@ Scene.Help	= class extends Scene.SceneBase {
 	}
 
 	InitEventListenerList(){
-		super.InitEventListenerList()
-			//キーボードリセット
-			.AddPropertiesToEventListenerList("keyboardReset",{
-				event			: cc.EventListener.KEYBOARD || null,
-				onKeyReleased	: (code,event)=>{
-					if(code==82){	//'R'key
-						this.ResetForce();
-					}
-				},
-			});
+		super.InitEventListenerList();
 
 		//共通イベント対応設定
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
-		Debug(()=>{
-			commonEvents.push(this.listeners.keyboardReset);
-		});
+		commonEvents.push(this.listeners.keyboardReset);
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;

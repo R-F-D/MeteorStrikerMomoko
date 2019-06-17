@@ -186,9 +186,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		//共通イベント対応設定
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
-		Debug(()=>{
-			//commonEvents.push(this.listeners.reset);
-		});
+		commonEvents.push(this.listeners.keyboardReset);
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		//シークエンス-イベント対応設定
