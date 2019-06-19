@@ -134,7 +134,7 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 function InsertToStorage(key,value,cond=null,resolve=null){
 	const oldValue	= cc.sys.localStorage.getItem(key);
 
-	if(cond===null)	cond = (oldValue,newValue)=>!!oldValue===null;
+	if(cond===null)	cond = old=>old===null;
 	if(cond(oldValue,value)){
 		cc.sys.localStorage.setItem(key,value);
 		if(resolve)	{
