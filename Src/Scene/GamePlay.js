@@ -351,13 +351,37 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
-				this.sprites.hitArea.SetIndex(this.aiming.GetCurrentArea().imgIndex).SetVisible(true).RunActions(
-					cc.scaleTo(0.25,1).easing(cc.easeBackOut(10))
-				);
+				//実績
+				const currentArea	= this.aiming.GetCurrentArea();
+				const rate			= this.aiming.GetRate(true);
+				const bestRate		= InsertToStorage(C.Store.GamePlay.BestAiming, rate, (o,n)=>(o||0)<n );
+				Achievement.Set(Achievements.Aiming.TruePerfect,bestRate);
+				if(rate>=100.0)	InsertDynamicValueToStorage( C.Store.GamePlay.NumTruePerfects );
+				switch(currentArea.tag){
+					case "PERFECT": {
+						const nPerfects	= InsertDynamicValueToStorage( C.Store.GamePlay.NumPerfects );
+						Achievement.Set(Achievements.Aiming.ManyPercefts,nPerfects);
+						//fall through
+					}
+					case "GOOD": {
+						const nGoods	= InsertDynamicValueToStorage( C.Store.GamePlay.NumGoods );
+						Achievement.Set(Achievements.Aiming.ManyGoods,nGoods);
+						break;
+					}
+					default:
+				}
 
+				//エイミング精度の表示
+				this.sprites.hitArea
+					.SetIndex(currentArea.imgIndex)
+					.SetVisible(true)
+					.RunActions( cc.scaleTo(0.25,1).easing(cc.easeBackOut(10)) );
 				this.aiming.SpawnRateValue(28,118);
+
+				//Labels
 				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Emit")).SetVisible(true);
 
+				//Fx
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
 				this.fx.player.SetVelocity(+1,+0.5,-2,-1);
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
@@ -442,7 +466,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= InsertToStorage(C.Store.HighScore,score,(o,n)=> n>(o||0) );
+				const highScore	= InsertToStorage(C.Store.GamePlay.HighScore,score,(o,n)=> n>(o||0) );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);

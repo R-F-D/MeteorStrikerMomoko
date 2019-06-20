@@ -5,8 +5,18 @@ const C = (()=>{let C={}; //file scope
 
 /** @const ローカルストレージのキー */
 C.Store	= {
-	/** @const ハイスコア*/
-	HighScore:	"HighScore",
+	GamePlay:{
+		/** @const ハイスコア*/
+		HighScore		: "GamePlay.HighScore",
+		/** @const パーフェクト回数 */
+		NumGoods		: "GamePlay.NumGoods",
+		/** @const パーフェクト回数 */
+		NumPerfects		: "GamePlay.NumPerfects",
+		/** @const 100%パーフェクト回数 */
+		NumTruePerfects	: "GamePlay.NumTruePerfects",
+		/** @const エイミング精度最高値 */
+		BestAiming		: "GamePlay.BestAiming",
+	},
 },
 
 /** @const チェックポイント距離 */
