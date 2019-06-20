@@ -148,6 +148,21 @@ function InsertToStorage(key,value,cond=null,resolve=null){
 	}
 }
 
+/** ローカルストレージにインサート（値は動的に生成）
+ * @param {string} key ストレージのキー
+ * @param {function} [valueGenerator=null] 現在値を受け取り新値を返す関数。f(oldValue)。省略時はインクリメント。
+ * @returns 新しい値
+ */
+function InsertDynamicValueToStorage(key,valueGenerator=null){
+	if(valueGenerator==null)	valueGenerator	= v=>{return v==null ? 1 : +v+1 };
+
+	const oldValue	= cc.sys.localStorage.getItem(key);
+	const value		= valueGenerator(oldValue);
+
+	cc.sys.localStorage.setItem(key,value);
+	return value;
+}
+
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
