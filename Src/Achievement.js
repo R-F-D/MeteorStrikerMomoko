@@ -5,25 +5,25 @@ const Achievements = (()=>{let Achievements={};	//Achievements scoop
 
 //エイミング精度
 Achievements.Aiming	= {
-	ManyPercefts	: {Key:"Aiming.ManyPerfects",	IsSecret:false,	Count:5,	Replacements:[null,null],	},
-	ManyGoods		: {Key:"Aiming.ManyGoods",		IsSecret:false,	Count:10,	Replacements:[null,null],	},
-	TruePerfect		: {Key:"Aiming.TruePerfect",	IsSecret:false,	Count:100,	Replacements:[null,null],	},
+	ManyPercefts	: {Key:"Aiming.ManyPerfects",	IsPublic:true,	Count:5,	Replacements:[null,null],	},
+	ManyGoods		: {Key:"Aiming.ManyGoods",		IsPublic:true,	Count:10,	Replacements:[null,null],	},
+	TruePerfect		: {Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:[null,null],	},
 };
 
 //チェックポイント到達
 Achievements.CheckPoint	= {
-	Venus		: {Key:"Check.Venus",		IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")]],	},
-	Mars		: {Key:"Check.Mars",		IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Mars,   L.Text("GamePlay.Distance.Unit")]],	},
-	Mercury		: {Key:"Check.Mercury",		IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Mercury,L.Text("GamePlay.Distance.Unit")]],	},
-	Sun			: {Key:"Check.Sun",			IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Sun,    L.Text("GamePlay.Distance.Unit")]],	},
-	Kirari		: {Key:"Check.Kirari",		IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Kirari, L.Text("GamePlay.Distance.Unit")]],	},
-	Unicorn		: {Key:"Check.Unicorn",		IsSecret:false,	Count:1,	Replacements:[null,[C.CheckPoints.Unicorn,L.Text("GamePlay.Distance.Unit")]],	},
+	Venus		: {Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")]],	},
+	Mars		: {Key:"Check.Mars",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Mars,   L.Text("GamePlay.Distance.Unit")]],	},
+	Mercury		: {Key:"Check.Mercury",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Mercury,L.Text("GamePlay.Distance.Unit")]],	},
+	Sun			: {Key:"Check.Sun",			IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Sun,    L.Text("GamePlay.Distance.Unit")]],	},
+	Kirari		: {Key:"Check.Kirari",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Kirari, L.Text("GamePlay.Distance.Unit")]],	},
+	Unicorn		: {Key:"Check.Unicorn",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Unicorn,L.Text("GamePlay.Distance.Unit")]],	},
 };
 
 //ユーザアクション
 Achievements.Action	= {
-	Complete	: {Key:"Action.Complete",	IsSecret:false,	Count:1,	Replacements:[null,null],	},
-	Share		: {Key:"Action.Share",		IsSecret:false,	Count:1,	Replacements:[null,null],	},
+	Complete	: {Key:"Action.Complete",	IsPublic:true,	Count:1,	Replacements:[null,null],	},
+	Share		: {Key:"Action.Share",		IsPublic:true,	Count:1,	Replacements:[null,null],	},
 };
 
 //実績総数
