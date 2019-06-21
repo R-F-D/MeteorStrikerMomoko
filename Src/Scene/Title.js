@@ -122,7 +122,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.sprites.player
 			.SetIndex(idx)
 			.SetPosition(128+adj.x,80+adj.y)
-			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);
+			.SetCustomData("adj.x",adj.x).SetCustomData("adj.y",adj.y).SetCustomData("dx",d.x).SetCustomData("dy",d.y);``
 		this.flyFx.Spawn(this.sprites.player.x-16,this.sprites.player.y-8).Update();
 
 		//フキダシ
@@ -132,9 +132,10 @@ Scene.Title	= class extends Scene.SceneBase {
 				.Update(dt);
 		}
 		if(this.label.IsDisplayed() && !this.label.bg.IsRunningActions()){
-			const bg = this.label.bg;
+			const bg	= this.label.bg;
+			const bg_h	= bg.imgHeight * bg.entity.getScaleY();
 			this.sprites.balloonTail
-				.SetPosition( bg.entity.x-4, bg.entity.y-bg.size.height+bg.PADDING.vertical*2)
+				.SetPosition( bg.entity.x-4, bg.entity.y - (bg_h+this.sprites.balloonTail.img.height)/2 )
 				.SetVisible(true);
 		}
 		else{
@@ -162,8 +163,6 @@ Scene.Title	= class extends Scene.SceneBase {
 					.SetVelocity(1,-0.5,-0.5,0);
 
 				//フキダシ
-				this.label.bg.OPACITY	= 255;
-				this.label.bg.COLOR		= cc.color(0x33,0x33,0x33);
 				this.sprites.balloonTail.SetColor(this.label.bg.COLOR).SetOpacity(this.label.bg.OPACITY)
 				this.label
 					.Init().SetVisible(false).SetColor("#FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
