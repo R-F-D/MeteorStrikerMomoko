@@ -361,12 +361,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				switch(currentArea.tag){
 					case "PERFECT": {
 						const nPerfects	= InsertDynamicValueToStorage( C.Store.GamePlay.NumPerfects );
-						Achievement.Set(Achievements.Aiming.ManyPercefts,nPerfects);
+						Achievement.Set(Achievements.Aiming.ManyPerfect,nPerfects);
 						//fall through
 					}
 					case "GOOD": {
 						const nGoods	= InsertDynamicValueToStorage( C.Store.GamePlay.NumGoods );
-						Achievement.Set(Achievements.Aiming.ManyGoods,nGoods);
+						Achievement.Set(Achievements.Aiming.ManyGood,nGoods);
 						break;
 					}
 					default:

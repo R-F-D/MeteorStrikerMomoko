@@ -5,8 +5,8 @@ const Achievements = (()=>{let Achievements={};	//Achievements scoop
 
 //エイミング精度
 Achievements.Aiming	= {
-	ManyPercefts	: {Key:"Aiming.ManyPerfects",	IsPublic:true,	Count:5,	Replacements:[null,null],	},
-	ManyGoods		: {Key:"Aiming.ManyGoods",		IsPublic:true,	Count:10,	Replacements:[null,null],	},
+	ManyPerfect		: {Key:"Aiming.ManyPerfect",	IsPublic:true,	Count:5,	Replacements:[null,null],	},
+	ManyGood		: {Key:"Aiming.ManyGood",		IsPublic:true,	Count:10,	Replacements:[null,null],	},
 	TruePerfect		: {Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:[null,null],	},
 };
 
