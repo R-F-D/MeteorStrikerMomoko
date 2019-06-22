@@ -351,6 +351,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
+
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
@@ -370,6 +371,19 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					}
 					default:
 				}
+
+				const force		= this.GetChargingRate();
+				const bestForce	= InsertToStorage(C.Store.GamePlay.BestBlowing, force, (o,n)=>(o||0)<n );
+				if(this.playerHardblows()){
+					InsertDynamicValueToStorage( C.Store.GamePlay.NumHardBlowings );
+					if(currentArea.tag=="PERFECT"){
+						const nHardAndPerfectBlowings	= InsertDynamicValueToStorage( C.Store.GamePlay.NumHardAndPerfectBlowings );
+					}
+				}
+				else{
+					InsertDynamicValueToStorage( C.Store.GamePlay.NumLightBlowings );
+				}
+
 
 				//エイミング精度の表示
 				this.sprites.hitArea
