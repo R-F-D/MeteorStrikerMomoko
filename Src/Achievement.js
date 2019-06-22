@@ -10,6 +10,12 @@ Achievements.Aiming	= {
 	TruePerfect		: {Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:[null,null],	},
 };
 
+//打撃力
+Achievements.Blowing	= {
+	ManyHard		: {Key:"Blowing.ManyHard",			IsPublic:true,	Count:20,	Replacements:[null,null],	},
+	HardAndPerfect	: {Key:"Blowing.HardAndPerfect",	IsPublic:true,	Count:1,	Replacements:[null,null],	},
+};
+
 //チェックポイント到達
 Achievements.CheckPoint	= {
 	Venus		: {Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[null,[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")]],	},

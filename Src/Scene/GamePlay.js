@@ -372,12 +372,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					default:
 				}
 
-				const force		= this.GetChargingRate();
-				const bestForce	= InsertToStorage(C.Store.GamePlay.BestBlowing, force);
+				InsertToStorage(C.Store.GamePlay.BestBlowing, this.GetChargingRate());
 				if(this.playerHardblows()){
-					InsertDynamicValueToStorage( C.Store.GamePlay.NumHardBlowings );
+					const nHardBlowings	= InsertDynamicValueToStorage( C.Store.GamePlay.NumHardBlowings );
+					Achievement.Set(Achievements.Blowing.ManyHard, nHardBlowings);
 					if(currentArea.tag=="PERFECT"){
 						const nHardAndPerfectBlowings	= InsertDynamicValueToStorage( C.Store.GamePlay.NumHardAndPerfectBlowings );
+						Achievement.Set(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
 				else{

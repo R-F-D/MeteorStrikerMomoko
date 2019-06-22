@@ -75,12 +75,18 @@ Texts	= {
 
 	//実績 Achievement
 	"Achievement.Unlocked" :	{	_:"Mission Completed!",	ja:"ミッション達成!",	},
+
 	"Achievement.Aiming.ManyPerfects.Title":	{	_:"PERFECT AIMS 05",	},
 	"Achievement.Aiming.ManyPerfects.Description":	{	_:"Aimed to perfect 5 times.",	ja:"5回パーフェクトを出した",	},
 	"Achievement.Aiming.ManyGoods.Title":	{	_:"Good-Aimings, Baby",	},
 	"Achievement.Aiming.ManyGoods.Description":	{	_:"Aimed to good 10 times.",	ja:"10回グッドを出した",	},
 	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	},
 	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	},
+	"Achievement.Blowing.ManyHard.Title":	{	_:"ART NEEDS HARDBLOWS",},
+	"Achievement.Blowing.ManyHard.Description":	{	_:"Hardblowed 20 times.",	ja:"20回強打した",	},
+	"Achievement.Blowing.HardAndPerfect.Title":	{	_:"Perfect Hard☆",	ja:"パーフェクトっすハード☆",	},
+	"Achievement.Blowing.HardAndPerfect.Description":	{	_:"Hardblowed with a perfect aim.",	ja:"強打でパーフェクトを出した",	},
+
 	"Achievement.Check.Venus.Title":	{	_:"Do You Know Venus?",	},
 	"Achievement.Check.Venus.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
 	"Achievement.Check.Mars.Title":	{	_:"Beyond The Mars",	ja:"ビヨンドザマーズ",	},
@@ -93,6 +99,7 @@ Texts	= {
 	"Achievement.Check.Kirari.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
 	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	},
 	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $0$1.",	ja:"隕石を$0$1以上吹っ飛ばした",	},
+
 	"Achievement.Action.Share.Title" :	{	_:"Shared Your Result",	ja:"結果をシェアして",	},
 	"Achievement.Action.Share.Description" :	{	_:"We post $0 tweets.",	ja:"ツイート✕$0投稿するんだ",	},
 }
