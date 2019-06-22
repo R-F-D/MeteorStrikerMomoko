@@ -29,6 +29,7 @@
 		"Src/Effect/Touched.js",
 
 		"Src/Const.js",
+		"Src/Store.js",
 		"Src/Locale.js",
 		"Src/Achievement.js",
 		"Src/Aiming.js",

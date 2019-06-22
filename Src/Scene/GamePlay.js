@@ -355,34 +355,34 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
-				const bestRate		= InsertToStorage(C.Store.GamePlay.BestAiming, rate);
+				const bestRate		= Store.Insert(C.Store.GamePlay.BestAiming, rate);
 				Achievement.Set(Achievements.Aiming.TruePerfect,bestRate);
-				if(rate>=100.0)	InsertDynamicValueToStorage( C.Store.GamePlay.NumTruePerfects );
+				if(rate>=100.0)	Store.DynamicInsert( C.Store.GamePlay.NumTruePerfects );
 				switch(currentArea.tag){
 					case "PERFECT": {
-						const nPerfects	= InsertDynamicValueToStorage( C.Store.GamePlay.NumPerfects );
+						const nPerfects	= Store.DynamicInsert( C.Store.GamePlay.NumPerfects );
 						Achievement.Set(Achievements.Aiming.ManyPerfect,nPerfects);
 						//fall through
 					}
 					case "GOOD": {
-						const nGoods	= InsertDynamicValueToStorage( C.Store.GamePlay.NumGoods );
+						const nGoods	= Store.DynamicInsert( C.Store.GamePlay.NumGoods );
 						Achievement.Set(Achievements.Aiming.ManyGood,nGoods);
 						break;
 					}
 					default:
 				}
 
-				InsertToStorage(C.Store.GamePlay.BestBlowing, this.GetChargingRate());
+				Store.Insert(C.Store.GamePlay.BestBlowing, this.GetChargingRate());
 				if(this.playerHardblows()){
-					const nHardBlowings	= InsertDynamicValueToStorage( C.Store.GamePlay.NumHardBlowings );
+					const nHardBlowings	= Store.DynamicInsert( C.Store.GamePlay.NumHardBlowings );
 					Achievement.Set(Achievements.Blowing.ManyHard, nHardBlowings);
 					if(currentArea.tag=="PERFECT"){
-						const nHardAndPerfectBlowings	= InsertDynamicValueToStorage( C.Store.GamePlay.NumHardAndPerfectBlowings );
+						const nHardAndPerfectBlowings	= Store.DynamicInsert( C.Store.GamePlay.NumHardAndPerfectBlowings );
 						Achievement.Set(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
 				else{
-					InsertDynamicValueToStorage( C.Store.GamePlay.NumLightBlowings );
+					Store.DynamicInsert( C.Store.GamePlay.NumLightBlowings );
 				}
 
 
@@ -481,7 +481,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= InsertToStorage(C.Store.GamePlay.HighScore,score );
+				const highScore	= Store.Insert(C.Store.GamePlay.HighScore,score );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);

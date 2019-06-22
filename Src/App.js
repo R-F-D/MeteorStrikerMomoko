@@ -124,45 +124,6 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 	return Cycle(pirad,0,2) * Math.PI;
 }
 
-/** ローカルストレージにインサート
- * @param {string} key 保存するキー文字列
- * @param {*} value 保存する値。ただしインサート成功時にコールバック関数が実行されたときはその返り値
- * @param {function} [cond=null] インサート条件（保存時は真を返す）。f(oldValue,newValue):boolean デフォルトでは旧値なしまたは旧値より大きい場合に真
- * @param {function} [resolve=null] インサート成功時コールバック
- * @returns {*} 保存時は新値、未保存時は旧値
- */
-function InsertToStorage(key,value,cond=null,resolve=null){
-	const oldValue	= cc.sys.localStorage.getItem(key);
-
-	if(cond===null)	cond = (oldValue,newValue)=>(oldValue||0)<newValue;
-	if(cond(oldValue,value)){
-		cc.sys.localStorage.setItem(key,value);
-		if(resolve)	{
-			const result = resolve(key,value);
-			return result===undefined ? value : result;	//コールバック関数が実行された場合は戻り値を返す（undefinedを除く）
-		};
-		return value;
-	}
-	else{
-		return oldValue;
-	}
-}
-
-/** ローカルストレージにインサート（値は動的に生成）
- * @param {string} key ストレージのキー
- * @param {function} [valueGenerator=null] 現在値を受け取り新値を返す関数。f(oldValue)。省略時はインクリメント。
- * @returns 新しい値
- */
-function InsertDynamicValueToStorage(key,valueGenerator=null){
-	if(valueGenerator==null)	valueGenerator	= v=>{return v==null ? 1 : +v+1 };
-
-	const oldValue	= cc.sys.localStorage.getItem(key);
-	const value		= valueGenerator(oldValue);
-
-	cc.sys.localStorage.setItem(key,value);
-	return value;
-}
-
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
