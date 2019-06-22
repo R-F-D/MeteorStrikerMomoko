@@ -355,7 +355,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
-				const bestRate		= InsertToStorage(C.Store.GamePlay.BestAiming, rate, (o,n)=>(o||0)<n );
+				const bestRate		= InsertToStorage(C.Store.GamePlay.BestAiming, rate);
 				Achievement.Set(Achievements.Aiming.TruePerfect,bestRate);
 				if(rate>=100.0)	InsertDynamicValueToStorage( C.Store.GamePlay.NumTruePerfects );
 				switch(currentArea.tag){
@@ -373,7 +373,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				}
 
 				const force		= this.GetChargingRate();
-				const bestForce	= InsertToStorage(C.Store.GamePlay.BestBlowing, force, (o,n)=>(o||0)<n );
+				const bestForce	= InsertToStorage(C.Store.GamePlay.BestBlowing, force);
 				if(this.playerHardblows()){
 					InsertDynamicValueToStorage( C.Store.GamePlay.NumHardBlowings );
 					if(currentArea.tag=="PERFECT"){
@@ -480,7 +480,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= InsertToStorage(C.Store.GamePlay.HighScore,score,(o,n)=> n>(o||0) );
+				const highScore	= InsertToStorage(C.Store.GamePlay.HighScore,score );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
