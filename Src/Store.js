@@ -32,14 +32,14 @@ Store.Keys = {
 /** ローカルストレージにインサート
  * @param {string} key 保存するキー文字列
  * @param {*} value 保存する値。ただしインサート成功時にコールバック関数が実行されたときはその返り値
- * @param {function} [cond=null] インサート条件（保存時は真を返す）。f(oldValue,newValue):boolean デフォルトでは旧値なしまたは旧値より大きい場合に真
+ * @param {function} [cond=null] インサート条件（保存時は真を返す）。
  * @param {function} [resolve=null] インサート成功時コールバック
  * @returns {*} 保存時は新値、未保存時は旧値
  */
-Store.Insert	= function Insert(key,value,cond=null,resolve=null){
+Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,resolve=null){
 	const oldValue	= cc.sys.localStorage.getItem(key);
 
-	if(cond===null)	cond = (oldValue,newValue)=>(oldValue||0)<newValue;
+//	if(cond===null)	cond = (oldValue,newValue)=>(oldValue||0)<newValue;
 	if(cond(oldValue,value)){
 		cc.sys.localStorage.setItem(key,value);
 		if(resolve)	{
@@ -51,20 +51,42 @@ Store.Insert	= function Insert(key,value,cond=null,resolve=null){
 	else{
 		return oldValue;
 	}
-}
+};
 
 /** ローカルストレージにインサート（値は動的に生成）
  * @param {string} key ストレージのキー
- * @param {function} [valueGenerator=null] 現在値を受け取り新値を返す関数。f(oldValue)。省略時はインクリメント。
+ * @param {function} [valueGenerator=null] 現在値を受け取り新値を返す関数。
  * @returns 新しい値
  */
-Store.DynamicInsert	= function DynamicInsert(key,valueGenerator=null){
-	if(valueGenerator==null)	valueGenerator	= v=>{return v==null ? 1 : +v+1 };
+Store.DynamicInsert	= function DynamicInsert(key,valueGenerator=Store.Gens.Increment){
+//	if(valueGenerator==null)	valueGenerator	= v=>{return v==null ? 1 : +v+1 };
 
 	const oldValue	= cc.sys.localStorage.getItem(key);
 	const value		= valueGenerator(oldValue);
 
 	cc.sys.localStorage.setItem(key,value);
 	return value;
-}
+};
 
+
+//----------------------------------------
+//	コールバック
+//----------------------------------------
+/** インサート条件関数
+ * @type {<string,function>}	f(currentValue,newValue):boolean
+ */
+Store.Conds	= {
+	/** 現在値が空欄のとき真 */
+	CurrentValueIsEmpty	: (currentValue,newValue)=>	currentValue==null || currentValue=="",
+	/** 挿入値が現在値より大きいとき真 */
+	NewValueIsGreater	: (currentValue,newValue)=>	(currentValue||0) < newValue,
+};
+
+/** @const 挿入値の生成関数
+ * @type {<string,function>}	f(value):any
+ */
+Store.Gens	= {
+	/** インクリメント */
+	Increment:	value=>	(value==null||value=="") ? 1 : Number(value)+1,
+
+};
