@@ -39,7 +39,6 @@ Store.Keys = {
 Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,resolve=null){
 	const oldValue	= cc.sys.localStorage.getItem(key);
 
-//	if(cond===null)	cond = (oldValue,newValue)=>(oldValue||0)<newValue;
 	if(cond(oldValue,value)){
 		cc.sys.localStorage.setItem(key,value);
 		if(resolve)	{
@@ -59,8 +58,6 @@ Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,reso
  * @returns 新しい値
  */
 Store.DynamicInsert	= function DynamicInsert(key,valueGenerator=Store.Gens.Increment){
-//	if(valueGenerator==null)	valueGenerator	= v=>{return v==null ? 1 : +v+1 };
-
 	const oldValue	= cc.sys.localStorage.getItem(key);
 	const value		= valueGenerator(oldValue);
 
