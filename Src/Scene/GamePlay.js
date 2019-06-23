@@ -442,9 +442,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
 				const passingPoint	= C.CheckPoints.find(c=> oldDistance<=c.distance && c.distance<=newDistance);
-				if(passingPoint)	this.labels.navigation
-										.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
-										.SetVisible(true);
+				if(passingPoint){
+					this.labels.navigation
+						.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
+						.SetVisible(true);
+					Achievement.Set(Achievements.CheckPoint[passingPoint.key],1);
+				}
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
@@ -486,7 +489,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
 
-				//チェックポイント実績
+				//ハイスコア基準のチェックポイント実績
 				C.CheckPoints
 					.filter( c=> c.distance<=highScore )
 					.forEach(c=> Achievement.Set(Achievements.CheckPoint[c.key],1) );
