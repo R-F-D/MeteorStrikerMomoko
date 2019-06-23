@@ -355,34 +355,34 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
-				const bestRate		= Store.Insert(C.Store.GamePlay.BestAiming, rate);
+				const bestRate		= Store.Insert(Store.Keys.GamePlay.BestAiming, rate);
 				Achievement.Set(Achievements.Aiming.TruePerfect,bestRate);
-				if(rate>=100.0)	Store.DynamicInsert( C.Store.GamePlay.NumTruePerfects );
+				if(rate>=100.0)	Store.DynamicInsert( Store.Keys.GamePlay.NumTruePerfects );
 				switch(currentArea.tag){
 					case "PERFECT": {
-						const nPerfects	= Store.DynamicInsert( C.Store.GamePlay.NumPerfects );
+						const nPerfects	= Store.DynamicInsert( Store.Keys.GamePlay.NumPerfects );
 						Achievement.Set(Achievements.Aiming.ManyPerfect,nPerfects);
 						//fall through
 					}
 					case "GOOD": {
-						const nGoods	= Store.DynamicInsert( C.Store.GamePlay.NumGoods );
+						const nGoods	= Store.DynamicInsert( Store.Keys.GamePlay.NumGoods );
 						Achievement.Set(Achievements.Aiming.ManyGood,nGoods);
 						break;
 					}
 					default:
 				}
 
-				Store.Insert(C.Store.GamePlay.BestBlowing, this.GetChargingRate());
+				Store.Insert(Store.Keys.GamePlay.BestBlowing, this.GetChargingRate());
 				if(this.playerHardblows()){
-					const nHardBlowings	= Store.DynamicInsert( C.Store.GamePlay.NumHardBlowings );
+					const nHardBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardBlowings );
 					Achievement.Set(Achievements.Blowing.ManyHard, nHardBlowings);
 					if(currentArea.tag=="PERFECT"){
-						const nHardAndPerfectBlowings	= Store.DynamicInsert( C.Store.GamePlay.NumHardAndPerfectBlowings );
+						const nHardAndPerfectBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardAndPerfectBlowings );
 						Achievement.Set(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
 				else{
-					Store.DynamicInsert( C.Store.GamePlay.NumLightBlowings );
+					Store.DynamicInsert( Store.Keys.GamePlay.NumLightBlowings );
 				}
 
 
@@ -481,7 +481,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= Store.Insert(C.Store.GamePlay.HighScore,score );
+				const highScore	= Store.Insert(Store.Keys.GamePlay.HighScore,score );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
