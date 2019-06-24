@@ -62,7 +62,7 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	}, //太陽通過
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	}, //きらりんロボ通過
 	"GamePlay.Navigator.BrowAway.Unicorn":	{	_:"I see them! I can see a pink unicorn!",	ja:"みえる！ わたしにもピンクのユニコーンがみえるよ！",	}, //2.5億km到達
-	"GamePlay.Navigator.Leave":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	}, //結果表示
+	"GamePlay.Navigator.Leave":	{	_:"Momoko arrived at the Large Million Space\n$0 away from the Earth.",	ja:"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ。",	}, //結果表示
 	"GamePlay.Navigator.Result.Reset":	{	_:"You go back to the title screen.", ja:"タイトル画面にもどるよ",	}, //リセットボタン
 	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	}, //リトライボタン
 	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	}, //シェアボタン
@@ -78,7 +78,7 @@ Texts	= {
 
 	"Achievement.Aiming.ManyPerfect.Title":	{	_:"Perfect Sun",	ja:"パーフェクトサン",	}, //パーフェクト一定回数
 	"Achievement.Aiming.ManyPerfect.Description":	{	_:"Got $0 perfect aims.",	ja:"$0回パーフェクトを出した",	},
-	"Achievement.Aiming.ManyGood.Title":	{	_:"Good-Aimings, Baby",	}, //グッド以上を一定回数
+	"Achievement.Aiming.ManyGood.Title":	{	_:"Good-Aims, Baby",	}, //グッド以上を一定回数
 	"Achievement.Aiming.ManyGood.Description":	{	_:"Got $0 good or better aims",	ja:"$0回グッド以上を出した",	}, //
 	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	}, //100%エイム
 	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	}, //
