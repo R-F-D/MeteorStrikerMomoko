@@ -5,16 +5,16 @@ const Achievements = (()=>{let Achievements={};	//Achievements scoop
 
 //エイミング精度
 Achievements.Aiming	= {
-	ManyPerfect:		{Key:"Aiming.ManyPerfect",	IsPublic:true,	Count:3,	Replacements:[],	},
-	ManyGood:			{Key:"Aiming.ManyGood",		IsPublic:true,	Count:10,	Replacements:[],	},
-	TruePerfect:		{Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:null,	},
+	ManyPerfect:		{Key:"Aiming.ManyPerfect",	IsPublic:true,	Count:3,	Replacements:[],	},	//パーフェクト
+	ManyGood:			{Key:"Aiming.ManyGood",		IsPublic:true,	Count:10,	Replacements:[],	},	//グッド以上
+	TruePerfect:		{Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:null,	},	//100%パーフェクト
 };
 
 //打撃力
 Achievements.Blowing	= {
-	ManyHard:			{Key:"Blowing.ManyHard",			IsPublic:true,	Count:10,	Replacements:[],	},
-	HardAndPerfect:		{Key:"Blowing.HardAndPerfect",		IsPublic:true,	Count:1,	Replacements:null,	},
-	SuccessiveHits:		{Key:"Blowing.SuccessiveHits",		IsPublic:true,	Count:5,	Replacements:[],	},
+	ManyHard:			{Key:"Blowing.ManyHard",			IsPublic:true,	Count:10,	Replacements:[],	},	//強打
+	HardAndPerfect:		{Key:"Blowing.HardAndPerfect",		IsPublic:true,	Count:1,	Replacements:null,	},	//強打でパーフェクト
+	SuccessiveHits:		{Key:"Blowing.SuccessiveHits",		IsPublic:true,	Count:5,	Replacements:[],	},	//連続ヒット
 };
 
 //エミット
@@ -27,19 +27,19 @@ Achievements.Emit	= {
 
 //チェックポイント到達
 Achievements.CheckPoint	= {
-	Venus:			{Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")],	},
-	Mars:			{Key:"Check.Mars",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mars,   L.Text("GamePlay.Distance.Unit")],	},
-	Mercury:		{Key:"Check.Mercury",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mercury,L.Text("GamePlay.Distance.Unit")],	},
-	Sun:			{Key:"Check.Sun",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Sun,    L.Text("GamePlay.Distance.Unit")],	},
-	Kirari:			{Key:"Check.Kirari",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Kirari, L.Text("GamePlay.Distance.Unit")],	},
-	Unicorn:		{Key:"Check.Unicorn",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Unicorn,L.Text("GamePlay.Distance.Unit")],	},
+	Venus:			{Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")],	},	//金星
+	Mars:			{Key:"Check.Mars",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mars,   L.Text("GamePlay.Distance.Unit")],	},	//火星
+	Mercury:		{Key:"Check.Mercury",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mercury,L.Text("GamePlay.Distance.Unit")],	},	//水星
+	Sun:			{Key:"Check.Sun",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Sun,    L.Text("GamePlay.Distance.Unit")],	},	//太陽
+	Kirari:			{Key:"Check.Kirari",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Kirari, L.Text("GamePlay.Distance.Unit")],	},	//諸星きらり
+	Unicorn:		{Key:"Check.Unicorn",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Unicorn,L.Text("GamePlay.Distance.Unit")],	},	//ピンクのユニコーン
 };
 
 //ユーザアクション
 Achievements.Action	= {
-	Complete: 		{Key:"Action.Complete",		IsPublic:true,	Count:1,	Replacements:null,	},
-	FirstPlay:		{Key:"Action.FirstPlay",	IsPublic:true,	Count:1,	Replacements:null,	},
-	Share:			{Key:"Action.Share",		IsPublic:true,	Count:1,	Replacements:null,	},
+	Complete: 		{Key:"Action.Complete",		IsPublic:true,	Count:1,	Replacements:null,	},	//コンプリート
+	FirstPlay:		{Key:"Action.FirstPlay",	IsPublic:true,	Count:1,	Replacements:null,	},	//初プレイ
+	Share:			{Key:"Action.Share",		IsPublic:true,	Count:1,	Replacements:null,	},	//シェア
 };
 
 //実績総数
@@ -81,7 +81,11 @@ const Achievement = new (class Achievement{
 		if(this.label)	this.label.Update(dt);
 	}
 
-	Set(achievement,count){
+	/** 実績解除
+	 * @param {Achievemtns} achievement 実績オブジェクト
+	 * @param {number} count カウンタ
+	 */
+	Unlock(achievement,count){
 		if(achievement==null) return this;
 
 		Store.Insert(

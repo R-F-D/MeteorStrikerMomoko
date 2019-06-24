@@ -322,7 +322,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//連続成功実績
 				const nSuccessiveHits	= Store.DynamicInsert(Store.Keys.GamePlay.NumSuccessiveHits);
 				const maxSuccessiveHits	= Store.Insert(Store.Keys.GamePlay.MaxSuccessiveHits, nSuccessiveHits);
-				Achievement.Set(Achievements.Blowing.SuccessiveHits, maxSuccessiveHits);
+				Achievement.Unlock(Achievements.Blowing.SuccessiveHits, maxSuccessiveHits);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
@@ -362,17 +362,17 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
 				const bestRate		= Store.Insert(Store.Keys.GamePlay.BestAiming, rate);
-				Achievement.Set(Achievements.Aiming.TruePerfect,bestRate);
+				Achievement.Unlock(Achievements.Aiming.TruePerfect,bestRate);
 				if(rate>=100.0)	Store.DynamicInsert( Store.Keys.GamePlay.NumTruePerfects );
 				switch(currentArea.tag){
 					case "PERFECT": {
 						const nPerfects	= Store.DynamicInsert( Store.Keys.GamePlay.NumPerfects );
-						Achievement.Set(Achievements.Aiming.ManyPerfect,nPerfects);
+						Achievement.Unlock(Achievements.Aiming.ManyPerfect,nPerfects);
 						//fall through
 					}
 					case "GOOD": {
 						const nGoods	= Store.DynamicInsert( Store.Keys.GamePlay.NumGoods );
-						Achievement.Set(Achievements.Aiming.ManyGood,nGoods);
+						Achievement.Unlock(Achievements.Aiming.ManyGood,nGoods);
 						break;
 					}
 					default:
@@ -381,10 +381,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Store.Insert(Store.Keys.GamePlay.BestBlowing, this.GetChargingRate());
 				if(this.playerHardblows()){
 					const nHardBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardBlowings );
-					Achievement.Set(Achievements.Blowing.ManyHard, nHardBlowings);
+					Achievement.Unlock(Achievements.Blowing.ManyHard, nHardBlowings);
 					if(currentArea.tag=="PERFECT"){
 						const nHardAndPerfectBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardAndPerfectBlowings );
-						Achievement.Set(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
+						Achievement.Unlock(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
 				else{
@@ -440,10 +440,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//エミット実績
 				const emitRate		= Math.trunc(this.GetEmittingRate() *100);
 				const maxEmitRate	= Store.Insert(Store.Keys.GamePlay.MaxEmittings, emitRate );
-				Achievement.Set(Achievements.Emit.Many01, maxEmitRate);
-				Achievement.Set(Achievements.Emit.Many02, maxEmitRate);
-				Achievement.Set(Achievements.Emit.Many03, maxEmitRate);
-				Achievement.Set(Achievements.Emit.Many04, maxEmitRate);
+				Achievement.Unlock(Achievements.Emit.Many01, maxEmitRate);
+				Achievement.Unlock(Achievements.Emit.Many02, maxEmitRate);
+				Achievement.Unlock(Achievements.Emit.Many03, maxEmitRate);
+				Achievement.Unlock(Achievements.Emit.Many04, maxEmitRate);
 
 			})
 			.PushUpdatingFunctions(dt=>{
@@ -461,7 +461,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation
 						.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
 						.SetVisible(true);
-					Achievement.Set(Achievements.CheckPoint[passingPoint.key],1);
+					Achievement.Unlock(Achievements.CheckPoint[passingPoint.key],1);
 				}
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
@@ -507,7 +507,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//ハイスコア基準のチェックポイント実績
 				C.CheckPoints
 					.filter( c=> c.distance<=highScore )
-					.forEach(c=> Achievement.Set(Achievements.CheckPoint[c.key],1) );
+					.forEach(c=> Achievement.Unlock(Achievements.CheckPoint[c.key],1) );
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
@@ -556,7 +556,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					//初プレイ実績
 					Store.DynamicInsert(Store.Keys.Action.NumPlayings);
-					Achievement.Set(Achievements.Action.FirstPlay,1);
+					Achievement.Unlock(Achievements.Action.FirstPlay,1);
 
 			})
 			.PushUpdatingFunctions(dt=>{
