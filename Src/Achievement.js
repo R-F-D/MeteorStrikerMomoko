@@ -5,14 +5,14 @@ const Achievements = (()=>{let Achievements={};	//Achievements scoop
 
 //エイミング精度
 Achievements.Aiming	= {
-	ManyPerfect:		{Key:"Aiming.ManyPerfect",	IsPublic:true,	Count:5,	Replacements:[],	},
+	ManyPerfect:		{Key:"Aiming.ManyPerfect",	IsPublic:true,	Count:3,	Replacements:[],	},
 	ManyGood:			{Key:"Aiming.ManyGood",		IsPublic:true,	Count:10,	Replacements:[],	},
 	TruePerfect:		{Key:"Aiming.TruePerfect",	IsPublic:true,	Count:100,	Replacements:null,	},
 };
 
 //打撃力
 Achievements.Blowing	= {
-	ManyHard:			{Key:"Blowing.ManyHard",			IsPublic:true,	Count:20,	Replacements:[],	},
+	ManyHard:			{Key:"Blowing.ManyHard",			IsPublic:true,	Count:10,	Replacements:[],	},
 	HardAndPerfect:		{Key:"Blowing.HardAndPerfect",		IsPublic:true,	Count:1,	Replacements:null,	},
 	SuccessiveHits:		{Key:"Blowing.SuccessiveHits",		IsPublic:true,	Count:5,	Replacements:[],	},
 };

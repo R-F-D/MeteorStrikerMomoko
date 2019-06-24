@@ -76,13 +76,13 @@ Texts	= {
 	//実績 Achievement
 	"Achievement.Unlocked" :	{	_:"Mission Completed!",	ja:"ミッション達成!",	},
 
-	"Achievement.Aiming.ManyPerfect.Title":	{	_:"PERFECT AIMS 0$0",	},
-	"Achievement.Aiming.ManyPerfect.Description":	{	_:"Aimed to perfect $0 times.",	ja:"$0回パーフェクトを出した",	},
+	"Achievement.Aiming.ManyPerfect.Title":	{	_:"Perfect Sun",	ja:"パーフェクトサン",	},
+	"Achievement.Aiming.ManyPerfect.Description":	{	_:"Got $0 perfect aims.",	ja:"$0回パーフェクトを出した",	},
 	"Achievement.Aiming.ManyGood.Title":	{	_:"Good-Aimings, Baby",	},
-	"Achievement.Aiming.ManyGood.Description":	{	_:"Aimed to good $0 times.",	ja:"$0回グッドを出した",	},
+	"Achievement.Aiming.ManyGood.Description":	{	_:"Got $0 good or better aims",	ja:"$0回グッド以上を出した",	},
 	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	},
 	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	},
-	"Achievement.Blowing.ManyHard.Title":	{	_:"ART NEEDS HARDBLOWS",},
+	"Achievement.Blowing.ManyHard.Title":	{	_:"ART NEEDS HARD-BLOWS",},
 	"Achievement.Blowing.ManyHard.Description":	{	_:"Hardblowed $0 times.",	ja:"$0回強打した",	},
 	"Achievement.Blowing.HardAndPerfect.Title":	{	_:"Perfect Hard☆",	ja:"パーフェクトっすハード☆",	},
 	"Achievement.Blowing.HardAndPerfect.Description":	{	_:"Hardblowed with a perfect aim.",	ja:"強打でパーフェクトを出した",	},
