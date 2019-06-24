@@ -86,8 +86,8 @@ Store.DynamicInsert	= function DynamicInsert(key,valueGenerator=Store.Gens.Incre
 Store.Conds	= {
 	/** 現在値が空欄のとき真 */
 	CurrentValueIsEmpty	: (currentValue,newValue)=>	currentValue==null || currentValue=="",
-	/** 挿入値が現在値より大きいとき真 */
-	NewValueIsGreater	: (currentValue,newValue)=>	(currentValue||0) < newValue,
+	/** 現在値と挿入値を数値化し、後者が大きいとき真 */
+	NewValueIsGreater	: (currentValue,newValue)=>	Number(currentValue||0) < Number(newValue),
 };
 
 /** @const 挿入値の生成関数
