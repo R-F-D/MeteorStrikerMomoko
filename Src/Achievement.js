@@ -16,6 +16,14 @@ Achievements.Blowing	= {
 	HardAndPerfect	: {Key:"Blowing.HardAndPerfect",	IsPublic:true,	Count:1,	Replacements:null,	},
 };
 
+//エミット
+Achievements.Emit	= {
+	Many01		: {Key:"Emit.Many01",		IsPublic:true,	Count:150,	Replacements:[],	},	// 約28回
+	Many02		: {Key:"Emit.Many02",		IsPublic:true,	Count:160,	Replacements:[],	},	// 約35回
+	Many03		: {Key:"Emit.Many03",		IsPublic:true,	Count:170,	Replacements:[],	},	// 約42回
+	Many04		: {Key:"Emit.Many04",		IsPublic:true,	Count:180,	Replacements:[],	},	// 約50回
+};
+
 //チェックポイント到達
 Achievements.CheckPoint	= {
 	Venus		: {Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")],	},

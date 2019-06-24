@@ -430,6 +430,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.aiming.HideRateValue();
 				this.labels.distance.SetVisible(true);
 				this.labels.navigation.SetVisible(false);
+
+				//エミット実績
+				const emitRate		= Math.trunc(this.GetEmittingRate() *100);
+				const maxEmitRate	= Store.Insert(Store.Keys.GamePlay.MaxEmittings, emitRate );
+				Achievement.Set(Achievements.Emit.Many01, maxEmitRate);
+				Achievement.Set(Achievements.Emit.Many02, maxEmitRate);
+				Achievement.Set(Achievements.Emit.Many03, maxEmitRate);
+				Achievement.Set(Achievements.Emit.Many04, maxEmitRate);
+
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
