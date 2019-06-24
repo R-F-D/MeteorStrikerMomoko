@@ -62,7 +62,7 @@ Texts	= {
 	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	}, //太陽通過
 	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	}, //きらりんロボ通過
 	"GamePlay.Navigator.BrowAway.Unicorn":	{	_:"I see them! I can see a pink unicorn!",	ja:"みえる！ わたしにもピンクのユニコーンがみえるよ！",	}, //2.5億km到達
-	"GamePlay.Navigator.Leave":	{	_:"Momoko arrived at the Large Million Space\n$0 away from the Earth.",	ja:"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ。",	}, //結果表示
+	"GamePlay.Navigator.Leave":	{	_:"Momoko arrived at the Large Million Space\n$0 away from the Earth.",	ja:"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",	}, //結果表示
 	"GamePlay.Navigator.Result.Reset":	{	_:"You go back to the title screen.", ja:"タイトル画面にもどるよ",	}, //リセットボタン
 	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	}, //リトライボタン
 	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	}, //シェアボタン
