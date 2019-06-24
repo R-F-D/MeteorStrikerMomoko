@@ -25,6 +25,10 @@ Store.Keys = {
 		BestBlowing:				"GamePlay.BestBlowing",
 		/** @const 強打とパーフェクトを同時に出した回数 */
 		NumHardAndPerfectBlowings:	"GamePlay.NumHardAndPerfectBlowings",
+		/** @const 連続で打撃に成功した数 */
+		NumSuccessiveHits:			"GamePlay.NumSuccessiveusHits",
+		/** @const 連続で打撃に成功した最多数 */
+		MaxSuccessiveHits:			"GamePlay.MaxSuccessiveusHits",
 		/** @const 最大エミット */
 		MaxEmittings:				"GamePlay.MaxEmittings"
 	},

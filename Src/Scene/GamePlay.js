@@ -318,6 +318,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.chargedPower	= this.chargingCount;
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 				this.fx.preliminary.Destroy();
+
+				//連続成功実績
+				const nSuccessiveHits	= Store.DynamicInsert(Store.Keys.GamePlay.NumSuccessiveHits);
+				const maxSuccessiveHits	= Store.Insert(Store.Keys.GamePlay.MaxSuccessiveHits, nSuccessiveHits);
+				Achievement.Set(Achievements.Blowing.SuccessiveHits, maxSuccessiveHits);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
@@ -334,6 +339,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.DISCHARGE_FAILED
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Destroy();
+				cc.sys.localStorage.setItem(Store.Keys.GamePlay.NumSuccessiveHits,0);	//連続成功数の初期化
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);

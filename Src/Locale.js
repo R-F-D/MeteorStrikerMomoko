@@ -86,6 +86,8 @@ Texts	= {
 	"Achievement.Blowing.ManyHard.Description":	{	_:"Hardblowed $0 times.",	ja:"$0回強打した",	},
 	"Achievement.Blowing.HardAndPerfect.Title":	{	_:"Perfect Hard☆",	ja:"パーフェクトっすハード☆",	},
 	"Achievement.Blowing.HardAndPerfect.Description":	{	_:"Hardblowed with a perfect aim.",	ja:"強打でパーフェクトを出した",	},
+	"Achievement.Blowing.SuccessiveHits.Title":	{	_:"Into Perpetual Hit Machines, L'Antica!",	ja:" 永久ヒットにしてゆくよ \"安定化!\"",	},
+	"Achievement.Blowing.SuccessiveHits.Description":	{	_:"Hit $0 times in a row without failure.",	ja:"失敗せずに$0回連続で打撃をヒットさせた",	},
 	"Achievement.Emit.Many01.Title":	{	_:"Gentle Emt"},
 	"Achievement.Emit.Many01.Description":	{	_:"Emitted $0% and more.",	ja:"エミット率$0%以上を出した",},
 	"Achievement.Emit.Many02.Title":	{	_:"Wild Emit"},
