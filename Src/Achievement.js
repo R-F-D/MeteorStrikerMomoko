@@ -37,8 +37,9 @@ Achievements.CheckPoint	= {
 
 //ユーザアクション
 Achievements.Action	= {
-	Complete: 		{Key:"Action.Complete",	IsPublic:true,	Count:1,	Replacements:null,	},
-	Share:			{Key:"Action.Share",	IsPublic:true,	Count:1,	Replacements:null,	},
+	Complete: 		{Key:"Action.Complete",		IsPublic:true,	Count:1,	Replacements:null,	},
+	FirstPlay:		{Key:"Action.FirstPlay",	IsPublic:true,	Count:1,	Replacements:null,	},
+	Share:			{Key:"Action.Share",		IsPublic:true,	Count:1,	Replacements:null,	},
 };
 
 //実績総数

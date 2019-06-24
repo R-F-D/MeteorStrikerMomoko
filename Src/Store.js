@@ -6,7 +6,7 @@ var Store	= Store || {};
 /** @const ストレージのキー */
 Store.Keys = {
 
-	GamePlay	: {
+	GamePlay: {
 		/** @const ハイスコア*/
 		HighScore:					"GamePlay.HighScore",
 		/** @const パーフェクト回数 */
@@ -31,6 +31,11 @@ Store.Keys = {
 		MaxSuccessiveHits:			"GamePlay.MaxSuccessiveusHits",
 		/** @const 最大エミット */
 		MaxEmittings:				"GamePlay.MaxEmittings"
+	},
+
+	Action: {
+		/** @const プレイ回数 */
+		NumPlayings:				"Action.NumPlayings",
 	},
 };
 

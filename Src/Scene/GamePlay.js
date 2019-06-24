@@ -554,6 +554,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 										]));
 					});
 
+					//初プレイ実績
+					Store.DynamicInsert(Store.Keys.Action.NumPlayings);
+					Achievement.Set(Achievements.Action.FirstPlay,1);
+
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(false);

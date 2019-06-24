@@ -110,6 +110,8 @@ Texts	= {
 	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	},
 	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
 
+	"Achievement.Action.FirstPlay.Title" :	{	_:"For Save The Earch Crisis",	ja:"地球の危機を救うため",	},
+	"Achievement.Action.FirstPlay.Description" :	{	_:"Stopped the meteorite and saved the Earch.",	ja:"隕石を食い止めて世界を救った",	},
 	"Achievement.Action.Share.Title" :	{	_:"Shared Your Result",	ja:"結果をシェアして",	},
 	"Achievement.Action.Share.Description" :	{	_:"We post $0 tweets.",	ja:"ツイート✕$0投稿するんだ",	},
 }
