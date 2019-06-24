@@ -74,7 +74,7 @@ Texts	= {
 	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
 
 	//実績 Achievement
-	"Achievement.Unlocked" :	{	_:"Mission Completed!",	ja:"ミッション達成!",	},
+	"Achievement.Unlocked" :	{	_:"Achievement Unlocked!!",	ja:"実績解除!",	},
 
 	"Achievement.Aiming.ManyPerfect.Title":	{	_:"Perfect Sun",	ja:"パーフェクトサン",	},
 	"Achievement.Aiming.ManyPerfect.Description":	{	_:"Got $0 perfect aims.",	ja:"$0回パーフェクトを出した",	},
