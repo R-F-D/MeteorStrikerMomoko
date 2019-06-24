@@ -35,85 +35,85 @@ NumericSeparators	= {
  *******************************************************************************/
 Texts	= {
 	//単位 Unit
-	"GamePlay.Distance.Unit":	{	_: "km",	},
-	"GamePlay.Charge.Unit":	{	_: "%",	},
+	"GamePlay.Distance.Unit":	{	_: "km",	}, //飛距離の単位
+	"GamePlay.Charge.Unit":	{	_: "%",	}, //チャージ量の単位
 
 	//タイトル画面 Title
-	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	},
-	"Title.Button.Score":	{	_:"Score and achievements",	ja:"スコアと実績",	},
-	"Title.Button.Help":	{	_:"How to play",	ja:"ゲームの遊び方",	},
-	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	},
-	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	},
-	"Title.Button.Credits":	{	_:"Show credits",	ja:"作ったひと",	},
-	"Title.Reaction.Player":	{	_:"Momoko dakedo.",	ja:"桃子だけど。",	},
+	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	}, //プレイボタン
+	"Title.Button.Score":	{	_:"Score and achievements",	ja:"スコアと実績",	}, //スコアボタン
+	"Title.Button.Help":	{	_:"How to play",	ja:"ゲームの遊び方",	}, //ヘルプボタン
+	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	}, //設定ボタン
+	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	}, //ウェブページボタン
+	"Title.Button.Credits":	{	_:"Show credits",	ja:"作ったひと",	}, //クレジットボタン
+	"Title.Reaction.Player":	{	_:"Momoko dakedo.",	ja:"桃子だけど。",	}, //プレイヤーをクリック時
 
 	//ゲームプレイ GamePlay
-	"GamePlay.Distance.Emit":	{	_: "Meteor: $0 $1",	},
+	"GamePlay.Distance":	{	_: "Meteor: $0 $1",	}, //隕石の飛距離メーター
 
 	//ナビゲータ Navigator
-	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	},
-	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	},
-	"GamePlay.Navigator.Fail":	{	_:"Release at the right time.",	ja:"タイミングよく はなしてね",	},
-	"GamePlay.Navigator.Emit":	{	_:"The power rises with taps.",	ja:"タップでパワーアップするよ",	},
-	"GamePlay.Navigator.BrowAway.Start":	{	_:"Please Momoko!",	ja:"おねがい☆桃子ちゃん",	},
-	"GamePlay.Navigator.BrowAway.Venus":	{	_:"Are you looking at Venus, Momoko?",	ja:"金星を見ておいでですか、桃子ちゃん",	},
-	"GamePlay.Navigator.BrowAway.Mars":	{	_:"Here is a place futher than Mars.",	ja:"火星よりも遠い場所だね",	},
-	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"I needa douse myself in water and repent.",	ja:"水をかぶって反省しなきゃ…",	},
-	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	},
-	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	},
-	"GamePlay.Navigator.BrowAway.Unicorn":	{	_:"I see them! I can see a pink unicorn!",	ja:"みえる！ わたしにもピンクのユニコーンがみえるよ！",	},
-	"GamePlay.Navigator.Leave":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	},
-	"GamePlay.Navigator.Result.Reset":	{	_:"You go back to the title screen.", ja:"タイトル画面にもどるよ",	},
-	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	},
-	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	},
+	"GamePlay.Navigator.Aim":	{	_:"Take aim and long tap to charge.",	ja:"ねらいを定めて長押ししてね",	}, //エイミングゲージ作動中
+	"GamePlay.Navigator.Preliminary":	{	_:"Release to attack.",	ja:"はなすと攻撃だよ",	}, //チャージ動作中
+	"GamePlay.Navigator.Fail":	{	_:"Release at the right time.",	ja:"タイミングよく はなしてね",	}, //打撃失敗
+	"GamePlay.Navigator.Emit":	{	_:"The power rises with taps.",	ja:"タップでパワーアップするよ",	}, //エミット中
+	"GamePlay.Navigator.BrowAway.Start":	{	_:"Please Momoko!",	ja:"おねがい☆桃子ちゃん",	}, //吹き飛ばし開始
+	"GamePlay.Navigator.BrowAway.Venus":	{	_:"Are you looking at Venus, Momoko?",	ja:"金星を見ておいでですか、桃子ちゃん",	}, //金星通過
+	"GamePlay.Navigator.BrowAway.Mars":	{	_:"Here is a place futher than Mars.",	ja:"火星よりも遠い場所だね",	}, //火星通過
+	"GamePlay.Navigator.BrowAway.Mercury":	{	_:"I needa douse myself in water and repent.",	ja:"水をかぶって反省しなきゃ…",	}, //水星通過
+	"GamePlay.Navigator.BrowAway.Sun":	{	_:"Farewell, the sun!\nFrom the theater with love.",	ja:"さようなら太陽！\nシアターより愛をこめて",	}, //太陽通過
+	"GamePlay.Navigator.BrowAway.Kirari":	{	_:"Listen Momoko.\nAre you more far than Kirarin Robot?",	ja:"桃子ちゃんはきらりんロボより遠方なんですか？",	}, //きらりんロボ通過
+	"GamePlay.Navigator.BrowAway.Unicorn":	{	_:"I see them! I can see a pink unicorn!",	ja:"みえる！ わたしにもピンクのユニコーンがみえるよ！",	}, //2.5億km到達
+	"GamePlay.Navigator.Leave":	{	_:"Momoko is $0 from Earth,\nin the Large Million Space.",	ja:"桃子ちゃんは地球からはるか\n$0彼方の大ミリオン宇宙に位置してるよ",	}, //結果表示
+	"GamePlay.Navigator.Result.Reset":	{	_:"You go back to the title screen.", ja:"タイトル画面にもどるよ",	}, //リセットボタン
+	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	}, //リトライボタン
+	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	}, //シェアボタン
 
 	//シェア Share
-	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",},
-	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",	},
-	"GamePlay.Share.URL":	{	_:"https://example.jp/",},
-	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	},
+	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",	}, //Twitter Intent
+	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",	}, //ツイート文字列
+	"GamePlay.Share.URL":	{	_:"https://example.jp/",	}, //URL
+	"GamePlay.Share.Tags":	{	_:"MeteorStrikerMomoko",	ja:"メテオストライカー桃子",	}, //タグ
 
 	//実績 Achievement
-	"Achievement.Unlocked" :	{	_:"Achievement Unlocked!!",	ja:"実績解除!",	},
+	"Achievement.Unlocked" :	{	_:"Achievement Unlocked!!",	ja:"実績解除!",	}, //実績解除ラベル
 
-	"Achievement.Aiming.ManyPerfect.Title":	{	_:"Perfect Sun",	ja:"パーフェクトサン",	},
+	"Achievement.Aiming.ManyPerfect.Title":	{	_:"Perfect Sun",	ja:"パーフェクトサン",	}, //パーフェクト一定回数
 	"Achievement.Aiming.ManyPerfect.Description":	{	_:"Got $0 perfect aims.",	ja:"$0回パーフェクトを出した",	},
-	"Achievement.Aiming.ManyGood.Title":	{	_:"Good-Aimings, Baby",	},
-	"Achievement.Aiming.ManyGood.Description":	{	_:"Got $0 good or better aims",	ja:"$0回グッド以上を出した",	},
-	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	},
-	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	},
-	"Achievement.Blowing.ManyHard.Title":	{	_:"ART NEEDS HARD-BLOWS",},
-	"Achievement.Blowing.ManyHard.Description":	{	_:"Hardblowed $0 times.",	ja:"$0回強打した",	},
-	"Achievement.Blowing.HardAndPerfect.Title":	{	_:"Perfect Hard☆",	ja:"パーフェクトっすハード☆",	},
-	"Achievement.Blowing.HardAndPerfect.Description":	{	_:"Hardblowed with a perfect aim.",	ja:"強打でパーフェクトを出した",	},
-	"Achievement.Blowing.SuccessiveHits.Title":	{	_:"Into Perpetual Hit Machines, L'Antica!",	ja:" 永久ヒットにしてゆくよ \"安定化!\"",	},
-	"Achievement.Blowing.SuccessiveHits.Description":	{	_:"Hit $0 times in a row without failure.",	ja:"失敗せずに$0回連続で打撃をヒットさせた",	},
-	"Achievement.Emit.Many01.Title":	{	_:"Gentle Emt"},
+	"Achievement.Aiming.ManyGood.Title":	{	_:"Good-Aimings, Baby",	}, //グッド以上を一定回数
+	"Achievement.Aiming.ManyGood.Description":	{	_:"Got $0 good or better aims",	ja:"$0回グッド以上を出した",	}, //
+	"Achievement.Aiming.TruePerfect.Title":	{	_:"Self-Styled Perfect",	ja:"自称・カンペキ",	}, //100%エイム
+	"Achievement.Aiming.TruePerfect.Description":	{	_:"Succeeded in 100% aim.",	ja:"100%エイムに成功した",	}, //
+	"Achievement.Blowing.ManyHard.Title":	{	_:"ART NEEDS HARD-BLOWS",	}, //強打を一定回数
+	"Achievement.Blowing.ManyHard.Description":	{	_:"Hardblowed $0 times.",	ja:"$0回強打した",	}, //
+	"Achievement.Blowing.HardAndPerfect.Title":	{	_:"Perfect Hard☆",	ja:"パーフェクトっすハード☆",	}, //強打かつパーフェクト
+	"Achievement.Blowing.HardAndPerfect.Description":	{	_:"Hardblowed with a perfect aim.",	ja:"強打でパーフェクトを出した",	}, //
+	"Achievement.Blowing.SuccessiveHits.Title":	{	_:"Into Perpetual Hit Machines, L'Antica!",	ja:" 永久ヒットにしてゆくよ \"安定化!\"",	}, //打撃を連続成功
+	"Achievement.Blowing.SuccessiveHits.Description":	{	_:"Hit $0 times in a row without failure.",	ja:"失敗せずに$0回連続で打撃をヒットさせた",	}, //
+	"Achievement.Emit.Many01.Title":	{	_:"Gentle Emt",	}, //エミット回数実績その1
 	"Achievement.Emit.Many01.Description":	{	_:"Emitted $0% and more.",	ja:"エミット率$0%以上を出した",},
-	"Achievement.Emit.Many02.Title":	{	_:"Wild Emit"},
+	"Achievement.Emit.Many02.Title":	{	_:"Wild Emit",	}, //エミット回数実績その2
 	"Achievement.Emit.Many02.Description":	{	_:"Emitted $0% and more.",	ja:"エミット率$0%以上を出した",},
-	"Achievement.Emit.Many03.Title":	{	_:"Dangerous Emit"},
+	"Achievement.Emit.Many03.Title":	{	_:"Dangerous Emit",	}, //エミット回数実績その3
 	"Achievement.Emit.Many03.Description":	{	_:"Emitted $0% and more.",	ja:"エミット率$0%以上を出した",},
-	"Achievement.Emit.Many04.Title":	{	_:"Over-emit",	ja:"オーバーエミット",	},
+	"Achievement.Emit.Many04.Title":	{	_:"Over-emit",	ja:"オーバーエミット",	}, //エミット回数実績その4
 	"Achievement.Emit.Many04.Description":	{	_:"Emitted $0% and more.",	ja:"エミット率$0%以上を出した",},
 
-	"Achievement.Check.Venus.Title":	{	_:"Do You Know Venus?",	},
-	"Achievement.Check.Venus.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
-	"Achievement.Check.Mars.Title":	{	_:"Beyond The Mars",	ja:"ビヨンドザマーズ",	},
-	"Achievement.Check.Mars.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
-	"Achievement.Check.Mercury.Title":	{	_:"Go Straight Ahead, Cross Over Mercury", ja:"まっすぐ進め 水星越えて",	},
-	"Achievement.Check.Mercury.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
-	"Achievement.Check.Sun.Title"	:	{	_:"BEYOND THE SUNLIGHT",},
-	"Achievement.Check.Sun.Description"	:	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
-	"Achievement.Check.Kirari.Title":	{	_:"Kirari, The Row of Light",	ja:"キラリ 光の列",	},
-	"Achievement.Check.Kirari.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
-	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	},
-	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	},
+	"Achievement.Check.Venus.Title":	{	_:"Do You Know Venus?",	}, //金星到達
+	"Achievement.Check.Venus.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Mars.Title":	{	_:"Beyond The Mars",	ja:"ビヨンドザマーズ",	}, //火星到達
+	"Achievement.Check.Mars.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Mercury.Title":	{	_:"Go Straight Ahead, Cross Over Mercury", ja:"まっすぐ進め 水星越えて",	}, //水星到達
+	"Achievement.Check.Mercury.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Sun.Title"	:	{	_:"BEYOND THE SUNLIGHT",	}, //太陽到達
+	"Achievement.Check.Sun.Description"	:	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Kirari.Title":	{	_:"Kirari, The Row of Light",	ja:"キラリ 光の列",	}, //諸星きらり到達
+	"Achievement.Check.Kirari.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Unicorn.Title":	{	_:"Tell Me the Pink Unicorn...",	ja:"教えてpink unicorn...",	}, //2.5億km到達
+	"Achievement.Check.Unicorn.Description":	{	_:"Flew the meteorite over $1$2.",	ja:"隕石を$1$2以上吹っ飛ばした",	}, //
 
-	"Achievement.Action.FirstPlay.Title" :	{	_:"For Save The Earch Crisis",	ja:"地球の危機を救うため",	},
-	"Achievement.Action.FirstPlay.Description" :	{	_:"Stopped the meteorite and saved the Earch.",	ja:"隕石を食い止めて世界を救った",	},
-	"Achievement.Action.Share.Title" :	{	_:"Shared Your Result",	ja:"結果をシェアして",	},
-	"Achievement.Action.Share.Description" :	{	_:"We post $0 tweets.",	ja:"ツイート✕$0投稿するんだ",	},
+	"Achievement.Action.FirstPlay.Title" :	{	_:"For Save The Earch Crisis",	ja:"地球の危機を救うため",	}, //初プレイ
+	"Achievement.Action.FirstPlay.Description" :	{	_:"Stopped the meteorite and saved the Earch.",	ja:"隕石を食い止めて世界を救った",	}, //
+	"Achievement.Action.Share.Title" :	{	_:"Shared Your Result",	ja:"結果をシェアして",	}, //結果シェア
+	"Achievement.Action.Share.Description" :	{	_:"We post $0 tweets.",	ja:"ツイート✕$0投稿するんだ",	}, //
 }
 
 
