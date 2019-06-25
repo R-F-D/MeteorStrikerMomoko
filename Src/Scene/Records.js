@@ -1,17 +1,17 @@
 /* *******************************************************************************
-	Scoreシーン
+	Recordsシーン
 ********************************************************************************/
 var Scene	= Scene || {};
 (function(){	//File Scope
 
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: "Score.Main",
-	UI		: "Score.Ui",
+	MAIN	: "Records.Main",
+	UI		: "Records.Ui",
 };
 
 
-Scene.Score	= class extends Scene.SceneBase {
+Scene.Records	= class extends Scene.SceneBase {
 
 	constructor(){
 		super();

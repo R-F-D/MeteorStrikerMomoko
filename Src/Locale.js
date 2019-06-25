@@ -40,7 +40,7 @@ Texts	= {
 
 	//タイトル画面 Title
 	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	}, //プレイボタン
-	"Title.Button.Score":	{	_:"Score and achievements",	ja:"スコアと実績",	}, //スコアボタン
+	"Title.Button.Records":	{	_:"Records and achievements",	ja:"スコアと実績",	}, //スコアボタン
 	"Title.Button.Help":	{	_:"How to play",	ja:"ゲームの遊び方",	}, //ヘルプボタン
 	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	}, //設定ボタン
 	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	}, //ウェブページボタン
