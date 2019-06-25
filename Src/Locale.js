@@ -40,10 +40,10 @@ Texts	= {
 
 	//タイトル画面 Title
 	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	}, //プレイボタン
-	"Title.Button.Records":	{	_:"Records and achievements",	ja:"スコアと実績",	}, //スコアボタン
+	"Title.Button.Records":	{	_:"Records and achievements",	ja:"記録と実績",	}, //スコアボタン
 	"Title.Button.Help":	{	_:"How to play",	ja:"ゲームの遊び方",	}, //ヘルプボタン
 	"Title.Button.Settings":	{	_:"Settings",	ja:"設定",	}, //設定ボタン
-	"Title.Button.WebPage":	{	_:"Go to page",	ja:"ウェブページへ",	}, //ウェブページボタン
+	"Title.Button.WebPage":	{	_:"Go to the web page",	ja:"ウェブページへ",	}, //ウェブページボタン
 	"Title.Button.Credits":	{	_:"Show credits",	ja:"作ったひと",	}, //クレジットボタン
 	"Title.Reaction.Player":	{	_:"Momoko dakedo.",	ja:"桃子だけど。",	}, //プレイヤーをクリック時
 
