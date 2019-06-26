@@ -89,7 +89,7 @@ const Achievement = new (class Achievement{
 		if(achievement==null) return this;
 
 		Store.Insert(
-			`${this.PrefixStorageKey}${achievement.Key}`,
+			{Key:`${this.PrefixStorageKey}${achievement.Key}`},
 			Scene.SceneBase.GetDate().getTime(),
 			(oldValue,newValue)	=> oldValue===null && achievement.Count<=count,	//cond
 			(key,value)			=> {
