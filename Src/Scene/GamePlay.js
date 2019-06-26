@@ -320,8 +320,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Destroy();
 
 				//連続成功実績
-				const nSuccessiveHits	= Store.DynamicInsert(Store.Keys.GamePlay.NumSuccessiveHits);
-				const maxSuccessiveHits	= Store.Insert(Store.Keys.GamePlay.MaxSuccessiveHits, nSuccessiveHits);
+				const nSuccessiveHits	= Store.DynamicInsert(Store.Handles.GamePlay.NumSuccessiveHits);
+				const maxSuccessiveHits	= Store.Insert(Store.Handles.GamePlay.MaxSuccessiveHits, nSuccessiveHits);
 				Achievement.Unlock(Achievements.Blowing.SuccessiveHits, maxSuccessiveHits);
 			})
 			.PushUpdatingFunctions(dt=>{
@@ -339,7 +339,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.DISCHARGE_FAILED
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Destroy();
-				cc.sys.localStorage.setItem(Store.Keys.GamePlay.NumSuccessiveHits,0);	//連続成功数の初期化
+				cc.sys.localStorage.setItem(Store.Handles.GamePlay.NumSuccessiveHits,0);	//連続成功数の初期化
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
@@ -361,34 +361,34 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
-				const bestRate		= Store.Insert(Store.Keys.GamePlay.BestAiming, rate);
+				const bestRate		= Store.Insert(Store.Handles.GamePlay.BestAiming, rate);
 				Achievement.Unlock(Achievements.Aiming.TruePerfect,bestRate);
-				if(rate>=100.0)	Store.DynamicInsert( Store.Keys.GamePlay.NumTruePerfects );
+				if(rate>=100.0)	Store.DynamicInsert( Store.Handles.GamePlay.NumTruePerfects );
 				switch(currentArea.tag){
 					case "PERFECT": {
-						const nPerfects	= Store.DynamicInsert( Store.Keys.GamePlay.NumPerfects );
+						const nPerfects	= Store.DynamicInsert( Store.Handles.GamePlay.NumPerfects );
 						Achievement.Unlock(Achievements.Aiming.ManyPerfect,nPerfects);
 						//fall through
 					}
 					case "GOOD": {
-						const nGoods	= Store.DynamicInsert( Store.Keys.GamePlay.NumGoods );
+						const nGoods	= Store.DynamicInsert( Store.Handles.GamePlay.NumGoods );
 						Achievement.Unlock(Achievements.Aiming.ManyGood,nGoods);
 						break;
 					}
 					default:
 				}
 
-				Store.Insert(Store.Keys.GamePlay.BestBlowing, this.GetChargingRate());
+				Store.Insert(Store.Handles.GamePlay.BestBlowing, this.GetChargingRate());
 				if(this.playerHardblows()){
-					const nHardBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardBlowings );
+					const nHardBlowings	= Store.DynamicInsert( Store.Handles.GamePlay.NumHardBlowings );
 					Achievement.Unlock(Achievements.Blowing.ManyHard, nHardBlowings);
 					if(currentArea.tag=="PERFECT"){
-						const nHardAndPerfectBlowings	= Store.DynamicInsert( Store.Keys.GamePlay.NumHardAndPerfectBlowings );
+						const nHardAndPerfectBlowings	= Store.DynamicInsert( Store.Handles.GamePlay.NumHardAndPerfectBlowings );
 						Achievement.Unlock(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
 				else{
-					Store.DynamicInsert( Store.Keys.GamePlay.NumLightBlowings );
+					Store.DynamicInsert( Store.Handles.GamePlay.NumLightBlowings );
 				}
 
 
@@ -439,7 +439,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//エミット実績
 				const emitRate		= Math.trunc(this.GetEmittingRate() *100);
-				const maxEmitRate	= Store.Insert(Store.Keys.GamePlay.MaxEmittings, emitRate );
+				const maxEmitRate	= Store.Insert(Store.Handles.GamePlay.MaxEmittings, emitRate );
 				Achievement.Unlock(Achievements.Emit.Many01, maxEmitRate);
 				Achievement.Unlock(Achievements.Emit.Many02, maxEmitRate);
 				Achievement.Unlock(Achievements.Emit.Many03, maxEmitRate);
@@ -499,7 +499,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				//ハイスコア
 				const score 	= this.GetDistanceInKm();
-				const highScore	= Store.Insert(Store.Keys.GamePlay.HighScore,score );
+				const highScore	= Store.Insert(Store.Handles.GamePlay.HighScore,score );
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
@@ -555,7 +555,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					});
 
 					//初プレイ実績
-					Store.DynamicInsert(Store.Keys.Action.NumPlayings);
+					Store.DynamicInsert(Store.Handles.Action.NumPlayings);
 					Achievement.Unlock(Achievements.Action.FirstPlay,1);
 
 			})

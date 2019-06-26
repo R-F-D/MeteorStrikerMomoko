@@ -4,7 +4,7 @@
 var Store	= Store || {};
 
 /** @const ストレージのキー */
-Store.Keys = {
+Store.Handles = {
 
 	GamePlay: {
 		/** @const ハイスコア*/
