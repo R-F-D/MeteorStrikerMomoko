@@ -17,8 +17,11 @@ Scene.Help	= class extends Scene.SceneBase {
 		super();
 
 		this.Sequences	= {
-			/**初期状態*/		INITIAL			: null,
+			INITIAL:	null,	//初期状態
+			//
 		};
+
+		this.buttons	= {};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -44,7 +47,17 @@ Scene.Help	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
+
+					//ボタン
+					_this.buttons	= Button.CreateInstance(1).AddToLayer(this);
+					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
+
 					return true;
+				},
+				update	: function(dt){
+					this._super();
+					_this.buttons.Update(dt);
+					_this.sequence.Update(dt,"layer-ui");
 				},
 			});
 		return this;
@@ -71,6 +84,12 @@ Scene.Help	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
+			//インタフェース
+			this.buttons.at("Reset")
+				.SetVisible(true)
+				.SetPosition(16,size.height-16)
+				.SetColorOnHover([0xFF,0xA0,0x00])
+				.OnButtonUp(()=>this.ResetForce());
 		})
 		.PushUpdatingFunctions(dt=>{
 		});
