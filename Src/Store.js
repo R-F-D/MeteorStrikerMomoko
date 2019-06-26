@@ -51,7 +51,9 @@ Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,reso
 	const oldValue	= cc.sys.localStorage.getItem(key);
 
 	if(cond(oldValue,value)){
+		//インサート実行
 		cc.sys.localStorage.setItem(key,value);
+		//成功時コールバック
 		if(resolve)	{
 			const result = resolve(key,value);
 			return result===undefined ? value : result;	//コールバック関数が実行された場合は戻り値を返す（undefinedを除く）
@@ -59,6 +61,7 @@ Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,reso
 		return value;
 	}
 	else{
+		//インサートしない場合
 		return oldValue;
 	}
 };
@@ -69,6 +72,7 @@ Store.Insert	= function Insert(key,value,cond=Store.Conds.NewValueIsGreater,reso
  * @returns 新しい値
  */
 Store.DynamicInsert	= function DynamicInsert(key,valueGenerator=Store.Gens.Increment){
+	//挿入値の生成
 	const oldValue	= cc.sys.localStorage.getItem(key);
 	const value		= valueGenerator(oldValue);
 
