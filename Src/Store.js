@@ -81,6 +81,13 @@ class Store{
 		return value;
 	};
 
+static get visibleHandles(){
+	let handles	= [];
+	_(Store.Handles).forEach(
+		category=> _.filter(category,v=>v.Required!==null).forEach(h=>handles.push(h))
+	);
+	return handles;
+}
 
 /** ストレージハンドルの個数
  * @returns {number}
