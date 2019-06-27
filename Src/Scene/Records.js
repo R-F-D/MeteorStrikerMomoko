@@ -135,7 +135,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
-					const value	= Number( cc.sys.localStorage.getItem(handles[i].Key) );
+					const value	= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
 					const text	= L.Text(`Records.${handles[i].Key}`);
 
 					const x	= (i%2) * 256;
