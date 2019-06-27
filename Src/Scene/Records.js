@@ -6,8 +6,9 @@ var Scene	= Scene || {};
 
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: "Records.Main",
-	UI		: "Records.Ui",
+	MAIN:	"Records.Main",
+	BG:		"Records.Bg",
+	UI:		"Records.Ui",
 };
 
 
@@ -17,11 +18,14 @@ Scene.Records	= class extends Scene.SceneBase {
 		super();
 
 		this.Sequences	= {
-			INITIAL:	null,	//初期状態
-			A_LIST:		null,	//実績一覧
+			INITIAL:		null,	//初期状態
+			RECORDS:		null,	//記録一覧
+			ACHIEVEMENTS:	null,	//実績一覧
 		};
 
+		this.sprites	= {};
 		this.buttons	= {};
+		this.labels		= {};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -40,7 +44,25 @@ Scene.Records	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
+
+					//Labels
+					_this.labels.records	= _.range(Store.visibleHandles.length).map(l=> Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true) );
+
 					return true;
+				},
+			})
+			.AddToLayerList("bg",{
+				ctor:function(){
+					this._super();
+					this.scheduleUpdate();
+					_this.sprites.bg	= _.range(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
+					return true;
+				},
+				update	: function(dt){
+					this._super();
+					const width		= cc.director.getWinSize().width;
+					const bgWidth	= _this.sprites.bg[0].GetPieceSize().width;
+					_this.sprites.bg.forEach((v,i)=>v.SetPosition(	width /2 - Cycle(_this.count, 0, bgWidth) + bgWidth*i,	256) );
 				},
 			})
 			.AddToLayerList("ui",{
@@ -65,7 +87,8 @@ Scene.Records	= class extends Scene.SceneBase {
 
 	OnEnter(){
 		super.OnEnter();
-		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,0x0002)
+		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
+			.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
@@ -76,6 +99,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
+		this.labels.records.forEach( label=>label.Update(dt) );
 		return this;
 	}
 
@@ -84,6 +108,10 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
+			//ラベル
+			this.labels.records
+				.forEach(label=> label.Init().SetColor("FFFFFF").SetNumLogLines(2) );
+
 			//インタフェース
 			this.buttons.at("Reset")
 				.SetVisible(true)
@@ -92,8 +120,32 @@ Scene.Records	= class extends Scene.SceneBase {
 				.OnButtonUp(()=>this.ResetForce());
 		})
 		.PushUpdatingFunctions(dt=>{
+			this.SetSequence(this.Sequences.RECORDS);
 		});
+		//初期状態
+		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
+			const handles	= Store.visibleHandles;
+
+			//ラベル
+			this.labels.records
+				.forEach((label,i)=>{
+					if(i>=handles.length){
+						label.SetVisible(false);
+						return;
+					}
+					const value	= Number( cc.sys.localStorage.getItem(handles[i].Key) );
+
+					const x	= (i%2) * 256;
+					const y	= Math.trunc(i/2) * 32;
+					label
+						.SetVisible(true)
+						.SetPosition(128+x,240-y)
+						.SetString(`${handles[i].Key}\n${value}`);
+				});
+		})
+		.PushUpdatingFunctions(dt=>{
+		});
 		return this;
 	}
 
