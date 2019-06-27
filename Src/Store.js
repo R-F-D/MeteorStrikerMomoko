@@ -3,7 +3,7 @@
 ********************************************************************************/
 class Store{
 
-	/** ストレージのキー */
+	/** ストレージのレコードハンドル */
 	static get Handles(){
 		return {
 			GamePlay: {
@@ -68,7 +68,7 @@ class Store{
 	};
 
 	/** ローカルストレージにインサート（値は動的に生成）
-	 * @param {string} handle ストレージのハンドル
+	 * @param {string} handle ストレージのレコードハンドル
 	 * @param {function} [valueGenerator=null] 現在値を受け取り新値を返す関数。
 	 * @returns 新しい値
 	 */
@@ -81,40 +81,45 @@ class Store{
 		return value;
 	};
 
-static get visibleHandles(){
-	let handles	= [];
-	_(Store.Handles).forEach(
-		category=> _.filter(category,v=>v.Required!==null).forEach(h=>handles.push(h))
-	);
-	return handles;
-}
+	/** 表示可能なレコードのハンドル一覧を得る
+	 * @readonly
+	 * @static
+	 * @memberof Store
+	 */
+	static get visibleHandles(){
+		let handles	= [];
+		_(Store.Handles).forEach(
+			category=> _.filter(category,v=>v.Required!==null).forEach(h=>handles.push(h))
+		);
+		return handles;
+	}
 
 
 
-//----------------------------------------
-//	コールバック
-//----------------------------------------
-/** インサート条件関数
- * @type {<string,function>}	f(currentValue,newValue):boolean
- */
-static get Conds() {
-	return{
-		/** 現在値が空欄のとき真 */
-		CurrentValueIsEmpty	: (currentValue,newValue)=>	currentValue==null || currentValue=="",
-		/** 現在値と挿入値を数値化し、後者が大きいとき真 */
-		NewValueIsGreater	: (currentValue,newValue)=>	Number(currentValue||0) < Number(newValue),
+	//----------------------------------------
+	//	コールバック
+	//----------------------------------------
+	/** インサート条件関数
+	 * @type {<string,function>}	f(currentValue,newValue):boolean
+	 */
+	static get Conds() {
+		return{
+			/** 現在値が空欄のとき真 */
+			CurrentValueIsEmpty	: (currentValue,newValue)=>	currentValue==null || currentValue=="",
+			/** 現在値と挿入値を数値化し、後者が大きいとき真 */
+			NewValueIsGreater	: (currentValue,newValue)=>	Number(currentValue||0) < Number(newValue),
+		};
 	};
-};
 
-/** @const 挿入値の生成関数
- * @type {<string,function>}	f(value):any
- */
-static get Gens() {
-	return{
-		/** インクリメント */
-		Increment:	value=>	(value==null||value=="") ? 1 : Number(value)+1,
+	/** @const 挿入値の生成関数
+	 * @type {<string,function>}	f(value):any
+	 */
+	static get Gens() {
+		return{
+			/** インクリメント */
+			Increment:	value=>	(value==null||value=="") ? 1 : Number(value)+1,
+		};
 	};
-};
 
 } // class
 
