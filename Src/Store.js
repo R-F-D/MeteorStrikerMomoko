@@ -8,34 +8,34 @@ Store.Handles = {
 
 	GamePlay: {
 		/** @const ハイスコア*/
-		HighScore:					{Key:"GamePlay.HighScore",},
+		HighScore:					{Key:"GamePlay.HighScore",					Required:0,		Index:0x0000,	},
+		/** @const グッド回数 */
+		NumGoods:					{Key:"GamePlay.NumGoods",					Required:0,		Index:0x0200,	},
 		/** @const パーフェクト回数 */
-		NumGoods:					{Key:"GamePlay.NumGoods",},
-		/** @const パーフェクト回数 */
-		NumPerfects:				{Key:"GamePlay.NumPerfects",},
+		NumPerfects:				{Key:"GamePlay.NumPerfects",				Required:0,		Index:0x0201,	},
 		/** @const 100%パーフェクト回数 */
-		NumTruePerfects:			{Key:"GamePlay.NumTruePerfects",},
+		NumTruePerfects:			{Key:"GamePlay.NumTruePerfects",			Required:1,		Index:0x0202,	},
 		/** @const エイミング精度最高値 */
-		BestAiming:					{Key:"GamePlay.BestAiming",},
+		BestAiming:					{Key:"GamePlay.BestAiming",					Required:0,		Index:0x0203,	},
 		/** @const 強打回数 */
-		NumHardBlowings:			{Key:"GamePlay.NumHardBlowings",},
+		NumHardBlowings:			{Key:"GamePlay.NumHardBlowings",			Required:0,		Index:0x0300,	},
 		/** @const 軽打回数 */
-		NumLightBlowings:			{Key:"GamePlay.NumLightBlowings",},
+		NumLightBlowings:			{Key:"GamePlay.NumLightBlowings",			Required:0,		Index:0x0301,	},
 		/** @const 最高打撃力 */
-		BestBlowing:				{Key:"GamePlay.BestBlowing",},
+		BestBlowing:				{Key:"GamePlay.BestBlowing",				Required:0,		Index:0x0302,	},
 		/** @const 強打とパーフェクトを同時に出した回数 */
-		NumHardAndPerfectBlowings:	{Key:"GamePlay.NumHardAndPerfectBlowings",},
+		NumHardAndPerfectBlowings:	{Key:"GamePlay.NumHardAndPerfectBlowings",	Required:1,		Index:0x0303,	},
 		/** @const 連続で打撃に成功した数 */
-		NumSuccessiveHits:			{Key:"GamePlay.NumSuccessiveusHits",},
+		NumSuccessiveHits:			{Key:"GamePlay.NumSuccessiveusHits",		Required:null,	Index:0x0300,	},
 		/** @const 連続で打撃に成功した最多数 */
-		MaxSuccessiveHits:			{Key:"GamePlay.MaxSuccessiveusHits",},
-		/** @const 最大エミット */
-		MaxEmittings:				{Key:"GamePlay.MaxEmittings"},
+		MaxSuccessiveHits:			{Key:"GamePlay.MaxSuccessiveusHits",		Required:0,		Index:0x0304,	},
+		/** @const 最大エミット倍率 */
+		MaxEmittings:				{Key:"GamePlay.MaxEmittings",				Required:0,		Index:0x0400,	},
 	},
 
 	Action: {
 		/** @const プレイ回数 */
-		NumPlayings:				{Key:"Action.NumPlayings",},
+		NumPlayings:				{Key:"Action.NumPlayings",					Required:0,		Index:0x0100,	},
 	},
 };
 
@@ -79,6 +79,21 @@ Store.DynamicInsert	= function DynamicInsert(handle,valueGenerator=Store.Gens.In
 	cc.sys.localStorage.setItem(handle.Key,value);
 	return value;
 };
+
+
+/** ストレージハンドルの個数
+ * @returns {number}
+ */
+Store.GetNumHandles	= function GetNumHandles(){
+	if(Store._numVisibleHandles===null){
+		Store._numVisibleHandles	= _(Store.Handles).reduce(
+			(sum,category)=> sum + _.filter(category,v=>v.Required!==null).length,
+			0
+		);
+	}
+	return Store._numVisibleHandles;
+}
+Store._numVisibleHandles	= null;
 
 
 //----------------------------------------
