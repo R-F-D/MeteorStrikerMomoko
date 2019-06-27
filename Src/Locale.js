@@ -67,6 +67,19 @@ Texts	= {
 	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	}, //リトライボタン
 	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	}, //シェアボタン
 
+	"Records.GamePlay.HighScore":					{	_:"High Score",	ja:"ハイスコア",	}, //
+	"Records.GamePlay.NumGoods":					{	_:"Aimings of Good or Over",	ja:"グッド以上",	}, //
+	"Records.GamePlay.NumPerfects":					{	_:"Aimings of Perfect",	ja:"パーフェクト",	}, //
+	"Records.GamePlay.NumTruePerfects":				{	_:"Aimings of 100%",	ja:"100%パーフェクト",	}, //
+	"Records.GamePlay.BestAiming":					{	_:"Best Aiming Rate",	ja:"エイミング最高倍率",	}, //
+	"Records.GamePlay.NumHardBlowings":				{	_:"Hardblows",	ja:"強打",	}, //
+	"Records.GamePlay.NumLightBlowings":			{	_:"Ligheblows",	ja:"軽打",	}, //
+	"Records.GamePlay.BestBlowing":					{	_:"Best Blowing Rate",	ja:"打撃最高倍率",	}, //
+	"Records.GamePlay.NumHardAndPerfectBlowings":	{	_:"Hardblow And Perfect",	ja:"強打＆パーフェクト",	}, //
+	"Records.GamePlay.MaxSuccessiveusHits":			{	_:"Max Successiveus Hits",	ja:"連続ヒット",	}, //
+	"Records.GamePlay.MaxEmittings":				{	_:"Max Emitting Rate",	ja:"エミット最高倍率",	}, //
+	"Records.Action.NumPlayings":					{	_:"Playings",	ja:"プレイ回数",	}, //
+
 	//シェア Share
 	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",	}, //Twitter Intent
 	"GamePlay.Share.Text":	{	_:"Momoko flew the meteorite $0 $1 away!",	ja:"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",	}, //ツイート文字列

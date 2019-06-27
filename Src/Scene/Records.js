@@ -134,14 +134,16 @@ Scene.Records	= class extends Scene.SceneBase {
 						label.SetVisible(false);
 						return;
 					}
+
 					const value	= Number( cc.sys.localStorage.getItem(handles[i].Key) );
+					const text	= L.Text(`Records.${handles[i].Key}`);
 
 					const x	= (i%2) * 256;
 					const y	= Math.trunc(i/2) * 32;
 					label
 						.SetVisible(true)
 						.SetPosition(128+x,240-y)
-						.SetString(`${handles[i].Key}\n${value}`);
+						.SetString(`${text}\n${value}`);
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
