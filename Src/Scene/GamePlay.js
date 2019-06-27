@@ -378,7 +378,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					default:
 				}
 
-				Store.Insert(Store.Handles.GamePlay.BestBlowing, this.GetChargingRate());
+				Store.Insert(Store.Handles.GamePlay.BestBlowing, this.GetChargingRate()/20*100);
 				if(this.playerHardblows()){
 					const nHardBlowings	= Store.DynamicInsert( Store.Handles.GamePlay.NumHardBlowings );
 					Achievement.Unlock(Achievements.Blowing.ManyHard, nHardBlowings);
