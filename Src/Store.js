@@ -89,18 +89,6 @@ static get visibleHandles(){
 	return handles;
 }
 
-/** ストレージハンドルの個数
- * @returns {number}
- */
-static get NumHandles(){
-	if(Store._numVisibleHandles===null){
-		Store._numVisibleHandles	= _(Store.Handles).reduce(
-			(sum,category)=> sum + _.filter(category,v=>v.Required!==null).length,
-			0
-		);
-	}
-	return Store._numVisibleHandles;
-}
 
 
 //----------------------------------------
@@ -129,5 +117,5 @@ static get Gens() {
 };
 
 } // class
-Store._numVisibleHandles	= null;
+
 
