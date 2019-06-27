@@ -91,7 +91,7 @@ class Store{
 		_(Store.Handles).forEach(
 			category=> _.filter(category,v=>v.Required!==null).forEach(h=>handles.push(h))
 		);
-		return handles;
+		return _.orderBy(handles,"Order");
 	}
 
 
