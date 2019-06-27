@@ -196,22 +196,25 @@ LocaleSettings	= class{
 
 	/** 数値に区切り文字を挿入
 	 * @param {number} value		整数
+	 * @param {number?} [nDecimalDigits=0] 小数点以下の桁数
 	 * @param {string?} [lang=null]	言語。省略時はすでに設定されている言語。
 	 * @returns {string}
 	 */
-	NumToStr(value,lang){
+	NumToStr(value,nDecimalDigits=0, lang=null){
 		const separation	= NumericSeparators[lang||this.numericSeparation] || NumericSeparators["_"];
 
 		//数値を区切りごとに配列に分割
-		const nDigits	= Math.trunc(Math.max(1,separation.nDigits));	//区切り桁数
-		const chunks	= this._SplitNumber(Math.trunc(value),nDigits);
+		const nDigits		= Math.trunc(Math.max(1,separation.nDigits));	//区切り桁数
+		const decimalPart	= (String(value).split(".")[1] || "0000000000000000").substr(0,nDecimalDigits);
+		const chunks		= this._SplitNumber(Math.trunc(value),nDigits);
 
 		//区切りを挿入
+		let integerPart	= "";
 		if(!Array.isArray(separation.integer)){	//区切りが文字のときは全ての区切りに挿入
-			return	chunks
-						.reverse()
-						.map((v,i)=> i==0 ? `${v}` : `${v}`.padStart(nDigits,'0') )
-						.join(separation.integer);
+			integerPart	= chunks
+							.reverse()
+							.map((v,i)=> i==0 ? `${v}` : `${v}`.padStart(nDigits,'0') )
+							.join(separation.integer);
 		}
 		else{									//配列のときは１つずつ区切り文字を変える
 			let str	= '';
@@ -225,8 +228,11 @@ LocaleSettings	= class{
 					str	= `${chunks[i]}${separator}${str}`;
 				}
 			}
-			return str||"0";
+			integerPart	= str||"0";
 		}
+
+		if(nDecimalDigits)	return `${integerPart}${separation.decimal}${decimalPart}`;
+		else				return integerPart;
 	}
 
 	/** 数値を一定桁数で区切った配列に変換する
