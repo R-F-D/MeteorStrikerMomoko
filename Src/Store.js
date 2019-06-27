@@ -85,7 +85,7 @@ class Store{
 /** ストレージハンドルの個数
  * @returns {number}
  */
-static GetNumHandles(){
+static get NumHandles(){
 	if(Store._numVisibleHandles===null){
 		Store._numVisibleHandles	= _(Store.Handles).reduce(
 			(sum,category)=> sum + _.filter(category,v=>v.Required!==null).length,
@@ -123,3 +123,4 @@ static get Gens() {
 
 } // class
 Store._numVisibleHandles	= null;
+
