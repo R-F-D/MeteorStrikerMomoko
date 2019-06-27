@@ -225,7 +225,7 @@ LocaleSettings	= class{
 					str	= `${chunks[i]}${separator}${str}`;
 				}
 			}
-			return str;
+			return str||"0";
 		}
 	}
 
