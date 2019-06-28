@@ -120,9 +120,9 @@ Scene.Records	= class extends Scene.SceneBase {
 				.OnButtonUp(()=>this.ResetForce());
 		})
 		.PushUpdatingFunctions(dt=>{
-			this.SetSequence(this.Sequences.RECORDS);
+			 if(this.sequence.count>=30) this.SetSequence(this.Sequences.RECORDS);
 		});
-		//初期状態
+		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
 			const handles	= Store.visibleHandles;
@@ -135,18 +135,20 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
+					//テキスト
 					const text		= L.Text(`Records.${handles[i].Key}`);
 					const count		= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
-
 					let patterns	= [count];
 					if(L.TextExists(handles[i].UnitKey))	patterns.push(L.Text(handles[i].UnitKey));
 					const fmtCount	= !L.TextExists(`Records.${handles[i].Key}.Format`) ? `${count}` : L.Textf( `Records.${handles[i].Key}.Format`, patterns );
 
-					const x	= (i%2) * 256;
-					const y	= Math.trunc(i/2) * 32;
+					const x	= (i%2) * (160+4);
+					const y	= Math.trunc(i/2) * (32+4);
+					label.bg.lower	= {width:160, height:32};
 					label
 						.SetVisible(true)
-						.SetPosition(128+x,240-y)
+						.SetAnchorPoint(0.0, 0.5)
+						.SetPosition(96+x,240-y)
 						.SetString(`${text}\n${fmtCount}`);
 				});
 		})
