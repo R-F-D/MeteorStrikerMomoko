@@ -173,6 +173,8 @@ LocaleSettings	= class{
 	 * @returns {string}		対応するテキスト
 	 */
 	Text(textCode,lang=null){
+		Log(`TextExixs:${this.TextExists(textCode,lang)} [${textCode}/${lang}]`);
+
 		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 		return Texts[textCode][lang||this.language] || Texts[textCode][`_`] || '';
 	}
@@ -191,6 +193,16 @@ LocaleSettings	= class{
 			text	= text.replace(`$${i}`,replacements[i]);
 		}
 		return text;
+	}
+
+	/** 識別子に対応するテキストが存在するか
+	 * @param {string} textCode		テキスト識別子
+	 * @param {string} [lang=null]	言語。省略時は言語を問わない
+	 * @returns
+	 */
+	TextExists(textCode,lang=null){
+		if(lang)return !!(Texts[textCode] && Texts[textCode][lang]);
+		else	return !!Texts[textCode];
 	}
 
 
