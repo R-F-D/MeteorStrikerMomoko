@@ -65,10 +65,13 @@ const Achievement = new (class Achievement{
 	}
 
 	Init(){
+		const size		= cc.director.getWinSize();
+
 		this.label	= Label.CreateInstance(9)
 						.AddToLayer(this.layer)
 						.SetBgEnabled(true)
-						.SetPosition(512-128,288-16)
+						.SetAnchorPoint(1.0,1.0)
+						.SetPosition(size.width-4,size.height-6)
 						.SetNumLogLines(2);
 
 		this.label.forcedPushesToLog	= false;
