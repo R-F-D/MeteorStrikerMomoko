@@ -173,8 +173,6 @@ LocaleSettings	= class{
 	 * @returns {string}		対応するテキスト
 	 */
 	Text(textCode,lang=null){
-		Log(`TextExixs:${this.TextExists(textCode,lang)} [${textCode}/${lang}]`);
-
 		if(!Texts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 		return Texts[textCode][lang||this.language] || Texts[textCode][`_`] || '';
 	}
