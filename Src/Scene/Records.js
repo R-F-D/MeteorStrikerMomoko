@@ -135,15 +135,19 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
-					const value	= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
-					const text	= L.Text(`Records.${handles[i].Key}`);
+					const text		= L.Text(`Records.${handles[i].Key}`);
+					const count		= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
+
+					let patterns	= [count];
+					if(L.TextExists(handles[i].UnitKey))	patterns.push(L.Text(handles[i].UnitKey));
+					const fmtCount	= !L.TextExists(`Records.${handles[i].Key}.Format`) ? `${count}` : L.Textf( `Records.${handles[i].Key}.Format`, patterns );
 
 					const x	= (i%2) * 256;
 					const y	= Math.trunc(i/2) * 32;
 					label
 						.SetVisible(true)
 						.SetPosition(128+x,240-y)
-						.SetString(`${text}\n${value}`);
+						.SetString(`${text}\n${fmtCount}`);
 				});
 		})
 		.PushUpdatingFunctions(dt=>{

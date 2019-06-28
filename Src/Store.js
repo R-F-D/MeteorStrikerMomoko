@@ -8,34 +8,34 @@ class Store{
 		return {
 			GamePlay: {
 				/** @const ハイスコア*/
-				HighScore:					{Key:"GamePlay.HighScore",					Required:0,		Order:0x0000,	nDecimalDigits:0,	},
+				HighScore:					{Key:"GamePlay.HighScore",					UnitKey:"GamePlay.Distance.Unit",	Required:0,		Order:0x0000,	nDecimalDigits:0,	},
 				/** @const グッド回数 */
-				NumGoods:					{Key:"GamePlay.NumGoods",					Required:0,		Order:0x0200,	nDecimalDigits:0,	},
+				NumGoods:					{Key:"GamePlay.NumGoods",					UnitKey:null,						Required:0,		Order:0x0200,	nDecimalDigits:0,	},
 				/** @const パーフェクト回数 */
-				NumPerfects:				{Key:"GamePlay.NumPerfects",				Required:0,		Order:0x0201,	nDecimalDigits:0,	},
+				NumPerfects:				{Key:"GamePlay.NumPerfects",				UnitKey:null,						Required:0,		Order:0x0201,	nDecimalDigits:0,	},
 				/** @const 100%パーフェクト回数 */
-				NumTruePerfects:			{Key:"GamePlay.NumTruePerfects",			Required:1,		Order:0x0202,	nDecimalDigits:0,	},
+				NumTruePerfects:			{Key:"GamePlay.NumTruePerfects",			UnitKey:null,						Required:1,		Order:0x0202,	nDecimalDigits:0,	},
 				/** @const エイミング精度最高値 */
-				BestAiming:					{Key:"GamePlay.BestAiming",					Required:0,		Order:0x0203,	nDecimalDigits:1,	},
+				BestAiming:					{Key:"GamePlay.BestAiming",					UnitKey:"GamePlay.Aiming.Unit",		Required:0,		Order:0x0203,	nDecimalDigits:1,	},
 				/** @const 強打回数 */
-				NumHardBlowings:			{Key:"GamePlay.NumHardBlowings",			Required:0,		Order:0x0300,	nDecimalDigits:0,	},
+				NumHardBlowings:			{Key:"GamePlay.NumHardBlowings",			UnitKey:null,						Required:0,		Order:0x0300,	nDecimalDigits:0,	},
 				/** @const 軽打回数 */
-				NumLightBlowings:			{Key:"GamePlay.NumLightBlowings",			Required:0,		Order:0x0301,	nDecimalDigits:0,	},
+				NumLightBlowings:			{Key:"GamePlay.NumLightBlowings",			UnitKey:null,						Required:0,		Order:0x0301,	nDecimalDigits:0,	},
 				/** @const 最高打撃力 */
-				BestBlowing:				{Key:"GamePlay.BestBlowing",				Required:0,		Order:0x0302,	nDecimalDigits:1,	},
+				BestBlowing:				{Key:"GamePlay.BestBlowing",				UnitKey:"GamePlay.Blowing.Unit",	Required:0,		Order:0x0302,	nDecimalDigits:1,	},
 				/** @const 強打とパーフェクトを同時に出した回数 */
-				NumHardAndPerfectBlowings:	{Key:"GamePlay.NumHardAndPerfectBlowings",	Required:1,		Order:0x0303,	nDecimalDigits:0,	},
+				NumHardAndPerfectBlowings:	{Key:"GamePlay.NumHardAndPerfectBlowings",	UnitKey:null,						Required:1,		Order:0x0303,	nDecimalDigits:0,	},
 				/** @const 連続で打撃に成功した数 */
-				NumSuccessiveHits:			{Key:"GamePlay.NumSuccessiveusHits",		Required:null,	Order:0x0300,	nDecimalDigits:0,	},
+				NumSuccessiveHits:			{Key:"GamePlay.NumSuccessiveusHits",		UnitKey:null,						Required:null,	Order:0x0300,	nDecimalDigits:0,	},
 				/** @const 連続で打撃に成功した最多数 */
-				MaxSuccessiveHits:			{Key:"GamePlay.MaxSuccessiveusHits",		Required:0,		Order:0x0304,	nDecimalDigits:0,	},
+				MaxSuccessiveHits:			{Key:"GamePlay.MaxSuccessiveusHits",		UnitKey:null,						Required:0,		Order:0x0304,	nDecimalDigits:0,	},
 				/** @const 最大エミット倍率 */
-				MaxEmittings:				{Key:"GamePlay.MaxEmittings",				Required:0,		Order:0x0400,	nDecimalDigits:1,	},
+				MaxEmittings:				{Key:"GamePlay.MaxEmittings",				UnitKey:"GamePlay.Emitting.Unit",	Required:0,		Order:0x0400,	nDecimalDigits:1,	},
 			},
 
 			Action: {
 				/** @const プレイ回数 */
-				NumPlayings:				{Key:"Action.NumPlayings",					Required:0,		Order:0x0100,	nDecimalDigits:0,	},
+				NumPlayings:				{Key:"Action.NumPlayings",					UnitKey:null,						Required:0,		Order:0x0100,	nDecimalDigits:0,	},
 			},
 		};
 	};

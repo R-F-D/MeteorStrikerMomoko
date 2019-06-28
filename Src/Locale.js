@@ -36,6 +36,8 @@ NumericSeparators	= {
 Texts	= {
 	//単位 Unit
 	"GamePlay.Distance.Unit":	{	_: "km",	}, //飛距離の単位
+	"GamePlay.Aiming.Unit":	{	_: "%",	}, //エイミング倍率の単位
+	"GamePlay.Blowing.Unit":	{	_: "%",	}, //打撃倍率の単位
 	"GamePlay.Emitting.Unit":	{	_: "%",	}, //エミット倍率の単位
 
 	//タイトル画面 Title
@@ -67,18 +69,31 @@ Texts	= {
 	"GamePlay.Navigator.Result.Retry":	{	_:"You play this game again.",	ja:"もういちどゲームをやるよ",	}, //リトライボタン
 	"GamePlay.Navigator.Result.Share":	{	_:"You post the score to Twitter.",	ja:"Twitterに結果をつぶやくよ",	}, //シェアボタン
 
-	"Records.GamePlay.HighScore":					{	_:"High Score",	ja:"ハイスコア",	}, //
-	"Records.GamePlay.NumGoods":					{	_:"Aimings of Good or Over",	ja:"グッド以上",	}, //
-	"Records.GamePlay.NumPerfects":					{	_:"Aimings of Perfect",	ja:"パーフェクト",	}, //
-	"Records.GamePlay.NumTruePerfects":				{	_:"Aimings of 100%",	ja:"100%パーフェクト",	}, //
-	"Records.GamePlay.BestAiming":					{	_:"Best Aiming Rate",	ja:"エイミング最高倍率",	}, //
-	"Records.GamePlay.NumHardBlowings":				{	_:"Hardblows",	ja:"強打",	}, //
-	"Records.GamePlay.NumLightBlowings":			{	_:"Ligheblows",	ja:"軽打",	}, //
-	"Records.GamePlay.BestBlowing":					{	_:"Best Blowing Rate",	ja:"打撃最高倍率",	}, //
-	"Records.GamePlay.NumHardAndPerfectBlowings":	{	_:"Hardblow And Perfect",	ja:"強打＆パーフェクト",	}, //
-	"Records.GamePlay.MaxSuccessiveusHits":			{	_:"Max Successiveus Hits",	ja:"連続ヒット",	}, //
-	"Records.GamePlay.MaxEmittings":				{	_:"Max Emitting Rate",	ja:"エミット最高倍率",	}, //
-	"Records.Action.NumPlayings":					{	_:"Playings",	ja:"プレイ回数",	}, //
+	//記録 Records
+	"Records.GamePlay.HighScore":						{	_:"High Score",	ja:"ハイスコア",	}, //
+	"Records.GamePlay.HighScore.Format":				{	_:"$0$1",	}, //
+	"Records.GamePlay.NumGoods":						{	_:"Aimings of Good or Over",	ja:"グッド以上",	}, //
+	"Records.GamePlay.NumGoods.Format":					{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.NumPerfects":						{	_:"Aimings of Perfect",	ja:"パーフェクト",	}, //
+	"Records.GamePlay.NumPerfects.Format":				{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.NumTruePerfects":					{	_:"Aimings of 100%",	ja:"100%パーフェクト",	}, //
+	"Records.GamePlay.NumTruePerfects.Format":			{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.BestAiming":						{	_:"Best Aiming Rate",	ja:"エイミング最高倍率",	}, //
+	"Records.GamePlay.BestAiming.Format":				{	_:"$0$1",	}, //
+	"Records.GamePlay.NumHardBlowings":					{	_:"Hardblows",	ja:"強打",	}, //
+	"Records.GamePlay.NumHardBlowings.Format":			{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.NumLightBlowings":				{	_:"Ligheblows",	ja:"軽打",	}, //
+	"Records.GamePlay.NumLightBlowings.Format":			{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.BestBlowing":						{	_:"Best Blowing Rate",	ja:"打撃最高倍率",	}, //
+	"Records.GamePlay.BestBlowing.Format":				{	_:"$0$1",	}, //
+	"Records.GamePlay.NumHardAndPerfectBlowings":		{	_:"Hardblow And Perfect",	ja:"強打＆パーフェクト",	}, //
+	"Records.GamePlay.NumHardAndPerfectBlowings.Format":{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.MaxSuccessiveusHits":				{	_:"Max Successiveus Hits",	ja:"連続ヒット",	}, //
+	"Records.GamePlay.MaxSuccessiveusHits.Format":		{	_:"$0",	ja:"$0回",	}, //
+	"Records.GamePlay.MaxEmittings":					{	_:"Max Emitting Rate",	ja:"エミット最高倍率",	}, //
+	"Records.GamePlay.MaxEmittings.Format":				{	_:"$0$1",	}, //
+	"Records.Action.NumPlayings":						{	_:"Playings",	ja:"プレイ回数",	}, //
+	"Records.Action.NumPlayings.Format":				{	_:"$0",	ja:"$0回",	}, //
 
 	//シェア Share
 	"GamePlay.Share.Format":	{	_:"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",	}, //Twitter Intent
