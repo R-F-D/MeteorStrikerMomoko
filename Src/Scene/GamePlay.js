@@ -502,7 +502,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const highScore	= Store.Insert(Store.Handles.GamePlay.HighScore,score );
 
 				this.labels.distance.SetVisible(false);
-				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("GamePlay.Distance.Unit")] ),null).SetVisible(true);
+				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("Unit.Distance")] ),null).SetVisible(true);
 
 				//ハイスコア基準のチェックポイント実績
 				C.CheckPoints
@@ -548,7 +548,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					.OnButtonUp(()=>{
 						this.labels.navigation.RemoveTempText();
 						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
-											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("GamePlay.Distance.Unit"), ]),
+											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
 											L.Text("GamePlay.Share.URL"),
 											L.Text("GamePlay.Share.Tags")
 										]));
@@ -742,7 +742,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
 		this.fx.meteor.Spawn(this.sprites.meteor.entity.x,this.sprites.meteor.entity.y,this.sequence.count%15==0 && this.sprites.meteor.visible).Update();
 		if(this.labels.distance.IsVisible()){
-			this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance",[L.NumToStr(this.GetDistanceInKm(),0,"en"),L.Text("GamePlay.Distance.Unit","_")]));
+			this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance",[L.NumToStr(this.GetDistanceInKm(),0,"en"),L.Text("Unit.Distance","_")]));
 		}
 		return this;
 	}

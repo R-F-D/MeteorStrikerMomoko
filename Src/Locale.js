@@ -35,10 +35,10 @@ NumericSeparators	= {
  *******************************************************************************/
 Texts	= {
 	//単位 Unit
-	"GamePlay.Distance.Unit":	{	_: "km",	}, //飛距離の単位
-	"GamePlay.Aiming.Unit":	{	_: "%",	}, //エイミング倍率の単位
-	"GamePlay.Blowing.Unit":	{	_: "%",	}, //打撃倍率の単位
-	"GamePlay.Emitting.Unit":	{	_: "%",	}, //エミット倍率の単位
+	"Unit.Distance":	{	_: "km",	}, //飛距離の単位
+	"Unit.Aim":	{	_: "%",	}, //エイミング倍率の単位
+	"Unit.Blow":	{	_: "%",	}, //打撃倍率の単位
+	"Unit.Emit":	{	_: "%",	}, //エミット倍率の単位
 
 	//タイトル画面 Title
 	"Title.Button.Play":	{	_:"Play game",	ja:"ゲームをプレイ",	}, //プレイボタン

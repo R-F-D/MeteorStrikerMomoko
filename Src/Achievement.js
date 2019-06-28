@@ -19,20 +19,20 @@ Achievements.Blowing	= {
 
 //エミット
 Achievements.Emit	= {
-	Many01:			{Key:"Emit.Many01",		IsPublic:true,	Count:150,	Replacements:[L.Text("GamePlay.Emitting.Unit")],	},	// 約28回
-	Many02:			{Key:"Emit.Many02",		IsPublic:true,	Count:160,	Replacements:[L.Text("GamePlay.Emitting.Unit")],	},	// 約35回
-	Many03:			{Key:"Emit.Many03",		IsPublic:true,	Count:170,	Replacements:[L.Text("GamePlay.Emitting.Unit")],	},	// 約42回
-	Many04:			{Key:"Emit.Many04",		IsPublic:true,	Count:180,	Replacements:[L.Text("GamePlay.Emitting.Unit")],	},	// 約50回
+	Many01:			{Key:"Emit.Many01",		IsPublic:true,	Count:150,	Replacements:[L.Text("Unit.Emit")],	},	// 約28回
+	Many02:			{Key:"Emit.Many02",		IsPublic:true,	Count:160,	Replacements:[L.Text("Unit.Emit")],	},	// 約35回
+	Many03:			{Key:"Emit.Many03",		IsPublic:true,	Count:170,	Replacements:[L.Text("Unit.Emit")],	},	// 約42回
+	Many04:			{Key:"Emit.Many04",		IsPublic:true,	Count:180,	Replacements:[L.Text("Unit.Emit")],	},	// 約50回
 };
 
 //チェックポイント到達
 Achievements.CheckPoint	= {
-	Venus:			{Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("GamePlay.Distance.Unit")],	},	//金星
-	Mars:			{Key:"Check.Mars",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mars,   L.Text("GamePlay.Distance.Unit")],	},	//火星
-	Mercury:		{Key:"Check.Mercury",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mercury,L.Text("GamePlay.Distance.Unit")],	},	//水星
-	Sun:			{Key:"Check.Sun",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Sun,    L.Text("GamePlay.Distance.Unit")],	},	//太陽
-	Kirari:			{Key:"Check.Kirari",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Kirari, L.Text("GamePlay.Distance.Unit")],	},	//諸星きらり
-	Unicorn:		{Key:"Check.Unicorn",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Unicorn,L.Text("GamePlay.Distance.Unit")],	},	//ピンクのユニコーン
+	Venus:			{Key:"Check.Venus",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("Unit.Distance")],	},	//金星
+	Mars:			{Key:"Check.Mars",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mars,   L.Text("Unit.Distance")],	},	//火星
+	Mercury:		{Key:"Check.Mercury",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mercury,L.Text("Unit.Distance")],	},	//水星
+	Sun:			{Key:"Check.Sun",		IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Sun,    L.Text("Unit.Distance")],	},	//太陽
+	Kirari:			{Key:"Check.Kirari",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Kirari, L.Text("Unit.Distance")],	},	//諸星きらり
+	Unicorn:		{Key:"Check.Unicorn",	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Unicorn,L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 };
 
 //ユーザアクション
