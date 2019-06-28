@@ -336,6 +336,17 @@ Label	= class Label{
 		return this;
 	}
 
+	/** アンカーポイント設定
+	 * @param {number} x 0.0-1.0
+	 * @param {number} y 0.0-1.0
+	 * @returns
+	 */
+	SetAnchorPoint(x,y){
+		this.entity.setAnchorPoint(cc.p(x,y));
+		if(this.bg.IsEnabled())	this.bg.entity.setAnchorPoint(cc.p(x,y));
+		return this;
+	}
+
 };
 
 //ラベル背景
