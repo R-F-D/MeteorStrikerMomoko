@@ -104,44 +104,44 @@ Texts	= {
 	//実績 Achievement
 	"Achievement.Unlocked" :	{_:"Achievement Unlocked!!",	ja:"実績解除!",	}, //実績解除ラベル
 
-	"Achievement.Aiming.ManyPerfect.Title":				{_:"Perfect Sun",								ja:"パーフェクトサン",	}, //パーフェクト一定回数
-	"Achievement.Aiming.ManyPerfect.Description":		{_:"Got $0 perfect aims.",						ja:"$0回パーフェクトを出した",	},
-	"Achievement.Aiming.ManyGood.Title":				{_:"Good-Aims, Baby",	}, //グッド以上を一定回数
-	"Achievement.Aiming.ManyGood.Description":			{_:"Got $0 good or better aims",				ja:"$0回グッド以上を出した",	}, //
-	"Achievement.Aiming.TruePerfect.Title":				{_:"Self-Styled Perfect",						ja:"自称・カンペキ",	}, //100%エイム
-	"Achievement.Aiming.TruePerfect.Description":		{_:"Succeeded in 100% aim.",					ja:"100%エイムに成功した",	}, //
-	"Achievement.Blowing.ManyHard.Title":				{_:"ART NEEDS HARD-BLOWS",	}, //強打を一定回数
-	"Achievement.Blowing.ManyHard.Description":			{_:"Hardblowed $0 times.",						ja:"$0回強打した",	}, //
-	"Achievement.Blowing.HardAndPerfect.Title":			{_:"Perfect Hard☆",								ja:"パーフェクトっすハード☆",	}, //強打かつパーフェクト
-	"Achievement.Blowing.HardAndPerfect.Description":	{_:"Hardblowed with a perfect aim.",			ja:"強打でパーフェクトを出した",	}, //
-	"Achievement.Blowing.SuccessiveHits.Title":			{_:"Into Perpetual Hit Machines, L'Antica!",	ja:" 永久ヒットにしてゆくよ \"安定化!\"",	}, //打撃を連続成功
-	"Achievement.Blowing.SuccessiveHits.Description":	{_:"Hit $0 times in a row without failure.",	ja:"失敗せずに$0回連続で打撃をヒットさせた",	}, //
-	"Achievement.Emit.Many01.Title":					{_:"Gentle Emt",								ja:"Gentleエミット",	}, //エミット回数実績その1
-	"Achievement.Emit.Many01.Description":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
-	"Achievement.Emit.Many02.Title":					{_:"Wild Emit",									ja:"Wildエミット",	}, //エミット回数実績その2
-	"Achievement.Emit.Many02.Description":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
-	"Achievement.Emit.Many03.Title":					{_:"Dangerous Emit",							ja:"Dangerousエミット",}, //エミット回数実績その3
-	"Achievement.Emit.Many03.Description":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
-	"Achievement.Emit.Many04.Title":					{_:"Over-emit",									ja:"オーバーエミット",	}, //エミット回数実績その4
-	"Achievement.Emit.Many04.Description":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
+	"Achievement.Aiming.ManyPerfect":			{_:"Perfect Sun",								ja:"パーフェクトサン",	}, //パーフェクト一定回数
+	"Achievement.Aiming.ManyPerfect.Text":		{_:"Got $0 perfect aims.",						ja:"$0回パーフェクトを出した",	},
+	"Achievement.Aiming.ManyGood":				{_:"Good-Aims, Baby",	}, //グッド以上を一定回数
+	"Achievement.Aiming.ManyGood.Text":			{_:"Got $0 good or better aims",				ja:"$0回グッド以上を出した",	}, //
+	"Achievement.Aiming.TruePerfect":			{_:"Self-Styled Perfect",						ja:"自称・カンペキ",	}, //100%エイム
+	"Achievement.Aiming.TruePerfect.Text":		{_:"Succeeded in 100% aim.",					ja:"100%エイムに成功した",	}, //
+	"Achievement.Blowing.ManyHard":				{_:"ART NEEDS HARD-BLOWS",	}, //強打を一定回数
+	"Achievement.Blowing.ManyHard.Text":		{_:"Hardblowed $0 times.",						ja:"$0回強打した",	}, //
+	"Achievement.Blowing.HardAndPerfect":		{_:"Perfect Hard☆",								ja:"パーフェクトっすハード☆",	}, //強打かつパーフェクト
+	"Achievement.Blowing.HardAndPerfect.Text":	{_:"Hardblowed with a perfect aim.",			ja:"強打でパーフェクトを出した",	}, //
+	"Achievement.Blowing.SuccessiveHits":		{_:"Into Perpetual Hit Machines, L'Antica!",	ja:" 永久ヒットにしてゆくよ \"安定化!\"",	}, //打撃を連続成功
+	"Achievement.Blowing.SuccessiveHits.Text":	{_:"Hit $0 times in a row without failure.",	ja:"失敗せずに$0回連続で打撃をヒットさせた",	}, //
+	"Achievement.Emit.Many01":					{_:"Gentle Emt",								ja:"Gentleエミット",	}, //エミット回数実績その1
+	"Achievement.Emit.Many01.Text":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
+	"Achievement.Emit.Many02":					{_:"Wild Emit",									ja:"Wildエミット",	}, //エミット回数実績その2
+	"Achievement.Emit.Many02.Text":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
+	"Achievement.Emit.Many03":					{_:"Dangerous Emit",							ja:"Dangerousエミット",}, //エミット回数実績その3
+	"Achievement.Emit.Many03.Text":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
+	"Achievement.Emit.Many04":					{_:"Over-emit",									ja:"オーバーエミット",	}, //エミット回数実績その4
+	"Achievement.Emit.Many04.Text":				{_:"Emitted $0$1 and more.",					ja:"エミット倍率$0$1以上を出した",},
 
-	"Achievement.Check.Venus.Title":					{_:"Do You Know Venus?",	}, //金星到達
-	"Achievement.Check.Venus.Description":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
-	"Achievement.Check.Mars.Title":						{_:"Beyond The Mars",							ja:"ビヨンドザマーズ",	}, //火星到達
-	"Achievement.Check.Mars.Description":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
-	"Achievement.Check.Mercury.Title":					{_:"Go Straight Ahead, Cross Over Mercury", 	ja:"まっすぐ進め 水星越えて",	}, //水星到達
-	"Achievement.Check.Mercury.Description":			{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
-	"Achievement.Check.Sun.Title":						{_:"BEYOND THE SUNLIGHT",	}, //太陽到達
-	"Achievement.Check.Sun.Description":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
-	"Achievement.Check.Kirari.Title":					{_:"Kirari, The Row of Light",					ja:"キラリ 光の列",	}, //諸星きらり到達
-	"Achievement.Check.Kirari.Description":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
-	"Achievement.Check.Unicorn.Title":					{_:"Tell Me the Pink Unicorn...",				ja:"教えてpink unicorn...",	}, //2.5億km到達
-	"Achievement.Check.Unicorn.Description":			{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Venus":					{_:"Do You Know Venus?",	}, //金星到達
+	"Achievement.Check.Venus.Text":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Mars":					{_:"Beyond The Mars",							ja:"ビヨンドザマーズ",	}, //火星到達
+	"Achievement.Check.Mars.Text":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Mercury":				{_:"Go Straight Ahead, Cross Over Mercury", 	ja:"まっすぐ進め 水星越えて",	}, //水星到達
+	"Achievement.Check.Mercury.Text":			{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Sun":					{_:"BEYOND THE SUNLIGHT",	}, //太陽到達
+	"Achievement.Check.Sun.Text":				{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Kirari":					{_:"Kirari, The Row of Light",					ja:"キラリ 光の列",	}, //諸星きらり到達
+	"Achievement.Check.Kirari.Text":			{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
+	"Achievement.Check.Unicorn":				{_:"Tell Me the Pink Unicorn...",				ja:"教えてpink unicorn...",	}, //2.5億km到達
+	"Achievement.Check.Unicorn.Text":			{_:"Flew the meteorite over $1$2.",				ja:"隕石を$1$2以上吹っ飛ばした",	}, //
 
-	"Achievement.Action.FirstPlay.Title":				{_:"For Save The Earch Crisis",					ja:"地球の危機を救うため",	}, //初プレイ
-	"Achievement.Action.FirstPlay.Description":			{_:"Stopped the meteorite and saved the Earch.",ja:"隕石を食い止めて世界を救った",	}, //
-	"Achievement.Action.Share.Title":					{_:"Shared Your Result",						ja:"結果をシェアして",	}, //結果シェア
-	"Achievement.Action.Share.Description":				{_:"We post $0 tweets.",						ja:"ツイート✕$0投稿するんだ",	}, //
+	"Achievement.Action.FirstPlay":				{_:"For Save The Earch Crisis",					ja:"地球の危機を救うため",	}, //初プレイ
+	"Achievement.Action.FirstPlay.Text":		{_:"Stopped the meteorite and saved the Earch.",ja:"隕石を食い止めて世界を救った",	}, //
+	"Achievement.Action.Share":					{_:"Shared Your Result",						ja:"結果をシェアして",	}, //結果シェア
+	"Achievement.Action.Share.Text":			{_:"We post $0 tweets.",						ja:"ツイート✕$0投稿するんだ",	}, //
 }
 
 
