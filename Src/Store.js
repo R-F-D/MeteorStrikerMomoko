@@ -81,6 +81,18 @@ class Store{
 		return value;
 	};
 
+	/** ローカルストレージからのロード
+	 * @static
+	 * @param {string} key				ストレージのハンドル
+	 * @param {*} [defaultValue=null]	デフォルト値
+	 * @returns
+	 * @memberof Store
+	 */
+	static Select(handle,defaultValue=null){
+		if(typeof handle==="string")	return cc.sys.localStorage.getItem(handle) || defaultValue;
+		else							return cc.sys.localStorage.getItem(handle.Key) || defaultValue;
+	}
+
 	/** 表示可能なレコードのハンドル一覧を得る
 	 * @readonly
 	 * @static
