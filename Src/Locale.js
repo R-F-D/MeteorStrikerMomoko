@@ -281,11 +281,18 @@ LocaleSettings	= class{
 		else				return chunks;
 	}
 
+	/** 地域設定のセーブ
+	 * @returns this
+	 */
 	Save(){
 		Store.Insert( Store.Handles.Settings.Language,			this.language,			null	);
 		Store.Insert( Store.Handles.Settings.NumberSeparation,	this.numericSeparation,	null	);
 		return this;
 	}
+
+	/** 地域設定のロード
+	 * @returns this
+	 */
 	Load(){
 		this.SetLanguage(			Store.Select(Store.Handles.Settings.Language,			"ja"));
 		this.SetNumberSeparation(	Store.Select(Store.Handles.Settings.NumberSeparation,	"ja"));
