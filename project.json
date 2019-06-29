@@ -30,6 +30,7 @@
 
 		"Src/Const.js",
 		"Src/Store.js",
+		"Src/Language.js",
 		"Src/Locale.js",
 		"Src/Achievement.js",
 		"Src/Aiming.js",
