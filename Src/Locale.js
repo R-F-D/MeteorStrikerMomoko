@@ -282,8 +282,8 @@ LocaleSettings	= class{
 	}
 
 	Save(){
-		Store.Insert( Store.Handles.Settings.Language,			this.language,			()=>true	);
-		Store.Insert( Store.Handles.Settings.NumberSeparation,	this.numericSeparation,	()=>true	);
+		Store.Insert( Store.Handles.Settings.Language,			this.language,			null	);
+		Store.Insert( Store.Handles.Settings.NumberSeparation,	this.numericSeparation,	null	);
 		return this;
 	}
 	Load(){
