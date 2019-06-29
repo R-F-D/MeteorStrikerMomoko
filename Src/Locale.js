@@ -280,9 +280,20 @@ LocaleSettings	= class{
 		if(truncated > 0)	return this._SplitNumber(truncated,nDigits,chunks);
 		else				return chunks;
 	}
+
+	Save(){
+		Store.Insert( Store.Handles.Settings.Language,			this.language,			()=>true	);
+		Store.Insert( Store.Handles.Settings.NumberSeparation,	this.numericSeparation,	()=>true	);
+		return this;
+	}
+	Load(){
+		this.SetLanguage(			Store.Select(Store.Handles.Settings.Language,			"ja"));
+		this.SetNumberSeparation(	Store.Select(Store.Handles.Settings.NumberSeparation,	"ja"));
+		return this;
+	}
 };
 
 
 })();	//File Scope
 
-var L	= (new LocaleSettings()).SetLanguage("ja").SetNumberSeparation("ja");
+var L	= (new LocaleSettings()).Load().Save();

@@ -37,6 +37,13 @@ class Store{
 				/** @const プレイ回数 */
 				NumPlayings:				{Key:"Action.NumPlayings",					UnitKey:null,			Required:0,		Order:0x0100,	nDecimalDigits:0,	},
 			},
+
+			Settings:{
+				/** @const 言語設定 */
+				Language:					{Key:"Settings.Language",					UnitKey:null,			Required:null,		Order:0x0100,	nDecimalDigits:0,	},
+				/** @const 数値の区切り設定 */
+				NumberSeparation:			{Key:"Settings.NumberSeparation",			UnitKey:null,			Required:null,		Order:0x0100,	nDecimalDigits:0,	},
+			},
 		};
 	};
 
