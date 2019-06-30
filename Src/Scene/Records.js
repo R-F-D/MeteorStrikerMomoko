@@ -46,7 +46,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//Labels
-					_this.labels.records	= _.range(Store.visibleHandles.length).map(l=> Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true) );
+					_this.labels.records	= _.range( Store.GetVisibleHandles().length )
+												.map( l=>	Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true) );
 
 					return true;
 				},
@@ -125,7 +126,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			const handles	= Store.visibleHandles;
+			const handles	= Store.GetVisibleHandles(0);
 
 			//ラベル
 			this.labels.records
