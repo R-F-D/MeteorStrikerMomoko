@@ -7,51 +7,47 @@ class Store{
 	static get Handles(){
 		let container	= {
 			GamePlay: {
-				/** @const ハイスコア*/
-				HighScore:					{Required:0,		Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
-				/** @const グッド回数 */
-				NumGoods:					{Required:0,		Order:0x0200,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const パーフェクト回数 */
-				NumPerfects:				{Required:0,		Order:0x0201,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const 100%パーフェクト回数 */
-				NumTruePerfects:			{Required:1,		Order:0x0202,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const エイミング精度最高値 */
-				BestAiming:					{Required:0,		Order:0x0203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
-				/** @const 強打回数 */
-				NumHardBlowings:			{Required:0,		Order:0x0300,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const 軽打回数 */
-				NumLightBlowings:			{Required:0,		Order:0x0301,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const 最高打撃力 */
-				BestBlowing:				{Required:0,		Order:0x0302,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
-				/** @const 強打とパーフェクトを同時に出した回数 */
-				NumHardAndPerfectBlowings:	{Required:1,		Order:0x0303,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const 連続で打撃に成功した数 */
+				/** ハイスコア*/
+				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+				/** グッド回数 */
+				NumGoods:					{Required:0,	Order:0x0200,	nDecimalDigits:0,	UnitKey:null,			},
+				/** パーフェクト回数 */
+				NumPerfects:				{Required:0,	Order:0x0201,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 100%パーフェクト回数 */
+				NumTruePerfects:			{Required:1,	Order:0x0202,	nDecimalDigits:0,	UnitKey:null,			},
+				/** エイミング精度最高値 */
+				BestAiming:					{Required:0,	Order:0x0203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
+				/** 強打回数 */
+				NumHardBlowings:			{Required:0,	Order:0x0300,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 軽打回数 */
+				NumLightBlowings:			{Required:0,	Order:0x0301,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 最高打撃力 */
+				BestBlowing:				{Required:0,	Order:0x0302,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				/** 強打＆パーフェクト回数 */
+				NumHardAndPerfectBlowings:	{Required:1,	Order:0x0303,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 連続打撃成功数 */
 				NumSuccessiveHits:			{},
-				/** @const 連続で打撃に成功した最多数 */
-				MaxSuccessiveHits:			{Required:0,		Order:0x0304,	nDecimalDigits:0,	UnitKey:null,			},
-				/** @const 最大エミット倍率 */
-				MaxEmittings:				{Required:0,		Order:0x0400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				/** 最高連続打撃成功数 */
+				MaxSuccessiveHits:			{Required:0,	Order:0x0304,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 最大エミット倍率 */
+				MaxEmittings:				{Required:0,	Order:0x0400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 			},
-
 			Action: {
-				/** @const プレイ回数 */
-				NumPlayings:				{Required:0,		Order:0x1100,	nDecimalDigits:0,	UnitKey:null,			},
+				/** プレイ回数 */
+				NumPlayings:				{Required:0,	Order:0x1100,	nDecimalDigits:0,	UnitKey:null,			},
 			},
-
 			Settings:{
-				/** @const 言語設定 */
+				/** 言語設定 */
 				Language:					{},
-				/** @const 数値の区切り設定 */
+				/** 数値の区切り設定 */
 				NumberSeparation:			{},
 			},
 		};
 
 		//Keyプロパティの生成
-		_(container).forEach(
-			( handles,category) =>	_(handles).forEach(
-				(h,key) =>	h.Key = `${category}.${key}`
-			)
-		);
+		_(container).forEach( (handles,category) =>	_(handles).forEach(
+			(h,key) =>	h.Key = `${category}.${key}`
+		));
 		return container;
 	};
 
@@ -147,7 +143,7 @@ class Store{
 		};
 	};
 
-	/** @const 挿入値の生成関数
+	/** 挿入値の生成関数
 	 * @type {<string,function>}	f(value):any
 	 */
 	static get Gens() {
