@@ -5,46 +5,54 @@ class Store{
 
 	/** ストレージのレコードハンドル */
 	static get Handles(){
-		return {
+		let container	= {
 			GamePlay: {
 				/** @const ハイスコア*/
-				HighScore:					{Key:"GamePlay.HighScore",					Required:0,		Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+				HighScore:					{Required:0,		Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
 				/** @const グッド回数 */
-				NumGoods:					{Key:"GamePlay.NumGoods",					Required:0,		Order:0x0200,	nDecimalDigits:0,	UnitKey:null,			},
+				NumGoods:					{Required:0,		Order:0x0200,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const パーフェクト回数 */
-				NumPerfects:				{Key:"GamePlay.NumPerfects",				Required:0,		Order:0x0201,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPerfects:				{Required:0,		Order:0x0201,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const 100%パーフェクト回数 */
-				NumTruePerfects:			{Key:"GamePlay.NumTruePerfects",			Required:1,		Order:0x0202,	nDecimalDigits:0,	UnitKey:null,			},
+				NumTruePerfects:			{Required:1,		Order:0x0202,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const エイミング精度最高値 */
-				BestAiming:					{Key:"GamePlay.BestAiming",					Required:0,		Order:0x0203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
+				BestAiming:					{Required:0,		Order:0x0203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
 				/** @const 強打回数 */
-				NumHardBlowings:			{Key:"GamePlay.NumHardBlowings",			Required:0,		Order:0x0300,	nDecimalDigits:0,	UnitKey:null,			},
+				NumHardBlowings:			{Required:0,		Order:0x0300,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const 軽打回数 */
-				NumLightBlowings:			{Key:"GamePlay.NumLightBlowings",			Required:0,		Order:0x0301,	nDecimalDigits:0,	UnitKey:null,			},
+				NumLightBlowings:			{Required:0,		Order:0x0301,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const 最高打撃力 */
-				BestBlowing:				{Key:"GamePlay.BestBlowing",				Required:0,		Order:0x0302,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				BestBlowing:				{Required:0,		Order:0x0302,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** @const 強打とパーフェクトを同時に出した回数 */
-				NumHardAndPerfectBlowings:	{Key:"GamePlay.NumHardAndPerfectBlowings",	Required:1,		Order:0x0303,	nDecimalDigits:0,	UnitKey:null,			},
+				NumHardAndPerfectBlowings:	{Required:1,		Order:0x0303,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const 連続で打撃に成功した数 */
-				NumSuccessiveHits:			{Key:"GamePlay.NumSuccessiveusHits",	},
+				NumSuccessiveHits:			{},
 				/** @const 連続で打撃に成功した最多数 */
-				MaxSuccessiveHits:			{Key:"GamePlay.MaxSuccessiveusHits",		Required:0,		Order:0x0304,	nDecimalDigits:0,	UnitKey:null,			},
+				MaxSuccessiveHits:			{Required:0,		Order:0x0304,	nDecimalDigits:0,	UnitKey:null,			},
 				/** @const 最大エミット倍率 */
-				MaxEmittings:				{Key:"GamePlay.MaxEmittings",				Required:0,		Order:0x0400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MaxEmittings:				{Required:0,		Order:0x0400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 			},
 
 			Action: {
 				/** @const プレイ回数 */
-				NumPlayings:				{Key:"Action.NumPlayings",					Required:0,		Order:0x1100,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPlayings:				{Required:0,		Order:0x1100,	nDecimalDigits:0,	UnitKey:null,			},
 			},
 
 			Settings:{
 				/** @const 言語設定 */
-				Language:					{Key:"Settings.Language",				},
+				Language:					{},
 				/** @const 数値の区切り設定 */
-				NumberSeparation:			{Key:"Settings.NumberSeparation",		},
+				NumberSeparation:			{},
 			},
 		};
+
+		//Keyプロパティの生成
+		_(container).forEach(
+			( handles,category) =>	_(handles).forEach(
+				(h,key) =>	h.Key = `${category}.${key}`
+			)
+		);
+		return container;
 	};
 
 
