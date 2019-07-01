@@ -461,7 +461,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					this.labels.navigation
 						.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
 						.SetVisible(true);
-					Achievement.Unlock(Achievements.CheckPoint[passingPoint.key],1);
+					Achievement.Unlock(Achievements.Check[passingPoint.key],1);
 				}
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
@@ -507,7 +507,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//ハイスコア基準のチェックポイント実績
 				C.CheckPoints
 					.filter( c=> c.distance<=highScore )
-					.forEach(c=> Achievement.Unlock(Achievements.CheckPoint[c.key],1) );
+					.forEach(c=> Achievement.Unlock(Achievements.Check[c.key],1) );
 
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
