@@ -277,11 +277,11 @@ const LocalizedTexts	= {
 			ja:	"$0回",
 		},
 		//失敗せずに連続して打撃を成功させた数 Hits in a Row Without Failure.",
-		"Records.GamePlay.MaxSuccessiveusHits":{
-			_:	"Max Successiveus Hits",
+		"Records.GamePlay.MaxSuccessiveHits":{
+			_:	"Max Successive Hits",
 			ja:	"連続ヒット",
 		},
-		"Records.GamePlay.MaxSuccessiveusHits.Format":{
+		"Records.GamePlay.MaxSuccessiveHits.Format":{
 			_:	"$0",
 			ja:	"$0回",
 		},
