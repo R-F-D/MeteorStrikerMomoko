@@ -5,7 +5,7 @@ const C = (()=>{let C={}; //file scope
 
 
 /** @const チェックポイント距離 */
-C.CheckPoints	= [
+C.Check	= [
 	{	key:"Start",	distance:0,			},
 	{	key:"Venus",	distance:42000000,	},
 	{	key:"Mars",		distance:70000000,	},

@@ -25,12 +25,12 @@ const Achievements = (()=>{		//Achievements scoop
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
-		Venus			:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Venus,  L.Text("Unit.Distance")],	},	//金星
-		Mars			:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mars,   L.Text("Unit.Distance")],	},	//火星
-		Mercury			:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Mercury,L.Text("Unit.Distance")],	},	//水星
-		Sun				:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Sun,    L.Text("Unit.Distance")],	},	//太陽
-		Kirari			:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Kirari, L.Text("Unit.Distance")],	},	//諸星きらり
-		Unicorn			:{	IsPublic:true,	Count:1,	Replacements:[C.CheckPoints.Unicorn,L.Text("Unit.Distance")],	},	//ピンクのユニコーン
+		Venus			:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Venus,  L.Text("Unit.Distance")],	},	//金星
+		Mars			:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Mars,   L.Text("Unit.Distance")],	},	//火星
+		Mercury			:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Mercury,L.Text("Unit.Distance")],	},	//水星
+		Sun				:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Sun,    L.Text("Unit.Distance")],	},	//太陽
+		Kirari			:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Kirari, L.Text("Unit.Distance")],	},	//諸星きらり
+		Unicorn			:{	IsPublic:true,	Count:1,	Replacements:[C.Check.Unicorn,L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 	};
 	//ユーザアクション
 	Achievements.Action	= {

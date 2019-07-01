@@ -456,7 +456,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const newDistance	= this.GetDistanceInKm();
 
 				//前フレームの距離と現フレームの距離を見て、超えた瞬間にセリフを出す
-				const passingPoint	= C.CheckPoints.find(c=> oldDistance<=c.distance && c.distance<=newDistance);
+				const passingPoint	= C.Check.find(c=> oldDistance<=c.distance && c.distance<=newDistance);
 				if(passingPoint){
 					this.labels.navigation
 						.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
@@ -505,7 +505,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("Unit.Distance")] ),null).SetVisible(true);
 
 				//ハイスコア基準のチェックポイント実績
-				C.CheckPoints
+				C.Check
 					.filter( c=> c.distance<=highScore )
 					.forEach(c=> Achievement.Unlock(Achievements.Check[c.key],1) );
 
