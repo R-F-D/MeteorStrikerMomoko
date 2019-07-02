@@ -376,6 +376,7 @@ class LabelBg{
 		this.imgWidth	= 128;
 		this.imgHeight	= 128;
 		this.animation	= BgAnimation.None;
+		this.animationDelay	= 0.0;
 
 		/** @const  */
 		this.easeFunc	= ()=>cc.easeBackOut(10);
@@ -493,6 +494,7 @@ class LabelBg{
 			const hides	= newScale.x<=0 || newScale.y<=0;
 			this.entity.attr({opacity:this.OPACITY});
 			this.entity.runAction(cc.sequence(
+				cc.delayTime(this.animationDelay),
 				cc.scaleTo(isFast?0.2:0.4, newScale.x,newScale.y).easing(hides ? cc.easeElasticOut(10) : this.easeFunc()),
 				cc.callFunc(()=>{
 					if(hides)	this.entity.attr({opacity:0});

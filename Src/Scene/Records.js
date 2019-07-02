@@ -148,7 +148,8 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					const x	= (i%2) * (160+4);
 					const y	= Math.trunc(i/2) * (32+4);
-					label.bg.lower	= {width:160, height:32};
+					label.bg.lower			= {width:160, height:32};
+					label.bg.animationDelay	= 0.05*i;
 					label
 						.SetVisible(true)
 						.SetAnchorPoint(0.0, 0.5)
