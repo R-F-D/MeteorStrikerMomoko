@@ -46,8 +46,11 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//Labels
-					_this.labels.records	= _.range( Store.GetVisibleHandles().length )
-												.map( l=>	Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true) );
+					_this.labels.records	= _.range( Store.GetVisibleHandles().length ).map( h=>	{
+						const l	= Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true);
+						l.bg.easeFunc	= ()=>cc.easeElasticOut(10);
+						return l;
+					});
 
 					return true;
 				},
