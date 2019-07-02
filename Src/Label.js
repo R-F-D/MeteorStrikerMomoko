@@ -249,7 +249,15 @@ Label	= class Label{
 		return this;
 	}
 
-	RemoveString(){return this.SetString("",false,true)}
+	/** テキスト削除
+	 * @param {boolean} [lowerLimitEnables=true] 背景の下限値が設定されている場合、それを有効のままとするか
+	 * @returns
+	 */
+	RemoveString(lowerLimitEnables=true){
+		if(!lowerLimitEnables && this.bg.IsEnabled())	this.bg.lower={width:0,height:0};
+		return this.SetString("",false,true);
+	}
+
 	SetTempText(text){return this.SetString(text,true)}
 	RemoveTempText(text){return this.SetString(this.text,false)}
 
