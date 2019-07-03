@@ -23,9 +23,9 @@ Scene.Records	= class extends Scene.SceneBase {
 			ACHIEVEMENTS:	null,	//実績一覧
 		};
 
-		this.sprites	= {};
-		this.buttons	= {};
-		this.labels		= {};
+		this.sprites		= {};
+		this.buttons		= {};
+		this.displayBoards	= [];	//表示板
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -45,11 +45,12 @@ Scene.Records	= class extends Scene.SceneBase {
 					this._super();
 					this.scheduleUpdate();
 
-					//Labels
-					_this.labels.records	= _.range( Store.GetVisibleHandles().length ).map( h=>	{
-						const l	= Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true);
-						l.bg.easeFunc	= ()=>cc.easeElasticOut(10);
-						return l;
+					//表示板
+					_this.displayBoards	= _.range( Store.GetVisibleHandles().length ).map( h=>	{
+						const head		= Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5).SetColor("#FFFF00");
+						const counter	= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5).SetColor("#FFFFFF");
+						head.bg.easeFunc	= ()=>cc.easeElasticOut(10);
+						return {head:head,counter:counter};
 					});
 
 					return true;
@@ -103,7 +104,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
-		this.labels.records.forEach( label=>label.Update(dt) );
+		this.displayBoards.forEach( board=>board.head.Update(dt) );
 		return this;
 	}
 
@@ -113,8 +114,8 @@ Scene.Records	= class extends Scene.SceneBase {
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 			//ラベル
-			this.labels.records
-				.forEach(label=> label.Init().SetColor("FFFFFF").SetNumLogLines(2) );
+			this.displayBoards
+				.forEach(board=> board.head.Init().SetNumLogLines(2) );
 
 			//インタフェース
 			this.buttons.at("Reset")
@@ -132,15 +133,17 @@ Scene.Records	= class extends Scene.SceneBase {
 			const handles	= Store.GetVisibleHandles(0);
 
 			//ラベル
-			this.labels.records
-				.forEach((label,i)=>{
+			this.displayBoards
+				.forEach((board,i)=>{
 					if(i>=handles.length){
-						label.SetVisible(false);
+						board.head.SetVisible(false);
+						board.counter.SetVisible(false);
 						return;
 					}
 
-					//テキスト
+					//ヘッダ
 					const text		= L.Text(`Records.${handles[i].Key}`);
+					//カウンタ
 					const count		= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
 					let patterns	= [count];
 					if(L.TextExists(handles[i].UnitKey))	patterns.push(L.Text(handles[i].UnitKey));
@@ -148,16 +151,22 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					const x	= (i%2) * (160+4);
 					const y	= Math.trunc(i/2) * (32+4);
-					label.bg.lower			= {width:160, height:32};
-					label.bg.animationDelay	= 0.05*i;
-					label
+					board.head.bg.lower			= {width:160, height:32};
+					board.head.bg.animationDelay	= 0.05*i;
+					board.head
 						.SetVisible(true)
-						.SetAnchorPoint(0.0, 0.5)
 						.SetPosition(96+x,240-y)
-						.SetString(`${text}\n${fmtCount}`);
+						.SetString(`${text}`);
+					board.counter
+						.SetVisible(false)
+						.SetPosition(96+x+160-2,240-y-6)
+						.SetString(`${fmtCount}`);
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
+			this.displayBoards.forEach((board,i)=>{
+				if(board.head.IsVisible() && !board.head.bg.IsRunningActions())		board.counter.SetVisible(true);
+			});
 		});
 		return this;
 	}
