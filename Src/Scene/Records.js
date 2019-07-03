@@ -11,6 +11,10 @@ const LinkedLayerTags	= {
 	UI:		"Records.Ui",
 };
 
+const PanelPosition		= {X:96,Y:240};
+const MaxDisplayBoards	= 12;
+const DisplayBoardSize	= {Width:160,Height:32};
+
 
 Scene.Records	= class extends Scene.SceneBase {
 
@@ -46,7 +50,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//表示板
-					_this.displayBoards	= _.range( Store.GetVisibleHandles().length ).map( h=>	{
+					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>	{
 						const body		= Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5).SetColor("#FFFF00");
 						const counter	= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5).SetColor("#FFFFFF");
 						body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
@@ -149,17 +153,17 @@ Scene.Records	= class extends Scene.SceneBase {
 					if(L.TextExists(handles[i].UnitKey))	patterns.push(L.Text(handles[i].UnitKey));
 					const fmtCount	= !L.TextExists(`Records.${handles[i].Key}.Format`) ? `${count}` : L.Textf( `Records.${handles[i].Key}.Format`, patterns );
 
-					const x	= (i%2) * (160+4);
-					const y	= Math.trunc(i/2) * (32+4);
-					board.body.bg.lower			= {width:160, height:32};
+					const x	= (i%2) * (DisplayBoardSize.Width+4);
+					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
+					board.body.bg.lower			= {width:DisplayBoardSize.Width, height:DisplayBoardSize.Height};
 					board.body.bg.animationDelay	= 0.05*i;
 					board.body
 						.SetVisible(true)
-						.SetPosition(96+x,240-y)
-						.SetString(`${text}`);
+						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
+						.SetString(` ${text}`);
 					board.counter
 						.SetVisible(false)
-						.SetPosition(96+x+160-2,240-y-6)
+						.SetPosition(PanelPosition.X+x+DisplayBoardSize.Width-2,PanelPosition.Y-y-6)
 						.SetString(`${fmtCount}`);
 				});
 		})
