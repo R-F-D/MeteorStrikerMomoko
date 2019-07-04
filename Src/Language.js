@@ -208,7 +208,7 @@ const LocalizedTexts	= {
 		},
 		//グッド以上の回数 Good/Perfect Aims
 		"Records.GamePlay.NumGoods":{
-			_:	"Aimings of Good or Over",
+			_:	"Good Aimings",
 			ja:	"グッド以上",
 		},
 		"Records.GamePlay.NumGoods.Format":{
@@ -217,7 +217,7 @@ const LocalizedTexts	= {
 		},
 		//パーフェクト回数 Perfect Aims
 		"Records.GamePlay.NumPerfects":{
-			_:	"Aimings of Perfect",
+			_:	"Perfect Aimings",
 			ja:	"パーフェクト",
 		},
 		"Records.GamePlay.NumPerfects.Format":{
@@ -226,7 +226,7 @@ const LocalizedTexts	= {
 		},
 		//100%エイム回数 100% Aims
 		"Records.GamePlay.NumTruePerfects":{
-			_:	"Aimings of 100%",
+			_:	"100% Perfect Aimings",
 			ja:	"100%パーフェクト",
 		},
 		"Records.GamePlay.NumTruePerfects.Format":{
@@ -252,7 +252,7 @@ const LocalizedTexts	= {
 		},
 		//軽打回数 Lightblows
 		"Records.GamePlay.NumLightBlowings":{
-			_:	"Ligheblows",
+			_:	"Lightblows",
 			ja:	"軽打",
 		},
 		"Records.GamePlay.NumLightBlowings.Format":{
