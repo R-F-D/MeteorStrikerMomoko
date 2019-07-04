@@ -29,6 +29,7 @@ const NumericSeparators	= {
 	},
 };
 
+
 /********************************************************************************
  * ローカライズされたテキストの一覧
  * Hash of Localized Texts
@@ -55,31 +56,37 @@ const LocalizedTexts	= {
 			_:	"Play game",
 			ja:	"ゲームをプレイ",
 		},
+
 		//レコードボタン Records Button
 		"Title.Button.Records":{
 			_:	"Records and achievements",
 			ja:	"記録と実績",
 		},
+
 		//ヘルプボタン Help Button
 		"Title.Button.Help":{
 			_:	"How to play",
 			ja:	"ゲームの遊び方",
 		},
+
 		//設定ボタン Settings Button
 		"Title.Button.Settings":{
 			_:	"Settings",
 			ja:	"設定",
 		},
+
 		//ウェブページボタン Web Page Button
 		"Title.Button.WebPage":{
 			_:	"Go to the web page",
 			ja:	"ウェブページへ",
 		},
+
 		//クレジットボタン Credits Button
 		"Title.Button.Credits":{
 			_:	"Show credits",
 			ja:	"作ったひと",
 		},
+
 		//プレイヤーをクリック時 On Click The Player
 		"Title.Reaction.Player":{
 			_:	"Momoko dakedo.",
@@ -108,26 +115,29 @@ const LocalizedTexts	= {
 			_:	"Take aim and long tap to charge.",
 			ja:	"ねらいを定めて長押ししてね",
 		},
+
 		//チャージ動作中 Charging
 		"GamePlay.Navigator.Preliminary":{
 			_:	"Release to attack.",
 			ja:	"はなすと攻撃だよ",
 		},
+
 		//打撃失敗 Failed to Blow
 		"GamePlay.Navigator.Fail":{
 			_:	"Release at the right time.",
 			ja:	"タイミングよく はなしてね",
 		},
+
 		//エミット中 Emitting
 		"GamePlay.Navigator.Emit":{
 			_:	"The power rises with taps.",
 			ja:	"タップでパワーアップするよ",
 		},
+
 		//結果表示 Result
-		//	（ヤマト OPナレーション）
 		"GamePlay.Navigator.Leave":{
 			_:	"Momoko arrived at the Large Million Space\n$0 away from the Earth.",
-			ja:	"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",
+			ja:	"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",	//宇宙戦艦ヤマト OPナレーション
 		},
 
 		//リセットボタン説明 Reset Button
@@ -135,11 +145,13 @@ const LocalizedTexts	= {
 			_:	"You go back to the title screen.",
 			ja:	"タイトル画面にもどるよ",
 		},
+
 		//リトライボタン説明 Retry Button
 		"GamePlay.Navigator.Result.Retry":{
 			_:	"You play this game again.",
 			ja:	"もういちどゲームをやるよ",
 		},
+
 		//シェアボタン説明 Share Button
 		"GamePlay.Navigator.Result.Share":{
 			_:	"You post the score to Twitter.",
@@ -147,41 +159,41 @@ const LocalizedTexts	= {
 		},
 
 		//チェックポイント：開始 Check Point : Start
-		//	（おねがいティーチャー）
 		"GamePlay.Navigator.BrowAway.Start":{
 			_:	"Please Momoko!",
-			ja:	"おねがい☆桃子ちゃん",
+			ja:	"おねがい☆桃子ちゃん",	//おねがいティーチャー
 		},
+
 		//チェックポイント：金星 Check Point : Venus
-		//	（銀英伝）
 		"GamePlay.Navigator.BrowAway.Venus":{
 			_:	"Are you looking at Venus, Momoko?",
-			ja:	"金星を見ておいでですか、桃子ちゃん",
+			ja:	"金星を見ておいでですか、桃子ちゃん",	//銀河英雄伝説#01
 		},
+
 		//チェックポイント：火星 Check Point : Mars
-		//	（宇宙よりも遠い場所）
 		"GamePlay.Navigator.BrowAway.Mars":{
 			_:	"Here is a place futher than Mars.",
-			ja:	"火星よりも遠い場所だね",
+			ja:	"火星よりも遠い場所だブーストがね",	//宇宙よりも遠い場所
 		},
+
 		//チェックポイント：水星 Check Point : Mercury
-		//	（セーラームーン マーキュリー）
 		"GamePlay.Navigator.BrowAway.Mercury":{
 			_:	"I needa douse myself in water and repent.",
-			ja:	"水をかぶって反省しなきゃ…",
+			ja:	"水をかぶって反省しなきゃ…",	//セーラームーン マーキュリー
 		},
+
 		//チェックポイント：太陽 Check Point : Sun
-		//	（宇宙戦艦ヤマト#10）
 		"GamePlay.Navigator.BrowAway.Sun":{
 			_:	"Farewell, the sun!\nFrom the theater with love.",
-			ja:	"さようなら太陽！\nシアターより愛をこめて",
+			ja:	"さようなら太陽！\nシアターより愛をこめて",	//宇宙戦艦ヤマト#10
 		},
+
 		//チェックポイント：きらりんロボ通過 Check Point : Kirarin Robot
-		//	（ガンダム 人間よりMSが大切なんですか）
 		"GamePlay.Navigator.BrowAway.Kirari":{
 			_:	"Listen Momoko.\nAre you more far than Kirarin Robot?",
-			ja:	"桃子ちゃんはきらりんロボより遠方なんですか？",
+			ja:	"桃子ちゃんはきらりんロボより遠方なんですか？",	//機動戦士ガンダム 台詞「人間よりMSが大切なんですか」
 		},
+
 		//チェックポイント：最終 Check Point : Last
 		//	（ガンダム）
 		"GamePlay.Navigator.BrowAway.Unicorn":{
@@ -206,6 +218,7 @@ const LocalizedTexts	= {
 		"Records.GamePlay.HighScore.Format":{
 			_:	"$0$1",
 		},
+
 		//グッド以上の回数 Good/Perfect Aims
 		"Records.GamePlay.NumGoods":{
 			_:	"Good Aimings",
@@ -215,6 +228,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//パーフェクト回数 Perfect Aims
 		"Records.GamePlay.NumPerfects":{
 			_:	"Perfect Aimings",
@@ -224,6 +238,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//100%エイム回数 100% Aims
 		"Records.GamePlay.NumTruePerfects":{
 			_:	"100% Perfect Aimings",
@@ -233,6 +248,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//エイミング最高倍率 Best Aiming Rate
 		"Records.GamePlay.BestAiming":{
 			_:	"Best Aiming Rate",
@@ -241,6 +257,7 @@ const LocalizedTexts	= {
 		"Records.GamePlay.BestAiming.Format":{
 			_:	"$0$1",
 		},
+
 		//強打回数 Hardblows
 		"Records.GamePlay.NumHardBlowings":{
 			_:	"Hardblows",
@@ -250,6 +267,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//軽打回数 Lightblows
 		"Records.GamePlay.NumLightBlowings":{
 			_:	"Lightblows",
@@ -259,6 +277,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//打撃最高倍率 Best Blowing Rate
 		"Records.GamePlay.BestBlowing":{
 			_:	"Best Blowing Rate",
@@ -267,6 +286,7 @@ const LocalizedTexts	= {
 		"Records.GamePlay.BestBlowing.Format":{
 			_:	"$0$1",
 		},
+
 		//強打とパーフェクトを同時に出した回数 Hardblow and Perfect
 		"Records.GamePlay.NumHardAndPerfectBlowings":{
 			_:	"Hardblow And Perfect",
@@ -276,6 +296,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//失敗せずに連続して打撃を成功させた数 Hits in a Row Without Failure.",
 		"Records.GamePlay.MaxSuccessiveHits":{
 			_:	"Max Successive Hits",
@@ -285,6 +306,7 @@ const LocalizedTexts	= {
 			_:	"$0",
 			ja:	"$0回",
 		},
+
 		//エミット最高倍率 Best Emitting Rate
 		"Records.GamePlay.MaxEmittings":{
 			_:	"Max Emitting Rate",
@@ -311,15 +333,18 @@ const LocalizedTexts	= {
 		"GamePlay.Share.Format":{
 			_:	"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",
 		},
+
 		//ツイート文字列 Tweet Text
 		"GamePlay.Share.Text":{
 			_:	"Momoko flew the meteorite $0 $1 away!",
 			ja:	"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",
 		},
+
 		//ウェブページURL Web Page URL
 		"GamePlay.Share.URL":{
 			_:	"https://example.jp/",
 		},
+
 		//タグ Tag
 		"GamePlay.Share.Tags":{
 			_:	"MeteorStrikerMomoko",
@@ -339,98 +364,97 @@ const LocalizedTexts	= {
 		},
 
 		//パーフェクト一定回数 Many Perfect Blows
-		//	（パーフェクトサン）
 		"Achievement.Aiming.ManyPerfect":{
 			_:	"Perfect Sun",
-			ja:	"パーフェクトサン",
+			ja:	"パーフェクトサン",	//パーフェクトサン
 		},
 		"Achievement.Aiming.ManyPerfect.Text":{
 			_:	"Got $0 perfect aims.",
 			ja:	"$0回パーフェクトを出した",
 		},
+
 		//グッド以上を一定回数 Many Good/Perfect Blows
-		//	（Good-Sleep,Baby）
 		"Achievement.Aiming.ManyGood":{
-			_:	"Good-Aims, Baby",
+			_:	"Good-Aims, Baby",	//Good-Sleep,Baby
 		},
 		"Achievement.Aiming.ManyGood.Text":{
 			_:	"Got $0 good or better aims",
 			ja:	"$0回グッド以上を出した",
 		},
+
 		//100%エイム 100% Aim
-		//	（輿水幸子）
 		"Achievement.Aiming.TruePerfect":{
 			_:	"Self-Styled Perfect",
-			ja:	"自称・カンペキ",
+			ja:	"自称・カンペキ",	//輿水幸子
 		},
 		"Achievement.Aiming.TruePerfect.Text":{
 			_:	"Succeeded in 100% aim.",
 			ja:	"100%エイムに成功した",
 		},
+
 		//強打を一定回数 Many Hardblows
-		//	（ART NEEDS HAERT BEATS）
 		"Achievement.Blowing.ManyHard":{
-			_:	"ART NEEDS HARD-BLOWS",
+			_:	"ART NEEDS HARD-BLOWS",	//ART NEEDS HAERT BEATS
 		},
 		"Achievement.Blowing.ManyHard.Text":{
 			_:	"Hardblowed $0 times.",
 			ja:	"$0回強打した",
 		},
+
 		//強打かつパーフェクト Hardblow And Perfect Aim
-		//	（しゅがーはぁとレボリューション）
 		"Achievement.Blowing.HardAndPerfect":{
 			_:	"Perfect Hard☆",
-			ja:	"パーフェクトっすハード☆",
+			ja:	"パーフェクトっすハード☆",	//しゅがーはぁとレボリューション
 		},
 		"Achievement.Blowing.HardAndPerfect.Text":{
 			_:	"Hardblowed with a perfect aim.",
 			ja:	"強打でパーフェクトを出した",
 		},
+
 		//打撃を連続成功 Successive Hits Without Failure
-		//	（バベルシティグレイス）
 		"Achievement.Blowing.SuccessiveHits":{
 			_:	"Into Perpetual Hit Machines, L'Antica!",
-			ja:	"永久ヒットにしてゆくよ 安定化!",
+			ja:	"永久ヒットにしてゆくよ 安定化!",	//バベルシティグレイス
 		},
 		"Achievement.Blowing.SuccessiveHits.Text":{
 			_:	"Hit $0 times in a row without failure.",
 			ja:	"失敗せず$0回連続でヒットさせた",
 		},
+
 		//エミット回数実績その1 Emit Rate #01
-		//	（オーバーマスター）
 		"Achievement.Emit.Many01":{
 			_:	"Gentle Emt",
-			ja:	"Gentleエミット",
+			ja:	"Gentleエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many01.Text":{
 			_:	"Emitted $0$1 and more.",
 			ja:	"エミット倍率$0$1以上を出した",
 		},
+
 		//エミット回数実績その2 Emit Rate #02
-		//	（オーバーマスター）
 		"Achievement.Emit.Many02":{
 			_:	"Wild Emit",
-			ja:	"Wildエミット",
+			ja:	"Wildエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many02.Text":{
 			_:	"Emitted $0$1 and more.",
 			ja:	"エミット倍率$0$1以上を出した",
 		},
+
 		//エミット回数実績その3 Emit Rate #03
-		//	（オーバーマスター）
 		"Achievement.Emit.Many03":{
 			_:	"Dangerous Emit",
-			ja:	"Dangerousエミット",
+			ja:	"Dangerousエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many03.Text":{
 			_:	"Emitted $0$1 and more.",
 			ja:	"エミット倍率$0$1以上を出した",
 		},
+
 		//エミット回数実績その4 Emit Rate #04
-		//	（オーバーマスター）
 		"Achievement.Emit.Many04":{
 			_:	"Over-emit",
-			ja:	"オーバーエミット",
+			ja:	"オーバーエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many04.Text":{
 			_:	"Emitted $0$1 and more.",
@@ -438,24 +462,24 @@ const LocalizedTexts	= {
 		},
 
 		//金星到達 Venus
-		//	（ヴィーナスシンドローム）
 		"Achievement.Check.Venus":{
-			_:	"Do You Know Venus?",
+			_:	"Do You Know Venus?",	//ヴィーナスシンドローム
 		},
 		"Achievement.Check.Venus.Text":{
 			_:	"Flew the meteorite over $1$2.",
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
+
 		//火星到達 Mars
-		//	（ビヨンドザスターズ）
 		"Achievement.Check.Mars":{
 			_:	"Beyond The Mars",
-			ja:	"ビヨンドザマーズ",
+			ja:	"ビヨンドザマーズ",	//ビヨンドザスターズ
 		},
 		"Achievement.Check.Mars.Text":{
 			_:	"Flew the meteorite over $1$2.",
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
+
 		//水星到達 Mercury
 		//	（Beyond The Dream）
 		"Achievement.Check.Mercury":{
@@ -466,30 +490,30 @@ const LocalizedTexts	= {
 			_:	"Flew the meteorite over $1$2.",
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
+
 		//太陽到達 Sun
-		//	（BEYOND THE STARLIGHT）
 		"Achievement.Check.Sun":{
-			_:	"BEYOND THE SUNLIGHT",
+			_:	"BEYOND THE SUNLIGHT",	//BEYOND THE STARLIGHT
 		},
 		"Achievement.Check.Sun.Text":{
 			_:	"Flew the meteorite over $1$2.",
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
+
 		//諸星きらり到達 Kirarin Robot
-		//	（Kosmos,Cosmos）
 		"Achievement.Check.Kirari":{
 			_:	"Kirari, Passed Through The Row of Light",
-			ja:	"キラリ 光の列すり抜けたら",
+			ja:	"キラリ 光の列すり抜けたら",	//Kosmos,Cosmos
 		},
 		"Achievement.Check.Kirari.Text":{
 			_:	"Flew the meteorite over $1$2.",
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
+
 		//2.5億km到達 250,000,000km
-		//	（教え絵last note...）
 		"Achievement.Check.Unicorn":{
 			_:	"Tell Me the Pink Unicorn...",
-			ja:	"教えてpink unicorn...",
+			ja:	"教えてpink unicorn...",	//教え絵last note...
 		},
 		"Achievement.Check.Unicorn.Text":{
 			_:	"Flew the meteorite over $1$2.",
@@ -497,20 +521,19 @@ const LocalizedTexts	= {
 		},
 
 		//初プレイ First Play
-		//	（地球の危機を救うため 周防桃子）
 		"Achievement.Action.FirstPlay":{
 			_:	"For Save The Earch Crisis",
-			ja:	"地球の危機を救うため",
+			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
 		},
 		"Achievement.Action.FirstPlay.Text":{
 			_:	"Stopped the meteorite and saved the Earch.",
 			ja:	"隕石を食い止めて世界を救った",
 		},
+
 		//結果シェア Share Result
-		//	（ドレミファクトリー！）
 		"Achievement.Action.Share":{
 			_:	"Shared Your Result",
-			ja:	"結果をシェアして",
+			ja:	"結果をシェアして",	//ドレミファクトリー！
 		},
 		"Achievement.Action.Share.Text":{
 			_:	"We post $0 tweets.",
