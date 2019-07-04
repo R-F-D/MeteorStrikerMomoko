@@ -25,11 +25,13 @@ Scene.Records	= class extends Scene.SceneBase {
 			INITIAL:		null,	//初期状態
 			RECORDS:		null,	//記録一覧
 			ACHIEVEMENTS:	null,	//実績一覧
+			TRANSITION:		null,	//トランジション用
 		};
 
 		this.sprites		= {};
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
+		this.page			= 0;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -134,7 +136,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			const handles	= Store.GetVisibleHandles(0);
+			const handles	= Store.GetVisibleHandles(this.page||0);
 
 			//ラベル
 			this.displayBoards
@@ -165,12 +167,28 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetVisible(false)
 						.SetPosition(PanelPosition.X+x+DisplayBoardSize.Width-2,PanelPosition.Y-y-6)
 						.SetString(`${fmtCount}`);
+						board.body.bg.animationDelay	= 0.0;
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
 			this.displayBoards.forEach((board,i)=>{
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.counter.SetVisible(true);
 			});
+
+			if(this.sequence.count>60*5)	this.SetSequence(this.Sequences.TRANSITION);
+		});
+		//トランジション
+		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
+			this.displayBoards.forEach(b=>{
+				if(b.body.IsVisible())	b.body.RemoveString(false);
+				if(b.counter.IsVisible())	b.counter.RemoveString(false);
+			});
+		})
+		.PushUpdatingFunctions(dt=>{
+			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
+				if(++this.page>1) this.page=0;
+				this.SetSequence(this.Sequences.RECORDS);
+			}
 		});
 		return this;
 	}
