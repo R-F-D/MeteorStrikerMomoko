@@ -221,8 +221,8 @@ const LocalizedTexts	= {
 
 		//グッド以上の回数 Good/Perfect Aims
 		"Records.GamePlay.NumGoods":{
-			_:	"Good Aimings",
-			ja:	"グッド以上",
+			_:	"Good Aims",
+			ja:	"グッドエイム",
 		},
 		"Records.GamePlay.NumGoods.Format":{
 			_:	"$0",
@@ -231,8 +231,8 @@ const LocalizedTexts	= {
 
 		//パーフェクト回数 Perfect Aims
 		"Records.GamePlay.NumPerfects":{
-			_:	"Perfect Aimings",
-			ja:	"パーフェクト",
+			_:	"Perfect Aims",
+			ja:	"パーフェクトエイム",
 		},
 		"Records.GamePlay.NumPerfects.Format":{
 			_:	"$0",
@@ -241,8 +241,8 @@ const LocalizedTexts	= {
 
 		//100%エイム回数 100% Aims
 		"Records.GamePlay.NumTruePerfects":{
-			_:	"100% Perfect Aimings",
-			ja:	"100%パーフェクト",
+			_:	"100% Perfect Aims",
+			ja:	"100%パーフェクトエイム",
 		},
 		"Records.GamePlay.NumTruePerfects.Format":{
 			_:	"$0",
@@ -258,6 +258,16 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
+		//軽打回数 Lightblows
+		"Records.GamePlay.NumLightBlowings":{
+			_:	"Lightblows",
+			ja:	"軽打",
+		},
+		"Records.GamePlay.NumLightBlowings.Format":{
+			_:	"$0",
+			ja:	"$0回",
+		},
+
 		//強打回数 Hardblows
 		"Records.GamePlay.NumHardBlowings":{
 			_:	"Hardblows",
@@ -268,12 +278,12 @@ const LocalizedTexts	= {
 			ja:	"$0回",
 		},
 
-		//軽打回数 Lightblows
-		"Records.GamePlay.NumLightBlowings":{
-			_:	"Lightblows",
-			ja:	"軽打",
+		//強打とパーフェクトを同時に出した回数 Hardblow and Perfect
+		"Records.GamePlay.NumHardAndPerfectBlowings":{
+			_:	"Hardblow And Perfect",
+			ja:	"強打＆パーフェクト",
 		},
-		"Records.GamePlay.NumLightBlowings.Format":{
+		"Records.GamePlay.NumHardAndPerfectBlowings.Format":{
 			_:	"$0",
 			ja:	"$0回",
 		},
@@ -287,20 +297,10 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
-		//強打とパーフェクトを同時に出した回数 Hardblow and Perfect
-		"Records.GamePlay.NumHardAndPerfectBlowings":{
-			_:	"Hardblow And Perfect",
-			ja:	"強打＆パーフェクト",
-		},
-		"Records.GamePlay.NumHardAndPerfectBlowings.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
-
 		//失敗せずに連続して打撃を成功させた数 Hits in a Row Without Failure.",
 		"Records.GamePlay.MaxSuccessiveHits":{
 			_:	"Max Successive Hits",
-			ja:	"連続ヒット",
+			ja:	"最大連続ヒット",
 		},
 		"Records.GamePlay.MaxSuccessiveHits.Format":{
 			_:	"$0",

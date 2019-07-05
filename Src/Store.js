@@ -10,31 +10,31 @@ class Store{
 				/** ハイスコア*/
 				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
 				/** グッド回数 */
-				NumGoods:					{Required:0,	Order:0x0200,	nDecimalDigits:0,	UnitKey:null,			},
+				NumGoods:					{Required:0,	Order:0x1200,	nDecimalDigits:0,	UnitKey:null,			},
 				/** パーフェクト回数 */
-				NumPerfects:				{Required:0,	Order:0x0201,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPerfects:				{Required:0,	Order:0x1201,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 100%パーフェクト回数 */
-				NumTruePerfects:			{Required:1,	Order:0x0202,	nDecimalDigits:0,	UnitKey:null,			},
+				NumTruePerfects:			{Required:1,	Order:0x1202,	nDecimalDigits:0,	UnitKey:null,			},
 				/** エイミング精度最高値 */
-				BestAiming:					{Required:0,	Order:0x0203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
-				/** 強打回数 */
-				NumHardBlowings:			{Required:0,	Order:0x0300,	nDecimalDigits:0,	UnitKey:null,			},
+				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
 				/** 軽打回数 */
-				NumLightBlowings:			{Required:0,	Order:0x0301,	nDecimalDigits:0,	UnitKey:null,			},
-				/** 最高打撃力 */
-				BestBlowing:				{Required:0,	Order:0x0302,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				NumLightBlowings:			{Required:0,	Order:0x1300,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 強打回数 */
+				NumHardBlowings:			{Required:0,	Order:0x1301,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 強打＆パーフェクト回数 */
-				NumHardAndPerfectBlowings:	{Required:1,	Order:0x0303,	nDecimalDigits:0,	UnitKey:null,			},
+				NumHardAndPerfectBlowings:	{Required:1,	Order:0x1302,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 最高打撃力 */
+				BestBlowing:				{Required:0,	Order:0x1303,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** 連続打撃成功数 */
 				NumSuccessiveHits:			{},
 				/** 最高連続打撃成功数 */
-				MaxSuccessiveHits:			{Required:0,	Order:0x0304,	nDecimalDigits:0,	UnitKey:null,			},
+				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 最大エミット倍率 */
-				MaxEmittings:				{Required:0,	Order:0x0400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MaxEmittings:				{Required:0,	Order:0x1400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 			},
 			Action: {
 				/** プレイ回数 */
-				NumPlayings:				{Required:0,	Order:0x1100,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPlayings:				{Required:0,	Order:0x0100,	nDecimalDigits:0,	UnitKey:null,			},
 			},
 			Settings:{
 				/** 言語設定 */
