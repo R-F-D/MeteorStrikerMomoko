@@ -364,18 +364,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const bestRate		= Store.Insert(Store.Handles.GamePlay.BestAiming, rate);
 				Achievement.Unlock(Achievements.Aiming.TruePerfect,bestRate);
 				if(rate>=100.0)	Store.DynamicInsert( Store.Handles.GamePlay.NumTruePerfects );
-				switch(currentArea.tag){
-					case "PERFECT": {
-						const nPerfects	= Store.DynamicInsert( Store.Handles.GamePlay.NumPerfects );
-						Achievement.Unlock(Achievements.Aiming.ManyPerfect,nPerfects);
-						//fall through
-					}
-					case "GOOD": {
-						const nGoods	= Store.DynamicInsert( Store.Handles.GamePlay.NumGoods );
-						Achievement.Unlock(Achievements.Aiming.ManyGood,nGoods);
-						break;
-					}
-					default:
+
+
+				if(["PERFECT","GOOD"].includes(currentArea.tag)){
+					const nPerfects	= currentArea.tag=="PERFECT"	? Store.DynamicInsert(Store.Handles.GamePlay.NumPerfects)
+																	: Number( Store.Select( Store.Handles.GamePlay.NumPerfects, 0) );
+					const nGoods	= currentArea.tag=="GOOD"		? Store.DynamicInsert(Store.Handles.GamePlay.NumGoods)
+																	: Number( Store.Select( Store.Handles.GamePlay.NumGoods, 0) );
+					Achievement.Unlock(Achievements.Aiming.ManyPerfect,nPerfects);
+					Achievement.Unlock(Achievements.Aiming.ManyGood,nPerfects+nGoods);
 				}
 
 				Store.Insert(Store.Handles.GamePlay.BestBlowing, this.GetChargingRate()/20*100);
