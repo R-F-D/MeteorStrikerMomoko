@@ -84,7 +84,8 @@ LocaleSettings	= class{
 	 * @returns {string}
 	 */
 	NumToStr(value,nDecimalDigits=0, lang=null){
-		const separation	= NumericSeparators[lang||this.numericSeparation] || NumericSeparators["_"];
+		value			= Number(value);
+		const separation= NumericSeparators[lang||this.numericSeparation] || NumericSeparators["_"];
 
 		//数値を区切りごとに配列に分割
 		const nDigits		= Math.trunc(Math.max(1,separation.nDigits));	//区切り桁数
