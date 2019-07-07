@@ -131,7 +131,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				.OnButtonUp(()=>this.ResetForce());
 		})
 		.PushUpdatingFunctions(dt=>{
-			 if(this.sequence.count>=30) this.SetSequence(this.Sequences.RECORDS);
+			 if(this.sequence.count>=60) this.SetSequence(this.Sequences.RECORDS);
 		});
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
