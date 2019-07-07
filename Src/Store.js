@@ -9,6 +9,7 @@ class Store{
 			GamePlay: {
 				/** ハイスコア*/
 				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+
 				/** グッド回数 */
 				NumGoods:					{Required:0,	Order:0x1200,	nDecimalDigits:0,	UnitKey:null,			},
 				/** パーフェクト回数 */
@@ -17,6 +18,7 @@ class Store{
 				NumTruePerfects:			{Required:1,	Order:0x1202,	nDecimalDigits:0,	UnitKey:null,			},
 				/** エイミング精度最高値 */
 				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
+
 				/** 軽打回数 */
 				NumLightBlowings:			{Required:0,	Order:0x1300,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 強打回数 */
@@ -29,6 +31,10 @@ class Store{
 				NumSuccessiveHits:			{},
 				/** 最高連続打撃成功数 */
 				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	nDecimalDigits:0,	UnitKey:null,			},
+				/** 平均打撃倍率 */
+				MeanBlowing:				{Required:0,	Order:0x1304,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},	//Generate
+				BlowingRateLog:				[{},{},{},{},{},],
+
 				/** 最大エミット倍率 */
 				MaxEmittings:				{Required:0,	Order:0x1400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 			},
@@ -46,11 +52,23 @@ class Store{
 
 		//Keyプロパティの生成
 		_(container).forEach( (handles,category) =>	_(handles).forEach(
-			(h,key) =>	h.Key = `${category}.${key}`
+			(handle,key) =>	{
+				if(Array.isArray(handle)){
+					handle.forEach((h,i)=>{
+						h.isVirtual	= false;
+						h.Key 		= `${category}.${key}.${String(i).padStart(2,'0')}`;
+						h.Generator	= h.Generator || null;
+					});
+				}
+				else{
+					handle.isVirtual	= false;
+					handle.Key 			= `${category}.${key}`;
+					handle.Generator	= handle.Generator || null;
+				}
+			}
 		));
 		return container;
-	};
-
+	}
 
 	/** ローカルストレージにインサート
 	 * @param {Object} handle ストレージのハンドル
@@ -111,18 +129,24 @@ class Store{
 	 * @memberof Store
 	 */
 	static GetVisibleHandles(page=null){
-		let handles	= [];
-		_(Store.Handles).forEach(
-			category=>
-				_.filter(category,v=>{
-					if(v.Required===undefined || v.Required===null)	return false;
-					else if (page===undefined || page      ===null)	return true;
+		let results	= [];
 
-					return Math.abs(page) == Math.trunc(v.Order/(16**3));
-				})
-				.forEach(h=>handles.push(h))
+		[Store.Handles, Store.VirtualHandles].forEach(container=>
+			_(container).forEach(category=>{	//カテゴリ舞のループ
+				_(category).forEach(handles=>{	//ハンドルのループ
+					_(handles).castArray()		//配列化してからループ
+						.filter(v=>{
+							if(Array.isArray(v))	return true;
+							if(v.Required===undefined || v.Required===null)	return false;
+							else if (page===undefined || page      ===null)	return true;
+							return Math.abs(page) == Math.trunc(v.Order/(16**3));
+						})
+						.forEach(h=>results.push(h));
+				});
+			})
 		);
-		return _.orderBy(handles,"Order");
+
+		return _.orderBy(results,"Order");
 	}
 
 

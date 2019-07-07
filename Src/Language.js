@@ -297,6 +297,15 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
+		//平均打撃倍率 Mean Blowing Rate
+		"Records.GamePlay.MeanBlowing":{
+			_:	"Mean Blowing Rate",
+			ja:	"平均打撃倍率",
+		},
+		"Records.GamePlay.BestBlowing.Format":{
+			_:	"$0$1",
+		},
+
 		//失敗せずに連続して打撃を成功させた数 Hits in a Row Without Failure.",
 		"Records.GamePlay.MaxSuccessiveHits":{
 			_:	"Max Successive Hits",
