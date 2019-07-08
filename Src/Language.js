@@ -258,6 +258,15 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
+		//直近の平均エイミング倍率 Latest Mean Aiming Rate
+		"Records.GamePlay.MeanAiming":{
+			_:	"Latest Mean Aiming Rate",
+			ja:	"直近の平均エイミング倍率",
+		},
+		"Records.GamePlay.MeanAiming.Format":{
+			_:	"$0$1",
+		},
+
 		//軽打回数 Lightblows
 		"Records.GamePlay.NumLightBlowings":{
 			_:	"Lightblows",
@@ -324,6 +333,16 @@ const LocalizedTexts	= {
 		"Records.GamePlay.MaxEmittings.Format":{
 			_:	"$0$1",
 		},
+
+		//直近の平均エミット倍率 Latest Mean Emitting Rate
+		"Records.GamePlay.MeanEmitting":{
+			_:	"Latest Mean Emitting Rate",
+			ja:	"直近の平均エミット倍率",
+		},
+		"Records.GamePlay.MeanEmitting.Format":{
+			_:	"$0$1",
+		},
+
 		//プレイ回数 Playings
 		"Records.Action.NumPlayings":{
 			_:	"Playings",

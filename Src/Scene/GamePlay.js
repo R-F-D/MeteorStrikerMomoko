@@ -387,9 +387,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					Store.DynamicInsert( Store.Handles.GamePlay.NumLightBlowings );
 				}
 
-				//平均打撃倍率
+				//平均倍率
 				Store.Log(Store.Handles.GamePlay.MeanBlowing, currentBlowRate);
-
+				Store.Log(Store.Handles.GamePlay.MeanAiming, rate);
 
 				//エイミング精度の表示
 				this.sprites.hitArea
@@ -444,6 +444,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Achievement.Unlock(Achievements.Emit.Many03, maxEmitRate);
 				Achievement.Unlock(Achievements.Emit.Many04, maxEmitRate);
 
+				Store.Log(Store.Handles.GamePlay.MeanEmitting, emitRate);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
