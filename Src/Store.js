@@ -198,17 +198,16 @@ class Store{
 
 	//Records用の生成関数
 	static get _RecordConverter(){
+		const StrToMean	= str=>{
+			let ary	= String(str).split("\n",5);
+			return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
+		};
+
 		return {
 			GamePlay:{
-				MeanBlowing:(value)=>{
-					return String(value).split("\n",5).reduce((acc,cur)=>acc+Number(cur),0) /5;
-				},
-				MeanAiming:(value)=>{
-					return String(value).split("\n",5).reduce((acc,cur)=>acc+Number(cur),0) /5;
-				},
-				MeanEmitting:(value)=>{
-					return String(value).split("\n",5).reduce((acc,cur)=>acc+Number(cur),0) /5;
-				},
+				MeanBlowing:	(value)=>StrToMean(value),
+				MeanAiming:		(value)=>StrToMean(value),
+				MeanEmitting:	(value)=>StrToMean(value),
 			},
 		};
 	}
