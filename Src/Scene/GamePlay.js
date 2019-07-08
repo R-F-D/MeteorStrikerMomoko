@@ -8,6 +8,7 @@ var Scene	= Scene || {};
 const BlowPower	= {
 	/**下限値*/			MIN				: -30*256,
 	/**上限値*/			MAX				: 60*256,
+	/**チャージ上限*/	UPPER_LIMIT		: 2*256,	//MAXに加算
 	/**初期値*/			INITIAL			: 0,
 	/**増分*/			INCREMENT		: 1*256,
 	/**失敗時の減少*/	DECREMENT		: 1*256,
@@ -309,13 +310,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.aiming.Update();
 				this.fx.preliminary.Update();
 				this.chargingCount += BlowPower.INCREMENT;
-				if(this.chargingCount > BlowPower.MAX)	this.SetSequence(this.Sequences.DISCHARGE_FAILED);
+				if(this.chargingCount > BlowPower.MAX+BlowPower.UPPER_LIMIT)	this.SetSequence(this.Sequences.DISCHARGE_FAILED);
 			});
 
 		//打撃動作
 		this.Sequences.DISCHARGE
 			.PushStartingFunctions(()=>{
-				this.chargedPower	= this.chargingCount;
+				this.chargedPower	= Math.min(this.chargingCount,BlowPower.MAX);
 				this.dischargeSpeed	= BlowPower.DISCHARGE_SPEED;
 				this.fx.preliminary.Destroy();
 
