@@ -388,12 +388,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				}
 
 				//平均打撃倍率
-				Store.DynamicInsert(Store.Handles.GamePlay.MeanBlowing,(values)=>{
-					if(!values)	return currentBlowRate;
-					values	= values.split("\n",5).map(v=>Number(v));
-					values.push(currentBlowRate);
-					return _(values).takeRight(5).join("\n");
-				});
+				Store.Log(Store.Handles.GamePlay.MeanBlowing, currentBlowRate);
 
 
 				//エイミング精度の表示

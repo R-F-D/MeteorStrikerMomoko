@@ -106,6 +106,26 @@ class Store{
 		return value;
 	};
 
+
+	/** ログ取得・保存
+	 * @static
+	 * @param {*} handle ストレージのレコードハンドル
+	 * @param {*} value 保存時は挿入する値。取得時はnull。
+	 * @param {number} [nlogs=5] ログの保存件数
+	 * @returns {array} ログの配列
+	 * @memberof Store
+	 */
+	static Log(handle,value=null,nlogs=5){
+		let result = [];
+		Store.DynamicInsert(handle,currentString=>{
+			let logs = currentString	?	currentString.split("\n",5).map(v=>Number(v))	: [];
+			if(value)	logs.push(value);
+			result	= _(logs).takeRight(nlogs);
+			return result.join("\n");
+		});
+		return result;
+	}
+
 	/** ローカルストレージからのロード
 	 * @static
 	 * @param {string} key				ストレージのハンドル
