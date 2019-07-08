@@ -357,14 +357,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
 
-
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
 				const rate			= this.aiming.GetRate(true);
 				const bestRate		= Store.Insert(Store.Handles.GamePlay.BestAiming, rate);
 				Achievement.Unlock(Achievements.Aiming.TruePerfect,bestRate);
 				if(rate>=100.0)	Store.DynamicInsert( Store.Handles.GamePlay.NumTruePerfects );
-
 
 				if(["PERFECT","GOOD"].includes(currentArea.tag)){
 					const nPerfects	= currentArea.tag=="PERFECT"	? Store.DynamicInsert(Store.Handles.GamePlay.NumPerfects)
@@ -375,7 +373,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					Achievement.Unlock(Achievements.Aiming.ManyGood,nPerfects+nGoods);
 				}
 
-				Store.Insert(Store.Handles.GamePlay.BestBlowing, this.GetChargingRate()/20*100);
+				const currentBlowRate	= this.GetChargingRate()/20*100;	//100-400%
+				Store.Insert(Store.Handles.GamePlay.BestBlowing, currentBlowRate);
 				if(this.playerHardblows()){
 					const nHardBlowings	= Store.DynamicInsert( Store.Handles.GamePlay.NumHardBlowings );
 					Achievement.Unlock(Achievements.Blowing.ManyHard, nHardBlowings);
@@ -387,6 +386,14 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				else{
 					Store.DynamicInsert( Store.Handles.GamePlay.NumLightBlowings );
 				}
+
+				//平均打撃倍率
+				Store.DynamicInsert(Store.Handles.GamePlay.MeanBlowing,(values)=>{
+					if(!values)	return currentBlowRate;
+					values	= values.split("\n",5).map(v=>Number(v));
+					values.push(currentBlowRate);
+					return _(values).takeRight(5).join("\n");
+				});
 
 
 				//エイミング精度の表示
