@@ -302,7 +302,7 @@ const LocalizedTexts	= {
 			_:	"Mean Blowing Rate",
 			ja:	"平均打撃倍率",
 		},
-		"Records.GamePlay.BestBlowing.Format":{
+		"Records.GamePlay.MeanBlowing.Format":{
 			_:	"$0$1",
 		},
 
