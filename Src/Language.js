@@ -252,7 +252,7 @@ const LocalizedTexts	= {
 		//エイミング最高倍率 Best Aiming Rate
 		"Records.GamePlay.BestAiming":{
 			_:	"Best Aiming Rate",
-			ja:	"エイミング最高倍率",
+			ja:	"最高エイミング倍率",
 		},
 		"Records.GamePlay.BestAiming.Format":{
 			_:	"$0$1",
@@ -291,7 +291,7 @@ const LocalizedTexts	= {
 		//打撃最高倍率 Best Blowing Rate
 		"Records.GamePlay.BestBlowing":{
 			_:	"Best Blowing Rate",
-			ja:	"打撃最高倍率",
+			ja:	"最高打撃倍率",
 		},
 		"Records.GamePlay.BestBlowing.Format":{
 			_:	"$0$1",
@@ -319,7 +319,7 @@ const LocalizedTexts	= {
 		//エミット最高倍率 Best Emitting Rate
 		"Records.GamePlay.MaxEmittings":{
 			_:	"Max Emitting Rate",
-			ja:	"エミット最高倍率",
+			ja:	"最高エミット倍率",
 		},
 		"Records.GamePlay.MaxEmittings.Format":{
 			_:	"$0$1",
