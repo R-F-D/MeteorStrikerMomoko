@@ -46,7 +46,7 @@ Effect.Preliminary	= class extends Effect.EffectBase{
 
 		this.UpdateParticles((v)=>{
 			v.sprite.SetScale(0.5+v.count/120).SetRotate(-v.count/4).SetOpacity(192+v.count);
-		},64);
+		});
 		return this;
 	}
 }
