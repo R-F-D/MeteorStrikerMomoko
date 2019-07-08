@@ -53,8 +53,8 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					//表示板
 					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>	{
-						const body		= Label.CreateInstance(11).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5).SetColor("#FFFF00");
-						const counter	= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5).SetColor("#FFFFFF");
+						const body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5).SetColor("#FFFF00");
+						const counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5).SetColor("#FFFFFF");
 						body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
 						return {body:body,counter:counter};
 					});
