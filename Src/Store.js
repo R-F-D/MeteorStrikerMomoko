@@ -32,8 +32,7 @@ class Store{
 				/** 最高連続打撃成功数 */
 				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 平均打撃倍率 */
-				MeanBlowing:				{Required:0,	Order:0x1304,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},	//Generate
-				BlowingRateLog:				[{},{},{},{},{},],
+				MeanBlowing:				{Required:0,	Order:0x1304,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 
 				/** 最大エミット倍率 */
 				MaxEmittings:				{Required:0,	Order:0x1400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
@@ -50,21 +49,17 @@ class Store{
 			},
 		};
 
-		//Keyプロパティの生成
+		//動的プロパティの生成
 		_(container).forEach( (handles,category) =>	_(handles).forEach(
 			(handle,key) =>	{
-				if(Array.isArray(handle)){
-					handle.forEach((h,i)=>{
+				_.castArray(handle)
+					.forEach((h,i)=>{
 						h.isVirtual	= false;
-						h.Key 		= `${category}.${key}.${String(i).padStart(2,'0')}`;
-						h.Generator	= h.Generator || null;
+						h.Key 		= Array.isArray(handle)	? `${category}.${key}.${String(i).padStart(2,'0')}`
+															: `${category}.${key}`;
+						const convs	= Store._RecordConverter;
+						h.Conv		= convs[category] && convs[category][key] || null;
 					});
-				}
-				else{
-					handle.isVirtual	= false;
-					handle.Key 			= `${category}.${key}`;
-					handle.Generator	= handle.Generator || null;
-				}
 			}
 		));
 		return container;
@@ -177,6 +172,16 @@ class Store{
 		};
 	};
 
+	//Records用の生成関数
+	static get _RecordConverter(){
+		return {
+			GamePlay:{
+				MeanBlowing:(value)=>{
+					return String(value).split("\n",5).reduce((acc,cur)=>acc+Number(cur),0) /5;
+				},
+			},
+		};
+	}
 } // class
 
 

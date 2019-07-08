@@ -136,24 +136,29 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			const handles	= Store.GetVisibleHandles(this.page||0);
+			let handles	= Store.GetVisibleHandles(this.page||0);
 
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
-					if(i>=handles.length){
+					const handle	= handles.shift();
+					if(!handle){
 						board.body.SetVisible(false);
 						board.counter.SetVisible(false);
 						return;
 					}
 
 					//ヘッダ
-					const text		= L.Text(`Records.${handles[i].Key}`);
+					const text		= L.Text(`Records.${handle.Key}`);
+
 					//カウンタ
-					const count		= L.NumToStr( Number(cc.sys.localStorage.getItem(handles[i].Key)), handles[i].nDecimalDigits );
+					let count	= Store.Select(handle.Key,0);
+					if(handle.Conv)	count = handle.Conv(count);
+					count		= L.NumToStr(count, handle.nDecimalDigits);
+
 					let patterns	= [count];
-					if(L.TextExists(handles[i].UnitKey))	patterns.push(L.Text(handles[i].UnitKey));
-					const fmtCount	= !L.TextExists(`Records.${handles[i].Key}.Format`) ? `${count}` : L.Textf( `Records.${handles[i].Key}.Format`, patterns );
+					if(L.TextExists(handle.UnitKey))	patterns.push(L.Text(handle.UnitKey));
+					const fmtCount	= !L.TextExists(`Records.${handle.Key}.Format`) ? `${count}` : L.Textf( `Records.${handle.Key}.Format`, patterns );
 
 					const x	= (i%2) * (DisplayBoardSize.Width+4);
 					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
