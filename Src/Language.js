@@ -297,10 +297,10 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
-		//平均打撃倍率 Mean Blowing Rate
+		//直近の平均打撃倍率 Latest Mean Blowing Rate
 		"Records.GamePlay.MeanBlowing":{
-			_:	"Mean Blowing Rate",
-			ja:	"平均打撃倍率",
+			_:	"Latest Mean Blowing Rate",
+			ja:	"直近の平均打撃倍率",
 		},
 		"Records.GamePlay.MeanBlowing.Format":{
 			_:	"$0$1",
