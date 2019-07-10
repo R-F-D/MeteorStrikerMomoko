@@ -219,6 +219,15 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
+		//直近の平均飛距離
+		"Records.GamePlay.MeanDistance":{
+			_:	"Latest Mean Distance",
+			ja:	"直近の平均飛距離",
+		},
+		"Records.GamePlay.MeanDistance.Format":{
+			_:	"$0$1",
+		},
+
 		//グッド以上の回数 Good/Perfect Aims
 		"Records.GamePlay.NumGoods":{
 			_:	"Good Aims",

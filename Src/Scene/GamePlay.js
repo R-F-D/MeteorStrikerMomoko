@@ -498,9 +498,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 				this.fx.player.SetVelocity(0,0,0,0);
 
-				//ハイスコア
+				//スコアとハイスコア
 				const score 	= this.GetDistanceInKm();
 				const highScore	= Store.Insert(Store.Handles.GamePlay.HighScore,score );
+				Store.Log(Store.Handles.GamePlay.MeanDistance, score);
 
 				this.labels.distance.SetVisible(false);
 				this.labels.navigation.PushLog( L.Textf("GamePlay.Navigator.Leave", [L.NumToStr(score)+L.Text("Unit.Distance")] ),null).SetVisible(true);

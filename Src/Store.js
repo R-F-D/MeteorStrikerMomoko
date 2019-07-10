@@ -9,6 +9,8 @@ class Store{
 			GamePlay: {
 				/** ハイスコア*/
 				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+				/** 直近の平均飛距離 */
+				MeanDistance:				{Required:0,	Order:0x0001,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
 
 				/** グッド回数 */
 				NumGoods:					{Required:0,	Order:0x1200,	nDecimalDigits:0,	UnitKey:null,			},
@@ -205,6 +207,7 @@ class Store{
 
 		return {
 			GamePlay:{
+				MeanDistance:	(value)=>StrToMean(value),
 				MeanBlowing:	(value)=>StrToMean(value),
 				MeanAiming:		(value)=>StrToMean(value),
 				MeanEmitting:	(value)=>StrToMean(value),
