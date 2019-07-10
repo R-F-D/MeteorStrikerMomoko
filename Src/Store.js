@@ -119,7 +119,7 @@ class Store{
 	 * @returns {array} ログの配列
 	 * @memberof Store
 	 */
-	static Log(handle,value=null,nlogs=5){
+	static Log(handle,value=null,nlogs=7){
 		let result = [];
 		Store.DynamicInsert(handle,currentString=>{
 			let logs = currentString	?	currentString.split("\n",5).map(v=>Number(v))	: [];
