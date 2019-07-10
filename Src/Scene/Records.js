@@ -12,7 +12,7 @@ const LinkedLayerTags	= {
 };
 
 const PanelPosition		= {X:96,Y:240};
-const MaxDisplayBoards	= 12;
+const MaxDisplayBoards	= 14;
 const DisplayBoardSize	= {Width:160,Height:32};
 
 
