@@ -40,11 +40,11 @@ const LocalizedTexts	= {
 	// 単位
 	// Unit
 	//----------------------------------------
-		"Unit.Distance":{_:	"km",},	//飛距離の単位 Distance
-		"Unit.Aim":		{_:	"%", },	//エイミング倍率の単位 Aim
-		"Unit.Blow":	{_:	"%", },	//打撃倍率の単位 Charge
-		"Unit.Emit":	{_:	"%", },	//エミット倍率の単位 Emit
-
+		"Unit.Distance":{_:"km",},				//飛距離の単位 Distance
+		"Unit.Aim":		{_:"%", },				//エイミング精度の単位 Aim
+		"Unit.Blow":	{_:"%", },				//打撃倍率の単位 Charge
+		"Unit.Emit":	{_:"%", },				//エミット倍率の単位 Emit
+		"Unit.Counter":	{_:"$0", ja:"$0回",	},	//Records>カウンタの単位（デフォルト） Records > Counter(Default)
 
 	//----------------------------------------
 	// タイトル画面
@@ -233,17 +233,9 @@ const LocalizedTexts	= {
 			_:	"Arrivals at the Sun",
 			ja:	"太陽到達回数",
 		},
-		"Records.GamePlay.NumPassings.00.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 		"Records.GamePlay.NumPassings.01":{
 			_:	"Kirarin Robot Passings",
 			ja:	"きらりんロボ通過回数",
-		},
-		"Records.GamePlay.NumPassings.01.Format":{
-			_:	"$0",
-			ja:	"$0回",
 		},
 		"Records.GamePlay.NumPassings.02":{
 			_:	"Found Pink Unicorns",
@@ -259,29 +251,17 @@ const LocalizedTexts	= {
 			_:	"Good Aims",
 			ja:	"グッドエイム",
 		},
-		"Records.GamePlay.NumGoods.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 
 		//パーフェクト回数 Perfect Aims
 		"Records.GamePlay.NumPerfects":{
 			_:	"Perfect Aims",
 			ja:	"パーフェクトエイム",
 		},
-		"Records.GamePlay.NumPerfects.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 
 		//100%エイム回数 100% Aims
 		"Records.GamePlay.NumTruePerfects":{
 			_:	"100% Perfect Aims",
 			ja:	"100%パーフェクトエイム",
-		},
-		"Records.GamePlay.NumTruePerfects.Format":{
-			_:	"$0",
-			ja:	"$0回",
 		},
 
 		//最高エイミング精度 Best Aiming Accurasy
@@ -307,29 +287,17 @@ const LocalizedTexts	= {
 			_:	"Lightblows",
 			ja:	"軽打",
 		},
-		"Records.GamePlay.NumLightBlowings.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 
 		//強打回数 Hardblows
 		"Records.GamePlay.NumHardBlowings":{
 			_:	"Hardblows",
 			ja:	"強打",
 		},
-		"Records.GamePlay.NumHardBlowings.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 
 		//強打とパーフェクトを同時に出した回数 Hardblow and Perfect
 		"Records.GamePlay.NumHardAndPerfectBlowings":{
 			_:	"Hardblow And Perfect",
 			ja:	"強打＆パーフェクト",
-		},
-		"Records.GamePlay.NumHardAndPerfectBlowings.Format":{
-			_:	"$0",
-			ja:	"$0回",
 		},
 
 		//打撃最高倍率 Best Blowing Rate
@@ -355,10 +323,6 @@ const LocalizedTexts	= {
 			_:	"Max Successive Hits",
 			ja:	"最大連続ヒット",
 		},
-		"Records.GamePlay.MaxSuccessiveHits.Format":{
-			_:	"$0",
-			ja:	"$0回",
-		},
 
 		//エミット最高倍率 Best Emitting Rate
 		"Records.GamePlay.MaxEmittings":{
@@ -382,10 +346,6 @@ const LocalizedTexts	= {
 		"Records.Action.NumPlayings":{
 			_:	"Playings",
 			ja:	"プレイ回数",
-		},
-		"Records.Action.NumPlayings.Format":{
-			_:	"$0",
-			ja:	"$0回",
 		},
 
 	//----------------------------------------

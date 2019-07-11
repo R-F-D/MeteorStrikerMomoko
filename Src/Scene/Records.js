@@ -158,7 +158,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					let patterns	= [count];
 					if(L.TextExists(handle.UnitKey))	patterns.push(L.Text(handle.UnitKey));
-					const fmtCount	= !L.TextExists(`Records.${handle.Key}.Format`) ? `${count}` : L.Textf( `Records.${handle.Key}.Format`, patterns );
+					const fmtCount	= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
 
 					const x	= (i%2) * (DisplayBoardSize.Width+4);
 					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
