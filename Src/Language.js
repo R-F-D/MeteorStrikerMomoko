@@ -228,6 +228,32 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
+		//チェックポイント通過回数
+		"Records.GamePlay.NumPassings.00":{
+			_:	"Arrivals at the Sun",
+			ja:	"太陽到達回数",
+		},
+		"Records.GamePlay.NumPassings.00.Format":{
+			_:	"$0",
+			ja:	"$0回",
+		},
+		"Records.GamePlay.NumPassings.01":{
+			_:	"Kirarin Robot Passings",
+			ja:	"きらりんロボ通過回数",
+		},
+		"Records.GamePlay.NumPassings.01.Format":{
+			_:	"$0",
+			ja:	"$0回",
+		},
+		"Records.GamePlay.NumPassings.02":{
+			_:	"Found Pink Unicorns",
+			ja:	"ピンクのユニコーン発見数",
+		},
+		"Records.GamePlay.NumPassings.02.Format":{
+			_:	"$0",
+			ja:	"$0匹",
+		},
+
 		//グッド以上の回数 Good/Perfect Aims
 		"Records.GamePlay.NumGoods":{
 			_:	"Good Aims",

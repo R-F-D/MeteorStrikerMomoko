@@ -463,6 +463,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						.PushLog(L.Text(`GamePlay.Navigator.BrowAway.${passingPoint.key}`))
 						.SetVisible(true);
 					Achievement.Unlock(Achievements.Check[passingPoint.key],1);
+					if(passingPoint.storage!==null && Store.Handles.GamePlay.NumPassings[passingPoint.storage])	Store.DynamicInsert(Store.Handles.GamePlay.NumPassings[passingPoint.storage]);
 				}
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);

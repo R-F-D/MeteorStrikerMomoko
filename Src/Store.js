@@ -11,6 +11,9 @@ class Store{
 				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
 				/** 直近の平均飛距離 */
 				MeanDistance:				{Required:0,	Order:0x0001,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+				NumPassings:[				{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},
+											{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},
+											{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},	],
 
 				/** グッド回数 */
 				NumGoods:					{Required:0,	Order:0x1200,	nDecimalDigits:0,	UnitKey:null,			},
