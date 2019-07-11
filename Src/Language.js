@@ -342,13 +342,25 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
-		//プレイ回数 Playings
-		"Records.Action.NumPlayings":{
-			_:	"Playings",
+		//プレイ回数 Number of Plays
+		"Records.Action.NumPlays":{
+			_:	"Plays",
 			ja:	"プレイ回数",
 		},
 
-	//----------------------------------------
+		//リトライ回数 Number of Retrys
+		"Records.Action.NumRetrys":{
+			_:	"Retrys",
+			ja:	"リトライ回数",
+		},
+
+		//シェア回数 Number of Shares
+		"Records.Action.NumShares":{
+			_:	"Shares",
+			ja:	"シェア回数",
+		},
+
+		//----------------------------------------
 	// シェア Share
 	//----------------------------------------
 

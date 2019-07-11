@@ -87,6 +87,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 		this.buttons	= {};
 
+		/** シェアを行ったかどうか */
+		this.isShared	= false;
+
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
 
@@ -203,6 +206,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.chargedPower		= 0;
 			this.dischargeSpeed		= 0;
 			this.distanceOfMeteor	= 0;
+			this.isShared			= false;
 
 			this.aiming.SetSpritePosition(164,80).SetVisible(false);
 
@@ -538,7 +542,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
 						()=>this.labels.navigation.RemoveTempText()
 					)
-					.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay));
+					.OnButtonUp(()=>{
+						Store.DynamicInsert(Store.Handles.Action.NumRetrys);
+						this.ReplaceScene(Scene.GamePlay);
+					});
 
 				this.buttons.at("Share")
 					.SetVisible(true)
@@ -549,6 +556,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						()=>this.labels.navigation.RemoveTempText()
 					)
 					.OnButtonUp(()=>{
+						if(!this.isShared){
+							this.isShared	= true;
+							Store.DynamicInsert(Store.Handles.Action.NumShares);
+						}
 						this.labels.navigation.RemoveTempText();
 						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
 											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
@@ -558,7 +569,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					});
 
 					//初プレイ実績
-					Store.DynamicInsert(Store.Handles.Action.NumPlayings);
+					Store.DynamicInsert(Store.Handles.Action.NumPlays);
 					Achievement.Unlock(Achievements.Action.FirstPlay,1);
 
 			})

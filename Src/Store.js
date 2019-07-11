@@ -48,7 +48,11 @@ class Store{
 			},
 			Action: {
 				/** プレイ回数 */
-				NumPlayings:				{Required:0,	Order:0x0100,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPlays:					{Required:0,	Order:0x0100,	nDecimalDigits:0,	UnitKey:null,			},
+				/** リトライ回数 */
+				NumRetrys:					{Required:0,	Order:0x0101,	nDecimalDigits:0,	UnitKey:null,			},
+				/** シェア回数 */
+				NumShares:					{Required:0,	Order:0x0101,	nDecimalDigits:0,	UnitKey:null,			},
 			},
 			Settings:{
 				/** 言語設定 */
