@@ -284,19 +284,19 @@ const LocalizedTexts	= {
 			ja:	"$0回",
 		},
 
-		//エイミング最高倍率 Best Aiming Rate
+		//最高エイミング精度 Best Aiming Accurasy
 		"Records.GamePlay.BestAiming":{
-			_:	"Best Aiming Rate",
-			ja:	"最高エイミング倍率",
+			_:	"Best Aiming Accurasy",
+			ja:	"最高エイミング精度",
 		},
 		"Records.GamePlay.BestAiming.Format":{
 			_:	"$0$1",
 		},
 
-		//直近の平均エイミング倍率 Latest Mean Aiming Rate
+		//直近の平均エイミング精度 Latest Mean Aiming Accurasy
 		"Records.GamePlay.MeanAiming":{
-			_:	"Latest Mean Aiming Rate",
-			ja:	"直近の平均エイミング倍率",
+			_:	"Latest Mean Aiming Accuracy",
+			ja:	"直近の平均エイミング精度",
 		},
 		"Records.GamePlay.MeanAiming.Format":{
 			_:	"$0$1",

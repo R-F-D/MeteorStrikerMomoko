@@ -157,7 +157,7 @@ Scene.Aiming	= class {
 		return Math.abs(this.position);
 	}
 
-	/** エイミング倍率（精度のみ）倍率を取得
+	/** エイミング精度を取得
 	 * @param {boolean} [isForDisplay=false] 表示用に補正する
 	 * @returns {number} 倍率
 	 * @memberof Aiming
@@ -252,7 +252,7 @@ Scene.Aiming	= class {
 	 */
 	static Create(){return new this;}
 
-	/** エイミング倍率の表示
+	/** エイミング精度の表示
 	 * @param {number} x
 	 * @param {number} y
 	 * @returns this
@@ -282,7 +282,7 @@ Scene.Aiming	= class {
 		return this;
 	}
 
-	/** エイミング倍率を非表示
+	/** エイミング精度を非表示
 	 * @returns this
 	 */
 	HideRateValue(){

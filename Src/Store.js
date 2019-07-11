@@ -23,7 +23,7 @@ class Store{
 				NumTruePerfects:			{Required:1,	Order:0x1202,	nDecimalDigits:0,	UnitKey:null,			},
 				/** エイミング精度最高値 */
 				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
-				/** 平均エイミング倍率 */
+				/** 平均エイミング精度 */
 				MeanAiming:					{Required:0,	Order:0x0200,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 
 				/** 軽打回数 */
