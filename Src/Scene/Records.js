@@ -148,19 +148,25 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
-					//カウンタ
+					//ヘッダテキスト＆カウンタ
 					let count	= Store.Select(handle.Key,0);
-					if(handle.Conv)	count = handle.Conv(count);
-					count		= L.NumToStr(count, handle.nDecimalDigits);
-
-					let patterns	= [count];
-					if(L.TextExists(handle.UnitKey))	patterns.push(L.Text(handle.UnitKey));
+					let text	= "";
 					let fmtCount	= "";
-					if(handle.Required!==null && handle.Required<=count)	fmtCount	= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
-					else													fmtCount	= L.Text("Records.Secret.Format");
+					if(handle.Required!==null && handle.Required<=count){
+						if(handle.Conv)	count = handle.Conv(count);
+						count		= L.NumToStr(count, handle.nDecimalDigits);
 
-					//ヘッダ
-					const text		= handle.Required!==null && handle.Required<=count	? L.Text(`Records.${handle.Key}`) : L.Text("Records.Secret");
+						let patterns	= [count];
+						if(L.TextExists(handle.UnitKey))	patterns.push(L.Text(handle.UnitKey));
+						fmtCount	= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
+
+						text		= L.Text(`Records.${handle.Key}`);
+					}
+					else{
+						fmtCount	= L.Text("Records.Secret.Format");
+						text		= L.Text("Records.Secret");
+					}
+
 
 					const x	= (i%2) * (DisplayBoardSize.Width+4);
 					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
