@@ -570,6 +570,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 					//初プレイ実績
 					Store.DynamicInsert(Store.Handles.Action.NumPlays);
+					Store.DynamicInsert(Store.Handles.Action.NumNavigates[ this.navigatorIsGolem?1:0 ]);
 					Achievement.Unlock(Achievements.Action.FirstPlay,1);
 
 			})

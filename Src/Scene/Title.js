@@ -24,6 +24,8 @@ Scene.Title	= class extends Scene.SceneBase {
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
 
+		this.playerIsTouched	= false;
+
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
@@ -167,6 +169,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				this.sprites.balloonTail.SetColor(this.label.bg.COLOR).SetOpacity(this.label.bg.OPACITY)
 				this.label
 					.Init().SetVisible(false).SetColor("#FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
+				this.playerIsTouched	= false;
 			})
 			.PushUpdatingFunctions(dt=>{
 				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);
@@ -193,6 +196,8 @@ Scene.Title	= class extends Scene.SceneBase {
 					//プレイヤーキャラクターをタッチ
 					if((location.x-this.sprites.player.x)**2 + (location.y-this.sprites.player.y)**2 <32**2){
 						this.label.PushLog(L.Text("Title.Reaction.Player"));
+						if(!this.playerIsTouched)	Store.DynamicInsert(Store.Handles.Action.NumTouchesPlayer);
+						this.playerIsTouched	= true;
 					}
 				});
 				return true;

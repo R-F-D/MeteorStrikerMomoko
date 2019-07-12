@@ -24,7 +24,7 @@ class Store{
 				/** エイミング精度最高値 */
 				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
 				/** 平均エイミング精度 */
-				MeanAiming:					{Required:0,	Order:0x0200,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
+				MeanAiming:					{Required:0,	Order:0x1204,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 
 				/** 軽打回数 */
 				NumLightBlowings:			{Required:0,	Order:0x1300,	nDecimalDigits:0,	UnitKey:null,			},
@@ -39,12 +39,12 @@ class Store{
 				/** 最高連続打撃成功数 */
 				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	nDecimalDigits:0,	UnitKey:null,			},
 				/** 平均打撃倍率 */
-				MeanBlowing:				{Required:0,	Order:0x0201,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				MeanBlowing:				{Required:0,	Order:0x1305,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 
 				/** 最大エミット倍率 */
 				MaxEmittings:				{Required:0,	Order:0x1400,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 				/** 平均エミット倍率 */
-				MeanEmitting:				{Required:0,	Order:0x0202,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MeanEmitting:				{Required:0,	Order:0x1401,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 			},
 			Action: {
 				/** プレイ回数 */
@@ -52,7 +52,13 @@ class Store{
 				/** リトライ回数 */
 				NumRetrys:					{Required:0,	Order:0x0101,	nDecimalDigits:0,	UnitKey:null,			},
 				/** シェア回数 */
-				NumShares:					{Required:0,	Order:0x0101,	nDecimalDigits:0,	UnitKey:null,			},
+				NumShares:					{Required:0,	Order:0x0102,	nDecimalDigits:0,	UnitKey:null,			},
+				/** ナビゲーション回数 */
+				NumNavigates:[				{Required:1,	Order:0x0104,	nDecimalDigits:0,	UnitKey:null,			},
+											{Required:1,	Order:0x0104,	nDecimalDigits:0,	UnitKey:null,			},],
+				/** タイトル画面でプレイヤーキャラをタッチした回数 */
+				NumTouchesPlayer:			{Required:1,	Order:0x0103,	nDecimalDigits:0,	UnitKey:null,			},
+
 			},
 			Settings:{
 				/** 言語設定 */

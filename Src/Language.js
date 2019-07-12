@@ -360,6 +360,22 @@ const LocalizedTexts	= {
 			ja:	"シェア回数",
 		},
 
+		//各ナビゲーション回数 Number of Navigates
+		"Records.Action.NumNavigates.00":{
+			_:	"Iku Navigates",
+			ja:	"育のナビ回数",
+		},
+		"Records.Action.NumNavigates.01":{
+			_:	"First Friend Navigates",
+			ja:	"初めてのともだちのナビ回数",
+		},
+
+		//プレイヤーキャラクターをタッチした回数 Number of Touches Player Character
+		"Records.Action.NumTouchesPlayer":{
+			_:	"Touches Momoko",
+			ja:	"桃子にタッチした回数",
+		},
+
 		//----------------------------------------
 	// シェア Share
 	//----------------------------------------
