@@ -148,9 +148,6 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
-					//ヘッダ
-					const text		= L.Text(`Records.${handle.Key}`);
-
 					//カウンタ
 					let count	= Store.Select(handle.Key,0);
 					if(handle.Conv)	count = handle.Conv(count);
@@ -158,7 +155,12 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					let patterns	= [count];
 					if(L.TextExists(handle.UnitKey))	patterns.push(L.Text(handle.UnitKey));
-					const fmtCount	= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
+					let fmtCount	= "";
+					if(handle.Required!==null && handle.Required<=count)	fmtCount	= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
+					else													fmtCount	= L.Text("Records.Secret.Format");
+
+					//ヘッダ
+					const text		= handle.Required!==null && handle.Required<=count	? L.Text(`Records.${handle.Key}`) : L.Text("Records.Secret");
 
 					const x	= (i%2) * (DisplayBoardSize.Width+4);
 					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);

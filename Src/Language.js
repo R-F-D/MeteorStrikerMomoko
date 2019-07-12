@@ -210,6 +210,15 @@ const LocalizedTexts	= {
 	//	XXX.Format	: カウンタ表示
 	//----------------------------------------
 
+		//シークレット項目 Secret
+		"Records.Secret":{
+			_:	"??????????",
+			ja:	"？？？？？",
+		},
+		"Records.Secret.Format":{
+			_:	"???",
+		},
+
 		//ハイスコア High Score
 		"Records.GamePlay.HighScore":{
 			_:	"High Score",
