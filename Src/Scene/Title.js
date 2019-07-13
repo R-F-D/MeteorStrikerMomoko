@@ -53,7 +53,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags(["Play","Records","Help","Settings","WebPage","Credits",]);
+					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags("Play","Records","Help","Settings","WebPage","Credits");
 					return true;
 				},
 			});

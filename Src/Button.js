@@ -124,7 +124,8 @@ Button	= class Button{
 		return this;
 	}
 
-	SetTags(tags){
+	SetTags(...tags){
+		if(Array.isArray(tags[0]))	tags = tags[0];
 		this.items.forEach((v,i)=>{
 			if(i<tags.length)	v.SetTag(tags[i]);
 		});
