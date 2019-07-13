@@ -537,7 +537,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.buttons.at("Retry")
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
-					.SetIndex(Button.OFF,12).SetIndex(Button.ON,13).SetIndex(Button.HOVER,13)
+					.SetIndex(13).SetIndex(Button.OFF,12)
 					.OnMouseHover(
 						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
 						()=>this.labels.navigation.RemoveTempText()
@@ -550,7 +550,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.buttons.at("Share")
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
-					.SetIndex(Button.OFF,14).SetIndex(Button.ON,14).SetIndex(Button.HOVER,15)
+					.SetIndex(15).SetIndex(Button.OFF,14)
 					.OnMouseHover(
 						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
 						()=>this.labels.navigation.RemoveTempText()

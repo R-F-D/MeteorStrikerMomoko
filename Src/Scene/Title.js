@@ -79,18 +79,14 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.buttons.at("Play")
 			.CreateSprite(rc.img.titleButton)
 			.SetScale(1)
-			.SetIndex(Button.OFF,  0)
-			.SetIndex(Button.ON,   1)
-			.SetIndex(Button.HOVER,1)
+			.SetIndex(1).SetIndex(Button.OFF,0)
 			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
 		this.buttons.filter(v=> v.tag!="Play" ).forEach((button,i)=>{
 			button
 				.CreateSprite(rc.img.titleButton)
 				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
 				.SetScale(0.5)
-				.SetIndex(Button.OFF,  i*2+2)
-				.SetIndex(Button.ON,   i*2+3)
-				.SetIndex(Button.HOVER,i*2+3);
+				.SetIndex(i*2+3).SetIndex(Button.OFF,i*2+2)
 		});
 		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records));
 		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));

@@ -216,8 +216,14 @@ class ButtonItem{
 	}
 	/** 画像のインデックス */
 	SetIndex(status,idx){
-		this.indexes			= this.indexes||{};
-		this.indexes[status]	= idx;
+		let stattuses	= [status];
+		if(idx===undefined)	{
+			stattuses	= [Button.OFF,Button.ON,Button.HOVER];
+			idx			= status;
+		}
+
+		this.indexes	= this.indexes||{};
+		stattuses.forEach(s=>	this.indexes[s] = idx	);
 		return this._ApplyIndex();
 	}
 	_ApplyIndex(){
