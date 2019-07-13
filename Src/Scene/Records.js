@@ -18,6 +18,7 @@ const DisplayBoardSize	= {Width:160,Height:32};
 
 Scene.Records	= class extends Scene.SceneBase {
 
+
 	constructor(){
 		super();
 
@@ -28,10 +29,13 @@ Scene.Records	= class extends Scene.SceneBase {
 			TRANSITION:		null,	//トランジション用
 		};
 
+
 		this.sprites		= {};
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
-		this.page			= 0;
+
+		this.numPages		= 2;
+		this._page			= 0;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -82,8 +86,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//ボタン
-					_this.buttons	= Button.CreateInstance(1).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
+					_this.buttons	= Button.CreateInstance(5).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last");
+					_this.buttons.forEach(b=>b.CreateSprite(rc.img.navigationButton));
 
 					return true;
 				},
@@ -124,11 +128,24 @@ Scene.Records	= class extends Scene.SceneBase {
 				.forEach(board=> board.body.Init().SetNumLogLines(2) );
 
 			//インタフェース
+			this.buttons.forEach(b=>b.SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
 			this.buttons.at("Reset")
-				.SetVisible(true)
-				.SetPosition(16,size.height-16)
-				.SetColorOnHover([0xFF,0xA0,0x00])
+				.SetIndex(0).SetPosition(16,size.height-16)
 				.OnButtonUp(()=>this.ResetForce());
+			this.buttons.at("Prev")
+				.SetIndex(2).SetPosition(16+32+8,32)
+				.OnButtonUp(()=>this.Page(this.Page()-1))
+				.sprite.SetRotate(180);
+			this.buttons.at("Next")
+				.SetIndex(2).SetPosition(size.width-16-32-8,32)
+				.OnButtonUp(()=>this.Page(this.Page()+1));
+			this.buttons.at("First")
+				.SetIndex(3).SetPosition(16,32)
+				.OnButtonUp(()=>this.Page(0))
+				.sprite.SetRotate(180);
+			this.buttons.at("Last")
+				.SetIndex(3).SetPosition(size.width-16,32)
+				.OnButtonUp(()=>this.Page(this.numPages));
 		})
 		.PushUpdatingFunctions(dt=>{
 			 if(this.sequence.count>=60) this.SetSequence(this.Sequences.RECORDS);
@@ -136,7 +153,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			let handles	= Store.GetVisibleHandles(this.page||0);
+			let handles	= Store.GetVisibleHandles(this.Page());
 
 			//ラベル
 			this.displayBoards
@@ -188,7 +205,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.counter.SetVisible(true);
 			});
 
-			if(this.sequence.count>60*5)	this.SetSequence(this.Sequences.TRANSITION);
+			//if(this.sequence.count>60*5)	this.SetSequence(this.Sequences.TRANSITION);
 		});
 		//トランジション
 		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
@@ -199,9 +216,9 @@ Scene.Records	= class extends Scene.SceneBase {
 		})
 		.PushUpdatingFunctions(dt=>{
 			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
-				if(++this.page>1) this.page=0;
 				this.SetSequence(this.Sequences.RECORDS);
 			}
+
 		});
 		return this;
 	}
@@ -216,6 +233,25 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
+	}
+
+
+	/** ページ設定
+	 * @param {number} [dst=null]			指定するとSetter扱い。省略するとGetter扱い
+	 * @param {boolean} [transitions=true]	シークエンス遷移を行うか（Setter時のみ）
+	 * @returns {number|this}				Setter時はthis、Getter時は現在のページ値
+	 */
+	Page(dst=null, transitions=true){
+		if(dst==null){	//as getter
+			return this._page || 0;
+		}
+		else{			//as setter
+			this.numPages	= this.numPages || 1;
+			const old		= this._page;
+			this._page		= _(dst).clamp( 0, this.numPages-1 );
+			if(transitions && old!=this._page)	this.SetSequence(this.Sequences.TRANSITION);
+			return this;
+		}
 	}
 
 }//class
