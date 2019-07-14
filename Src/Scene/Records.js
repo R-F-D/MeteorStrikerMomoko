@@ -131,20 +131,26 @@ Scene.Records	= class extends Scene.SceneBase {
 			this.buttons.forEach(b=>b.SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
 			this.buttons.at("Reset")
 				.SetIndex(0).SetPosition(16,size.height-16)
+				.AssignKeyboard(82)	//R
 				.OnButtonUp(()=>this.ResetForce());
+
 			this.buttons.at("Prev")
 				.SetIndex(2).SetPosition(16+32+8,32)
+				.AssignKeyboard(72)	//H
 				.OnButtonUp(()=>this.Page(this.Page()-1))
 				.sprite.SetRotate(180);
 			this.buttons.at("Next")
 				.SetIndex(2).SetPosition(size.width-16-32-8,32)
+				.AssignKeyboard(76)	//L
 				.OnButtonUp(()=>this.Page(this.Page()+1));
 			this.buttons.at("First")
 				.SetIndex(3).SetPosition(16,32)
+				.AssignKeyboard(36)	//Home
 				.OnButtonUp(()=>this.Page(0))
 				.sprite.SetRotate(180);
 			this.buttons.at("Last")
 				.SetIndex(3).SetPosition(size.width-16,32)
+				.AssignKeyboard(35)	//End
 				.OnButtonUp(()=>this.Page(this.numPages));
 		})
 		.PushUpdatingFunctions(dt=>{

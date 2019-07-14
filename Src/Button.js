@@ -162,6 +162,7 @@ class ButtonItem{
 		this.indexes	= {};
 		this.status		= Button.OFF;
 		this.listensButtonUp	= false;
+		this.keyCodes	= [];
 
 		this.SetTag();
 	}
@@ -281,83 +282,110 @@ class ButtonItem{
 	_ApplyEvents(){
 		if(!this.sprite)	return this;
 		this.listeners	= this.listeners || {};
-
 		cc.eventManager.removeListeners(this.sprite.entity);
-		cc.eventManager.addListener(
-			cc.EventListener.create({
-				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touches,event)=>{
+
+		//タッチ
+		cc.eventManager.addListener(cc.EventListener.create({
+			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+			onTouchesBegan	: (touches,event)=>{
+				if(!this.sprite.entity.isVisible())	return false;
+				if(this._EventIsOnSprite(touches,event)){
+					if(this.status!==Button.HOVER && this.listeners.onMouseOver)	this.listeners.onMouseOver();
+					this.status			= Button.ON;
+					this._ApplyIndex();
+					event.stopPropagation();
+					if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
+					this.SetScale(this.scale*this.scaleOnActive,true);
+					this.SetOpacity(this.opacityOnHover,false,true);
+					this.SetColor(this.colorOnHover,false,true);
+				}
+				return true;
+			},
+			onTouchesEnded	: (touches,event)=>{
+				if(this.status==Button.ON){
 					if(!this.sprite.entity.isVisible())	return false;
 					if(this._EventIsOnSprite(touches,event)){
-						if(this.status!==Button.HOVER && this.listeners.onMouseOver)	this.listeners.onMouseOver();
-						this.status			= Button.ON;
-						this._ApplyIndex();
 						event.stopPropagation();
-						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
-						this.SetScale(this.scale*this.scaleOnActive,true);
-						this.SetOpacity(this.opacityOnHover,false,true);
-						this.SetColor(this.colorOnHover,false,true);
+						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
+						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
+						this.status			= Button.HOVER;
+						this.SetOpacity(this.opacityOnHover,true,true);
+						this.SetColor(this.colorOnHover,true,true);
 					}
-					return true;
-				},
-				onTouchesEnded	: (touches,event)=>{
-					if(this.status==Button.ON){
-						if(!this.sprite.entity.isVisible())	return false;
-						if(this._EventIsOnSprite(touches,event)){
-							event.stopPropagation();
-							if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
-							if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
-							this.status			= Button.HOVER;
-							this.SetOpacity(this.opacityOnHover,true,true);
-							this.SetColor(this.colorOnHover,true,true);
-						}
-						else{
-							this.status			= Button.OFF;
-							this.SetOpacity(this.opacity,true,false);
-							this.SetColor(this.color,true,false);
-							if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
-						}
-						this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						this._ApplyIndex();
-					}
-				},
-				onTouchesCanceled	: (touches,event)=>{
-					this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-					this.status			= Button.OFF;
-					this.SetOpacity(this.opacity,true,false);
-					this.SetColor(this.color,true,false);
-					this._ApplyIndex();
-					if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
-				}
-			}),
-			this.sprite.entity
-		);
-		cc.eventManager.addListener(
-			cc.EventListener.create({
-				event			: cc.EventListener.MOUSE,
-				onMouseMove	: (event)=>{
-					if(!this.sprite.entity.isVisible())	return false;
-					if(this._EventIsOnSprite(null,event)){
-						if(this.status & (Button.OFF|Button.HOVER)){
-							if(this.status==Button.OFF && this.listeners.onMouseOver)	this.listeners.onMouseOver();
-							this.status			= Button.HOVER;
-							this._ApplyIndex();
-							this.SetOpacity(this.opacityOnHover,false,true);
-							this.SetColor(this.colorOnHover,false,true);
-						}
-					}
-					else if(this.status==Button.HOVER){
+					else{
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false);
 						this.SetColor(this.color,true,false);
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
-						this._ApplyIndex();
 					}
-					return;
+					this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+					this._ApplyIndex();
 				}
-			}),
-			this.sprite.entity
-		);
+			},
+			onTouchesCanceled	: (touches,event)=>{
+				this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+				this.status			= Button.OFF;
+				this.SetOpacity(this.opacity,true,false);
+				this.SetColor(this.color,true,false);
+				this._ApplyIndex();
+				if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
+			}
+		}),this.sprite.entity);
+
+		//マウス
+		cc.eventManager.addListener(cc.EventListener.create({
+			event			: cc.EventListener.MOUSE,
+			onMouseMove	: (event)=>{
+				if(!this.sprite.entity.isVisible())	return false;
+				if(this._EventIsOnSprite(null,event)){
+					if(this.status & (Button.OFF|Button.HOVER)){
+						if(this.status==Button.OFF && this.listeners.onMouseOver)	this.listeners.onMouseOver();
+						this.status			= Button.HOVER;
+						this._ApplyIndex();
+						this.SetOpacity(this.opacityOnHover,false,true);
+						this.SetColor(this.colorOnHover,false,true);
+					}
+				}
+				else if(this.status==Button.HOVER){
+					this.status			= Button.OFF;
+					this.SetOpacity(this.opacity,true,false);
+					this.SetColor(this.color,true,false);
+					if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
+					this._ApplyIndex();
+				}
+				return;
+			}
+		}),this.sprite.entity);
+
+		//キーボード
+		if(cc.EventListener.KEYBOARD && this.keyCodes){
+
+			cc.eventManager.addListener(cc.EventListener.create({
+				event			: cc.EventListener.KEYBOARD,
+				onKeyPressed	: (code,event)=>{
+					if(this.keyCodes.includes(code)){
+						event.stopPropagation();
+						if(this.listeners.onTouchBegan)	this.listeners.onTouchBegan();
+						this.SetScale(this.scale*this.scaleOnActive,true)
+							.SetOpacity(this.opacityOnHover,false,true)
+							.SetColor(this.colorOnHover,false,true);
+					}
+				},
+				onKeyReleased	: (code,event)=>{
+					if(this.keyCodes.includes(code)){
+						event.stopPropagation();
+						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
+						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
+						this.SetOpacity(this.opacity,true,false)
+							.SetColor(this.color,true,false)
+							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
+					}
+				},
+			}),this.sprite.entity);
+
+		}
+
 		return this;
 	}
 
@@ -426,6 +454,16 @@ class ButtonItem{
 		this.listeners	= this.listeners||{};
 		this.listeners.onButtonUp	= callback;
 		this._ApplyEvents();
+		return this;
+	}
+
+	/** キーアサイン追加
+	 * @param {number} keyCodes
+	 * @returns this
+	 * @memberof ButtonItem
+	 */
+	AssignKeyboard(...keyCodes){
+		this.keyCodes	= keyCodes;
 		return this;
 	}
 }
