@@ -272,7 +272,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				.SetVisible(true)
 				.SetPosition(16,size.height-16)
 				.SetColorOnHover([0xFF,0xA0,0x00])
-				.AssignKeyboard(82)
+				.AssignKeyboard(cc.KEY.r)
 				.OnMouseHover(
 					()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
 					()=>this.labels.navigation.RemoveTempText()
@@ -539,7 +539,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					.SetVisible(true)
 					.SetPosition(size.width/2-128,size.height/2)
 					.SetIndex(13).SetIndex(Button.OFF,12)
-					.AssignKeyboard(49)
+					.AssignKeyboard(cc.KEY["1"])
 					.OnMouseHover(
 						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
 						()=>this.labels.navigation.RemoveTempText()
@@ -553,7 +553,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					.SetVisible(true)
 					.SetPosition(size.width/2+128,size.height/2)
 					.SetIndex(15).SetIndex(Button.OFF,14)
-					.AssignKeyboard(50)
+					.AssignKeyboard(cc.KEY["2"])
 					.OnMouseHover(
 						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
 						()=>this.labels.navigation.RemoveTempText()

@@ -180,7 +180,7 @@ Scene.SceneBase	= class {
 		.AddPropertiesToEventListenerList("keyboardReset",{
 			event			: cc.EventListener.KEYBOARD || null,
 			onKeyReleased	: (code,event)=>{
-				if(code==27){	//'ESC'key
+				if(code==cc.KEY.escape){
 					this.ResetForce();
 				}
 			},
