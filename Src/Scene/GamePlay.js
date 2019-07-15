@@ -24,7 +24,6 @@ const EmitEnergy	= {
 const LinkedLayerTags	= {
 	MAIN	: "GamePlay.Main",
 	BG		: "GamePlay.Bg",
-	UI		: "GamePlay.Ui",
 };
 
 Scene.GamePlay	= class extends Scene.SceneBase {
@@ -85,6 +84,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.distanceOfMeteor	= 0;
 		this.isOnGround			= true;
 
+		this.EnableNaviButtons(0);
 		this.buttons	= {};
 
 		/** シェアを行ったかどうか */
@@ -169,13 +169,14 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.sequence.Update(dt,"layer-bg");
 				},
 			})
+			/*
 			.AddToLayerList("ui",{
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
 
 					//ボタン
-					_this.buttons	= Button.CreateInstance(3).AddToLayer(this);
+					_this.buttons	= Button.CreateInstance(1).AddToLayer(this);
 					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
 					_this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Retry");
 					_this.buttons.at(2).CreateSprite(rc.img.titleButton).SetTag("Share");
@@ -188,7 +189,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.sequence.Update(dt,"layer-ui");
 				},
 			});
+			*/
 			return this;
+	}
+
+	OnUiLayerCreate(layer){
+		this.buttons	= Button.CreateInstance(2).AddToLayer(layer);
+		this.buttons.at(0).CreateSprite(rc.img.titleButton).SetTag("Retry");
+		this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Share");
+		return true;
 	}
 
 	/** シーケンス毎の処理を定義
@@ -268,18 +277,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			//インタフェース
-			this.buttons.at("Reset")
-				.SetVisible(true)
-				.SetPosition(16,size.height-16)
-				.SetColorOnHover([0xFF,0xA0,0x00])
-				.AssignKeyboard(cc.KEY.r)
-				.OnMouseHover(
-					()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
-					()=>this.labels.navigation.RemoveTempText()
-				)
-				.OnButtonUp(()=>this.ResetForce());
-			this.buttons.at("Retry").SetVisible(false);
-			this.buttons.at("Share").SetVisible(false);
+			this.buttons.SetVisible(false);
 		})
 		.PushUpdatingFunctions(dt=>{
 			this.UpdatePlayerSprite(false);
@@ -589,11 +587,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.aiming	= Scene.Aiming.Create();
 
 		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
-			.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
+
+		this.buttons.Update();
 		return this;
 	}
 
