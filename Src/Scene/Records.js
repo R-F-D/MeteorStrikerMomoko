@@ -36,6 +36,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		this.numPages		= 2;
 		this._page			= 0;
+		this._onPaged		= ()=> this.SetSequence(this.Sequences.TRANSITION);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -80,30 +81,13 @@ Scene.Records	= class extends Scene.SceneBase {
 					_this.sprites.bg.forEach((v,i)=>v.SetPosition(	width /2 - Cycle(_this.count, 0, bgWidth) + bgWidth*i,	256) );
 				},
 			})
-			.AddToLayerList("ui",{
-				ctor:function(){
-					this._super();
-					this.scheduleUpdate();
 
-					//ボタン
-					_this.buttons	= Button.CreateInstance(5).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last");
-					_this.buttons.forEach(b=>b.CreateSprite(rc.img.navigationButton));
-
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-					_this.buttons.Update(dt);
-					_this.sequence.Update(dt,"layer-ui");
-				},
-			});
 		return this;
 	}
 
 	OnEnter(){
 		super.OnEnter();
-		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,  0x0002)
-			.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
+		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
 			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
@@ -127,31 +111,6 @@ Scene.Records	= class extends Scene.SceneBase {
 			this.displayBoards
 				.forEach(board=> board.body.Init().SetNumLogLines(2) );
 
-			//インタフェース
-			this.buttons.forEach(b=>b.SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
-			this.buttons.at("Reset")
-				.SetIndex(0).SetPosition(16,size.height-16)
-				.AssignKeyboard(82)	//R
-				.OnButtonUp(()=>this.ResetForce());
-
-			this.buttons.at("Prev")
-				.SetIndex(2).SetPosition(16+32+8,32)
-				.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
-				.OnButtonUp(()=>this.Page(this.Page()-1))
-				.sprite.SetRotate(180);
-			this.buttons.at("Next")
-				.SetIndex(2).SetPosition(size.width-16-32-8,32)
-				.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
-				.OnButtonUp(()=>this.Page(this.Page()+1));
-			this.buttons.at("First")
-				.SetIndex(3).SetPosition(16,32)
-				.AssignKeyboard(cc.KEY.home)	//Home
-				.OnButtonUp(()=>this.Page(0))
-				.sprite.SetRotate(180);
-			this.buttons.at("Last")
-				.SetIndex(3).SetPosition(size.width-16,32)
-				.AssignKeyboard(cc.KEY.end)	//End
-				.OnButtonUp(()=>this.Page(this.numPages));
 		})
 		.PushUpdatingFunctions(dt=>{
 			 if(this.sequence.count>=60) this.SetSequence(this.Sequences.RECORDS);
@@ -239,25 +198,6 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
-	}
-
-
-	/** ページ設定
-	 * @param {number} [dst=null]			指定するとSetter扱い。省略するとGetter扱い
-	 * @param {boolean} [transitions=true]	シークエンス遷移を行うか（Setter時のみ）
-	 * @returns {number|this}				Setter時はthis、Getter時は現在のページ値
-	 */
-	Page(dst=null, transitions=true){
-		if(dst==null){	//as getter
-			return this._page || 0;
-		}
-		else{			//as setter
-			this.numPages	= this.numPages || 1;
-			const old		= this._page;
-			this._page		= _(dst).clamp( 0, this.numPages-1 );
-			if(transitions && old!=this._page)	this.SetSequence(this.Sequences.TRANSITION);
-			return this;
-		}
 	}
 
 }//class

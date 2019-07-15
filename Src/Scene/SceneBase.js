@@ -19,6 +19,10 @@ Scene.SceneBase	= class {
 		this.count				= 0;
 		/** @var ポーズ用カウント */
 		this.pauseCount			= 0;
+		/** @var ページ機能/ページ枚数 */
+		this.numPages		= 2;
+		/** @var ページ機能/現在のページ番号 */
+		this._page			= 0;
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;
@@ -31,6 +35,8 @@ Scene.SceneBase	= class {
 		this.sprites	= {};
 		/** @var Labelクラスのコンテナ*/
 		this.labels		= {};
+		/** @var ナビゲーション用ボタンのコンテナ */
+		this.naviButtons	= [];
 		/** @var イベントリスナのコンテナ*/
 		this.listeners	= {};
 		/** @var シーン共通イベントリスナ*/
@@ -121,7 +127,8 @@ Scene.SceneBase	= class {
 	 * @returns this
 	 */
 	InitLayerList(){
-		const _this	= this;
+		const _this		= this;
+		const size		= cc.director.getWinSize();
 		this.ccLayers	= {};
 		this.AddToLayerList("touchFx",{
 			ctor:function(){
@@ -146,6 +153,45 @@ Scene.SceneBase	= class {
 				this._super();
 				Scene.SceneBase._date = null;
 				Achievement.Update(dt);
+			},
+		});
+		this.AddToLayerList("ui",{
+			ctor:function(){
+				this._super();
+				this.scheduleUpdate();
+				_this.naviButtons	= Button.CreateInstance(5).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last");
+				_this.naviButtons.forEach(b=>b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
+
+				_this.naviButtons.at("Reset")
+					.SetIndex(0).SetPosition(16,size.height-16)
+					.AssignKeyboard(82)	//R
+					.OnButtonUp(()=>_this.ResetForce());
+
+				_this.naviButtons.at("Prev")
+					.SetIndex(2).SetPosition(16+32+8,32)
+					.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
+					.OnButtonUp(()=>_this.Page(_this.Page()-1))
+					.sprite.SetRotate(180);
+				_this.naviButtons.at("Next")
+					.SetIndex(2).SetPosition(size.width-16-32-8,32)
+					.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
+					.OnButtonUp(()=>_this.Page(_this.Page()+1));
+				_this.naviButtons.at("First")
+					.SetIndex(3).SetPosition(16,32)
+					.AssignKeyboard(cc.KEY.home)	//Home
+					.OnButtonUp(()=>_this.Page(0))
+					.sprite.SetRotate(180);
+				_this.naviButtons.at("Last")
+					.SetIndex(3).SetPosition(size.width-16,32)
+					.AssignKeyboard(cc.KEY.end)	//End
+					.OnButtonUp(()=>_this.Page(this.numPages));
+
+				return _this.OnUiLayerCreate(this);
+			},
+			update	: function(dt){
+				this._super();
+				_this.naviButtons.Update(dt);
+				_this.sequence.Update(dt,"layer-ui");
 			},
 		});
 		return this;
@@ -218,8 +264,9 @@ Scene.SceneBase	= class {
 			onEnter	: function (){
 				this._super();
 				childScene
-					.SetLayer("SceneBase.TouchFx",    childScene.ccLayers.touchFx,    0x0201)
-					.SetLayer("SceneBase.Achievement",childScene.ccLayers.achievement,0x0200)
+					.SetLayer("SceneBase.TouchFx",    childScene.ccLayers.touchFx,    0x0202)
+					.SetLayer("SceneBase.Achievement",childScene.ccLayers.achievement,0x0201)
+					.SetLayer("SceneBase.Ui",         childScene.ccLayers.ui,         0x0200)
 					.OnEnter();
 				Achievement.SetLayer(_this.ccLayerInstances["SceneBase.Achievement"]);
 				this.scheduleUpdate();
@@ -249,6 +296,7 @@ Scene.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
+	OnUiLayerCreate(layer){return true};
 	SetSequenceFunctions(){return this;}
 
 	SetCommonEventListeners(tag,listeners){
@@ -280,6 +328,25 @@ Scene.SceneBase	= class {
 		this.ReplaceScene(Scene.SceneBase.resetTo);
 		return this;
 	}
+
+	/** ページ設定
+	 * @param {number} [dst=null]			指定するとSetter扱い。省略するとGetter扱い
+	 * @param {boolean} [transitions=true]	シークエンス遷移を行うか（Setter時のみ）
+	 * @returns {number|this}				Setter時はthis、Getter時は現在のページ値
+	 */
+	Page(dst=null, transitions=true){
+		if(dst==null){	//as getter
+			return this._page || 0;
+		}
+		else{			//as setter
+			this.numPages	= this.numPages || 1;
+			const old		= this._page;
+			this._page		= _(dst).clamp( 0, this.numPages-1 );
+			if(transitions && old!=this._page && this._onPaged) this._onPaged();
+			return this;
+		}
+	}
+
 
 	/** 現在時刻のDateオブジェクトを取得
 	 * @static
