@@ -33,8 +33,8 @@ Scene.SceneBase	= class {
 		this.sprites	= {};
 		/** @var Labelクラスのコンテナ*/
 		this.labels		= {};
-		/** @var ナビゲーション用ボタンのコンテナ */
-		this.naviButtons	= [];
+		/** @var ナビゲーション用ボタンナ */
+		this.naviButtons	= null;
 		/** @var イベントリスナのコンテナ*/
 		this.listeners	= {};
 		/** @var シーン共通イベントリスナ*/
@@ -165,7 +165,7 @@ Scene.SceneBase	= class {
 
 					_this.naviButtons.at("Reset")
 						.SetIndex(0).SetPosition(16,size.height-16)
-						.AssignKeyboard(82)	//R
+						.AssignKeyboard(cc.KEY.r)	//R
 						.OnButtonUp(()=>_this.ResetForce());
 
 					if(_this.pager){
@@ -194,7 +194,7 @@ Scene.SceneBase	= class {
 			},
 			update	: function(dt){
 				this._super();
-				_this.naviButtons.Update(dt);
+				if(_this.naviButtons)	_this.naviButtons.Update(dt);
 				_this.sequence.Update(dt,"layer-ui");
 			},
 		});
