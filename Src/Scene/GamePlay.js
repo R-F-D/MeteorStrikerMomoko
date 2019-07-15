@@ -169,27 +169,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					_this.sequence.Update(dt,"layer-bg");
 				},
 			})
-			/*
-			.AddToLayerList("ui",{
-				ctor:function(){
-					this._super();
-					this.scheduleUpdate();
 
-					//ボタン
-					_this.buttons	= Button.CreateInstance(1).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
-					_this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Retry");
-					_this.buttons.at(2).CreateSprite(rc.img.titleButton).SetTag("Share");
-
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-					_this.buttons.Update(dt);
-					_this.sequence.Update(dt,"layer-ui");
-				},
-			});
-			*/
 			return this;
 	}
 
@@ -277,6 +257,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			//インタフェース
+			this.naviButtons.at("Reset").OnMouseHover(
+				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
+				()=>this.labels.navigation.RemoveTempText()
+			);
 			this.buttons.SetVisible(false);
 		})
 		.PushUpdatingFunctions(dt=>{
