@@ -19,10 +19,8 @@ Scene.SceneBase	= class {
 		this.count				= 0;
 		/** @var ポーズ用カウント */
 		this.pauseCount			= 0;
-		/** @var ページ機能/ページ枚数 */
-		this.numPages		= 2;
-		/** @var ページ機能/現在のページ番号 */
-		this._page			= 0;
+		/** @var ページ機能 */
+		this.pager				= new Pager(3);
 
 		/** @var cc.Layer cc.Sceneインスタンス */
 		this.ccSceneInstance	= null;
@@ -170,21 +168,21 @@ Scene.SceneBase	= class {
 				_this.naviButtons.at("Prev")
 					.SetIndex(2).SetPosition(16+32+8,32)
 					.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
-					.OnButtonUp(()=>_this.Page(_this.Page()-1))
+					.OnButtonUp(()=>_this.pager.Add(-1))
 					.sprite.SetRotate(180);
 				_this.naviButtons.at("Next")
 					.SetIndex(2).SetPosition(size.width-16-32-8,32)
 					.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
-					.OnButtonUp(()=>_this.Page(_this.Page()+1));
+					.OnButtonUp(()=>_this.pager.Add(+1));
 				_this.naviButtons.at("First")
 					.SetIndex(3).SetPosition(16,32)
 					.AssignKeyboard(cc.KEY.home)	//Home
-					.OnButtonUp(()=>_this.Page(0))
+					.OnButtonUp(()=>_this.pager.Set(0))
 					.sprite.SetRotate(180);
 				_this.naviButtons.at("Last")
 					.SetIndex(3).SetPosition(size.width-16,32)
 					.AssignKeyboard(cc.KEY.end)	//End
-					.OnButtonUp(()=>_this.Page(this.numPages));
+					.OnButtonUp(()=>_this.pager.Set(null));
 
 				return _this.OnUiLayerCreate(this);
 			},
@@ -329,24 +327,6 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
-	/** ページ設定
-	 * @param {number} [dst=null]			指定するとSetter扱い。省略するとGetter扱い
-	 * @param {boolean} [transitions=true]	シークエンス遷移を行うか（Setter時のみ）
-	 * @returns {number|this}				Setter時はthis、Getter時は現在のページ値
-	 */
-	Page(dst=null, transitions=true){
-		if(dst==null){	//as getter
-			return this._page || 0;
-		}
-		else{			//as setter
-			this.numPages	= this.numPages || 1;
-			const old		= this._page;
-			this._page		= _(dst).clamp( 0, this.numPages-1 );
-			if(transitions && old!=this._page && this._onPaged) this._onPaged();
-			return this;
-		}
-	}
-
 
 	/** 現在時刻のDateオブジェクトを取得
 	 * @static
@@ -373,6 +353,36 @@ Scene.SceneBase.first		= null;
 Scene.SceneBase.resetTo		= null;
 Scene.SceneBase._date		= null;
 Scene.SceneBase._initsFirst	= false;
+
+
+
+class Pager{
+	constructor(nPages){
+		this.nPages		= nPages;
+		this._current	= 0;
+		this.onPaged	= null;
+	}
+
+	Get(){
+		return this._current || 0;
+	}
+
+	Set(dst, callbacks=true){
+		this.nPages		= this.nPages || 1;
+		dst				= dst===null ? this.nPages : dst;
+
+		const old		= this._current;
+		this._current	= _(dst).clamp( 0, this.nPages-1 );
+
+		if(callbacks && old!=this._current && this.onPaged) this.onPaged();
+		return this;
+	}
+
+	Add(value, callbacks=true){
+		return this.Set(this._current+value,callbacks);
+	}
+
+}
 
 })();	//File Scope
 
