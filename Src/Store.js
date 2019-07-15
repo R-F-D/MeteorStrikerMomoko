@@ -11,9 +11,10 @@ class Store{
 				HighScore:					{Required:0,	Order:0x0000,	UnitKey:"Unit.Distance",	},
 				/** 直近の平均飛距離 */
 				MeanDistance:				{Required:0,	Order:0x0001,	UnitKey:"Unit.Distance",	},
-				NumPassings:[				{Required:1,	Order:0x0002,	},
-											{Required:1,	Order:0x0002,	},
-											{Required:1,	Order:0x0002,	},	],
+				/** チェックポイント到達回数 */
+				NumPassings:[				{Required:1,	Order:0x0002,	},		//太陽
+											{Required:1,	Order:0x0002,	},		//きらり
+											{Required:1,	Order:0x0002,	},	],	//ユニコーン
 
 				/** グッド回数 */
 				NumGoods:					{Required:0,	Order:0x1200,	},
@@ -54,8 +55,8 @@ class Store{
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** ナビゲーション回数 */
-				NumNavigates:[				{Required:1,	Order:0x0104,	},
-											{Required:1,	Order:0x0104,	},	],
+				NumNavigates:[				{Required:1,	Order:0x0104,	},		//ノーマル
+											{Required:1,	Order:0x0104,	},	],	//初めてのともだち
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
 				NumTouchesPlayer:			{Required:1,	Order:0x0103,	},
 

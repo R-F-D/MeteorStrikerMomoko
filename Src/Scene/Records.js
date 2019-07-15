@@ -145,7 +145,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					}
 					else{
 						fmtCount	= L.Text("Records.Secret.Format");
-						text		= L.Text("Records.Secret");
+						text		= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
 

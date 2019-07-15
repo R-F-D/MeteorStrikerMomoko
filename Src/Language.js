@@ -242,13 +242,25 @@ const LocalizedTexts	= {
 			_:	"Arrivals at the Sun",
 			ja:	"太陽到達回数",
 		},
+		"Records.GamePlay.NumPassings.00.Secret":{
+			_:	"Arrivals at ????????",
+			ja:	"？？？？到達回数",
+		},
 		"Records.GamePlay.NumPassings.01":{
 			_:	"Kirarin Robot Passings",
 			ja:	"きらりんロボ通過回数",
 		},
+		"Records.GamePlay.NumPassings.01.Secret":{
+			_:	"???????? Passings",
+			ja:	"？？？？通過回数",
+		},
 		"Records.GamePlay.NumPassings.02":{
 			_:	"Found Pink Unicorns",
 			ja:	"ピンクのユニコーン発見数",
+		},
+		"Records.GamePlay.NumPassings.02.Secret":{
+			_:	"Found ????????",
+			ja:	"？？？？発見数",
 		},
 		"Records.GamePlay.NumPassings.02.Format":{
 			_:	"$0",
@@ -374,9 +386,17 @@ const LocalizedTexts	= {
 			_:	"Iku Navigates",
 			ja:	"育のナビ回数",
 		},
+		"Records.Action.NumNavigates.00.Secret":{
+			_:	"???????? Navigates",
+			ja:	"？？？？のナビ回数",
+		},
 		"Records.Action.NumNavigates.01":{
 			_:	"First Friend Navigates",
 			ja:	"初めてのともだちのナビ回数",
+		},
+		"Records.Action.NumNavigates.01.Secret":{
+			_:	"???????? Navigates",
+			ja:	"？？？？のナビ回数",
 		},
 
 		//プレイヤーキャラクターをタッチした回数 Number of Touches Player Character
