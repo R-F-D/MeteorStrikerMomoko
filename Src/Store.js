@@ -8,36 +8,36 @@ class Store{
 		let container	= {
 			GamePlay: {
 				/** ハイスコア*/
-				HighScore:					{Required:0,	Order:0x0000,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
+				HighScore:					{Required:0,	Order:0x0000,	UnitKey:"Unit.Distance",	},
 				/** 直近の平均飛距離 */
-				MeanDistance:				{Required:0,	Order:0x0001,	nDecimalDigits:0,	UnitKey:"Unit.Distance",},
-				NumPassings:[				{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},
-											{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},
-											{Required:1,	Order:0x0002,	nDecimalDigits:0,	UnitKey:null,},	],
+				MeanDistance:				{Required:0,	Order:0x0001,	UnitKey:"Unit.Distance",	},
+				NumPassings:[				{Required:1,	Order:0x0002,	},
+											{Required:1,	Order:0x0002,	},
+											{Required:1,	Order:0x0002,	},	],
 
 				/** グッド回数 */
-				NumGoods:					{Required:0,	Order:0x1200,	nDecimalDigits:0,	UnitKey:null,			},
+				NumGoods:					{Required:0,	Order:0x1200,	},
 				/** パーフェクト回数 */
-				NumPerfects:				{Required:0,	Order:0x1201,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPerfects:				{Required:0,	Order:0x1201,	},
 				/** 100%パーフェクト回数 */
-				NumTruePerfects:			{Required:1,	Order:0x1202,	nDecimalDigits:0,	UnitKey:null,			},
+				NumTruePerfects:			{Required:1,	Order:0x1202,	},
 				/** エイミング精度最高値 */
-				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		},
+				BestAiming:					{Required:0,	Order:0x1203,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 				/** 平均エイミング精度 */
 				MeanAiming:					{Required:0,	Order:0x1204,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 
 				/** 軽打回数 */
-				NumLightBlowings:			{Required:0,	Order:0x1300,	nDecimalDigits:0,	UnitKey:null,			},
+				NumLightBlowings:			{Required:0,	Order:0x1300,	},
 				/** 強打回数 */
-				NumHardBlowings:			{Required:0,	Order:0x1301,	nDecimalDigits:0,	UnitKey:null,			},
+				NumHardBlowings:			{Required:0,	Order:0x1301,	},
 				/** 強打＆パーフェクト回数 */
-				NumHardAndPerfectBlowings:	{Required:1,	Order:0x1302,	nDecimalDigits:0,	UnitKey:null,			},
+				NumHardAndPerfectBlowings:	{Required:1,	Order:0x1302,	},
 				/** 最高打撃力 */
 				BestBlowing:				{Required:0,	Order:0x1303,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** 連続打撃成功数 */
 				NumSuccessiveHits:			{},
 				/** 最高連続打撃成功数 */
-				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	nDecimalDigits:0,	UnitKey:null,			},
+				MaxSuccessiveHits:			{Required:0,	Order:0x1304,	},
 				/** 平均打撃倍率 */
 				MeanBlowing:				{Required:0,	Order:0x1305,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 
@@ -48,16 +48,16 @@ class Store{
 			},
 			Action: {
 				/** プレイ回数 */
-				NumPlays:					{Required:0,	Order:0x0100,	nDecimalDigits:0,	UnitKey:null,			},
+				NumPlays:					{Required:0,	Order:0x0100,	},
 				/** リトライ回数 */
-				NumRetrys:					{Required:0,	Order:0x0101,	nDecimalDigits:0,	UnitKey:null,			},
+				NumRetrys:					{Required:0,	Order:0x0101,	},
 				/** シェア回数 */
-				NumShares:					{Required:0,	Order:0x0102,	nDecimalDigits:0,	UnitKey:null,			},
+				NumShares:					{Required:0,	Order:0x0102,	},
 				/** ナビゲーション回数 */
-				NumNavigates:[				{Required:1,	Order:0x0104,	nDecimalDigits:0,	UnitKey:null,			},
-											{Required:1,	Order:0x0104,	nDecimalDigits:0,	UnitKey:null,			},],
+				NumNavigates:[				{Required:1,	Order:0x0104,	},
+											{Required:1,	Order:0x0104,	},	],
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
-				NumTouchesPlayer:			{Required:1,	Order:0x0103,	nDecimalDigits:0,	UnitKey:null,			},
+				NumTouchesPlayer:			{Required:1,	Order:0x0103,	},
 
 			},
 			Settings:{
