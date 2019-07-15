@@ -57,8 +57,8 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					//表示板
 					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>	{
-						const body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5).SetColor("#FFFF00");
-						const counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5).SetColor("#FFFFFF");
+						const body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
+						const counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5)
 						body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
 						return {body:body,counter:counter};
 					});
@@ -129,11 +129,15 @@ Scene.Records	= class extends Scene.SceneBase {
 						return;
 					}
 
+					//カウンタと公開フラグ
 					//ヘッダテキスト＆カウンタ
-					let count	= Store.Select(handle.Key,0);
+					let count		= Store.Select(handle.Key,0);
+					const isPublic	= handle.Required!==null && handle.Required<=count;
+
+					//カウンタと公開フラグ
 					let text	= "";
 					let fmtCount	= "";
-					if(handle.Required!==null && handle.Required<=count){
+					if(isPublic){
 						if(handle.Conv)	count = handle.Conv(count);
 						count		= L.NumToStr(count, handle.nDecimalDigits);
 
@@ -148,11 +152,14 @@ Scene.Records	= class extends Scene.SceneBase {
 						text		= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
-
 					const x	= (i%2) * (DisplayBoardSize.Width+4);
 					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
 					board.body.bg.lower			= {width:DisplayBoardSize.Width, height:DisplayBoardSize.Height};
-					board.body.bg.animationDelay	= 0.05*i;
+					board.body.bg.animationDelay= 0.05*i;
+					board.body.bg.OPACITY		= isPublic	? 128 : 64;
+					board.body.SetColor(	isPublic ? "#FFFF00" : "#AFAF00");
+					board.counter.SetColor(	isPublic ? "#FFFFFF" : "#AFAFAF");;
+
 					board.body
 						.SetVisible(true)
 						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
@@ -161,7 +168,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetVisible(false)
 						.SetPosition(PanelPosition.X+x+DisplayBoardSize.Width-2,PanelPosition.Y-y-6)
 						.SetString(`${fmtCount}`);
-						board.body.bg.animationDelay	= 0.0;
+					board.body.bg.animationDelay	= 0.0;
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
