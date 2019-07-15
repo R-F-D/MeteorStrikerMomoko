@@ -34,6 +34,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
+		this.EnableNaviButtons(3);
 		this.pager.onPaged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
 
 		/** ccSceneのインスタンス */
