@@ -7,7 +7,6 @@ var Scene	= Scene || {};
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
 	MAIN	: "Help.Main",
-	UI		: "Help.Ui",
 };
 
 
@@ -21,6 +20,7 @@ Scene.Help	= class extends Scene.SceneBase {
 			//
 		};
 
+		this.EnableNaviButtons(0);
 		this.buttons	= {};
 
 		/** ccSceneのインスタンス */
@@ -43,30 +43,12 @@ Scene.Help	= class extends Scene.SceneBase {
 					return true;
 				},
 			})
-			.AddToLayerList("ui",{
-				ctor:function(){
-					this._super();
-					this.scheduleUpdate();
-
-					//ボタン
-					_this.buttons	= Button.CreateInstance(1).AddToLayer(this);
-					_this.buttons.at(0).CreateSprite(rc.img.navigationButton).SetTag("Reset");
-
-					return true;
-				},
-				update	: function(dt){
-					this._super();
-					_this.buttons.Update(dt);
-					_this.sequence.Update(dt,"layer-ui");
-				},
-			});
 		return this;
 	}
 
 	OnEnter(){
 		super.OnEnter();
-		this.SetLayer(LinkedLayerTags.UI,  this.ccLayers.ui,0x0002)
-			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
@@ -84,12 +66,6 @@ Scene.Help	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			//インタフェース
-			this.buttons.at("Reset")
-				.SetVisible(true)
-				.SetPosition(16,size.height-16)
-				.SetColorOnHover([0xFF,0xA0,0x00])
-				.OnButtonUp(()=>this.ResetForce());
 		})
 		.PushUpdatingFunctions(dt=>{
 		});
