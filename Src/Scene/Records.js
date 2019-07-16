@@ -119,7 +119,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			let handles	= Store.GetVisibleHandles( this.pager ? this.pager.Get() : null);
+			let handles	= Store.GetVisibleHandles( this.pager ? this.pager.GetPage() : null);
 
 			//ラベル
 			this.displayBoards

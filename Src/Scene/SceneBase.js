@@ -172,21 +172,21 @@ Scene.SceneBase	= class {
 						_this.naviButtons.at("Prev")
 							.SetIndex(2).SetPosition(16+32+8,32)
 							.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
-							.OnButtonUp(()=>_this.pager.Add(-1))
+							.OnButtonUp(()=>_this.pager.AddPage(-1))
 							.sprite.SetRotate(180);
 						_this.naviButtons.at("Next")
 							.SetIndex(2).SetPosition(size.width-16-32-8,32)
 							.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
-							.OnButtonUp(()=>_this.pager.Add(+1));
+							.OnButtonUp(()=>_this.pager.AddPage(+1));
 						_this.naviButtons.at("First")
 							.SetIndex(3).SetPosition(16,32)
 							.AssignKeyboard(cc.KEY.home)	//Home
-							.OnButtonUp(()=>_this.pager.Set(0))
+							.OnButtonUp(()=>_this.pager.SetPage(0))
 							.sprite.SetRotate(180);
 						_this.naviButtons.at("Last")
 							.SetIndex(3).SetPosition(size.width-16,32)
 							.AssignKeyboard(cc.KEY.end)	//End
-							.OnButtonUp(()=>_this.pager.Set(null));
+							.OnButtonUp(()=>_this.pager.SetPage(null));
 					}
 				}
 
@@ -373,30 +373,55 @@ Scene.SceneBase._initsFirst	= false;
 
 
 
+/** ページ送り機能
+ * @class Pager
+ */
 class Pager{
-	constructor(nPages){
-		this.nPages		= Number(nPages);
-		this._current	= 0;
-		this.onPaged	= null;
+	/** Creates an instance of Pager.
+	 * @param {number} nPages			ページ数
+	 * @param {number} [nChapters=1]	チャプター数
+	 * @memberof Pager
+	 */
+	constructor(nPages,nChapters=1){
+		this.nPages			= Number(nPages);
+		this.nChapters		= Number(nChapters);
+		this._currentPage	= 0;
+		this.onPaged		= null;
 	}
 
-	Get(){
-		return this._current || 0;
+	/** 現在のページを取得
+	 * @returns {number}
+	 * @memberof Pager
+	 */
+	GetPage(){
+		return this._currentPage || 0;
 	}
 
-	Set(dst, callbacks=true){
-		this.nPages		= this.nPages || 1;
-		dst				= dst===null ? this.nPages : dst;
+	/** ページ番号の絶対指定
+	 * @param {number}} dst					ページ番号
+	 * @param {boolean} [callbacks=true]	ページ変更時にコールバック関数を呼ぶか
+	 * @returns {this}
+	 * @memberof Pager
+	 */
+	SetPage(dst, callbacks=true){
+		this.nPages			= this.nPages || 1;
+		dst					= dst===null ? this.nPages : dst;
 
-		const old		= this._current;
-		this._current	= _(dst).clamp( 0, this.nPages-1 );
+		const old			= this._currentPage;
+		this._currentPage	= _(dst).clamp( 0, this.nPages-1 );
 
-		if(callbacks && old!=this._current && this.onPaged) this.onPaged();
+		if(callbacks && old!=this._currentPage && this.onPaged) this.onPaged();
 		return this;
 	}
 
-	Add(value, callbacks=true){
-		return this.Set(this._current+value,callbacks);
+	/** ページ番号の相対指定
+	 * @param {number} value				ページ番号の増分
+	 * @param {boolean} [callbacks=true]	ページ変更時にコールバック関数を呼ぶか
+	 * @returns {this}
+	 * @memberof Pager
+	 */
+	AddPage(value, callbacks=true){
+		return this.SetPage(this._currentPage+value,callbacks);
 	}
 
 }
