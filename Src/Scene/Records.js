@@ -37,7 +37,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.displayBoards	= [];	//表示板
 
 		this.EnableNaviButtons(5);
-		this.pager.onPaged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
+		if(this.pager)	this.pager.onPaged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -119,7 +119,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
-			let handles	= Store.GetVisibleHandles(this.pager.Get());
+			let handles	= Store.GetVisibleHandles( this.pager ? this.pager.Get() : null);
 
 			//ラベル
 			this.displayBoards
