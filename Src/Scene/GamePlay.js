@@ -371,9 +371,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 						Achievement.Unlock(Achievements.Blowing.HardAndPerfect, nHardAndPerfectBlowings);
 					}
 				}
-				else{
-					Store.DynamicInsert( Store.Handles.GamePlay.NumLightBlowings );
-				}
 
 				//平均倍率
 				Store.Log(Store.Handles.GamePlay.MeanBlowing, currentBlowRate);

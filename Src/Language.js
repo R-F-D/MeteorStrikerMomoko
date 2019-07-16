@@ -303,12 +303,6 @@ const LocalizedTexts	= {
 			_:	"$0$1",
 		},
 
-		//軽打回数 Lightblows
-		"Records.GamePlay.NumLightBlowings":{
-			_:	"Lightblows",
-			ja:	"軽打",
-		},
-
 		//強打回数 Hardblows
 		"Records.GamePlay.NumHardBlowings":{
 			_:	"Hardblows",
