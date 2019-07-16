@@ -372,11 +372,13 @@ Scene.SceneBase._date		= null;
 Scene.SceneBase._initsFirst	= false;
 
 
+//--------------------------------------------------------------------------------
 
 /** ページ送り機能
  * @class Pager
  */
 class Pager{
+
 	/** Creates an instance of Pager.
 	 * @param {number} nPages			ページ数
 	 * @param {number} [nChapters=1]	チャプター数
@@ -386,7 +388,7 @@ class Pager{
 		this.nPages			= Number(nPages);
 		this.nChapters		= Number(nChapters);
 		this._currentPage	= 0;
-		this.onPaged		= null;
+		this.onPageChanged	= null;
 	}
 
 	/** 現在のページを取得
@@ -410,7 +412,7 @@ class Pager{
 		const old			= this._currentPage;
 		this._currentPage	= _(dst).clamp( 0, this.nPages-1 );
 
-		if(callbacks && old!=this._currentPage && this.onPaged) this.onPaged();
+		if(callbacks && old!=this._currentPage && this.onPageChanged) this.onPageChanged();
 		return this;
 	}
 
