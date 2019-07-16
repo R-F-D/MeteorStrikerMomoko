@@ -387,6 +387,16 @@ const LocalizedTexts	= {
 			ja:	"シェア回数",
 		},
 
+		//実績解除数 Number of Unlocked Achievements
+		"Records.Action.NumUnlockedAchievements":{
+			_:	"Unlocked Achievements",
+			ja:	"解除した実績数",
+		},
+		"Records.Action.NumUnlockedAchievements.Format":{
+			_:	"$0",
+			ja:	"$0個",
+		},
+
 		//各ナビゲーション回数 Number of Navigates
 		"Records.Action.NumNavigates.00":{
 			_:	"Iku Navigates",

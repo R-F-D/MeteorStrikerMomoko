@@ -55,6 +55,8 @@ class Store{
 				NumRetrys:					{Required:0,	Order:0x0102,	},
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0103,	},
+				/** 実績解除数*/
+				NumUnlockedAchievements:	{Required:0,	Order:0x0104,	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:1,	Order:0x4000,	},		//ノーマル
 											{Required:1,	Order:0x4000,	},	],	//初めてのともだち
@@ -226,6 +228,9 @@ class Store{
 				MeanBlowing:	(value)=>StrToMean(value),
 				MeanAiming:		(value)=>StrToMean(value),
 				MeanEmitting:	(value)=>StrToMean(value),
+			},
+			Action:{
+				NumUnlockedAchievements:	()=>Achievement.nUnlockedItems,
 			},
 		};
 	}

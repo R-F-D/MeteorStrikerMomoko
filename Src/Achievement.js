@@ -118,9 +118,9 @@ const Achievement = new (class Achievement{
 	}
 	get nUnlockedItems(){
 		let n	= 0;
-		_.forEach(Achievements,category=>{
-			_.forEach(category,a=>{
-				const date = cc.sys.localStorage.getItem(key);
+		_(Achievements).forEach(category=>{
+			_(category).forEach(a=>{
+				const date = cc.sys.localStorage.getItem(`${this.PrefixStorageKey}${a.Key}`);
 				if(date!==null && 0<date) ++n;
 			});
 		});
