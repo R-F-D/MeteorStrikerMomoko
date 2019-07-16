@@ -12,7 +12,9 @@ const LinkedLayerTags	= {
 };
 
 const PanelPosition		= {X:96,Y:240};
-const MaxDisplayBoards	= 14;
+const MaxRows			= 5;
+const MaxColumns		= 2;
+const MaxDisplayBoards	= MaxRows * MaxColumns;
 const DisplayBoardSize	= {Width:160,Height:32};
 
 
@@ -34,7 +36,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
-		this.EnableNaviButtons(3);
+		this.EnableNaviButtons(5);
 		this.pager.onPaged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
 
 		/** ccSceneのインスタンス */
@@ -152,8 +154,8 @@ Scene.Records	= class extends Scene.SceneBase {
 						text		= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
-					const x	= (i%2) * (DisplayBoardSize.Width+4);
-					const y	= Math.trunc(i/2) * (DisplayBoardSize.Height+4);
+					const x	= Math.trunc(i/MaxRows) * (DisplayBoardSize.Width+4);
+					const y	= (i%MaxRows) * (DisplayBoardSize.Height+4);
 					board.body.bg.lower			= {width:DisplayBoardSize.Width, height:DisplayBoardSize.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					board.body.bg.OPACITY		= isPublic	? 128 : 64;
