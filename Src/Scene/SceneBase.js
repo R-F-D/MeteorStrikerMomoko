@@ -459,7 +459,7 @@ class Pager{
 	 * @memberof Pager
 	 */
 	AddChapter(value, callbacks=true){
-		return this.SeChapter(this._chapter+value,callbacks);
+		return this.SetChapter(this._chapter+value,callbacks);
 	}
 }
 
