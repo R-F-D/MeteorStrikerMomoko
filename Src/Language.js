@@ -369,6 +369,12 @@ const LocalizedTexts	= {
 			ja:	"プレイ回数",
 		},
 
+		//起動回数 Number of Bootings
+		"Records.Action.NumBootings":{
+			_:	"Bootings",
+			ja:	"起動回数",
+		},
+
 		//リトライ回数 Number of Retrys
 		"Records.Action.NumRetrys":{
 			_:	"Retrys",

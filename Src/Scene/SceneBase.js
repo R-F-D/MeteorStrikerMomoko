@@ -360,6 +360,7 @@ Scene.SceneBase	= class {
 		if(Scene.SceneBase._initsFirst)	return;
 		Scene.SceneBase._initsFirst = true;
 
+		Store.DynamicInsert(Store.Handles.Action.NumBootings);
 		Achievement.Init();
 	}
 

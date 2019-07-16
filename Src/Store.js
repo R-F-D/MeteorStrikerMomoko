@@ -49,10 +49,12 @@ class Store{
 			Action: {
 				/** プレイ回数 */
 				NumPlays:					{Required:0,	Order:0x0100,	},
+				/** 起動回数 */
+				NumBootings:				{Required:0,	Order:0x0101,	},
 				/** リトライ回数 */
-				NumRetrys:					{Required:0,	Order:0x0101,	},
+				NumRetrys:					{Required:0,	Order:0x0102,	},
 				/** シェア回数 */
-				NumShares:					{Required:0,	Order:0x0102,	},
+				NumShares:					{Required:0,	Order:0x0103,	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:1,	Order:0x4000,	},		//ノーマル
 											{Required:1,	Order:0x4000,	},	],	//初めてのともだち
