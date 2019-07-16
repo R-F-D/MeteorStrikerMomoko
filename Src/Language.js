@@ -309,6 +309,12 @@ const LocalizedTexts	= {
 			ja:	"強打",
 		},
 
+		//全力打撃回数 Full Power Blows
+		"Records.GamePlay.NumFullPowerBlowings":{
+			_:	"Full Power Blows",
+			ja:	"全力打撃",
+		},
+
 		//強打とパーフェクトを同時に出した回数 Hardblow and Perfect
 		"Records.GamePlay.NumHardAndPerfectBlowings":{
 			_:	"Hardblow And Perfect",

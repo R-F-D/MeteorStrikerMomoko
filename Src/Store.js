@@ -27,7 +27,9 @@ class Store{
 				/** 平均エイミング精度 */
 				MeanAiming:					{Required:0,	Order:0x2004,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 				/** 強打回数 */
-				NumHardBlowings:			{Required:0,	Order:0x2011,	},
+				NumHardBlowings:			{Required:0,	Order:0x2010,	},
+				/** 全力打撃回数 */
+				NumFullPowerBlowings:		{Required:1,	Order:0x2011,	},
 				/** 強打＆パーフェクト回数 */
 				NumHardAndPerfectBlowings:	{Required:1,	Order:0x2012,	},
 				/** 最高打撃力 */
