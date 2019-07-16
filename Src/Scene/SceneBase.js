@@ -159,8 +159,8 @@ Scene.SceneBase	= class {
 				this.scheduleUpdate();
 
 				if(_this._naviButtonIsEnabled){
-					const nButtons	= _this.pager ? 5 : 1;
-					_this.naviButtons	= Button.CreateInstance(nButtons).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last");
+					const nButtons	= _this.pager ? 7 : 1;
+					_this.naviButtons	= Button.CreateInstance(nButtons).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last","PrevChapter","NextChapter");
 					_this.naviButtons.forEach(b=>b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
 
 					_this.naviButtons.at("Reset")
@@ -170,23 +170,35 @@ Scene.SceneBase	= class {
 
 					if(_this.pager){
 						_this.naviButtons.at("Prev")
-							.SetIndex(2).SetPosition(16+32+8,32)
+							.SetIndex(2).SetPosition(16+32+12,32)
 							.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
 							.OnButtonUp(()=>_this.pager.AddPage(-1))
 							.sprite.SetRotate(180);
 						_this.naviButtons.at("Next")
-							.SetIndex(2).SetPosition(size.width-16-32-8,32)
+							.SetIndex(2).SetPosition(size.width-16-32-12,32)
 							.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
 							.OnButtonUp(()=>_this.pager.AddPage(+1));
 						_this.naviButtons.at("First")
-							.SetIndex(3).SetPosition(16,32)
+							.SetIndex(3).SetPosition(16+4,32)
 							.AssignKeyboard(cc.KEY.home)	//Home
 							.OnButtonUp(()=>_this.pager.SetPage(0))
 							.sprite.SetRotate(180);
 						_this.naviButtons.at("Last")
-							.SetIndex(3).SetPosition(size.width-16,32)
+							.SetIndex(3).SetPosition(size.width-16-4,32)
 							.AssignKeyboard(cc.KEY.end)	//End
 							.OnButtonUp(()=>_this.pager.SetPage(null));
+						_this.naviButtons.at("PrevChapter")
+							.SetIndex(2).SetPosition(16+32+12,168+72)
+							.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
+							.OnButtonUp(()=>_this.pager.AddChapter(-1))
+							.SetVisible(_this.pager.nChapters>1)
+							.sprite.SetRotate(-90);
+						_this.naviButtons.at("NextChapter")
+							.SetIndex(2).SetPosition(16+32+12,168-72)
+							.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
+							.OnButtonUp(()=>_this.pager.AddChapter(+1))
+							.SetVisible(_this.pager.nChapters>1)
+							.sprite.SetRotate(90);
 					}
 				}
 
