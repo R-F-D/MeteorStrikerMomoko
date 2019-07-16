@@ -387,7 +387,8 @@ class Pager{
 	constructor(nPages,nChapters=1){
 		this.nPages			= Number(nPages);
 		this.nChapters		= Number(nChapters);
-		this._currentPage	= 0;
+		this._page			= 0;
+		this._chapter		= 0;
 		this.onPageChanged	= null;
 	}
 
@@ -396,7 +397,15 @@ class Pager{
 	 * @memberof Pager
 	 */
 	GetPage(){
-		return this._currentPage || 0;
+		return this._page || 0;
+	}
+
+	/** 現在のチャプターを取得
+	 * @returns {number}
+	 * @memberof Pager
+	 */
+	GetChapter(){
+		return this._chapter || 0;
 	}
 
 	/** ページ番号の絶対指定
@@ -409,10 +418,27 @@ class Pager{
 		this.nPages			= this.nPages || 1;
 		dst					= dst===null ? this.nPages : dst;
 
-		const old			= this._currentPage;
-		this._currentPage	= _(dst).clamp( 0, this.nPages-1 );
+		const old			= this._page;
+		this._page	= _(dst).clamp( 0, this.nPages-1 );
 
-		if(callbacks && old!=this._currentPage && this.onPageChanged) this.onPageChanged();
+		if(callbacks && old!=this._page && this.onPageChanged) this.onPageChanged();
+		return this;
+	}
+
+	/** チャプター番号の絶対指定
+	 * @param {number}} dst					チャプター番号
+	 * @param {boolean} [callbacks=true]	チャプター変更時にコールバック関数を呼ぶか
+	 * @returns {this}
+	 * @memberof Pager
+	 */
+	SetChapter(dst, callbacks=true){
+		this.nChapters		= this.nChapters || 1;
+		dst					= dst===null ? this.nChapters : dst;
+
+		const old		= this._chapter;
+		this._chapter	= _(dst).clamp( 0, this.nChapters-1 );
+
+		if(callbacks && old!=this._chapter && this.onPageChanged) this.onPageChanged();
 		return this;
 	}
 
@@ -423,9 +449,18 @@ class Pager{
 	 * @memberof Pager
 	 */
 	AddPage(value, callbacks=true){
-		return this.SetPage(this._currentPage+value,callbacks);
+		return this.SetPage(this._page+value,callbacks);
 	}
 
+	/** チャプター番号の相対指定
+	 * @param {number} value				チャプター番号の増分
+	 * @param {boolean} [callbacks=true]	チャプター変更時にコールバック関数を呼ぶか
+	 * @returns {this}
+	 * @memberof Pager
+	 */
+	AddChapter(value, callbacks=true){
+		return this.SeChapter(this._chapter+value,callbacks);
+	}
 }
 
 })();	//File Scope
