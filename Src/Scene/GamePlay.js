@@ -574,13 +574,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
-		this.buttons.Update();
 		return this;
 	}
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
 
+		this.buttons.Update();
 		this.fx.explosion.Update();
 		this.fx.hit.Update();
 		this.fx.emit.Update();
