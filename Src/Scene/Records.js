@@ -8,7 +8,6 @@ var Scene	= Scene || {};
 const LinkedLayerTags	= {
 	MAIN:	"Records.Main",
 	BG:		"Records.Bg",
-	UI:		"Records.Ui",
 };
 
 const PanelPosition		= {X:96,Y:240};
@@ -31,12 +30,11 @@ Scene.Records	= class extends Scene.SceneBase {
 			TRANSITION:		null,	//トランジション用
 		};
 
-
 		this.sprites		= {};
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
-		this.EnableNaviButtons(5,1);
+		this.EnableNaviButtons(5,2);
 		if(this.pager)	this.pager.onPageChanged	= this.pageTransitioner;
 
 		/** ccSceneのインスタンス */
@@ -116,6 +114,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		.PushUpdatingFunctions(dt=>{
 			 if(this.sequence.count>=60) this.SetSequence(this.Sequences.RECORDS);
 		});
+
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 
@@ -177,6 +176,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 			//if(this.sequence.count>60*5)	this.SetSequence(this.Sequences.TRANSITION);
 		});
+
 		//トランジション
 		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
 			this.displayBoards.forEach(b=>{
@@ -186,10 +186,21 @@ Scene.Records	= class extends Scene.SceneBase {
 		})
 		.PushUpdatingFunctions(dt=>{
 			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
-				this.SetSequence(this.Sequences.RECORDS);
+
+				const chapter	= this.pager && this.pager.GetChapter() || 0;
+				if(chapter==0)	this.SetSequence(this.Sequences.RECORDS);
+				else			this.SetSequence(this.Sequences.ACHIEVEMENTS);
 			}
 
 		});
+
+		//実績
+		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
+			Log("List of Achievements");
+		})
+		.PushUpdatingFunctions(dt=>{
+		});
+
 		return this;
 	}
 
