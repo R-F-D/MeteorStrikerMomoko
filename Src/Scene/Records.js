@@ -37,7 +37,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.displayBoards	= [];	//表示板
 
 		this.EnableNaviButtons(5,1);
-		if(this.pager)	this.pager.onPageChanged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
+		if(this.pager)	this.pager.onPageChanged	= this.pageTransitioner;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -203,6 +203,13 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
+	}
+
+	get pageTransitioner(){
+		return ()=>{
+			super.pageTransitioner();
+			this.SetSequence(this.Sequences.TRANSITION);
+		}
 	}
 
 }//class

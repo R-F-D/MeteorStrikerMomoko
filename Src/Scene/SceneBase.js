@@ -35,6 +35,8 @@ Scene.SceneBase	= class {
 		this.labels		= {};
 		/** @var ナビゲーション用ボタンナ */
 		this.naviButtons	= null;
+		/** @var ページ遷移用インジケータのコンテナ */
+		this.pageIndicator	= null;
 		/** @var イベントリスナのコンテナ*/
 		this.listeners	= {};
 		/** @var シーン共通イベントリスナ*/
@@ -126,7 +128,6 @@ Scene.SceneBase	= class {
 	 */
 	InitLayerList(){
 		const _this		= this;
-		const size		= cc.director.getWinSize();
 		this.ccLayers	= {};
 		this.AddToLayerList("touchFx",{
 			ctor:function(){
@@ -157,51 +158,7 @@ Scene.SceneBase	= class {
 			ctor:function(){
 				this._super();
 				this.scheduleUpdate();
-
-				if(_this._naviButtonIsEnabled){
-					const nButtons	= _this.pager ? 7 : 1;
-					_this.naviButtons	= Button.CreateInstance(nButtons).AddToLayer(this).SetTags("Reset","First","Prev","Next","Last","PrevChapter","NextChapter");
-					_this.naviButtons.forEach(b=>b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
-
-					_this.naviButtons.at("Reset")
-						.SetIndex(0).SetPosition(16,size.height-16)
-						.AssignKeyboard(cc.KEY.r)	//R
-						.OnButtonUp(()=>_this.ResetForce());
-
-					if(_this.pager){
-						_this.naviButtons.at("Prev")
-							.SetIndex(2).SetPosition(16+32+12,32)
-							.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
-							.OnButtonUp(()=>_this.pager.AddPage(-1))
-							.sprite.SetRotate(180);
-						_this.naviButtons.at("Next")
-							.SetIndex(2).SetPosition(size.width-16-32-12,32)
-							.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
-							.OnButtonUp(()=>_this.pager.AddPage(+1));
-						_this.naviButtons.at("First")
-							.SetIndex(3).SetPosition(16+4,32)
-							.AssignKeyboard(cc.KEY.home)	//Home
-							.OnButtonUp(()=>_this.pager.SetPage(0))
-							.sprite.SetRotate(180);
-						_this.naviButtons.at("Last")
-							.SetIndex(3).SetPosition(size.width-16-4,32)
-							.AssignKeyboard(cc.KEY.end)	//End
-							.OnButtonUp(()=>_this.pager.SetPage(null));
-						_this.naviButtons.at("PrevChapter")
-							.SetIndex(2).SetPosition(16+32+12,168+72)
-							.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
-							.OnButtonUp(()=>_this.pager.AddChapter(-1))
-							.SetVisible(_this.pager.nChapters>1)
-							.sprite.SetRotate(-90);
-						_this.naviButtons.at("NextChapter")
-							.SetIndex(2).SetPosition(16+32+12,168-72)
-							.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
-							.OnButtonUp(()=>_this.pager.AddChapter(+1))
-							.SetVisible(_this.pager.nChapters>1)
-							.sprite.SetRotate(90);
-					}
-				}
-
+				if(_this._naviButtonIsEnabled)	_this.CreateNaviButtons(this);
 				return _this.OnUiLayerCreate(this);
 			},
 			update	: function(dt){
@@ -344,6 +301,85 @@ Scene.SceneBase	= class {
 		this._naviButtonIsEnabled	= true;
 		if(nPages>1)	this.pager	= new Pager(nPages);
 		return this;
+	}
+
+	//ナビボタン作成
+	CreateNaviButtons(layer){
+		if(!layer || !this._naviButtonIsEnabled)	return this;
+
+		const size		= cc.director.getWinSize();
+		const nButtons	= this.pager ? 7 : 1;
+		this.naviButtons	= Button.CreateInstance(nButtons).AddToLayer(layer).SetTags("Reset","First","Prev","Next","Last","PrevChapter","NextChapter");
+		this.naviButtons.forEach(b=>b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
+
+		//リセットボタン
+		this.naviButtons.at("Reset")
+			.SetIndex(0).SetPosition(16,size.height-16)
+			.AssignKeyboard(cc.KEY.r)	//R
+			.OnButtonUp(()=>this.ResetForce());
+
+		if(!this.pager)	return this;
+
+		//矢印ボタン
+		this.naviButtons.at("Prev")
+			.SetIndex(2).SetPosition(16+32+12,32)
+			.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
+			.OnButtonUp(()=>this.pager.AddPage(-1))
+			.sprite.SetRotate(180);
+		this.naviButtons.at("Next")
+			.SetIndex(2).SetPosition(size.width-16-32-12,32)
+			.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
+			.OnButtonUp(()=>this.pager.AddPage(+1));
+
+		this.naviButtons.at("First")
+			.SetIndex(3).SetPosition(16+4,32)
+			.AssignKeyboard(cc.KEY.home)	//Home
+			.OnButtonUp(()=>this.pager.SetPage(0))
+			.sprite.SetRotate(180);
+		this.naviButtons.at("Last")
+			.SetIndex(3).SetPosition(size.width-16-4,32)
+			.AssignKeyboard(cc.KEY.end)	//End
+			.OnButtonUp(()=>this.pager.SetPage(null));
+
+		this.naviButtons.at("PrevChapter")
+			.SetIndex(2).SetPosition(16+32+12,168+72)
+			.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
+			.OnButtonUp(()=>this.pager.AddChapter(-1))
+			.SetVisible(this.pager.nChapters>1)
+			.sprite.SetRotate(-90);
+		this.naviButtons.at("NextChapter")
+			.SetIndex(2).SetPosition(16+32+12,168-72)
+			.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
+			.OnButtonUp(()=>this.pager.AddChapter(+1))
+			.SetVisible(this.pager.nChapters>1)
+			.sprite.SetRotate(90);
+
+		//インジケータ
+		const indicatorWidth	= 128;
+		this.pageIndicator	= _.range(this.pager.nPages).map((v,i)=>
+			Sprite.CreateInstance(rc.img.navigationButton).AddToLayer(layer).Attr({zIndex:5})
+				.SetIndex(1)
+				.SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.nPages-1)), 32)
+		);
+		this.SetPageIndicator();
+		this.pager.onPageChanged	= this.pageTransitioner;
+
+		return this;
+	}
+
+	/** ページインジケータ設定 */
+	SetPageIndicator(){
+		if(!this._naviButtonIsEnabled || !this.pager)	return this;
+		this.pageIndicator.forEach((indicator,i)=>{
+			if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(1).RunActions([cc.scaleTo(0.25, 0.75),cc.fadeTo (0.25,255)]);
+			else						indicator.SetColor("#FFFFFF").RunActions([cc.scaleTo(0.25, 0.5 ),cc.fadeTo (0.25,96 )]);
+		});
+		return this;
+	}
+
+	/** ページ遷移関数 */
+	get pageTransitioner(){
+		return ()=>this.SetPageIndicator();
 	}
 
 	/** 強制リセット
