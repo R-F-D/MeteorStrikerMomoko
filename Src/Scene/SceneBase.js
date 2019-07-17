@@ -356,6 +356,7 @@ Scene.SceneBase	= class {
 			.sprite.SetRotate(90);
 
 		//インジケータ
+		if(this.pager.nPages<2) return this;
 		const indicatorWidth	= 128;
 		this.pageIndicator	= _.range(this.pager.nPages).map((v,i)=>
 			Sprite.CreateInstance(rc.img.navigationButton).AddToLayer(layer).Attr({zIndex:5})
