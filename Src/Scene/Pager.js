@@ -21,7 +21,7 @@ Scene.Pager	= class Pager{
 		this.nChapters		= Number(nChapters) || 1;
 		this._page			= 0;
 		this._chapter		= 0;
-		this.onPageChanged	= null;
+		this._onPageChanged	= null;
 	}
 
 	/** 現在のページを取得
@@ -53,7 +53,7 @@ Scene.Pager	= class Pager{
 		const old			= this._page;
 		this._page	= _(dst).clamp( 0, this.nPages-1 );
 
-		if(callbacks && old!=this._page && this.onPageChanged) this.onPageChanged();
+		if(callbacks && old!=this._page && this._onPageChanged) this._onPageChanged();
 		return this;
 	}
 
@@ -70,7 +70,7 @@ Scene.Pager	= class Pager{
 		const old		= this._chapter;
 		this._chapter	= _(dst).clamp( 0, this.nChapters-1 );
 
-		if(callbacks && old!=this._chapter && this.onPageChanged) this.onPageChanged();
+		if(callbacks && old!=this._chapter && this._onPageChanged) this._onPageChanged();
 		return this;
 	}
 
@@ -92,6 +92,14 @@ Scene.Pager	= class Pager{
 	 */
 	AddChapter(value, callbacks=true){
 		return this.SetChapter(this._chapter+value,callbacks);
+	}
+
+	/** ページ変更時のコールバック関数
+	 * @param {function} [callback=null]
+	 */
+	set onPageChanged(callback=null){
+		if(typeof callback !== "function")	callback = null;
+		this._onPageChanged	= callback;
 	}
 }
 
