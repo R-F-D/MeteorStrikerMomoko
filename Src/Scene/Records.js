@@ -35,7 +35,6 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.displayBoards	= [];	//表示板
 
 		this.EnableNaviButtons(5,2);
-		if(this.pager)	this.pager.onPageChanged	= this.pageTransitioner;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -92,6 +91,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
+		if(this.pager)	this.pager.onPageChanged	= this.pageTransitioner;
 		return this;
 	}
 
