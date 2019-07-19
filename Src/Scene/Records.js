@@ -139,7 +139,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					let text		= "";
 					let fmtCount	= "";
 					if(isPublic){
-						count			= L.NumToStr(count, handle.nDecimalDigits);
+						count			= _.isString(count)	? count	: L.NumToStr(count, handle.nDecimalDigits);
 						const patterns	= L.TextExists(handle.UnitKey)	? [count, L.Text(handle.UnitKey)]	: [count];
 						fmtCount		= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
 						text			= L.Text(`Records.${handle.Key}`);

@@ -242,6 +242,7 @@ Scene.SceneBase	= class {
 					.SetLayer("SceneBase.Ui",         childScene.ccLayers.ui,         0x0200)
 					.OnEnter();
 				Achievement.SetLayer(_this.ccLayerInstances["SceneBase.Achievement"]);
+				Scene.SceneBase.SaveTotalRunTime(true);
 				this.scheduleUpdate();
 			},
 			update	: function(dt){
@@ -250,6 +251,7 @@ Scene.SceneBase	= class {
 					--_this.pauseCount;
 					return;
 				}
+				Scene.SceneBase.SaveTotalRunTime();
 				childScene.OnUpdating(dt);
 				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
@@ -313,6 +315,15 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
+	static SaveTotalRunTime(isForce=false){
+		if(!isForce && Math.max(0,--Scene.SceneBase._countUntilSaveRunTime) > 0)	return;
+
+		const now	= Scene.SceneBase.GetDate().getTime();
+		if(!Scene.SceneBase._startAt || Scene.SceneBase._startAt.getTime()<= 0)	Scene.SceneBase._startAt	= now;
+
+		Store.Insert(Store.Handles.Action.RunTime, Math.trunc((now-Scene.SceneBase._startAt.getTime())/1000), null);
+		Scene.SceneBase._countUntilSaveRunTime	= (7+NormalRandom(2))*60;
+	}
 
 	/** 現在時刻のDateオブジェクトを取得
 	 * @static
@@ -332,6 +343,14 @@ Scene.SceneBase	= class {
 
 		Store.DynamicInsert(Store.Handles.Action.NumBootings);
 		Achievement.Init();
+
+		//実行時間
+		Scene.SceneBase._startAt	= new Date();
+		const lastRunTime	= Number(Store.Select(Store.Handles.Action.RunTime,0));
+		if(lastRunTime){
+			Store.DynamicInsert(Store.Handles.Action.TotalRunTime,	(value)=>Number(value)+lastRunTime	);
+			Store.Insert(Store.Handles.Action.RunTime,0,null);
+		}
 	}
 
 }//class
@@ -340,6 +359,7 @@ Scene.SceneBase.first		= null;
 Scene.SceneBase.resetTo		= null;
 Scene.SceneBase._date		= null;
 Scene.SceneBase._initsFirst	= false;
+Scene.SceneBase._countUntilSaveRunTime	= 0;
 
 
 })();	//File Scope

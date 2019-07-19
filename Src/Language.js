@@ -365,14 +365,32 @@ const LocalizedTexts	= {
 
 		//プレイ回数 Number of Plays
 		"Records.Action.NumPlays":{
-			_:	"Plays",
-			ja:	"プレイ回数",
+			_:	"Clears",
+			ja:	"クリア回数",
 		},
 
 		//起動回数 Number of Bootings
 		"Records.Action.NumBootings":{
 			_:	"Bootings",
 			ja:	"起動回数",
+		},
+
+		//推定実行時間 Estimated Run Time
+		"Records.Action.RunTime":{
+			_:	"Run Time",
+			ja:	"起動時間",
+		},
+		"Records.Action.RunTime.Format":{
+			_:	"$0",
+		},
+
+		//推定合計実行時間 Estimated Total Run Time
+		"Records.Action.TotalRunTime":{
+			_:	"Total Run Time",
+			ja:	"合計起動時間",
+		},
+		"Records.Action.TotalRunTime.Format":{
+			_:	"$0",
 		},
 
 		//リトライ回数 Number of Retrys

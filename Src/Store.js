@@ -47,16 +47,20 @@ class Store{
 				NumSuccessiveHits:			{},
 			},
 			Action: {
-				/** プレイ回数 */
+				/** クリア回数 */
 				NumPlays:					{Required:0,	Order:0x0100,	},
-				/** 起動回数 */
-				NumBootings:				{Required:0,	Order:0x0101,	},
 				/** リトライ回数 */
-				NumRetrys:					{Required:0,	Order:0x0102,	},
+				NumRetrys:					{Required:0,	Order:0x0101,	},
 				/** シェア回数 */
-				NumShares:					{Required:0,	Order:0x0103,	},
+				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
-				NumUnlockedAchievements:	{Required:0,	Order:0x0104,	},
+				NumUnlockedAchievements:	{Required:0,	Order:0x0103,	},
+				/** 起動回数 */
+				NumBootings:				{Required:0,	Order:0x0200,	},
+				/** 実行時間 */
+				RunTime:					{Required:0,	Order:0x0201,	},
+				/** 合計実行時間 */
+				TotalRunTime:				{Required:0,	Order:0x0202,	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:1,	Order:0x3010,	},		//ノーマル
 											{Required:1,	Order:0x3011,	},	],	//初めてのともだち
@@ -237,6 +241,11 @@ class Store{
 			let ary	= String(str).split("\n",5);
 			return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
 		};
+		const StrToTime	= str=>{
+			const totalSec	= Number(str) + Number(Store.Select(Store.Handles.Action.RunTime,0));
+			const times		= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
+			return `${times[0]}:${times[1]}:${times[2]}`;
+		};
 
 		return {
 			GamePlay:{
@@ -246,7 +255,9 @@ class Store{
 				MeanEmitting:	(value)=>StrToMean(value),
 			},
 			Action:{
-				NumUnlockedAchievements:	()=>Achievement.nUnlockedItems,
+				NumUnlockedAchievements:	()=>`${Achievement.nUnlockedItems} / ${Achievement.nItems}`,
+				RunTime:					(value)=>StrToTime(value),
+				TotalRunTime:				(value)=>StrToTime(value),
 			},
 		};
 	}
