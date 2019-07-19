@@ -258,6 +258,7 @@ class Sprite{
 	 */
 	RunActions(...actions){
 		actions	= actions.map(a=> Array.isArray(a) ? cc.spawn(...a) : a );
+		this.entity.stopAllActions();
 		this.entity.runAction(cc.sequence(actions));
 		return this;
 	}
