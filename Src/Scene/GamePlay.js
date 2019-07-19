@@ -257,7 +257,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			//インタフェース
-			this.naviButtons.at("Reset").OnMouseHover(
+			this.pageNavigator.buttons.at("Reset").OnMouseHover(
 				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
 				()=>this.labels.navigation.RemoveTempText()
 			);

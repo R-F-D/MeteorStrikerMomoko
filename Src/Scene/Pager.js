@@ -115,7 +115,7 @@ Scene.PageNavigator	= class PageNavigator{
 		/** @var ページ遷移用インジケータのコンテナ */
 		this.pageIndicator	= null;
 
-		this.pager.onPageChanged	= ()=>this.SetPageIndicator();
+		if(pager)	this.pager.onPageChanged	= ()=>this.SetPageIndicator();
 	}
 
 	//ナビボタン作成
