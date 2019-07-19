@@ -26,7 +26,6 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.Sequences	= {
 			INITIAL:		null,	//初期状態
 			RECORDS:		null,	//記録一覧
-			ACHIEVEMENTS:	null,	//実績一覧
 			TRANSITION:		null,	//トランジション用
 		};
 
@@ -34,7 +33,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
-		this.EnableNaviButtons(5,2);
+		this.EnableNaviButtons(5);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -185,20 +184,7 @@ Scene.Records	= class extends Scene.SceneBase {
 			});
 		})
 		.PushUpdatingFunctions(dt=>{
-			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
-
-				const chapter	= this.pager && this.pager.GetChapter() || 0;
-				if(chapter==0)	this.SetSequence(this.Sequences.RECORDS);
-				else			this.SetSequence(this.Sequences.ACHIEVEMENTS);
-			}
-
-		});
-
-		//実績
-		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
-			Log("List of Achievements");
-		})
-		.PushUpdatingFunctions(dt=>{
+			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) )	this.SetSequence(this.Sequences.RECORDS);
 		});
 
 		return this;
