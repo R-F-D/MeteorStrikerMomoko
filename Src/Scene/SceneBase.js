@@ -304,11 +304,6 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
-	/** ページ遷移関数 */
-	get pageTransitioner(){
-		return ()=>this.pageNavigator.pageTransitioner();
-	}
-
 	/** 強制リセット
 	 * @returns this
 	 */

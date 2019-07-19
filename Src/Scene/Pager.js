@@ -21,7 +21,7 @@ Scene.Pager	= class Pager{
 		this.nChapters		= Number(nChapters) || 1;
 		this._page			= 0;
 		this._chapter		= 0;
-		this._onPageChanged	= null;
+		this._onPageChanged	= [];
 	}
 
 	/** 現在のページを取得
@@ -53,7 +53,7 @@ Scene.Pager	= class Pager{
 		const old			= this._page;
 		this._page	= _(dst).clamp( 0, this.nPages-1 );
 
-		if(callbacks && old!=this._page && this._onPageChanged) this._onPageChanged();
+		if(callbacks && old!=this._page && this._onPageChanged) this._onPageChanged.forEach(f=>f());
 		return this;
 	}
 
@@ -70,7 +70,7 @@ Scene.Pager	= class Pager{
 		const old		= this._chapter;
 		this._chapter	= _(dst).clamp( 0, this.nChapters-1 );
 
-		if(callbacks && old!=this._chapter && this._onPageChanged) this._onPageChanged();
+		if(callbacks && old!=this._chapter && this._onPageChanged) this._onPageChanged.forEach(f=>f());
 		return this;
 	}
 
@@ -98,8 +98,8 @@ Scene.Pager	= class Pager{
 	 * @param {function} [callback=null]
 	 */
 	set onPageChanged(callback=null){
-		if(typeof callback !== "function")	callback = null;
-		this._onPageChanged	= callback;
+		if(typeof callback !== "function")	callback = [];
+		else								this._onPageChanged.push(callback);
 	}
 }
 
@@ -115,7 +115,7 @@ Scene.PageNavigator	= class PageNavigator{
 		/** @var ページ遷移用インジケータのコンテナ */
 		this.pageIndicator	= null;
 
-		this.pager.onPageChanged	= this.pageTransitioner;
+		this.pager.onPageChanged	= ()=>this.SetPageIndicator();
 	}
 
 	//ナビボタン作成
@@ -198,11 +198,6 @@ Scene.PageNavigator	= class PageNavigator{
 	Update(dt){
 		if(this.buttons)	this.buttons.Update(dt);
 		return this;
-	}
-
-	/** ページ遷移関数 */
-	get pageTransitioner(){
-		return ()=>this.SetPageIndicator();
 	}
 
 }

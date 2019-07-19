@@ -91,7 +91,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
-		if(this.pager)	this.pager.onPageChanged	= this.pageTransitioner;
+		if(this.pager)	this.pager.onPageChanged	= ()=>this.SetSequence(this.Sequences.TRANSITION);
 		return this;
 	}
 
@@ -214,13 +214,6 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
-	}
-
-	get pageTransitioner(){
-		return ()=>{
-			super.pageTransitioner();
-			this.SetSequence(this.Sequences.TRANSITION);
-		}
 	}
 
 }//class
