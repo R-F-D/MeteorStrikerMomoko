@@ -12,9 +12,9 @@ class Store{
 				/** 直近の平均飛距離 */
 				MeanDistance:				{Required:0,	Order:0x1001,	UnitKey:"Unit.Distance",	},
 				/** チェックポイント到達回数 */
-				NumPassings:[				{Required:1,	Order:0x1100,	},		//太陽
-											{Required:1,	Order:0x1100,	},		//きらり
-											{Required:1,	Order:0x1100,	},	],	//ユニコーン
+				NumPassings:[				{Required:1,	Order:0x1010,	},		//太陽
+											{Required:1,	Order:0x1011,	},		//きらり
+											{Required:1,	Order:0x1012,	},	],	//ユニコーン
 
 				/** グッド回数 */
 				NumGoods:					{Required:0,	Order:0x2000,	},
@@ -38,11 +38,11 @@ class Store{
 				MeanBlowing:				{Required:0,	Order:0x2014,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 
 				/** 最大エミット倍率 */
-				MaxEmittings:				{Required:0,	Order:0x3000,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MaxEmittings:				{Required:0,	Order:0x1110,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 				/** 平均エミット倍率 */
-				MeanEmitting:				{Required:0,	Order:0x3001,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MeanEmitting:				{Required:0,	Order:0x1111,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 				/** 最高連続打撃成功数 */
-				MaxSuccessiveHits:			{Required:0,	Order:0x3010,	},
+				MaxSuccessiveHits:			{Required:0,	Order:0x1100,	},
 				/** 連続打撃成功数 */
 				NumSuccessiveHits:			{},
 			},
@@ -58,10 +58,10 @@ class Store{
 				/** 実績解除数*/
 				NumUnlockedAchievements:	{Required:0,	Order:0x0104,	},
 				/** ナビゲーション回数 */
-				NumNavigates:[				{Required:1,	Order:0x4000,	},		//ノーマル
-											{Required:1,	Order:0x4000,	},	],	//初めてのともだち
+				NumNavigates:[				{Required:1,	Order:0x3010,	},		//ノーマル
+											{Required:1,	Order:0x3011,	},	],	//初めてのともだち
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
-				NumTouchesPlayer:			{Required:1,	Order:0x4001,	},
+				NumTouchesPlayer:			{Required:1,	Order:0x3000,	},
 
 			},
 			Settings:{
@@ -82,6 +82,8 @@ class Store{
 															: `${category}.${key}`;
 						const convs	= Store._RecordConverter;
 						h.Conv		= convs[category] && convs[category][key] || null;
+
+						h.Page		= Math.trunc(h.Order/(16**3));
 					});
 			}
 		));
@@ -177,7 +179,7 @@ class Store{
 							if(Array.isArray(v))	return true;
 							if(v.Required===undefined || v.Required===null)	return false;
 							else if (page===undefined || page      ===null)	return true;
-							return Math.abs(page) == Math.trunc(v.Order/(16**3));
+							return Math.abs(page) == v.Page;
 						})
 						.forEach(h=>results.push(h));
 				});
@@ -186,6 +188,20 @@ class Store{
 
 		return _.orderBy(results,"Order");
 	}
+
+	/** ページ数
+	 * @readonly
+	 * @static
+	 * @memberof Store
+	 */
+	static get NumPages(){
+		if(Store._nPages!==null)	return Store._nPages;
+
+		return 1 + Store.GetVisibleHandles().reduce(
+			(result,handle)=> Math.max(result,handle.Page),	0
+		);
+	}
+
 
 
 
@@ -235,5 +251,7 @@ class Store{
 		};
 	}
 } // class
+
+Store._nPages	= null;
 
 

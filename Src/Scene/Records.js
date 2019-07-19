@@ -33,7 +33,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
-		this.EnableNaviButtons(5);
+		this.EnableNaviButtons(Store.NumPages);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
