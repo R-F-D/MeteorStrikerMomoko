@@ -57,10 +57,16 @@ const LocalizedTexts	= {
 			ja:	"ゲームをプレイ",
 		},
 
+		//実績ボタン Achievements Button
+		"Title.Button.Achievements":{
+			_:	"Achievements",
+			ja:	"実績",
+		},
+
 		//レコードボタン Records Button
 		"Title.Button.Records":{
-			_:	"Records and achievements",
-			ja:	"記録と実績",
+			_:	"Records",
+			ja:	"記録",
 		},
 
 		//ヘルプボタン Help Button
@@ -73,12 +79,6 @@ const LocalizedTexts	= {
 		"Title.Button.Settings":{
 			_:	"Settings",
 			ja:	"設定",
-		},
-
-		//ウェブページボタン Web Page Button
-		"Title.Button.WebPage":{
-			_:	"Go to the web page",
-			ja:	"ウェブページへ",
 		},
 
 		//クレジットボタン Credits Button

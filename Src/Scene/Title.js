@@ -53,7 +53,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags("Play","Records","Help","Settings","WebPage","Credits");
+					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags("Play","Achievements","Records","Credits","Settings","Help");
 					return true;
 				},
 			});
@@ -92,7 +92,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		});
 		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records));
 		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
-		this.buttons.at("WebPage").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
+		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
 
 		return this;
 	}
