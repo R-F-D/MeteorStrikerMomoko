@@ -68,32 +68,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
-		//ボタン
-		this.buttons
-			.SetPosition(384,128)
-			.forEach((button)=>{
-				button.OnMouseHover(
-					()=>this.label.PushLog(L.Text(`Title.Button.${button.tag}`))
-				);
-			});
-		this.buttons.at("Play")
-			.CreateSprite(rc.img.titleButton)
-			.SetScale(1)
-			.SetIndex(1).SetIndex(Button.OFF,0)
-			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
-			.AssignKeyboard(cc.KEY["0"], cc.KEY.p, cc.KEY.space, cc.KEY.enter);
-		this.buttons.filter(v=> v.tag!="Play" ).forEach((button,i)=>{
-			button
-				.CreateSprite(rc.img.titleButton)
-				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
-				.SetScale(0.5)
-				.SetIndex(i*2+3).SetIndex(Button.OFF,i*2+2)
-				.AssignKeyboard(cc.KEY["1"]+i);
-		});
-		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records));
-		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
-		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
-
+		this.InitUIs();
 		return this;
 	}
 
@@ -213,6 +188,44 @@ Scene.Title	= class extends Scene.SceneBase {
 
 		return this;
 	}
+
+
+	/** UIパーツ初期化 */
+	InitUIs(){
+		//ボタン共通
+		this.buttons
+			.SetPosition(384,128)
+			.forEach((button)=>{
+				button.OnMouseHover(
+					()=>this.label.PushLog(L.Text(`Title.Button.${button.tag}`))
+				);
+			});
+
+		//Play
+		this.buttons.at("Play")
+			.CreateSprite(rc.img.titleButton)
+			.SetScale(1)
+			.SetIndex(1).SetIndex(Button.OFF,0)
+			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
+			.AssignKeyboard(cc.KEY["0"], cc.KEY.p, cc.KEY.space, cc.KEY.enter);
+
+		//Play以外
+		this.buttons.filter(v=> v.tag!="Play" ).forEach((button,i)=>{
+			button
+				.CreateSprite(rc.img.titleButton)
+				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
+				.SetScale(0.5)
+				.SetIndex(i*2+3).SetIndex(Button.OFF,i*2+2)
+				.AssignKeyboard(cc.KEY["1"]+i);
+		});
+
+		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records));
+		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
+		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
+
+		return this;
+	}
+
 
 }//class
 

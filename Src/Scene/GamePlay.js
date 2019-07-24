@@ -256,12 +256,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.distance.SetVisible(false).SetColor("#00FF00").SetNumLogLines(1);
 			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
-			//インタフェース
-			this.pageNavigator.buttons.at("Reset").OnMouseHover(
-				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
-				()=>this.labels.navigation.RemoveTempText()
-			);
-			this.buttons.SetVisible(false);
+			this.InitUIs();
+
 		})
 		.PushUpdatingFunctions(dt=>{
 			this.UpdatePlayerSprite(false);
@@ -511,51 +507,13 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//ダイアログ表示
 		this.Sequences.DIALOG
 			.PushStartingFunctions(()=>{
-				const size	= cc.director.getWinSize();
-
 				this.sprites.player.SetVisible(false);
+				this.buttons.SetVisible(true);
 
-				this.buttons.at("Retry")
-					.SetVisible(true)
-					.SetPosition(size.width/2-128,size.height/2)
-					.SetIndex(13).SetIndex(Button.OFF,12)
-					.AssignKeyboard(cc.KEY["1"])
-					.OnMouseHover(
-						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
-						()=>this.labels.navigation.RemoveTempText()
-					)
-					.OnButtonUp(()=>{
-						Store.DynamicInsert(Store.Handles.Action.NumRetrys);
-						this.ReplaceScene(Scene.GamePlay);
-					});
-
-				this.buttons.at("Share")
-					.SetVisible(true)
-					.SetPosition(size.width/2+128,size.height/2)
-					.SetIndex(15).SetIndex(Button.OFF,14)
-					.AssignKeyboard(cc.KEY["2"])
-					.OnMouseHover(
-						()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
-						()=>this.labels.navigation.RemoveTempText()
-					)
-					.OnButtonUp(()=>{
-						if(!this.isShared){
-							this.isShared	= true;
-							Store.DynamicInsert(Store.Handles.Action.NumShares);
-						}
-						this.labels.navigation.RemoveTempText();
-						cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
-											L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
-											L.Text("GamePlay.Share.URL"),
-											L.Text("GamePlay.Share.Tags")
-										]));
-					});
-
-					//初プレイ実績
-					Store.DynamicInsert(Store.Handles.Action.NumPlays);
-					Store.DynamicInsert(Store.Handles.Action.NumNavigates[ this.navigatorIsGolem?1:0 ]);
-					Achievement.Unlock(Achievements.Action.FirstPlay,1);
-
+				//初プレイ実績
+				Store.DynamicInsert(Store.Handles.Action.NumPlays);
+				Store.DynamicInsert(Store.Handles.Action.NumNavigates[ this.navigatorIsGolem?1:0 ]);
+				Achievement.Unlock(Achievements.Action.FirstPlay,1);
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(false);
@@ -756,6 +714,56 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	playerHardblows(power=this.chargedPower){
 		return !(power < BlowPower.MAX/2);
+	}
+
+	/** UIパーツ初期化 */
+	InitUIs(){
+		const size	= cc.director.getWinSize();
+
+		this.pageNavigator.buttons.at("Reset").OnMouseHover(
+			()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
+			()=>this.labels.navigation.RemoveTempText()
+		);
+
+		this.buttons.at("Retry")
+			.SetVisible(true)
+			.SetPosition(size.width/2-128,size.height/2)
+			.SetIndex(13).SetIndex(Button.OFF,12)
+			.AssignKeyboard(cc.KEY["1"])
+			.OnMouseHover(
+				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
+				()=>this.labels.navigation.RemoveTempText()
+			)
+			.OnButtonUp(()=>{
+				Store.DynamicInsert(Store.Handles.Action.NumRetrys);
+				this.ReplaceScene(Scene.GamePlay);
+			});
+
+		this.buttons.at("Share")
+			.SetVisible(true)
+			.SetPosition(size.width/2+128,size.height/2)
+			.SetIndex(15).SetIndex(Button.OFF,14)
+			.AssignKeyboard(cc.KEY["2"])
+			.OnMouseHover(
+				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
+				()=>this.labels.navigation.RemoveTempText()
+			)
+			.OnButtonUp(()=>{
+				if(!this.isShared){
+					this.isShared	= true;
+					Store.DynamicInsert(Store.Handles.Action.NumShares);
+				}
+				this.labels.navigation.RemoveTempText();
+				cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
+									L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
+									L.Text("GamePlay.Share.URL"),
+									L.Text("GamePlay.Share.Tags")
+								]));
+			});
+
+		this.buttons.SetVisible(false);
+
+		return this;
 	}
 
 }//class
