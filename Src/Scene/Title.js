@@ -192,6 +192,8 @@ Scene.Title	= class extends Scene.SceneBase {
 
 	/** UIパーツ初期化 */
 	InitUIs(){
+		super.InitUIs();
+
 		//ボタン共通
 		this.buttons
 			.SetPosition(384,128)

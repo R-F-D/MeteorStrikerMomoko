@@ -718,6 +718,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 	/** UIパーツ初期化 */
 	InitUIs(){
+		super.InitUIs();
 		const size	= cc.director.getWinSize();
 
 		this.pageNavigator.buttons.at("Reset").OnMouseHover(

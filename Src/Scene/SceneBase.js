@@ -295,6 +295,12 @@ Scene.SceneBase	= class {
 		return this;
 	}
 
+
+	/** UIパーツ初期化
+	 * @returns
+	 */
+	InitUIs(){return this;}
+
 	/** ナビゲーションボタンを有効にする
 	 * @param {number} [nPages]		ページ枚数。1以下のときページ送りなし。
 	 * @param {number} [nChapters]	チャプター数。ページ送りなしの場合は無効。
