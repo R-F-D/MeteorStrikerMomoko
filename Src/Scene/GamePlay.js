@@ -323,7 +323,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.DISCHARGE_FAILED
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Destroy();
-				cc.sys.localStorage.setItem(Store.Handles.GamePlay.NumSuccessiveHits,0);	//連続成功数の初期化
+				Store.Insert(Store.Handles.GamePlay.NumSuccessiveHits,0,null);	//連続成功数の初期化
 			})
 			.PushUpdatingFunctions(dt=>{
 				this.UpdatePlayerSprite(true);
