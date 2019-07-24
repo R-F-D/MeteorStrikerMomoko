@@ -28,12 +28,11 @@ Scene.Records	= class extends Scene.SceneBase {
 			RECORDS:		null,	//記録一覧
 			TRANSITION:		null,	//トランジション用
 		};
+		this.mode	= Scene.Records.Mode.Records;
 
 		this.sprites		= {};
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
-
-		this.EnableNaviButtons(Store.NumPages);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -200,6 +199,23 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
+	}
+
+	/** 記録/実績のモード設定
+	 * @param {*} [mode=Scene.Records.Mode.Records]
+	 * @returns
+	 */
+	SetMode(mode=Scene.Records.Mode.Records){
+		this.mode	= mode;
+		if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(1);
+		else if(this.mode===Scene.Records.Mode.Records)	this.EnableNaviButtons(Store.NumPages);
+		return this;
+	}
+	static get Mode(){
+		return {
+			Achievements:	1,
+			Records:		2,
+		};
 	}
 
 }//class

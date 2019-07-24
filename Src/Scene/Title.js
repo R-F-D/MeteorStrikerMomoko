@@ -221,7 +221,8 @@ Scene.Title	= class extends Scene.SceneBase {
 				.AssignKeyboard(cc.KEY["1"]+i);
 		});
 
-		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records));
+		this.buttons.at("Achievements").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Achievements));
+		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Records));
 		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
 		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(L.Text("GamePlay.Share.URL")) );
 
