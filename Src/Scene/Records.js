@@ -132,6 +132,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					//ヘッダテキスト＆カウンタ
 					let count		= Store.Select(handle.Key,0);
 					if(handle.Conv)	count = handle.Conv(count);
+					if(String(Number(count))===count)	count = Number(count);
+
 					const isPublic	= handle.Required!==null && handle.Required<=count || handle.Required===0;
 
 					//カウンタと公開フラグ
