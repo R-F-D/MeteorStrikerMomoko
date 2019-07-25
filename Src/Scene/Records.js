@@ -209,7 +209,7 @@ Scene.Records	= class extends Scene.SceneBase {
 	 */
 	SetMode(mode=Scene.Records.Mode.Records){
 		this.mode	= mode;
-		if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(1);
+		if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(Achievement.NumPages);
 		else if(this.mode===Scene.Records.Mode.Records)	this.EnableNaviButtons(Store.NumPages);
 		return this;
 	}
