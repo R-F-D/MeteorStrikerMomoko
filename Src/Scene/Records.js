@@ -26,6 +26,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.Sequences	= {
 			INITIAL:		null,	//初期状態
 			RECORDS:		null,	//記録一覧
+			ACHIEVEMENTS:	null,	//実績一覧
 			TRANSITION:		null,	//トランジション用
 		};
 		this.mode	= Scene.Records.Mode.Records;
@@ -110,7 +111,10 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		})
 		.PushUpdatingFunctions(dt=>{
-			 if(this.sequence.count>=60) this.SetSequence(this.Sequences.RECORDS);
+			 if(this.sequence.count>=60){
+				if(this.mode===Scene.Records.Mode.Achievements)	this.SetSequence(this.Sequences.ACHIEVEMENTS);
+				else if(this.mode===Scene.Records.Mode.Records)	this.SetSequence(this.Sequences.RECORDS);
+			}
 		});
 
 		//スコア表示
@@ -173,8 +177,12 @@ Scene.Records	= class extends Scene.SceneBase {
 			this.displayBoards.forEach((board,i)=>{
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.counter.SetVisible(true);
 			});
+		});
 
-			//if(this.sequence.count>60*5)	this.SetSequence(this.Sequences.TRANSITION);
+		//実績一覧
+		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
+		})
+		.PushUpdatingFunctions(dt=>{
 		});
 
 		//トランジション
@@ -185,7 +193,10 @@ Scene.Records	= class extends Scene.SceneBase {
 			});
 		})
 		.PushUpdatingFunctions(dt=>{
-			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) )	this.SetSequence(this.Sequences.RECORDS);
+			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
+				if(this.mode===Scene.Records.Mode.Achievements)	this.SetSequence(this.Sequences.ACHIEVEMENTS);
+				else if(this.mode===Scene.Records.Mode.Records)	this.SetSequence(this.Sequences.RECORDS);
+			}
 		});
 
 		return this;
