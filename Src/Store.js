@@ -10,7 +10,7 @@ class Store{
 				/** ハイスコア*/
 				HighScore:					{Required:0,	Order:0x1000,	UnitKey:"Unit.Distance",	},
 				/** 直近の平均飛距離 */
-				MeanDistance:				{Required:0,	Order:0x1001,	UnitKey:"Unit.Distance",	},
+				MeanDistance:				{Required:0,	Order:0x1001,	UnitKey:"Unit.Distance",	Conv:Store.Convs.LinesToMean,	},
 				/** チェックポイント到達回数 */
 				NumPassings:[				{Required:1,	Order:0x1010,	},		//太陽
 											{Required:1,	Order:0x1011,	},		//きらり
@@ -25,7 +25,7 @@ class Store{
 				/** エイミング精度最高値 */
 				BestAiming:					{Required:0,	Order:0x2003,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 				/** 平均エイミング精度 */
-				MeanAiming:					{Required:0,	Order:0x2004,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
+				MeanAiming:					{Required:0,	Order:0x2004,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		Conv:Store.Convs.LinesToMean,	},
 				/** 強打回数 */
 				NumHardBlowings:			{Required:0,	Order:0x2010,	},
 				/** 強打＆パーフェクト回数 */
@@ -35,12 +35,12 @@ class Store{
 				/** 最高打撃力 */
 				BestBlowing:				{Required:0,	Order:0x2013,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** 平均打撃倍率 */
-				MeanBlowing:				{Required:0,	Order:0x2014,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				MeanBlowing:				{Required:0,	Order:0x2014,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	Conv:Store.Convs.LinesToMean,	},
 
 				/** 最大エミット倍率 */
 				MaxEmittings:				{Required:0,	Order:0x1110,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
 				/** 平均エミット倍率 */
-				MeanEmitting:				{Required:0,	Order:0x1111,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
+				MeanEmitting:				{Required:0,	Order:0x1111,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	Conv:Store.Convs.LinesToMean,	},
 				/** 最高連続打撃成功数 */
 				MaxSuccessiveHits:			{Required:0,	Order:0x1100,	},
 				/** 連続打撃成功数 */
@@ -54,13 +54,13 @@ class Store{
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
-				NumUnlockedAchievements:	{Required:0,	Order:0x0103,	},
+				NumUnlockedAchievements:	{Required:0,	Order:0x0103,	Conv:()=>`${Achievement.nUnlockedItems} / ${Achievement.nItems}`,	},
 				/** 起動回数 */
 				NumBootings:				{Required:0,	Order:0x0200,	},
 				/** 実行時間 */
-				RunTime:					{Required:0,	Order:0x0201,	},
+				RunTime:					{Required:0,	Order:0x0201,	Conv:Store.Convs.SecToTime,	},
 				/** 合計実行時間 */
-				TotalRunTime:				{Required:0,	Order:0x0202,	},
+				TotalRunTime:				{Required:0,	Order:0x0202,	Conv:Store.Convs.SecToTime,	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:1,	Order:0x3010,	},		//ノーマル
 											{Required:1,	Order:0x3011,	},	],	//初めてのともだち
@@ -84,9 +84,6 @@ class Store{
 						h.isVirtual	= false;
 						h.Key 		= Array.isArray(handle)	? `${category}.${key}.${String(i).padStart(2,'0')}`
 															: `${category}.${key}`;
-						const convs	= Store._RecordConverter;
-						h.Conv		= convs[category] && convs[category][key] || null;
-
 						h.Page		= Math.trunc(h.Order/(16**3));
 					});
 			}
@@ -235,32 +232,25 @@ class Store{
 		};
 	};
 
-	//Records用の生成関数
-	static get _RecordConverter(){
-		const StrToMean	= str=>{
-			let ary	= String(str).split("\n",5);
-			return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
-		};
-		const StrToTime	= str=>{
-			const totalSec	= Number(str) + Number(Store.Select(Store.Handles.Action.RunTime,0));
-			const times		= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
-			return `${times[0]}:${times[1]}:${times[2]}`;
-		};
-
+	/** Records表示の変換関数
+	 * @type {<string,function>}	f(value):any
+	 */
+	static get Convs(){
 		return {
-			GamePlay:{
-				MeanDistance:	(value)=>StrToMean(value),
-				MeanBlowing:	(value)=>StrToMean(value),
-				MeanAiming:		(value)=>StrToMean(value),
-				MeanEmitting:	(value)=>StrToMean(value),
+			/**改行区切りの数値の平均*/
+			LinesToMean: value=>{
+				let ary	= String(value).split("\n",5);
+				return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
 			},
-			Action:{
-				NumUnlockedAchievements:	()=>`${Achievement.nUnlockedItems} / ${Achievement.nItems}`,
-				RunTime:					(value)=>StrToTime(value),
-				TotalRunTime:				(value)=>StrToTime(value),
+			/** 秒数を時間表記に*/
+			SecToTime: value=>{
+				const totalSec	= Number(value) + Number(Store.Select(Store.Handles.Action.RunTime,0));
+				const times		= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
+				return `${times[0]}:${times[1]}:${times[2]}`;
 			},
 		};
 	}
+
 } // class
 
 Store._nPages	= null;
