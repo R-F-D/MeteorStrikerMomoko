@@ -45,7 +45,7 @@ const Achievements = (()=>{		//Achievements scoop
 	_(Achievements).forEach(
 		(handles,category) =>	{
 			nAchievements+=_.size(handles);
-			_(handles).forEach(	(h,key) =>	h.Key = `${category}.${key}`);
+			_(handles).forEach(	(h,key) =>	h.Key = `Achievement.${category}.${key}`);
 		}
 	);
 	Achievements.Action.Complete.Count = nAchievements-1;	//コンプリート実績
@@ -60,7 +60,6 @@ const Achievements = (()=>{		//Achievements scoop
  */
 const Achievement = new (class Achievement{
 	constructor(){
-		this.PrefixStorageKey	= "Achievement.";
 		this.NumItems	= Achievements.Action.Complete.Count+1;
 
 		this.layer	= null;
@@ -95,7 +94,7 @@ const Achievement = new (class Achievement{
 		if(achievement==null) return this;
 
 		Store.Insert(
-			{Key:`${this.PrefixStorageKey}${achievement.Key}`},
+			{Key:achievement.Key},
 			Scene.SceneBase.GetDate().getTime(),
 			(oldValue,newValue)	=> oldValue===null && achievement.Count<=count,	//cond
 			(key,value)			=> {
@@ -120,7 +119,7 @@ const Achievement = new (class Achievement{
 		let n	= 0;
 		_(Achievements).forEach(category=>{
 			_(category).forEach(a=>{
-				const date = cc.sys.localStorage.getItem(`${this.PrefixStorageKey}${a.Key}`);
+				const date = cc.sys.localStorage.getItem(a.Key);
 				if(date!==null && 0<date) ++n;
 			});
 		});
