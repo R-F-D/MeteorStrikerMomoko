@@ -60,7 +60,7 @@ class Store{
 				/** 実行時間 */
 				RunTime:					{Required:0,	Order:0x0201,	Conv:Store.Convs.SecToTime,	},
 				/** 合計実行時間 */
-				TotalRunTime:				{Required:0,	Order:0x0202,	Conv:Store.Convs.SecToTime,	},
+				TotalRunTime:				{Required:0,	Order:0x0202,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:1,	Order:0x3010,	},		//ノーマル
 											{Required:1,	Order:0x3011,	},	],	//初めてのともだち
@@ -243,9 +243,10 @@ class Store{
 				return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
 			},
 			/** 秒数を時間表記に*/
-			SecToTime: value=>{
-				const totalSec	= Number(value) + Number(Store.Select(Store.Handles.Action.RunTime,0));
-				const times		= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
+			SecToTime: (value,add=0)=>{
+				const additionalSec	= _.isNumber(add)	? add	: Number(Store.Select(add));
+				const totalSec		= Number(value) + additionalSec;
+				const times			= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
 				return `${times[0]}:${times[1]}:${times[2]}`;
 			},
 		};
