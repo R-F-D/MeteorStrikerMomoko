@@ -172,20 +172,18 @@ class Store{
 	static GetVisibleHandles(page=null){
 		let results	= [];
 
-		[Store.Handles, Store.VirtualHandles].forEach(container=>
-			_(container).forEach(category=>{	//カテゴリ舞のループ
-				_(category).forEach(handles=>{	//ハンドルのループ
-					_(handles).castArray()		//配列化してからループ
-						.filter(v=>{
-							if(Array.isArray(v))	return true;
-							if(v.Required===undefined || v.Required===null)	return false;
-							else if (page===undefined || page      ===null)	return true;
-							return Math.abs(page) == v.Page;
-						})
-						.forEach(h=>results.push(h));
-				});
-			})
-		);
+		_(Store.Handles).forEach(category=>{	//カテゴリ舞のループ
+			_(category).forEach(handles=>{	//ハンドルのループ
+				_(handles).castArray()		//配列化してからループ
+					.filter(v=>{
+						if(Array.isArray(v))	return true;
+						if(v.Required===undefined || v.Required===null)	return false;
+						else if (page===undefined || page      ===null)	return true;
+						return Math.abs(page) == v.Page;
+					})
+					.forEach(h=>results.push(h));
+			});
+		});
 
 		return _.orderBy(results,"Order");
 	}
