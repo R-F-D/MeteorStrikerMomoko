@@ -11,10 +11,12 @@ const LinkedLayerTags	= {
 };
 
 const PanelPosition		= {X:96,Y:240};
-const MaxRows			= 5;
-const MaxColumns		= 2;
-const MaxDisplayBoards	= MaxRows * MaxColumns;
-const DisplayBoardSize	= {Width:160,Height:32};
+const RecordBoard	= {
+	MaxRows:			5,
+	MaxColumns:			2,
+	Max:				5 * 2,	//MaxRows * MaxColumns
+	Size:				{Width:160, Height:32},
+};
 
 
 Scene.Records	= class extends Scene.SceneBase {
@@ -54,7 +56,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//表示板
-					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>	{
+					_this.displayBoards	= _.range(RecordBoard.Max).map( h=>	{
 						const body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
 						const counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5)
 						body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
@@ -154,9 +156,9 @@ Scene.Records	= class extends Scene.SceneBase {
 						text			= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
-					const x	= Math.trunc(i/MaxRows) * (DisplayBoardSize.Width+4);
-					const y	= (i%MaxRows) * (DisplayBoardSize.Height+4);
-					board.body.bg.lower			= {width:DisplayBoardSize.Width, height:DisplayBoardSize.Height};
+					const x	= Math.trunc(i/RecordBoard.MaxRows) * (RecordBoard.Size.Width+4);
+					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height+4);
+					board.body.bg.lower			= {width:RecordBoard.Size.Width, height:RecordBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					board.body.bg.OPACITY		= isPublic	? 128 : 64;
 					board.body.SetColor(	isPublic ? "#FFFF00" : "#AFAF00");
@@ -168,7 +170,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetString(` ${text}`);
 					board.counter
 						.SetVisible(false)
-						.SetPosition(PanelPosition.X+x+DisplayBoardSize.Width-2,PanelPosition.Y-y-6)
+						.SetPosition(PanelPosition.X+x+RecordBoard.Size.Width-2,PanelPosition.Y-y-6)
 						.SetString(`${fmtCount}`);
 					board.body.bg.animationDelay	= 0.0;
 				});
