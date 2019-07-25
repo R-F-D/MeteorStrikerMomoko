@@ -137,14 +137,14 @@ class Store{
 	 * @static
 	 * @param {*} handle ストレージのレコードハンドル
 	 * @param {*} value 保存時は挿入する値。取得時はnull。
-	 * @param {number} [nlogs=5] ログの保存件数
+	 * @param {number} [nlogs=7] ログの保存件数
 	 * @returns {array} ログの配列
 	 * @memberof Store
 	 */
 	static Log(handle,value=null,nlogs=7){
 		let result = [];
 		Store.DynamicInsert(handle,currentString=>{
-			let logs = currentString	?	currentString.split("\n",5).map(v=>Number(v))	: [];
+			let logs = currentString	?	currentString.split("\n",nlogs).map(v=>Number(v))	: [];
 			if(value)	logs.push(value);
 			result	= _(logs).takeRight(nlogs);
 			return result.join("\n");
@@ -239,7 +239,7 @@ class Store{
 		return {
 			/**改行区切りの数値の平均*/
 			LinesToMean: value=>{
-				let ary	= String(value).split("\n",5);
+				let ary	= String(value).split("\n",7);
 				return ary ? ary.reduce((acc,cur)=>acc+Number(cur),0) / ary.length : 0;
 			},
 			/** 秒数を時間表記に*/
