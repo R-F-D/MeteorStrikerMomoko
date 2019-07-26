@@ -634,6 +634,16 @@ const LocalizedTexts	= {
 			ja:	"隕石を$1$2以上吹っ飛ばした",
 		},
 
+		//実績コンプリート
+		"Achievement.Action.Complete":{
+			_:	"Special Meteor Strike!",
+			ja:	"必殺のメテオストライク!",	//必殺のメテオストライク！ 周防桃子
+		},
+		"Achievement.Action.Complete.Text":{
+			_:	"Unlocked all achievements",
+			ja:	"全ての実績を解放した",
+		},
+
 		//初プレイ First Play
 		"Achievement.Action.FirstPlay":{
 			_:	"For Save The Earch Crisis",
