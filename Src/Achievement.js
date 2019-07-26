@@ -36,7 +36,7 @@ const Achievements = (()=>{		//Achievements scoop
 	Achievements.Action	= {
 		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Replacements:null,	},	//コンプリート
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Replacements:null,	},	//初プレイ
-		Share			:{	IsPublic:true,	Count:1,	Order:0x0002,	Replacements:null,	},	//シェア
+		Share			:{	IsPublic:true,	Count:1,	Order:0x0002,	Replacements:[],	},	//シェア
 	};
 
 
