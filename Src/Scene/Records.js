@@ -16,8 +16,16 @@ const RecordBoard	= {
 	MaxColumns:			2,
 	Max:				5 * 2,	//MaxRows * MaxColumns
 	Size:				{Width:160, Height:32},
+	NumLogLines:		2,
 };
-
+const AchievementBoard	= {
+	MaxRows:			4,
+	MaxColumns:			1,
+	Max:				4 * 1,	//MaxRows * MaxColumns
+	Size:				{Width:160, Height:48},
+	NumLogLines:		4,
+};
+const MaxDisplayBoards	= Math.max(RecordBoard.Max,AchievementBoard.Max);
 
 Scene.Records	= class extends Scene.SceneBase {
 
@@ -31,7 +39,7 @@ Scene.Records	= class extends Scene.SceneBase {
 			ACHIEVEMENTS:	null,	//実績一覧
 			TRANSITION:		null,	//トランジション用
 		};
-		this.mode	= Scene.Records.Mode.Records;
+		this.SetMode(Scene.Records.Mode.Records,false);
 
 		this.sprites		= {};
 		this.buttons		= {};
@@ -56,11 +64,19 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//表示板
-					_this.displayBoards	= _.range(RecordBoard.Max).map( h=>	{
-						const body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
-						const counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5)
-						body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
-						return {body:body,counter:counter};
+					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>{
+						let board	= {};
+						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
+						board.body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
+
+						if		(_this.mode==Scene.Records.Mode.Records){
+							board.counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
+						}
+						else if	(_this.mode==Scene.Records.Mode.Achievements){
+							board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
+							board.date		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
+						}
+						return board;
 					});
 
 					return true;
@@ -109,14 +125,11 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 			//ラベル
 			this.displayBoards
-				.forEach(board=> board.body.Init().SetNumLogLines(2) );
+				.forEach(board=> board.body.Init() );
 
 		})
 		.PushUpdatingFunctions(dt=>{
-			 if(this.sequence.count>=60){
-				if(this.mode===Scene.Records.Mode.Achievements)	this.SetSequence(this.Sequences.ACHIEVEMENTS);
-				else if(this.mode===Scene.Records.Mode.Records)	this.SetSequence(this.Sequences.RECORDS);
-			}
+			 if(this.sequence.count>=60)	this.SetSequence(this.processScene());
 		});
 
 		//スコア表示
@@ -166,6 +179,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					board.body
 						.SetVisible(true)
+						.SetNumLogLines(RecordBoard.NumLogLines)
 						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
 						.SetString(` ${text}`);
 					board.counter
@@ -183,22 +197,65 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		//実績一覧
 		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
+			let handles	= Achievement.GetHandles( this.pager ? this.pager.GetPage() : null);
+
+			//ラベル
+			this.displayBoards
+				.forEach((board,i)=>{
+					board.body.SetVisible(false);
+					board.text.SetVisible(false);
+					board.date.SetVisible(false);
+
+					const handle	= handles.shift();
+					if(!handle)	return;
+
+					let date		= Number(Store.Select(handle.Key));
+					if(date==null)	return;
+
+					const title		= L.Text(handle.Key);
+					const text		= Array.isArray(handle.Replacements)	? L.Textf(`${handle.Key}.Text`, [handle.Count].concat(handle.Replacements) )
+																			: L.Text(`${handle.Key}.Text`);
+
+					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4);
+					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
+					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
+					board.body.bg.animationDelay= 0.05*i;
+					board.body
+						.SetVisible(true)
+						.SetNumLogLines(AchievementBoard.NumLogLines)
+						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
+						.SetString(` ${title}`);
+					board.text
+						.SetNumLogLines(2)
+						.SetPosition(PanelPosition.X+x+2,PanelPosition.Y-y)
+						.SetString(text);
+					board.date
+						.SetNumLogLines(1)
+						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,PanelPosition.Y-y-16+1)
+						.SetString(`${date}`);
+					board.body.bg.animationDelay	= 0.0;
+				});
+
 		})
 		.PushUpdatingFunctions(dt=>{
+			this.displayBoards.forEach((board,i)=>{
+				if(board.body.IsVisible() && !board.body.bg.IsRunningActions()){
+					board.text.SetVisible(true);
+					board.date.SetVisible(true);
+				}
+			});
 		});
 
 		//トランジション
 		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
 			this.displayBoards.forEach(b=>{
-				if(b.body.IsVisible())	b.body.RemoveString(false);
-				if(b.counter.IsVisible())	b.counter.RemoveString(false);
+				["body","counter","text","date"].forEach(i=>{
+					if(b[i] && b[i].IsVisible())	b[i].RemoveString(false);
+				});
 			});
 		})
 		.PushUpdatingFunctions(dt=>{
-			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) ){
-				if(this.mode===Scene.Records.Mode.Achievements)	this.SetSequence(this.Sequences.ACHIEVEMENTS);
-				else if(this.mode===Scene.Records.Mode.Records)	this.SetSequence(this.Sequences.RECORDS);
-			}
+			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) )	this.SetSequence(this.processScene());
 		});
 
 		return this;
@@ -217,13 +274,20 @@ Scene.Records	= class extends Scene.SceneBase {
 	}
 
 	/** 記録/実績のモード設定
-	 * @param {*} [mode=Scene.Records.Mode.Records]
+	 * @param {*} mode
+	 * @param {boolean} [initializes=true]
 	 * @returns
 	 */
-	SetMode(mode=Scene.Records.Mode.Records){
+	SetMode(mode,initializes=true){
 		this.mode	= mode;
-		if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(Achievement.NumPages);
-		else if(this.mode===Scene.Records.Mode.Records)	this.EnableNaviButtons(Store.NumPages);
+		this.processScene	= this.mode==Scene.Records.Mode.Records	? ()=>this.Sequences.RECORDS	: ()=>this.Sequences.ACHIEVEMENTS;
+
+
+		//Init
+		if(initializes){
+			if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(Achievement.NumPages);
+			else if(this.mode===Scene.Records.Mode.Records)	this.EnableNaviButtons(Store.NumPages);
+		}
 		return this;
 	}
 	static get Mode(){
