@@ -646,11 +646,11 @@ const LocalizedTexts	= {
 
 		//初プレイ First Play
 		"Achievement.Action.FirstPlay":{
-			_:	"For Save The Earch Crisis",
+			_:	"For Save The Earth Crisis",
 			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
 		},
 		"Achievement.Action.FirstPlay.Text":{
-			_:	"Stopped the meteorite and saved the Earch.",
+			_:	"Stopped the meteorite and saved the Earth.",
 			ja:	"隕石を食い止めて世界を救った",
 		},
 
