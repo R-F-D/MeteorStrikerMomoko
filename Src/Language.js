@@ -531,8 +531,8 @@ const LocalizedTexts	= {
 			ja:	"永久ヒットにしてゆくよ \"安定化\"",	//バベルシティグレイス
 		},
 		"Achievement.Blowing.SuccessiveHits.Text":{
-			_:	"Hit $0 times in a row without failure. And TODAY, the time has come.",
-			ja:	"失敗せず$0回連続でヒットさせた。そうそして「今日」時が来たよ。",
+			_:	"Hit $0 times in a row without failure.\nAnd TODAY, the time has come.",
+			ja:	"失敗せず$0回連続でヒットさせた。\nそうそして「今日」時が来たよ。",
 		},
 
 		//エミット回数実績その1 Emit Rate #01
@@ -542,7 +542,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Emit.Many01.Text":{
 			_:	"Emitted $0$1 and more. No such the theill-less emittings...",
-			ja:	"エミット倍率$0$1以上を出した。スリルのないエミットなんて…。",
+			ja:	"エミット倍率$0$1以上を出した。\nスリルのないエミットなんて…。",
 		},
 
 		//エミット回数実績その2 Emit Rate #02
@@ -551,8 +551,8 @@ const LocalizedTexts	= {
 			ja:	"ワイルドエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many02.Text":{
-			_:	"Emitted $0$1 and more. The emittings breaked the taboos are...",
-			ja:	"エミット倍率$0$1以上を出した。タブーを冒せるエミットは…",
+			_:	"Emitted $0$1 and more.\nThe emittings breaked the taboos are...",
+			ja:	"エミット倍率$0$1以上を出した。\nタブーを冒せるエミットは…",
 		},
 
 		//エミット回数実績その3 Emit Rate #03
@@ -562,7 +562,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Emit.Many03.Text":{
 			_:	"Emitted $0$1 and more. No such the risk-less emittings...",
-			ja:	"エミット倍率$0$1以上を出した。リスクのないエミットなんて…",
+			ja:	"エミット倍率$0$1以上を出した。\nリスクのないエミットなんて…",
 		},
 
 		//エミット回数実績その4 Emit Rate #04
@@ -571,7 +571,7 @@ const LocalizedTexts	= {
 			ja:	"オーバーエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many04.Text":{
-			_:	"Emitted $0$1 and more. It’s possible?",
+			_:	"Emitted $0$1 and more. Isn’t it impossible?",
 			ja:	"エミット倍率$0$1以上を出した。ありえなくない？",
 		},
 
@@ -580,8 +580,8 @@ const LocalizedTexts	= {
 			_:	"Do You Know Venus?",	//ヴィーナスシンドローム
 		},
 		"Achievement.Check.Venus.Text":{
-			_:	"Flew the meteorite over $1$2. The goddess striked the meteorite so",
-			ja:	"隕石を$1$2以上吹っ飛ばした。そう女神は隕石を打ち付けた。",
+			_:	"Flew the meteorite over $1$2.\nThe goddess striked the meteorite so",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\nそう女神は隕石を打ち付けた。",
 		},
 
 		//火星到達 Mars
@@ -590,8 +590,8 @@ const LocalizedTexts	= {
 			ja:	"マーズに響いてスタート!",	//プリンセスアラモード
 		},
 		"Achievement.Check.Mars.Text":{
-			_:	"Flew the meteorite over $1$2. Escort me nicely, please?",
-			ja:	"隕石を$1$2以上吹っ飛ばした。素敵にエスコートしてくださいね?",
+			_:	"Flew the meteorite over $1$2.\nEscort me nicely, please?",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\n素敵にエスコートしてくださいね?",
 		},
 
 		//水星到達 Mercury
@@ -601,8 +601,8 @@ const LocalizedTexts	= {
 			ja:	"進めまっすぐ 水星越えて",
 		},
 		"Achievement.Check.Mercury.Text":{
-			_:	"Flew the meteorite over $1$2. Let's go together beyond the space.",
-			ja:	"隕石を$1$2以上吹っ飛ばした。一緒に行こう宇宙の向こうへ。",
+			_:	"Flew the meteorite over $1$2.\nLet's go together beyond the space.",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\n一緒に行こう宇宙の向こうへ。",
 		},
 
 		//太陽到達 Sun
@@ -610,7 +610,7 @@ const LocalizedTexts	= {
 			_:	"BEYOND THE SUNLIGHT",	//BEYOND THE STARLIGHT
 		},
 		"Achievement.Check.Sun.Text":{
-			_:	"Flew the meteorite over $1$2. Send farther than anyone else.",
+			_:	"Flew the meteorite over $1$2.\nSend farther than anyone else.",
 			ja:	"隕石を$1$2以上吹っ飛ばした。誰よりも飛ばせ。",
 		},
 
@@ -640,8 +640,8 @@ const LocalizedTexts	= {
 			ja:	"必殺のメテオストライク!",	//必殺のメテオストライク！ 周防桃子
 		},
 		"Achievement.Action.Complete.Text":{
-			_:	"Unlocked all achievements. The meteorite was one punch KO!",
-			ja:	"全ての実績を解放した",
+			_:	"Unlocked all achievements.\nThe meteorite was KO in one!",
+			ja:	"全ての実績を解放した。隕石なんて一発でKOだったね!",
 		},
 
 		//初プレイ First Play
@@ -650,8 +650,8 @@ const LocalizedTexts	= {
 			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
 		},
 		"Achievement.Action.FirstPlay.Text":{
-			_:	"Stopped the meteorite and saved the Earth. Momoko has to do something...!",
-			ja:	"隕石を食い止めて世界を救った。桃子がなんとかしなきゃ…!",
+			_:	"Stopped the meteorite and saved the Earth.\nMomoko has to do something...!",
+			ja:	"隕石を食い止めて世界を救った。\n桃子がなんとかしなきゃ…!",
 		},
 
 		//結果シェア Share Result
@@ -661,7 +661,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Action.Share.Text":{
 			_:	"We post a tweet, tweet, tweet.",
-			ja:	"ツイートツイートツイート投稿するんだ",
+			ja:	"ツイートツイートツイート 投稿するんだ。",
 		},
 
 };
