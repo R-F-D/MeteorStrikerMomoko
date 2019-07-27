@@ -12,25 +12,25 @@ const Achievements = (()=>{		//Achievements scoop
 	};
 	//打撃力
 	Achievements.Blowing	= {
-		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x1100,	Replacements:[],	},	//強打
-		HardAndPerfect	:{	IsPublic:true,	Count:1,	Order:0x1101,	Replacements:null,	},	//強打でパーフェクト
-		SuccessiveHits	:{	IsPublic:true,	Count:5,	Order:0x1102,	Replacements:[],	},	//連続ヒット
+		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x2100,	Replacements:[],	},	//強打
+		HardAndPerfect	:{	IsPublic:true,	Count:1,	Order:0x2101,	Replacements:null,	},	//強打でパーフェクト
+		SuccessiveHits	:{	IsPublic:true,	Count:5,	Order:0x2102,	Replacements:[],	},	//連続ヒット
 	};
 	//エミット
 	Achievements.Emit	= {
-		Many01			:{	IsPublic:true,	Count:150,	Order:0x2200,	Replacements:[L.Text("Unit.Emit")],	},	// 約28回
-		Many02			:{	IsPublic:true,	Count:160,	Order:0x2201,	Replacements:[L.Text("Unit.Emit")],	},	// 約35回
-		Many03			:{	IsPublic:true,	Count:170,	Order:0x2202,	Replacements:[L.Text("Unit.Emit")],	},	// 約42回
-		Many04			:{	IsPublic:true,	Count:180,	Order:0x2203,	Replacements:[L.Text("Unit.Emit")],	},	// 約50回
+		Many01			:{	IsPublic:true,	Count:150,	Order:0x3200,	Replacements:[L.Text("Unit.Emit")],	},	// 約28回
+		Many02			:{	IsPublic:true,	Count:160,	Order:0x3201,	Replacements:[L.Text("Unit.Emit")],	},	// 約35回
+		Many03			:{	IsPublic:true,	Count:170,	Order:0x3202,	Replacements:[L.Text("Unit.Emit")],	},	// 約42回
+		Many04			:{	IsPublic:true,	Count:180,	Order:0x3203,	Replacements:[L.Text("Unit.Emit")],	},	// 約50回
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
-		Venus			:{	IsPublic:true,	Count:1,	Order:0x3300,	Replacements:[C.Check[1].distance, L.Text("Unit.Distance")],	},	//金星
-		Mars			:{	IsPublic:true,	Count:1,	Order:0x3301,	Replacements:[C.Check[2].distance, L.Text("Unit.Distance")],	},	//火星
-		Mercury			:{	IsPublic:true,	Count:1,	Order:0x3302,	Replacements:[C.Check[3].distance, L.Text("Unit.Distance")],	},	//水星
-		Sun				:{	IsPublic:true,	Count:1,	Order:0x3303,	Replacements:[C.Check[4].distance, L.Text("Unit.Distance")],	},	//太陽
-		Kirari			:{	IsPublic:true,	Count:1,	Order:0x3304,	Replacements:[C.Check[5].distance, L.Text("Unit.Distance")],	},	//諸星きらり
-		Unicorn			:{	IsPublic:true,	Count:1,	Order:0x3305,	Replacements:[C.Check[6].distance, L.Text("Unit.Distance")],	},	//ピンクのユニコーン
+		Venus			:{	IsPublic:true,	Count:1,	Order:0x4300,	Replacements:[C.Check[1].distance, L.Text("Unit.Distance")],	},	//金星
+		Mars			:{	IsPublic:true,	Count:1,	Order:0x4301,	Replacements:[C.Check[2].distance, L.Text("Unit.Distance")],	},	//火星
+		Mercury			:{	IsPublic:true,	Count:1,	Order:0x4302,	Replacements:[C.Check[3].distance, L.Text("Unit.Distance")],	},	//水星
+		Sun				:{	IsPublic:true,	Count:1,	Order:0x4303,	Replacements:[C.Check[4].distance, L.Text("Unit.Distance")],	},	//太陽
+		Kirari			:{	IsPublic:true,	Count:1,	Order:0x5304,	Replacements:[C.Check[5].distance, L.Text("Unit.Distance")],	},	//諸星きらり
+		Unicorn			:{	IsPublic:true,	Count:1,	Order:0x5305,	Replacements:[C.Check[6].distance, L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 	};
 	//ユーザアクション
 	Achievements.Action	= {
