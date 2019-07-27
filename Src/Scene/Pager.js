@@ -173,7 +173,7 @@ Scene.PageNavigator	= class PageNavigator{
 
 		//インジケータ
 		if(this.pager.nPages<2) return this;
-		const indicatorWidth	= 128;
+		const indicatorWidth	= this.pager.nPages<8 ? 128 : 256;
 		this.pageIndicator	= _.range(this.pager.nPages).map((v,i)=>
 			Sprite.CreateInstance(rc.img.navigationButton).AddToLayer(layer).Attr({zIndex:5})
 				.SetIndex(1)
