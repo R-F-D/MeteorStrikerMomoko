@@ -135,7 +135,10 @@ Scene.Records	= class extends Scene.SceneBase {
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
 			let handles	= Store.GetVisibleHandles( this.pager ? this.pager.GetPage() : null);
-			this.displayBoards.length	= Math.min(this.displayBoards.length, RecordBoard.Max);
+			if(RecordBoard.Max < handles.length){
+				handles.length	= RecordBoard.Max;
+				Debug(()=>{throw new Error("Too many records")});
+			}
 
 			//ラベル
 			this.displayBoards
@@ -198,7 +201,10 @@ Scene.Records	= class extends Scene.SceneBase {
 		//実績一覧
 		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
 			let handles	= Achievement.GetHandles( this.pager ? this.pager.GetPage() : null);
-			this.displayBoards.length	= Math.min(this.displayBoards.length, AchievementBoard.Max);
+			if(AchievementBoard.Max < handles.length){
+				handles.length	= AchievementBoard.Max;
+				Debug(()=>{throw new Error("Too many achievements")});
+			}
 
 			//ラベル
 			this.displayBoards
