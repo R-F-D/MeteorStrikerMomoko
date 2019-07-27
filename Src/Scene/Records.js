@@ -11,20 +11,20 @@ const LinkedLayerTags	= {
 };
 
 const PanelPosition		= {X:96,Y:240};
-const RecordBoard	= {
+let RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
-	Max:				5 * 2,	//MaxRows * MaxColumns
 	Size:				{Width:160, Height:32},
 	NumLogLines:		2,
 };
 const AchievementBoard	= {
 	MaxRows:			4,
 	MaxColumns:			1,
-	Max:				4 * 1,	//MaxRows * MaxColumns
-	Size:				{Width:160, Height:48},
+	Size:				{Width:324, Height:48},
 	NumLogLines:		4,
 };
+RecordBoard.Max			= RecordBoard.MaxRows * RecordBoard.MaxColumns;
+AchievementBoard.Max	= AchievementBoard.MaxRows * AchievementBoard.MaxColumns;
 const MaxDisplayBoards	= Math.max(RecordBoard.Max,AchievementBoard.Max);
 
 Scene.Records	= class extends Scene.SceneBase {
@@ -134,8 +134,8 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		//スコア表示
 		this.Sequences.RECORDS.PushStartingFunctions(()=>{
-
 			let handles	= Store.GetVisibleHandles( this.pager ? this.pager.GetPage() : null);
+			this.displayBoards.length	= Math.min(this.displayBoards.length, RecordBoard.Max);
 
 			//ラベル
 			this.displayBoards
@@ -198,6 +198,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//実績一覧
 		this.Sequences.ACHIEVEMENTS.PushStartingFunctions(()=>{
 			let handles	= Achievement.GetHandles( this.pager ? this.pager.GetPage() : null);
+			this.displayBoards.length	= Math.min(this.displayBoards.length, AchievementBoard.Max);
 
 			//ラベル
 			this.displayBoards
@@ -220,6 +221,10 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
+					board.body.SetColor(	"#FFFF00");
+					board.text.SetColor(	"#CFCFCF");;
+					board.date.SetColor(	"#FFFFFF");;
+
 					board.body
 						.SetVisible(true)
 						.SetNumLogLines(AchievementBoard.NumLogLines)
