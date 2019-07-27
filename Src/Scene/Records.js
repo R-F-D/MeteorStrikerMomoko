@@ -11,7 +11,7 @@ const LinkedLayerTags	= {
 };
 
 const PanelPosition		= {X:96,Y:240};
-let RecordBoard	= {
+const RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
 	Size:				{Width:160, Height:32},
