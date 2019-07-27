@@ -752,7 +752,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.OnButtonUp(()=>{
 				if(!this.isShared){
 					this.isShared	= true;
-					Store.DynamicInsert(Store.Handles.Action.NumShares);
+					const nShares	= Store.DynamicInsert(Store.Handles.Action.NumShares);
+					Achievement.Unlock(Achievements.Action.Share, nShares);
 				}
 				this.labels.navigation.RemoveTempText();
 				cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
