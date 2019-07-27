@@ -216,8 +216,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					const handle	= handles.shift();
 					if(!handle)	return;
 
-					let date		= Number(Store.Select(handle.Key));
-					if(date==null)	return;
+					let date		= Store.Select(handle.Key,"");
+					if(date!="")	date	= (new Date(Number(date))).toLocaleString();
 
 					const title		= L.Text(handle.Key);
 					const text		= Array.isArray(handle.Replacements)	? L.Textf(`${handle.Key}.Text`, [handle.Count].concat(handle.Replacements) )
