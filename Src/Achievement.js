@@ -13,8 +13,8 @@ const Achievements = (()=>{		//Achievements scoop
 	//打撃力
 	Achievements.Blowing	= {
 		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x2100,	Replacements:[],	},	//強打
-		HardAndPerfect	:{	IsPublic:true,	Count:1,	Order:0x2101,	Replacements:null,	},	//強打でパーフェクト
-		SuccessiveHits	:{	IsPublic:true,	Count:5,	Order:0x2102,	Replacements:[],	},	//連続ヒット
+		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x2101,	Replacements:null,	},	//強打でパーフェクト
+		SuccessiveHits	:{	IsPublic:true,	Count:19,	Order:0x2102,	Replacements:[],	},	//連続ヒット
 	};
 	//エミット
 	Achievements.Emit	= {
@@ -36,7 +36,7 @@ const Achievements = (()=>{		//Achievements scoop
 	Achievements.Action	= {
 		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Replacements:null,	},	//コンプリート
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Replacements:null,	},	//初プレイ
-		Share			:{	IsPublic:true,	Count:1,	Order:0x0002,	Replacements:[],	},	//シェア
+		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Replacements:[],	},	//シェア
 	};
 
 
