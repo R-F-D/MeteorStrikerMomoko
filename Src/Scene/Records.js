@@ -223,12 +223,16 @@ Scene.Records	= class extends Scene.SceneBase {
 					const handle	= handles.shift();
 					if(!handle)	return;
 
-					let date		= Store.Select(handle.Key,"");
-					if(date!="")	date	= (new Date(Number(date))).toLocaleString();
+					let datetime	= Store.Select(handle.Key,"");
+					if(datetime!="")	datetime	= (new Date(Number(datetime))).toLocaleString();
 
-					const title		= L.Text(handle.Key);
+					let title		= L.Text(handle.Key);
 					let text		= "";
-					if(Array.isArray(handle.Replacements)){
+					if(!handle.IsPublic && datetime==""){
+						title	= L.Text("Achievement.Secret");
+						text	= L.Text("Achievement.Secret.Text");
+					}
+					else if(Array.isArray(handle.Replacements)){
 						const repls	= [handle.Count].concat(handle.Replacements).map(r=> _.isNumber(r) ? L.NumToStr(r) : r );
 						text	= L.Textf(`${handle.Key}.Text`, repls)
 					}
@@ -240,7 +244,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
-					if(date!=""){
+					if(datetime!=""){
 						board.body.bg.OPACITY	= 128;
 						board.body.SetFontColor("#FFCF00","#7F0000",1);
 						board.text.SetFontColor("#CFCFCF");
@@ -260,12 +264,12 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetString(` ${title}`);
 					board.text
 						.SetNumLogLines(2)
-						.SetPosition(PanelPosition.X+x+2,PanelPosition.Y-y)
+						.SetPosition(PanelPosition.X+x+2,PanelPosition.Y-y-2)
 						.SetString(text);
 					board.date
 						.SetNumLogLines(1)
-						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,PanelPosition.Y-y-16+1)
-						.SetString(`${date}`);
+						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,PanelPosition.Y-y-16)
+						.SetString(`${datetime}`);
 					board.body.bg.animationDelay	= 0.0;
 				});
 

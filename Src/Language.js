@@ -477,6 +477,16 @@ const LocalizedTexts	= {
 			ja:	"実績解除!",
 		},
 
+		//シークレット項目 Secret
+		"Achievement.Secret":{
+			_:	"??????????",
+			ja:	"？？？？？",
+		},
+		"Achievement.Secret.Text":{
+			_:	"?????????? ??????????",
+			ja:	"？？？？？？？？？？",
+		},
+
 		//パーフェクト一定回数 Many Perfect Blows
 		"Achievement.Aiming.ManyPerfect":{
 			_:	"Perfect Sun",
