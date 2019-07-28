@@ -469,7 +469,7 @@ const LocalizedTexts	= {
 
 		//実績解除ラベル Label of Unlocking
 		"Achievement.Unlocked" :{
-			_:	"Achievement Unlocked!!",
+			_:	"Achievement Unlocked!",
 			ja:	"実績解除!",
 		},
 
