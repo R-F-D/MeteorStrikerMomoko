@@ -12,7 +12,7 @@ class Store{
 				/** 直近の平均飛距離 */
 				MeanDistance:				{Required:0,	Order:0x1001,	UnitKey:"Unit.Distance",	Conv:Store.Convs.LinesToMean,	},
 				/** チェックポイント到達回数 */
-				NumPassings:[				{Required:1,	Order:0x1010,	},		//太陽
+				NumPassings:[				{Required:0,	Order:0x1010,	},		//太陽
 											{Required:1,	Order:0x1011,	},		//きらり
 											{Required:1,	Order:0x1012,	},	],	//ユニコーン
 
@@ -21,7 +21,7 @@ class Store{
 				/** パーフェクト回数 */
 				NumPerfects:				{Required:0,	Order:0x2001,	},
 				/** 100%パーフェクト回数 */
-				NumTruePerfects:			{Required:1,	Order:0x2002,	},
+				NumTruePerfects:			{Required:0,	Order:0x2002,	},
 				/** エイミング精度最高値 */
 				BestAiming:					{Required:0,	Order:0x2003,	nDecimalDigits:1,	UnitKey:"Unit.Aim",	},
 				/** 平均エイミング精度 */
@@ -29,9 +29,9 @@ class Store{
 				/** 強打回数 */
 				NumHardBlowings:			{Required:0,	Order:0x2010,	},
 				/** 強打＆パーフェクト回数 */
-				NumHardAndPerfectBlowings:	{Required:1,	Order:0x2011,	},
+				NumHardAndPerfectBlowings:	{Required:0,	Order:0x2011,	},
 				/** 全力打撃回数 */
-				NumFullPowerBlowings:		{Required:1,	Order:0x2012,	},
+				NumFullPowerBlowings:		{Required:0,	Order:0x2012,	},
 				/** 最高打撃力 */
 				BestBlowing:				{Required:0,	Order:0x2013,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** 平均打撃倍率 */

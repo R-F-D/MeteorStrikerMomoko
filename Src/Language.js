@@ -242,10 +242,6 @@ const LocalizedTexts	= {
 			_:	"Arrivals at the Sun",
 			ja:	"太陽到達回数",
 		},
-		"Records.GamePlay.NumPassings.00.Secret":{
-			_:	"Arrivals at ????????",
-			ja:	"？？？？到達回数",
-		},
 		"Records.GamePlay.NumPassings.01":{
 			_:	"Kirarin Robot Passings",
 			ja:	"きらりんロボ通過回数",

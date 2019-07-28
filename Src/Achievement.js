@@ -29,8 +29,8 @@ const Achievements = (()=>{		//Achievements scoop
 		Mars			:{	IsPublic:true,	Count:1,	Order:0x4301,	Replacements:[C.Check[2].distance, L.Text("Unit.Distance")],	},	//火星
 		Mercury			:{	IsPublic:true,	Count:1,	Order:0x4302,	Replacements:[C.Check[3].distance, L.Text("Unit.Distance")],	},	//水星
 		Sun				:{	IsPublic:true,	Count:1,	Order:0x4303,	Replacements:[C.Check[4].distance, L.Text("Unit.Distance")],	},	//太陽
-		Kirari			:{	IsPublic:true,	Count:1,	Order:0x5304,	Replacements:[C.Check[5].distance, L.Text("Unit.Distance")],	},	//諸星きらり
-		Unicorn			:{	IsPublic:true,	Count:1,	Order:0x5305,	Replacements:[C.Check[6].distance, L.Text("Unit.Distance")],	},	//ピンクのユニコーン
+		Kirari			:{	IsPublic:false,	Count:1,	Order:0x5304,	Replacements:[C.Check[5].distance, L.Text("Unit.Distance")],	},	//諸星きらり
+		Unicorn			:{	IsPublic:false,	Count:1,	Order:0x5305,	Replacements:[C.Check[6].distance, L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 	};
 	//ユーザアクション
 	Achievements.Action	= {
