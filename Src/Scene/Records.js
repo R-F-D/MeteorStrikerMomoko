@@ -227,8 +227,14 @@ Scene.Records	= class extends Scene.SceneBase {
 					if(date!="")	date	= (new Date(Number(date))).toLocaleString();
 
 					const title		= L.Text(handle.Key);
-					const text		= Array.isArray(handle.Replacements)	? L.Textf(`${handle.Key}.Text`, [handle.Count].concat(handle.Replacements) )
-																			: L.Text(`${handle.Key}.Text`);
+					let text		= "";
+					if(Array.isArray(handle.Replacements)){
+						const repls	= [handle.Count].concat(handle.Replacements).map(r=> _.isNumber(r) ? L.NumToStr(r) : r );
+						text	= L.Textf(`${handle.Key}.Text`, repls)
+					}
+					else{
+						text	= L.Text(`${handle.Key}.Text`);
+					}
 
 					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4);
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
