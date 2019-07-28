@@ -307,6 +307,28 @@ Label	= class Label{
 		return this;
 	}
 
+	/** フォントの文字色・枠線色・枠線幅を設定
+	 * @param {cc.Color|string} [fill=null]		文字色のcc.Colorオブジェクトまたはカラーコード文字列。nullで変更なし。
+	 * @param {cc.Color|string} [stroke=null]	枠線色のcc.Colorオブジェクトまたはカラーコード文字列。nullで変更なし。
+	 * @param {number|null} [width=null]		枠線幅。0で枠線削除。nullで変更なし。
+	 * @returns {this}
+	 */
+	SetFontColor(fill=null,stroke=null,width=null){
+		if(fill)	this.entity.setFontFillColor( _.isString(fill) ? cc.color(fill) : fill );
+
+		stroke	= stroke!==null ? stroke : this.entity.strokeStyle;
+		width	= width !==null ? width  : this.entity.lineWidth;
+
+		if(width <= 0){
+			this.entity.disableStroke();
+			return this;
+		}
+
+		this.entity.enableStroke( _.isString(stroke)?cc.color(stroke):stroke, width);
+		return this;
+	}
+
+
 	/** アイコン画像のセット
 	 * @param {*} img
 	 * @returns {this}
