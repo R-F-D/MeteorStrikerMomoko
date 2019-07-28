@@ -234,9 +234,18 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
-					board.body.SetFontColor("#FFCF00","#7F0000",1);
-					board.text.SetFontColor("#CFCFCF");
-					board.date.SetFontColor("#FFFFFF");
+					if(date!=""){
+						board.body.bg.OPACITY	= 128;
+						board.body.SetFontColor("#FFCF00","#7F0000",1);
+						board.text.SetFontColor("#CFCFCF");
+						board.date.SetFontColor("#FFFFFF");
+					}
+					else{
+						board.body.bg.OPACITY	= 64;
+						board.body.SetFontColor("#AFAF00","#1F0000",1);
+						board.text.SetFontColor("#AFAFAF");
+						board.date.SetFontColor("#AFAFAF");
+					}
 
 					board.body
 						.SetVisible(true)
