@@ -95,7 +95,7 @@ const Achievement = new (class Achievement{
 	 * @param {Achievemtns} achievement 実績オブジェクト
 	 * @param {number} count カウンタ
 	 */
-	Unlock(achievement,count){
+	Unlock(achievement,count,unlocksCompleteAchievement=true){
 		if(achievement==null) return this;
 
 		Store.Insert(
@@ -106,14 +106,25 @@ const Achievement = new (class Achievement{
 				const title	= Array.isArray(achievement.Replacements)	? L.Textf(key,[achievement.Count].concat(achievement.Replacements))
 																		: L.Text (key);
 				this.label.PushLog(`${L.Text("Achievement.Unlocked")}\n${title}`);
+				Log(`Achievement: ${key}`);
 			}
 		);
+
+		if(unlocksCompleteAchievement)	this.Complete();
+		return this;
+	}
+
+	Complete(){
+		this.Unlock(Achievements.Action.Complete,this.nUnlockedItems,false);
 		return this;
 	}
 
 	SetLayer(layer){
 		this.layer = layer;
-		if(this.label)	this.label.AddToLayer(layer);
+		if(this.label){
+			this.label.AddToLayer(layer);
+			this.Complete();
+		}
 		return this;
 	}
 
