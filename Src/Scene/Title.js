@@ -141,7 +141,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				//フキダシ
 				this.sprites.balloonTail.SetColor(this.label.bg.COLOR).SetOpacity(this.label.bg.OPACITY)
 				this.label
-					.Init().SetVisible(false).SetColor("#FFFFFF").SetBgEnabled(true).SetNumLogLines(1);
+					.Init().SetVisible(false).SetBgEnabled(true).SetNumLogLines(1);
 				this.playerIsTouched	= false;
 			})
 			.PushUpdatingFunctions(dt=>{

@@ -176,9 +176,16 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height+4);
 					board.body.bg.lower			= {width:RecordBoard.Size.Width, height:RecordBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
-					board.body.bg.OPACITY		= isPublic	? 128 : 64;
-					board.body.SetColor(	isPublic ? "#FFFF00" : "#AFAF00");
-					board.counter.SetColor(	isPublic ? "#FFFFFF" : "#AFAFAF");;
+					if(isPublic){
+						board.body.bg.OPACITY	= 128;
+						board.body.SetFontColor("#FFCF00","#7F0000",1);
+						board.counter.SetFontColor("#FFFFFF");
+					}
+					else{
+						board.body.bg.OPACITY	= 64;
+						board.body.SetFontColor("#AFAF00","#1F0000",1);
+						board.counter.SetFontColor("#AFAFAF");
+					}
 
 					board.body
 						.SetVisible(true)
@@ -227,9 +234,9 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
-					board.body.SetColor(	"#FFFF00");
-					board.text.SetColor(	"#CFCFCF");;
-					board.date.SetColor(	"#FFFFFF");;
+					board.body.SetFontColor("#FFCF00","#7F0000",1);
+					board.text.SetFontColor("#CFCFCF");
+					board.date.SetFontColor("#FFFFFF");
 
 					board.body
 						.SetVisible(true)

@@ -253,8 +253,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.fx.preliminary.Destroy();
 
 			//ラベル
-			this.labels.distance.SetVisible(false).SetColor("#00FF00").SetNumLogLines(1);
-			this.labels.navigation.Init().SetVisible(false).SetColor("FFFFFF").SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
+			this.labels.distance.SetVisible(false).SetFontColor("#00FF00").SetNumLogLines(1);
+			this.labels.navigation.Init().SetVisible(false).SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,0).SetNumLogLines(2);
 
 			this.InitUIs();
 
