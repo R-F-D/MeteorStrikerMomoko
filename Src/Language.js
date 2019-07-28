@@ -416,15 +416,19 @@ const LocalizedTexts	= {
 			_:	"Iku Navigates",
 			ja:	"育のナビ回数",
 		},
-		"Records.Action.NumNavigates.00.Secret":{
-			_:	"???????? Navigates",
-			ja:	"？？？？のナビ回数",
-		},
 		"Records.Action.NumNavigates.01":{
 			_:	"First Friend Navigates",
 			ja:	"初めてのともだちのナビ回数",
 		},
 		"Records.Action.NumNavigates.01.Secret":{
+			_:	"???????? Navigates",
+			ja:	"？？？？のナビ回数",
+		},
+		"Records.Action.NumNavigates.02":{
+			_:	"Goddess Navigates",
+			ja:	"女神のナビ回数",
+		},
+		"Records.Action.NumNavigates.02.Secret":{
 			_:	"???????? Navigates",
 			ja:	"？？？？のナビ回数",
 		},
@@ -652,12 +656,51 @@ const LocalizedTexts	= {
 
 		//結果シェア Share Result
 		"Achievement.Action.Share":{
-			_:	"Shared Your Result",
+			_:	"Share Your Result",
 			ja:	"結果をシェアして",	//ドレミファクトリー！
 		},
 		"Achievement.Action.Share.Text":{
 			_:	"We post a tweet, tweet, tweet.",
 			ja:	"ツイートツイートツイート 投稿するんだ。",
+		},
+
+		//桃子だけど
+		"Achievement.Action.TouchPlayer":{
+			_:	"Momoko Dakedo.",
+			ja:	"桃子だけど。",	//桃子だけど。
+		},
+		"Achievement.Action.TouchPlayer.Text":{
+			_:	"Touched Momoko in the title. Well then, see you.",
+			ja:	"タイトル画面で桃子にタッチした。それじゃあ、またね。",
+		},
+
+		//ナビゲータ（ノーマル）使用
+		"Achievement.Action.Navigate00":{
+			_:	"Navigator Goes The Space",
+			ja:	"ナビゲーター宇宙を往く",	//エージェント夜を往く
+		},
+		"Achievement.Action.Navigate00.Text":{
+			_:	"Iku navigated $0 times.",
+			ja:	"育が$0回ナビゲートした。",
+		},
+
+		//ナビゲータ（ゴーレム）使用
+		"Achievement.Action.Navigate01":{
+			_:	"Wandering Golem Navigator",
+		},
+		"Achievement.Action.Navigate01.Text":{
+			_:	"First friend navigated $0 times. As I have a something to reach for.",
+			ja:	"初めてのともだちが$0回ナビゲートした。目指すものがあるから。",
+		},
+
+		//ナビゲータ（女神）使用
+		"Achievement.Action.Navigate02":{
+			_:	"Navigation of Light",
+			ja:	"ヒカリのnavigation",	//ヒカリのdestination
+		},
+		"Achievement.Action.Navigate02.Text":{
+			_:	"Goddess navigated $0 times. Start running to the base of radiance.",
+			ja:	"女神が$0回ナビゲートした。輝きのたもとへ走り出そうよ。",
 		},
 
 };

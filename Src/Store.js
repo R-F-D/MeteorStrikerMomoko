@@ -62,8 +62,9 @@ class Store{
 				/** 合計実行時間 */
 				TotalRunTime:				{Required:0,	Order:0x0202,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
 				/** ナビゲーション回数 */
-				NumNavigates:[				{Required:1,	Order:0x3010,	},		//ノーマル
-											{Required:1,	Order:0x3011,	},	],	//初めてのともだち
+				NumNavigates:[				{Required:0,	Order:0x3010,	},		//ノーマル
+											{Required:1,	Order:0x3011,	},		//初めてのともだち
+											{Required:1,	Order:0x3012,	},	],	//女神
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
 				NumTouchesPlayer:			{Required:1,	Order:0x3000,	},
 
