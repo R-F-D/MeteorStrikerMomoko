@@ -528,11 +528,11 @@ const LocalizedTexts	= {
 		//強打かつパーフェクト Hardblow And Perfect Aim
 		"Achievement.Blowing.HardAndPerfect":{
 			_:	"Perfect³ Hard☆",
-			ja:	"パーフェクトっす³ハード☆",	//しゅがーはぁとレボリューション
+			ja:	"パーフェクトっす³ ハード☆",	//しゅがーはぁとレボリューション
 		},
 		"Achievement.Blowing.HardAndPerfect.Text":{
-			_:	"Hardblowed with a perfect aim. (Note: It's a user thought)",
-			ja:	"強打でパーフェクトを出した。(注:使用者の感想です)",
+			_:	"Hardblowed with a perfect aim $0 times. (Note: It's a user thought)",
+			ja:	"強打でパーフェクトを$0回出した。(注:使用者の感想です)",
 		},
 
 		//打撃を連続成功 Successive Hits Without Failure
@@ -690,13 +690,13 @@ const LocalizedTexts	= {
 			ja:	"ナビゲーター宇宙を往く",	//エージェント夜を往く
 		},
 		"Achievement.Action.Navigate00.Text":{
-			_:	"Iku navigated $0 times.",
-			ja:	"育が$0回ナビゲートした。",
+			_:	"Iku navigated $0 times. I can lead you completely everywhere.",
+			ja:	"育が$0回ナビゲートした。どんな道も万全に率いられる。",
 		},
 
 		//ナビゲータ（ゴーレム）使用
 		"Achievement.Action.Navigate01":{
-			_:	"Wandering Golem Navigator",
+			_:	"Wandering Golem Navigator",	//Wandering Dream Chaser
 		},
 		"Achievement.Action.Navigate01.Text":{
 			_:	"First friend navigated $0 times. As I have a something to reach for.",
