@@ -538,7 +538,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Emit.Many01.Text":{
 			_:	"Emitted $0$1 and more. No such the theill-less emittings...",
-			ja:	"エミット倍率$0$1以上を出した。\nスリルのないエミットなんて…。",
+			ja:	"エミット倍率$0$1以上を出した。\nスリルのないエミットなんて…",
 		},
 
 		//エミット回数実績その2 Emit Rate #02
