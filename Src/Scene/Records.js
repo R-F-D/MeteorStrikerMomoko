@@ -10,7 +10,7 @@ const LinkedLayerTags	= {
 	BG:		"Records.Bg",
 };
 
-const PanelPosition		= {X:96,Y:240};
+const PanelPosition		= {X:96,Y:242};
 const RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
@@ -20,7 +20,7 @@ const RecordBoard	= {
 const AchievementBoard	= {
 	MaxRows:			4,
 	MaxColumns:			1,
-	Size:				{Width:324, Height:48},
+	Size:				{Width:324, Height:52},
 	NumLogLines:		4,
 };
 RecordBoard.Max			= RecordBoard.MaxRows * RecordBoard.MaxColumns;
