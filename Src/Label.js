@@ -203,8 +203,9 @@ Label	= class Label{
 
 		const pos		= this.entity.getPosition();
 		const size		= this.GetContentSize();
+		const anchor	= this.entity.getAnchorPoint();
 
-		this.icon.SetPosition(	pos.x + this.iconAdjust.x - size.width /2,
+		this.icon.SetPosition(	pos.x + this.iconAdjust.x - size.width * anchor.x,
 								pos.y + this.iconAdjust.y );
 
 		return this;
