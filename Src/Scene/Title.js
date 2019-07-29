@@ -169,7 +169,10 @@ Scene.Title	= class extends Scene.SceneBase {
 					//プレイヤーキャラクターをタッチ
 					if((location.x-this.sprites.player.x)**2 + (location.y-this.sprites.player.y)**2 <32**2){
 						this.label.PushLog(L.Text("Title.Reaction.Player"));
-						if(!this.playerIsTouched)	Store.DynamicInsert(Store.Handles.Action.NumTouchesPlayer);
+						if(!this.playerIsTouched){
+							const nTouches	= Store.DynamicInsert(Store.Handles.Action.NumTouchesPlayer);
+							Achievement.Unlock(Achievements.Action.TouchPlayer,nTouches);
+						}
 						this.playerIsTouched	= true;
 					}
 				});
