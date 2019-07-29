@@ -126,7 +126,9 @@ Scene.PageNavigator	= class PageNavigator{
 		const nButtons	= this.pager ? 7 : 1;
 
 		this.buttons	= Button.CreateInstance(nButtons).AddToLayer(layer).SetTags("Reset","First","Prev","Next","Last","PrevChapter","NextChapter");
-		this.buttons.forEach(b=>b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00]));
+		this.buttons.forEach(b=>{
+			b.CreateSprite(rc.img.navigationButton).SetVisible(true).SetColorOnHover([0xFF,0xA0,0x00])
+		});
 
 		//リセットボタン
 		this.buttons.at("Reset")
@@ -141,33 +143,39 @@ Scene.PageNavigator	= class PageNavigator{
 			.SetIndex(2).SetPosition(16+32+12,32)
 			.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
 			.OnButtonUp(()=>this.pager.AddPage(-1))
+			.SetAutoOff(true)
 			.sprite.SetRotate(180);
 		this.buttons.at("Next")
 			.SetIndex(2).SetPosition(size.width-16-32-12,32)
 			.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
-			.OnButtonUp(()=>this.pager.AddPage(+1));
+			.OnButtonUp(()=>this.pager.AddPage(+1))
+			.SetAutoOff(true);
 
 		this.buttons.at("First")
 			.SetIndex(3).SetPosition(16+4,32)
 			.AssignKeyboard(cc.KEY.home)	//Home
 			.OnButtonUp(()=>this.pager.SetPage(0))
+			.SetAutoOff(true)
 			.sprite.SetRotate(180);
 		this.buttons.at("Last")
 			.SetIndex(3).SetPosition(size.width-16-4,32)
 			.AssignKeyboard(cc.KEY.end)	//End
-			.OnButtonUp(()=>this.pager.SetPage(null));
+			.OnButtonUp(()=>this.pager.SetPage(null))
+			.SetAutoOff(true);
 
 		this.buttons.at("PrevChapter")
 			.SetIndex(2).SetPosition(16+32+12,168+72)
 			.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
 			.OnButtonUp(()=>this.pager.AddChapter(-1))
 			.SetVisible(this.pager.nChapters>1)
+			.SetAutoOff(true)
 			.sprite.SetRotate(-90);
 		this.buttons.at("NextChapter")
 			.SetIndex(2).SetPosition(16+32+12,168-72)
 			.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
 			.OnButtonUp(()=>this.pager.AddChapter(+1))
 			.SetVisible(this.pager.nChapters>1)
+			.SetAutoOff(true)
 			.sprite.SetRotate(90);
 
 
