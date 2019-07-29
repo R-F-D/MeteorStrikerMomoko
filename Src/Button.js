@@ -308,17 +308,14 @@ class ButtonItem{
 						event.stopPropagation();
 						if(this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
-						this.status			= Button.HOVER;
-						this.SetOpacity(this.opacityOnHover,true,true);
-						this.SetColor(this.colorOnHover,true,true);
 					}
 					else{
-						this.status			= Button.OFF;
-						this.SetOpacity(this.opacity,true,false);
-						this.SetColor(this.color,true,false);
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
-					this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+					this.status			= Button.OFF;
+					this.SetOpacity(this.opacity,true,false)
+						.SetColor(this.color,true,false)
+						.sprite.RunActions(cc.scaleTo(0.2,this.scale));
 					this._ApplyIndex();
 				}
 			},
