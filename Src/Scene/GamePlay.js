@@ -485,6 +485,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				);
 				this.fx.explosion.Spawn(this.sprites.meteor.x,this.sprites.meteor.y);
 				this.fx.player.SetVelocity(0,0,0,0);
+				this.pageNavigator.buttons.at("Reset").SetVisible(false);
 
 				//スコアとハイスコア
 				const score 	= this.GetDistanceInKm();
@@ -515,6 +516,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.sprites.player.SetVisible(false);
 				this.buttons.SetVisible(true);
+				this.pageNavigator.buttons.at("Reset").SetVisible(true);
+
 
 				//初プレイ実績
 				const nPlays	= Store.DynamicInsert(Store.Handles.Action.NumPlays);
