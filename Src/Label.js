@@ -203,8 +203,9 @@ Label	= class Label{
 
 		const pos		= this.entity.getPosition();
 		const size		= this.GetContentSize();
-		const imgSize	= this.icon.GetPieceSize();
-		this.icon.SetPosition(	pos.x-(size.width+imgSize.width)/2+this.iconAdjust.x,	pos.y+this.iconAdjust.y	);
+
+		this.icon.SetPosition(	pos.x + this.iconAdjust.x - size.width /2,
+								pos.y + this.iconAdjust.y );
 
 		return this;
 	}
@@ -339,7 +340,8 @@ Label	= class Label{
 		this.icon	= Sprite
 						.CreateInstance(img)
 						.Attr({opacity:0,zIndex:this.Z-1})
-						.SetScale(1);
+						.SetScale(1)
+		this.icon.entity.setAnchorPoint(1.0, 0.5);
 
 		let layer	= this.entity.getParent();
 		if(layer)	this.icon.AddToLayer(layer);
