@@ -21,7 +21,7 @@ const Achievements = (()=>{		//Achievements scoop
 		Many01			:{	IsPublic:true,	Count:150,	Order:0x3200,	Replacements:[L.Text("Unit.Emit")],	},	// 約28回
 		Many02			:{	IsPublic:true,	Count:160,	Order:0x3201,	Replacements:[L.Text("Unit.Emit")],	},	// 約35回
 		Many03			:{	IsPublic:true,	Count:170,	Order:0x3202,	Replacements:[L.Text("Unit.Emit")],	},	// 約42回
-		Many04			:{	IsPublic:true,	Count:180,	Order:0x3203,	Replacements:[L.Text("Unit.Emit")],	},	// 約50回
+		Many04			:{	IsPublic:false,	Count:180,	Order:0x3203,	Replacements:[L.Text("Unit.Emit")],	},	// 約50回
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
@@ -38,7 +38,7 @@ const Achievements = (()=>{		//Achievements scoop
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Replacements:null,	},	//初プレイ
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Replacements:[],	},	//シェア
 		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x6000,	Replacements:null,	},	//桃子だけど
-		Navigate00		:{	IsPublic:false,	Count:19,	Order:0x6001,	Replacements:[],	},	//ノーマルナビ使用
+		Navigate00		:{	IsPublic:true,	Count:19,	Order:0x6001,	Replacements:[],	},	//ノーマルナビ使用
 		Navigate01		:{	IsPublic:false,	Count:19,	Order:0x6002,	Replacements:[],	},	//ゴーレムナビ使用
 		Navigate02		:{	IsPublic:false,	Count:19,	Order:0x6002,	Replacements:[],	},	//女神ナビ使用
 	};
