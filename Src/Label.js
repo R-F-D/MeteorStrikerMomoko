@@ -33,6 +33,7 @@ Label	= class Label{
 
 		//アイコン
 		this.icon	= null;
+		this.iconOpacity	= 255;
 		this.iconAdjust	= {x:0,y:0};
 
 		//背景
@@ -53,7 +54,7 @@ Label	= class Label{
 	 * @memberof Label
 	 */
 	Init(){
-		if(this.icon)this.icon.Attr({opacity:192});
+		if(this.icon)this.icon.Attr({opacity:this.iconOpacity});
 		if(this.bg.IsEnabled())	this.bg.Init();
 		return this;
 	}
@@ -238,7 +239,7 @@ Label	= class Label{
 		if(this.icon){
 			this.ApplicateIconPosition();
 			if(hidesIfEmpty && text=="")	this.icon.SetOpacity(0);
-			else							this.icon.SetOpacity(192)
+			else							this.icon.SetOpacity(this.iconOpacity)
 		}
 
 		if(this.bg.IsEnabled()){
