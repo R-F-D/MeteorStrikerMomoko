@@ -258,10 +258,14 @@ class Sprite{
 	 */
 	RunActions(...actions){
 		actions	= actions.map(a=> Array.isArray(a) ? cc.spawn(...a) : a );
-		this.entity.stopAllActions();
 		this.entity.runAction(cc.sequence(actions));
 		return this;
 	}
+	StopActions(){
+		this.entity.stopAllActions();
+		return this;
+	}
+
 	/** 実行中のアクションがあるか
 	 * @returns {boolean}
 	 */
