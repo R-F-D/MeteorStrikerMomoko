@@ -758,6 +758,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.SetPosition(size.width/2+128,size.height/2)
 			.SetIndex(15).SetIndex(Button.OFF,14)
 			.AssignKeyboard(cc.KEY["2"])
+			.SetAutoOff(true)
 			.OnMouseHover(
 				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
 				()=>this.labels.navigation.RemoveTempText()
