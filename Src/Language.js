@@ -690,7 +690,7 @@ const LocalizedTexts	= {
 			ja:	"ナビゲーター宇宙を往く",	//エージェント夜を往く
 		},
 		"Achievement.Action.Navigate00.Text":{
-			_:	"Iku navigated $0 times. I can lead you completely everywhere.",
+			_:	"Iku navigated $0 times.\nI can lead you completely everywhere.",
 			ja:	"育が$0回ナビゲートした。どんな道も万全に率いられる。",
 		},
 
@@ -699,8 +699,8 @@ const LocalizedTexts	= {
 			_:	"Wandering Golem Navigator",	//Wandering Dream Chaser
 		},
 		"Achievement.Action.Navigate01.Text":{
-			_:	"First friend navigated $0 times. As I have a something to reach for.",
-			ja:	"初めてのともだちが$0回ナビゲートした。目指すものがあるから。",
+			_:	"First friend navigated $0 times.\nAs I have a something to reach for.",
+			ja:	"初めてのともだちが$0回ナビゲートした。\n目指すものがあるから。",
 		},
 
 		//ナビゲータ（女神）使用
@@ -709,7 +709,7 @@ const LocalizedTexts	= {
 			ja:	"ヒカリのnavigation",	//ヒカリのdestination
 		},
 		"Achievement.Action.Navigate02.Text":{
-			_:	"Goddess navigated $0 times. Start running to the base of radiance.",
+			_:	"Goddess navigated $0 times.\nStart running to the base of radiance.",
 			ja:	"女神が$0回ナビゲートした。輝きのたもとへ走り出そうよ。",
 		},
 
