@@ -74,6 +74,8 @@ class Store{
 				Language:					{},
 				/** 数値の区切り設定 */
 				NumberSeparation:			{},
+				/**記録・実績の全公開設定*/
+				RecordIsPublic:				{},
 			},
 		};
 

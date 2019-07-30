@@ -45,6 +45,13 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.buttons		= {};
 		this.displayBoards	= [];	//表示板
 
+		//シークレット項目の公開設定
+		this.isPublic	= false;
+		Debug(()=>{
+			this.isPublic	= !!Number(Store.Select(Store.Handles.Settings.RecordIsPublic,0));
+			Store.Insert( Store.Handles.Settings.RecordIsPublic,Number(this.isPublic),null);
+		});
+
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
 
@@ -162,7 +169,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					//カウンタと公開フラグ
 					let text		= "";
 					let fmtCount	= "";
-					if(isPublic){
+					if(this.isPublic || isPublic){
 						count			= _.isString(count)	? count	: L.NumToStr(count, handle.nDecimalDigits);
 						const patterns	= L.TextExists(handle.UnitKey)	? [count, L.Text(handle.UnitKey)]	: [count];
 						fmtCount		= L.TextExists(`Records.${handle.Key}.Format`) ? L.Textf( `Records.${handle.Key}.Format`,patterns) : L.Textf("Unit.Counter",patterns);
@@ -229,7 +236,7 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					let title		= L.Text(handle.Key);
 					let text		= "";
-					if(!handle.IsPublic && datetime==""){
+					if(!this.isPublic && !handle.IsPublic && datetime==""){
 						title	= L.Text("Achievement.Secret");
 						text	= L.Text("Achievement.Secret.Text");
 					}
