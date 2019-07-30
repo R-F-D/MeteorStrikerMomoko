@@ -11,7 +11,7 @@ const rc	= {
 		bgSpace			: [ "bgSpace.png",			1,	1,	],	//背景（宇宙）
 		bgLaunch		: [ "bgLaunch.png",			1,	1,	],	//背景（シーン開始テキスト）
 		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
-		navigator		: [ "navigator.png",		4,	4,	],	//ナビゲータ
+		navigator		: [ "navigator.png",		4,	4,	],	//ナビゲーターアイコン
 		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
 		aimBar			: [ "aimBar.png",			1,	1,	],	//エイミングゲージ
 		aimValue		: [ "aimValue.png",			4,	3,	],	//エイミング値
@@ -21,6 +21,7 @@ const rc	= {
 
 		txtLaunch		: [ "txtLaunch.png",		1,	2,	],	//シーン入場テキスト
 		balloonTail		: [ "balloonTail.png",		1,	1,	],	//フキダシしっぽ
+		achievement		: [ "achievement.png",		1,	1,	],	//実績アイコン
 
 		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
 		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト

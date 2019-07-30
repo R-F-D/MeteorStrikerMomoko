@@ -20,7 +20,7 @@ const RecordBoard	= {
 const AchievementBoard	= {
 	MaxRows:			4,
 	MaxColumns:			1,
-	Size:				{Width:324, Height:52},
+	Size:				{Width:270, Height:52},
 	NumLogLines:		4,
 };
 RecordBoard.Max			= RecordBoard.MaxRows * RecordBoard.MaxColumns;
@@ -73,6 +73,7 @@ Scene.Records	= class extends Scene.SceneBase {
 							board.counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
 						}
 						else if	(_this.mode==Scene.Records.Mode.Achievements){
+							board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
 							board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
 							board.date		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
 						}
@@ -240,18 +241,20 @@ Scene.Records	= class extends Scene.SceneBase {
 						text	= L.Text(`${handle.Key}.Text`);
 					}
 
-					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4);
+					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4) + 52;
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					if(datetime!=""){
 						board.body.bg.OPACITY	= 128;
+						board.body.iconOpacity	= 255;
 						board.body.SetFontColor("#FFCF00","#7F0000",1);
 						board.text.SetFontColor("#CFCFCF");
 						board.date.SetFontColor("#FFFFFF");
 					}
 					else{
 						board.body.bg.OPACITY	= 64;
+						board.body.iconOpacity	= 128;
 						board.body.SetFontColor("#AFAF00","#1F0000",1);
 						board.text.SetFontColor("#AFAFAF");
 						board.date.SetFontColor("#AFAFAF");
