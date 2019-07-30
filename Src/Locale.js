@@ -47,7 +47,8 @@ LocaleSettings	= class{
 	 */
 	Text(textCode,lang=null){
 		if(!LocalizedTexts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
-		return LocalizedTexts[textCode][lang||this.language] || LocalizedTexts[textCode][`_`] || '';
+		const lines	= LocalizedTexts[textCode][lang||this.language] || LocalizedTexts[textCode][`_`] || '';
+		return Array.isArray(lines)	? lines.join(" \n")	: lines;
 	}
 
 	/** テキスト識別子に対応したテキストを返す（フォーマット付き）
