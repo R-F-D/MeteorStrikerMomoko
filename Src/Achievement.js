@@ -38,9 +38,9 @@ const Achievements = (()=>{		//Achievements scoop
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Replacements:null,	},	//初プレイ
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Replacements:[],	},	//シェア
 		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x6000,	Replacements:null,	},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:19,	Order:0x6001,	Replacements:[],	},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:19,	Order:0x6002,	Replacements:[],	},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:19,	Order:0x6002,	Replacements:[],	},	//女神ナビ使用
+		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x6001,	Replacements:[],	},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x6002,	Replacements:[],	},	//ゴーレムナビ使用
+		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x6002,	Replacements:[],	},	//女神ナビ使用
 	};
 
 
