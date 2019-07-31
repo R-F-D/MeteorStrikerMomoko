@@ -773,7 +773,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.labels.navigation.RemoveTempText();
 				cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
 									L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
-									L.Text("GamePlay.Share.URL"),
+									C.WebPage,
 									L.Text("GamePlay.Share.Tags")
 								]));
 			});

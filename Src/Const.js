@@ -15,5 +15,8 @@ C.Check	= [
 	{	key:"Unicorn",	distance:256000000,	storage:2,		},
 ];
 
+/** @const ウェブサイトURL */
+C.WebPage	= "https://example.jp";
+
 
 

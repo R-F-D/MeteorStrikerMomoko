@@ -450,13 +450,8 @@ const LocalizedTexts	= {
 
 		//ツイート文字列 Tweet Text
 		"GamePlay.Share.Text":{
-			_:	"Momoko flew the meteorite $0 $1 away!",
+			_:	"Momoko flew the meteorite to $0 $1 away!",
 			ja:	"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",
-		},
-
-		//ウェブページURL Web Page URL
-		"GamePlay.Share.URL":{
-			_:	"https://example.jp/",
 		},
 
 		//タグ Tag
