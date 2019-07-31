@@ -493,8 +493,8 @@ const LocalizedTexts	= {
 			ja:	"パーフェクトサン",	//パーフェクトサン
 		},
 		"Achievement.Aiming.ManyPerfect.Text":{
-			_:	"Got $0 perfect aims. We'll surely see a new world.",
-			ja:	"$0回パーフェクトを出した。必ず見える新しい世界。",
+			_:	"Got $0 perfect aims.\nWe'll surely see a new world.",
+			ja:	"$0回パーフェクトを出した。\n必ず見える新しい世界。",
 		},
 
 		//グッド以上を一定回数 Many Good/Perfect Blows
@@ -502,8 +502,8 @@ const LocalizedTexts	= {
 			_:	"Good-Aims, Baby",	//Good-Sleep,Baby
 		},
 		"Achievement.Aiming.ManyGood.Text":{
-			_:	"Got $0 good or better aims. Have a good dream.",
-			ja:	"$0回グッド以上を出した。いい夢を。",
+			_:	"Got $0 good or better aims.\nHave a good dream.",
+			ja:	"$0回グッド以上を出した。\nいい夢を。",
 		},
 
 		//100%エイム 100% Aim
@@ -512,8 +512,8 @@ const LocalizedTexts	= {
 			ja:	"自称・カンペキ",	//輿水幸子
 		},
 		"Achievement.Aiming.TruePerfect.Text":{
-			_:	"Succeeded in 100% aim. My kawaii doesn't stop.",
-			ja:	"100%エイムに成功した。カワイイが止まらない。",
+			_:	"Succeeded in 100% aim.\nMy kawaii doesn't stop.",
+			ja:	"100%エイムに成功した。\nカワイイが止まらない。",
 		},
 
 		//強打を一定回数 Many Hardblows
@@ -521,8 +521,8 @@ const LocalizedTexts	= {
 			_:	"ART NEEDS HARD-BLOWS",	//ART NEEDS HAERT BEATS
 		},
 		"Achievement.Blowing.ManyHard.Text":{
-			_:	"Hardblowed $0 times. Experience you have never.",
-			ja:	"$0回強打した。感じたことのないエクスペリエンス。",
+			_:	"Hardblowed $0 times.\nExperience you have never.",
+			ja:	"$0回強打した。\n感じたことのないエクスペリエンス。",
 		},
 
 		//強打かつパーフェクト Hardblow And Perfect Aim
@@ -531,8 +531,8 @@ const LocalizedTexts	= {
 			ja:	"パーフェクトっす³ ハード☆",	//しゅがーはぁとレボリューション
 		},
 		"Achievement.Blowing.HardAndPerfect.Text":{
-			_:	"Hardblowed with a perfect aim $0 times. (Note: It's a user thought)",
-			ja:	"強打でパーフェクトを$0回出した。(注:使用者の感想です)",
+			_:	"Hardblowed with a perfect aim $0 times.\n(Note: It's a user thought)",
+			ja:	"強打でパーフェクトを$0回出した。\n(注:使用者の感想です)",
 		},
 
 		//打撃を連続成功 Successive Hits Without Failure
@@ -551,7 +551,7 @@ const LocalizedTexts	= {
 			ja:	"ジェントルエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many01.Text":{
-			_:	"Emitted $0$1 and more. No such the theill-less emittings...",
+			_:	"Emitted $0$1 and more.\nNo such the theill-less emittings...",
 			ja:	"エミット倍率$0$1以上を出した。\nスリルのないエミットなんて…",
 		},
 
@@ -571,7 +571,7 @@ const LocalizedTexts	= {
 			ja:	"デンジャラスエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many03.Text":{
-			_:	"Emitted $0$1 and more. No such the risk-less emittings...",
+			_:	"Emitted $0$1 and more.\nNo such the risk-less emittings...",
 			ja:	"エミット倍率$0$1以上を出した。\nリスクのないエミットなんて…",
 		},
 
@@ -581,8 +581,8 @@ const LocalizedTexts	= {
 			ja:	"オーバーエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many04.Text":{
-			_:	"Emitted $0$1 and more. Isn’t it impossible?",
-			ja:	"エミット倍率$0$1以上を出した。ありえなくない？",
+			_:	"Emitted $0$1 and more.\nIsn’t it impossible?",
+			ja:	"エミット倍率$0$1以上を出した\nありえなくない？",
 		},
 
 		//金星到達 Venus
@@ -621,7 +621,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Check.Sun.Text":{
 			_:	"Flew the meteorite over $1$2.\nSend farther than anyone else.",
-			ja:	"隕石を$1$2以上吹っ飛ばした。誰よりも飛ばせ。",
+			ja:	"隕石を$1$2以上吹っ飛ばした\n誰よりも飛ばせ。",
 		},
 
 		//諸星きらり到達 Kirarin Robot
@@ -630,8 +630,8 @@ const LocalizedTexts	= {
 			ja:	"キラリ 光の列すり抜けたら",	//Kosmos,Cosmos
 		},
 		"Achievement.Check.Kirari.Text":{
-			_:	"Flew the meteorite over $1$2. Take off.",
-			ja:	"隕石を$1$2以上吹っ飛ばした。跳び出してゆく。",
+			_:	"Flew the meteorite over $1$2.\nTake off.",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\n跳び出してゆく。",
 		},
 
 		//2.5億km到達 250,000,000km
@@ -640,8 +640,8 @@ const LocalizedTexts	= {
 			ja:	"教えてpink unicorn...",	//教え絵last note...
 		},
 		"Achievement.Check.Unicorn.Text":{
-			_:	"Flew the meteorite over $1$2. ...I say bye bye.",
-			ja:	"隕石を$1$2以上吹っ飛ばした。……バイバイ。",
+			_:	"Flew the meteorite over $1$2.\n...I say bye bye.",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\n……バイバイ。",
 		},
 
 		//実績コンプリート
@@ -651,7 +651,7 @@ const LocalizedTexts	= {
 		},
 		"Achievement.Action.Complete.Text":{
 			_:	"Unlocked all achievements.\nThe meteorite was KO in one!",
-			ja:	"全ての実績を解放した。隕石なんて一発でKOだったね!",
+			ja:	"全ての実績を解放した。\n隕石なんて一発でKOだったね!",
 		},
 
 		//初プレイ First Play
@@ -680,8 +680,8 @@ const LocalizedTexts	= {
 			ja:	"桃子だけど。",	//桃子だけど。
 		},
 		"Achievement.Action.TouchPlayer.Text":{
-			_:	"Touched Momoko in the title. Well then, see you.",
-			ja:	"タイトル画面で桃子にタッチした。それじゃあ、またね。",
+			_:	"Touched Momoko in the title. \nWell then, see you.",
+			ja:	"タイトル画面で桃子にタッチした。\nそれじゃあ、またね。",
 		},
 
 		//ナビゲータ（ノーマル）使用
@@ -709,7 +709,7 @@ const LocalizedTexts	= {
 			ja:	"ヒカリのnavigation",	//ヒカリのdestination
 		},
 		"Achievement.Action.Navigate02.Text":{
-			_:	"Goddess navigated $0 times.\nStart running to the base of radiance.",
+			_:	["Goddess navigated $0 times.","Start running to the base of radiance."],
 			ja:	"女神が$0回ナビゲートした。輝きのたもとへ走り出そうよ。",
 		},
 

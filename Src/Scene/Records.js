@@ -252,6 +252,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
+					board.text.fieldWidth		= AchievementBoard.Size.Width;
 					if(datetime!=""){
 						board.body.bg.OPACITY	= 128;
 						board.body.iconOpacity	= 255;

@@ -23,6 +23,7 @@ Label	= class Label{
 		this.logs				= [];
 		this.logBuffers			= [];
 		this.nLines				= 1;
+		this.fieldWidth			= null;
 
 		this.pushIntervalToLog	= 0;
 		this.nPushedLinesAtOnce	= 1;	//一度にログへプッシュされる行数
@@ -228,6 +229,15 @@ Label	= class Label{
 	 */
 	SetString(text,isTemp=false,hidesIfEmpty=false){
 		if(text==this.entity.getString()) return this;
+
+		//折返し
+		if(this.fieldWidth!==null && this.fieldWidth>0){
+			text	= text.split(/\n/).reduce((result,current)=>{
+				this.entity.setString(`${result}${current}`);
+				if(this.entity.getContentSize().width < this.fieldWidth)	return `${result}${current} `;
+				else														return `${result}\n${current} `;
+			},"");
+		}
 
 		//表示行数の調整
 		if(!hidesIfEmpty){
