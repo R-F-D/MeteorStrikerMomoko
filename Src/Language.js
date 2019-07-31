@@ -709,8 +709,8 @@ const LocalizedTexts	= {
 			ja:	"ヒカリのnavigation",	//ヒカリのdestination
 		},
 		"Achievement.Action.Navigate02.Text":{
-			_:	["Goddess navigated $0 times.","Start running to the base of radiance."],
-			ja:	"女神が$0回ナビゲートした。輝きのたもとへ走り出そうよ。",
+			_:	"Goddess navigated $0 times.\nStart running to the base of radiance.",
+			ja:	"女神が$0回ナビゲートした。\n輝きのたもとへ走り出そうよ。",
 		},
 
 };
