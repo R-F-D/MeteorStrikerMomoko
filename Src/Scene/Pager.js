@@ -1,5 +1,5 @@
 /* *******************************************************************************
-	シーン基本クラス
+	ページ遷移クラス群
 ********************************************************************************/
 var Scene	= Scene || {};
 var cc;
@@ -132,7 +132,7 @@ Scene.PageNavigator	= class PageNavigator{
 
 		//リセットボタン
 		this.buttons.at("Reset")
-			.SetIndex(0).SetPosition(16,size.height-16)
+			.SetIndex(0).SetPosition(24,size.height-24)
 			.AssignKeyboard(cc.KEY.r)	//R
 			.OnButtonUp(()=>this.parent.ResetForce());
 
@@ -140,38 +140,38 @@ Scene.PageNavigator	= class PageNavigator{
 
 		//矢印ボタン
 		this.buttons.at("Prev")
-			.SetIndex(2).SetPosition(16+32+12,32)
+			.SetIndex(2).SetPosition(24+32+12,32)
 			.AssignKeyboard(cc.KEY.h, cc.KEY.left)	//H
 			.OnButtonUp(()=>this.pager.AddPage(-1))
 			.SetAutoOff(true)
 			.sprite.SetRotate(180);
 		this.buttons.at("Next")
-			.SetIndex(2).SetPosition(size.width-16-32-12,32)
+			.SetIndex(2).SetPosition(size.width-24-32-12,32)
 			.AssignKeyboard(cc.KEY.l, cc.KEY.right)	//L
 			.OnButtonUp(()=>this.pager.AddPage(+1))
 			.SetAutoOff(true);
 
 		this.buttons.at("First")
-			.SetIndex(3).SetPosition(16+4,32)
+			.SetIndex(3).SetPosition(24+4,32)
 			.AssignKeyboard(cc.KEY.home)	//Home
 			.OnButtonUp(()=>this.pager.SetPage(0))
 			.SetAutoOff(true)
 			.sprite.SetRotate(180);
 		this.buttons.at("Last")
-			.SetIndex(3).SetPosition(size.width-16-4,32)
+			.SetIndex(3).SetPosition(size.width-24-4,32)
 			.AssignKeyboard(cc.KEY.end)	//End
 			.OnButtonUp(()=>this.pager.SetPage(null))
 			.SetAutoOff(true);
 
 		this.buttons.at("PrevChapter")
-			.SetIndex(2).SetPosition(16+32+12,168+72)
+			.SetIndex(2).SetPosition(24+32+12,168+72)
 			.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
 			.OnButtonUp(()=>this.pager.AddChapter(-1))
 			.SetVisible(this.pager.nChapters>1)
 			.SetAutoOff(true)
 			.sprite.SetRotate(-90);
 		this.buttons.at("NextChapter")
-			.SetIndex(2).SetPosition(16+32+12,168-72)
+			.SetIndex(2).SetPosition(24+32+12,168-72)
 			.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
 			.OnButtonUp(()=>this.pager.AddChapter(+1))
 			.SetVisible(this.pager.nChapters>1)
