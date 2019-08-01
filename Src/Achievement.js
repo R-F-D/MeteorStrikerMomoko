@@ -70,6 +70,7 @@ const Achievements = (()=>{		//Achievements scoop
 const Achievement = new (class Achievement{
 
 	constructor(){
+		this._totalItems= null;
 		this._nItems	= null;
 		this._nPages	= null;
 
@@ -134,18 +135,30 @@ const Achievement = new (class Achievement{
 		return this;
 	}
 
-	get nItems(){
-		if(this._nItems!==null)	return this._nItems;
-		return this.GetHandles().length;
+	/** 実績数を得る
+	 * @param {number|null} [rank=null]	実績ランク（nullで全実績）
+	 * @returns {number}				実績数
+	 */
+	GetNumItems(rank=null){
+		if(rank===null){
+			if(this._totalItems===null)	this._totalItems	= this.GetHandles().length;
+			return this._totalItems;
+		}
+		else{
+			if(this._nItems===null)	this.GetHandles().forEach(h=>++this._nItems[h.Rank||0])
+			return this._nItems[rank] || 0;
+		}
 	}
 
-	get nUnlockedItems(){
+	GetNumUnlockedItems(rank=null){
 		let n	= 0;
 		_(Achievements).forEach(category=>{
-			_(category).forEach(a=>{
-				const date = cc.sys.localStorage.getItem(a.Key);
-				if(date!==null && 0<date) ++n;
-			});
+			_(category)
+				.filter(a=>rank===null || a.Rank==rank)
+				.forEach(a=>{
+					const date = cc.sys.localStorage.getItem(a.Key);
+					if(date!==null && 0<date) ++n;
+				});
 		});
 		return n;
 	}

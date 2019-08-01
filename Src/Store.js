@@ -52,7 +52,7 @@ class Store{
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
-				TotalUnlockedAchievements:	{Required:0,	Order:0x0103,	Conv:()=>`${Achievement.nUnlockedItems} / ${Achievement.nItems}`,	},
+				TotalUnlockedAchievements:	{Required:0,	Order:0x0103,	Conv:()=>`${Achievement.GetNumUnlockedItems()} / ${Achievement.GetNumItems()}`,	},
 				/** 起動回数 */
 				NumBootings:				{Required:0,	Order:0x0200,	},
 				/** 実行時間 */
