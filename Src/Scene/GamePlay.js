@@ -750,7 +750,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				()=>this.labels.navigation.RemoveTempText()
 			)
 			.OnButtonUp(()=>{
-				Store.DynamicInsert(Store.Handles.Action.NumRetrys);
 				this.ReplaceScene(Scene.GamePlay);
 			});
 

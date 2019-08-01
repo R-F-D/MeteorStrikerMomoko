@@ -49,8 +49,6 @@ class Store{
 			Action: {
 				/** クリア回数 */
 				NumPlays:					{Required:0,	Order:0x0100,	},
-				/** リトライ回数 */
-				NumRetrys:					{Required:0,	Order:0x0101,	},
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
