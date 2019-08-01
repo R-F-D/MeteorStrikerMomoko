@@ -327,8 +327,13 @@ Scene.SceneBase	= class {
 		const now	= Scene.SceneBase.GetDate().getTime();
 		if(!Scene.SceneBase._startAt || Scene.SceneBase._startAt.getTime()<= 0)	Scene.SceneBase._startAt	= now;
 
-		Store.Insert(Store.Handles.Action.RunTime, Math.trunc((now-Scene.SceneBase._startAt.getTime())/1000), null);
+		const runSec	= Math.trunc((now-Scene.SceneBase._startAt.getTime())/1000);
+		Store.Insert(Store.Handles.Action.RunTime, runSec, null);
 		Scene.SceneBase._countUntilSaveRunTime	= (7+NormalRandom(2))*60;
+
+		const totalSec		= Number(Store.Select(Store.Handles.Action.TotalRunTime),0) + runSec;
+		Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
+		return;
 	}
 
 	/** 現在時刻のDateオブジェクトを取得
