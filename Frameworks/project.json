@@ -7,7 +7,7 @@
 	"noCache"		: false,
 	"id"			: "gameCanvas",
 	"renderMode"	: 0,
-	"engineDir"		:"Frameworks/cocos2d-html5",
+	"engineDir"		:"../Frameworks/cocos2d-html5",
 
 	"modules"		: ["cocos2d"],
 
