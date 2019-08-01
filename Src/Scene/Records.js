@@ -232,28 +232,33 @@ Scene.Records	= class extends Scene.SceneBase {
 					if(!handle)	return;
 
 					let datetime	= Store.Select(handle.Key,"");
-					if(datetime!="")	datetime	= (new Date(Number(datetime))).toLocaleString();
+					board.isUnlocked	= datetime!="";
+					if(board.isUnlocked)	datetime	= (new Date(Number(datetime))).toLocaleString();
 
 					let title		= L.Text(handle.Key);
 					let text		= "";
-					if(!this.isPublic && !handle.IsPublic && datetime==""){
+					if(!this.isPublic && !handle.IsPublic && !board.isUnlocked){
 						title	= L.Text("Achievement.Secret");
 						text	= L.Text("Achievement.Secret.Text");
 					}
 					else if(Array.isArray(handle.Replacements)){
 						const repls	= [handle.Count].concat(handle.Replacements).map(r=> _.isNumber(r) ? L.NumToStr(r) : r );
-						text	= L.Textf(`${handle.Key}.Text`, repls)
+						text	= L.Textf(`${handle.Key}.Text`, repls);
 					}
 					else{
 						text	= L.Text(`${handle.Key}.Text`);
 					}
+
+					//アイコン
+					board.isPublic	= !!handle.IsPublic;
+					board.rank		= handle.Rank || 0;
 
 					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4) + 52;
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					board.text.fieldWidth		= AchievementBoard.Size.Width;
-					if(datetime!=""){
+					if(board.isUnlocked){
 						board.body.bg.OPACITY	= 128;
 						board.body.iconOpacity	= 255;
 						board.body.SetFontColor("#FFCF00","#7F0000",1);
@@ -272,6 +277,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetVisible(true)
 						.SetNumLogLines(AchievementBoard.NumLogLines)
 						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
+						.SetIconIndex(15)
 						.SetString(` ${title}`);
 					board.text
 						.SetNumLogLines(2)
@@ -286,12 +292,17 @@ Scene.Records	= class extends Scene.SceneBase {
 
 		})
 		.PushUpdatingFunctions(dt=>{
-			this.displayBoards.forEach((board,i)=>{
+			this.displayBoards.forEach((board)=>{
+				//出現アニメーションが終わったら連動して内容を表示
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions()){
 					board.text.SetVisible(true);
 					board.date.SetVisible(true);
 				}
+
+				//アイコン
+				if(board.body.IsVisible())	board.body.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked) );
 			});
+
 		});
 
 		//トランジション
@@ -319,6 +330,19 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
 
 		return this;
+	}
+
+	/** 実績アイコンのインデックス
+	 * @param {number} rank				実績ランク
+	 * @param {boolean} detailIsPublic	シークレット項目ではないなら真
+	 * @param {boolean} isUnlocked		解除されているか
+	 * @returns {this}
+	 */
+	GetAchievementIconIndex(rank,detailIsPublic,isUnlocked){
+		if(!isUnlocked)	return this.isPublic||detailIsPublic	? 12	: 13;
+		rank		=  _(rank).clamp(0,3);
+		const cnt	= Math.trunc(this.sequence.count/16) % 8;
+		return rank*3 + [0,0,0,0,0,1,2,1,][cnt];
 	}
 
 	/** 記録/実績のモード設定

@@ -21,7 +21,7 @@ const rc	= {
 
 		txtLaunch		: [ "txtLaunch.png",		1,	2,	],	//シーン入場テキスト
 		balloonTail		: [ "balloonTail.png",		1,	1,	],	//フキダシしっぽ
-		achievement		: [ "achievement.png",		1,	1,	],	//実績アイコン
+		achievement		: [ "achievement.png",		4,	4,	],	//実績アイコン
 
 		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
 		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト
