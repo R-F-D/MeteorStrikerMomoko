@@ -397,11 +397,11 @@ const LocalizedTexts	= {
 		},
 
 		//実績解除数 Number of Unlocked Achievements
-		"Records.Action.NumUnlockedAchievements":{
+		"Records.Action.TotalUnlockedAchievements":{
 			_:	"Unlocked Achievements",
 			ja:	"解除した実績数",
 		},
-		"Records.Action.NumUnlockedAchievements.Format":{
+		"Records.Action.TotalUnlockedAchievements.Format":{
 			_:	"$0",
 			ja:	"$0個",
 		},
