@@ -396,12 +396,45 @@ const LocalizedTexts	= {
 			ja:	"シェア回数",
 		},
 
-		//実績解除数 Number of Unlocked Achievements
+		//実績解除数（トータル） Total of Unlocked Achievements
 		"Records.Action.TotalUnlockedAchievements":{
 			_:	"Unlocked Achievements",
-			ja:	"解除した実績数",
+			ja:	"解除した実績数(トータル)",
 		},
 		"Records.Action.TotalUnlockedAchievements.Format":{
+			_:	"$0",
+			ja:	"$0個",
+		},
+		//実績解除数（ランク別） Number of Unlocked Achievements By Rank
+		"Records.Action.NumUnlockedAchievements.00":{
+			_:	"Bronze Momokos",
+			ja:	"ブロンズ桃子",
+		},
+		"Records.Action.NumUnlockedAchievements.01":{
+			_:	"Silver Momokos",
+			ja:	"シルバー桃子",
+		},
+		"Records.Action.NumUnlockedAchievements.02":{
+			_:	"Gold Momokos",
+			ja:	"ゴールド桃子",
+		},
+		"Records.Action.NumUnlockedAchievements.03":{
+			_:	"Platinum Momokos",
+			ja:	"プラチナ桃子",
+		},
+		"Records.Action.NumUnlockedAchievements.00.Format":{
+			_:	"$0",
+			ja:	"$0個",
+		},
+		"Records.Action.NumUnlockedAchievements.01.Format":{
+			_:	"$0",
+			ja:	"$0個",
+		},
+		"Records.Action.NumUnlockedAchievements.02.Format":{
+			_:	"$0",
+			ja:	"$0個",
+		},
+		"Records.Action.NumUnlockedAchievements.03.Format":{
 			_:	"$0",
 			ja:	"$0個",
 		},

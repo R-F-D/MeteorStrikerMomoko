@@ -52,13 +52,17 @@ class Store{
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
-				TotalUnlockedAchievements:	{Required:0,	Order:0x0103,	Conv:()=>`${Achievement.GetNumUnlockedItems()} / ${Achievement.GetNumItems()}`,	},
+				TotalUnlockedAchievements:	{Required:0,	Order:0x0203,	Conv:()=>Store.Convs.GotAchievements() },
+				NumUnlockedAchievements:[	{Required:0,	Order:0x0207,	Conv:()=>Store.Convs.GotAchievements(0)},
+											{Required:0,	Order:0x0206,	Conv:()=>Store.Convs.GotAchievements(1)},
+											{Required:0,	Order:0x0205,	Conv:()=>Store.Convs.GotAchievements(2)},
+											{Required:0,	Order:0x0204,	Conv:()=>Store.Convs.GotAchievements(3)},	],
 				/** 起動回数 */
-				NumBootings:				{Required:0,	Order:0x0200,	},
+				NumBootings:				{Required:0,	Order:0x0101,	},
 				/** 実行時間 */
-				RunTime:					{Required:0,	Order:0x0201,	Conv:Store.Convs.SecToTime,	},
+				RunTime:					{Required:0,	Order:0x0110,	Conv:Store.Convs.SecToTime,	},
 				/** 合計実行時間 */
-				TotalRunTime:				{Required:0,	Order:0x0202,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
+				TotalRunTime:				{Required:0,	Order:0x0111,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:0,	Order:0x3010,	},		//ノーマル
 											{Required:1,	Order:0x3011,	},		//初めてのともだち
@@ -248,6 +252,10 @@ class Store{
 				const times			= [	totalSec/3600,	(totalSec/60)%60,	totalSec%60,].map(t=>String(Math.trunc(t)).padStart(2,"0"));
 				return `${times[0]}:${times[1]}:${times[2]}`;
 			},
+			/** 実績解除数 */
+			GotAchievements: (rank)=>{
+				return `${Achievement.GetNumUnlockedItems(rank)} / ${Achievement.GetNumItems(rank)}`;
+			}
 		};
 	}
 

@@ -145,7 +145,13 @@ const Achievement = new (class Achievement{
 			return this._totalItems;
 		}
 		else{
-			if(this._nItems===null)	this.GetHandles().forEach(h=>++this._nItems[h.Rank||0])
+			if(this._nItems===null){
+				this._nItems	= this._nItems || [];
+				this.GetHandles().forEach(h=>{
+					if(!this._nItems[h.Rank]) this._nItems[h.Rank]=0;
+					++this._nItems[h.Rank];
+				})
+			}
 			return this._nItems[rank] || 0;
 		}
 	}
