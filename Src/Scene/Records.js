@@ -252,6 +252,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					//アイコン
 					board.isPublic	= !!handle.IsPublic;
 					board.rank		= handle.Rank || 0;
+					board.body.icon.SetCustomData("adjAnim",Math.trunc(Math.random()*8));
 
 					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4) + 52;
 					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
@@ -300,7 +301,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				}
 
 				//アイコン
-				if(board.body.IsVisible())	board.body.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked) );
+				if(board.body.IsVisible())	board.body.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked, board.body.icon.GetCustomData("adjAnim",0)  ));
 			});
 
 		});
@@ -338,10 +339,10 @@ Scene.Records	= class extends Scene.SceneBase {
 	 * @param {boolean} isUnlocked		解除されているか
 	 * @returns {this}
 	 */
-	GetAchievementIconIndex(rank,detailIsPublic,isUnlocked){
+	GetAchievementIconIndex(rank,detailIsPublic,isUnlocked,adjAnimation=0){
 		if(!isUnlocked)	return this.isPublic||detailIsPublic	? 12	: 13;
 		rank		=  _(rank).clamp(0,3);
-		const cnt	= Math.trunc(this.sequence.count/16) % 8;
+		const cnt	= Math.trunc(this.sequence.count/16+adjAnimation) % 8;
 		return rank*3 + [0,0,0,0,0,1,2,1,][cnt];
 	}
 
