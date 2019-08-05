@@ -21,7 +21,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 
 		this.EnableNaviButtons(0);
-		this.buttons	= {};
+		this.selector	= new Selector(1);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -53,11 +53,13 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
+		this.InitUIs();
 		return this;
 	}
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
+		this.selector.Update(dt);
 		return this;
 	}
 
@@ -81,6 +83,26 @@ Scene.Settings	= class extends Scene.SceneBase {
 		commonEvents.push(this.listeners.touched);
 		commonEvents.push(this.listeners.keyboardReset);
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
+
+		return this;
+	}
+
+	OnUiLayerCreate(layer){
+		super.InitUIs(layer);
+		this.selector.AddToLayer(layer);
+		return true;
+
+	}
+
+	/** UIパーツ初期化 */
+	InitUIs(){
+		super.InitUIs();
+
+		this.selector
+			.Init()
+			.buttons.at(0)
+				.SetLabelText("Button Label")
+				.SetPosition(128,128);
 
 		return this;
 	}
