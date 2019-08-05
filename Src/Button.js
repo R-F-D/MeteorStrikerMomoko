@@ -146,6 +146,7 @@ class ButtonItem{
 	 */
 	constructor(container){
 		this.sprite		= null;
+		this.label		= null;
 		this.container	= container;
 		this.x	= 0;
 		this.y	= 0;
@@ -185,15 +186,29 @@ class ButtonItem{
 		this.Apply();
 		return this;
 	}
+	CreateLabel(fontSize=16,font=""){
+		this.label	= Label.CreateInstance(fontSize,font);
+		this.Apply();
+		return this;
+	}
 
 	Apply(){
-		if(!this.sprite)	return this;
+		if(this.sprite){
+			this.sprite
+				.AddToLayer(this.container.layer)
+				.Attr({zIndex:this.Z})
+				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+				.SetOpacity(this.opacity);
+		}
+		if(this.label){
+			this.label
+				.AddToLayer(this.container.layer)
+			//	.Attr({zIndex:this.Z})
+				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+			//	.SetOpacity(this.opacity)
+			;
+		}
 
-		this.sprite
-			.AddToLayer(this.container.layer)
-			.Attr({zIndex:this.Z})
-			.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
-			.SetOpacity(this.opacity);
 		this._ApplyEvents();
 		return this;
 	}
@@ -216,6 +231,7 @@ class ButtonItem{
 		if(this.sprite)	this.sprite.SetVisible(isVisible);
 		return this;
 	}
+
 	/** 画像のインデックス */
 	SetIndex(status,idx){
 		let stattuses	= [status];
@@ -270,6 +286,12 @@ class ButtonItem{
 			g	: DefinedOr( color.g, this.colorOnHover.g, 255),
 			b	: DefinedOr( color.b, this.colorOnHover.b, 255),
 		}
+		return this;
+	}
+
+	/**ラベルの文字列設定*/
+	SetLabelText(text){
+		if(this.label)	this.label.SetString(text);
 		return this;
 	}
 
