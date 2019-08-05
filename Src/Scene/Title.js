@@ -226,6 +226,7 @@ Scene.Title	= class extends Scene.SceneBase {
 
 		this.buttons.at("Achievements").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Achievements));
 		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Records));
+		this.buttons.at("Settings").OnButtonUp(()=>this.ReplaceScene(Scene.Settings));
 		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
 		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(C.WebPage) );
 
