@@ -291,7 +291,16 @@ class ButtonItem{
 
 	/**ラベルの文字列設定*/
 	SetLabelText(text){
-		if(this.label)	this.label.SetString(text);
+		if(this.label){
+			this.label
+				.SetNumLogLines(text.split(/\n/).length)
+				.SetString(text);
+		}
+		return this;
+	}
+
+	SetLabelColor(fill=null,stroke=null,width=null){
+		if(this.label)	this.label.SetFontColor(fill,stroke,width);
 		return this;
 	}
 
