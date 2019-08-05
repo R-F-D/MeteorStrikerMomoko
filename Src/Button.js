@@ -203,10 +203,7 @@ class ButtonItem{
 		if(this.label){
 			this.label
 				.AddToLayer(this.container.layer)
-			//	.Attr({zIndex:this.Z})
-				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
-			//	.SetOpacity(this.opacity)
-			;
+				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius);
 		}
 
 		this._ApplyEvents();
@@ -254,7 +251,8 @@ class ButtonItem{
 	SetScale(scale,isTemp=false){
 		scale = DefinedOr(scale,this.scale,1.0);
 		if(!isTemp)	this.scale = scale;
-		this.sprite.SetScale(scale*this.container.scale);
+		if(this.sprite)	this.sprite.SetScale(scale*this.container.scale);
+		if(this.label)	this.label.entity.setScale(scale*this.container.scale);
 		return this;
 	}
 
@@ -344,6 +342,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacityOnHover,false,true)
 							.SetColor(this.colorOnHover,false,true)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
 					}
 					else{
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
@@ -351,6 +350,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
 					}
 					this._ApplyIndex();
 				}
@@ -412,6 +412,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
 				},

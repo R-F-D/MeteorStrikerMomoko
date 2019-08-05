@@ -14,7 +14,7 @@ class Selector{
 		this.buttons.forEach(button=>{
 			button
 				.CreateSprite(rc.img.labelButton)
-				.CreateLabel(10)
+				.CreateLabel(20)
 				.SetColorOnHover([0xFF,0xA0,0x00])
 				.SetLabelColor("#FF0000")
 				.SetScale(0.5);
