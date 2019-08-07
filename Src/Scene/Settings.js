@@ -21,7 +21,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 
 		this.EnableNaviButtons(0);
-		this.selector	= new Selector(3);
+		this.selector	= new Selector(10);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -100,7 +100,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.selector
 			.Init()
-			.SetPositionTL(128,128)
+			.SetArea(0,288)
 			.buttons.forEach((button,i)=>{
 				button
 					.SetLabelText(`Label\n${i}`);
