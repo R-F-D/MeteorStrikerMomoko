@@ -6,7 +6,8 @@ var Scene	= Scene || {};
 
 /** リンクされたレイヤーのタグ */
 const LinkedLayerTags	= {
-	MAIN	: "Settings.Main",
+	MAIN:	"Settings.Main",
+	BG:		"Settings.Bg",
 };
 
 
@@ -17,11 +18,13 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.Sequences	= {
 			INITIAL:	null,	//初期状態
+			SELECTORS:	null,	//セレクタ
 		};
 
 		this.EnableNaviButtons(0);
 		this.selector	= new Selector(3);
 		this.selector.gap	= 32;
+		this.sprites		= {};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -43,12 +46,27 @@ Scene.Settings	= class extends Scene.SceneBase {
 					return true;
 				},
 			})
+			.AddToLayerList("bg",{
+				ctor:function(){
+					this._super();
+					this.scheduleUpdate();
+					_this.sprites.bg	= _.range(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
+					return true;
+				},
+				update	: function(dt){
+					this._super();
+					const width		= cc.director.getWinSize().width;
+					const bgWidth	= _this.sprites.bg[0].GetPieceSize().width;
+					_this.sprites.bg.forEach((v,i)=>v.SetPosition(	width /2 - Cycle(_this.count, 0, bgWidth) + bgWidth*i,	256) );
+				},
+			})
 		return this;
 	}
 
 	OnEnter(){
 		super.OnEnter();
-		this.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
+		this.SetLayer(LinkedLayerTags.BG,  this.ccLayers.bg,  0x0000)
+			.SetLayer(LinkedLayerTags.MAIN,this.ccLayers.main,0x0001);	//各種処理があるのでmainレイヤは最後にセット
 
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
