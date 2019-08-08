@@ -13,6 +13,9 @@ class Selector{
 
 		this.area	= {x:0,y:0,width:0,height:0};
 		this.gap	= 16;
+
+		/** @var {function} f(key,tag)*/
+		this.OnSelected		= (key,tag)=>{};
 	}
 
 	Init(){
@@ -23,10 +26,7 @@ class Selector{
 				.SetColorOnHover([0xFF,0xA0,0x00])
 				.SetLabelColor("#FF0000")
 				.SetScale(0.5)
-				.OnTouchEnded(()=>{
-					this.idxSelected	= i;
-					this.Turn(button,true).TurnOffAll(this.idxSelected);
-				});
+				.OnTouchEnded(()=>this.Select(i));
 		});
 		return this;
 	}
@@ -80,6 +80,23 @@ class Selector{
 
 	Update(dt){
 		this.buttons.Update(dt);
+		return this;
+	}
+
+	/** 選択肢をセレクトする
+	 * @param {number} idx
+	 * @returns
+	 * @memberof Selector
+	 */
+	Select(idx){
+		if(this.idxSelected	== idx)	return this;
+		this.idxSelected	= idx;
+
+		const button	= this.buttons.at(idx);
+		this
+			.Turn(button,true)
+			.TurnOffAll(this.idxSelected)
+			.OnSelected(i,button.tag);
 		return this;
 	}
 
