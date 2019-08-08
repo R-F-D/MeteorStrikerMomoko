@@ -13,9 +13,9 @@ const LinkedLayerTags	= {
 /** 選択肢マッピング */
 const SelectorMaps	= {
 	Locale:[
-		{	Tag:"_",	OnSelected:()=>{L.ApplyPreset("_")},	},
-		{	Tag:"en",	OnSelected:()=>{L.ApplyPreset("en")},	},
-		{	Tag:"ja",	OnSelected:()=>{L.ApplyPreset("ja")},	},
+		{	Tag:LocaleSettings.UniversalLocaleCode,	OnSelected:()=>{L.ApplyPreset(LocaleSettings.UniversalLocaleCode)},	},
+		{	Tag:"en",								OnSelected:()=>{L.ApplyPreset("en")},								},
+		{	Tag:"ja",								OnSelected:()=>{L.ApplyPreset("ja")},								},
 	],
 };
 
@@ -136,7 +136,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.Select(initialIndexes.locale)
 			.SetOnSelected((key,tag)=>{
 				const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);
-				L.ApplyPreset( mapping ? mapping.Tag : "_" );
+				L.ApplyPreset( mapping ? mapping.Tag : LocaleSettings.UniversalLocaleCode );
 			})
 			.buttons
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )

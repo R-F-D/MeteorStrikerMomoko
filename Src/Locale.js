@@ -4,30 +4,20 @@
 var LocaleSetting	= LocaleSetting | {};
 (function(){	//File Scope
 
-const LocalePresets	= {
-	_	:{	language:"_",	numericSeparation:"_",	},
-	en	:{	language:"en",	numericSeparation:"en",	},
-	ja	:{	language:"ja",	numericSeparation:"ja",	},
-};
-
 /**地域設定クラス*/
 LocaleSettings	= class{
 
 	constructor(){
-
-		/** @const グローバルの言語コード  */
-		this.GLOBAL_CODE		= "_";
-
 		/**テキストの言語*/
-		this.language			= this.GLOBAL_CODE;
+		this.language			= LocaleSettings.UniversalLocaleCode
 		/**数値の区切り方法*/
-		this.numericSeparation	= this.GLOBAL_CODE;
+		this.numericSeparation	= LocaleSettings.UniversalLocaleCode;
 	}
 
 	/** 言語コードをセットする
 	 * @param {string} langCode
 	 */
-	SetLanguage(langCode=this.GLOBAL_CODE){
+	SetLanguage(langCode=LocaleSettings.UniversalLocaleCode){
 		this.language	= langCode;
 		return this;
 	}
@@ -37,9 +27,9 @@ LocaleSettings	= class{
 	/** 数字区切りの言語をセットする
 	 * @param {string} langCode
 	 */
-	SetNumberSeparation(langCode=this.GLOBAL_CODE){
+	SetNumberSeparation(langCode=LocaleSettings.UniversalLocaleCode){
 		this.numericSeparation	= langCode;
-		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= this.GLOBAL_CODE;
+		if(!NumericSeparators[this.numericSeparation])	this.numericSeparation	= LocaleSettings.UniversalLocaleCode;
 		return this;
 	}
 	/** 設定されている数値区切りの言語コードを取得*/
@@ -91,7 +81,7 @@ LocaleSettings	= class{
 	 */
 	NumToStr(value,nDecimalDigits=0, lang=null){
 		value			= Number(value);
-		const separation= NumericSeparators[lang||this.numericSeparation] || NumericSeparators["_"];
+		const separation= NumericSeparators[lang||this.numericSeparation] || NumericSeparators[LocaleSettings.UniversalLocaleCode];
 
 		//数値を区切りごとに配列に分割
 		const nDigits		= Math.trunc(Math.max(1,separation.nDigits));	//区切り桁数
@@ -163,19 +153,19 @@ LocaleSettings	= class{
 	}
 
 	/** プリセット取得
-	 * @param {string} [key="_"]
+	 * @param {string} [key=LocaleSettings.UniversalLocaleCode]
 	 * @returns
 	 */
-	GetPreset(key="_"){
+	GetPreset(key=LocaleSettings.UniversalLocaleCode){
 		if(LocalePresets[key])	return LocalePresets[key];
 		return LocalePresets[_];
 	}
 
 	/** プリセット適用
-	 * @param {string} [key="_"]
+	 * @param {string} [key=LocaleSettings.UniversalLocaleCode]
 	 * @returns
 	 */
-	ApplyPreset(key="_"){
+	ApplyPreset(key=LocaleSettings.UniversalLocaleCode){
 		const preset	= this.GetPreset(key);
 		this.language			= preset.language;
 		this.numericSeparation	= preset.numericSeparation;
@@ -185,8 +175,17 @@ LocaleSettings	= class{
 
 	GetCurrentPresetKey(){
 		const key	= _(LocalePresets).findKey(p=> this.language==p.language && this.numericSeparation==p.numericSeparation);
-		return key || "_";
+		return key || LocaleSettings.UniversalLocaleCode;
 	}
+
+};
+/** グローバルの言語コード  */
+LocaleSettings.UniversalLocaleCode	= "_";
+
+const LocalePresets	= {
+	_	:{	language:LocaleSettings.UniversalLocaleCode,	numericSeparation:LocaleSettings.UniversalLocaleCode,	},
+	en	:{	language:"en",	numericSeparation:"en",	},
+	ja	:{	language:"ja",	numericSeparation:"ja",	},
 };
 
 
