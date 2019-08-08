@@ -698,7 +698,7 @@ const LocalizedTexts	= {
 			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
 		},
 		"Achievement.Action.FirstPlay.Text":{
-			_:	"Stopped the meteorite and saved the Earth.\nMomoko has to do something...!",
+			_:	"Stopped the meteorite and saved the Earth.\nI have to do something...!",
 			ja:	"隕石を食い止めて世界を救った。\n桃子がなんとかしなきゃ…!",
 		},
 
