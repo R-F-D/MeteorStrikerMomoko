@@ -66,11 +66,10 @@ LocaleSettings	= class{
 	Textf(textCode,replacements=[],lang=null){
 		if(!LocalizedTexts[textCode])	throw new Error(`Text '${textCode}' is not found.`);
 
-		let	text	= this.Text(textCode,lang);
-		for(let i=replacements.length-1; i>=0; --i){
-			text	= text.replace(`$${i}`,replacements[i]);
-		}
-		return text;
+		return	_(replacements).reduceRight(
+					(result,replacement,i)=>	result.replace(`$${i}`,	_.isFunction(replacement) ? replacement() : replacement	),
+					this.Text(textCode,lang)
+				);
 	}
 
 	/** 識別子に対応するテキストが存在するか
