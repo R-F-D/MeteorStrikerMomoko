@@ -17,11 +17,11 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.Sequences	= {
 			INITIAL:	null,	//初期状態
-			//
 		};
 
 		this.EnableNaviButtons(0);
-		this.selector	= new Selector(10);
+		this.selector	= new Selector(3);
+		this.selector.gap	= 32;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -97,14 +97,25 @@ Scene.Settings	= class extends Scene.SceneBase {
 	/** UIパーツ初期化 */
 	InitUIs(){
 		super.InitUIs();
+		const size	= cc.director.getWinSize();
+
+		let initialIndex	= 0;
+		if		(L.language=="en"&&L.numericSeparation=="en")	initialIndex=1;
+		else if	(L.language=="ja"&&L.numericSeparation=="ja")	initialIndex=2;
 
 		this.selector
 			.Init()
-			.SetArea(0,288)
-			.buttons.forEach((button,i)=>{
-				button
-					.SetLabelText(`Label\n${i}`);
-			});
+			.SetArea(64,size.height-64)
+			.Select(initialIndex)
+			.buttons
+				.SetTags("_","en","ja",)
+				.forEach((b,i)=> b.SetLabelText(b.tag) );
+
+		this.selector.OnSelected	= (ley,tag)=>{
+			if		(tag=="_")	{	L.language="_";		L.numericSeparation="_";	L.Save();	}
+			else if	(tag=="en")	{	L.language="en";	L.numericSeparation="en";	L.Save();	}
+			else if	(tag=="ja")	{	L.language="ja";	L.numericSeparation="ja";	L.Save();	}
+		};
 
 		return this;
 	}
