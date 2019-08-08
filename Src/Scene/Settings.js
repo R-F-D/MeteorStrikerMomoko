@@ -134,14 +134,13 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.Init()
 			.SetArea(64,size.height-64)
 			.Select(initialIndexes.locale)
+			.SetOnSelected((key,tag)=>{
+				const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);
+				L.ApplyPreset( mapping ? mapping.Tag : "_" );
+			})
 			.buttons
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
 				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
-
-		this.selector.OnSelected	= (key,tag)=>{
-			const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);
-			L.ApplyPreset( mapping ? mapping.Tag : "_" );
-		};
 
 		return this;
 	}

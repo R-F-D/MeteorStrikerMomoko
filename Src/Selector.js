@@ -15,7 +15,7 @@ class Selector{
 		this.gap	= 16;
 
 		/** @var {function} f(key,tag)*/
-		this.OnSelected		= (key,tag)=>{};
+		this._onSelected		= (key,tag)=>{};
 	}
 
 	Init(){
@@ -95,8 +95,9 @@ class Selector{
 		const button	= this.buttons.at(idx);
 		this
 			.Turn(button,true)
-			.TurnOffAll(this.idxSelected)
-			.OnSelected(i,button.tag);
+			.TurnOffAll(this.idxSelected);
+
+		if(this._onSelected)	this._onSelected(i,button.tag);
 		return this;
 	}
 
@@ -145,6 +146,10 @@ class Selector{
 		return this.buttons.at(this.idxSelected) || null;
 	}
 
+	SetOnSelected(callback){
+		this._onSelected	= callback;
+		return this;
+	}
 }
 
 
