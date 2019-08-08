@@ -15,6 +15,7 @@ Button	= class Button{
 		this.items	= [];
 		for(let i=0; i<nItems; ++i){
 			this.items[i]	= new ButtonItem(this);
+			this.items[i].idx	= i;
 		}
 
 		this.x	= 0;
@@ -166,6 +167,7 @@ class ButtonItem{
 		this.keyCodes	= [];
 		this._autoOff	= false;
 
+		this.idx		= null;
 		this.SetTag();
 	}
 
