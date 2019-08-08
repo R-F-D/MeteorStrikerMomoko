@@ -204,6 +204,21 @@ const LocalizedTexts	= {
 
 
 	//----------------------------------------
+	// 設定画面
+	// Settings
+	//----------------------------------------
+
+		//地域・言語設定 Locale & Language
+		"Settings.Locale":	{
+			_:	"Language",
+			ja:	"言語",
+		},
+		"Settings.Locale.Label._":	{_:	"Universal",},			//Universal
+		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
+		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
+
+
+	//----------------------------------------
 	// レコード画面 - 記録
 	// Records Scene - Records
 	//

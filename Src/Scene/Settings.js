@@ -135,7 +135,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.Select(initialIndexes.locale)
 			.buttons
 				.SetTags("_","en","ja",)
-				.forEach((b,i)=> b.SetLabelText(b.tag) );
+				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
 
 		this.selector.OnSelected	= (ley,tag)=>{
 			if		(tag=="_")	L.ApplyPreset("_");
