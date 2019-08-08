@@ -6,21 +6,27 @@ var cc;
 class Selector{
 
 	constructor(nItems){
-		this.buttons	= Button.CreateInstance(nItems);
-		this.layer		= null;
+		this.buttons		= Button.CreateInstance(nItems);
+		this.layer			= null;
+		/** @var 選択されたボタン番号 */
+		this.idxSelected	= null;
 
 		this.area	= {x:0,y:0,width:0,height:0};
 		this.gap	= 16;
 	}
 
 	Init(){
-		this.buttons.forEach(button=>{
+		this.buttons.forEach((button,i)=>{
 			button
 				.CreateSprite(rc.img.labelButton)
 				.CreateLabel(20)
 				.SetColorOnHover([0xFF,0xA0,0x00])
 				.SetLabelColor("#FF0000")
-				.SetScale(0.5);
+				.SetScale(0.5)
+				.OnTouchEnded(()=>{
+					this.idxSelected	= i;
+					this.Turn(button,true).TurnOffAll(this.idxSelected);
+				});
 		});
 		return this;
 	}
@@ -77,6 +83,50 @@ class Selector{
 		return this;
 	}
 
+	/** 特定ボタンのオン/オフを設定する
+	 * @param {ButtonItem} button	対象のボタン
+	 * @param {boolean} switchesOn	ONなら真、OFFなら偽
+	 * @returns
+	 * @memberof Selector
+	 */
+	Turn(button,switchesOn){
+		if(!button)	return this;
+		if(switchesOn){
+			button.SetColor([0xFF,0xA0,0x00]);
+		}
+		else{
+			button.SetColor([0xFF,0xFF,0xFF]);
+		}
+		return this;
+	}
+
+
+	/** 全てのスイッチをオフにする
+	 * @param {array|number} [excludingIndexes=null]	除外するインデックス。null時は除外なし。
+	 * @returns
+	 * @memberof Selector
+	 */
+	TurnOffAll(excludingIndexes=null){
+		this.buttons
+			.filter((b,i)=>{	//除外
+				if		(excludingIndexes===null || excludingIndexes===[])	return true;
+				else if	(Array.isArray(excludingIndexes))					return !excludingIndexes.includes(i);
+				else														return excludingIndexes!=i;
+			})
+			.forEach(b=>{
+				this.Turn(b,false);
+			})
+		return this;
+	}
+
+	/** 選択されているボタン
+	 * @readonly
+	 * @memberof Selector
+	 */
+	get selectedButton(){
+		if(this.idxSelected===null)	return null;
+		return this.buttons.at(this.idxSelected) || null;
+	}
 
 }
 
