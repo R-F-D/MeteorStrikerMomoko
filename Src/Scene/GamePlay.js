@@ -713,7 +713,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.sprites.distance.SetPosition(m.x+64+16+8,m.y-24);
 		this.fx.meteor.Spawn(this.sprites.meteor.entity.x,this.sprites.meteor.entity.y,this.sequence.count%15==0 && this.sprites.meteor.visible).Update();
 		if(this.labels.distance.IsVisible()){
-			this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance",[L.NumToStr(this.GetDistanceInKm(),0,"en"),L.Text("Unit.Distance",LocaleSettings.UniversalLocaleCode)]));
+			this.labels.distance.SetPosition(m.x+96+8,m.y-48+6).SetString(L.Textf("GamePlay.Distance",[L.NumToStr(this.GetDistanceInKm(),0,"en"),L.Text("Unit.Distance",Locale.UniversalCode)]));
 		}
 		return this;
 	}
