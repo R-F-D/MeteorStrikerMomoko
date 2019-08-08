@@ -10,6 +10,14 @@ const LinkedLayerTags	= {
 	BG:		"Settings.Bg",
 };
 
+const SelectorMaps	= {
+	Locale:[
+		{	Tag:"_",	OnSelected:()=>{L.ApplyPreset("_")},	},
+		{	Tag:"en",	OnSelected:()=>{L.ApplyPreset("en")},	},
+		{	Tag:"ja",	OnSelected:()=>{L.ApplyPreset("ja")},	},
+	],
+};
+
 
 Scene.Settings	= class extends Scene.SceneBase {
 
@@ -117,22 +125,22 @@ Scene.Settings	= class extends Scene.SceneBase {
 		super.InitUIs();
 		const size	= cc.director.getWinSize();
 
-		let initialIndex	= 0;
-		if		(L.language=="en"&&L.numericSeparation=="en")	initialIndex=1;
-		else if	(L.language=="ja"&&L.numericSeparation=="ja")	initialIndex=2;
+		const initialIndexes	= {
+			locale:	Number(_(SelectorMaps.Locale).findKey(m=>	m.Tag==L.GetCurrentPresetKey()	)),
+		};
 
 		this.selector
 			.Init()
 			.SetArea(64,size.height-64)
-			.Select(initialIndex)
+			.Select(initialIndexes.locale)
 			.buttons
 				.SetTags("_","en","ja",)
 				.forEach((b,i)=> b.SetLabelText(b.tag) );
 
 		this.selector.OnSelected	= (ley,tag)=>{
-			if		(tag=="_")	{	L.language="_";		L.numericSeparation="_";	L.Save();	}
-			else if	(tag=="en")	{	L.language="en";	L.numericSeparation="en";	L.Save();	}
-			else if	(tag=="ja")	{	L.language="ja";	L.numericSeparation="ja";	L.Save();	}
+			if		(tag=="_")	L.ApplyPreset("_");
+			else if	(tag=="en")	L.ApplyPreset("en");
+			else if	(tag=="ja")	L.ApplyPreset("ja");
 		};
 
 		return this;

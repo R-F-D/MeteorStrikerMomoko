@@ -4,6 +4,12 @@
 var LocaleSetting	= LocaleSetting | {};
 (function(){	//File Scope
 
+const LocalePresets	= {
+	_	:{	language:"_",	numericSeparation:"_",	},
+	en	:{	language:"en",	numericSeparation:"en",	},
+	ja	:{	language:"ja",	numericSeparation:"ja",	},
+};
+
 /**地域設定クラス*/
 LocaleSettings	= class{
 
@@ -155,6 +161,32 @@ LocaleSettings	= class{
 		this.SetLanguage(			Store.Select(Store.Handles.Settings.Language,			"ja"));
 		this.SetNumberSeparation(	Store.Select(Store.Handles.Settings.NumberSeparation,	"ja"));
 		return this;
+	}
+
+	/** プリセット取得
+	 * @param {string} [key="_"]
+	 * @returns
+	 */
+	GetPreset(key="_"){
+		if(LocalePresets[key])	return LocalePresets[key];
+		return LocalePresets[_];
+	}
+
+	/** プリセット適用
+	 * @param {string} [key="_"]
+	 * @returns
+	 */
+	ApplyPreset(key="_"){
+		const preset	= this.GetPreset(key);
+		this.language			= preset.language;
+		this.numericSeparation	= preset.numericSeparation;
+		this.Save();
+		return this;
+	}
+
+	GetCurrentPresetKey(){
+		const key	= _(LocalePresets).findKey(p=> this.language==p.language && this.numericSeparation==p.numericSeparation);
+		return key || "_";
 	}
 };
 
