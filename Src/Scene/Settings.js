@@ -132,7 +132,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.selector
 			.Init()
-			.SetCaption(L.Text("Settings.Locale"))
+			.SetCaptionByTextCode("Settings.Locale")
 			.SetArea(64,size.height-32)
 			.Select(initialIndexes.locale)
 			.SetOnSelected((key,tag)=>{

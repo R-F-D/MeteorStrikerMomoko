@@ -32,6 +32,11 @@ class Selector{
 		return this;
 	}
 
+	/** キャプション設定
+	 * @param {string} text
+	 * @returns
+	 * @memberof Selector
+	 */
 	SetCaption(text){
 		if(!this.caption){
 			this.caption	= Label.CreateInstance(14)
@@ -42,6 +47,25 @@ class Selector{
 		this.caption.SetString(text);
 		return this;
 	}
+
+	/** キャプション設定（テキストコードで指定）
+	 * @param {string} textCode					テキスト識別子
+	 * @param {string[]} [replacements=null]	置換文字列（置換処理が不要なときはnull）
+	 * @returns
+	 * @memberof Selector
+	 */
+	SetCaptionByTextCode(textCode,replacements=null){
+		//ローカライズされたテキスト
+		const text		= replacements===null	? L.Text(textCode)
+												: L.Textf(textCode,replacements);
+		//ユニバーサルなテキスト
+		const univText	= replacements===null	? L.Text(textCode,Locale.UniversalCode)
+												: L.Textf(textCode,replacements,Locale.UniversalCode);
+
+		if(text==univText)	return this.SetCaption(text);
+		else				return this.SetCaption(`${text} (${univText})`);
+	}
+
 
 	AddToLayer(layer){
 		if(!layer)	return this;
