@@ -13,7 +13,7 @@ const Achievements = (()=>{		//Achievements scoop
 	//打撃力
 	Achievements.Blowing	= {
 		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x2100,	Rank:0,	Replacements:[],	},	//強打
-		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x2101,	Rank:2,	Replacements:[],	},	//強打でパーフェクト
+		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x2101,	Rank:1,	Replacements:[],	},	//強打でパーフェクト
 		SuccessiveHits	:{	IsPublic:true,	Count:19,	Order:0x2102,	Rank:1,	Replacements:[],	},	//連続ヒット
 	};
 	//エミット
@@ -39,9 +39,9 @@ const Achievements = (()=>{		//Achievements scoop
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],							},	//シェア
 		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x0003,	Rank:0,	Replacements:[()=>L.Text("Unit.Second")],	},	//プレイ時間
 		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x6000,	Rank:0,	Replacements:null,							},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x6001,	Rank:1,	Replacements:[],							},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x6002,	Rank:1,	Replacements:[],							},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x6002,	Rank:1,	Replacements:[],							},	//女神ナビ使用
+		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x6001,	Rank:0,	Replacements:[],							},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x6002,	Rank:0,	Replacements:[],							},	//ゴーレムナビ使用
+		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x6002,	Rank:0,	Replacements:[],							},	//女神ナビ使用
 	};
 
 
