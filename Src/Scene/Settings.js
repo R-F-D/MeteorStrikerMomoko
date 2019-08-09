@@ -18,8 +18,8 @@ const SelectorMaps	= {
 		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja")},					},
 	],
 	Navigator:[
-		{	Tag:"Normal",				OnSelected:()=>{Store.Insert(Store.Handles.Settings.Navigator,"Normal",null)},	},
-		{	Tag:"Golem",				OnSelected:()=>{Store.Insert(Store.Handles.Settings.Navigator,"Golem", null)},	},
+		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Navigator,	},
+		{	Tag:"Golem",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
 };
 
@@ -127,7 +127,6 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.selectors.locale.AddToLayer(layer);
 		this.selectors.navigator.AddToLayer(layer);
 		return true;
-
 	}
 
 	/** UIパーツ初期化 */
@@ -149,11 +148,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.SetCaptionByTextCode("Settings.Locale")
 			.SetArea(64,size.height-32)
 			.Select(initialIndexes.locale)
-			.SetOnSelected((key,tag)=>{
-				const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);
-				if(mapping)	mapping.OnSelected();
-				else		SelectorMaps.Locale[0].OnSelected();
-			})
+			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Locale,tag,0))
 			.buttons
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
 				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
@@ -163,15 +158,26 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.SetCaptionByTextCode("Settings.Navigator")
 			.SetArea(64,size.height-96)
 			.Select(initialIndexes.navigator)
-			.SetOnSelected((key,tag)=>{
-				const mapping	= _(SelectorMaps.Navigator).find(m=>tag==m.Tag);
-				if(mapping)	mapping.OnSelected();
-				else		SelectorMaps.Navigator[0].OnSelected();
-			})
+			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Navigator,tag,0))
 			.buttons
 				.SetTags( ... _(SelectorMaps.Navigator).map("Tag") )
 				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Navigator.Label.${b.tag}`)) );
 
+		return this;
+	}
+
+	//OnSelectedイベントの発行
+	DispatchOnSelect(mappings,tag,idxDefault=null){
+		//設定マッピング一覧を走査
+		let mapping	= _(mappings).find(m=>tag==m.Tag);
+		if(!mapping){
+			if(idxDefault===null)	return this;
+			else					mapping	= mappings[idxDefault];
+		}
+
+		if		(mapping.OnSelected===null)			return this;
+		else if	(_.isFunction(mapping.OnSelected))	mapping.OnSelected();
+		else										Store.Insert(mapping.OnSelected,mapping.Tag,null);
 		return this;
 	}
 
