@@ -27,7 +27,9 @@ class Selector{
 				.SetColorOnHover([0xFF,0xA0,0x00])
 				.SetLabelColor("#FF0000")
 				.SetScale(0.5)
+				.SetOpacity(192)
 				.OnTouchEnded(()=>this.Select(i));
+			button.opacityOnHover	= 255;
 		});
 		return this;
 	}
@@ -154,10 +156,14 @@ class Selector{
 	Turn(button,switchesOn){
 		if(!button)	return this;
 		if(switchesOn){
-			button.SetColor([0xFF,0xA0,0x00]);
+			button
+				.SetColor([0xFF,0xA0,0x00])
+				.SetOpacity(255);
 		}
 		else{
-			button.SetColor([0xFF,0xFF,0xFF]);
+			button
+				.SetColor([0xFF,0xFF,0xFF])
+				.SetOpacity(192);
 		}
 		return this;
 	}
