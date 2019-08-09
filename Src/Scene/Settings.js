@@ -132,7 +132,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.selector
 			.Init()
-			.SetArea(64,size.height-64)
+			.SetCaption(L.Text("Settings.Locale"))
+			.SetArea(64,size.height-32)
 			.Select(initialIndexes.locale)
 			.SetOnSelected((key,tag)=>{
 				const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);

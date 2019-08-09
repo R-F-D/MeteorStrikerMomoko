@@ -11,8 +11,9 @@ class Selector{
 		/** @var 選択されたボタン番号 */
 		this.idxSelected	= null;
 
-		this.area	= {x:0,y:0,width:0,height:0};
-		this.gap	= 16;
+		this.area		= {x:0,y:0,width:0,height:0};
+		this.gap		= 16;
+		this.caption	= null;
 
 		/** @var {function} f(key,tag)*/
 		this._onSelected		= (key,tag)=>{};
@@ -31,9 +32,22 @@ class Selector{
 		return this;
 	}
 
+	SetCaption(text){
+		if(!this.caption){
+			this.caption	= Label.CreateInstance(14)
+								.AddToLayer(this.layer)
+								.SetAnchorPoint(cc.p(0,0.5))
+								.SetFontColor("#FFCF00","#7F0000",1);
+		}
+		this.caption.SetString(text);
+		return this;
+	}
+
 	AddToLayer(layer){
+		if(!layer)	return this;
 		this.layer	= layer;
 		this.buttons.AddToLayer(layer);
+		if(this.caption)	this.caption.AddToLayer(layer);
 		return this;
 	}
 
@@ -52,6 +66,12 @@ class Selector{
 		this.area.width		= width !==null	? Math.trunc(width) : cc.director.getWinSize().width -this.area.x;
 		this.area.height	= height!==null	? Math.trunc(height): Math.trunc(top);
 		if(this.area.width<=0 || this.area.height<=0)	return this;
+
+		if(this.caption){
+			this.caption.SetPosition(this.area.x,this.area.y-this.gap/2);
+			this.area.y-=this.gap;
+			this.area.height-=this.gap;
+		}
 
 		let x	= this.area.x;	//左上座標（アンカーポイント修正込み）
 		let y	= this.area.y;	//
