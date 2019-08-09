@@ -17,6 +17,10 @@ const SelectorMaps	= {
 		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en")},					},
 		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja")},					},
 	],
+	Navigator:[
+		{	Tag:"Normal",				OnSelected:()=>{Store.Insert(Store.Handles.Settings.Navigator,"Normal",null)},	},
+		{	Tag:"Golem",				OnSelected:()=>{Store.Insert(Store.Handles.Settings.Navigator,"Golem", null)},	},
+	],
 };
 
 
@@ -31,8 +35,11 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 
 		this.EnableNaviButtons(0);
-		this.selector	= new Selector(3);
-		this.selector.gap	= 32;
+		this.selectors	= {
+			locale:		new Selector(3),
+			navigator:	new Selector(2),
+		};
+		_(this.selectors).forEach(s=>s.gap=32);
 		this.sprites		= {};
 
 		/** ccSceneのインスタンス */
@@ -86,7 +93,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
-		this.selector.Update(dt);
+		this.selectors.locale.Update(dt);
+		this.selectors.navigator.Update(dt);
 		return this;
 	}
 
@@ -116,7 +124,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	OnUiLayerCreate(layer){
 		super.InitUIs(layer);
-		this.selector.AddToLayer(layer);
+		this.selectors.locale.AddToLayer(layer);
+		this.selectors.navigator.AddToLayer(layer);
 		return true;
 
 	}
@@ -126,22 +135,42 @@ Scene.Settings	= class extends Scene.SceneBase {
 		super.InitUIs();
 		const size	= cc.director.getWinSize();
 
+		const currentSettings	= {
+			locale:		L.GetCurrentPresetKey(),
+			navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
+		};
 		const initialIndexes	= {
-			locale:	Number(_(SelectorMaps.Locale).findKey(m=>	m.Tag==L.GetCurrentPresetKey()	)),
+			locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.locale)		||0),
+			navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.navigator)	||0),
 		};
 
-		this.selector
+		this.selectors.locale
 			.Init()
 			.SetCaptionByTextCode("Settings.Locale")
 			.SetArea(64,size.height-32)
 			.Select(initialIndexes.locale)
 			.SetOnSelected((key,tag)=>{
 				const mapping	= _(SelectorMaps.Locale).find(m=>tag==m.Tag);
-				L.ApplyPreset( mapping ? mapping.Tag : Locale.UniversalCode );
+				if(mapping)	mapping.OnSelected();
+				else		SelectorMaps.Locale[0].OnSelected();
 			})
 			.buttons
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
 				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
+
+		this.selectors.navigator
+			.Init()
+			.SetCaptionByTextCode("Settings.Navigator")
+			.SetArea(64,size.height-96)
+			.Select(initialIndexes.navigator)
+			.SetOnSelected((key,tag)=>{
+				const mapping	= _(SelectorMaps.Navigator).find(m=>tag==m.Tag);
+				if(mapping)	mapping.OnSelected();
+				else		SelectorMaps.Navigator[0].OnSelected();
+			})
+			.buttons
+				.SetTags( ... _(SelectorMaps.Navigator).map("Tag") )
+				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Navigator.Label.${b.tag}`)) );
 
 		return this;
 	}

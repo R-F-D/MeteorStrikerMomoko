@@ -217,6 +217,14 @@ const LocalizedTexts	= {
 		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
 		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
 
+		//ナビゲーター設定 Navigator
+		"Settings.Navigator":	{
+			_:	"Navigator",
+			ja:	"ナビゲーター",
+		},
+		"Settings.Navigator.Label.Normal":	{_:	"Iku",				ja:"育",					},	//Iku
+		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",	ja:"初めての\nともだち",	},	//Golem
+
 
 	//----------------------------------------
 	// レコード画面 - 記録

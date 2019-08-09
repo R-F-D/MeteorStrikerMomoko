@@ -103,7 +103,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.labels	= {
 			hitArea:null, distance:null,	navigation:null,
 		}
-		this.navigator	= NavigatorSettings.Normal;
+
+		//ナビゲーター
+		this.navigator	= this.GetNavigatorSetting();
 
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
@@ -656,6 +658,12 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	GetChargingRate(){
 		return this.chargedPower/BlowPower.INCREMENT + 20;
+	}
+
+	/** ナビゲーター設定を取得 */
+	GetNavigatorSetting(){
+		const naviKey	= Store.Select(Store.Handles.Settings.Navigator);
+		return _(NavigatorSettings).find(ns=>naviKey==ns.Key) || NavigatorSettings.Normal;
 	}
 
 	/**プレイヤー画像の表示*/
