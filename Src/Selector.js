@@ -43,7 +43,7 @@ class Selector{
 		if(!this.caption){
 			this.caption	= Label.CreateInstance(14)
 								.AddToLayer(this.layer)
-								.SetAnchorPoint(cc.p(0,0.5))
+								.SetAnchorPoint(cc.p(0,0))
 								.SetFontColor("#FFCF00","#7F0000",1);
 		}
 		this.caption.SetString(text);
@@ -94,7 +94,7 @@ class Selector{
 		if(this.area.width<=0 || this.area.height<=0)	return this;
 
 		if(this.caption){
-			this.caption.SetPosition(this.area.x,this.area.y-this.gap/2);
+			this.caption.SetPosition(this.area.x,this.area.y-this.gap);
 			this.area.y-=this.gap;
 			this.area.height-=this.gap;
 		}
