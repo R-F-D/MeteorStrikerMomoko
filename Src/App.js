@@ -141,6 +141,8 @@ Date.prototype.ToEpochDay	= function(){
 	return EpochMsecToEpochDay(this.getTime(), this.getTimezoneOffset());
 }
 
+String.prototype.Number	= function(){return Number(this)}
+String.prototype.Int	= function(){return Math.trunc(Number(this))}
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
