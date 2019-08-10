@@ -124,6 +124,23 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 	return Cycle(pirad,0,2) * Math.PI;
 }
 
+/** エポックミリ秒をエポック日数に変換
+ * @param {number} ms					エポックミリ秒
+ * @param {number} [hourOffset=null]	ローカル時間から見た。時差+9時間なら省略時は自動検出。
+ * @returns
+ */
+function EpochMsecToEpochDay(msec,hourOffset=null){
+	const msOffset	= (hourOffset!==null ? hourOffset : (new Date()).getTimezoneOffset())	* 60*1000;
+	return Math.trunc( (msec-msOffset) / (24*60*60*1000) );
+}
+
+/** エポック日数を得る
+ * @returns
+ */
+Date.prototype.ToEpochDay	= function(){
+	return EpochMsecToEpochDay(this.getTime(), this.getTimezoneOffset());
+}
+
 
 //デバッグ
 function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
