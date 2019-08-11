@@ -34,16 +34,16 @@ const Achievements = (()=>{		//Achievements scoop
 	};
 	//ユーザアクション
 	Achievements.Action	= {
-		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Rank:3,	Replacements:null,							},	//コンプリート
-		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,							},	//初プレイ
-		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],							},	//シェア
-		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[()=>L.Text("Unit.Second")],	},	//プレイ時間
-		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:0,	Replacements:[],							},	//起動日数
-		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:0,	Replacements:[],							},	//月曜日または9時台に起動
-		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x7000,	Rank:0,	Replacements:null,							},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7001,	Rank:0,	Replacements:[],							},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7002,	Rank:0,	Replacements:[],							},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x7002,	Rank:0,	Replacements:[],							},	//女神ナビ使用
+		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Rank:3,	Replacements:null,	},	//コンプリート
+		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,	},	//初プレイ
+		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],	},	//シェア
+		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[],	},	//プレイ時間
+		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:0,	Replacements:[],	},	//起動日数
+		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:0,	Replacements:[],	},	//月曜日または9時台に起動
+		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x7000,	Rank:0,	Replacements:null,	},	//桃子だけど
+		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7002,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
+		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x7002,	Rank:0,	Replacements:[],	},	//女神ナビ使用
 	};
 
 

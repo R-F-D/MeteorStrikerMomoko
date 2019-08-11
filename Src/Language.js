@@ -44,7 +44,6 @@ const LocalizedTexts	= {
 		"Unit.Aim":		{_:"%", },					//エイミング精度の単位 Aim
 		"Unit.Blow":	{_:"%", },					//打撃倍率の単位 Charge
 		"Unit.Emit":	{_:"%", },					//エミット倍率の単位 Emit
-		"Unit.Second":	{_:"seconds", ja:"秒",	},	//秒 Second
 		"Unit.Counter":	{_:"$0", ja:"$0回",	},		//Records>カウンタの単位（デフォルト） Records > Counter(Default)
 
 	//----------------------------------------
@@ -726,8 +725,8 @@ const LocalizedTexts	= {
 			ja:	"長い時間の中で",	//思い出をありがとう
 		},
 		"Achievement.Action.PlayTime.Text":{
-			_:	"The total play time exceeded $0 $1.\nThank you for the memories.",
-			ja:	"合計プレイ時間が$0$1を越えた。思い出をありがとう。",
+			_:	"The total play time exceeded $0 seconds.\nThank you for the memories.",
+			ja:	"合計プレイ時間が$0秒を越えた。思い出をありがとう。",
 		},
 
 		//起動日数 Booting Days
