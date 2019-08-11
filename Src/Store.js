@@ -52,11 +52,11 @@ class Store{
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0102,	},
 				/** 実績解除数*/
-				TotalUnlockedAchievements:	{Required:0,	Order:0x0203,	Conv:()=>Store.Convs.GotAchievements() },
+				TotalUnlockedAchievements:	{Required:0,	Order:0x0203,	nDecimalDigits:1,	Conv:()=>Store.Convs.GotAchievements(null,true)},
 				NumUnlockedAchievements:[	{Required:0,	Order:0x0207,	Conv:()=>Store.Convs.GotAchievements(0)},
 											{Required:0,	Order:0x0206,	Conv:()=>Store.Convs.GotAchievements(1)},
 											{Required:0,	Order:0x0205,	Conv:()=>Store.Convs.GotAchievements(2)},
-											{Required:0,	Order:0x0204,	Conv:()=>Store.Convs.GotAchievements(3)},	],
+											{Required:0,	Order:0x0204,	Conv:()=>Store.Convs.GotAchievements(3)},		],
 				/** 起動回数 */
 				NumBootings:				{Required:0,	Order:0x0101,	},
 				/** 起動回数（1日1カウントまで） */
@@ -261,8 +261,9 @@ class Store{
 				return `${times[0]}:${times[1]}:${times[2]}`;
 			},
 			/** 実績解除数 */
-			GotAchievements: (rank)=>{
-				return `${Achievement.GetNumUnlockedItems(rank)} / ${Achievement.GetNumItems(rank)}`;
+			GotAchievements: (rank=null,isRatio=false)=>{
+				if(isRatio)	return 100 * Achievement.GetNumUnlockedItems(rank) / Achievement.GetNumItems(rank);
+				else		return `${Achievement.GetNumUnlockedItems(rank)} / ${Achievement.GetNumItems(rank)}`;
 			}
 		};
 	}

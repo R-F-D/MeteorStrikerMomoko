@@ -418,14 +418,13 @@ const LocalizedTexts	= {
 			ja:	"シェア回数",
 		},
 
-		//実績解除数（トータル） Total of Unlocked Achievements
+		//実績解除率（トータル） Ratio of All Unlocked Achievements
 		"Records.Action.TotalUnlockedAchievements":{
-			_:	"Unlocked Achievements",
-			ja:	"解除した実績数(トータル)",
+			_:	"Achievement Ratio",
+			ja:	"実績達成率",
 		},
 		"Records.Action.TotalUnlockedAchievements.Format":{
-			_:	"$0",
-			ja:	"$0個",
+			_:	"$0%",
 		},
 		//実績解除数（ランク別） Number of Unlocked Achievements By Rank
 		"Records.Action.NumUnlockedAchievements.00":{
