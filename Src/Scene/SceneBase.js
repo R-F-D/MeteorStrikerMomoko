@@ -358,6 +358,13 @@ Scene.SceneBase	= class {
 		//起動時刻
 		Scene.SceneBase._startAt	= new Date();
 		Store.Insert(	Store.Handles.Action.FirstStartAt,	Scene.SceneBase._startAt.getTime(),		Store.Conds.CurrentValueIsEmptr	);
+
+		//起動時刻（月９）実績
+		if(Scene.SceneBase._startAt.getDay()==1 || [9,19,29].includes(Scene.SceneBase._startAt.getDate()) || [9,19,21].includes(Scene.SceneBase._startAt.getHours())){
+			Achievement.Unlock(Achievements.Action.Monday9,1);
+		}
+
+		//起動日数実績
 		Store.Insert(	Store.Handles.Action.LastStartDay,	Scene.SceneBase._startAt.ToEpochDay(),	Store.Conds.NewValueIsGreater,	(key,value)=>{
 							const nDays	= Store.DynamicInsert(Store.Handles.Action.NumBootingDays);
 							Achievement.Unlock(Achievements.Action.BootDays,nDays);

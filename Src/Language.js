@@ -740,6 +740,16 @@ const LocalizedTexts	= {
 			ja:	"$0日間ゲームを起動した。\nFeel like a home game...",
 		},
 
+		//月曜日または9時台に起動
+		"Achievement.Action.Monday9":{
+			_:	"Ice \"9 Letters\" on Monday",
+			ja:	"月曜日の9リームソーダ",	///月曜日のクリームソーダ
+		},
+		"Achievement.Action.Monday9.Text":{
+			_:	"Booted at/on 9, 19, 21, Monday *9th...OK?",
+			ja:	"月曜日、○9日、9/19/21時台いずれかに起動した…オケ?",
+		},
+
 		//桃子だけど
 		"Achievement.Action.TouchPlayer":{
 			_:	"Momoko Dakedo.",
