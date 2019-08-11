@@ -6,42 +6,43 @@ const Achievements = (()=>{		//Achievements scoop
 
 	//エイミング精度
 	Achievements.Aiming	= {
-		ManyPerfect		:{	IsPublic:true,	Count:3,	Order:0x1000,	Rank:1,	Replacements:[],	},	//パーフェクト
-		ManyGood		:{	IsPublic:true,	Count:4,	Order:0x1001,	Rank:0,	Replacements:[],	},	//グッド以上
-		TruePerfect		:{	IsPublic:true,	Count:100,	Order:0x1002,	Rank:2,	Replacements:null,	},	//100%パーフェクト
+		ManyPerfect		:{	IsPublic:true,	Count:3,	Order:0x2000,	Rank:1,	Replacements:[],	},	//パーフェクト
+		ManyGood		:{	IsPublic:true,	Count:4,	Order:0x2001,	Rank:0,	Replacements:[],	},	//グッド以上
+		TruePerfect		:{	IsPublic:true,	Count:100,	Order:0x2002,	Rank:2,	Replacements:null,	},	//100%パーフェクト
 	};
 	//打撃力
 	Achievements.Blowing	= {
-		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x2100,	Rank:0,	Replacements:[],	},	//強打
-		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x2101,	Rank:1,	Replacements:[],	},	//強打でパーフェクト
-		SuccessiveHits	:{	IsPublic:true,	Count:19,	Order:0x2102,	Rank:1,	Replacements:[],	},	//連続ヒット
+		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x3100,	Rank:0,	Replacements:[],	},	//強打
+		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x3101,	Rank:1,	Replacements:[],	},	//強打でパーフェクト
+		SuccessiveHits	:{	IsPublic:true,	Count:19,	Order:0x3102,	Rank:1,	Replacements:[],	},	//連続ヒット
 	};
 	//エミット
 	Achievements.Emit	= {
-		Many01			:{	IsPublic:true,	Count:150,	Order:0x3200,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約28回
-		Many02			:{	IsPublic:true,	Count:160,	Order:0x3201,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約35回
-		Many03			:{	IsPublic:true,	Count:170,	Order:0x3202,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
-		Many04			:{	IsPublic:false,	Count:180,	Order:0x3203,	Rank:2,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
+		Many01			:{	IsPublic:true,	Count:150,	Order:0x4200,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約28回
+		Many02			:{	IsPublic:true,	Count:160,	Order:0x4201,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約35回
+		Many03			:{	IsPublic:true,	Count:170,	Order:0x4202,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
+		Many04			:{	IsPublic:false,	Count:180,	Order:0x4203,	Rank:2,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
-		Venus			:{	IsPublic:true,	Count:1,	Order:0x4300,	Rank:0,	Replacements:[C.Check[1].distance, ()=>L.Text("Unit.Distance")],	},	//金星
-		Mars			:{	IsPublic:true,	Count:1,	Order:0x4301,	Rank:0,	Replacements:[C.Check[2].distance, ()=>L.Text("Unit.Distance")],	},	//火星
-		Mercury			:{	IsPublic:true,	Count:1,	Order:0x4302,	Rank:0,	Replacements:[C.Check[3].distance, ()=>L.Text("Unit.Distance")],	},	//水星
-		Sun				:{	IsPublic:true,	Count:1,	Order:0x4303,	Rank:1,	Replacements:[C.Check[4].distance, ()=>L.Text("Unit.Distance")],	},	//太陽
-		Kirari			:{	IsPublic:false,	Count:1,	Order:0x5304,	Rank:1,	Replacements:[C.Check[5].distance, ()=>L.Text("Unit.Distance")],	},	//諸星きらり
-		Unicorn			:{	IsPublic:false,	Count:1,	Order:0x5305,	Rank:2,	Replacements:[C.Check[6].distance, ()=>L.Text("Unit.Distance")],	},	//ピンクのユニコーン
+		Venus			:{	IsPublic:true,	Count:1,	Order:0x5300,	Rank:0,	Replacements:[C.Check[1].distance, ()=>L.Text("Unit.Distance")],	},	//金星
+		Mars			:{	IsPublic:true,	Count:1,	Order:0x5301,	Rank:0,	Replacements:[C.Check[2].distance, ()=>L.Text("Unit.Distance")],	},	//火星
+		Mercury			:{	IsPublic:true,	Count:1,	Order:0x5302,	Rank:0,	Replacements:[C.Check[3].distance, ()=>L.Text("Unit.Distance")],	},	//水星
+		Sun				:{	IsPublic:true,	Count:1,	Order:0x5303,	Rank:1,	Replacements:[C.Check[4].distance, ()=>L.Text("Unit.Distance")],	},	//太陽
+		Kirari			:{	IsPublic:false,	Count:1,	Order:0x6304,	Rank:1,	Replacements:[C.Check[5].distance, ()=>L.Text("Unit.Distance")],	},	//諸星きらり
+		Unicorn			:{	IsPublic:false,	Count:1,	Order:0x6305,	Rank:2,	Replacements:[C.Check[6].distance, ()=>L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 	};
 	//ユーザアクション
 	Achievements.Action	= {
 		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Rank:3,	Replacements:null,							},	//コンプリート
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,							},	//初プレイ
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],							},	//シェア
-		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x0003,	Rank:0,	Replacements:[()=>L.Text("Unit.Second")],	},	//プレイ時間
-		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x6000,	Rank:0,	Replacements:null,							},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x6001,	Rank:0,	Replacements:[],							},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x6002,	Rank:0,	Replacements:[],							},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x6002,	Rank:0,	Replacements:[],							},	//女神ナビ使用
+		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[()=>L.Text("Unit.Second")],	},	//プレイ時間
+		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:0,	Replacements:[],							},	//起動日数
+		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x7000,	Rank:0,	Replacements:null,							},	//桃子だけど
+		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7001,	Rank:0,	Replacements:[],							},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7002,	Rank:0,	Replacements:[],							},	//ゴーレムナビ使用
+		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x7002,	Rank:0,	Replacements:[],							},	//女神ナビ使用
 	};
 
 

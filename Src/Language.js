@@ -723,11 +723,21 @@ const LocalizedTexts	= {
 		//プレイ時間 Play Time
 		"Achievement.Action.PlayTime":{
 			_:	"In A Long Time",
-			ja:	"長い時間の中で",	//
+			ja:	"長い時間の中で",	//思い出をありがとう
 		},
 		"Achievement.Action.PlayTime.Text":{
 			_:	"The total play time exceeded $0 $1.\nThank you for the memories.",
-			ja:	"合計プレイ時間が$0$1を越えた。思い出をありがとう。",	//
+			ja:	"合計プレイ時間が$0$1を越えた。思い出をありがとう。",
+		},
+
+		//起動日数 Booting Days
+		"Achievement.Action.BootDays":{
+			_:	"\"Tadaima\"",
+			ja:	"「ただいま」",	////HOME, SWEET FRIENDSHIP
+		},
+		"Achievement.Action.BootDays.Text":{
+			_:	"Booted the game for $0 days.\nFeel like a home game...",
+			ja:	"$0日間ゲームを起動した。\nFeel like a home game...",
 		},
 
 		//桃子だけど

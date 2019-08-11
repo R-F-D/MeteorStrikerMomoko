@@ -355,8 +355,15 @@ Scene.SceneBase	= class {
 		Store.DynamicInsert(Store.Handles.Action.NumBootings);
 		Achievement.Init();
 
-		//実行時間
+		//起動時刻
 		Scene.SceneBase._startAt	= new Date();
+		Store.Insert(	Store.Handles.Action.FirstStartAt,	Scene.SceneBase._startAt.getTime(),		Store.Conds.CurrentValueIsEmptr	);
+		Store.Insert(	Store.Handles.Action.LastStartDay,	Scene.SceneBase._startAt.ToEpochDay(),	Store.Conds.NewValueIsGreater,	(key,value)=>{
+							const nDays	= Store.DynamicInsert(Store.Handles.Action.NumBootingDays);
+							Achievement.Unlock(Achievements.Action.BootDays,nDays);
+						});
+
+		//実行時間
 		const lastRunTime	= Number(Store.Select(Store.Handles.Action.RunTime,0));
 		if(lastRunTime){
 			Store.DynamicInsert(Store.Handles.Action.TotalRunTime,	(value)=>Number(value)+lastRunTime	);

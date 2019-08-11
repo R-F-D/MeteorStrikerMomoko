@@ -59,6 +59,12 @@ class Store{
 											{Required:0,	Order:0x0204,	Conv:()=>Store.Convs.GotAchievements(3)},	],
 				/** 起動回数 */
 				NumBootings:				{Required:0,	Order:0x0101,	},
+				/** 起動回数（1日1カウントまで） */
+				NumBootingDays:				{},
+				/** 初めて起動した時刻 */
+				FirstStartAt:				{},
+				/** 最後に起動した時刻 */
+				LastStartDay:				{},
 				/** 実行時間 */
 				RunTime:					{Required:0,	Order:0x0110,	Conv:Store.Convs.SecToTime,	},
 				/** 合計実行時間 */
