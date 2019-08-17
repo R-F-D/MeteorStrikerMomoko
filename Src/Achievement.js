@@ -164,7 +164,7 @@ const Achievement = new (class Achievement{
 			_(category)
 				.filter(a=>rank===null || a.Rank==rank)
 				.forEach(a=>{
-					const date = cc.sys.localStorage.getItem(a.Key);
+					const date = Store.Select(a.Key);
 					if(date!==null && 0<date) ++n;
 				});
 		});
