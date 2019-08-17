@@ -104,9 +104,9 @@ class Store{
 		return container;
 	}
 
-	static _SetItem(key,value)				{ cc.sys.localStorage.setItem(key,value);	return this;	}
-	static _GetItem(key,defaultValue=null)	{ return cc.sys.localStorage.getItem(key) || defaultValue;	}
-	static _RemoveItem(key)					{ cc.sys.localStorage.removeItem(key);	return this;		}
+	static _SetItem(key,value)				{ cc.sys.localStorage.setItem(Store._Prefix+key,value);	return this;	}
+	static _GetItem(key,defaultValue=null)	{ return cc.sys.localStorage.getItem(Store._Prefix+key) || defaultValue;	}
+	static _RemoveItem(key)					{ cc.sys.localStorage.removeItem(Store._Prefix+key);	return this;		}
 
 	/** ローカルストレージにインサート
 	 * @param {Object} handle ストレージのハンドル
@@ -275,5 +275,6 @@ class Store{
 } // class
 
 Store._nPages	= null;
+Store._Prefix	= "MeteorStrikerMomoko/";
 
 
