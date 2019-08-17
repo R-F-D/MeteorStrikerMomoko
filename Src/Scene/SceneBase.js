@@ -331,8 +331,10 @@ Scene.SceneBase	= class {
 		Store.Insert(Store.Handles.Action.RunTime, runSec, null);
 		Scene.SceneBase._countUntilSaveRunTime	= (7+NormalRandom(2))*60;
 
-		const totalSec		= Number(Store.Select(Store.Handles.Action.TotalRunTime),0) + runSec;
-		Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
+		if(isForce){	//プレイ時間実績（強制更新時のみ）
+			const totalSec		= Number(Store.Select(Store.Handles.Action.TotalRunTime),0) + runSec;
+			Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
+		}
 		return;
 	}
 
