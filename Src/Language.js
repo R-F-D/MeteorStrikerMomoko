@@ -221,7 +221,7 @@ const LocalizedTexts	= {
 			_:	"Navigator",
 			ja:	"ナビゲーター",
 		},
-		"Settings.Navigator.Label.Normal":	{_:	"Iku",						ja:"育",					},	//Iku
+		"Settings.Navigator.Label.Normal":	{_:	"NAKATANI\nIku",			ja:"中谷育",				},	//Iku
 		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	},	//Golem
 		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earch",	ja:"大地の女神",			},	//Goddess
 
@@ -463,8 +463,8 @@ const LocalizedTexts	= {
 
 		//各ナビゲーション回数 Number of Navigates
 		"Records.Action.NumNavigates.00":{
-			_:	"Iku Navigates",
-			ja:	"育のナビ回数",
+			_:	"NAKATANI Iku Navigates",
+			ja:	"中谷育のナビ回数",
 		},
 		"Records.Action.NumNavigates.01":{
 			_:	"First Friend Navigates",
@@ -475,8 +475,8 @@ const LocalizedTexts	= {
 			ja:	"？？？？のナビ回数",
 		},
 		"Records.Action.NumNavigates.02":{
-			_:	"Goddess Navigates",
-			ja:	"女神のナビ回数",
+			_:	"Goddess of The Earth Navigates",
+			ja:	"大地の女神のナビ回数",
 		},
 		"Records.Action.NumNavigates.02.Secret":{
 			_:	"???????? Navigates",
@@ -765,8 +765,8 @@ const LocalizedTexts	= {
 			ja:	"ナビゲーター宇宙を往く",	//エージェント夜を往く
 		},
 		"Achievement.Action.Navigate00.Text":{
-			_:	"Iku navigated $0 times.\nI can lead you completely everywhere.",
-			ja:	"育が$0回ナビゲートした。どんな道も万全に率いられる。",
+			_:	"NAKATANI Iku navigated $0 times.\nI can lead you completely everywhere.",
+			ja:	"中谷育が$0回ナビゲートした。どんな道も万全に率いられる。",
 		},
 
 		//ナビゲータ（ゴーレム）使用
@@ -784,8 +784,8 @@ const LocalizedTexts	= {
 			ja:	"ヒカリのnavigation",	//ヒカリのdestination
 		},
 		"Achievement.Action.Navigate02.Text":{
-			_:	"Goddess navigated $0 times.\nStart running to the base of radiance.",
-			ja:	"女神が$0回ナビゲートした。\n輝きのたもとへ走り出そうよ。",
+			_:	"Goddess of the earth navigated $0 times.\nStart running to the base of radiance.",
+			ja:	"大地の女神が$0回ナビゲートした。\n輝きのたもとへ走り出そうよ。",
 		},
 
 };
