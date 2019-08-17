@@ -104,6 +104,10 @@ class Store{
 		return container;
 	}
 
+	static _SetItem(key,value)				{ cc.sys.localStorage.setItem(key,value);	return this;	}
+	static _GetItem(key,defaultValue=null)	{ return cc.sys.localStorage.getItem(key) || defaultValue;	}
+	static _RemoveItem(key)					{ cc.sys.localStorage.removeItem(key);	return this;		}
+
 	/** ローカルストレージにインサート
 	 * @param {Object} handle ストレージのハンドル
 	 * @param {*} value 保存する値。ただしインサート成功時にコールバック関数が実行されたときはその返り値
@@ -112,12 +116,12 @@ class Store{
 	 * @returns {*} 保存時は新値、未保存時は旧値
 	 */
 	static Insert(handle,value,cond=Store.Conds.NewValueIsGreater,resolve=null){
-		const oldValue	= cc.sys.localStorage.getItem(handle.Key);
+		const oldValue	= Store._GetItem(handle.Key);
 		if(cond===null)	cond = Store.Conds.Always;
 
 		if(cond(oldValue,value)){
 			//インサート実行
-			cc.sys.localStorage.setItem(handle.Key,value);
+			Store._SetItem(handle.Key,value);
 			//成功時コールバック
 			if(resolve)	{
 				const result = resolve(handle.Key,value);
@@ -138,10 +142,10 @@ class Store{
 	 */
 	static DynamicInsert(handle,valueGenerator=Store.Gens.Increment){
 		//挿入値の生成
-		const oldValue	= cc.sys.localStorage.getItem(handle.Key);
+		const oldValue	= Store._GetItem(handle.Key);
 		const value		= valueGenerator(oldValue);
 
-		cc.sys.localStorage.setItem(handle.Key,value);
+		Store._SetItem(handle.Key,value);
 		return value;
 	};
 
@@ -173,8 +177,8 @@ class Store{
 	 * @memberof Store
 	 */
 	static Select(handle,defaultValue=null){
-		if(typeof handle==="string")	return cc.sys.localStorage.getItem(handle) || defaultValue;
-		else							return cc.sys.localStorage.getItem(handle.Key) || defaultValue;
+		if(typeof handle==="string")	return Store._GetItem(handle,defaultValue);
+		else							return Store._GetItem(handle.Key,defaultValue);
 	}
 
 	/** 表示可能なレコードのハンドル一覧を得る
