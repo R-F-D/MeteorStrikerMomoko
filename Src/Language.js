@@ -221,8 +221,9 @@ const LocalizedTexts	= {
 			_:	"Navigator",
 			ja:	"ナビゲーター",
 		},
-		"Settings.Navigator.Label.Normal":	{_:	"Iku",				ja:"育",					},	//Iku
-		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",	ja:"初めての\nともだち",	},	//Golem
+		"Settings.Navigator.Label.Normal":	{_:	"Iku",						ja:"育",					},	//Iku
+		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	},	//Golem
+		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earch",	ja:"大地の女神",			},	//Goddess
 
 
 	//----------------------------------------

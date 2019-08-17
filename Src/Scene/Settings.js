@@ -20,6 +20,7 @@ const SelectorMaps	= {
 	Navigator:[
 		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Navigator,	},
 		{	Tag:"Golem",				OnSelected:Store.Handles.Settings.Navigator,	},
+		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
 };
 
@@ -37,7 +38,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.EnableNaviButtons(0);
 		this.selectors	= {
 			locale:		new Selector(3),
-			navigator:	new Selector(2),
+			navigator:	new Selector(3),
 		};
 		_(this.selectors).forEach(s=>s.gap=32);
 		this.sprites		= {};
