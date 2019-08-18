@@ -22,7 +22,7 @@ class Sprite{
 		/** @var 並列画像のインデックス */
 		this.currentIndex	= -1;
 		/** @var cc.Spriteクラスのインスタンス */
-		this.entity			= new cc.Sprite(GetResPath(img));
+		this.entity			= new cc.Sprite(`${rc.DIRECTORY}Img/${img[0]}`);
 
 		/** @var 画像リソース */
 		this.img	= {

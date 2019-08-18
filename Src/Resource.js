@@ -5,23 +5,23 @@ const rc	= {
 
 	/** 画像 */
 	img	: {
-		logo			: [ "logo.png",				1,	1,	],	//タイトルロゴ
+		logo			: [ "Text/logo.png",		1,	1,	],	//タイトルロゴ
 
-		bgGround		: [ "bgGround.png",			1,	1,	],	//背景（地上）
-		bgSpace			: [ "bgSpace.png",			1,	1,	],	//背景（宇宙）
-		bgLaunch		: [ "bgLaunch.png",			1,	1,	],	//背景（シーン開始テキスト）
-		player			: [ "momoko.png",			4,	4,	],	//プレイヤーキャラクター
-		navigator		: [ "navigator.png",		5,	5,	],	//ナビゲーターアイコン
-		aimCursor		: [ "aimcur.png",			2,	2,	],	//エイミングカーソル
-		aimBar			: [ "aimBar.png",			1,	1,	],	//エイミングゲージ
-		aimValue		: [ "aimValue.png",			4,	3,	],	//エイミング値
-		hitArea			: [ "hitarea.png",			1,	4,	],	//ヒット領域
-		meteor			: [ "meteor.png",			1,	1,	],	//メテオ
-		distance		: [ "distance.png",			1,	1,	],	//飛距離表示
+		bgGround		: [ "Bg/bgGround.png",		1,	1,	],	//背景（地上）
+		bgSpace			: [ "Bg/bgSpace.png",		1,	1,	],	//背景（宇宙）
+		bgLaunch		: [ "Text/bgLaunch.png",	1,	1,	],	//背景（シーン開始テキスト）
+		player			: [ "Actor/momoko.png",		4,	4,	],	//プレイヤーキャラクター
+		navigator		: [ "Text/navigator.png",	5,	5,	],	//ナビゲーターアイコン
+		aimCursor		: [ "Aim/aimcur.png",		2,	2,	],	//エイミングカーソル
+		aimBar			: [ "Aim/aimBar.png",		1,	1,	],	//エイミングゲージ
+		aimValue		: [ "Aim/aimValue.png",		4,	3,	],	//エイミング値
+		hitArea			: [ "Aim/hitarea.png",		1,	4,	],	//ヒット領域
+		meteor			: [ "Actor/meteor.png",		1,	1,	],	//メテオ
+		distance		: [ "Text/distance.png",	1,	1,	],	//飛距離表示
 
-		txtLaunch		: [ "txtLaunch.png",		1,	2,	],	//シーン入場テキスト
-		balloonTail		: [ "balloonTail.png",		1,	1,	],	//フキダシしっぽ
-		achievement		: [ "achievement.png",		4,	4,	],	//実績アイコン
+		txtLaunch		: [ "Text/txtLaunch.png",	1,	2,	],	//シーン入場テキスト
+		balloonTail		: [ "Text/balloonTail.png",	1,	1,	],	//フキダシしっぽ
+		achievement		: [ "Text/achievement.png",	4,	4,	],	//実績アイコン
 
 		flare			: [ "Fx/fxFlare.png",		1,	1,	],	//隕石エフェクト
 		explosion		: [ "Fx/fxExplosion.png",	1,	1,	],	//爆発エフェクト
@@ -57,8 +57,6 @@ const rc	= {
 
 
 
-function GetResPath(res){return `${rc.DIRECTORY}${res[0]}`}
-
 var g_resources = [];
 for(let i in rc.sysImg)	g_resources.push(`${rc.DIRECTORY}${rc.sysImg[i]}`);
-for(let i in rc.img)	g_resources.push(GetResPath(rc.img[i]));
+for(let i in rc.img)	g_resources.push(`${rc.DIRECTORY}Img/${rc.img[i][0]}`);
