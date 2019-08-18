@@ -236,6 +236,7 @@ Scene.SceneBase	= class {
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
+				cc.audioEngine.stopMusic();
 				childScene
 					.SetLayer("SceneBase.TouchFx",    childScene.ccLayers.touchFx,    0x0202)
 					.SetLayer("SceneBase.Achievement",childScene.ccLayers.achievement,0x0201)

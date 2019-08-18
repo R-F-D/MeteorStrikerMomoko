@@ -37,7 +37,10 @@ const rc	= {
 	},
 
 	/** サウンド */
-	se	: {
+	sfx	: {
+	},
+	bgm	: {
+		meteorite:		"meteorite.mp3",
 	},
 
 	/** システム用 */

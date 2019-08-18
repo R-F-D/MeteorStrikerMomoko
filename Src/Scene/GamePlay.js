@@ -546,6 +546,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
+		cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${rc.bgm.meteorite}`,true);
+
 		return this;
 	}
 
