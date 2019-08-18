@@ -156,7 +156,7 @@ Scene.SceneBase	= class {
 				this._super();
 				this.scheduleUpdate();
 				if(_this._naviButtonIsEnabled){
-					_this.pageNavigator	= new Scene.PageNavigator(_this,_this.pager);
+					_this.pageNavigator	= new PageNavigator(_this,_this.pager);
 					_this.pageNavigator.CreateButtons(this);
 				}
 				return _this.OnUiLayerCreate(this);
@@ -309,7 +309,7 @@ Scene.SceneBase	= class {
 	 */
 	EnableNaviButtons(nPages,nChapters=1){
 		this._naviButtonIsEnabled	= true;
-		if(nPages>=2)	this.pager	= new Scene.Pager(nPages,nChapters);
+		if(nPages>=2)	this.pager	= new Pager(nPages,nChapters);
 		return this;
 	}
 

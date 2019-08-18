@@ -1,15 +1,11 @@
 /* *******************************************************************************
 	ページ遷移クラス群
 ********************************************************************************/
-var Scene	= Scene || {};
-var cc;
-(function(){	//File Scope
-
 
 /** ページ送り機能
  * @class Pager
  */
-Scene.Pager	= class Pager{
+class Pager{
 
 	/** Creates an instance of Pager.
 	 * @param {number} nPages			ページ数
@@ -104,7 +100,7 @@ Scene.Pager	= class Pager{
 }
 
 
-Scene.PageNavigator	= class PageNavigator{
+class PageNavigator{
 
 	constructor(scene,pager){
 		this.parent	= scene;
@@ -210,5 +206,3 @@ Scene.PageNavigator	= class PageNavigator{
 
 }
 
-
-})();	//File Scope
