@@ -1381,7 +1381,7 @@ cc.game = {
     _initConfig: function (config) {
         var CONFIG_KEY = this.CONFIG_KEY,
             modules = config[CONFIG_KEY.modules];
-        config[CONFIG_KEY.showFPS] = typeof config[CONFIG_KEY.showFPS] === 'undefined' ? true : config[CONFIG_KEY.showFPS];
+        config[CONFIG_KEY.showFPS] = typeof config[CONFIG_KEY.showFPS] === 'undefined' ? false : config[CONFIG_KEY.showFPS];
         config[CONFIG_KEY.engineDir] = config[CONFIG_KEY.engineDir] || "frameworks/cocos2d-html5";
         if (config[CONFIG_KEY.debugMode] == null)
             config[CONFIG_KEY.debugMode] = 0;
