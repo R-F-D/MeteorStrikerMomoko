@@ -357,6 +357,7 @@ Scene.SceneBase	= class {
 
 		Store.DynamicInsert(Store.Handles.Action.NumBootings);
 		Achievement.Init();
+		sound.Init();
 
 		//起動時刻
 		Scene.SceneBase._startAt	= new Date();
