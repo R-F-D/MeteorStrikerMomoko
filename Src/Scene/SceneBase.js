@@ -15,6 +15,8 @@ Scene.SceneBase	= class {
 		this.sequence			= null;
 		/** @var {boolean} シークエンス遷移が可能か */
 		this.isSequenceMovable	= false;
+		/** @var {boolean} シーン遷移が完全に終了したか*/
+		this.isEnterTransitionFinished	= false;
 		/** @var シーン開始からのカウント */
 		this.count				= 0;
 		/** @var ポーズ用カウント */
@@ -257,11 +259,15 @@ Scene.SceneBase	= class {
 				if(childScene.sequence instanceof Scene.Sequence)	childScene.sequence.Update(dt);
 				childScene.OnUpdated(dt);
 			},
+			onEnterTransitionDidFinish:function(){
+				_this.isEnterTransitionFinished	= true;
+				_this.OnEnterTransitionFinished(this);
+			}
 		}))();
 		return this;
 	}
 
-	/** シーン遷移
+	/** シーン遷移 - シーン遷移中に再度呼ばないこと（警告）
 	 * @param {*} newSceneClass シーンクラスの型
 	 * @returns {Scene.SceneBase} 新シーンクラスのインスタンス
 	 */
@@ -272,6 +278,7 @@ Scene.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
+	OnEnterTransitionFinished(layer){return this};
 	OnUiLayerCreate(layer){return true};
 	SetSequenceFunctions(){return this;}
 
