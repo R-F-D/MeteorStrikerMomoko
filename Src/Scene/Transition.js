@@ -75,7 +75,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 				.SetAnchorPoint(cc.p(1,0))
 				.SetPosition(size.width-8,4)
 				.SetFontColor("#4F4F4F")
-				.SetString("Trust in me!");
+				.SetString(L.Text("Transition.Wait"));
 		})
 		.PushUpdatingFunctions(dt=>{
 		});
