@@ -14,8 +14,6 @@ Scene.Sequence	= class Sequence{
 
 		/** @var このフェイズ開始してからのフレーム数 */
 		this.count				= 0;
-		/** @var 単純遷移における次フェイズ */
-		this.nextSequence		= null;
 		/** @var イベントリスナの対象レイヤ */
 		this.listenTargetLayer	= null;
 		this.eventTag			= null;
@@ -157,22 +155,6 @@ Scene.Sequence	= class Sequence{
 		if(!Array.isArray(listeners))	listeners	= [listeners];
 		this.eventListeners[tag].push(...listeners);
 		return this;
-	}
-
-
-	/** 単純遷移における次フェイズを設定または取得
-	 * @param {*} nextSeq 省略時はゲッタとして機能
-	 * @returns {this|Sequenxe} セッタ時this、ゲッタ時Sequenceインスタンス
-	 * @memberof Sequence
-	 */
-	NextPhase(nextSeq=undefined){
-		if(nextSeq==undefined){
-			return this.nextSequence;
-		}
-		else{
-			this.nextSequence	= nextSeq;
-			return this;
-		}
 	}
 
 }
