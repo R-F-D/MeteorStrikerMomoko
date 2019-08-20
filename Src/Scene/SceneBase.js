@@ -9,7 +9,10 @@ var cc;
 /** シーン基本クラス */
 Scene.SceneBase	= class {
 
-	constructor(){
+	constructor(isBranchScene=false){
+
+		/** @var 実績*/
+		this.achievementIsEnabled	= !isBranchScene;
 
 		/** @var number シーン内のシークエンス */
 		this.sequence			= null;
@@ -42,7 +45,7 @@ Scene.SceneBase	= class {
 		this.commonEventListeners	= {};
 		this.commonEventListeners["SceneBase.TouchFx"]	= [];
 
-		Scene.SceneBase.OnEnterFirst();
+		if(!isBranchScene)	Scene.SceneBase.OnEnterFirst();
 	}
 
 	/** シーンの更新処理 共通部分
@@ -150,7 +153,7 @@ Scene.SceneBase	= class {
 			update	: function(dt){
 				this._super();
 				Scene.SceneBase._date = null;
-				Achievement.Update(dt);
+				if(this.achievementIsEnabled)	Achievement.Update(dt);
 			},
 		});
 		this.AddToLayerList("ui",{
@@ -341,7 +344,7 @@ Scene.SceneBase	= class {
 
 		if(isForce){	//プレイ時間実績（強制更新時のみ）
 			const totalSec		= Number(Store.Select(Store.Handles.Action.TotalRunTime),0) + runSec;
-			Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
+			if(this.achievementIsEnabled)	Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
 		}
 		return;
 	}

@@ -13,7 +13,7 @@ const LinkedLayerTags	= {
 Scene.Transition	= class extends Scene.SceneBase {
 
 	constructor(){
-		super();
+		super(true);
 
 		this.Sequences	= {
 			INITIAL:	null,	//初期状態
