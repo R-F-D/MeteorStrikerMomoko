@@ -211,7 +211,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.CreateSprite(rc.img.titleButton)
 			.SetScale(1)
 			.SetIndex(1).SetIndex(Button.OFF,0)
-			.OnButtonUp(()=>this.ReplaceScene(Scene.GamePlay))
+			.OnButtonUp(()=>this.ReplaceScene(Scene.Transition).SetTransitionTo(Scene.GamePlay))
 			.AssignKeyboard(cc.KEY["0"], cc.KEY.p, cc.KEY.space, cc.KEY.enter);
 
 		//Play以外
