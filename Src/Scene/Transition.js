@@ -20,6 +20,8 @@ Scene.Transition	= class extends Scene.SceneBase {
 		};
 		this._transitionTo	= null;
 
+		this.label			= null;
+
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
 
@@ -37,6 +39,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
+					_this.label	= Label.CreateInstance(14).AddToLayer(this);
 					return true;
 				},
 			})
@@ -68,6 +71,11 @@ Scene.Transition	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
+			this.label
+				.SetAnchorPoint(cc.p(1,0))
+				.SetPosition(size.width-8,4)
+				.SetFontColor("#4F4F4F")
+				.SetString("Trust in me!");
 		})
 		.PushUpdatingFunctions(dt=>{
 		});
