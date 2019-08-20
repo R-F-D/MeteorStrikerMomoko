@@ -333,7 +333,7 @@ Scene.SceneBase	= class {
 	}
 
 	static SaveTotalRunTime(isForce=false){
-		if(!isForce && Math.max(0,--Scene.SceneBase._countUntilSaveRunTime) > 0)	return;
+		if(!Scene.SceneBase._startAt || !isForce && Math.max(0,--Scene.SceneBase._countUntilSaveRunTime) > 0)	return;
 
 		const now	= Scene.SceneBase.GetDate().getTime();
 		if(!Scene.SceneBase._startAt || Scene.SceneBase._startAt.getTime()<= 0)	Scene.SceneBase._startAt	= now;
