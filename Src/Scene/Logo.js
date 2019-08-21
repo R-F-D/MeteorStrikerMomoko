@@ -17,9 +17,8 @@ Scene.Logo	= class extends Scene.SceneBase {
 
 		this.Sequences	= {
 			INITIAL:	null,	//初期状態
+			PROCESS:	null,	//メイン処理
 		};
-
-		this.label			= null;
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -38,7 +37,6 @@ Scene.Logo	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.label	= Label.CreateInstance(14).AddToLayer(this);
 					return true;
 				},
 			})
@@ -65,11 +63,12 @@ Scene.Logo	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			this.label
-				.SetAnchorPoint(cc.p(1,0))
-				.SetPosition(size.width-8,4)
-				.SetFontColor("#4F4F4F")
-				.SetString(L.Text("Logo.Wait"));
+		})
+		.PushUpdatingFunctions(dt=>{
+			if(this.isEnterTransitionFinished)	this.SetSequence(this.Sequences.PROCESS);
+		});
+		//メイン処理
+		this.Sequences.PROCESS.PushStartingFunctions(()=>{
 		})
 		.PushUpdatingFunctions(dt=>{
 		});
@@ -78,13 +77,22 @@ Scene.Logo	= class extends Scene.SceneBase {
 	}
 
 	InitEventListenerList(){
-		super.InitEventListenerList();
+		super.InitEventListenerList()
+			.AddPropertiesToEventListenerList("move",{
+				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
+				onTouchesEnded	: (touch,event)=>{
+					this.ReplaceScene(Scene.Title);
+				},
+			})
 
 		//共通イベント対応設定
 		let commonEvents	= [];
 		commonEvents.push(this.listeners.touched);
 		commonEvents.push(this.listeners.keyboardReset);
 		this.SetCommonEventListeners("SceneBase.TouchFx",commonEvents);
+
+		//シークエンス-イベント対応設定
+		this.Sequences.PROCESS.SetEventListeners(  LinkedLayerTags.MAIN, this.listeners.move);
 
 		return this;
 	}
