@@ -45,7 +45,10 @@ Scene.SceneBase	= class {
 		this.commonEventListeners	= {};
 		this.commonEventListeners["SceneBase.TouchFx"]	= [];
 
-		if(!isBranchScene)	Scene.SceneBase.OnEnterFirst();
+		if(!isBranchScene){
+			Scene.SceneBase.OnEnterFirst();
+			sound.Init();
+		}
 	}
 
 	/** シーンの更新処理 共通部分
@@ -367,7 +370,6 @@ Scene.SceneBase	= class {
 
 		Store.DynamicInsert(Store.Handles.Action.NumBootings);
 		Achievement.Init();
-		sound.Init();
 
 		//起動時刻
 		Scene.SceneBase._startAt	= new Date();
