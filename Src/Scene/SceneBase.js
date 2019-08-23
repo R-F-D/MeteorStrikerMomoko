@@ -118,12 +118,13 @@ Scene.SceneBase	= class {
 	}
 
 	/** レイヤに背景色を設定
-	 * @param {*} layer
-	 * @param {*} color
+	 * @param {string|cc.Layer} layer	レイヤーまたはレイヤータグ
+	 * @param {string|cc.Color} color	カラーまたはカラーコード
 	 * @returns this
 	 */
 	SetBackgroundColor(layer,color){
 		const size	= cc.director.getWinSize();
+		layer		= _.isString(layer)	? this.ccLayerInstances[layer] : layer;
 		layer.addChild(new cc.LayerColor(typeof color==='string'?cc.color(color):color, size.width,size.height));
 		return this;
 	}

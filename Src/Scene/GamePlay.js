@@ -162,7 +162,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				},
 				init	: function(){
 					this._super();
-					//_this.SetBackgroundColor(this,"#000000");
 					const size	= cc.director.getWinSize();
 					_this.sprites		= _this.sprites||{};
 					_this.sprites.bgSpace	= CreateArray(4).map(()=> Sprite.CreateInstance(rc.img.bgSpace).AddToLayer(this).SetVisible(false)	);
