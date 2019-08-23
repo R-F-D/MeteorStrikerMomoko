@@ -156,7 +156,7 @@ Scene.SceneBase	= class {
 			update	: function(dt){
 				this._super();
 				Scene.SceneBase._date = null;
-				if(this.achievementIsEnabled)	Achievement.Update(dt);
+				if(_this.achievementIsEnabled)	Achievement.Update(dt);
 			},
 		});
 		this.AddToLayerList("ui",{
