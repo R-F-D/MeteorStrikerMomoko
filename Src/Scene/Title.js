@@ -41,7 +41,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					this._super();
 					this.scheduleUpdate();
 					_this.sprites.bg			= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
-					_this.sprites.logo			= Sprite.CreateInstance(rc.img.logo).AddToLayer(this);
+					_this.sprites.title			= Sprite.CreateInstance(rc.img.title).AddToLayer(this);
 					_this.sprites.player		= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.sprites.balloonTail	= Sprite.CreateInstance(rc.img.balloonTail).AddToLayer(this);
 					_this.flyFx					= Effect.Fly.Create(32).Init(this);
@@ -129,7 +129,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		this.Sequences.INITIAL
 			.PushStartingFunctions(()=>{
 				this.sprites.bg.forEach(v=>v.SetVisible(true));
-				this.sprites.logo
+				this.sprites.title
 					.SetScale(1).Attr({zIndex:10}).SetPositionLT(0,size.height);
 				this.sprites.player
 					.SetScale(0).Attr({zIndex:5})
