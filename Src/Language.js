@@ -95,9 +95,15 @@ const LocalizedTexts	= {
 
 
 	//----------------------------------------
-	// 遷移画面
-	// Transition Scene
+	// ロゴ＆遷移画面
+	// Logo Scene & Transition Scene
 	//----------------------------------------
+
+		//遷移中 Transition Message
+		"Logo.ToStart":{
+			_:	"Clck / Tap  to  start",
+			ja:	"クリック/タップでスタート",
+		},
 
 		//遷移中 Transition Message
 		"Transition.Wait":{

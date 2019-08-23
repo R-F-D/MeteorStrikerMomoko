@@ -21,6 +21,7 @@ Scene.Logo	= class extends Scene.SceneBase {
 		};
 
 		this.sprites	= {};
+		this.labels		= {};
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -40,6 +41,7 @@ Scene.Logo	= class extends Scene.SceneBase {
 					this._super();
 					_this.SetBackgroundColor(this,"#F0F0F0");
 					_this.sprites.devLogo	= Sprite.CreateInstance(rc.img.devLogo).AddToLayer(this);
+					_this.labels.toStart	= Label.CreateInstance().SetFontColor("#4F4F4F").AddToLayer(this);
 					this.scheduleUpdate();
 					return true;
 				},
@@ -67,6 +69,7 @@ Scene.Logo	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
+			this.labels.toStart.SetPosition(size.width/2,size.height/8).SetString(L.Text("Logo.ToStart"));
 			this.sprites.devLogo.SetPosition(size.width/2,size.height/2);
 		})
 		.PushUpdatingFunctions(dt=>{
