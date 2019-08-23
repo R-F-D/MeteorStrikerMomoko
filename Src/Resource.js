@@ -5,6 +5,7 @@ const rc	= {
 
 	/** 画像 */
 	img	: {
+		devLogo			: [ "Text/devLogo.png",		1,	1,	],	//開発者ロゴ
 		title			: [ "Text/title.png",		1,	1,	],	//タイトルロゴ
 
 		bgGround		: [ "Bg/bgGround.png",		1,	1,	],	//背景（地上）
