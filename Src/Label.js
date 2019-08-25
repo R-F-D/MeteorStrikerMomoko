@@ -537,13 +537,11 @@ class LabelBg{
 		else if(animates){
 			const hides	= newScale.x<=0 || newScale.y<=0;
 			this.entity.attr({opacity:this.OPACITY});
-			this.entity.runAction(cc.sequence(
+			this.entity.RunActions(
 				cc.delayTime(this.animationDelay),
 				cc.scaleTo(isFast?0.2:0.4, newScale.x,newScale.y).easing(hides ? cc.easeElasticOut(10) : this.easeFunc()),
-				cc.callFunc(()=>{
-					if(hides)	this.entity.attr({opacity:0});
-				})
-			));
+				cc.callFunc(	()=>{	if(hides) this.entity.attr({opacity:0})	})
+			);
 		}
 		else{
 			this.entity.setScale(newScale.x,newScale.y);

@@ -114,6 +114,15 @@ function NormalRandom(halfWidth){
 	return (Math.random()+Math.random()-1) * halfWidth;
 }
 
+/** アクション設定
+ * @param {Action|Acrion[]} actions 可変長引数。アクション、またはアクションの配列（並列処理扱い）
+ */
+cc.Node.prototype.RunActions	= function(...actions){
+	actions	= actions.map(a=> Array.isArray(a) ? cc.spawn(...a) : a );
+	return this.runAction(cc.sequence(actions));
+}
+
+
 /** ランダムな角度を出力する
  * @param {number} [piradRange=2]			出力する範囲。単位はπrad。省略すると2（2πrad=360°）。
  * @param {number} [piradStandardAngle=0]	出力範囲の中央となる値。単位はπrad。省略すると0。

@@ -344,7 +344,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacityOnHover,false,true)
 							.SetColor(this.colorOnHover,false,true)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					else{
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
@@ -352,7 +352,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					this._ApplyIndex();
 				}
@@ -414,7 +414,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.runAction(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
 						if(this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
 				},

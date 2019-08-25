@@ -257,8 +257,7 @@ class Sprite{
 	 * @memberof Sprite
 	 */
 	RunActions(...actions){
-		actions	= actions.map(a=> Array.isArray(a) ? cc.spawn(...a) : a );
-		this.entity.runAction(cc.sequence(actions));
+		this.entity.RunActions(...actions);
 		return this;
 	}
 	StopActions(){
