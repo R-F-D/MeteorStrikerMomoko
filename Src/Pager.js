@@ -8,13 +8,14 @@
 class Pager{
 
 	/** Creates an instance of Pager.
-	 * @param {number} nPages			ページ数
-	 * @param {number} [nChapters=1]	チャプター数
+	 * @param {number} nPagesList		ページ数
 	 * @memberof Pager
 	 */
-	constructor(nPages,nChapters=1){
-		this.nPages			= Number(nPages) || 1;
-		this.nChapters		= Number(nChapters) || 1;
+	constructor(...nPagesList){
+		if(nPagesList.length<=0)	nPagesList = [1];
+		this.nPagesList		= nPagesList;
+		this.nChapters		= nPagesList.length;
+
 		this._page			= 0;
 		this._chapter		= 0;
 		this._onPageChanged	= [];
@@ -97,6 +98,9 @@ class Pager{
 		if(typeof callback !== "function")	callback = [];
 		else								this._onPageChanged.push(callback);
 	}
+
+	get nPages(){ return this.nPagesList[this._chapter]};
+	set nPages(p){ this.nPagesList[this._chapter]=p};
 }
 
 

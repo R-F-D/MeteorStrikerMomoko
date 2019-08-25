@@ -323,7 +323,7 @@ Scene.SceneBase	= class {
 	 */
 	EnableNaviButtons(nPages,nChapters=1){
 		this._naviButtonIsEnabled	= true;
-		if(nPages>=2)	this.pager	= new Pager(nPages,nChapters);
+		if(nPages>=2)	this.pager	= new Pager(nPages);
 		return this;
 	}
 
