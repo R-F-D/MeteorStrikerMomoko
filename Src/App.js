@@ -118,8 +118,8 @@ function NormalRandom(halfWidth){
  * @param {Action|Acrion[]} actions 可変長引数。アクション、またはアクションの配列（並列処理扱い）
  */
 cc.Node.prototype.RunActions	= function(...actions){
-	actions	= actions.map(a=> Array.isArray(a) ? cc.spawn(...a) : a );
-	return this.runAction(cc.sequence(actions));
+	const ParseActs = acts=> acts.map(a=>Array.isArray(a)	? cc.spawn(a)	: a );
+	return this.runAction(cc.sequence(ParseActs(actions)));
 }
 
 
