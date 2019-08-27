@@ -151,7 +151,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		const currentSettings	= {
 			locale:		L.GetCurrentPresetKey(),
 			navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
-			playsBgm:	Store.Select(Store.Handles.Settings.PlaysBgm, "0"),
+			playsBgm:	Store.Select(Store.Handles.Settings.PlaysBgm, "1"),
 		};
 		const initialIndexes	= {
 			locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.locale)		||0),
