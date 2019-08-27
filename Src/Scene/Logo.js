@@ -69,7 +69,10 @@ Scene.Logo	= class extends Scene.SceneBase {
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			this.labels.toStart.SetPosition(size.width/2,size.height/8).SetString(L.Text("Logo.ToStart"));
+			this.labels.toStart
+				.SetPosition(size.width/2,size.height/8)
+				.SetString(L.Text("Logo.ToStart"))
+				.entity.RunActions( [null,cc.fadeTo(1,64),cc.fadeTo(0,255)] );
 			this.sprites.devLogo.SetPosition(size.width/2,size.height/2);
 		})
 		.PushUpdatingFunctions(dt=>{
