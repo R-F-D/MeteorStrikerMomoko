@@ -197,7 +197,7 @@ class PageNavigator{
 		if(!this.pager || this.pager.nPages<2)	return this;
 
 		this.pageIndicator.forEach((indicator,i)=>{
-			if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(1).StopActions().RunActions( [cc.scaleTo(0.25, 0.75),cc.fadeTo (0.25,255), cc.repeat(cc.rotateBy(4,360),2**30)]);
+			if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(1).StopActions().RunActions( [cc.scaleTo(0.25, 0.75),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
 			else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.5 ),cc.fadeTo (0.25,96)] );
 		});
 		return this;

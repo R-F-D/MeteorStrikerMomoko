@@ -115,13 +115,26 @@ function NormalRandom(halfWidth){
 }
 
 /** アクション設定
+ * Usage:
+ * - 連続:	act1,act2,act3 …
+ * - 並列:	[act1,act2,act3,…]
+ * - 反復: [nRepeats,avt1,act2,…]
  * @param {Action|Acrion[]} actions 可変長引数。アクション、またはアクションの配列（並列処理扱い）
  */
 cc.Node.prototype.RunActions	= function(...actions){
-	const ParseActs = acts=> acts.map(a=>Array.isArray(a)	? cc.spawn(a)	: a );
-	return this.runAction(cc.sequence(ParseActs(actions)));
-}
 
+	const ParseActs = acts=>_(acts).map(act=>{
+		if		(!Array.isArray(act))					return act;							//連続アクション
+		else if	(act[0]!==null && !_.isNumber(act[0]))	return cc.spawn(...ParseActs(act));	//並列アクション
+
+		//反復アクション
+		const nRepeats = act.shift();
+		if(nRepeats!==null)	return cc.repeat(cc.sequence(...ParseActs(act)),nRepeats);
+		else				return cc.repeat(cc.sequence(...ParseActs(act)),2**30);
+	});
+
+	return this.runAction(cc.sequence(...ParseActs(actions)));
+}
 
 /** ランダムな角度を出力する
  * @param {number} [piradRange=2]			出力する範囲。単位はπrad。省略すると2（2πrad=360°）。
