@@ -29,6 +29,8 @@ Scene.Title	= class extends Scene.SceneBase {
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
 		this.SetSequenceFunctions().InitEventListenerList();
+
+		sound.Init();
 	}
 
 
@@ -69,7 +71,6 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetSequence(this.Sequences.INITIAL);
 
 		this.InitUIs();
-		sound.Init();
 		return this;
 	}
 
