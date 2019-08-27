@@ -69,6 +69,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.SetSequence(this.Sequences.INITIAL);
 
 		this.InitUIs();
+		sound.Init();
 		return this;
 	}
 

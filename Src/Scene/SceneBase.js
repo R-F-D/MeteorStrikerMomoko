@@ -45,10 +45,7 @@ Scene.SceneBase	= class {
 		this.commonEventListeners	= {};
 		this.commonEventListeners["SceneBase.TouchFx"]	= [];
 
-		if(!isBranchScene){
-			Scene.SceneBase.OnEnterFirst();
-			sound.Init();
-		}
+		if(!isBranchScene)	Scene.SceneBase.OnEnterFirst();
 	}
 
 	/** シーンの更新処理 共通部分
@@ -245,7 +242,7 @@ Scene.SceneBase	= class {
 		this.ccSceneInstance	= new (cc.Scene.extend({
 			onEnter	: function (){
 				this._super();
-				sound.StopMusic();
+				sound.Reset();
 				childScene
 					.SetLayer("SceneBase.TouchFx",    childScene.ccLayers.touchFx,    0x0202)
 					.SetLayer("SceneBase.Achievement",childScene.ccLayers.achievement,0x0201)
