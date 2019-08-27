@@ -278,9 +278,10 @@ Scene.SceneBase	= class {
 	 * @param {*} newSceneClass シーンクラスの型
 	 * @returns {Scene.SceneBase} 新シーンクラスのインスタンス
 	 */
-	ReplaceScene(newSceneClass){
+	ReplaceScene(newSceneClass,isTR=false){
 		const sceneInst	= newSceneClass.Create();
-		cc.director.runScene( cc.TransitionFade.create(1,sceneInst.GetCcSceneInstance()));
+		if(isTR)	cc.director.runScene( cc.TransitionFadeTR.create(1,sceneInst.GetCcSceneInstance()));
+		else		cc.director.runScene( cc.TransitionFade.create(1,sceneInst.GetCcSceneInstance()));
 		return sceneInst;
 	}
 

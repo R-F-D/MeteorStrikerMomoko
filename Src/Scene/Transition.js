@@ -19,6 +19,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 			INITIAL:	null,	//初期状態
 		};
 		this._transitionTo	= null;
+		this._isTR			= false;
 
 		this.label			= null;
 
@@ -39,6 +40,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
+					_this.SetBackgroundColor(this,"#000000");
 					_this.label	= Label.CreateInstance(14).AddToLayer(this);
 					return true;
 				},
@@ -57,12 +59,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 	}
 
 	OnUpdating(dt){
-		super.OnUpdating(dt);
-
-		if(this.isEnterTransitionFinished && this._transitionTo){
-			this.ReplaceScene(this._transitionTo);
-			this._transitionTo	= null;
-		}
+		super.OnUpdating(dt)
 		return this;
 	}
 
@@ -78,6 +75,11 @@ Scene.Transition	= class extends Scene.SceneBase {
 				.SetString(L.Text("Transition.Wait"));
 		})
 		.PushUpdatingFunctions(dt=>{
+			if(this.isEnterTransitionFinished && this._transitionTo){
+				this.ReplaceScene(this._transitionTo,this._isTR);
+				this._transitionTo	= null;
+				this._isTR			= false;
+			}
 		});
 
 		return this;
@@ -95,8 +97,9 @@ Scene.Transition	= class extends Scene.SceneBase {
 		return this;
 	}
 
-	SetTransitionTo(scene){
+	SetTransitionTo(scene,isTR=false){
 		this._transitionTo	= scene;
+		this._isTR	= isTR;
 		return this;
 	}
 
