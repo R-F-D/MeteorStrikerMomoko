@@ -25,6 +25,15 @@ class Sound{
 		cc.audioEngine.setMusicVolume(this.musicVolume);
 		this.musicIsInitialized	= true;
 
+		return this.Reset();
+	}
+
+	/** サウンドのリセット
+	 * @memberof Sound
+	 */
+	Reset(){
+		if(!this.musicIsInitialized)	return this;
+		this.StopMusic();
 		return this;
 	}
 
