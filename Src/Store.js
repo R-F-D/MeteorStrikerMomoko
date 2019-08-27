@@ -82,6 +82,8 @@ class Store{
 				Language:					{},
 				/** 数値の区切り設定 */
 				NumberSeparation:			{},
+				/** BGM再生 */
+				PlaysBgm:					{},
 				/** ナビゲーター設定 */
 				Navigator:					{},
 				/**記録・実績の全公開設定*/

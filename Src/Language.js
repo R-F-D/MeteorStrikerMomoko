@@ -233,6 +233,14 @@ const LocalizedTexts	= {
 		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
 		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
 
+		//BGM設定 Background Music
+		"Settings.PlaysBgm":	{
+			_:	"Background Music",
+			ja:	"BGM",
+		},
+		"Settings.PlaysBgm.Label.0":	{_:	"Off",	ja:"OFF",	},	//Volume Off
+		"Settings.PlaysBgm.Label.1":	{_:	"On",	ja:"ON",	},	//Volume On
+
 		//ナビゲーター設定 Navigator
 		"Settings.Navigator":	{
 			_:	"Navigator",
