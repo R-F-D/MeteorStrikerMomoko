@@ -127,6 +127,12 @@ Scene.Settings	= class extends Scene.SceneBase {
 		super.InitUIs(layer);
 		this.selectors.locale.AddToLayer(layer);
 		this.selectors.navigator.AddToLayer(layer);
+
+		//初回起動時の初期設定
+		if(Scene.SceneBase.isFirstBoot && !Scene.SceneBase.initialSettingIsCompleted){
+			this.pageNavigator.buttons.at("Reset").OnButtonUp(()=>this.ReplaceScene(Scene.Logo));
+			Scene.SceneBase.initialSettingIsCompleted	= true;
+		}
 		return true;
 	}
 

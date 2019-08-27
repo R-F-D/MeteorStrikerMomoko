@@ -3,7 +3,8 @@ var Scene	= Scene || {};
 
 /** Scenesクラスのファクトリ */
 Scene.SceneFactory	= ()=>{
-	Scene.SceneBase.first	= Scene.Logo;
+	Scene.SceneBase.isFirstBoot	= Store.Select(Store.Handles.Action.NumBootings,0) <= 0;
+	Scene.SceneBase.first	= Scene.SceneBase.isFirstBoot	? Scene.Settings	: Scene.Logo;	//初回起動時のみロゴ画面ではなく設定画面へ
 	Scene.SceneBase.resetTo	= Scene.Title;
 	return Scene.SceneBase.first.Create();
 }

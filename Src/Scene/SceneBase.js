@@ -398,6 +398,9 @@ Scene.SceneBase	= class {
 
 }//class
 
+Scene.SceneBase.isFirstBoot					= false;	//初回起動
+Scene.SceneBase.initialSettingIsCompleted	= false;	//初期設定
+
 Scene.SceneBase.first		= null;
 Scene.SceneBase.resetTo		= null;
 Scene.SceneBase._date		= null;
