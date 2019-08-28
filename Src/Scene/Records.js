@@ -75,7 +75,6 @@ Scene.Records	= class extends Scene.SceneBase {
 						let board	= {};
 						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
 						board.body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
-						if	(_this.mode==Scene.Records.Mode.Achievements)	board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
 
 						board.foot	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
 						board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
@@ -128,8 +127,12 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 			//ラベル
 			this.displayBoards
-				.forEach(board=> board.body.Init() );
-
+				.forEach(board=>{
+					board.body.Init();
+					board.text.Init();
+					board.foot.Init();
+					if(this.mode==Scene.Records.Mode.Achievements)	board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
+				});
 		})
 		.PushUpdatingFunctions(dt=>{
 			 if(this.sequence.count>=60)	this.SetSequence(this.processScene());
