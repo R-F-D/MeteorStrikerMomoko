@@ -75,15 +75,10 @@ Scene.Records	= class extends Scene.SceneBase {
 						let board	= {};
 						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
 						board.body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
+						if	(_this.mode==Scene.Records.Mode.Achievements)	board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
 
-						if		(_this.mode==Scene.Records.Mode.Records){
-							board.counter	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
-						}
-						else if	(_this.mode==Scene.Records.Mode.Achievements){
-							board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
-							board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
-							board.date		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
-						}
+						board.foot	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
+						board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
 						return board;
 					});
 
@@ -152,9 +147,10 @@ Scene.Records	= class extends Scene.SceneBase {
 			this.displayBoards
 				.forEach((board,i)=>{
 					const handle	= handles.shift();
+					board.text.SetVisible(false);
 					if(!handle){
 						board.body.SetVisible(false);
-						board.counter.SetVisible(false);
+						board.foot.SetVisible(false);
 						return;
 					}
 
@@ -187,12 +183,12 @@ Scene.Records	= class extends Scene.SceneBase {
 					if(isPublic){
 						board.body.bg.OPACITY	= 128;
 						board.body.SetFontColor("#FFCF00","#7F0000",1);
-						board.counter.SetFontColor("#FFFFFF");
+						board.foot.SetFontColor("#FFFFFF");
 					}
 					else{
 						board.body.bg.OPACITY	= 64;
 						board.body.SetFontColor("#AFAF00","#1F0000",1);
-						board.counter.SetFontColor("#AFAFAF");
+						board.foot.SetFontColor("#AFAFAF");
 					}
 
 					board.body
@@ -200,7 +196,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetNumLogLines(RecordBoard.NumLogLines)
 						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
 						.SetString(` ${text}`);
-					board.counter
+					board.foot
 						.SetVisible(false)
 						.SetPosition(PanelPosition.X+x+RecordBoard.Size.Width-2,PanelPosition.Y-y-6)
 						.SetString(`${fmtCount}`);
@@ -209,7 +205,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		})
 		.PushUpdatingFunctions(dt=>{
 			this.displayBoards.forEach((board,i)=>{
-				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.counter.SetVisible(true);
+				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.foot.SetVisible(true);
 			});
 		});
 
@@ -226,7 +222,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				.forEach((board,i)=>{
 					board.body.SetVisible(false);
 					board.text.SetVisible(false);
-					board.date.SetVisible(false);
+					board.foot.SetVisible(false);
 
 					const handle	= handles.shift();
 					if(!handle)	return;
@@ -264,14 +260,14 @@ Scene.Records	= class extends Scene.SceneBase {
 						board.body.iconOpacity	= 255;
 						board.body.SetFontColor("#FFCF00","#7F0000",1);
 						board.text.SetFontColor("#CFCFCF");
-						board.date.SetFontColor("#FFFFFF");
+						board.foot.SetFontColor("#FFFFFF");
 					}
 					else{
 						board.body.bg.OPACITY	= 64;
 						board.body.iconOpacity	= 128;
 						board.body.SetFontColor("#AFAF00","#1F0000",1);
 						board.text.SetFontColor("#AFAFAF");
-						board.date.SetFontColor("#AFAFAF");
+						board.foot.SetFontColor("#AFAFAF");
 					}
 
 					board.body
@@ -284,7 +280,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetNumLogLines(2)
 						.SetPosition(PanelPosition.X+x+2,PanelPosition.Y-y-2)
 						.SetString(text);
-					board.date
+					board.foot
 						.SetNumLogLines(1)
 						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,PanelPosition.Y-y-16)
 						.SetString(`${datetime}`);
@@ -297,7 +293,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				//出現アニメーションが終わったら連動して内容を表示
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions()){
 					board.text.SetVisible(true);
-					board.date.SetVisible(true);
+					board.foot.SetVisible(true);
 				}
 
 				//アイコン
@@ -309,7 +305,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		//トランジション
 		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
 			this.displayBoards.forEach(b=>{
-				["body","counter","text","date"].forEach(i=>{
+				["body","foot","text"].forEach(i=>{
 					if(b[i] && b[i].IsVisible())	b[i].RemoveString(false);
 				});
 			});
