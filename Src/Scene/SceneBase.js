@@ -316,12 +316,11 @@ Scene.SceneBase	= class {
 
 	/** ナビゲーションボタンを有効にする
 	 * @param {number} [nPages]		ページ枚数。1以下のときページ送りなし。
-	 * @param {number} [nChapters]	チャプター数。ページ送りなしの場合は無効。
 	 * @returns this
 	 */
-	EnableNaviButtons(nPages,nChapters=1){
+	EnableNaviButtons(...nPages){
 		this._naviButtonIsEnabled	= true;
-		if(nPages>=2)	this.pager	= new Pager(nPages);
+		if(nPages.length>1 || nPages[0]>1)	this.pager	= new Pager(...nPages);
 		return this;
 	}
 

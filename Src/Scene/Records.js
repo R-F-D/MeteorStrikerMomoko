@@ -354,12 +354,8 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.mode	= mode;
 		this.processScene	= this.mode==Scene.Records.Mode.Records	? ()=>this.Sequences.RECORDS	: ()=>this.Sequences.ACHIEVEMENTS;
 
-
 		//Init
-		if(initializes){
-			if(this.mode===Scene.Records.Mode.Achievements)	this.EnableNaviButtons(Achievement.NumPages);
-			else if(this.mode===Scene.Records.Mode.Records)	this.EnableNaviButtons(Store.NumPages);
-		}
+		if(initializes)	this.EnableNaviButtons(Achievement.NumPages,Store.NumPages);
 		return this;
 	}
 	static get Mode(){
