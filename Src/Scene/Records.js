@@ -355,7 +355,11 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.processScene	= this.mode==Scene.Records.Mode.Records	? ()=>this.Sequences.RECORDS	: ()=>this.Sequences.ACHIEVEMENTS;
 
 		//Init
-		if(initializes)	this.EnableNaviButtons(Achievement.NumPages,Store.NumPages);
+		if(initializes){
+			this.EnableNaviButtons(Achievement.NumPages,Store.NumPages);
+			if		(this.mode==Scene.Records.Mode.Records)			this.pager.SetChapter(1, false);
+			else if	(this.mode==Scene.Records.Mode.Achievements)	this.pager.SetChapter(0, false);
+		}
 		return this;
 	}
 	static get Mode(){

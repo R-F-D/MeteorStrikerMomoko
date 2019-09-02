@@ -44,11 +44,11 @@ class Pager{
 	 * @memberof Pager
 	 */
 	SetPage(dst, callbacks=true){
-		this.nPages			= this.nPages || 1;
-		dst					= dst===null ? this.nPages : dst;
+		this.nPages			= this.GetNumPages() || 1;
+		dst					= dst===null ? this.GetNumPages() : dst;
 
 		const old			= this._page;
-		this._page	= _(dst).clamp( 0, this.nPages-1 );
+		this._page	= _(dst).clamp( 0, this.GetNumPages()-1 );
 
 		if(callbacks && old!=this._page && this._onPageChanged) this._onPageChanged.forEach(f=>f());
 		return this;
@@ -99,8 +99,13 @@ class Pager{
 		else								this._onPageChanged.push(callback);
 	}
 
-	get nPages(){ return this.nPagesList[this._chapter]};
+	GetNumPages(chapter=null){
+		if(chapter===null)	return this.nPagesList[this._chapter];
+		else				return this.nPagesList[chapter];
+	};
+	/** @param {number} p */
 	set nPages(p){ this.nPagesList[this._chapter]=p};
+	get mostPagesOfAllChapters()	{return _.max(this.nPagesList)};
 }
 
 
@@ -136,7 +141,7 @@ class PageNavigator{
 			.AssignKeyboard(cc.KEY.r)	//R
 			.OnButtonUp(()=>this.parent.ResetForce());
 
-		if(!this.pager || this.pager.nPages<2)	return this;
+		if(!this.pager || this.pager.GetNumPages()<2)	return this;
 
 		//矢印ボタン
 		this.buttons.at("Prev")
@@ -180,26 +185,33 @@ class PageNavigator{
 
 
 		//インジケータ
-		if(this.pager.nPages<2) return this;
-		const indicatorWidth	= this.pager.nPages<8 ? 128 : 256;
-		this.pageIndicator	= _.range(this.pager.nPages).map((v,i)=>
-			Sprite.CreateInstance(rc.img.navigationButton).AddToLayer(layer).Attr({zIndex:5})
-				.SetIndex(1)
-				.SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.nPages-1)), 32)
-		);
-		this.SetPageIndicator();
+		if(this.pager.mostPagesOfAllChapters>1){
+			this.pageIndicator	= _.range(this.pager.mostPagesOfAllChapters).map(()=>
+				Sprite.CreateInstance(rc.img.navigationButton)
+					.AddToLayer(layer)
+					.Attr({zIndex:5})
+					.SetIndex(1)
+					.SetVisible(false)
+			);
+			this.SetPageIndicator();
+		}
 
 		return this;
 	}
 
 	/** ページインジケータ設定 */
 	SetPageIndicator(){
-		if(!this.pager || this.pager.nPages<2)	return this;
+		if(!this.pager || this.pager.GetNumPages()<2)	return this;
+		const size		= cc.director.getWinSize();
 
-		this.pageIndicator.forEach((indicator,i)=>{
-			if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(1).StopActions().RunActions( [cc.scaleTo(0.25, 0.75),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
-			else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.5 ),cc.fadeTo (0.25,96)] );
-		});
+		this.pageIndicator
+			.filter((v,i)=> i < this.pager.GetNumPages() )
+			.forEach((indicator,i)=>{
+				const indicatorWidth	= this.pager.GetNumPages()<8 ? 128 : 256;
+				indicator.SetVisible(true).SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.GetNumPages()-1)), 32);
+				if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(1).StopActions().RunActions( [cc.scaleTo(0.25, 0.75),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
+				else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.5 ),cc.fadeTo (0.25,96)] );
+			});
 		return this;
 	}
 
