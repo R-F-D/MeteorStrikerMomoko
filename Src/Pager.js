@@ -191,7 +191,6 @@ class PageNavigator{
 					.AddToLayer(layer)
 					.Attr({zIndex:5})
 					.SetIndex(1)
-					.SetVisible(false)
 			);
 			this.SetPageIndicator();
 		}
@@ -203,6 +202,9 @@ class PageNavigator{
 	SetPageIndicator(){
 		if(!this.pager || this.pager.GetNumPages()<2)	return this;
 		const size		= cc.director.getWinSize();
+
+		this.pageIndicator
+			.forEach((indicator)=>indicator.SetVisible(false).SetScale(0.5));
 
 		this.pageIndicator
 			.filter((v,i)=> i < this.pager.GetNumPages() )
