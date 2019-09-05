@@ -18,7 +18,8 @@ class Pager{
 
 		this._page			= 0;
 		this._chapter		= 0;
-		this._onPageChanged	= [];
+		this._onPageChanged		= [];
+		this._onChapterChanged	= [];
 	}
 
 	/** 現在のページを取得
@@ -49,8 +50,10 @@ class Pager{
 
 		const old			= this._page;
 		this._page	= _(dst).clamp( 0, this.GetNumPages()-1 );
+		if(old==this._page)	return this;	//遷移しない
 
-		if(callbacks && old!=this._page && this._onPageChanged) this._onPageChanged.forEach(f=>f());
+		//イベントリスナ
+		if(callbacks && this._onPageChanged) this._onPageChanged.forEach(f=>f());
 		return this;
 	}
 
@@ -66,8 +69,11 @@ class Pager{
 
 		const old		= this._chapter;
 		this._chapter	= _(dst).clamp( 0, this.nChapters-1 );
+		if(old==this._chapter)	return this;	//遷移しない
 
-		if(callbacks && old!=this._chapter && this._onPageChanged) this._onPageChanged.forEach(f=>f());
+		//イベントリスナ
+		if(callbacks && this._onChapterChanged)	this._onChapterChanged.forEach(f=>f());
+		this.SetPage(0,callbacks);
 		return this;
 	}
 
@@ -95,8 +101,15 @@ class Pager{
 	 * @param {function} [callback=null]
 	 */
 	set onPageChanged(callback=null){
-		if(typeof callback !== "function")	callback = [];
+		if(typeof callback !== "function")	his._onPageChanged = [];
 		else								this._onPageChanged.push(callback);
+	}
+	/** チャプター変更時のコールバック関数
+	 * @param {function} [callback=null]
+	 */
+	set onChapterChanged(callback=null){
+		if(typeof callback !== "function")	this._onChapterChanged = [];
+		else								this._onChapterChanged.push(callback);
 	}
 
 	GetNumPages(chapter=null){
@@ -171,7 +184,7 @@ class PageNavigator{
 		this.buttons.at("PrevChapter")
 			.SetIndex(2).SetPosition(24+32+12,168+72)
 			.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
-			.OnButtonUp(()=>this.pager.AddChapter(-1))
+			.OnButtonUp(()=>{this.pager.AddChapter(-1)})
 			.SetVisible(this.pager.nChapters>1)
 			.SetAutoOff(true)
 			.sprite.SetRotate(-90);

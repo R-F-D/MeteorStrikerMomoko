@@ -110,7 +110,10 @@ Scene.Records	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
-		if(this.pager)	this.pager.onPageChanged	= ()=>this.SetSequence(this.Sequences.TRANSITION);
+		if(this.pager){
+			this.pager.onChapterChanged	= ()=> this.SetMode(this.pager.GetChapter(),false);
+			this.pager.onPageChanged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
+		}
 		return this;
 	}
 
@@ -131,7 +134,6 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body.Init();
 					board.text.Init();
 					board.foot.Init();
-					if(this.mode==Scene.Records.Mode.Achievements)	board.body.SetIcon(rc.img.achievement).SetIconPosition(4,3);
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
@@ -149,13 +151,12 @@ Scene.Records	= class extends Scene.SceneBase {
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
-					const handle	= handles.shift();
+					board.body.SetVisible(false).SetIcon(null);
 					board.text.SetVisible(false);
-					if(!handle){
-						board.body.SetVisible(false);
-						board.foot.SetVisible(false);
-						return;
-					}
+					board.foot.SetVisible(false);
+
+					const handle	= handles.shift();
+					if(!handle)	return;
 
 					//カウンタと公開フラグ
 					//ヘッダテキスト＆カウンタ
@@ -223,7 +224,7 @@ Scene.Records	= class extends Scene.SceneBase {
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
-					board.body.SetVisible(false);
+					board.body.SetVisible(false).SetIcon(rc.img.achievement).SetIconPosition(4,3);
 					board.text.SetVisible(false);
 					board.foot.SetVisible(false);
 
@@ -357,15 +358,14 @@ Scene.Records	= class extends Scene.SceneBase {
 		//Init
 		if(initializes){
 			this.EnableNaviButtons(Achievement.NumPages,Store.NumPages);
-			if		(this.mode==Scene.Records.Mode.Records)			this.pager.SetChapter(1, false);
-			else if	(this.mode==Scene.Records.Mode.Achievements)	this.pager.SetChapter(0, false);
+			this.pager.SetChapter(this.mode, false);
 		}
 		return this;
 	}
 	static get Mode(){
 		return {
-			Achievements:	1,
-			Records:		2,
+			Achievements:	0,
+			Records:		1,
 		};
 	}
 
