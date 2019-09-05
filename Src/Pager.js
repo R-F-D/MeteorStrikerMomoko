@@ -70,10 +70,14 @@ class Pager{
 		const old		= this._chapter;
 		this._chapter	= _(dst).clamp( 0, this.nChapters-1 );
 		if(old==this._chapter)	return this;	//遷移しない
+		this.SetPage(0,false);
 
 		//イベントリスナ
-		if(callbacks && this._onChapterChanged)	this._onChapterChanged.forEach(f=>f());
-		this.SetPage(0,callbacks);
+		if(callbacks){
+			if(this._onChapterChanged)	this._onChapterChanged.forEach(f=>f());
+			if(this._onPageChanged)		this._onPageChanged.forEach(f=>f());
+		}
+
 		return this;
 	}
 
