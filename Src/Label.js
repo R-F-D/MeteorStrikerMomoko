@@ -347,6 +347,10 @@ Label	= class Label{
 	 * @returns {this}
 	 */
 	SetIcon(img){
+		if(!img){
+			this.icon	= null;
+			return this;
+		}
 
 		this.icon	= Sprite
 						.CreateInstance(img)
