@@ -10,7 +10,7 @@ const LinkedLayerTags	= {
 	BG:		"Records.Bg",
 };
 
-const PanelPosition		= {X:96,Y:242};
+const PanelPosition		= {X:96,Y:20};
 const RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
@@ -73,11 +73,11 @@ Scene.Records	= class extends Scene.SceneBase {
 					//表示板
 					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>{
 						let board	= {};
-						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 0.5);
+						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 1.0);
 						board.body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
 
-						board.foot	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.5);
-						board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 0.5);
+						board.foot	= Label.CreateInstance(11).AddToLayer(this).SetAnchorPoint(1.0, 0.0);
+						board.text		= Label.CreateInstance(9).AddToLayer(this).SetAnchorPoint(0.0, 1.0);
 						return board;
 					});
 
@@ -198,11 +198,11 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body
 						.SetVisible(true)
 						.SetNumLogLines(RecordBoard.NumLogLines)
-						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
+						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y)
 						.SetString(` ${text}`);
 					board.foot
 						.SetVisible(false)
-						.SetPosition(PanelPosition.X+x+RecordBoard.Size.Width-2,PanelPosition.Y-y-6)
+						.SetPosition(PanelPosition.X+x+RecordBoard.Size.Width-2,size.height-PanelPosition.Y-y-RecordBoard.Size.Height+2)
 						.SetString(`${fmtCount}`);
 					board.body.bg.animationDelay	= 0.0;
 				});
@@ -224,7 +224,7 @@ Scene.Records	= class extends Scene.SceneBase {
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
-					board.body.SetVisible(false).SetIcon(rc.img.achievement).SetIconPosition(4,3);
+					board.body.SetVisible(false).SetIcon(rc.img.achievement).SetIconPosition(4,6+3);
 					board.text.SetVisible(false);
 					board.foot.SetVisible(false);
 
@@ -277,16 +277,16 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body
 						.SetVisible(true)
 						.SetNumLogLines(AchievementBoard.NumLogLines)
-						.SetPosition(PanelPosition.X+x,PanelPosition.Y-y)
+						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y)
 						.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked) )
 						.SetString(` ${title}`);
 					board.text
 						.SetNumLogLines(2)
-						.SetPosition(PanelPosition.X+x+2,PanelPosition.Y-y-2)
+						.SetPosition(PanelPosition.X+x+2,size.height-PanelPosition.Y-y-14)
 						.SetString(text);
 					board.foot
 						.SetNumLogLines(1)
-						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,PanelPosition.Y-y-16)
+						.SetPosition(PanelPosition.X+x+AchievementBoard.Size.Width-2,size.height-PanelPosition.Y-y-AchievementBoard.Size.Height+2)
 						.SetString(`${datetime}`);
 					board.body.bg.animationDelay	= 0.0;
 				});

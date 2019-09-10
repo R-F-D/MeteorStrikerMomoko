@@ -355,8 +355,10 @@ Label	= class Label{
 		this.icon	= Sprite
 						.CreateInstance(img)
 						.Attr({opacity:0,zIndex:this.Z-1})
-						.SetScale(1)
-		this.icon.entity.setAnchorPoint(1.0, 0.5);
+						.SetScale(1);
+
+		const anchor= this.entity.getAnchorPoint();
+		this.icon.entity.setAnchorPoint(1.0, anchor.y);
 
 		let layer	= this.entity.getParent();
 		if(layer)	this.icon.AddToLayer(layer);
@@ -392,6 +394,8 @@ Label	= class Label{
 	SetAnchorPoint(x,y){
 		this.entity.setAnchorPoint(cc.p(x,y));
 		if(this.bg.IsEnabled())	this.bg.entity.setAnchorPoint(cc.p(x,y));
+		if(this.icon)	this.icon.entity.setAnchorPoint(1.0, y);
+
 		return this;
 	}
 
