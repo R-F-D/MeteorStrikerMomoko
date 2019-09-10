@@ -28,6 +28,12 @@ const SelectorMaps	= {
 	],
 };
 
+/** @const セレクタ領域のマージン */
+const SelectorAreaMargin	= {
+	left:	16+64,
+	top:	16,
+};
+
 
 Scene.Settings	= class extends Scene.SceneBase {
 
@@ -162,7 +168,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.selectors.locale
 			.Init()
 			.SetCaptionByTextCode("Settings.Locale")
-			.SetArea(64,size.height)
+			.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+0))
 			.Select(initialIndexes.locale)
 			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Locale,tag,0))
 			.buttons
@@ -172,7 +178,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.selectors.playsBgm
 				.Init()
 				.SetCaptionByTextCode("Settings.PlaysBgm")
-				.SetArea(64,size.height-64)
+				.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+64))
 				.Select(initialIndexes.playsBgm)
 				.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.PlaysBgm,tag,0))
 				.buttons
@@ -182,7 +188,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.selectors.navigator
 			.Init()
 			.SetCaptionByTextCode("Settings.Navigator")
-			.SetArea(64,size.height-128)
+			.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+128))
 			.Select(initialIndexes.navigator)
 			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Navigator,tag,0))
 			.buttons
