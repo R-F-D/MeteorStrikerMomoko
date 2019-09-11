@@ -193,9 +193,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	 */
 	SetSequenceFunctions(){
 
+		const size	= cc.director.getWinSize();
+
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
-			const size	= cc.director.getWinSize();
 
 			this.bgScroll			= 0;
 			this.bgScrollSpeed		= -8;
@@ -206,6 +207,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.isShared			= false;
 
 			this.aiming.SetSpritePosition(164,80).SetVisible(false);
+			this.pageNavigator.buttons.at("Reset").SetVisible(false);
 
 			//スプライト
 			this.sprites.player
@@ -280,6 +282,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.player.SetCustomData("isFlying",false)
 				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Aim"),null).SetVisible(true);
 				this.aiming.SetVisible(true,true);
+				this.pageNavigator.buttons.at("Reset").SetVisible(true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
 			})
@@ -468,7 +471,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		//プレイヤー退場
 		this.Sequences.LEAVE
 			.PushStartingFunctions(()=>{
-				const size	= cc.director.getWinSize();
 
 				this.sprites.bgGround.forEach(s=>s.SetVisible(false));
 				this.sprites.meteor.SetVisible(false);
@@ -518,8 +520,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.sprites.player.SetVisible(false);
 				this.buttons.SetVisible(true);
-				this.pageNavigator.buttons.at("Reset").SetVisible(true);
-
+				this.pageNavigator.buttons.at("Reset").SetVisible(true).SetScale(2);
 
 				//初プレイ実績
 				const nPlays	= Store.DynamicInsert(Store.Handles.Action.NumPlays);

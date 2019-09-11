@@ -154,7 +154,7 @@ class PageNavigator{
 
 		//リセットボタン
 		this.buttons.at("Reset")
-			.SetIndex(0).SetPosition(24,size.height-24)
+			.SetIndex(0).SetPosition(32,size.height-32)
 			.AssignKeyboard(cc.KEY.r)	//R
 			.OnButtonUp(()=>this.parent.ResetForce());
 
