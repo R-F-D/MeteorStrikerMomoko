@@ -120,6 +120,9 @@ class Pager{
 		if(chapter===null)	return this.nPagesList[this._chapter];
 		else				return this.nPagesList[chapter];
 	};
+	GetNumChapters(){
+		return this.nPagesList.length || 1;
+	};
 	/** @param {number} p */
 	set nPages(p){ this.nPagesList[this._chapter]=p};
 	get mostPagesOfAllChapters()	{return _.max(this.nPagesList)};
@@ -135,9 +138,14 @@ class PageNavigator{
 		/** @var ナビゲーション用ボタン */
 		this.buttons		= null;
 		/** @var ページ遷移用インジケータのコンテナ */
-		this.pageIndicator	= null;
+		this.pageIndicators	= null;
+		/** @var チャプター遷移用インジケータのコンテナ */
+		this.chapterIndicators	= null;
 
-		if(pager)	this.pager.onPageChanged	= ()=>this.SetPageIndicator();
+		if(pager){
+			this.pager.onPageChanged	= ()=>this.SetPageIndicator();
+			this.pager.onChapterChanged	= ()=>this.SetChapterIndicator();
+		}
 	}
 
 	//ナビボタン作成
@@ -201,15 +209,26 @@ class PageNavigator{
 			.sprite.SetRotate(90);
 
 
-		//インジケータ
+		//ページインジケータ
 		if(this.pager.mostPagesOfAllChapters>1){
-			this.pageIndicator	= _.range(this.pager.mostPagesOfAllChapters).map(()=>
+			this.pageIndicators	= _.range(this.pager.mostPagesOfAllChapters).map(()=>
 				Sprite.CreateInstance(rc.img.navigationButton)
 					.AddToLayer(layer)
 					.Attr({zIndex:5})
 					.SetIndex(1)
 			);
 			this.SetPageIndicator();
+		}
+
+		//チャプターインジケータ
+		if(this.pager.GetNumChapters()>1){
+			this.chapterIndicators	= _.range(this.pager.GetNumChapters()).map(()=>
+				Sprite.CreateInstance(rc.img.navigationButton)
+					.AddToLayer(layer)
+					.Attr({zIndex:5})
+					.SetIndex(1)
+			);
+			this.SetChapterIndicator();
 		}
 
 		return this;
@@ -220,16 +239,31 @@ class PageNavigator{
 		if(!this.pager || this.pager.GetNumPages()<2)	return this;
 		const size		= cc.director.getWinSize();
 
-		this.pageIndicator
+		this.pageIndicators
 			.forEach((indicator)=>indicator.SetVisible(false).SetScale(0.5));
 
-		this.pageIndicator
+		this.pageIndicators
 			.filter((v,i)=> i < this.pager.GetNumPages() )
 			.forEach((indicator,i)=>{
 				const indicatorWidth	= this.pager.GetNumPages()<8 ? 128 : 256;
 				indicator.SetVisible(true).SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.GetNumPages()-1)), 32);
 				if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(0.75).StopActions().RunActions( [cc.scaleTo(0.20, 0.5),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
 				else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.25 ),cc.fadeTo (0.25,96)] );
+			});
+		return this;
+	}
+
+	/** チャプターインジケータ設定 */
+	SetChapterIndicator(){
+		if(this.pager.GetNumChapters()<2)	return this;
+		const size		= cc.director.getWinSize();
+
+		this.chapterIndicators
+			.forEach((indicator,i)=>{
+				const indicatorWidth	= 32;
+				indicator.SetVisible(true).SetPosition(32+32,96+128-indicatorWidth*(i+1));
+				if(i==this.pager.GetChapter())	indicator.SetColor("#FFA000").StopActions().RunActions( cc.fadeTo (0.25,255));
+				else							indicator.SetColor("#FFFFFF").StopActions().RunActions( cc.fadeTo (0.25,96) );
 			});
 		return this;
 	}
