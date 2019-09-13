@@ -194,14 +194,14 @@ class PageNavigator{
 			.SetAutoOff(true);
 
 		this.buttons.at("PrevChapter")
-			.SetIndex(2).SetPosition(32+32,96+128)
+			.SetIndex(2).SetPosition(32+32,size.height-32)
 			.AssignKeyboard(cc.KEY.k, cc.KEY.up)	//K
 			.OnButtonUp(()=>{this.pager.AddChapter(-1)})
 			.SetVisible(this.pager.nChapters>1)
 			.SetAutoOff(true)
 			.sprite.SetRotate(-90);
 		this.buttons.at("NextChapter")
-			.SetIndex(2).SetPosition(32+32,96)
+			.SetIndex(2).SetPosition(32+32,size.height-32-32*(this.pager.GetNumChapters()+1))
 			.AssignKeyboard(cc.KEY.j, cc.KEY.down)	//K
 			.OnButtonUp(()=>this.pager.AddChapter(+1))
 			.SetVisible(this.pager.nChapters>1)
@@ -260,8 +260,7 @@ class PageNavigator{
 
 		this.chapterIndicators
 			.forEach((indicator,i)=>{
-				const indicatorWidth	= 32;
-				indicator.SetVisible(true).SetPosition(32+32,96+128-indicatorWidth*(i+1));
+				indicator.SetVisible(true).SetPosition(32+32,size.height-32-32*(i+1));
 				if(i==this.pager.GetChapter())	indicator.SetColor("#FFA000").StopActions().RunActions( cc.fadeTo (0.25,255));
 				else							indicator.SetColor("#FFFFFF").StopActions().RunActions( cc.fadeTo (0.25,96) );
 			});
