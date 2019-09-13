@@ -10,7 +10,7 @@ const LinkedLayerTags	= {
 	BG:		"Records.Bg",
 };
 
-const PanelPosition		= {X:96,Y:20};
+const PanelPosition		= {X:16+64,Y:16};
 const RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
@@ -20,7 +20,7 @@ const RecordBoard	= {
 const AchievementBoard	= {
 	MaxRows:			4,
 	MaxColumns:			1,
-	Size:				{Width:270, Height:52},
+	Size:				{Width:32*11-64, Height:64-1},
 	NumLogLines:		4,
 };
 RecordBoard.Max			= RecordBoard.MaxRows * RecordBoard.MaxColumns;
@@ -181,7 +181,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					}
 
 					const x	= Math.trunc(i/RecordBoard.MaxRows) * (RecordBoard.Size.Width+4);
-					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height+4);
+					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height);
 					board.body.bg.lower			= {width:RecordBoard.Size.Width, height:RecordBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					if(isPublic){
@@ -224,7 +224,7 @@ Scene.Records	= class extends Scene.SceneBase {
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
-					board.body.SetVisible(false).SetIcon(rc.img.achievement).SetIconPosition(4,6+3);
+					board.body.SetVisible(false).SetIcon(rc.img.achievement);
 					board.text.SetVisible(false);
 					board.foot.SetVisible(false);
 
@@ -254,8 +254,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.rank		= handle.Rank || 0;
 					board.body.icon.SetCustomData("adjAnim",Math.trunc(Math.random()*8));
 
-					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+4) + 52;
-					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+4);
+					const x	= Math.trunc(i/AchievementBoard.MaxRows) * (AchievementBoard.Size.Width+64) + 64;
+					const y	= (i%AchievementBoard.MaxRows) * (AchievementBoard.Size.Height+1);
 					board.body.bg.lower			= {width:AchievementBoard.Size.Width, height:AchievementBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					board.text.fieldWidth		= AchievementBoard.Size.Width;
