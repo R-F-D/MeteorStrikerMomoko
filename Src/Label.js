@@ -414,7 +414,7 @@ class LabelBg{
 		/** @const 背景色 */
 		this.COLOR		= new cc.color(0,0,0);
 		/** @const パディング  */
-		this.PADDING	= { horizon:4,	vertical:2	};
+		this.PADDING	= { horizon:0,	vertical:0	};
 
 		/** @var cc.DwarNodeクラスのインスタンス */
 		this.entity		= null;
@@ -583,7 +583,7 @@ class LabelBg{
 		if(!this.IsEnabled())	return this;
 
 		let pos	= this.parent.entity.getPosition();
-		this.entity.setPosition(pos.x,pos.y+3);
+		this.entity.setPosition(pos.x,pos.y);
 		return this;
 	}
 
