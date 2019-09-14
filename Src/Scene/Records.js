@@ -14,7 +14,7 @@ const PanelPosition		= {X:16+64,Y:16};
 const RecordBoard	= {
 	MaxRows:			5,
 	MaxColumns:			2,
-	Size:				{Width:160, Height:32},
+	Size:				{Width:32*6-1, Height:32-1},
 	NumLogLines:		2,
 };
 const AchievementBoard	= {
@@ -180,8 +180,8 @@ Scene.Records	= class extends Scene.SceneBase {
 						text			= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
-					const x	= Math.trunc(i/RecordBoard.MaxRows) * (RecordBoard.Size.Width+4);
-					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height);
+					const x	= Math.trunc(i/RecordBoard.MaxRows) * (RecordBoard.Size.Width+1);
+					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height+1);
 					board.body.bg.lower			= {width:RecordBoard.Size.Width, height:RecordBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					if(isPublic){
