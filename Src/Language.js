@@ -641,18 +641,8 @@ const LocalizedTexts	= {
 			ja:	"デンジャラスエミット",	//オーバーマスター
 		},
 		"Achievement.Emit.Many03.Text":{
-			_:	"Emitted $0$1 and more.\nNo such the risk-less emittings...",
-			ja:	"エミット倍率$0$1以上を出した。\nリスクのないエミットなんて…",
-		},
-
-		//エミット回数実績その4 Emit Rate #04
-		"Achievement.Emit.Many04":{
-			_:	"Over-Emit",
-			ja:	"オーバーエミット",	//オーバーマスター
-		},
-		"Achievement.Emit.Many04.Text":{
 			_:	"Emitted $0$1 and more.\nIsn’t it impossible?",
-			ja:	"エミット倍率$0$1以上を出した\nありえなくない？",
+			ja:	"エミット倍率$0$1以上を出した。\nありえなくない？",
 		},
 
 		//金星到達 Venus

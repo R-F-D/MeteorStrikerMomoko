@@ -18,10 +18,9 @@ const Achievements = (()=>{		//Achievements scoop
 	};
 	//エミット
 	Achievements.Emit	= {
-		Many01			:{	IsPublic:true,	Count:150,	Order:0x4200,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約28回
-		Many02			:{	IsPublic:true,	Count:160,	Order:0x4201,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約35回
-		Many03			:{	IsPublic:true,	Count:170,	Order:0x4202,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
-		Many04			:{	IsPublic:false,	Count:180,	Order:0x4203,	Rank:2,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
+		Many01			:{	IsPublic:true,	Count:160,	Order:0x4200,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約35回
+		Many02			:{	IsPublic:true,	Count:170,	Order:0x4201,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
+		Many03			:{	IsPublic:true,	Count:180,	Order:0x4202,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
