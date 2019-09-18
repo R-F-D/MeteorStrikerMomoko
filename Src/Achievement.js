@@ -27,9 +27,9 @@ const Achievements = (()=>{		//Achievements scoop
 		Venus			:{	IsPublic:true,	Count:1,	Order:0x5300,	Rank:0,	Replacements:[C.Check[1].distance, ()=>L.Text("Unit.Distance")],	},	//金星
 		Mars			:{	IsPublic:true,	Count:1,	Order:0x5301,	Rank:0,	Replacements:[C.Check[2].distance, ()=>L.Text("Unit.Distance")],	},	//火星
 		Mercury			:{	IsPublic:true,	Count:1,	Order:0x5302,	Rank:0,	Replacements:[C.Check[3].distance, ()=>L.Text("Unit.Distance")],	},	//水星
-		Sun				:{	IsPublic:true,	Count:1,	Order:0x5303,	Rank:1,	Replacements:[C.Check[4].distance, ()=>L.Text("Unit.Distance")],	},	//太陽
-		Kirari			:{	IsPublic:false,	Count:1,	Order:0x6304,	Rank:1,	Replacements:[C.Check[5].distance, ()=>L.Text("Unit.Distance")],	},	//諸星きらり
-		Unicorn			:{	IsPublic:false,	Count:1,	Order:0x6305,	Rank:2,	Replacements:[C.Check[6].distance, ()=>L.Text("Unit.Distance")],	},	//ピンクのユニコーン
+		Sun				:{	IsPublic:true,	Count:1,	Order:0x6300,	Rank:1,	Replacements:[C.Check[4].distance, ()=>L.Text("Unit.Distance")],	},	//太陽
+		Kirari			:{	IsPublic:false,	Count:1,	Order:0x6301,	Rank:1,	Replacements:[C.Check[5].distance, ()=>L.Text("Unit.Distance")],	},	//諸星きらり
+		Unicorn			:{	IsPublic:false,	Count:1,	Order:0x6302,	Rank:2,	Replacements:[C.Check[6].distance, ()=>L.Text("Unit.Distance")],	},	//ピンクのユニコーン
 	};
 	//ユーザアクション
 	Achievements.Action	= {
@@ -39,9 +39,9 @@ const Achievements = (()=>{		//Achievements scoop
 		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[],	},	//プレイ時間
 		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:0,	Replacements:[],	},	//起動日数
 		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:0,	Replacements:[],	},	//月曜日または9時台に起動
-		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x7000,	Rank:0,	Replacements:null,	},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7002,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
+		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x8000,	Rank:0,	Replacements:null,	},	//桃子だけど
+		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7000,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
 		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x7002,	Rank:0,	Replacements:[],	},	//女神ナビ使用
 	};
 
