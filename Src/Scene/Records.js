@@ -134,6 +134,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body.Init();
 					board.text.Init();
 					board.foot.Init();
+					board.body.bg.SetPadding(0,0);
+					board.body.bg.SetPosition(null,5);
 				});
 		})
 		.PushUpdatingFunctions(dt=>{
@@ -198,7 +200,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body
 						.SetVisible(true)
 						.SetNumLogLines(RecordBoard.NumLogLines)
-						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y)
+						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y-5)
 						.SetString(` ${text}`);
 					board.foot
 						.SetVisible(false)
@@ -277,12 +279,12 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body
 						.SetVisible(true)
 						.SetNumLogLines(AchievementBoard.NumLogLines)
-						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y)
+						.SetPosition(PanelPosition.X+x,size.height-PanelPosition.Y-y-5).SetIconPosition(null,5)
 						.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked) )
 						.SetString(` ${title}`);
 					board.text
 						.SetNumLogLines(2)
-						.SetPosition(PanelPosition.X+x+2,size.height-PanelPosition.Y-y-14)
+						.SetPosition(PanelPosition.X+x+2,size.height-PanelPosition.Y-y-14-4)
 						.SetString(text);
 					board.foot
 						.SetNumLogLines(1)
