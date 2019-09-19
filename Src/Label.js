@@ -407,6 +407,8 @@ class LabelBg{
 	constructor(parent){
 		/** @var 紐付いているLabel */
 		this.parent		= parent;
+		this.x			= 0;
+		this.y			= 0;
 		/** @const 描画するZ座標*/
 		this.Z			= this.parent.Z - 2;
 		/** @const 不透明度 */
@@ -414,7 +416,7 @@ class LabelBg{
 		/** @const 背景色 */
 		this.COLOR		= new cc.color(0,0,0);
 		/** @const パディング  */
-		this.PADDING	= { horizon:0,	vertical:0	};
+		this.padding	= { horizon:0,	vertical:0	};
 
 		/** @var cc.DwarNodeクラスのインスタンス */
 		this.entity		= null;
@@ -432,6 +434,9 @@ class LabelBg{
 
 		/** @const  */
 		this.easeFunc	= ()=>cc.easeBackOut(10);
+
+		this.SetDefaultPadding();
+		this.SetPosition(0,this.padding.vertical);
 
 		this.Init();
 	}
@@ -511,16 +516,16 @@ class LabelBg{
 		let parentSize	= this.parent.GetContentSize();
 
 		//パディング
-		const adjust	= {
-			width:	pads	? this.PADDING.horizon  * 2	: 0,
-			height:	pads	? this.PADDING.vertical * 2	: 0,
+		const sizeAdjust	= {
+			width:	pads	? this.padding.horizon  * 2	: 0,
+			height:	pads	? this.padding.vertical * 2	: 0,
 		};
 
 		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
 		this.size.width		= width === null		? this.size.width					:
-							  width === undefined	? parentSize.width +adjust.width	: width +adjust.width;
+							  width === undefined	? parentSize.width +sizeAdjust.width	: width +sizeAdjust.width;
 		this.size.height	= height=== null		? this.size.height					:
-							  height=== undefined	? parentSize.height+adjust.height	: height+adjust.height;
+							  height=== undefined	? parentSize.height+sizeAdjust.height	: height+sizeAdjust.height;
 
 		//Clamp
 		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);
@@ -583,7 +588,7 @@ class LabelBg{
 		if(!this.IsEnabled())	return this;
 
 		let pos	= this.parent.entity.getPosition();
-		this.entity.setPosition(pos.x,pos.y);
+		this.entity.setPosition(pos.x+this.x, pos.y+this.y);
 		return this;
 	}
 
@@ -607,6 +612,21 @@ class LabelBg{
 	IsRunningActions(){
 		if(this.IsEnabled() && this.entity.getNumberOfRunningActions()>0) return true;
 		return false;
+	}
+
+	SetPadding(horizon=null,vertical=null){
+		if(horizon !==null)	this.padding.horizon	= horizon;
+		if(vertical!==null)	this.padding.vertical	= vertical;
+		return this;
+	}
+	SetDefaultPadding(){
+		return this.SetPadding(4,2);
+	}
+
+	SetPosition(x=null,y=null){
+		if(x!==null)	this.x = x;
+		if(y!==null)	this.y = y;
+		return this;
 	}
 }
 
