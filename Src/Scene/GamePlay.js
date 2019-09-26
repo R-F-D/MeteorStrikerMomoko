@@ -208,7 +208,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.isShared			= false;
 
 			this.aiming.SetSpritePosition(164,80).SetVisible(false);
-			this.pageNavigator.buttons.at("Reset").SetVisible(false);
+			this.pageNavigator.buttons.at("Reset").SetVisible(true);
 
 			//スプライト
 			this.sprites.player
@@ -283,7 +283,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.sprites.player.SetCustomData("isFlying",false)
 				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Aim"),null).SetVisible(true);
 				this.aiming.SetVisible(true,true);
-				this.pageNavigator.buttons.at("Reset").SetVisible(true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
 			})
@@ -521,7 +520,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.sprites.player.SetVisible(false);
 				this.buttons.SetVisible(true);
-				this.pageNavigator.buttons.at("Reset").SetVisible(true).SetScale(2);
 
 				//初プレイ実績
 				const nPlays	= Store.DynamicInsert(Store.Handles.Action.NumPlays);
