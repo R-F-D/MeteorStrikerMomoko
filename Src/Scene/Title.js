@@ -55,7 +55,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags("Play","Achievements","Records","Credits","Settings","Help");
+					_this.buttons			= Button.CreateInstance(6).AddToLayer(this).SetTags("Play","Settings","Records","Search","Home","Help");
 					return true;
 				},
 			});
@@ -226,11 +226,11 @@ Scene.Title	= class extends Scene.SceneBase {
 				.AssignKeyboard(cc.KEY["1"]+i);
 		});
 
-		this.buttons.at("Achievements").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Achievements));
-		this.buttons.at("Records").OnButtonUp(()=>this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Records));
-		this.buttons.at("Settings").OnButtonUp(()=>this.ReplaceScene(Scene.Settings));
-		this.buttons.at("Help").OnButtonUp(()=>this.ReplaceScene(Scene.Help));
-		this.buttons.at("Credits").OnButtonUp(()=> cc.sys.openURL(C.WebPage) );
+		this.buttons.at( "Settings"	).OnButtonUp(()=> this.ReplaceScene(Scene.Settings));
+		this.buttons.at( "Records"	).OnButtonUp(()=> this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Achievements));
+		this.buttons.at( "Search"	).OnButtonUp(()=> cc.sys.openURL( L.Textf("Title.Search.Format",[L.Text("GamePlay.Share.Tags")]) ));
+		this.buttons.at( "Home"		).OnButtonUp(()=> cc.sys.openURL(C.WebPage));
+		this.buttons.at( "Help"		).OnButtonUp(()=> this.ReplaceScene(Scene.Help));
 
 		return this;
 	}

@@ -57,34 +57,34 @@ const LocalizedTexts	= {
 			ja:	"ゲームをプレイ",
 		},
 
-		//実績ボタン Achievements Button
-		"Title.Button.Achievements":{
-			_:	"Achievements",
-			ja:	"実績",
-		},
-
 		//レコードボタン Records Button
 		"Title.Button.Records":{
-			_:	"Records",
-			ja:	"記録",
+			_:	"Achievements and records.",
+			ja:	"記録と実績",
 		},
 
 		//ヘルプボタン Help Button
 		"Title.Button.Help":{
-			_:	"How to play",
+			_:	"How to play.",
 			ja:	"ゲームの遊び方",
 		},
 
 		//設定ボタン Settings Button
 		"Title.Button.Settings":{
-			_:	"Settings",
+			_:	"Settings.",
 			ja:	"設定",
 		},
 
-		//クレジットボタン Credits Button
-		"Title.Button.Credits":{
-			_:	"Show credits",
-			ja:	"作ったひと",
+		//ウェブページボタン Webpage Button
+		"Title.Button.Home":{
+			_:	"Go to the webpage.",
+			ja:	"ウェブページ",
+		},
+
+		//ハッシュタグ検索 Hashtag Search Button
+		"Title.Button.Search":{
+			_:	"Hashtag search.",
+			ja:	"ハッシュタグ検索",
 		},
 
 		//プレイヤーをクリック時 On Click The Player
@@ -521,6 +521,11 @@ const LocalizedTexts	= {
 		//Twitter Intent
 		"GamePlay.Share.Format":{
 			_:	"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",
+		},
+
+		//ハッシュタグ検索 Hashtag Search
+		"Title.Search.Format":{
+			_:	"https://twitter.com/hashtag/$0",
 		},
 
 		//ツイート文字列 Tweet Text
