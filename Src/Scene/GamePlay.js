@@ -779,10 +779,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					Achievement.Unlock(Achievements.Action.Share, nShares);
 				}
 				this.labels.navigation.RemoveTempText();
-				cc.sys.openURL( L.Textf("GamePlay.Share.Format",[
-									L.Textf("GamePlay.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
+				cc.sys.openURL( L.Textf("About.Share.Format",[
+									L.Textf("About.Share.Text",	[ L.NumToStr(this.GetDistanceInKm()),	L.Text("Unit.Distance"), ]),
 									C.WebPage,
-									L.Text("GamePlay.Share.Tags")
+									L.Text("About.HashTags")
 								]));
 			});
 

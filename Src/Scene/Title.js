@@ -228,7 +228,7 @@ Scene.Title	= class extends Scene.SceneBase {
 
 		this.buttons.at( "Settings"	).OnButtonUp(()=> this.ReplaceScene(Scene.Settings));
 		this.buttons.at( "Records"	).OnButtonUp(()=> this.ReplaceScene(Scene.Records).SetMode(Scene.Records.Mode.Achievements));
-		this.buttons.at( "Search"	).OnButtonUp(()=> cc.sys.openURL( L.Textf("Title.Search.Format",[L.Text("GamePlay.Share.Tags")]) ));
+		this.buttons.at( "Search"	).OnButtonUp(()=> cc.sys.openURL( L.Textf("About.Search.Format",[L.Text("About.HashTags")]) ));
 		this.buttons.at( "Home"		).OnButtonUp(()=> cc.sys.openURL(C.WebPage));
 		this.buttons.at( "Help"		).OnButtonUp(()=> this.ReplaceScene(Scene.Help));
 

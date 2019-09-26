@@ -519,23 +519,23 @@ const LocalizedTexts	= {
 	//----------------------------------------
 
 		//Twitter Intent
-		"GamePlay.Share.Format":{
+		"About.Share.Format":{
 			_:	"https://twitter.com/intent/tweet?text=$0%0a%23$2%0a$1",
 		},
 
 		//ハッシュタグ検索 Hashtag Search
-		"Title.Search.Format":{
+		"About.Search.Format":{
 			_:	"https://twitter.com/hashtag/$0",
 		},
 
 		//ツイート文字列 Tweet Text
-		"GamePlay.Share.Text":{
+		"About.Share.Text":{
 			_:	"Momoko flew the meteorite to $0 $1 away!",
-			ja:	"桃子ちゃんは隕石を$1$2吹っ飛ばしました！",
+			ja:	"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",
 		},
 
 		//タグ Tag
-		"GamePlay.Share.Tags":{
+		"About.HashTags":{
 			_:	"MeteorStrikerMomoko",
 			ja:	"メテオストライカー桃子",
 		},
