@@ -33,7 +33,7 @@ const rc	= {
 		touched			: [ "Fx/fxTouch.png",		4,	2,	],	//タッチエフェクト
 
 		navigationButton: [ "Ui/btnNavigation.png",	2,	2,	],	//ナビゲーションボタン
-		titleButton		: [ "Ui/btnTitle.png",		4,	4,	],	//タイトル画面等のボタン
+		titleButton		: [ "Ui/btnTitle.png",		4,	6,	],	//タイトル画面等のボタン
 		labelButton		: [ "Ui/btnLabel.png",		1,	1,	],	//ラベル付きボタン
 	},
 

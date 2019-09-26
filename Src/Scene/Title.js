@@ -222,7 +222,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				.CreateSprite(rc.img.titleButton)
 				.SetPosition(null,null,(0.3-0.2*i)*Math.PI,96)
 				.SetScale(0.5)
-				.SetIndex(i*2+3).SetIndex(Button.OFF,i*2+2)
+				.SetIndex(i*2+8+1).SetIndex(Button.OFF,i*2+8)
 				.AssignKeyboard(cc.KEY["1"]+i);
 		});
 
