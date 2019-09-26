@@ -182,9 +182,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 	}
 
 	OnUiLayerCreate(layer){
-		this.buttons	= Button.CreateInstance(2).AddToLayer(layer);
-		this.buttons.at(0).CreateSprite(rc.img.titleButton).SetTag("Retry");
-		this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Share");
+		this.buttons	= Button.CreateInstance(3).AddToLayer(layer);
+		this.buttons.at(0).CreateSprite(rc.img.titleButton).SetTag("Back");
+		this.buttons.at(1).CreateSprite(rc.img.titleButton).SetTag("Retry");
+		this.buttons.at(2).CreateSprite(rc.img.titleButton).SetTag("Share");
 		return true;
 	}
 
@@ -749,11 +750,24 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			()=>this.labels.navigation.RemoveTempText()
 		);
 
-		this.buttons.at("Retry")
+		this.buttons.at("Back")
 			.SetVisible(true)
 			.SetPosition(size.width/2-128,size.height/2)
-			.SetIndex(2+1).SetIndex(Button.OFF,2)
+			.SetIndex(6+1).SetIndex(Button.OFF,6)
 			.AssignKeyboard(cc.KEY["1"])
+			.OnMouseHover(
+				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Reset")),
+				()=>this.labels.navigation.RemoveTempText()
+			)
+			.OnButtonUp(()=>{
+				this.ResetForce();
+			});
+
+		this.buttons.at("Retry")
+			.SetVisible(true)
+			.SetPosition(size.width/2,size.height/2)
+			.SetIndex(2+1).SetIndex(Button.OFF,2)
+			.AssignKeyboard(cc.KEY["2"])
 			.OnMouseHover(
 				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Retry")),
 				()=>this.labels.navigation.RemoveTempText()
@@ -766,7 +780,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.SetVisible(true)
 			.SetPosition(size.width/2+128,size.height/2)
 			.SetIndex(4+1).SetIndex(Button.OFF,4)
-			.AssignKeyboard(cc.KEY["2"])
+			.AssignKeyboard(cc.KEY["3"])
 			.SetAutoOff(true)
 			.OnMouseHover(
 				()=>this.labels.navigation.SetTempText(L.Text("GamePlay.Navigator.Result.Share")),
