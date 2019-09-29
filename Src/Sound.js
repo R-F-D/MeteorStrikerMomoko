@@ -11,6 +11,9 @@ class Sound{
 		this.musicIsInitialized	= false;
 		this.musicVolume	= 1.0;
 		this.playsBgm		= false;
+
+		this.musicHandles		= {};
+		this.playingMusicHandle	= null;
 	}
 
 	/** 初期化処理
@@ -21,11 +24,13 @@ class Sound{
 
 		if(this.musicIsInitialized)	return this;
 
-		//音量0でBGMを再生してみる
+		//全BGMを音量0で再生してミュージックハンドルに格納
 		if(this.playsBgm){
 			cc.audioEngine.setMusicVolume(0);
-			cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${rc.bgm.meteorite}`,false);
-			cc.audioEngine.stopMusic();
+			_(rc.bgm).forEach(filename=>{
+				this.musicHandles[filename]	= cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${filename}`,true);
+				cc.audioEngine.pauseMusic(this.musicHandles[filename]);
+			});
 			cc.audioEngine.setMusicVolume(this.musicVolume);
 			this.musicIsInitialized	= true;
 		}
@@ -37,21 +42,25 @@ class Sound{
 	 * @memberof Sound
 	 */
 	Reset(){
-		this.StopMusic();
+		_(this.musicHandles).forEach(h=>this.StopMusic(h));
 		return this;
 	}
 
 	/** BGM再生 */
-	PlayMusic(path){
+	PlayMusic(filename){
 		if(!this.playsBgm || !this.musicIsInitialized)	return this;
 
-		cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${path}`,true);
+		this.StopMusic();
+		this.playingMusicHandle	= this.musicHandles[filename];
+		cc.audioEngine.rewindMusic(this.playingMusicHandle);
+//		cc.audioEngine.resumeMusic(this.playingMusicHandle);
+
 		return this;
 	}
 
 	/** BGM停止 */
-	StopMusic(){
-		cc.audioEngine.stopMusic();
+	StopMusic(musicHandle=this.playingMusicHandle){
+		if(musicHandle!==null)	cc.audioEngine.pauseMusic(musicHandle);
 		return this;
 	}
 
