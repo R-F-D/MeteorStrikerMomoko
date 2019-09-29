@@ -14,7 +14,7 @@ VT323
 
 --------------------------------------------------------------------------------
 	「Res/」ディレクトリ以下のファイル群について
-	About The Files Below "Res/" Directory
+	About The Files Below Res/ Directory
 --------------------------------------------------------------------------------
 	Icon made by Freepik(www.freepik.com) from Flaticon(www.flaticon.com) is licensed by CC 3.0 BY.
 	Gagalin FONTFABRICTM FREE FONT END USER LICENSE AGREEMENT FFF EULA ver. 2.1 https://www.fontfabric.com/fonts/gagalin/
@@ -24,7 +24,7 @@ VT323
 
 --------------------------------------------------------------------------------
 	「Src/」ディレクトリ以下のファイル群について
-	About The Files Below "Src/" Directory
+	About The Files Below Src/ Directory
 --------------------------------------------------------------------------------
 
 MIT License
@@ -54,8 +54,8 @@ SOFTWARE.
 	「Frameworks/」ディレクトリ以下のファイル群について
 	About The Files Below "Frameworks/" Directory
 --------------------------------------------------------------------------------
-Frameworks/**/licenses/ディレクトリのファイルを参照してください。
-Refer to license files in "Frameworks/**/licenses/" directory.
+Frameworks/cocos2d-html5/licenses/ディレクトリのファイルを参照してください。
+Refer to license files in Frameworks/cocos2d-html5/licenses/ directory.
 
 
 --------------------------------------------------------------------------------
