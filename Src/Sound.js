@@ -13,7 +13,7 @@ class Sound{
 		this.playsBgm		= false;
 
 		this.musicHandles		= {};
-		this.playingMusicHandle	= null;
+//		this.playingMusicHandle	= null;
 	}
 
 	/** 初期化処理
@@ -28,8 +28,9 @@ class Sound{
 		if(this.playsBgm){
 			cc.audioEngine.setMusicVolume(0);
 			_(rc.bgm).forEach(filename=>{
-				this.musicHandles[filename]	= cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${filename}`,true);
-				cc.audioEngine.pauseMusic(this.musicHandles[filename]);
+				cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${filename}`,true);
+				this.musicHandles[filename]	= cc.audioEngine._currMusic;
+				this.musicHandles[filename].pause();
 			});
 			cc.audioEngine.setMusicVolume(this.musicVolume);
 			this.musicIsInitialized	= true;
@@ -50,17 +51,22 @@ class Sound{
 	PlayMusic(filename){
 		if(!this.playsBgm || !this.musicIsInitialized)	return this;
 
-		this.StopMusic();
-		this.playingMusicHandle	= this.musicHandles[filename];
-		cc.audioEngine.rewindMusic(this.playingMusicHandle);
-//		cc.audioEngine.resumeMusic(this.playingMusicHandle);
+		this.Reset();
+		if(this.musicHandles[filename]){
+			this.musicHandles[filename].stop();
+			this.musicHandles[filename].play();
+		}
+		else{
+			cc.audioEngine.rewindMusic();
+		}
 
 		return this;
 	}
 
 	/** BGM停止 */
-	StopMusic(musicHandle=this.playingMusicHandle){
-		if(musicHandle!==null)	cc.audioEngine.pauseMusic(musicHandle);
+	StopMusic(musicHandle=null){
+		if(musicHandle)	musicHandle.pause();
+		else			cc.audioEngine.pauseMusic();
 		return this;
 	}
 
