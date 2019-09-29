@@ -268,7 +268,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.labels.navigation.Init().SetVisible(false).SetPosition(256,32).SetBgEnabled(true).SetIconPosition(-4,4).SetNumLogLines(2);
 
 			this.InitUIs();
-
+			sound.PlayMusic(rc.bgm.meteorite);
 		})
 		.PushUpdatingFunctions(dt=>{
 			this.UpdatePlayerSprite(false);
@@ -398,6 +398,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
 				this.fx.player.SetVelocity(+1,+0.5,-2,-1);
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
+
+				sound.PlayMusic(rc.bgm.strike);
 			})
 			.PushUpdatingFunctions(dt=>{
 				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 10 : 5;
@@ -504,6 +506,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 					.filter( c=> c.distance<=highScore )
 					.forEach(c=> Achievement.Unlock(Achievements.Check[c.key],1) );
 
+				sound.StopMusic();
+
 				Log(`Emit: ${this.nEmits.total}c, ${this.nEmits.maxSimul}c/f, ${this.GetEmittingRate()}x`);
 				Log(`AimingRate: ${this.aiming.GetRate(true)}`);
 				Log(`Impact: ${this.impactPower}`);
@@ -545,7 +549,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
-		sound.PlayMusic(rc.bgm.meteorite);
 		return this;
 	}
 

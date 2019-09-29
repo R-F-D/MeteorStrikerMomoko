@@ -42,6 +42,7 @@ const rc	= {
 	},
 	bgm	: {
 		meteorite:		"meteorite.mp3",
+		strike:			"strike.mp3",
 	},
 
 	/** システム用 */
