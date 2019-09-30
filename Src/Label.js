@@ -1,9 +1,7 @@
 var cc,_;
 var rc;
 var Clamp;
-var Label;
-
-(function(){	//File Scope
+var Label	= (function(){	//File Scope
 
 /** @const 背景アニメーションの種類 */
 const BgAnimation	= {
@@ -633,5 +631,5 @@ class LabelBg{
 	}
 }
 
-
+return Label
 })();	//File Scope

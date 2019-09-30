@@ -4,7 +4,7 @@
 var cc,_;
 var L,C;
 var Log;
-var Store;
+var Store,Label;
 
 const Achievements = (()=>{		//Achievements scoop
 	let Achievements={};

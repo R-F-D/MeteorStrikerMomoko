@@ -1,5 +1,6 @@
 var cc;
 var DefinedOr;
+var Label;
 var Button	= Button||{};
 (function(){	//File Scope
 
