@@ -107,7 +107,7 @@ class Pager{
 	 * @param {function} [callback=null]
 	 */
 	set onPageChanged(callback=null){
-		if(typeof callback !== "function")	his._onPageChanged = [];
+		if(typeof callback !== "function")	this._onPageChanged = [];
 		else								this._onPageChanged.push(callback);
 	}
 	/** チャプター変更時のコールバック関数
