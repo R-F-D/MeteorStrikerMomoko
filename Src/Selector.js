@@ -5,6 +5,7 @@ var cc;
 var rc,L;
 var Label,Locale,Button;
 
+// eslint-disable-next-line no-unused-vars
 var Selector	= class Selector{
 
 	constructor(nItems){

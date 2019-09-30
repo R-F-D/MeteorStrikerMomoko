@@ -7,6 +7,7 @@
  * 数値の区切り
  * Hash of Numeric Separations
  *******************************************************************************/
+// eslint-disable-next-line no-unused-vars
 var NumericSeparators	= (()=>{return{
 	//国際度量衡総会 General Conference on Weights and Measures
 	_:{
@@ -34,6 +35,7 @@ var NumericSeparators	= (()=>{return{
  * ローカライズされたテキストの一覧
  * Hash of Localized Texts
  *******************************************************************************/
+// eslint-disable-next-line no-unused-vars
 var LocalizedTexts	= (()=>{return{
 
 	//----------------------------------------

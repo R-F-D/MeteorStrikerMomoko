@@ -90,6 +90,7 @@ Array.prototype.MoveTo	= function(dest,distance=1){
  * @param {number} [isNumbering=null] 値を連番にする
  * @returns {array}
  */
+// eslint-disable-next-line no-unused-vars
 var CreateArray	= function CreateArray(length,isNumbering=null){
 	let list	= [];
 	for(let i=0; i<length; ++i)	list.push( isNumbering ? i : null );
@@ -102,6 +103,7 @@ var CreateArray	= function CreateArray(length,isNumbering=null){
  * @param {*} valueUndef	undefined時の値
  * @returns value、ないしnull/undefine時はそれぞれの値
  */
+// eslint-disable-next-line no-unused-vars
 var DefinedOr	= function DefinedOr(value,valueNull,valueUndef){
 	if(value===undefined)	return valueUndef;
 	else if(value===null)	return valueNull;
@@ -112,6 +114,7 @@ var DefinedOr	= function DefinedOr(value,valueNull,valueUndef){
  * @param {number} halfWidth 半幅
  * @returns {number}
  */
+// eslint-disable-next-line no-unused-vars
 var NormalRandom	= function NormalRandom(halfWidth){
 	return (Math.random()+Math.random()-1) * halfWidth;
 }
@@ -143,6 +146,7 @@ cc.Node.prototype.RunActions	= function(...actions){
  * @param {number} [piradStandardAngle=0]	出力範囲の中央となる値。単位はπrad。省略すると0。
  * @returns {number} 						単位はrad
  */
+// eslint-disable-next-line no-unused-vars
 var GetRandamAngle	= function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 	let pirad	= Math.random() * piradRange - piradRange/2 + piradStandardAngle;
 	return Cycle(pirad,0,2) * Math.PI;
@@ -171,7 +175,9 @@ String.prototype.Int	= function(){return Math.trunc(Number(this))}
 //デバッグ
 var isDebug	= ()=>			{ return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
 var Debug	= (callback)=>	{ if(isDebug()) callback();	}
+// eslint-disable-next-line no-unused-vars
 var Msg		= (arg)=>		{ Debug(()=>alert(JSON.stringify(arg)));	}
+// eslint-disable-next-line no-unused-vars
 var Log		= (arg)=>		{ Debug(()=>{
 	const date = new Date();
 	console.log(`[${date.toLocaleTimeString()}.${(date.getMilliseconds()/1000).toFixed(3).slice(2,5)}] ${arg}`);

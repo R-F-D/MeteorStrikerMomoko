@@ -1,6 +1,7 @@
 var cc;
 var rc;
 var Clamp,Cycle;
+// eslint-disable-next-line no-unused-vars
 var Sprite	= (()=>{
 
 /** cc.Spriteのラッパクラス

@@ -75,5 +75,6 @@ class Sound{
 
 }
 
+// eslint-disable-next-line no-unused-vars
 var sound	= new Sound();
 

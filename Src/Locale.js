@@ -190,4 +190,5 @@ const LocalePresets	= {
 };
 
 
+// eslint-disable-next-line no-unused-vars
 var L	= (new Locale()).Load().Save();

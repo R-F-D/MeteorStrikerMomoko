@@ -73,6 +73,7 @@ var Achievements = (()=>{		//Achievements scoop
 /** 実績
  * @class Achievement
  */
+// eslint-disable-next-line no-unused-vars
 var Achievement = new (class Achievement{
 
 	constructor(){

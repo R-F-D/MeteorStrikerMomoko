@@ -8,6 +8,7 @@ var Sprite,Button;
 /** ページ送り機能
  * @class Pager
  */
+// eslint-disable-next-line no-unused-vars
 var Pager	= class Pager{
 
 	/** Creates an instance of Pager.
@@ -132,6 +133,7 @@ var Pager	= class Pager{
 }
 
 
+// eslint-disable-next-line no-unused-vars
 var PageNavigator	= class PageNavigator{
 
 	constructor(scene,pager){
