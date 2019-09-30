@@ -54,11 +54,11 @@ Scene.SceneBase	= class {
 	/** シーンの更新処理 共通部分
 	 * @param {*} dt
 	 */
-	OnUpdating(dt){return this;}
+	OnUpdating(/*dt*/){return this;}
 	/** シーンの更新処理 共通部分
 	 * @param {*} dt
 	 */
-	OnUpdated(dt){
+	OnUpdated(/*dt*/){
 		++this.count;
 		return this;
 	}
@@ -143,7 +143,7 @@ Scene.SceneBase	= class {
 				_this.fx.touched	= Effect.Touched.Create().Init(this);
 				return true;
 			},
-			update	: function(dt){
+			update	: function(/*dt*/){
 				this._super();
 				_this.fx.touched.Update();
 			},
@@ -196,7 +196,7 @@ Scene.SceneBase	= class {
 		this.listeners	= {};
 		this.AddPropertiesToEventListenerList("touched",{
 			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-			onTouchesBegan	: (touches,event)=>{
+			onTouchesBegan	: (touches/*,event*/)=>{
 				for(let t of touches){
 					const pos	= t.getLocation();
 					this.fx.touched.Spawn(pos.x,pos.y);
@@ -207,7 +207,7 @@ Scene.SceneBase	= class {
 		//キーボードリセット
 		.AddPropertiesToEventListenerList("keyboardReset",{
 			event			: cc.EventListener.KEYBOARD || null,
-			onKeyReleased	: (code,event)=>{
+			onKeyReleased	: (code/*,event*/)=>{
 				if(code==cc.KEY.escape){
 					this.ResetForce();
 				}
@@ -286,8 +286,8 @@ Scene.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
-	OnEnterTransitionFinished(layer){return this}
-	OnUiLayerCreate(layer){return true}
+	OnEnterTransitionFinished(/*layer*/){return this}
+	OnUiLayerCreate(/*layer*/){return true}
 	SetSequenceFunctions(){return this}
 
 	SetCommonEventListeners(tag,listeners){
@@ -382,7 +382,7 @@ Scene.SceneBase	= class {
 		}
 
 		//起動日数実績
-		Store.Insert(	Store.Handles.Action.LastStartDay,	Scene.SceneBase._startAt.ToEpochDay(),	Store.Conds.NewValueIsGreater,	(key,value)=>{
+		Store.Insert(	Store.Handles.Action.LastStartDay,	Scene.SceneBase._startAt.ToEpochDay(),	Store.Conds.NewValueIsGreater,	()=>{
 							const nDays	= Store.DynamicInsert(Store.Handles.Action.NumBootingDays);
 							Achievement.Unlock(Achievements.Action.BootDays,nDays);
 						});

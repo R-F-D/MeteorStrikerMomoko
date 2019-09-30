@@ -82,10 +82,10 @@ Scene.Settings	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.sprites.bg	= _.range(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
+					_this.sprites.bg	= _.range(2).map(()=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
 					return true;
 				},
-				update	: function(dt){
+				update	: function(/*dt*/){
 					this._super();
 					const width		= cc.director.getWinSize().width;
 					const bgWidth	= _this.sprites.bg[0].GetPieceSize().width;
@@ -116,12 +116,10 @@ Scene.Settings	= class extends Scene.SceneBase {
 	}
 
 	SetSequenceFunctions(){
-		const size		= cc.director.getWinSize();
-
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 		});
 
 		return this;
@@ -177,7 +175,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Locale,tag,0))
 			.buttons
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
-				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
+				.forEach((b)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
 
 		this.selectors.playsBgm
 				.Init()
@@ -187,7 +185,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.PlaysBgm,tag,0))
 				.buttons
 					.SetTags( ... _(SelectorMaps.PlaysBgm).map("Tag") )
-					.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.PlaysBgm.Label.${b.tag}`)) );
+					.forEach((b)=> b.SetLabelText(L.Text(`Settings.PlaysBgm.Label.${b.tag}`)) );
 
 		this.selectors.navigator
 			.Init()
@@ -197,7 +195,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Navigator,tag,0))
 			.buttons
 				.SetTags( ... _(SelectorMaps.Navigator).map("Tag") )
-				.forEach((b,i)=> b.SetLabelText(L.Text(`Settings.Navigator.Label.${b.tag}`)) );
+				.forEach((b)=> b.SetLabelText(L.Text(`Settings.Navigator.Label.${b.tag}`)) );
 
 		return this;
 	}

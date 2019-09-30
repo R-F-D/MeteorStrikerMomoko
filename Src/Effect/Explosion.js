@@ -49,7 +49,7 @@ Effect.Explosion	= class extends Effect.EffectBase{
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
 
-		this.ActivateParticles(2,(v,i)=>{
+		this.ActivateParticles(2,(v/*,i*/)=>{
 			if((v.type==FxType.Particle)){
 				v.sprite
 					.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);

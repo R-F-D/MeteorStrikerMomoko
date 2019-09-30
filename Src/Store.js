@@ -234,11 +234,11 @@ class _Store{
 	 */
 	static get Conds() {
 		return{
-			Always:					(currentValue,newValue)=>	true,
+			Always:					(/*currentValue,newValue*/)=>	true,
 			/** 現在値が空欄のとき真 */
-			CurrentValueIsEmpty:	(currentValue,newValue)=>	currentValue==null || currentValue=="",
+			CurrentValueIsEmpty:	(currentValue/*,newValue*/)=>	currentValue==null || currentValue=="",
 			/** 現在値と挿入値を数値化し、後者が大きいとき真 */
-			NewValueIsGreater:		(currentValue,newValue)=>	Number(currentValue||0) < Number(newValue),
+			NewValueIsGreater:		(currentValue,newValue)=>		Number(currentValue||0) < Number(newValue),
 		};
 	}
 

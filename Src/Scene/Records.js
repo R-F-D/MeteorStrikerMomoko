@@ -75,7 +75,7 @@ Scene.Records	= class extends Scene.SceneBase {
 					this.scheduleUpdate();
 
 					//表示板
-					_this.displayBoards	= _.range(MaxDisplayBoards).map( h=>{
+					_this.displayBoards	= _.range(MaxDisplayBoards).map( (/*h*/)=>{
 						let board	= {};
 						board.body		= Label.CreateInstance( 9).AddToLayer(this).SetBgEnabled(true).SetAnchorPoint(0.0, 1.0);
 						board.body.bg.easeFunc	= ()=>cc.easeElasticOut(10);
@@ -92,10 +92,10 @@ Scene.Records	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.sprites.bg	= _.range(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
+					_this.sprites.bg	= _.range(2).map(()=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(true) );
 					return true;
 				},
-				update	: function(dt){
+				update	: function(/*dt*/){
 					this._super();
 					const width		= cc.director.getWinSize().width;
 					const bgWidth	= _this.sprites.bg[0].GetPieceSize().width;
@@ -142,8 +142,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body.bg.SetPosition(null,5);
 				});
 		})
-		.PushUpdatingFunctions(dt=>{
-			 if(this.sequence.count>=60)	this.SetSequence(this.processScene());
+		.PushUpdatingFunctions((/*dt*/)=>{
+			if(this.sequence.count>=60)	this.SetSequence(this.processScene());
 		});
 
 		//スコア表示
@@ -213,8 +213,8 @@ Scene.Records	= class extends Scene.SceneBase {
 					board.body.bg.animationDelay	= 0.0;
 				});
 		})
-		.PushUpdatingFunctions(dt=>{
-			this.displayBoards.forEach((board,i)=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
+			this.displayBoards.forEach((board)=>{
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions())		board.foot.SetVisible(true);
 			});
 		});
@@ -298,7 +298,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				});
 
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 			this.displayBoards.forEach((board)=>{
 				//出現アニメーションが終わったら連動して内容を表示
 				if(board.body.IsVisible() && !board.body.bg.IsRunningActions()){
@@ -320,7 +320,7 @@ Scene.Records	= class extends Scene.SceneBase {
 				});
 			});
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 			if( _(this.displayBoards).every(b=>!b.body.IsVisible() || !b.body.bg.IsRunningActions()) )	this.SetSequence(this.processScene());
 		});
 

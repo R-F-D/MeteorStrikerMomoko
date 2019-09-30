@@ -17,7 +17,7 @@ Effect.Meteor	= class extends Effect.EffectBase{
 
 	Init(layer){
 		this.InitParticles((particle)=>{
-			particle	= Object.assign(particle,{
+			Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.flare).AddToLayer(layer)
 							.SetScale(2).Attr({zIndex:0,opacity:255}).SetVisible(false),
 			});
@@ -32,7 +32,7 @@ Effect.Meteor	= class extends Effect.EffectBase{
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
 
-		this.ActivateParticles(1,(v,i)=>{
+		this.ActivateParticles(1,(v/*,i*/)=>{
 			v.sprite.SetPosition(x,y).SetRotate(Math.random()*360).SetVisible(true).SetColor(this.color);
 			v.dx		= this.initialVelocity.x;
 			v.dy		= NormalRandom(2)+this.initialVelocity.y;

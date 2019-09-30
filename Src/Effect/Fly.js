@@ -18,7 +18,7 @@ Effect.Fly	= class extends Effect.EffectBase{
 
 	Init(layer){
 		this.InitParticles((particle)=>{
-			particle	= Object.assign(particle,{
+			Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.flyFx).AddToLayer(layer)
 								.SetPosition(100,100).Attr({zIndex:3,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				scale	: 1.0,
@@ -34,7 +34,7 @@ Effect.Fly	= class extends Effect.EffectBase{
 	Spawn(x,y,spawns=true){
 		if(!spawns)	return this;
 
-		this.ActivateParticles(1,(v,i)=>{
+		this.ActivateParticles(1,(v/*,i*/)=>{
 			v.dx		= this.initialVelocity.x;
 			v.dy		= NormalRandom(2)   + this.initialVelocity.y
 			v.scale		= NormalRandom(0.5) + 1;

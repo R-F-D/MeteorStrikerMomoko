@@ -1,7 +1,6 @@
 /* *******************************************************************************
 	Helpシーン
 ********************************************************************************/
-var cc;
 var Scene	= Scene || {};
 (function(){	//File Scope
 
@@ -35,7 +34,6 @@ Scene.Help	= class extends Scene.SceneBase {
 
 	/** ccLayerに渡す用 */
 	InitLayerList(){
-		const _this	= this;
 		super.InitLayerList()
 			.AddToLayerList("main",{
 				ctor:function(){
@@ -63,12 +61,11 @@ Scene.Help	= class extends Scene.SceneBase {
 	}
 
 	SetSequenceFunctions(){
-		const size		= cc.director.getWinSize();
 
 		//初期状態
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 		});
 
 		return this;

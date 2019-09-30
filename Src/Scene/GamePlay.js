@@ -166,7 +166,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				},
 				init	: function(){
 					this._super();
-					const size	= cc.director.getWinSize();
 					_this.sprites		= _this.sprites||{};
 					_this.sprites.bgSpace	= CreateArray(4).map(()=> Sprite.CreateInstance(rc.img.bgSpace).AddToLayer(this).SetVisible(false)	);
 					_this.sprites.bgGround	= CreateArray(2).map(()=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this).SetVisible(false)	);
@@ -274,7 +273,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			this.InitUIs();
 			sound.PlayMusic(rc.bgm.meteorite);
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 			this.UpdatePlayerSprite(false);
 			this.UpdateMeteorSprite(false);
 			this.aiming.Update(false);
@@ -290,7 +289,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -302,7 +301,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Spawn(64,48);
 				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -323,7 +322,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const maxSuccessiveHits	= Store.Insert(Store.Handles.GamePlay.MaxSuccessiveHits, nSuccessiveHits);
 				Achievement.Unlock(Achievements.Blowing.SuccessiveHits, maxSuccessiveHits);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -340,7 +339,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.preliminary.Destroy();
 				Store.Insert(Store.Handles.GamePlay.NumSuccessiveHits,0,null);	//連続成功数の初期化
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update();
@@ -405,7 +404,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				sound.PlayMusic(rc.bgm.strike);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 10 : 5;
 
 				this.UpdatePlayerSprite(true);
@@ -445,7 +444,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				Store.Log(Store.Handles.GamePlay.MeanEmitting, emitRate);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
 				this.UpdateMeteorSprite(true);
 				this.aiming.Update(false);
@@ -466,7 +465,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 				if(this.totalPower <= this.distanceOfMeteor)	this.SetSequence(this.Sequences.LEAVE);
 			})
-			.PushUpdatingFunctions("layer-bg", dt=>{
+			.PushUpdatingFunctions("layer-bg", (/*dt*/)=>{
 				this.sprites.bgGround.forEach(sprite=>{
 					sprite
 						.SetRelativePosition(null,-4)
@@ -517,7 +516,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Log(`Impact: ${this.impactPower}`);
 				Log(`Total: ${this.totalPower}`);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(false);
 				this.UpdateMeteorSprite(false);
 				if(!this.sprites.player.IsRunningActions())	this.SetSequence(this.Sequences.DIALOG);
@@ -536,7 +535,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				const nNavigates	= Store.DynamicInsert(this.navigator.Storage);
 				Achievement.Unlock(this.navigator.Achievement,nNavigates);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(false);
 			});
 
@@ -579,7 +578,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		return this;
 	}
 
-	UpdateBgLayer(dt){
+	UpdateBgLayer(/*dt*/){
 		const size		= cc.director.getWinSize();
 		const bgWidth	= [this.sprites.bgGround[0].img.width, this.sprites.bgSpace[0].img.width, ];
 
@@ -608,21 +607,21 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			/** インパクトフェイズ */
 			.AddPropertiesToEventListenerList("discharge",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touch,event)=>{
+				onTouchesBegan	: (/*touch,event*/)=>{
 					if(this.sequence===this.Sequences.START_AIM){
 						this.SetSequence(this.Sequences.PRELIMINARY);
 						return true;
 					}
 					return false;
 				},
-				onTouchesEnded	: (touch,event)=>{
+				onTouchesEnded	: (/*touch,event*/)=>{
 					if(this.sequence===this.Sequences.PRELIMINARY)	this.SetSequence(this.Sequences.DISCHARGE);
 				},
 			})
 			/** エミットエナジーフェイズ */
 			.AddPropertiesToEventListenerList("emitEnergy",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesBegan	: (touch,event)=>{
+				onTouchesBegan	: (/*touch,event*/)=>{
 					this.nEmits.simul++;
 					this.nEmits.total++;
 					this.fx.emit.Spawn(this.sprites.player.x,this.sprites.player.y);

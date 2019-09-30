@@ -77,7 +77,7 @@ Scene.Transition	= class extends Scene.SceneBase {
 				.SetFontColor("#4F4F4F")
 				.SetString(L.Text("Transition.Wait"));
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 			if(this.isEnterTransitionFinished && this._transitionTo){
 				this.ReplaceScene(this._transitionTo,this._isTR);
 				this._transitionTo	= null;

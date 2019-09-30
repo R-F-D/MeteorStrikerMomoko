@@ -46,7 +46,7 @@ Scene.Title	= class extends Scene.SceneBase {
 				ctor:function(){
 					this._super();
 					this.scheduleUpdate();
-					_this.sprites.bg			= CreateArray(2).map(i=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
+					_this.sprites.bg			= CreateArray(2).map(()=> Sprite.CreateInstance(rc.img.bgGround).AddToLayer(this));
 					_this.sprites.title			= Sprite.CreateInstance(rc.img.title).AddToLayer(this);
 					_this.sprites.player		= Sprite.CreateInstance(rc.img.player).AddToLayer(this);
 					_this.sprites.balloonTail	= Sprite.CreateInstance(rc.img.balloonTail).AddToLayer(this);
@@ -150,7 +150,7 @@ Scene.Title	= class extends Scene.SceneBase {
 					.Init().SetVisible(false).SetBgEnabled(true).SetNumLogLines(1);
 				this.playerIsTouched	= false;
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);
 			});
 		//メイン処理
@@ -158,7 +158,7 @@ Scene.Title	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.label.SetVisible(true);
 			})
-			.PushUpdatingFunctions(dt=>{
+			.PushUpdatingFunctions((/*dt*/)=>{
 			});
 
 		return this;
@@ -168,7 +168,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		super.InitEventListenerList()
 		.AddPropertiesToEventListenerList("reactions",{
 			event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-			onTouchesBegan	: (touches,event)=>{
+			onTouchesBegan	: (touches/*,event*/)=>{
 				touches.forEach(touch=>{
 					const location		= touch.getLocation();
 

@@ -73,7 +73,7 @@ Effect.EffectBase	= class{
 	/** パーティクル生成
 	 * @returns {this}
 	 */
-	Spawn(){ return this.ActivateParticles(1,(v,i)=>false) }
+	Spawn(){ return this.ActivateParticles(1,(/*v,i*/)=>false) }
 
 	/** パーティクルをアクティブにする
 	 * @param {number} nParticles 一度にアクティブ化するパーティクル数。1以上。

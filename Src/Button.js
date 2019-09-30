@@ -360,7 +360,7 @@ class ButtonItem{
 					this._ApplyIndex();
 				}
 			},
-			onTouchesCanceled	: (touches,event)=>{
+			onTouchesCanceled	: (/*touches,event*/)=>{
 				this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
 				this.status			= Button.OFF;
 				this.SetOpacity(this.opacity,true,false);
@@ -441,7 +441,7 @@ class ButtonItem{
 		});
 	}
 
-	Update(dt){
+	Update(/*dt*/){
 		if(this.listensButtonUp && this.listeners.onButtonUp && !this.sprite.IsRunningActions()){
 			this.listeners.onButtonUp();
 			this.listensButtonUp	= false;

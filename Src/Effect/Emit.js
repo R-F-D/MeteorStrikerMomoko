@@ -18,7 +18,7 @@ Effect.Emit	= class extends Effect.EffectBase{
 
 	Init(layer){
 		this.InitParticles((particle)=>{
-			particle	= Object.assign(particle,{
+			Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.emitFx).AddToLayer(layer)
 							.SetScale(1).Attr({zIndex:120,opacity:255}).SetBlend(cc.BlendFunc.ADDITIVE).SetVisible(false),
 				index	: 0,
@@ -32,7 +32,7 @@ Effect.Emit	= class extends Effect.EffectBase{
 	 * @returns {this}
 	 */
 	Spawn(x,y){
-		this.ActivateParticles(_nParticles,(v,i)=>{
+		this.ActivateParticles(_nParticles,(v/*,i*/)=>{
 			v.sprite
 				.SetPosition(x+4,y).SetIndex(0)
 				.SetVisible(true).SetColor(this.color);

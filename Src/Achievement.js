@@ -114,8 +114,8 @@ var Achievement = new (class Achievement{
 		Store.Insert(
 			{Key:achievement.Key},
 			Scene.SceneBase.GetDate().getTime(),
-			(oldValue,newValue)	=> oldValue===null && achievement.Count<=count,	//cond
-			(key,value)			=> {
+			(oldValue/*,newValue*/)	=> oldValue===null && achievement.Count<=count,	//cond
+			(key/*,value*/)			=> {
 				const title	= Array.isArray(achievement.Replacements)	? L.Textf(key,[achievement.Count].concat(achievement.Replacements))
 																		: L.Text (key);
 				this.label.PushLog(`${L.Text("Achievement.Unlocked")}\n${title}`);

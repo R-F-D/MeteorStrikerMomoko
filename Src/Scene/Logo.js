@@ -78,13 +78,13 @@ Scene.Logo	= class extends Scene.SceneBase {
 				.entity.RunActions( [null,cc.fadeTo(1,64),cc.fadeTo(0,255)] );
 			this.sprites.devLogo.SetPosition(size.width/2,size.height/2);
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 			if(this.isEnterTransitionFinished)	this.SetSequence(this.Sequences.PROCESS);
 		});
 		//メイン処理
 		this.Sequences.PROCESS.PushStartingFunctions(()=>{
 		})
-		.PushUpdatingFunctions(dt=>{
+		.PushUpdatingFunctions((/*dt*/)=>{
 		});
 
 		return this;
@@ -94,7 +94,7 @@ Scene.Logo	= class extends Scene.SceneBase {
 		super.InitEventListenerList()
 			.AddPropertiesToEventListenerList("move",{
 				event			: cc.EventListener.TOUCH_ALL_AT_ONCE,
-				onTouchesEnded	: (touch,event)=>{
+				onTouchesEnded	: (/*touch,event*/)=>{
 					this.ReplaceScene(Scene.Title);
 				},
 			})

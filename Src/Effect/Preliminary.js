@@ -17,7 +17,7 @@ Effect.Preliminary	= class extends Effect.EffectBase{
 
 	Init(layer){
 		this.InitParticles((particle)=>{
-			particle	= Object.assign(particle,{
+			Object.assign(particle,{
 				sprite	: Sprite.CreateInstance(rc.img.preliminaryFx).AddToLayer(layer)
 							.Attr({zIndex:120,opacity:255}).SetVisible(false),
 			});
@@ -30,7 +30,7 @@ Effect.Preliminary	= class extends Effect.EffectBase{
 	 * @returns {this}
 	 */
 	Spawn(x,y){
-		this.ActivateParticles(_nParticles,(v,i)=>{
+		this.ActivateParticles(_nParticles,(v/*,i*/)=>{
 			v.sprite
 				.SetPosition(x,y).SetVisible(true).SetScale(0.5).SetRotate(0).SetOpacity(192).SetColor(this.color);
 			return true;

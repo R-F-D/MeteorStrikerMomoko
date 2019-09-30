@@ -18,7 +18,7 @@ var Selector	= class Selector{
 		this.caption	= null;
 
 		/** @var {function} f(key,tag)*/
-		this._onSelected		= (key,tag)=>{};
+		this._onSelected		= (/*key,tag*/)=>{};
 	}
 
 	Init(){

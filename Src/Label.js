@@ -109,13 +109,13 @@ Label	= class Label{
 	}
 
 	/** 更新 */
-	Update(dt){
+	Update(/*dt*/){
 		if(this.bg.IsEnabled()){
 			this.bg.Update();
 		}
 		//背景アニメーション中はテキストを表示しない
 		if(!this.bg.IsRunningActions()){
-		 	this.entity.attr({opacity:255});
+			this.entity.attr({opacity:255});
 		}
 
 		let isDirty		= false;
@@ -274,7 +274,7 @@ Label	= class Label{
 	}
 
 	SetTempText(text){return this.SetString(text,true)}
-	RemoveTempText(text){return this.SetString(this.text,false)}
+	RemoveTempText(){return this.SetString(this.text,false)}
 
 	/** ログ形式のテキストを追加
 	 * @param {string} line 文字列
@@ -476,7 +476,7 @@ class LabelBg{
 	 * @returns
 	 * @memberof LabelBg
 	 */
-	Update(dt){
+	Update(/*dt*/){
 		if(!this.IsRunningActions()){
 			this.animation	= BgAnimation.None;
 		}
