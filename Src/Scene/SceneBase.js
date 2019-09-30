@@ -294,7 +294,7 @@ Scene.SceneBase	= class {
 	}
 	PushCommonEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
-		this.commonEventListeners[tag].push(...listenrs);
+		this.commonEventListeners[tag].push(...listeners);
 		return this;
 	}
 
