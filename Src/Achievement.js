@@ -6,7 +6,7 @@ var L,C;
 var Log;
 var Store,Label;
 
-const Achievements = (()=>{		//Achievements scoop
+var Achievements = (()=>{		//Achievements scoop
 	let Achievements={};
 
 	//エイミング精度
@@ -73,7 +73,7 @@ const Achievements = (()=>{		//Achievements scoop
 /** 実績
  * @class Achievement
  */
-const Achievement = new (class Achievement{
+var Achievement = new (class Achievement{
 
 	constructor(){
 		this._totalItems= null;
