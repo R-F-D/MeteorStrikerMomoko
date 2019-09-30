@@ -2,7 +2,6 @@
 	パーティクルエフェクト基本クラス
 ********************************************************************************/
 var Effect	= Effect || {};
-var cc;
 (function(){	//File Scope
 
 Effect.EffectBase	= class{

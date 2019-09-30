@@ -1,3 +1,5 @@
+var cc;
+
 /** cc.Spriteのラッパクラス
  * @class Sprite
  */

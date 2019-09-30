@@ -1,3 +1,4 @@
+var cc,_;
 var Label;
 
 (function(){	//File Scope

@@ -1,3 +1,4 @@
+var cc;
 var Button	= Button||{};
 (function(){	//File Scope
 

@@ -1,4 +1,4 @@
-var cc;
+var cc,_;
 var Scene	= Scene || {};
 
 /** Scenesクラスのファクトリ */
