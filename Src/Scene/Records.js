@@ -3,6 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var rc,L;
+var Store;
 var Scene	= Scene || {};
 (function(){	//File Scope
 

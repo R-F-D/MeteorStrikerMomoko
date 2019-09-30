@@ -3,6 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var L,C;
+var Store;
 
 const Achievements = (()=>{		//Achievements scoop
 	let Achievements={};

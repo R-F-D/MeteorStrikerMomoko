@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 
-class Store{
+class _Store{
 
 	/** ストレージのレコードハンドル */
 	static get Handles(){
@@ -278,7 +278,9 @@ class Store{
 
 } // class
 
-Store._nPages	= null;
-Store._Prefix	= "MeteorStrikerMomoko/";
+_Store._nPages	= null;
+_Store._Prefix	= "MeteorStrikerMomoko/";
+
+var Store = _Store;
 
 
