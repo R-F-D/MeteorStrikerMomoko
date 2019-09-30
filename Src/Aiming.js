@@ -71,8 +71,8 @@ Scene.Aiming	= class {
 		this.increment				= this.DEFAULT_INCREMENT + NormalRandom(this.INCREMENT_RANDAM) + this.INCREMENT_RANDAM;
 		this.currentArea			= null;
 
-		this.sprites.bar			= Sprite.CreateInstance(rc.img.aimBar).Attr({zIndex:100});;
-		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor).Attr({zIndex:100});;
+		this.sprites.bar			= Sprite.CreateInstance(rc.img.aimBar).Attr({zIndex:100});
+		this.sprites.cursor			= Sprite.CreateInstance(rc.img.aimCursor).Attr({zIndex:100});
 		for(let i=0;i<6;++i){
 			this.sprites.rates.push(Sprite.CreateInstance(rc.img.aimValue).Attr({zIndex:111}).SetVisible(false));
 		}

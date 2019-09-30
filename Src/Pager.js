@@ -119,13 +119,13 @@ class Pager{
 	GetNumPages(chapter=null){
 		if(chapter===null)	return this.nPagesList[this._chapter];
 		else				return this.nPagesList[chapter];
-	};
+	}
 	GetNumChapters(){
 		return this.nPagesList.length || 1;
-	};
+	}
 	/** @param {number} p */
-	set nPages(p){ this.nPagesList[this._chapter]=p};
-	get mostPagesOfAllChapters()	{return _.max(this.nPagesList)};
+	set nPages(p){ this.nPagesList[this._chapter]=p}
+	get mostPagesOfAllChapters()	{return _.max(this.nPagesList)}
 }
 
 

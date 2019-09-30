@@ -23,7 +23,7 @@ Locale	= class Locale{
 		return this;
 	}
 	/** 設定されている言語コードを取得 */
-	GetLanguageCode(){return this.language};
+	GetLanguageCode(){return this.language}
 
 	/** 数字区切りの言語をセットする
 	 * @param {string} langCode

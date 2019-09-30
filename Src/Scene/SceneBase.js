@@ -283,9 +283,9 @@ Scene.SceneBase	= class {
 	}
 
 	OnEnter(){return this}
-	OnEnterTransitionFinished(layer){return this};
-	OnUiLayerCreate(layer){return true};
-	SetSequenceFunctions(){return this;}
+	OnEnterTransitionFinished(layer){return this}
+	OnUiLayerCreate(layer){return true}
+	SetSequenceFunctions(){return this}
 
 	SetCommonEventListeners(tag,listeners){
 		if(!Array.isArray(listeners))	listeners	= [listeners];
