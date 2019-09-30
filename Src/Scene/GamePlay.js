@@ -2,7 +2,7 @@
 	GamePlayシーン
 ********************************************************************************/
 var cc,_;
-var rc, L,C;
+var rc, L,C,sound;
 var Store;
 var NormalRandom,CreateArray,Log,MoveTo,Cycle;
 var Scene	= Scene || {};

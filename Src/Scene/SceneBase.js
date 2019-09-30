@@ -2,6 +2,7 @@
 	シーン基本クラス
 ********************************************************************************/
 var cc,_;
+var sound;
 var Store;
 var Debug,Log,NormalRandom;
 var Scene	= Scene || {};

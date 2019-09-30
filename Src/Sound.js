@@ -75,5 +75,5 @@ class Sound{
 
 }
 
-const sound = new Sound();
+var sound	= new Sound();
 
