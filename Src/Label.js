@@ -524,10 +524,10 @@ class LabelBg{
 		};
 
 		//引数が未指定(undefined)時はラベル文字列から取得、null時は変更なし
-		this.size.width		= width === null		? this.size.width					:
-							  width === undefined	? parentSize.width +sizeAdjust.width	: width +sizeAdjust.width;
-		this.size.height	= height=== null		? this.size.height					:
-							  height=== undefined	? parentSize.height+sizeAdjust.height	: height+sizeAdjust.height;
+		this.size.width	=	width === null		? this.size.width					:
+							width === undefined	? parentSize.width +sizeAdjust.width	: width +sizeAdjust.width;
+		this.size.height=	height=== null		? this.size.height					:
+							height=== undefined	? parentSize.height+sizeAdjust.height	: height+sizeAdjust.height;
 
 		//Clamp
 		this.size.width		= Clamp(this.size.width	,this.lower.width, this.upper.width);

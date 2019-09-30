@@ -239,7 +239,7 @@ Scene.SceneBase	= class {
 	}
 
 	ApplicateCcSceneInstance(childScene){
-		if(!childScene instanceof Scene.SceneBase) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
+		if(!(childScene instanceof Scene.SceneBase)) throw new Error("Arg 'childScene' is not the child class of SceneBase.");
 
 		const _this	= this;
 		this.ccSceneInstance	= new (cc.Scene.extend({
