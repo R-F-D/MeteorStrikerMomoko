@@ -8,7 +8,7 @@ var Sprite;
 /** ページ送り機能
  * @class Pager
  */
-class Pager{
+var Pager	= class Pager{
 
 	/** Creates an instance of Pager.
 	 * @param {number} nPagesList		ページ数
@@ -132,7 +132,7 @@ class Pager{
 }
 
 
-class PageNavigator{
+var PageNavigator	= class PageNavigator{
 
 	constructor(scene,pager){
 		this.parent	= scene;

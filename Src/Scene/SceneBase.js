@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var sound;
-var Achievement,Achievements,Store;
+var Achievement,Achievements,Store,Pager,PageNavigator;
 var Debug,Log,NormalRandom;
 var Scene	= Scene || {};
 (function(){	//File Scope

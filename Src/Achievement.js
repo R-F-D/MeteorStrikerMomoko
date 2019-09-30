@@ -4,7 +4,7 @@
 var cc,_;
 var L,C;
 var Log;
-var Store,Label;
+var Scene,Store,Label;
 
 var Achievements = (()=>{		//Achievements scoop
 	let Achievements={};
