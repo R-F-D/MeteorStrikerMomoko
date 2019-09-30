@@ -128,14 +128,14 @@ class Store{
 			if(resolve)	{
 				const result = resolve(handle.Key,value);
 				return result===undefined ? value : result;	//コールバック関数が実行された場合は戻り値を返す（undefinedを除く）
-			};
+			}
 			return value;
 		}
 		else{
 			//インサートしない場合
 			return oldValue;
 		}
-	};
+	}
 
 	/** ローカルストレージにインサート（値は動的に生成）
 	 * @param {string} handle ストレージのレコードハンドル
@@ -149,7 +149,7 @@ class Store{
 
 		Store._SetItem(handle.Key,value);
 		return value;
-	};
+	}
 
 
 	/** ログ取得・保存
@@ -237,7 +237,7 @@ class Store{
 			/** 現在値と挿入値を数値化し、後者が大きいとき真 */
 			NewValueIsGreater:		(currentValue,newValue)=>	Number(currentValue||0) < Number(newValue),
 		};
-	};
+	}
 
 	/** 挿入値の生成関数
 	 * @type {<string,function>}	f(value):any
@@ -247,7 +247,7 @@ class Store{
 			/** インクリメント */
 			Increment:				value=>	(value==null||value=="") ? 1 : Number(value)+1,
 		};
-	};
+	}
 
 	/** Records表示の変換関数
 	 * @type {<string,function>}	f(value):any
