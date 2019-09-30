@@ -2,6 +2,7 @@
 	選択肢クラス
 ********************************************************************************/
 var cc;
+var L;
 
 class Selector{
 
@@ -143,7 +144,7 @@ class Selector{
 			.Turn(button,true)
 			.TurnOffAll(this.idxSelected);
 
-		if(this._onSelected)	this._onSelected(i,button.tag);
+		if(this._onSelected)	this._onSelected(idx,button.tag);
 		return this;
 	}
 
