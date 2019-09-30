@@ -1,4 +1,5 @@
 var cc,_;
+var rc;
 var Label;
 
 (function(){	//File Scope

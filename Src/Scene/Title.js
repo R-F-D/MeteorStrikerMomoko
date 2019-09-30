@@ -2,7 +2,7 @@
 	Titleシーン
 ********************************************************************************/
 var cc;
-var L,C;
+var rc,L,C;
 var Scene	= Scene || {};
 (function(){	//File Scope
 

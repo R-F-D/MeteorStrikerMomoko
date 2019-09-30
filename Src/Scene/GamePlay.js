@@ -2,7 +2,7 @@
 	GamePlayシーン
 ********************************************************************************/
 var cc,_;
-var L,C;
+var rc, L,C;
 var Scene	= Scene || {};
 (function(){	//File Scope
 

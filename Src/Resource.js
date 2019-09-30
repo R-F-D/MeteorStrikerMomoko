@@ -1,5 +1,7 @@
 /** @const リソースファイル設定 */
-const rc	= {
+var rc	= (()=>{
+	return{
+
 	/** リソースディレクトリ */
 	DIRECTORY	: "../Res/",
 
@@ -56,6 +58,7 @@ const rc	= {
 		distance	: {	Family:"VT323",			},
 	},
 };
+})();
 
 
 

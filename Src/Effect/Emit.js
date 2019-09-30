@@ -3,6 +3,7 @@
 ********************************************************************************/
 var Effect	= Effect || {};
 var cc;
+var rc;
 (function(){	//File Scope
 
 const _nParticles   = 1;

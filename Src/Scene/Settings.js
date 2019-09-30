@@ -2,7 +2,7 @@
 	Settingsシーン
 ********************************************************************************/
 var cc,_;
-var L;
+var rc,L;
 var Scene	= Scene || {};
 (function(){	//File Scope
 
