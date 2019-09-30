@@ -9,3 +9,7 @@
 *.old
 *.bak
 *.tmp
+node_modules
+package*.json
+.eslint*
+
