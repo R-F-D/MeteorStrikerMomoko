@@ -3,9 +3,9 @@
 ********************************************************************************/
 var cc;
 var rc,L;
-var Label,Locale;
+var Label,Locale,Button;
 
-class Selector{
+var Selector	= class Selector{
 
 	constructor(nItems){
 		this.buttons		= Button.CreateInstance(nItems);
