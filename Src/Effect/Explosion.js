@@ -4,6 +4,7 @@
 var Effect	= Effect || {};
 var cc;
 var rc;
+var Sprite;
 (function(){	//File Scope
 
 

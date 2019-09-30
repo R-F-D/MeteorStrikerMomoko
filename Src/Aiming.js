@@ -5,6 +5,7 @@ var Scene	= Scene || {};
 var cc;
 var rc;
 var Clamp,NormalRandom;
+var Sprite;
 (function(){	//File Scope
 
 /** エイミングクラス */

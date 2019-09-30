@@ -1,11 +1,12 @@
 var cc;
 var rc;
 var Clamp,Cycle;
+var Sprite	= (()=>{
 
 /** cc.Spriteのラッパクラス
  * @class Sprite
  */
-class Sprite{
+const Sprite	= class Sprite{
 
 	constructor(img){
 		//座標
@@ -286,6 +287,7 @@ class Sprite{
 			height:	Math.trunc( this.img.height/this.img.nSplitY ),
 		};
 	}
+};
 
-
-}
+return Sprite;
+})();

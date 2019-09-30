@@ -3,6 +3,7 @@
 ********************************************************************************/
 var Effect	= Effect || {};
 var rc;
+var Sprite;
 var GetRandamAngle;
 (function(){	//File Scope
 

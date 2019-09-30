@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc;
 var rc,L,C;
-var Store,Label,sound;
+var Sprite,Store,Label,sound;
 var Cycle,MoveTo,CreateArray;
 var Scene	= Scene || {};
 (function(){	//File Scope

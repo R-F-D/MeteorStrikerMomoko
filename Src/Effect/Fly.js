@@ -5,6 +5,7 @@ var Effect	= Effect || {};
 var cc;
 var rc;
 var NormalRandom;
+var Sprite;
 (function(){	//File Scope
 
 

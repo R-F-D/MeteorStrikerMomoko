@@ -1,6 +1,7 @@
 var cc,_;
 var rc;
 var Clamp;
+var Sprite;
 var Label	= (function(){	//File Scope
 
 /** @const 背景アニメーションの種類 */
