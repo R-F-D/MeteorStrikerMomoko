@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc;
 var rc,L;
-var Label;
+var Label,Locale;
 
 class Selector{
 

@@ -7,7 +7,7 @@
  * 数値の区切り
  * Hash of Numeric Separations
  *******************************************************************************/
-const NumericSeparators	= {
+var NumericSeparators	= (()=>{return{
 	//国際度量衡総会 General Conference on Weights and Measures
 	_:{
 		nDigits:	3,	//何桁ごとに区切るか How many every digits
@@ -27,14 +27,14 @@ const NumericSeparators	= {
 		integer:	['万','億',],
 		decimal:	'.',
 	},
-};
+}})();
 
 
 /********************************************************************************
  * ローカライズされたテキストの一覧
  * Hash of Localized Texts
  *******************************************************************************/
-const LocalizedTexts	= {
+var LocalizedTexts	= (()=>{return{
 
 	//----------------------------------------
 	// 単位
@@ -808,5 +808,5 @@ const LocalizedTexts	= {
 			ja:	"大地の女神が$0回ナビゲートした。\n輝きのたもとへ走り出そうよ。",
 		},
 
-};
+}})();
 

@@ -3,11 +3,10 @@
 ********************************************************************************/
 var _;
 var Store;
-var Locale	= Locale | {};
-(function(){	//File Scope
+var LocalizedTexts,NumericSeparators;
 
 /**地域設定クラス*/
-Locale	= class Locale{
+ var Locale	= class Locale{
 
 	constructor(){
 		/**テキストの言語*/
@@ -180,7 +179,7 @@ Locale	= class Locale{
 		return key || Locale.UniversalCode;
 	}
 
-};
+}
 /** グローバルの言語コード  */
 Locale.UniversalCode	= "_";
 
@@ -190,7 +189,5 @@ const LocalePresets	= {
 	ja	:{	language:"ja",	numericSeparation:"ja",	},
 };
 
-
-})();	//File Scope
 
 var L	= (new Locale()).Load().Save();
