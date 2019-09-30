@@ -63,7 +63,7 @@ Effect.EffectBase	= class{
 		this.color	= color;
 		if(!delays){
 			for(let entity of this.entities){
-				if(enitity.sprite)	entity.sprite.SetColor(this.color);
+				if(entity.sprite)	entity.sprite.SetColor(this.color);
 				for(let s of entity.sprites)	if(s) s.SetColor(this.color);
 			}
 		}
