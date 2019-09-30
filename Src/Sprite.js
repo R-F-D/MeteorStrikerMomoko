@@ -1,5 +1,6 @@
 var cc;
 var rc;
+var Clamp,Cycle;
 
 /** cc.Spriteのラッパクラス
  * @class Sprite

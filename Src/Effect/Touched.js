@@ -3,6 +3,7 @@
 ********************************************************************************/
 var Effect	= Effect || {};
 var rc;
+var GetRandamAngle;
 (function(){	//File Scope
 
 const _nParticles	= 5;

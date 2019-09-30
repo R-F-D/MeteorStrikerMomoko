@@ -17,7 +17,7 @@ Scene.SceneFactory	= ()=>{
  * @param {number} upper 上限値（未満）
  * @returns  {number}
  */
-function Cycle(value,lower,upper){
+var Cycle	= function Cycle(value,lower,upper){
 	if(typeof value !== "number" || typeof lower!=="number" || typeof upper!=="number" || lower>=upper){
 		throw new Error(`'${value}' or ${lower}','${upper}' is not valid.`);
 	}
@@ -44,7 +44,7 @@ Array.prototype.Cycle	= function(lower,upper){
  * @param {number} [upper=null] 上限値（以下）
  * @returns {number} 新しい値
  */
-function Clamp(value,lower=null,upper=null){
+var Clamp	= function Clamp(value,lower=null,upper=null){
 	//Swap
 	if(lower!=null && upper!=null && upper<lower) [upper,lower] = [lower,upper];
 	//クランプ処理
@@ -68,7 +68,7 @@ Array.prototype.Clamp	= function(lower=null,upper=null){
  * @param {number} [distance=1] 変化量
  * @returns {number} 新しい値
  */
-function MoveTo(src,dest,distance=1){
+var MoveTo	= function MoveTo(src,dest,distance=1){
 	if(distance <= 0)	return src;
 
 	else if(src < dest)	return Math.min( src+distance, dest );
@@ -90,7 +90,7 @@ Array.prototype.MoveTo	= function(dest,distance=1){
  * @param {number} [isNumbering=null] 値を連番にする
  * @returns {array}
  */
-function CreateArray(length,isNumbering=null){
+var CreateArray	= function CreateArray(length,isNumbering=null){
 	let list	= [];
 	for(let i=0; i<length; ++i)	list.push( isNumbering ? i : null );
 	return list;
@@ -102,7 +102,7 @@ function CreateArray(length,isNumbering=null){
  * @param {*} valueUndef	undefined時の値
  * @returns value、ないしnull/undefine時はそれぞれの値
  */
-function DefinedOr(value,valueNull,valueUndef){
+var DefinedOr	= function DefinedOr(value,valueNull,valueUndef){
 	if(value===undefined)	return valueUndef;
 	else if(value===null)	return valueNull;
 	else					return value;
@@ -112,7 +112,7 @@ function DefinedOr(value,valueNull,valueUndef){
  * @param {number} halfWidth 半幅
  * @returns {number}
  */
-function NormalRandom(halfWidth){
+var NormalRandom	= function NormalRandom(halfWidth){
 	return (Math.random()+Math.random()-1) * halfWidth;
 }
 
@@ -143,7 +143,7 @@ cc.Node.prototype.RunActions	= function(...actions){
  * @param {number} [piradStandardAngle=0]	出力範囲の中央となる値。単位はπrad。省略すると0。
  * @returns {number} 						単位はrad
  */
-function GetRandamAngle(piradRange=2,piradStandardAngle=0){
+var GetRandamAngle	= function GetRandamAngle(piradRange=2,piradStandardAngle=0){
 	let pirad	= Math.random() * piradRange - piradRange/2 + piradStandardAngle;
 	return Cycle(pirad,0,2) * Math.PI;
 }
@@ -153,7 +153,7 @@ function GetRandamAngle(piradRange=2,piradStandardAngle=0){
  * @param {number} [hourOffset=null]	ローカル時間から見た。時差+9時間なら省略時は自動検出。
  * @returns
  */
-function EpochMsecToEpochDay(msec,hourOffset=null){
+var EpochMsecToEpochDay	= function EpochMsecToEpochDay(msec,hourOffset=null){
 	const msOffset	= (hourOffset!==null ? hourOffset : (new Date()).getTimezoneOffset())	* 60*1000;
 	return Math.trunc( (msec-msOffset) / (24*60*60*1000) );
 }
@@ -169,10 +169,10 @@ String.prototype.Number	= function(){return Number(this)}
 String.prototype.Int	= function(){return Math.trunc(Number(this))}
 
 //デバッグ
-function isDebug(){			return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
-function Debug(callback){	if(isDebug()) callback();	}
-function Msg(arg){			Debug(()=>alert(JSON.stringify(arg)));	}
-function Log(arg){Debug(()=>{
+var isDebug	= ()=>			{ return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
+var Debug	= (callback)=>	{ if(isDebug()) callback();	}
+var Msg		= (arg)=>		{ Debug(()=>alert(JSON.stringify(arg)));	}
+var Log		= (arg)=>		{ Debug(()=>{
 	const date = new Date();
 	console.log(`[${date.toLocaleTimeString()}.${(date.getMilliseconds()/1000).toFixed(3).slice(2,5)}] ${arg}`);
 })}

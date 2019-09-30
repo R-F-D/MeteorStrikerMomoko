@@ -1,5 +1,6 @@
 var cc,_;
 var rc;
+var Clamp;
 var Label;
 
 (function(){	//File Scope

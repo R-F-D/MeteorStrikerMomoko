@@ -4,6 +4,7 @@
 var cc,_;
 var rc,L;
 var Store;
+var Cycle;
 var Scene	= Scene || {};
 (function(){	//File Scope
 
