@@ -17,7 +17,7 @@ const C={};
 	];
 
 	/** @const ウェブサイトURL */
-	C.WebPage	= "https://example.jp";
+	C.WebPage	= "https://r-f-d.github.io/MeteorStriker/";
 
 
 return C;})();
