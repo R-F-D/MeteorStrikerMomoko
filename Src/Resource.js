@@ -51,6 +51,9 @@ var rc	= (()=>{
 	sysImg	: {
 		white	: "Sys/white.png",
 	},
+	sysAudio:{
+		void:	"void.mp3",
+	},
 
 	/** フォント名 */
 	font	: {
