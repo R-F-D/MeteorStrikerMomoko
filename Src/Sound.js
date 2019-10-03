@@ -73,6 +73,12 @@ class Sound{
 		return this;
 	}
 
+	/**ダミーBGM*/
+	PlayDummyMusic(){
+		cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${rc.sysAudio.void}`,true);
+		return this;
+	}
+
 }
 
 // eslint-disable-next-line no-unused-vars

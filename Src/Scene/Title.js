@@ -149,6 +149,8 @@ Scene.Title	= class extends Scene.SceneBase {
 				this.label
 					.Init().SetVisible(false).SetBgEnabled(true).SetNumLogLines(1);
 				this.playerIsTouched	= false;
+
+				sound.PlayDummyMusic();
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
 				if(this.sequence.count>60)	this.SetSequence(this.Sequences.PROCESS);
