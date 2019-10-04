@@ -16,7 +16,6 @@ class Sound{
 		this.playsBgm		= false;
 
 		this.musicHandles		= {};
-//		this.playingMusicHandle	= null;
 	}
 
 	/** 初期化処理
@@ -35,7 +34,6 @@ class Sound{
 				this.musicHandles[filename]	= cc.audioEngine._currMusic;
 				this.musicHandles[filename].pause();
 			});
-			cc.audioEngine.setMusicVolume(this.musicVolume);
 			this.musicIsInitialized	= true;
 		}
 
@@ -58,9 +56,11 @@ class Sound{
 		if(this.musicHandles[filename]){
 			this.musicHandles[filename].stop();
 			this.musicHandles[filename].play();
+			this.musicHandles[filename].setVolume(_(this.musicVolume).clamp(0.0,1.0));
 		}
 		else{
 			cc.audioEngine.rewindMusic();
+			cc.audioEngine.setMusicVolume(this.musicVolume);
 		}
 
 		return this;
@@ -76,6 +76,7 @@ class Sound{
 	/**ダミーBGM*/
 	PlayDummyMusic(){
 		cc.audioEngine.playMusic(`${rc.DIRECTORY}/${rc.sysAudio.void}`,true);
+		cc.audioEngine.setMusicVolume(0);
 		return this;
 	}
 
