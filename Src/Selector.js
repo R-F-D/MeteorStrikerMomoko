@@ -28,7 +28,7 @@ var Selector	= class Selector{
 				.CreateSprite(rc.img.labelButton)
 				.CreateLabel(20)
 				.SetColorOnHover([0xFF,0xA0,0x00])
-				.SetLabelColor("#FF0000")
+				.SetLabelColor("#442222","#FFFFFF",1)
 				.SetScale(0.5)
 				.SetOpacity(192)
 				.OnTouchEnded(()=>this.Select(i));
