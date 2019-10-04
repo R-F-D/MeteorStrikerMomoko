@@ -80,6 +80,14 @@ class Sound{
 		return this;
 	}
 
+	//BGM音量
+	SetMusicVolume(volume){
+		volume	= _(volume).clamp(0.0, 1.0);
+		_(this.musicHandles).forEach(h=>h.setMusicVolume(volume));
+		cc.audioEngine.setMusicVolume(volume);
+		return this;
+	}
+
 }
 
 // eslint-disable-next-line no-unused-vars
