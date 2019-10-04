@@ -55,7 +55,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			playsBgm:	new Selector(2),
 			navigator:	new Selector(3),
 		};
-		_(this.selectors).forEach(s=>s.gap=32);
+		_(this.selectors).forEach(s=>s.SetGap(1,32));
 		this.sprites		= {};
 
 		/** ccSceneのインスタンス */

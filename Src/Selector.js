@@ -15,7 +15,7 @@ var Selector	= class Selector{
 		this.idxSelected	= null;
 
 		this.area		= {x:0,y:0,width:0,height:0};
-		this.gap		= 16;
+		this._gap		= {x:16,y:16};
 		this.caption	= null;
 
 		/** @var {function} f(key,tag)*/
@@ -97,9 +97,9 @@ var Selector	= class Selector{
 		if(this.area.width<=0 || this.area.height<=0)	return this;
 
 		if(this.caption){
-			this.caption.SetPosition(this.area.x,this.area.y-this.gap);
-			this.area.y-=this.gap;
-			this.area.height-=this.gap;
+			this.caption.SetPosition(this.area.x,this.area.y-this._gap.y);
+			this.area.y-=this._gap.y;
+			this.area.height-=this._gap.y;
 		}
 
 		let x	= this.area.x;	//左上座標（アンカーポイント修正込み）
@@ -113,10 +113,10 @@ var Selector	= class Selector{
 
 			//選択肢1つ分だけ座標をずらす
 			if(i>0){
-				dx	+= box.width + this.gap;
+				dx	+= box.width + this._gap.x;
 				if(this.area.width-box.width < dx){
 					dx	= 0;
-					dy	+= box.height + this.gap;
+					dy	+= box.height + this._gap.y;
 				}
 			}
 
@@ -201,6 +201,12 @@ var Selector	= class Selector{
 
 	SetOnSelected(callback){
 		this._onSelected	= callback;
+		return this;
+	}
+
+	SetGap(x=null,y=null){
+		if(x!==null)	this._gap.x	= x;
+		if(y!==null)	this._gap.y	= y;
 		return this;
 	}
 }
