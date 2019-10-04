@@ -52,7 +52,7 @@ var rc	= (()=>{
 		white	: "Sys/white.png",
 	},
 	sysAudio:{
-		void:	"void.mp3",
+		void:	"Sys/void.mp3",
 	},
 
 	/** フォント名 */

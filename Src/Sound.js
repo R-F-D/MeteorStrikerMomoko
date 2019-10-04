@@ -75,7 +75,7 @@ class Sound{
 
 	/**ダミーBGM*/
 	PlayDummyMusic(){
-		cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${rc.sysAudio.void}`,true);
+		cc.audioEngine.playMusic(`${rc.DIRECTORY}/${rc.sysAudio.void}`,true);
 		return this;
 	}
 
