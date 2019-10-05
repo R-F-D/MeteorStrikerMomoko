@@ -44,9 +44,9 @@ var Selector	= class Selector{
 	 */
 	SetCaption(text){
 		if(!this.caption){
-			this.caption	= Label.CreateInstance(14)
+			this.caption	= Label.CreateInstance()
 								.AddToLayer(this.layer)
-								.SetAnchorPoint(cc.p(0,0))
+								.SetAnchorPoint(cc.p(0,0.5))
 								.SetFontColor("#FFCF00","#7F0000",1);
 		}
 		this.caption.SetString(text);
@@ -97,7 +97,7 @@ var Selector	= class Selector{
 		if(this.area.width<=0 || this.area.height<=0)	return this;
 
 		if(this.caption){
-			this.caption.SetPosition(this.area.x,this.area.y-this._gap.y);
+			this.caption.SetPosition(this.area.x,this.area.y-this._gap.y/2);
 			this.area.y-=this._gap.y;
 			this.area.height-=this._gap.y;
 		}
@@ -128,6 +128,7 @@ var Selector	= class Selector{
 
 
 	Update(dt){
+		this.caption.Update(dt);
 		this.buttons.Update(dt);
 		return this;
 	}
@@ -209,6 +210,7 @@ var Selector	= class Selector{
 		if(y!==null)	this._gap.y	= y;
 		return this;
 	}
+
 }
 
 
