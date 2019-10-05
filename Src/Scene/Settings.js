@@ -21,9 +21,13 @@ const SelectorMaps	= {
 		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en")},					},
 		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja")},					},
 	],
-	PlaysBgm:[
-		{	Tag:"0",					OnSelected:Store.Handles.Settings.PlaysBgm,	},
-		{	Tag:"1",					OnSelected:Store.Handles.Settings.PlaysBgm,	},
+	BgmVolume:[
+		{	Tag:"0",					OnSelected:Store.Handles.Settings.BgmVolume,	},
+		{	Tag:"1",					OnSelected:Store.Handles.Settings.BgmVolume,	},
+		{	Tag:"2",					OnSelected:Store.Handles.Settings.BgmVolume,	},
+		{	Tag:"3",					OnSelected:Store.Handles.Settings.BgmVolume,	},
+		{	Tag:"4",					OnSelected:Store.Handles.Settings.BgmVolume,	},
+		{	Tag:"5",					OnSelected:Store.Handles.Settings.BgmVolume,	},
 	],
 	Navigator:[
 		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Navigator,	},
@@ -52,7 +56,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.EnableNaviButtons(0);
 		this.selectors	= {
 			locale:		new Selector(3),
-			playsBgm:	new Selector(2),
+			BgmVolume:	new Selector(6),
 			navigator:	new Selector(3),
 		};
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
@@ -110,7 +114,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	OnUpdating(dt){
 		super.OnUpdating(dt);
 		this.selectors.locale.Update(dt);
-		this.selectors.playsBgm.Update(dt);
+		this.selectors.BgmVolume.Update(dt);
 		this.selectors.navigator.Update(dt);
 		return this;
 	}
@@ -140,7 +144,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	OnUiLayerCreate(layer){
 		super.InitUIs(layer);
 		this.selectors.locale.AddToLayer(layer);
-		this.selectors.playsBgm.AddToLayer(layer);
+		this.selectors.BgmVolume.AddToLayer(layer);
 		this.selectors.navigator.AddToLayer(layer);
 
 		//初回起動時の初期設定
@@ -159,12 +163,12 @@ Scene.Settings	= class extends Scene.SceneBase {
 		const currentSettings	= {
 			locale:		L.GetCurrentPresetKey(),
 			navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
-			playsBgm:	Store.Select(Store.Handles.Settings.PlaysBgm, "1"),
+			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume, "1"),
 		};
 		const initialIndexes	= {
 			locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.locale)		||0),
 			navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.navigator)	||0),
-			playsBgm:	Number(_(SelectorMaps.PlaysBgm).findKey(m=> m.Tag==currentSettings.playsBgm)	||0),
+			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
 		};
 
 		this.selectors.locale
@@ -177,15 +181,15 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
 				.forEach((b)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
 
-		this.selectors.playsBgm
+		this.selectors.BgmVolume
 				.Init()
-				.SetCaptionByTextCode("Settings.PlaysBgm")
+				.SetCaptionByTextCode("Settings.BgmVolume")
 				.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+64))
-				.Select(initialIndexes.playsBgm)
-				.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.PlaysBgm,tag,0))
+				.Select(initialIndexes.BgmVolume)
+				.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.BgmVolume,tag,0))
 				.buttons
-					.SetTags( ... _(SelectorMaps.PlaysBgm).map("Tag") )
-					.forEach((b)=> b.SetLabelText(L.Text(`Settings.PlaysBgm.Label.${b.tag}`)) );
+					.SetTags( ... _(SelectorMaps.BgmVolume).map("Tag") )
+					.forEach((b)=> b.SetLabelText(L.Text(`Settings.BgmVolume.Label.${b.tag}`)) );
 
 		this.selectors.navigator
 			.Init()

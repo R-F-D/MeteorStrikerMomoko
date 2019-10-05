@@ -22,7 +22,7 @@ class Sound{
 	 * - 自動再生ブロックへの対応のため音量0で再生
 	 * - Init()前後に画面をクリック/タップさせるような構成にすること */
 	Init(){
-		this.playsBgm	= !!Store.Select(Store.Handles.Settings.PlaysBgm,"1").Number();
+		this.playsBgm	= !!Store.Select(Store.Handles.Settings.BgmVolume,"1").Number();
 
 		if(this.musicIsInitialized)	return this;
 
@@ -56,12 +56,13 @@ class Sound{
 		if(this.musicHandles[filename]){
 			this.musicHandles[filename].stop();
 			this.musicHandles[filename].play();
-			this.musicHandles[filename].setVolume(_(this.musicVolume).clamp(0.0,1.0));
+//			this.musicHandles[filename].setVolume(_(this.musicVolume).clamp(0.0,1.0));
 		}
 		else{
 			cc.audioEngine.rewindMusic();
-			cc.audioEngine.setMusicVolume(this.musicVolume);
+//			cc.audioEngine.setMusicVolume(this.musicVolume);
 		}
+		this.LoadVolumeSettings();
 
 		return this;
 	}
@@ -80,11 +81,17 @@ class Sound{
 		return this;
 	}
 
-	//BGM音量
+	/**BGM音量*/
 	SetMusicVolume(volume){
-		volume	= _(volume).clamp(0.0, 1.0);
-		_(this.musicHandles).forEach(h=>h.setMusicVolume(volume));
-		cc.audioEngine.setMusicVolume(volume);
+		this.musicVolume	= _(volume).clamp(0.0, 1.0);
+		_(this.musicHandles).forEach(h=>h.setVolume(this.musicVolume));
+		cc.audioEngine.setMusicVolume(this.musicVolume);
+		return this;
+	}
+
+	/**音量設定を読み込む*/
+	LoadVolumeSettings(){
+		this.SetMusicVolume( _(Store.Select(Store.Handles.Settings.BgmVolume,"3").Number()).clamp(0,5)*0.2	);
 		return this;
 	}
 
