@@ -36,6 +36,11 @@ const SelectorMaps	= {
 	],
 };
 
+const PageMaps	= [
+	[	"Locale","BgmVolume",	],
+	[	"Navigator",			],
+];
+
 /** @const セレクタ領域のマージン */
 const SelectorAreaMargin	= {
 	left:	16+64,
@@ -51,16 +56,20 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.Sequences	= {
 			INITIAL:	null,	//初期状態
 			SELECTORS:	null,	//セレクタ
+			TRANSITION:	null,
 		};
 
 		this.EnableNaviButtons(0);
 		this.selectors	= {
-			locale:		new Selector(3),
+			Locale:		new Selector(3),
 			BgmVolume:	new Selector(6),
-			navigator:	new Selector(3),
+			Navigator:	new Selector(3),
 		};
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
+
+		this.EnableNaviButtons(PageMaps.length);
+		if(this.pager)	this.pager.SetChapter(0, false);
 
 		/** ccSceneのインスタンス */
 		this.ApplicateCcSceneInstance(this).InitLayerList();
@@ -107,15 +116,15 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.InitSequences(this.Sequences,LinkedLayerTags.MAIN,this.ccLayerInstances[LinkedLayerTags.MAIN])
 			.SetSequence(this.Sequences.INITIAL);
 
+		if(this.pager)	this.pager.onPageChanged	= ()=> this.SetSequence(this.Sequences.TRANSITION);
+
 		this.InitUIs();
 		return this;
 	}
 
 	OnUpdating(dt){
 		super.OnUpdating(dt);
-		this.selectors.locale.Update(dt);
-		this.selectors.BgmVolume.Update(dt);
-		this.selectors.navigator.Update(dt);
+		_(this.selectors).forEach(s=>s.Update(dt));
 		return this;
 	}
 
@@ -124,6 +133,21 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.Sequences.INITIAL.PushStartingFunctions(()=>{
 		})
 		.PushUpdatingFunctions((/*dt*/)=>{
+			if(this.isEnterTransitionFinished)	this.SetSequence(this.Sequences.SELECTORS);
+		});
+		//セレクタ表示
+		this.Sequences.SELECTORS.PushStartingFunctions(()=>{
+			const page	= this.pager ? this.pager.GetPage() : 0;
+			this.DeploySelectors(page);
+		})
+		.PushUpdatingFunctions((/*dt*/)=>{
+		});
+		//セレクタ消去
+		this.Sequences.TRANSITION.PushStartingFunctions(()=>{
+			_(this.selectors).forEach(s=>s.SetVisible(false))
+		})
+		.PushUpdatingFunctions((/*dt*/)=>{
+			this.SetSequence(this.Sequences.SELECTORS);
 		});
 
 		return this;
@@ -143,9 +167,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	OnUiLayerCreate(layer){
 		super.InitUIs(layer);
-		this.selectors.locale.AddToLayer(layer);
-		this.selectors.BgmVolume.AddToLayer(layer);
-		this.selectors.navigator.AddToLayer(layer);
+		_(this.selectors).forEach(s=>s.AddToLayer(layer));
 
 		//初回起動時の初期設定
 		if(Scene.SceneBase.isFirstBoot && !Scene.SceneBase.initialSettingIsCompleted){
@@ -158,50 +180,48 @@ Scene.Settings	= class extends Scene.SceneBase {
 	/** UIパーツ初期化 */
 	InitUIs(){
 		super.InitUIs();
-		const size	= cc.director.getWinSize();
 
 		const currentSettings	= {
-			locale:		L.GetCurrentPresetKey(),
-			navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
+			Locale:		L.GetCurrentPresetKey(),
+			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
 			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume, "1"),
 		};
 		const initialIndexes	= {
-			locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.locale)		||0),
-			navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.navigator)	||0),
+			Locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale)		||0),
+			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
 			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
 		};
 
-		this.selectors.locale
-			.Init()
-			.SetCaptionByTextCode("Settings.Locale")
-			.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+0))
-			.Select(initialIndexes.locale)
-			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Locale,tag,0))
-			.buttons
-				.SetTags( ... _(SelectorMaps.Locale).map("Tag") )
-				.forEach((b)=> b.SetLabelText(L.Text(`Settings.Locale.Label.${b.tag}`)) );
-
-		this.selectors.BgmVolume
+		_(this.selectors).forEach((selector,item)=>{
+			selector
 				.Init()
-				.SetCaptionByTextCode("Settings.BgmVolume")
-				.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+64))
-				.Select(initialIndexes.BgmVolume)
-				.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.BgmVolume,tag,0))
+				.SetVisible(false)
+				.SetCaptionByTextCode(`Settings.${item}`)
+				.Select(initialIndexes[item])
+				.SetOnSelected((key,tag)=>{
+					this.DispatchOnSelect(SelectorMaps[item],tag,0)
+				})
 				.buttons
-					.SetTags( ... _(SelectorMaps.BgmVolume).map("Tag") )
-					.forEach((b)=> b.SetLabelText(L.Text(`Settings.BgmVolume.Label.${b.tag}`)) );
-
-		this.selectors.navigator
-			.Init()
-			.SetCaptionByTextCode("Settings.Navigator")
-			.SetArea(SelectorAreaMargin.left, size.height-(SelectorAreaMargin.top+128))
-			.Select(initialIndexes.navigator)
-			.SetOnSelected((key,tag)=>this.DispatchOnSelect(SelectorMaps.Navigator,tag,0))
-			.buttons
-				.SetTags( ... _(SelectorMaps.Navigator).map("Tag") )
-				.forEach((b)=> b.SetLabelText(L.Text(`Settings.Navigator.Label.${b.tag}`)) );
+					.SetTags( ... _(SelectorMaps[item]).map("Tag") )
+					.forEach((b)=> b.SetLabelText(L.Text(`Settings.${item}.Label.${b.tag}`)) );
+		});
 
 		return this;
+	}
+
+	DeploySelectors(page){
+		const size	= cc.director.getWinSize();
+
+		_(this.selectors).forEach(s=>s.SetVisible(false));
+		PageMaps[page].forEach((item,i)=>{
+			const selector	= this.selectors[item];
+			if(!selector)	return;
+
+			selector
+				.SetVisible(true)
+				.SetArea(	SelectorAreaMargin.left,
+							size.height - (SelectorAreaMargin.top+i*64)	);
+		});
 	}
 
 	//OnSelectedイベントの発行
