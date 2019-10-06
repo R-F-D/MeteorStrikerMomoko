@@ -13,7 +13,9 @@ var Selector	= class Selector{
 		this.layer			= null;
 		/** @var 選択されたボタン番号 */
 		this.idxSelected	= null;
+
 		this.isVisible		= true;
+		this.isEnabled		= true;
 
 		this.area		= {x:0,y:0,width:0,height:0};
 		this._gap		= {x:16,y:16};
@@ -81,10 +83,18 @@ var Selector	= class Selector{
 		return this;
 	}
 
+	/**表示/非表示の切り替え*/
 	SetVisible(visible){
 		this.isVisible	= visible;
 		if(this.buttons)	this.buttons.SetVisible(visible);
 		if(this.caption)	this.caption.SetVisible(visible);
+		return this;
+	}
+
+	/**ボタンの有効化/無効化*/
+	SetEnabled(enable){
+		this.isEnabled	= enable;
+		this.buttons.SetEnabled(enable);
 		return this;
 	}
 
