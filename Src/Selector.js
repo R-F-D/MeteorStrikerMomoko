@@ -50,7 +50,8 @@ var Selector	= class Selector{
 			this.caption	= Label.CreateInstance()
 								.AddToLayer(this.layer)
 								.SetAnchorPoint(cc.p(0,0.5))
-								.SetFontColor("#FFCF00","#7F0000",1);
+								.SetFontColor("#FFCF00","#7F0000",1)
+								.SetVisible(this.isVisible);
 		}
 		this.caption.SetString(text);
 		return this;

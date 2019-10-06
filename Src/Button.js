@@ -27,6 +27,7 @@ Button	= class Button{
 		this.layer	= null;
 		this.listener	- null;
 
+		this.isVisible	= true;
 		this.isEnabled	= true;
 	}
 
@@ -109,6 +110,7 @@ Button	= class Button{
 	}
 
 	SetVisible(visible){
+		this.isVisible	= visible;
 		this.items.forEach(b=>b.SetVisible(!!visible));
 		return this;
 	}
@@ -217,7 +219,8 @@ class ButtonItem{
 		if(this.label){
 			this.label
 				.AddToLayer(this.container.layer)
-				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius);
+				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+				.SetVisible(this.isVisible);
 		}
 
 		this._ApplyEvents();
@@ -240,6 +243,7 @@ class ButtonItem{
 	/** 表示設定 */
 	SetVisible(isVisible){
 		if(this.sprite)	this.sprite.SetVisible(isVisible);
+		if(this.label)	this.label.SetVisible(isVisible);
 		return this;
 	}
 
@@ -531,9 +535,8 @@ class ButtonItem{
 	}
 
 	/** ボタンの有効/無効フラグ */
-	get isEnabled(){
-		return this.container.isEnabled;
-	}
+	get isEnabled()	{return this.container.isEnabled;}
+	get isVisible()	{return this.container.isVisible;}
 }
 
 })();	//File Scope
