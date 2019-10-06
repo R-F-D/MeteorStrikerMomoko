@@ -13,6 +13,7 @@ var Selector	= class Selector{
 		this.layer			= null;
 		/** @var 選択されたボタン番号 */
 		this.idxSelected	= null;
+		this.isVisible		= true;
 
 		this.area		= {x:0,y:0,width:0,height:0};
 		this._gap		= {x:16,y:16};
@@ -80,6 +81,13 @@ var Selector	= class Selector{
 		return this;
 	}
 
+	SetVisible(visible){
+		this.isVisible	= visible;
+		if(this.buttons)	this.buttons.SetVisible(visible);
+		if(this.caption)	this.caption.SetVisible(visible);
+		return this;
+	}
+
 	/** 選択肢エリアの範囲を設定
 	 * @param {number} left				x座標
 	 * @param {number} top				y座標
@@ -128,7 +136,8 @@ var Selector	= class Selector{
 
 
 	Update(dt){
-		this.caption.Update(dt);
+		if(!this.isVisible)	return this;
+		if(this.caption)	this.caption.Update(dt);
 		this.buttons.Update(dt);
 		return this;
 	}
