@@ -240,12 +240,12 @@ var LocalizedTexts	= (()=>{return{
 			_:	"Music Volume",
 			ja:	"BGM音量",
 		},
-		"Settings.BgmVolume.Label.0":	{_:	"Off",	ja:"なし",	},	//Volume Off
+		"Settings.BgmVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	},	//Volume 0%(Off)
 		"Settings.BgmVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		},	//Volume 20%
 		"Settings.BgmVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	},	//Volume 40%
 		"Settings.BgmVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	},	//Volume 60%
 		"Settings.BgmVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	},	//Volume 80%
-		"Settings.BgmVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	},	//Volume 100%
+		"Settings.BgmVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	},	//Volume 100%(Max)
 
 		//ナビゲーター設定 Navigator
 		"Settings.Navigator":	{
