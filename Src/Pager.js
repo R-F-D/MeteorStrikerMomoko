@@ -243,6 +243,7 @@ var PageNavigator	= class PageNavigator{
 	SetPageIndicator(){
 		if(!this.pager || this.pager.GetNumPages()<2)	return this;
 		const size		= cc.director.getWinSize();
+		const indicatorWidth	= (p=>p<=2?64:p<8?128:256)(this.pager.GetNumPages());	// 2ページ:64, 3-7ページ:128,  8+ページ:256
 
 		this.pageIndicators
 			.forEach((indicator)=>indicator.SetVisible(false).SetScale(0.5));
@@ -250,7 +251,6 @@ var PageNavigator	= class PageNavigator{
 		this.pageIndicators
 			.filter((v,i)=> i < this.pager.GetNumPages() )
 			.forEach((indicator,i)=>{
-				const indicatorWidth	= this.pager.GetNumPages()<8 ? 128 : 256;
 				indicator.SetVisible(true).SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.GetNumPages()-1)), 32);
 				if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(0.75).StopActions().RunActions( [cc.scaleTo(0.20, 0.5),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
 				else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.25 ),cc.fadeTo (0.25,96)] );
