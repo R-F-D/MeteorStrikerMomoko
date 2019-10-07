@@ -29,6 +29,11 @@ const LinkedLayerTags	= {
 	MAIN	: "GamePlay.Main",
 	BG		: "GamePlay.Bg",
 };
+/**隕石設定の情報*/
+const MeteoriteSettings	= {
+	Normal:		{Key:"Normal",		IdxSprite:0,	},
+	Tryangle:	{Key:"Tryangle",	IdxSprite:1,	},
+};
 /**ナビゲータ情報*/
 const NavigatorSettings	= {
 	Normal	:{	Key:"Normal",	Storage:Store.Handles.Action.NumNavigates[0],	Achievement:Achievements.Action.Navigate00,	},
@@ -108,7 +113,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			hitArea:null, distance:null,	navigation:null,
 		}
 
-		//ナビゲーター
+		//隕石とナビゲーター
+		this.meteorite	= this.GetMeteoriteSetting();
 		this.navigator	= this.GetNavigatorSetting();
 
 		//シークエンス設定
@@ -221,7 +227,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			this.sprites.meteor
 				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
-				.SetScale(2).SetVisible(true).SetIndex(0)
+				.SetScale(2).SetVisible(true).SetIndex(this.meteorite.IdxSprite)
 				.RunActions(cc.delayTime(3.0), cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
@@ -666,6 +672,11 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		return this.chargedPower/BlowPower.INCREMENT + 20;
 	}
 
+	/** 隕石設定を取得 */
+	GetMeteoriteSetting(){
+		const meteoriteKey	= Store.Select(Store.Handles.Settings.Meteorite);
+		return _(MeteoriteSettings).find(ms=>meteoriteKey==ms.Key) || MeteoriteSettings.Normal;
+	}
 	/** ナビゲーター設定を取得 */
 	GetNavigatorSetting(){
 		const naviKey	= Store.Select(Store.Handles.Settings.Navigator);

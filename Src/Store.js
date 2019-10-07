@@ -87,6 +87,8 @@ class _Store{
 				NumberSeparation:			{},
 				/** BGM音量 */
 				BgmVolume:					{},
+				/** 隕石設定 */
+				Meteorite:					{},
 				/** ナビゲーター設定 */
 				Navigator:					{},
 				/**記録・実績の全公開設定*/

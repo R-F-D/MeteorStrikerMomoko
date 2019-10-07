@@ -29,6 +29,10 @@ const SelectorMaps	= {
 		{	Tag:"4",					OnSelected:Store.Handles.Settings.BgmVolume,	},
 		{	Tag:"5",					OnSelected:Store.Handles.Settings.BgmVolume,	},
 	],
+	Meteorite:[
+		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Meteorite,	},
+		{	Tag:"Tryangle",				OnSelected:Store.Handles.Settings.Meteorite,	},
+	],
 	Navigator:[
 		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Navigator,	},
 		{	Tag:"Golem",				OnSelected:Store.Handles.Settings.Navigator,	},
@@ -38,7 +42,7 @@ const SelectorMaps	= {
 
 const PageMaps	= [
 	[	"Locale","BgmVolume",	],
-	[	"Navigator",			],
+	[	"Meteorite","Navigator",],
 ];
 
 /** @const セレクタ領域のマージン */
@@ -63,6 +67,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.selectors	= {
 			Locale:		new Selector(3),
 			BgmVolume:	new Selector(6),
+			Meteorite:	new Selector(2),
 			Navigator:	new Selector(3),
 		};
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
@@ -183,13 +188,15 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		const currentSettings	= {
 			Locale:		L.GetCurrentPresetKey(),
+			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"1"),
 			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
-			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume, "1"),
+			Meteorite:	Store.Select(Store.Handles.Settings.Meteorite,"0"),
 		};
 		const initialIndexes	= {
 			Locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale)		||0),
-			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
 			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
+			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
+			Meteorite:	Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite)	||0),
 		};
 
 		_(this.selectors).forEach((selector,item)=>{

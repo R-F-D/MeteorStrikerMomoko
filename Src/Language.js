@@ -247,6 +247,14 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.BgmVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	},	//Volume 80%
 		"Settings.BgmVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	},	//Volume 100%(Max)
 
+		//隕石設定 Meteorite
+		"Settings.Meteorite":	{
+			_:	"Meteorite",
+			ja:	"隕石",
+		},
+		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",			ja:"隕石",				},	//Meteorite
+		"Settings.Meteorite.Label.Tryangle":	{_:	"△Tryangle",			ja:"△さんかく",			},	//Tryangle
+
 		//ナビゲーター設定 Navigator
 		"Settings.Navigator":	{
 			_:	"Navigator",
@@ -255,7 +263,6 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Navigator.Label.Normal":	{_:	"NAKATANI\nIku",			ja:"中谷育",				},	//Iku
 		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	},	//Golem
 		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			},	//Goddess
-
 
 	//----------------------------------------
 	// レコード画面 - 記録
