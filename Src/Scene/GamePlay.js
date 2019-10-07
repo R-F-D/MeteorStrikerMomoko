@@ -221,7 +221,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			this.sprites.meteor
 				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
-				.SetScale(2).SetVisible(true)
+				.SetScale(2).SetVisible(true).SetIndex(0)
 				.RunActions(cc.delayTime(3.0), cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
