@@ -407,8 +407,6 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.fx.hit.Spawn(this.sprites.player.x+32,this.sprites.player.y, this.playerHardblows()?2.0:1.0 );
 				this.fx.player.SetVelocity(+1,+0.5,-2,-1);
 				this.fx.meteor.SetVelocity(-8,-4).SetColor("#FFFF00");
-
-				sound.PlayMusic(rc.bgm.strike);
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
 				if(this.sequence.count==0)	this.pauseCount = this.playerHardblows ? 10 : 5;
@@ -448,6 +446,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				Achievement.Unlock(Achievements.Emit.Many03, maxEmitRate);
 				Achievement.Unlock(Achievements.Emit.Many04, maxEmitRate);
 
+				sound.PlayMusic(rc.bgm.strike);
 				Store.Log(Store.Handles.GamePlay.MeanEmitting, emitRate);
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
