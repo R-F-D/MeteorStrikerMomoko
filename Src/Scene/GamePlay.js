@@ -36,9 +36,9 @@ const MeteoriteSettings	= {
 };
 /**ナビゲータ情報*/
 const NavigatorSettings	= {
-	Normal	:{	Key:"Normal",	Storage:Store.Handles.Action.NumNavigates[0],	Achievement:Achievements.Action.Navigate00,	},
-	Golem	:{	Key:"Golem",	Storage:Store.Handles.Action.NumNavigates[1],	Achievement:Achievements.Action.Navigate01,	},
-	Goddess	:{	Key:"Goddess",	Storage:Store.Handles.Action.NumNavigates[2],	Achievement:Achievements.Action.Navigate02,	},
+	Normal	:{	Key:"Normal",	idxSprite:[4,1,2,7, 4,1,2,7, 4,1,2,7, 4,5,6,7,],								Storage:Store.Handles.Action.NumNavigates[0],	Achievement:Achievements.Action.Navigate00,	},
+	Golem	:{	Key:"Golem",	idxSprite:[8,9,10,10,8,14,15,15, 8,9,10,10,8,14,15,15, 8,9,10,11,12,13,15,15,],	Storage:Store.Handles.Action.NumNavigates[1],	Achievement:Achievements.Action.Navigate01,	},
+	Goddess	:{	Key:"Goddess",	idxSprite:[20,17,18,23, 20,17,18,23, 20,17,18,23, 20,21,22,23,],				Storage:Store.Handles.Action.NumNavigates[2],	Achievement:Achievements.Action.Navigate02,	},
 };
 
 Scene.GamePlay	= class extends Scene.SceneBase {
@@ -569,14 +569,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.fx.emit.Update();
 
 		//ナビゲータのアイコン画像
-		const naviIcon	= (()=>{
-			const indexes	= {
-				Normal:		[4,1,2,7, 4,1,2,7, 4,1,2,7, 4,5,6,7,],
-				Golem:		[8,9,10,10,8,14,15,15, 8,9,10,10,8,14,15,15, 8,9,10,11,12,13,15,15,],
-				Goddess:	[20,17,18,23, 20,17,18,23, 20,17,18,23, 20,21,22,23,],
-			}[this.navigator.Key];
-			return indexes[ Math.trunc(this.sequence.count/8) % indexes.length ];
-		})();
+		const naviIcon	= this.navigator.idxSprite[ Math.trunc(this.sequence.count/8) % this.navigator.idxSprite.length ];
 		this.labels.navigation.SetIconIndex(naviIcon).Update();
 
 		this.isOnGround	= ![this.Sequences.BLOW_AWAY,this.Sequences.LEAVE,this.Sequences.DIALOG].includes(this.sequence);
