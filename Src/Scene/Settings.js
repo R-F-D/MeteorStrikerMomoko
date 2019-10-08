@@ -40,10 +40,12 @@ const SelectorMaps	= {
 	],
 };
 
-const PageMaps	= [
-	[	"Locale","BgmVolume",	],
-	[	"Meteorite","Navigator",],
-];
+const PageMaps	= {
+	Locale:		{	Order:0,	KeepsOn:true,	},
+	BgmVolume:	{	Order:0,	KeepsOn:true,	},
+	Meteorite:	{	Order:1,	KeepsOn:true,	},
+	Navigator:	{	Order:1,	KeepsOn:true,	},
+};
 
 /** @const セレクタ領域のマージン */
 const SelectorAreaMargin	= {
@@ -73,7 +75,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
 
-		this.EnableNaviButtons(PageMaps.length);
+		this.EnableNaviButtons( _(PageMaps).reduce((result,pm)=>Math.max(result,pm.Order),0)+1 );
 		if(this.pager)	this.pager.SetChapter(0, false);
 
 		/** ccSceneのインスタンス */
@@ -220,15 +222,20 @@ Scene.Settings	= class extends Scene.SceneBase {
 		const size	= cc.director.getWinSize();
 
 		_(this.selectors).forEach(s=>s.SetVisible(false));
-		PageMaps[page].forEach((item,i)=>{
-			const selector	= this.selectors[item];
-			if(!selector)	return;
+		let i=0;
+		_(PageMaps)
+			.forEach((pm,key)=>{
+				if(pm.Order!=page)	return this;
 
-			selector
-				.SetVisible(true)
-				.SetArea(	SelectorAreaMargin.left,
-							size.height - (SelectorAreaMargin.top+i*64)	);
-		});
+				const selector	= this.selectors[key];
+				if(!selector)	return this;
+
+				selector
+					.SetVisible(true)
+					.SetArea(	SelectorAreaMargin.left,
+								size.height - (SelectorAreaMargin.top+i*64)	);
+				++i;
+			});
 	}
 
 	//OnSelectedイベントの発行
