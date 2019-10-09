@@ -247,21 +247,21 @@ Scene.Settings	= class extends Scene.SceneBase {
 	/*選択肢の初期値*/
 	GetInitialSelectionIndexes(tag){
 		const currentSettings	= {
-			Locale:		L.GetCurrentPresetKey(),
-			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"3"),
-			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
-			Meteorite:	Store.Select(Store.Handles.Settings.Meteorite,"0"),
-			Storage:	null,
+			Locale:		()=> L.GetCurrentPresetKey(),
+			BgmVolume:	()=> Store.Select(Store.Handles.Settings.BgmVolume,"3"),
+			Navigator:	()=> Store.Select(Store.Handles.Settings.Navigator,"0"),
+			Meteorite:	()=> Store.Select(Store.Handles.Settings.Meteorite,"0"),
+			Storage:	()=> {},
 		};
 		const initialIndexes	= {
-			Locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale)		||0),
-			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
-			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
-			Meteorite:	Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite)	||0),
-			Storage:	null,
+			Locale:		()=> Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale())		||0),
+			BgmVolume:	()=> Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume())	||0),
+			Navigator:	()=> Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator())	||0),
+			Meteorite:	()=> Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite())	||0),
+			Storage:	()=> null,
 		};
 
-		return initialIndexes[tag];
+		return initialIndexes[tag]();
 	}
 
 	/** ストレージデータの削除（確認ダイアログ付き）
