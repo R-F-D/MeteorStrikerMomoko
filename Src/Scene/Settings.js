@@ -39,9 +39,9 @@ const SelectorMaps	= {
 		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
 	Storage:[
-		{	Tag:"RemoveRecords",		OnSelected:()=>{Store.RemoveAll()},	},
-		{	Tag:"RemoveAchievements",	OnSelected:()=>{Achievement.RemoveAll()},	},
-		{	Tag:"Remove",				OnSelected:()=>{Store.RemoveAll();Achievement.RemoveAll()},	},
+		{	Tag:"RemoveRecords",		OnSelected:()=>Scene.Settings.RemoveStorageData(true,false),	},
+		{	Tag:"RemoveAchievements",	OnSelected:()=>Scene.Settings.RemoveStorageData(false,true),	},
+		{	Tag:"Remove",				OnSelected:()=>Scene.Settings.RemoveStorageData(true,true),		},
 	],
 };
 
@@ -266,6 +266,17 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 
 		return initialIndexes[tag];
+	}
+
+	/** ストレージデータの削除
+	 * @param {boolean} removesRecords		プレイ記録を削除するか
+	 * @param {boolean} removesAchievements	実績を削除するか
+	 * @returns
+	 */
+	static RemoveStorageData(removesRecords,removesAchievements){
+		if(removesRecords)		Store.RemoveAll();
+		if(removesAchievements)	Achievement.RemoveAll();
+		return this;
 	}
 
 }//class
