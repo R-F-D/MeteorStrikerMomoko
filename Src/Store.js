@@ -102,6 +102,7 @@ class _Store{
 				_.castArray(handle)
 					.forEach((h,i)=>{
 						h.isVirtual	= false;
+						h.Category	= category;
 						h.Key 		= Array.isArray(handle)	? `${category}.${key}.${String(i).padStart(2,'0')}`
 															: `${category}.${key}`;
 						h.Page		= Math.trunc(h.Order/(16**3));
@@ -238,11 +239,17 @@ class _Store{
 		);
 	}
 
-	/** データ全削除（実績を除く） */
+	/** データ全削除（設定や実績を除く） */
 	static RemoveAll(){
-		Store._GetHandleArray().forEach(h=>{
-			Store._RemoveItem(h.Key);
-		});
+		Store._GetHandleArray()
+			.filter(h=>h.Category != "Settings")
+			.forEach(h=>Store._RemoveItem(h.Key));
+	}
+	/** 設定データ全削除 */
+	static RemoveSettings(){
+		Store._GetHandleArray()
+			.filter(h=>h.Category == "Settings")
+			.forEach(h=>Store._RemoveItem(h.Key));
 	}
 
 

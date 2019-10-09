@@ -269,21 +269,26 @@ var LocalizedTexts	= (()=>{return{
 			_:	"Storage Management",
 			ja:	"ストレージ管理",
 		},
+		"Settings.Storage.Label.RemoveSettings":	{_:	"Remove\nSettings",		ja:"設定の削除",	},	//Remove settings
 		"Settings.Storage.Label.RemoveRecords":		{_:	"Remove\nRecords",		ja:"記録の削除",	},	//Remove records
 		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	},	//Remove achievements
 		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		},	//Remove all data
 
+		"Settings.Storage.Confirm.RemoveSettings":{		//Confirm: Remove settings
+			_:	"Are you sure you want to remove the game settings?",
+			ja:	"ゲーム設定を削除しますか？",
+		},
 		"Settings.Storage.Confirm.RemoveRecords":{		//Confirm: Remove records
 			_:	"Are you sure you want to remove the play records?",
-			ja:"プレイ記録を削除しますか？",
+			ja:	"プレイ記録を削除しますか？",
 		},
 		"Settings.Storage.Confirm.RemoveAchievements":{	//Confirm: Remove achievements
 			_:	"Are you sure you want to remove the achievements?",
-			ja:"実績を削除しますか？",
+			ja:	"実績を削除しますか？",
 		},
 		"Settings.Storage.Confirm.Remove":{				//Confirm: Remove all data
 			_:	"Are you sure you want to remove all data?",
-			ja:"全てのデータを削除しますか？",
+			ja:	"全てのデータを削除しますか？",
 		},
 
 	//----------------------------------------
