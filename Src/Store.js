@@ -194,22 +194,35 @@ class _Store{
 	 * @memberof Store
 	 */
 	static GetVisibleHandles(page=null){
+		const handles	= Store._GetHandleArray()
+			.filter(h=>{
+				//Requiredフラグ
+				if(h.Required===undefined || h.Required===null)	return false;
+				//Page一致
+				if(page===undefined || page===null)	return true;
+				else								return page === h.Page;
+			});
+
+		return _.orderBy(handles,"Order");
+	}
+
+	/**ハンドル一覧を配列で取得
+	 * @static
+	 * @returns
+	 * @memberof Store
+	 */
+	static _GetHandleArray(){
 		let results	= [];
 
 		_(Store.Handles).forEach(category=>{	//カテゴリ舞のループ
 			_(category).forEach(handles=>{	//ハンドルのループ
-				_(handles).castArray()		//配列化してからループ
-					.filter(v=>{
-						if(Array.isArray(v))	return true;
-						if(v.Required===undefined || v.Required===null)	return false;
-						else if (page===undefined || page      ===null)	return true;
-						return Math.abs(page) == v.Page;
-					})
+				_(handles)
+					.castArray()		//配列化してからループ
 					.forEach(h=>results.push(h));
 			});
 		});
 
-		return _.orderBy(results,"Order");
+		return results;
 	}
 
 	/** ページ数
