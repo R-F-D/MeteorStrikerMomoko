@@ -73,13 +73,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 
 		this.EnableNaviButtons(0);
-		this.selectors	= {
-			Locale:		new Selector(3),
-			BgmVolume:	new Selector(6),
-			Meteorite:	new Selector(2),
-			Navigator:	new Selector(3),
-			Storage:	new Selector(4),
-		};
+		this.selectors	= {};
+		_(SelectorMaps).forEach((sm,tag)=>this.selectors[tag]	= new Selector(sm.length));
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
 
