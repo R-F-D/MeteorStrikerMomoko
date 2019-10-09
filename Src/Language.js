@@ -576,8 +576,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//タグ Tag
 		"About.HashTags":{
-			_:	"MeteorStrikerMomoko",
-			ja:	"メテオストライカー桃子",
+			_:	"MeteorMomoko",
+			ja:	"メテオ桃子",
 		},
 
 
