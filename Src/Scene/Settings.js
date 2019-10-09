@@ -39,9 +39,9 @@ const SelectorMaps	= {
 		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
 	Storage:[
-		{	Tag:"RemoveRecords",		OnSelected:()=>Scene.Settings.RemoveStorageData(true,false),	},
-		{	Tag:"RemoveAchievements",	OnSelected:()=>Scene.Settings.RemoveStorageData(false,true),	},
-		{	Tag:"Remove",				OnSelected:()=>Scene.Settings.RemoveStorageData(true,true),		},
+		{	Tag:"RemoveRecords",		OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveRecords",		true,false),	},
+		{	Tag:"RemoveAchievements",	OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveAchievements",	false,true),	},
+		{	Tag:"Remove",				OnSelected:()=> Scene.Settings.RemoveStorageData( "Remove",				true,true),		},
 	],
 };
 
@@ -268,12 +268,16 @@ Scene.Settings	= class extends Scene.SceneBase {
 		return initialIndexes[tag];
 	}
 
-	/** ストレージデータの削除
+	/** ストレージデータの削除（確認ダイアログ付き）
+	 * @param {string} tag					タグ
 	 * @param {boolean} removesRecords		プレイ記録を削除するか
 	 * @param {boolean} removesAchievements	実績を削除するか
 	 * @returns
 	 */
-	static RemoveStorageData(removesRecords,removesAchievements){
+	static RemoveStorageData(tag, removesRecords,removesAchievements){
+		//確認ダイアログ
+		if(!window.confirm(L.Text(`Settings.Storage.Confirm.${tag}`)))	return this;
+
 		if(removesRecords)		Store.RemoveAll();
 		if(removesAchievements)	Achievement.RemoveAll();
 		return this;

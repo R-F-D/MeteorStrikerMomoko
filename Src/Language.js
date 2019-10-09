@@ -273,6 +273,18 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	},	//Remove achievements
 		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		},	//Remove all data
 
+		"Settings.Storage.Confirm.RemoveRecords":{		//Confirm: Remove records
+			_:	"Are you sure you want to remove the play records?",
+			ja:"プレイ記録を削除しますか？",
+		},
+		"Settings.Storage.Confirm.RemoveAchievements":{	//Confirm: Remove achievements
+			_:	"Are you sure you want to remove the achievements?",
+			ja:"実績を削除しますか？",
+		},
+		"Settings.Storage.Confirm.Remove":{				//Confirm: Remove all data
+			_:	"Are you sure you want to remove all data?",
+			ja:"全てのデータを削除しますか？",
+		},
 
 	//----------------------------------------
 	// レコード画面 - 記録
