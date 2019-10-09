@@ -238,6 +238,12 @@ class _Store{
 		);
 	}
 
+	/** データ全削除（実績を除く） */
+	static RemoveAll(){
+		Store._GetHandleArray().forEach(h=>{
+			Store._RemoveItem(h.Key);
+		});
+	}
 
 
 

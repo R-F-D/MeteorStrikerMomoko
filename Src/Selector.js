@@ -13,6 +13,7 @@ var Selector	= class Selector{
 		this.layer			= null;
 		/** @var 選択されたボタン番号 */
 		this.idxSelected	= null;
+		this._keepsOn		= true;
 
 		this.isVisible		= true;
 		this.isEnabled		= true;
@@ -159,13 +160,11 @@ var Selector	= class Selector{
 	 * @memberof Selector
 	 */
 	Select(idx){
-		if(this.idxSelected	== idx)	return this;
+		if(idx===null || idx===this.idxSelected)	return this;
 		this.idxSelected	= idx;
 
 		const button	= this.buttons.at(idx);
-		this
-			.Turn(button,true)
-			.TurnOffAll(this.idxSelected);
+		if(this._keepsOn)	this.Turn(button,true).TurnOffAll(this.idxSelected);
 
 		if(this._onSelected)	this._onSelected(idx,button.tag);
 		return this;
@@ -228,6 +227,12 @@ var Selector	= class Selector{
 	SetGap(x=null,y=null){
 		if(x!==null)	this._gap.x	= x;
 		if(y!==null)	this._gap.y	= y;
+		return this;
+	}
+
+	/**ボタン押下時にON状態をキープするか*/
+	KeepsOn(keepsOn){
+		this._keepsOn	= keepsOn;
 		return this;
 	}
 

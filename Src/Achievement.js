@@ -200,6 +200,13 @@ var Achievement = new (class Achievement{
 		);
 	}
 
+	/** データ全削除（実績を除く） */
+	RemoveAll(){
+		_(Achievements).forEach(handles=>{
+			_(handles).forEach(h=>Store._RemoveItem(h.Key));
+		});
+	}
+
 })();
 
 

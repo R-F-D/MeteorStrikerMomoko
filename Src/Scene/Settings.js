@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var rc,L;
-var Sprite,Store,Locale,Selector;
+var Sprite,Store,Achievement,Locale,Selector;
 var Cycle;
 var Scene	= Scene || {};
 (function(){	//File Scope
@@ -38,6 +38,11 @@ const SelectorMaps	= {
 		{	Tag:"Golem",				OnSelected:Store.Handles.Settings.Navigator,	},
 		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
+	Storage:[
+		{	Tag:"DelRecords",			OnSelected:()=>{Store.RemoveAll()},	},
+		{	Tag:"DelAchievements",		OnSelected:()=>{Achievement.RemoveAll()},	},
+		{	Tag:"DelAll",				OnSelected:()=>{Store.RemoveAll();Achievement.RemoveAll()},	},
+	],
 };
 
 const PageMaps	= {
@@ -45,6 +50,7 @@ const PageMaps	= {
 	BgmVolume:	{	Order:0,	KeepsOn:true,	},
 	Meteorite:	{	Order:1,	KeepsOn:true,	},
 	Navigator:	{	Order:1,	KeepsOn:true,	},
+	Storage:	{	Order:2,	KeepsOn:false,	},
 };
 
 /** @const セレクタ領域のマージン */
@@ -71,6 +77,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			BgmVolume:	new Selector(6),
 			Meteorite:	new Selector(2),
 			Navigator:	new Selector(3),
+			Storage:	new Selector(3),
 		};
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
@@ -188,31 +195,19 @@ Scene.Settings	= class extends Scene.SceneBase {
 	InitUIs(){
 		super.InitUIs();
 
-		const currentSettings	= {
-			Locale:		L.GetCurrentPresetKey(),
-			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"1"),
-			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
-			Meteorite:	Store.Select(Store.Handles.Settings.Meteorite,"0"),
-		};
-		const initialIndexes	= {
-			Locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale)		||0),
-			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
-			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
-			Meteorite:	Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite)	||0),
-		};
-
-		_(this.selectors).forEach((selector,item)=>{
+		_(this.selectors).forEach((selector,tag)=>{
 			selector
 				.Init()
 				.SetVisible(false)
-				.SetCaptionByTextCode(`Settings.${item}`)
-				.Select(initialIndexes[item])
-				.SetOnSelected((key,tag)=>{
-					this.DispatchOnSelect(SelectorMaps[item],tag,0)
+				.SetCaptionByTextCode(`Settings.${tag}`)
+				.Select( this.GetInitialSelectionIndexes(tag) )
+				.KeepsOn(PageMaps[tag].KeepsOn)
+				.SetOnSelected((idxButon,tagButton)=>{
+					this.DispatchOnSelect(SelectorMaps[tag],tagButton,0)
 				})
 				.buttons
-					.SetTags( ... _(SelectorMaps[item]).map("Tag") )
-					.forEach((b)=> b.SetLabelText(L.Text(`Settings.${item}.Label.${b.tag}`)) );
+					.SetTags( ... _(SelectorMaps[tag]).map("Tag") )
+					.forEach((b)=> b.SetLabelText(L.Text(`Settings.${tag}.Label.${b.tag}`)) );
 		});
 
 		return this;
@@ -251,6 +246,26 @@ Scene.Settings	= class extends Scene.SceneBase {
 		else if	(_.isFunction(mapping.OnSelected))	mapping.OnSelected();
 		else										Store.Insert(mapping.OnSelected,mapping.Tag,null);
 		return this;
+	}
+
+	/*選択肢の初期値*/
+	GetInitialSelectionIndexes(tag){
+		const currentSettings	= {
+			Locale:		L.GetCurrentPresetKey(),
+			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"1"),
+			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
+			Meteorite:	Store.Select(Store.Handles.Settings.Meteorite,"0"),
+			Storage:	null,
+		};
+		const initialIndexes	= {
+			Locale:		Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale)		||0),
+			BgmVolume:	Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume)	||0),
+			Navigator:	Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator)	||0),
+			Meteorite:	Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite)	||0),
+			Storage:	null,
+		};
+
+		return initialIndexes[tag];
 	}
 
 }//class

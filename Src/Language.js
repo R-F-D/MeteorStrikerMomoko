@@ -264,6 +264,16 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	},	//Golem
 		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			},	//Goddess
 
+		//ストレージ管理 Storage Management
+		"Settings.Storage":	{
+			_:	"Storage Management",
+			ja:	"ストレージ管理",
+		},
+		"Settings.Storage.Label.DelRecords":		{_:	"Delete\nRecords",		ja:"記録削除",				},	//Delete records
+		"Settings.Storage.Label.DelAchievements":	{_:	"Delete\nAchievements",	ja:"実績削除",				},	//Delete achievements
+		"Settings.Storage.Label.DelAll":			{_:	"Delete All",			ja:"全削除",				},	//Delete all data
+
+
 	//----------------------------------------
 	// レコード画面 - 記録
 	// Records Scene - Records
