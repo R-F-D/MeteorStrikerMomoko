@@ -161,7 +161,7 @@ var Selector	= class Selector{
 	 */
 	Select(idx){
 		if(idx===null || idx===this.idxSelected)	return this;
-		this.idxSelected	= idx;
+		this.idxSelected	= this._keepsOn ?  idx : null;
 
 		const button	= this.buttons.at(idx);
 		if(this._keepsOn)	this.Turn(button,true).TurnOffAll(this.idxSelected);
