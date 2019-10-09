@@ -308,7 +308,7 @@ class _Store{
 } // class
 
 _Store._nPages	= null;
-_Store._Prefix	= "MeteorStrikerMomoko/";
+_Store._Prefix	= "MSMomoko.";
 
 var Store = _Store;
 
