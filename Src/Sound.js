@@ -13,7 +13,6 @@ class Sound{
 	constructor(){
 		this.musicIsInitialized	= false;
 		this.musicVolume	= 1.0;
-		this.playsBgm		= false;
 
 		this.musicHandles		= {};
 	}
@@ -22,9 +21,10 @@ class Sound{
 	 * - 自動再生ブロックへの対応のため音量0で再生
 	 * - Init()前後に画面をクリック/タップさせるような構成にすること */
 	Init(){
-		this.playsBgm	= !!Store.Select(Store.Handles.Settings.BgmVolume,"1").Number();
-
 		if(this.musicIsInitialized)	return this;
+
+		//音量データ読み込み
+		this.LoadVolumeSettings();
 
 		//全BGMを音量0で再生してミュージックハンドルに格納
 		if(this.playsBgm){
@@ -56,11 +56,9 @@ class Sound{
 		if(this.musicHandles[filename]){
 			this.musicHandles[filename].stop();
 			this.musicHandles[filename].play();
-//			this.musicHandles[filename].setVolume(_(this.musicVolume).clamp(0.0,1.0));
 		}
 		else{
 			cc.audioEngine.rewindMusic();
-//			cc.audioEngine.setMusicVolume(this.musicVolume);
 		}
 		this.LoadVolumeSettings();
 
@@ -94,6 +92,8 @@ class Sound{
 		this.SetMusicVolume( _(Store.Select(Store.Handles.Settings.BgmVolume,"3").Number()).clamp(0,5)*0.2	);
 		return this;
 	}
+
+	get playsBgm(){ return this.musicVolume > 0 }
 
 }
 
