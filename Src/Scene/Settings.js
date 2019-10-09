@@ -39,9 +39,9 @@ const SelectorMaps	= {
 		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
 	Storage:[
-		{	Tag:"DelRecords",			OnSelected:()=>{Store.RemoveAll()},	},
-		{	Tag:"DelAchievements",		OnSelected:()=>{Achievement.RemoveAll()},	},
-		{	Tag:"DelAll",				OnSelected:()=>{Store.RemoveAll();Achievement.RemoveAll()},	},
+		{	Tag:"RemoveRecords",		OnSelected:()=>{Store.RemoveAll()},	},
+		{	Tag:"RemoveAchievements",	OnSelected:()=>{Achievement.RemoveAll()},	},
+		{	Tag:"Remove",				OnSelected:()=>{Store.RemoveAll();Achievement.RemoveAll()},	},
 	],
 };
 

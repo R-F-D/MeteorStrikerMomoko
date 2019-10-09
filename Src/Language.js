@@ -269,9 +269,9 @@ var LocalizedTexts	= (()=>{return{
 			_:	"Storage Management",
 			ja:	"ストレージ管理",
 		},
-		"Settings.Storage.Label.DelRecords":		{_:	"Delete\nRecords",		ja:"記録削除",				},	//Delete records
-		"Settings.Storage.Label.DelAchievements":	{_:	"Delete\nAchievements",	ja:"実績削除",				},	//Delete achievements
-		"Settings.Storage.Label.DelAll":			{_:	"Delete All",			ja:"全削除",				},	//Delete all data
+		"Settings.Storage.Label.RemoveRecords":		{_:	"Remove\nRecords",		ja:"記録の削除",	},	//Remove records
+		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	},	//Remove achievements
+		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		},	//Remove all data
 
 
 	//----------------------------------------
