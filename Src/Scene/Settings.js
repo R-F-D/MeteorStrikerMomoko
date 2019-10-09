@@ -253,7 +253,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	GetInitialSelectionIndexes(tag){
 		const currentSettings	= {
 			Locale:		L.GetCurrentPresetKey(),
-			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"1"),
+			BgmVolume:	Store.Select(Store.Handles.Settings.BgmVolume,"3"),
 			Navigator:	Store.Select(Store.Handles.Settings.Navigator,"0"),
 			Meteorite:	Store.Select(Store.Handles.Settings.Meteorite,"0"),
 			Storage:	null,
