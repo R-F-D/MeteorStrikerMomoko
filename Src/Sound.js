@@ -11,9 +11,12 @@ var Store;
 class Sound{
 
 	constructor(){
-		this.musicIsInitialized	= false;
+		this.effectIsInitialized	= false;
+		this.musicIsInitialized		= false;
+		this.effectVolume	= 1.0;
 		this.musicVolume	= 1.0;
 
+		this.effectHandles		= {};
 		this.musicHandles		= {};
 	}
 
@@ -21,23 +24,40 @@ class Sound{
 	 * - 自動再生ブロックへの対応のため音量0で再生
 	 * - Init()前後に画面をクリック/タップさせるような構成にすること */
 	Init(){
-		if(this.musicIsInitialized)	return this;
-
 		//音量データ読み込み
 		this.LoadVolumeSettings();
 
-		//全BGMを音量0で再生してミュージックハンドルに格納
-		if(this.playsBgm){
-			cc.audioEngine.setMusicVolume(0);
-			_(rc.bgm).forEach(filename=>{
-				cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${filename}`,true);
-				this.musicHandles[filename]	= cc.audioEngine._currMusic;
-				this.musicHandles[filename].pause();
-			});
-			this.musicIsInitialized	= true;
-		}
-
+		if(!this.effectIsInitialized)	this._InitEffect();
+		if(!this.musicIsInitialized)	this._InitMusic();
 		return this.Reset();
+	}
+
+	/**全効果音を音量0で再生してSFXハンドルに格納*/
+	_InitEffect(){
+		if(!this.playsFx)	return this;
+
+		cc.audioEngine.setEffectsVolume(0);
+		_(rc.sfx).forEach(filename=>{
+			this.effectHandles[filename]	= cc.audioEngine.playEffect(`${rc.DIRECTORY}Sfx/${filename}`,false);
+		});
+		this.effectIsInitialized	= true;
+
+		return this;
+	}
+
+	/**全BGMを音量0で再生してミュージックハンドルに格納*/
+	_InitMusic(){
+		if(!this.playsBgm)	return this;
+
+		cc.audioEngine.setMusicVolume(0);
+		_(rc.bgm).forEach(filename=>{
+			cc.audioEngine.playMusic(`${rc.DIRECTORY}Bgm/${filename}`,true);
+			this.musicHandles[filename]	= cc.audioEngine._currMusic;
+			this.musicHandles[filename].pause();
+		});
+		this.musicIsInitialized	= true;
+
+		return this;
 	}
 
 	/** サウンドのリセット
@@ -45,6 +65,14 @@ class Sound{
 	 */
 	Reset(){
 		_(this.musicHandles).forEach(h=>this.StopMusic(h));
+		return this;
+	}
+
+	Play(filename){
+		if(!this.playsFx || !this.effectIsInitialized)	return this;
+
+		cc.audioEngine.setEffectsVolume(this.effectVolume);
+		cc.audioEngine.playEffect(`${rc.DIRECTORY}Sfx/${filename}`,false);
 		return this;
 	}
 
@@ -93,7 +121,8 @@ class Sound{
 		return this;
 	}
 
-	get playsBgm(){ return this.musicVolume > 0 }
+	get playsFx()	{ return this.effectVolume > 0 }
+	get playsBgm()	{ return this.musicVolume > 0 }
 
 }
 
