@@ -117,7 +117,7 @@ var Selector	= class Selector{
 		if(this.area.width<=0 || this.area.height<=0)	return this;
 
 		if(this.caption){
-			this.caption.SetPosition(this.area.x,this.area.y-this._gap.y/2);
+			this.caption.SetPosition(this.area.x,this.area.y-this._gap.y/2-3);
 			this.area.y-=this._gap.y;
 			this.area.height-=this._gap.y;
 		}
