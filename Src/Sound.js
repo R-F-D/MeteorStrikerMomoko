@@ -71,7 +71,7 @@ class Sound{
 	Play(filename){
 		if(!this.playsFx || !this.effectIsInitialized)	return this;
 
-		cc.audioEngine.setEffectsVolume(this.effectVolume);
+		this.SetEffectVolume(this.effectVolume);
 		cc.audioEngine.playEffect(`${rc.DIRECTORY}Sfx/${filename}`,false);
 		return this;
 	}
@@ -107,6 +107,12 @@ class Sound{
 		return this;
 	}
 
+	/**SFX音量*/
+	SetEffectVolume(volume){
+		this.effectVolume	= _(volume).clamp(0.0, 1.0);
+		cc.audioEngine.setEffectsVolume(this.effectVolume);
+		return this;
+	}
 	/**BGM音量*/
 	SetMusicVolume(volume){
 		this.musicVolume	= _(volume).clamp(0.0, 1.0);
@@ -117,7 +123,8 @@ class Sound{
 
 	/**音量設定を読み込む*/
 	LoadVolumeSettings(){
-		this.SetMusicVolume( _(Store.Select(Store.Handles.Settings.BgmVolume,"3").Number()).clamp(0,5)*0.2	);
+		this.SetEffectVolume(	_(Store.Select(Store.Handles.Settings.SfxVolume,"3").Number()).clamp(0,5)*0.2	);
+		this.SetMusicVolume(	_(Store.Select(Store.Handles.Settings.BgmVolume,"3").Number()).clamp(0,5)*0.2	);
 		return this;
 	}
 

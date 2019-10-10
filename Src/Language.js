@@ -235,6 +235,18 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
 		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
 
+		//SFX音量設定 Sound Effect Volume
+		"Settings.SfxVolume":	{
+			_:	"SFX Volume",
+			ja:	"効果音音量",
+		},
+		"Settings.SfxVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	},	//Volume 0%(Off)
+		"Settings.SfxVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		},	//Volume 20%
+		"Settings.SfxVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	},	//Volume 40%
+		"Settings.SfxVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	},	//Volume 60%
+		"Settings.SfxVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	},	//Volume 80%
+		"Settings.SfxVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	},	//Volume 100%(Max)
+
 		//BGM音量設定 Background Music Volume
 		"Settings.BgmVolume":	{
 			_:	"Music Volume",

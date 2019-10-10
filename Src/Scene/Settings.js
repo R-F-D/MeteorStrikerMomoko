@@ -21,6 +21,14 @@ const SelectorMaps	= {
 		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en")},					},
 		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja")},					},
 	],
+	SfxVolume:[
+		{	Tag:"0",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+		{	Tag:"1",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+		{	Tag:"2",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+		{	Tag:"3",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+		{	Tag:"4",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+		{	Tag:"5",					OnSelected:Store.Handles.Settings.SfxVolume,	},
+	],
 	BgmVolume:[
 		{	Tag:"0",					OnSelected:Store.Handles.Settings.BgmVolume,	},
 		{	Tag:"1",					OnSelected:Store.Handles.Settings.BgmVolume,	},
@@ -42,12 +50,13 @@ const SelectorMaps	= {
 		{	Tag:"RemoveSettings",		OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveSettings",		true,false,false),	},
 		{	Tag:"RemoveRecords",		OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveRecords",		false,true,false),	},
 		{	Tag:"RemoveAchievements",	OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveAchievements",	false,false,true),	},
-		{	Tag:"Remove",				OnSelected:()=> Scene.Settings.RemoveStorageData( "Remove",				true,true,true),		},
+		{	Tag:"Remove",				OnSelected:()=> Scene.Settings.RemoveStorageData( "Remove",				true,true,true),	},
 	],
 };
 
 const PageMaps	= {
 	Locale:		{	Order:0,	KeepsOn:true,	},
+	SfxVolume:	{	Order:0,	KeepsOn:true,	},
 	BgmVolume:	{	Order:0,	KeepsOn:true,	},
 	Meteorite:	{	Order:1,	KeepsOn:true,	},
 	Navigator:	{	Order:1,	KeepsOn:true,	},
@@ -248,6 +257,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	GetInitialSelectionIndexes(tag){
 		const currentSettings	= {
 			Locale:		()=> L.GetCurrentPresetKey(),
+			SfxVolume:	()=> Store.Select(Store.Handles.Settings.SfxVolume,"3"),
 			BgmVolume:	()=> Store.Select(Store.Handles.Settings.BgmVolume,"3"),
 			Navigator:	()=> Store.Select(Store.Handles.Settings.Navigator,"0"),
 			Meteorite:	()=> Store.Select(Store.Handles.Settings.Meteorite,"0"),
@@ -255,6 +265,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		};
 		const initialIndexes	= {
 			Locale:		()=> Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale())		||0),
+			SfxVolume:	()=> Number(_(SelectorMaps.SfxVolume).findKey(m=> m.Tag==currentSettings.SfxVolume())	||0),
 			BgmVolume:	()=> Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume())	||0),
 			Navigator:	()=> Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator())	||0),
 			Meteorite:	()=> Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite())	||0),

@@ -85,6 +85,8 @@ class _Store{
 				Language:					{},
 				/** 数値の区切り設定 */
 				NumberSeparation:			{},
+				/** SFX音量 */
+				SfxVolume:					{},
 				/** BGM音量 */
 				BgmVolume:					{},
 				/** 隕石設定 */
