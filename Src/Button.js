@@ -1,6 +1,7 @@
 var cc;
 var DefinedOr;
 var Sprite,Label;
+var sound,rc;
 var Button	= Button||{};
 (function(){	//File Scope
 
@@ -390,7 +391,10 @@ class ButtonItem{
 				if(!this.isEnabled || !this.sprite.entity.isVisible())	return false;
 				if(this._EventIsOnSprite(null,event)){
 					if(this.status & (Button.OFF|Button.HOVER)){
-						if(this.isEnabled && this.status==Button.OFF && this.listeners.onMouseOver)	this.listeners.onMouseOver();
+						if(this.isEnabled && this.status==Button.OFF){
+							if(this.listeners.onMouseOver)	this.listeners.onMouseOver();
+							sound.Play(rc.sfx.btnHover);
+						}
 						this.status			= Button.HOVER;
 						this._ApplyIndex();
 						this.SetOpacity(this.opacityOnHover,false,true);
@@ -421,7 +425,7 @@ class ButtonItem{
 						this.SetScale(this.scale*this.scaleOnActive,true)
 							.SetOpacity(this.opacityOnHover,false,true)
 							.SetColor(this.colorOnHover,false,true);
-					}
+						}
 				},
 				onKeyReleased	: (code,event)=>{
 					if(!this.isEnabled)	return;
