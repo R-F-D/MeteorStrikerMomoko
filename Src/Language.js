@@ -264,8 +264,8 @@ var LocalizedTexts	= (()=>{return{
 			_:	"Meteorite",
 			ja:	"隕石",
 		},
-		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",			ja:"隕石",				},	//Meteorite
-		"Settings.Meteorite.Label.Tryangle":	{_:	"△Tryangle",			ja:"△さんかく",			},	//Tryangle
+		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",						ja:"隕石",		},	//Meteorite
+		"Settings.Meteorite.Label.Tryangle":	{_:	"Tryangle",		en:	"△Tryangle",	ja:"△さんかく",	},	//Tryangle
 
 		//ナビゲーター設定 Navigator
 		"Settings.Navigator":	{
