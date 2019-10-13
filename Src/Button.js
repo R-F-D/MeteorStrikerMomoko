@@ -110,6 +110,15 @@ Button	= class Button{
 		return this;
 	}
 
+	/** 不透明度
+	 * @param {number} opacity
+	 * @returns
+	 */
+	SetOpacity(opacity){
+		this.items.forEach(b=>b.SetOpacity(opacity));
+		return this;
+	}
+
 	SetVisible(visible){
 		this.isVisible	= visible;
 		this.items.forEach(b=>b.SetVisible(!!visible));

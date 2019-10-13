@@ -236,6 +236,11 @@ var Selector	= class Selector{
 		return this;
 	}
 
+	SetOpacity(opacity){
+		if(this.buttons)	this.buttons.SetOpacity(opacity);
+		return this;
+	}
+
 }
 
 
