@@ -87,6 +87,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
 
+		this.lockPanel	= null;
+
 		this.EnableNaviButtons( _(PageMaps).reduce((result,pm)=>Math.max(result,pm.Order),0)+1 );
 		if(this.pager)	this.pager.SetChapter(0, false);
 
@@ -186,7 +188,9 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	OnUiLayerCreate(layer){
 		super.InitUIs(layer);
+		this.lockPanel	= new LockPanel(layer,3);
 		_(this.selectors).forEach(s=>s.AddToLayer(layer));
+
 
 		//初回起動時の初期設定
 		if(Scene.SceneBase.isFirstBoot && !Scene.SceneBase.initialSettingIsCompleted){
@@ -207,6 +211,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.SetCaptionByTextCode(`Settings.${tag}`)
 				.Select( this.GetInitialSelectionIndexes(tag) )
 				.KeepsOn(PageMaps[tag].KeepsOn)
+				.Attr({zIndex:0x0100})
 				.SetOnSelected((idxButon,tagButton)=>{
 					this.DispatchOnSelect(SelectorMaps[tag],tagButton,0)
 				})
@@ -221,6 +226,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	DeploySelectors(page){
 		const size	= cc.director.getWinSize();
 
+		this.lockPanel.Init();
 		_(this.selectors).forEach(s=>s.SetVisible(false));
 		let i=0;
 		_(PageMaps)
@@ -230,10 +236,23 @@ Scene.Settings	= class extends Scene.SceneBase {
 				const selector	= this.selectors[key];
 				if(!selector)	return this;
 
+				//シークレット項目
+				let isEnabled	= true;
+				if(["Meteorite","Navigator"].includes(key))	isEnabled=false;
+
 				selector
 					.SetVisible(true)
+					.SetEnabled(isEnabled)
+					.SetOpacity(isEnabled?255:128)
 					.SetArea(	SelectorAreaMargin.left,
 								size.height - (SelectorAreaMargin.top+i*64)	);
+
+				//ロックパネル
+				if(!isEnabled){
+					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
+											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
+				}
+
 				++i;
 			});
 	}
@@ -293,6 +312,35 @@ Scene.Settings	= class extends Scene.SceneBase {
 	}
 
 }//class
+
+class LockPanel{
+	constructor(layer,nPanels){
+
+		this.panels	= _.range(nPanels).map(()=>{
+			return {
+				sprite:	Sprite.CreateInstance(rc.img.lockPanel).AddToLayer(layer).SetVisible(false).Attr({zIndex:0x0105}),
+				exists:	false,
+			}
+		});
+	}
+
+	Init(){
+		this.panels.forEach(p=>{
+			p.sprite.SetVisible(false);
+			p.exists	= false;
+		});
+		return this;
+	}
+
+	Spawn(x,y){
+		const panel	= this.panels.find(p=>!p.exists);
+		if(!panel)	return this;
+
+		panel.sprite.SetPosition(x,y).SetVisible(true);
+		panel.exists	= true;
+		return this;
+	}
+}
 
 })();	//File Scope
 
