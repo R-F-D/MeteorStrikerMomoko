@@ -250,6 +250,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 				if(!isEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
 											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
+
+					selector.buttons.forEach(b=>b.label.SetVisible(false));
 				}
 
 				++i;
