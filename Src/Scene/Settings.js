@@ -14,8 +14,8 @@ const LinkedLayerTags	= {
 	BG:		"Settings.Bg",
 };
 
-/** 選択肢マッピング */
-const SelectorMaps	= {
+/** 選択肢の個別設定 */
+const OptionSettings	= {
 	Locale:[
 		{	Tag:Locale.UniversalCode,	OnSelected:()=>{L.ApplyPreset(Locale.UniversalCode)},	},
 		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en")},					},
@@ -83,7 +83,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.EnableNaviButtons(0);
 		this.selectors	= {};
-		_(SelectorMaps).forEach((sm,tag)=>this.selectors[tag]	= new Selector(sm.length));
+		_(OptionSettings).forEach((os,tag)=>this.selectors[tag]	= new Selector(os.length));
 		_(this.selectors).forEach(s=>s.SetGap(0,32));
 		this.sprites		= {};
 
@@ -213,10 +213,10 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.KeepsOn(PageMaps[tag].KeepsOn)
 				.Attr({zIndex:0x0100})
 				.SetOnSelected((idxButon,tagButton)=>{
-					this.DispatchOnSelect(SelectorMaps[tag],tagButton,0)
+					this.DispatchOnSelect(OptionSettings[tag],tagButton,0)
 				})
 				.buttons
-					.SetTags( ... _(SelectorMaps[tag]).map("Tag") )
+					.SetTags( ... _(OptionSettings[tag]).map("Tag") )
 					.forEach((b)=> b.SetLabelText(L.Text(`Settings.${tag}.Label.${b.tag}`)) );
 		});
 
@@ -279,11 +279,11 @@ Scene.Settings	= class extends Scene.SceneBase {
 			Storage:	()=> {},
 		};
 		const initialIndexes	= {
-			Locale:		()=> Number(_(SelectorMaps.Locale   ).findKey(m=> m.Tag==currentSettings.Locale())		||0),
-			SfxVolume:	()=> Number(_(SelectorMaps.SfxVolume).findKey(m=> m.Tag==currentSettings.SfxVolume())	||0),
-			BgmVolume:	()=> Number(_(SelectorMaps.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume())	||0),
-			Navigator:	()=> Number(_(SelectorMaps.Navigator).findKey(m=> m.Tag==currentSettings.Navigator())	||0),
-			Meteorite:	()=> Number(_(SelectorMaps.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite())	||0),
+			Locale:		()=> Number(_(OptionSettings.Locale   ).findKey(m=> m.Tag==currentSettings.Locale())	||0),
+			SfxVolume:	()=> Number(_(OptionSettings.SfxVolume).findKey(m=> m.Tag==currentSettings.SfxVolume())	||0),
+			BgmVolume:	()=> Number(_(OptionSettings.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume())	||0),
+			Navigator:	()=> Number(_(OptionSettings.Navigator).findKey(m=> m.Tag==currentSettings.Navigator())	||0),
+			Meteorite:	()=> Number(_(OptionSettings.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite())	||0),
 			Storage:	()=> null,
 		};
 
