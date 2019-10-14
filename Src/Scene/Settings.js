@@ -59,8 +59,8 @@ const SelectorSettings	= {
 	Locale:		{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	SfxVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
-	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:false,	},
-	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:false,	},
+	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:()=>LockPanel.Enablers.Meteorite(),	},
+	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:()=>LockPanel.Enablers.Navigator(),	},
 	Storage:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 };
 
@@ -237,15 +237,17 @@ Scene.Settings	= class extends Scene.SceneBase {
 				const selector	= this.selectors[key];
 				if(!selector)	return this;
 
+				const isEnabled	= _.isFunction(settings.IsEnabled) ? settings.IsEnabled() : settings.IsEnabled;
+
 				selector
 					.SetVisible(true)
-					.SetEnabled(settings.IsEnabled)
-					.SetOpacity(settings.IsEnabled?255:128)
+					.SetEnabled(isEnabled)
+					.SetOpacity(isEnabled?255:128)
 					.SetArea(	SelectorAreaMargin.left,
 								size.height - (SelectorAreaMargin.top+i*64)	);
 
 				//ロックパネル
-				if(!settings.IsEnabled){
+				if(!isEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
 											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
 				}
@@ -336,6 +338,13 @@ class LockPanel{
 		panel.sprite.SetPosition(x,y).SetVisible(true);
 		panel.exists	= true;
 		return this;
+	}
+
+	static get Enablers(){
+		return {
+			Meteorite:	()=> Achievement.IsUnlocked(Achievements.Action.TouchPlayer),
+			Navigator:	()=> Store.Select(Store.Handles.Action.NumNavigates[0],0) >=5,
+		}
 	}
 }
 
