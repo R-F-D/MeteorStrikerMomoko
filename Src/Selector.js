@@ -241,6 +241,12 @@ var Selector	= class Selector{
 		return this;
 	}
 
+	Attr(attributes){
+		if(this.buttons)	this.buttons.forEach(b=>b.Attr(attributes));
+		if(this.caption)	this.caption.entity.attr(attributes);
+		return this;
+	}
+
 }
 
 

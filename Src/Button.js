@@ -257,6 +257,12 @@ class ButtonItem{
 		return this;
 	}
 
+	Attr(attributes){
+		if(this.sprite)	this.sprite.Attr(attributes);
+		if(this.label)	this.label.entity.attr(attributes);
+		return this;
+	}
+
 	/** 画像のインデックス */
 	SetIndex(status,idx){
 		let stattuses	= [status];
