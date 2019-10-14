@@ -189,6 +189,11 @@ var Achievement = new (class Achievement{
 		return _.orderBy(results,"Order");
 	}
 
+	/** 指定した実績が解除されているかどうか */
+	IsUnlocked(achievement){
+		return !!Store.Select({Key:achievement.Key});
+	}
+
 	/** ページ数
 	 * @readonly
 	 */
