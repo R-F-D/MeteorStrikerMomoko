@@ -54,7 +54,8 @@ const OptionSettings	= {
 	],
 };
 
-const PageMaps	= {
+/**セレクタ設定*/
+const SelectorSettings	= {
 	Locale:		{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	SfxVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
@@ -89,7 +90,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 		this.lockPanel	= null;
 
-		this.EnableNaviButtons( _(PageMaps).reduce((result,pm)=>Math.max(result,pm.Order),0)+1 );
+		this.EnableNaviButtons( _(SelectorSettings).reduce((result,ss)=>Math.max(result,ss.Order),0)+1 );
 		if(this.pager)	this.pager.SetChapter(0, false);
 
 		/** ccSceneのインスタンス */
@@ -210,7 +211,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.SetVisible(false)
 				.SetCaptionByTextCode(`Settings.${tag}`)
 				.Select( this.GetInitialSelectionIndexes(tag) )
-				.KeepsOn(PageMaps[tag].KeepsOn)
+				.KeepsOn(SelectorSettings[tag].KeepsOn)
 				.Attr({zIndex:0x0100})
 				.SetOnSelected((idxButon,tagButton)=>{
 					this.DispatchOnSelect(OptionSettings[tag],tagButton,0)
@@ -229,22 +230,22 @@ Scene.Settings	= class extends Scene.SceneBase {
 		this.lockPanel.Init();
 		_(this.selectors).forEach(s=>s.SetVisible(false));
 		let i=0;
-		_(PageMaps)
-			.forEach((pm,key)=>{
-				if(pm.Order!=page)	return this;
+		_(SelectorSettings)
+			.forEach((settings,key)=>{
+				if(settings.Order!=page)	return this;
 
 				const selector	= this.selectors[key];
 				if(!selector)	return this;
 
 				selector
 					.SetVisible(true)
-					.SetEnabled(pm.IsEnabled)
-					.SetOpacity(pm.IsEnabled?255:128)
+					.SetEnabled(settings.IsEnabled)
+					.SetOpacity(settings.IsEnabled?255:128)
 					.SetArea(	SelectorAreaMargin.left,
 								size.height - (SelectorAreaMargin.top+i*64)	);
 
 				//ロックパネル
-				if(!pm.IsEnabled){
+				if(!settings.IsEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
 											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
 				}
