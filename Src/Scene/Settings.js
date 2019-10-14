@@ -55,12 +55,12 @@ const SelectorMaps	= {
 };
 
 const PageMaps	= {
-	Locale:		{	Order:0,	KeepsOn:true,	},
-	SfxVolume:	{	Order:0,	KeepsOn:true,	},
-	BgmVolume:	{	Order:0,	KeepsOn:true,	},
-	Meteorite:	{	Order:1,	KeepsOn:true,	},
-	Navigator:	{	Order:1,	KeepsOn:true,	},
-	Storage:	{	Order:2,	KeepsOn:false,	},
+	Locale:		{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
+	SfxVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
+	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
+	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:false,	},
+	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:false,	},
+	Storage:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 };
 
 /** @const セレクタ領域のマージン */
@@ -236,19 +236,15 @@ Scene.Settings	= class extends Scene.SceneBase {
 				const selector	= this.selectors[key];
 				if(!selector)	return this;
 
-				//シークレット項目
-				let isEnabled	= true;
-				if(["Meteorite","Navigator"].includes(key))	isEnabled=false;
-
 				selector
 					.SetVisible(true)
-					.SetEnabled(isEnabled)
-					.SetOpacity(isEnabled?255:128)
+					.SetEnabled(pm.IsEnabled)
+					.SetOpacity(pm.IsEnabled?255:128)
 					.SetArea(	SelectorAreaMargin.left,
 								size.height - (SelectorAreaMargin.top+i*64)	);
 
 				//ロックパネル
-				if(!isEnabled){
+				if(!pm.IsEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
 											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
 				}
