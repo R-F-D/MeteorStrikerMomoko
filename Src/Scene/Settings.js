@@ -315,7 +315,9 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 }//class
 
+/** セレクタのロックパネル */
 class LockPanel{
+
 	constructor(layer,nPanels){
 
 		this.panels	= _.range(nPanels).map(()=>{
@@ -328,6 +330,10 @@ class LockPanel{
 		});
 	}
 
+	/** 初期化とリセット
+	 * @returns
+	 * @memberof LockPanel
+	 */
 	Init(){
 		this.panels.forEach(p=>{
 			p.sprite.SetVisible(false);
@@ -337,6 +343,13 @@ class LockPanel{
 		return this;
 	}
 
+	/** 生成
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {string} [subtext=""]	サブテキスト（ロック解除方法）
+	 * @returns
+	 * @memberof LockPanel
+	 */
 	Spawn(x,y,subtext=""){
 		const panel	= this.panels.find(p=>!p.exists);
 		if(!panel)	return this;
@@ -348,6 +361,11 @@ class LockPanel{
 		return this;
 	}
 
+	/** ロック解除判定の関数群
+	 * @readonly
+	 * @static
+	 * @memberof LockPanel
+	 */
 	static get Enablers(){
 		return {
 			Meteorite:	()=> Achievement.IsUnlocked(Achievements.Action.TouchPlayer),
