@@ -34,6 +34,7 @@
         "Src/Aiming.js",
         "Src/Selector.js",
         "Src/Pager.js",
+        "Src/LockPanel.js",
 
         "Src/Scene/Sequence.js",
         "Src/Scene/SceneBase.js",
