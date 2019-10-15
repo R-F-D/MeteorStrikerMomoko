@@ -226,6 +226,12 @@ var LocalizedTexts	= (()=>{return{
 	// Settings
 	//----------------------------------------
 
+		//ロックパネル
+		"Settings.LockPanel.Locked": {
+			_:	"This selector is locked.",
+			ja:	"この項目はロックされています。",
+		},
+
 		//地域・言語設定 Locale & Language
 		"Settings.Locale":	{
 			_:	"Language",
@@ -267,6 +273,11 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",						ja:"隕石",		},	//Meteorite
 		"Settings.Meteorite.Label.Tryangle":	{_:	"Tryangle",		en:	"△Tryangle",	ja:"△さんかく",	},	//Tryangle
 
+		"Settings.Meteorite.Locked":	{
+			_:	"Unlock achievement \"Momoko Dakedo.\"",
+			ja:	"実績「桃子だけど。」を解除してください。",
+		},
+
 		//ナビゲーター設定 Navigator
 		"Settings.Navigator":	{
 			_:	"Navigator",
@@ -275,6 +286,11 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Navigator.Label.Normal":	{_:	"NAKATANI\nIku",			ja:"中谷育",				},	//Iku
 		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	},	//Golem
 		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			},	//Goddess
+
+		"Settings.Navigator.Locked":	{
+			_:	"Save the Earth 5 times.",
+			ja:	"世界を5回救ってください。",
+		},
 
 		//ストレージ管理 Storage Management
 		"Settings.Storage":	{

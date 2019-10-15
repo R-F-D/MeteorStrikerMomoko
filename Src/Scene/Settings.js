@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var rc,L;
-var Sprite,Store,Achievement,Locale,Selector;
+var Sprite,Label,Store,Achievement,Achievements,Locale,Selector;
 var Cycle;
 var Scene	= Scene || {};
 (function(){	//File Scope
@@ -249,7 +249,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 				//ロックパネル
 				if(!isEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
-											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1);
+											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1,
+											L.Text(`Settings.${key}.Locked`)	);
 
 					selector.buttons.forEach(b=>b.label.SetVisible(false));
 				}
@@ -320,6 +321,8 @@ class LockPanel{
 		this.panels	= _.range(nPanels).map(()=>{
 			return {
 				sprite:	Sprite.CreateInstance(rc.img.lockPanel).AddToLayer(layer).SetVisible(false).Attr({zIndex:0x0105}),
+				labels:	[	Label.CreateInstance(15).AddToLayer(layer).SetVisible(false).SetFontColor("#FFFF00","#000000",1),
+							Label.CreateInstance(11).AddToLayer(layer).SetVisible(false).SetFontColor("#DDDDDD","#000000",1),	],
 				exists:	false,
 			}
 		});
@@ -328,16 +331,19 @@ class LockPanel{
 	Init(){
 		this.panels.forEach(p=>{
 			p.sprite.SetVisible(false);
+			p.labels.forEach(l=>l.SetVisible(false));
 			p.exists	= false;
 		});
 		return this;
 	}
 
-	Spawn(x,y){
+	Spawn(x,y,subtext=""){
 		const panel	= this.panels.find(p=>!p.exists);
 		if(!panel)	return this;
 
 		panel.sprite.SetPosition(x,y).SetVisible(true);
+		panel.labels[0].SetPosition(x,y).SetString(L.Text("Settings.LockPanel.Locked")).SetVisible(true);
+		panel.labels[1].SetPosition(x,y-20).SetString(subtext).SetVisible(true);
 		panel.exists	= true;
 		return this;
 	}
