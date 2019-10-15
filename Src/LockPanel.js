@@ -1,13 +1,14 @@
 /* *******************************************************************************
-	Settingsシーン
+	設定画面のロックパネル
 ********************************************************************************/
-var cc,_;
+var _;
 var rc,L;
-var Sprite,Label,Store,Achievement,Achievements,Locale,Selector;
+var Sprite,Label,Store,Achievement,Achievements;
 
 
 /** セレクタのロックパネル */
-class LockPanel{
+// eslint-disable-next-line no-unused-vars
+var LockPanel = class LockPanel{
 
 	constructor(layer,nPanels){
 

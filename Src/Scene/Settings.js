@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var rc,L;
-var Sprite,Label,Store,Achievement,Achievements,Locale,Selector;
+var Sprite,Store,Achievement,Locale,Selector,LockPanel;
 var Cycle;
 var Scene	= Scene || {};
 (function(){	//File Scope
