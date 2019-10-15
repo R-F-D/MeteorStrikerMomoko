@@ -227,7 +227,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	DeploySelectors(page){
 		const size	= cc.director.getWinSize();
 
-		this.lockPanel.Init();
+		this.lockPanel.Reset();
 		_(this.selectors).forEach(s=>s.SetVisible(false));
 		let i=0;
 		_(SelectorSettings)
@@ -330,11 +330,11 @@ class LockPanel{
 		});
 	}
 
-	/** 初期化とリセット
+	/** リセット
 	 * @returns
 	 * @memberof LockPanel
 	 */
-	Init(){
+	Reset(){
 		this.panels.forEach(p=>{
 			p.sprite.SetVisible(false);
 			p.labels.forEach(l=>l.SetVisible(false));
