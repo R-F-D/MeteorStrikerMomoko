@@ -4,11 +4,12 @@
 var _;
 var rc,L;
 var Sprite,Label,Store,Achievement,Achievements;
+var LockPanel	= LockPanel||{};
+(function(){	//File Scope
 
 
 /** セレクタのロックパネル */
-// eslint-disable-next-line no-unused-vars
-var LockPanel = class LockPanel{
+LockPanel = class LockPanel{
 
 	constructor(layer,nPanels){
 
@@ -65,3 +66,5 @@ var LockPanel = class LockPanel{
 		}
 	}
 }
+
+})();	//File Scope
