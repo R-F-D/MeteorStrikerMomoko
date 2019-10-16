@@ -37,7 +37,7 @@ var rc	= (()=>{
 		navigationButton: [ "Ui/btnNavigation.png",	2,	2,	],	//ナビゲーションボタン
 		titleButton		: [ "Ui/btnTitle.png",		4,	6,	],	//タイトル画面等のボタン
 		labelButton		: [ "Ui/btnLabel.png",		1,	1,	],	//ラベル付きボタン
-		lockPanel		: [ "Ui/lockPanel.png",		1,	1,	],	//ロック表示パネル
+		lockPanel		: [ "Ui/lockPanel.png",		1,	2,	],	//ロック表示パネル
 	},
 
 	/** サウンド */
