@@ -61,7 +61,7 @@ var LockPanel = class LockPanel{
 	static get Enablers(){
 		return {
 			Meteorite:	()=> Achievement.IsUnlocked(Achievements.Action.TouchPlayer),
-			Navigator:	()=> Store.Select(Store.Handles.Action.NumNavigates[0],0) >=5,
+			Navigator:	()=> Store.Select(Store.Handles.Action.NumPlays,0) >=5,
 		}
 	}
 }
