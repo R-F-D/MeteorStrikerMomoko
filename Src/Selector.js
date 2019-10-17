@@ -17,6 +17,7 @@ var Selector	= class Selector{
 
 		this.isVisible		= true;
 		this.enabler		= null;
+		this._isEnabled		= null;
 
 		this.area		= {x:0,y:0,width:0,height:0};
 		this._gap		= {x:16,y:16};
@@ -100,6 +101,7 @@ var Selector	= class Selector{
 	 * @returns
 	 */
 	SetEnabled(enabler=null,idxStorage=null){
+		this._isEnabled	= null;
 		if(enabler===null)	return this;
 
 		if(_.isFunction(enabler))	this.enabler	= enabler;
@@ -110,9 +112,12 @@ var Selector	= class Selector{
 	}
 
 	get isEnabled(){
-		if(this.enabler===null)				return false;
-		else if(_.isFunction(this.enabler))	return this.enabler();
-		else								return !!this.enabler;
+		if(this._isEnabled!==null)	return !!this._isEnabled;
+
+		if(this.enabler===null)				this._isEnabled	= false;
+		else if(_.isFunction(this.enabler))	this._isEnabled	= this.enabler();
+		else								this._isEnabled	= !!this.enabler;
+		return !!this._isEnabled;
 	}
 
 	/** 選択肢エリアの範囲を設定
