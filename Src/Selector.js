@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	選択肢クラス
 ********************************************************************************/
-var cc;
+var cc,_;
 var rc,L;
 var Label,Locale,Button;
 
@@ -16,7 +16,7 @@ var Selector	= class Selector{
 		this._keepsOn		= true;
 
 		this.isVisible		= true;
-		this.isEnabled		= true;
+		this.enabler		= null;
 
 		this.area		= {x:0,y:0,width:0,height:0};
 		this._gap		= {x:16,y:16};
@@ -93,11 +93,26 @@ var Selector	= class Selector{
 		return this;
 	}
 
-	/**ボタンの有効化/無効化*/
-	SetEnabled(enable){
-		this.isEnabled	= enable;
-		this.buttons.SetEnabled(enable);
+
+	/** 有効フラグまたは有効チェック関数のセット
+	 * @param {boolean|function} [enabler=null]		有効チェック関数
+	 * @param {number} [idxStorage=null]	アンロック済フラグを格納するストレージ番号
+	 * @returns
+	 */
+	SetEnabled(enabler=null,idxStorage=null){
+		if(enabler===null)	return this;
+
+		if(_.isFunction(enabler))	this.enabler	= enabler;
+		else						this.enabler	= !!enabler;
+
+		this.buttons.SetEnabled(this.isEnabled);
 		return this;
+	}
+
+	get isEnabled(){
+		if(this.enabler===null)				return false;
+		else if(_.isFunction(this.enabler))	return this.enabler();
+		else								return !!this.enabler;
 	}
 
 	/** 選択肢エリアの範囲を設定

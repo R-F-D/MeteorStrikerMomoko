@@ -59,8 +59,8 @@ const SelectorSettings	= {
 	Locale:		{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	SfxVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
-	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:()=>LockPanel.Enablers.Meteorite(),	},
-	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:()=>LockPanel.Enablers.Navigator(),	},
+	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Meteorite,	},
+	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Navigator,	},
 	Storage:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 };
 
@@ -237,22 +237,22 @@ Scene.Settings	= class extends Scene.SceneBase {
 				const selector	= this.selectors[key];
 				if(!selector)	return this;
 
-				const isEnabled	= _.isFunction(settings.IsEnabled) ? settings.IsEnabled() : settings.IsEnabled;
-
 				selector
 					.SetVisible(true)
-					.SetEnabled(isEnabled)
-					.SetOpacity(isEnabled?255:128)
+					.SetEnabled(settings.IsEnabled)
+					.SetOpacity(255)
 					.SetArea(	SelectorAreaMargin.left,
 								size.height - (SelectorAreaMargin.top+i*64)	);
 
 				//ロックパネル
-				if(!isEnabled){
+				if(!selector.isEnabled){
 					this.lockPanel.Spawn(	SelectorAreaMargin.left + 64*6/2,
 											size.height - (SelectorAreaMargin.top+i*64)	-64/2 -1,
 											L.Text(`Settings.${key}.Locked`)	);
 
-					selector.buttons.forEach(b=>b.label.SetVisible(false));
+					selector
+						.SetOpacity(128)
+						.buttons.forEach(b=>b.label.SetVisible(false));
 				}
 
 				++i;
