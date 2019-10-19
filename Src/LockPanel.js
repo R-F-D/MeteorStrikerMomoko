@@ -3,7 +3,7 @@
 ********************************************************************************/
 var _;
 var rc,L;
-var Sprite,Label,Store,Achievement,Achievements;
+var Sprite,Label,Store,Selector,Achievement,Achievements;
 var LockPanel	= LockPanel||{};
 (function(){	//File Scope
 
@@ -53,8 +53,23 @@ LockPanel = class LockPanel{
 		if(!selector)	return this;
 		this.selector	= selector;
 
-		const panel	= this._Spawn(	this.selector.area.x +PanelAdjust.x,	this.selector.area.y +PanelAdjust.y,	0,
-									L.Text("Settings.LockPanel.Locked"),	subtext);
+		let idxSprite	= 0;
+		let texts		= [];
+		if		(selector.state===Selector.States.Locked){
+			idxSprite	= 0;
+			texts[0]	= L.Text("Settings.LockPanel.Locked");
+			texts[1]	= subtext;
+		}
+		else if	(selector.state===Selector.States.Breakable){
+			idxSprite = 1;
+			texts[0]	= L.Text("Settings.LockPanel.Locked");
+			texts[1]	= subtext;
+		}
+		else{
+			return this;
+		}
+
+		const panel	= this._Spawn(	this.selector.area.x +PanelAdjust.x,	this.selector.area.y +PanelAdjust.y,	idxSprite,	texts[0],texts[1]);
 		if(!panel)	return this;
 		return this;
 	}

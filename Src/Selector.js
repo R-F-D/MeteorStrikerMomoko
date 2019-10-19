@@ -16,8 +16,8 @@ var Selector	= class Selector{
 		this._keepsOn		= true;
 
 		this.isVisible		= true;
+		this._state			= Selector.States.Unlocked;
 		this.enabler		= null;
-		this._isEnabled		= null;
 
 		this.area		= {x:0,y:0,width:0,height:0};
 		this._gap		= {x:16,y:16};
@@ -101,7 +101,7 @@ var Selector	= class Selector{
 	 * @returns
 	 */
 	SetEnabled(enabler=null,idxStorage=null){
-		this._isEnabled	= null;
+		this._state	= null;
 		if(enabler===null)	return this;
 
 		if(_.isFunction(enabler))	this.enabler	= enabler;
@@ -111,13 +111,25 @@ var Selector	= class Selector{
 		return this;
 	}
 
-	get isEnabled(){
-		if(this._isEnabled!==null)	return !!this._isEnabled;
+	/** 状態
+	 * @readonly
+	 */
+	get state(){
+		if(this._state!==null)	return this._state;
 
-		if(this.enabler===null)				this._isEnabled	= false;
-		else if(_.isFunction(this.enabler))	this._isEnabled	= this.enabler();
-		else								this._isEnabled	= !!this.enabler;
-		return !!this._isEnabled;
+		if(_.isFunction(this.enabler)){
+			return this.enabler()	? Selector.States.Breakable	: Selector.States.Locked;
+		}
+		else{
+			return this.enabler		? Selector.States.Unlocked	: Selector.States.Locked;
+		}
+	}
+
+	/** 有効か（ロックパネル非表示なら真）
+	 * @readonly
+	 */
+	get isEnabled(){
+		return !this.state;
 	}
 
 	/** 選択肢エリアの範囲を設定
@@ -265,6 +277,19 @@ var Selector	= class Selector{
 		if(this.buttons)	this.buttons.forEach(b=>b.Attr(attributes));
 		if(this.caption)	this.caption.entity.attr(attributes);
 		return this;
+	}
+
+
+	/** 状態
+	 * @readonly
+	 * @static
+	 */
+	static get States(){
+		return {
+			Unlocked:	0x00,	// Hide panel. (The selector is enabled)
+			Breakable:	0x01,	// Show unlock-able panel. (Click/Tap to enable the selector)
+			Locked:		0x02,	// Show lock panel. (The Selector is disabled)
+		};
 	}
 
 }
