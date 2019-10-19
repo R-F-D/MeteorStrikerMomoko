@@ -93,6 +93,8 @@ class _Store{
 				Meteorite:					{},
 				/** ナビゲーター設定 */
 				Navigator:					{},
+				/** 設定項目のアンロック */
+				UnlockFlags:				{},
 				/**記録・実績の全公開設定*/
 				RecordIsPublic:				{},
 			},
@@ -279,6 +281,15 @@ class _Store{
 		return{
 			/** インクリメント */
 			Increment:				value=>	(value==null||value=="") ? 1 : Number(value)+1,
+			/** フラグのセット (value)=>f(number,number,boolean) */
+			SetFlag:				(value,idxFlag,flag)=>{
+				if(!_.isNumber(idxFlag) || idxFlag<0) return value;
+				const mask	= 1 << Math.trunc(idxFlag);
+				value		= Math.abs(value);
+
+				if(flag)	return value|mask;
+				else		return value & ~mask;
+			},
 		};
 	}
 
@@ -303,7 +314,7 @@ class _Store{
 			GotAchievements: (rank=null,isRatio=false)=>{
 				if(isRatio)	return 100 * Achievement.GetNumUnlockedItems(rank) / Achievement.GetNumItems(rank);
 				else		return `${Achievement.GetNumUnlockedItems(rank)} / ${Achievement.GetNumItems(rank)}`;
-			}
+			},
 		};
 	}
 
