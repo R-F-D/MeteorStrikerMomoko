@@ -58,12 +58,12 @@ LockPanel = class LockPanel{
 		if		(selector.state===Selector.States.Locked){
 			idxSprite	= 0;
 			texts[0]	= L.Text("Settings.LockPanel.Locked");
-			texts[1]	= subtext;
+			texts[1]	= L.Textf("Settings.LockPanel.Cond",[subtext]);
 		}
 		else if	(selector.state===Selector.States.Breakable){
 			idxSprite = 1;
-			texts[0]	= L.Text("Settings.LockPanel.Locked");
-			texts[1]	= subtext;
+			texts[0]	= L.Text("Settings.LockPanel.Breakable");
+			texts[1]	= L.Textf("Settings.LockPanel.Filled",[subtext]);
 		}
 		else{
 			return this;

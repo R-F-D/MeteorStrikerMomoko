@@ -226,10 +226,25 @@ var LocalizedTexts	= (()=>{return{
 	// Settings
 	//----------------------------------------
 
-		//ロックパネル
+		//ロックパネル（ロック時） Locked
 		"Settings.LockPanel.Locked": {
 			_:	"This selector is locked.",
 			ja:	"この項目はロックされています。",
+		},
+		//ロックパネル（解除可能時） Unlock-able
+		"Settings.LockPanel.Breakable": {
+			_:	"Click/Tap here.",
+			ja:	"クリック/タップしてください。",
+		},
+		//ロックパネルの解除条件 Conditions of unlocking
+		"Settings.LockPanel.Cond": {
+			_:	"Cond: $0",
+			ja:	"条件：$0",
+		},
+		//ロックパネルの達成された解除条件 Filled Conditions
+		"Settings.LockPanel.Filled": {
+			_:	"Filled: $0",
+			ja:	"達成：$0",
 		},
 
 		//地域・言語設定 Locale & Language
@@ -274,8 +289,8 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Meteorite.Label.Tryangle":	{_:	"Tryangle",		en:	"△Tryangle",	ja:"△さんかく",	},	//Tryangle
 
 		"Settings.Meteorite.Locked":	{
-			_:	"Unlock achievement \"Momoko Dakedo.\"",
-			ja:	"実績「桃子だけど。」を解除してください。",
+			_:	"Unlocking achievement \"Momoko Dakedo.\"",
+			ja:	"実績「桃子だけど。」の解除",
 		},
 
 		//ナビゲーター設定 Navigator
@@ -288,8 +303,8 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			},	//Goddess
 
 		"Settings.Navigator.Locked":	{
-			_:	"Save the Earth 5 times.",
-			ja:	"世界を5回救ってください。",
+			_:	"Saving the Earth 5 times",
+			ja:	"世界を5回救う",
 		},
 
 		//ストレージ管理 Storage Management
