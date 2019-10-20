@@ -238,7 +238,8 @@ var LocalizedTexts	= (()=>{return{
 		},
 		//ロックパネルの解除条件 Conditions of unlocking
 		"Settings.LockPanel.Cond": {
-			_:	"Cond: $0",
+			_:	"Condition: $0",
+			en:	"Cond: $0",
 			ja:	"条件：$0",
 		},
 		//ロックパネルの達成された解除条件 Filled Conditions
