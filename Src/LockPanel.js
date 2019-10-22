@@ -41,35 +41,6 @@ LockPanel = class LockPanel extends Button{
 		return this;
 	}
 
-	/** 生成
-	 * @returns
-	 * @memberof LockPanel
-	 */
-	Spawn(tag){
-		/*
-		if(!selector)	return this;
-		this.selector	= selector;
-
-		let isLockPanel	= true;
-		let texts		= [];
-		if		(selector.state===Selector.States.Locked){
-			isLockPanel	= true;
-			texts[0]	= L.Text("Settings.LockPanel.Locked");
-			texts[1]	= L.Textf("Settings.LockPanel.Cond",[subtext]);
-		}
-		else if	(selector.state===Selector.States.Breakable){
-			isLockPanel	= false;
-			texts[0]	= L.Text("Settings.LockPanel.Breakable");
-			texts[1]	= L.Textf("Settings.LockPanel.Filled",[subtext]);
-		}
-		else{
-			return this;
-		}
-
-		const panel	= this._Spawn(	this.selector.area.x +PanelAdjust.x,	this.selector.area.y +PanelAdjust.y,	isLockPanel,	texts[0],texts[1]);
-		if(!panel)	return this;
-		*/
-	}
 
 	ApplyPosition(){
 		this.forEach(panel=>{
@@ -80,30 +51,6 @@ LockPanel = class LockPanel extends Button{
 		return this;
 	}
 
-	/*
-	_Spawn(x,y,isLockPanel,text1,text2){
-		const panel	= this.panels.find(p=>!p.exists);
-		if(!panel)	return null;
-
-		panel.sprite.SetPosition(x,y).SetVisible(true);
-		panel.labels[0].SetPosition(x,y).SetString(text1).SetVisible(true);
-		panel.labels[1].SetPosition(x,y-20).SetString(text2).SetVisible(true);
-		panel.exists	= true;
-
-		if(isLockPanel){
-			panel.sprite.SetIndex(0);
-			panel.labels[0].SetFontColor("#FFFF00","#000000",1);
-			panel.labels[1].SetFontColor("#DDDDDD","#000000",1);
-		}
-		else{
-			panel.sprite.SetIndex(1);
-			panel.labels[0].SetFontColor("#7F0000","#FFFF00",1).entity.RunActions( [null,cc.fadeTo(1,128),cc.fadeTo(0,255)] );;
-			panel.labels[1].SetFontColor("#444444","#FFFFFF",1);
-		}
-
-		return panel;
-	}
-	*/
 
 	/** ロック解除判定の関数群
 	 * @readonly
