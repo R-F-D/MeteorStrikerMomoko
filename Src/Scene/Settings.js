@@ -189,8 +189,8 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	OnUiLayerCreate(layer){
 		super.InitUIs(layer);
-		this.lockPanel	= new LockPanel(layer,3);
 		_(this.selectors).forEach(s=>s.AddToLayer(layer));
+		this.lockPanel	= LockPanel.CreateInstance(this.selectors);
 
 
 		//初回起動時の初期設定
@@ -204,8 +204,16 @@ Scene.Settings	= class extends Scene.SceneBase {
 	/** UIパーツ初期化 */
 	InitUIs(){
 		super.InitUIs();
+		const size	= cc.director.getWinSize();
 
+		let page=-1,i=0;
 		_(this.selectors).forEach((selector,tag)=>{
+			//セレクタは上から何番目に配置するか
+			if(page != SelectorSettings[tag].Order){
+				i	= 0;
+				page= SelectorSettings[tag].Order;
+			}
+
 			selector
 				.Init()
 				.SetVisible(false)
@@ -213,23 +221,26 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.Select( this.GetInitialSelectionIndexes(tag) )
 				.KeepsOn(SelectorSettings[tag].KeepsOn)
 				.Attr({zIndex:0x0100})
+				.SetArea(	SelectorAreaMargin.left,	size.height - (SelectorAreaMargin.top+i*64)	)
 				.SetOnSelected((idxButon,tagButton)=>{
 					this.DispatchOnSelect(OptionSettings[tag],tagButton,0)
 				})
 				.buttons
 					.SetTags( ... _(OptionSettings[tag]).map("Tag") )
 					.forEach((b)=> b.SetLabelText(L.Text(`Settings.${tag}.Label.${b.tag}`)) );
+
+			++i;
 		});
+
+		this.lockPanel.ApplyPosition();
 
 		return this;
 	}
 
 	DeploySelectors(page){
-		const size	= cc.director.getWinSize();
-
 		this.lockPanel.Reset();
 		_(this.selectors).forEach(s=>s.SetVisible(false));
-		let i=0;
+
 		_(SelectorSettings)
 			.forEach((settings,key)=>{
 				if(settings.Order!=page)	return this;
@@ -241,19 +252,15 @@ Scene.Settings	= class extends Scene.SceneBase {
 					.SetVisible(true)
 					.SetEnabled(settings.IsEnabled)
 					.SetOpacity(255)
-					.SetArea(	SelectorAreaMargin.left,
-								size.height - (SelectorAreaMargin.top+i*64)	);
 
 				//ロックパネル
 				if(!selector.isEnabled){
-					this.lockPanel.Spawn( selector, L.Text(`Settings.${key}.Locked`) );
+					this.lockPanel.at(key).SetVisible(true);//Spawn(key);
 
 					selector
 						.SetOpacity(128)
 						.buttons.forEach(b=>b.label.SetVisible(false));
 				}
-
-				++i;
 			});
 	}
 

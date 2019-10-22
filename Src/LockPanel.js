@@ -11,20 +11,20 @@ const PanelAdjust	= {x:64*6/2, y:-1};
 
 
 /** セレクタのロックパネル */
-LockPanel = class LockPanel{
+LockPanel = class LockPanel extends Button{
 
-	constructor(layer,nPanels){
+	constructor(selectors){
+		super(Object.keys(selectors).length);
 
-		this.panels	= _.range(nPanels).map(()=>{
-			return {
-				selector:		null,
-				sprite:			Sprite.CreateInstance(rc.img.lockPanel).AddToLayer(layer).SetVisible(false).Attr({zIndex:0x0105}),
-				labels:			[	Label.CreateInstance(15).AddToLayer(layer).SetVisible(false),
-									Label.CreateInstance(11).AddToLayer(layer).SetVisible(false),	],
-				exists:			false,
-				isLockPanel:	true,
-				idxStorage:		null,
-			}
+		this.SetTags(Object.keys(selectors));
+		this.AddToLayer( _(selectors).find(s=>!!s.layer).layer );
+
+		this.forEach(panel=>{
+			panel.selector	= selectors[panel.tag];
+			panel.isLockPanel	= true;
+			panel.idxStorage	= null;
+
+			panel.AddToLayer(panel.selector.layer).CreateSprite(rc.img.lockPanel).CreateLabel(15).SetVisible(false);
 		});
 	}
 
@@ -33,23 +33,20 @@ LockPanel = class LockPanel{
 	 * @memberof LockPanel
 	 */
 	Reset(){
-		this.panels.forEach(p=>{
-			p.sprite.SetVisible(false);
-			p.labels.forEach(l=>l.SetVisible(false));
-			p.exists		= false;
-			p.isLockPanel	= true;
-			p.idxStorage	= null;
+		this.forEach(panel=>{
+			panel.SetVisible(false);
+			panel.isLockPanel	= true;
+			panel.idxStorage	= null;
 		});
 		return this;
 	}
 
 	/** 生成
-	 * @param {Selector} selector	紐付けるセレクタ
-	 * @param {string} subtext		サブテキスト（ロック解除方法）
 	 * @returns
 	 * @memberof LockPanel
 	 */
-	Spawn(selector,subtext){
+	Spawn(tag){
+		/*
 		if(!selector)	return this;
 		this.selector	= selector;
 
@@ -71,9 +68,19 @@ LockPanel = class LockPanel{
 
 		const panel	= this._Spawn(	this.selector.area.x +PanelAdjust.x,	this.selector.area.y +PanelAdjust.y,	isLockPanel,	texts[0],texts[1]);
 		if(!panel)	return this;
+		*/
+	}
+
+	ApplyPosition(){
+		this.forEach(panel=>{
+			panel
+				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
+								panel.selector.area.y +PanelAdjust.y	);
+		});
 		return this;
 	}
 
+	/*
 	_Spawn(x,y,isLockPanel,text1,text2){
 		const panel	= this.panels.find(p=>!p.exists);
 		if(!panel)	return null;
@@ -96,6 +103,7 @@ LockPanel = class LockPanel{
 
 		return panel;
 	}
+	*/
 
 	/** ロック解除判定の関数群
 	 * @readonly
