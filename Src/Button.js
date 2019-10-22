@@ -201,8 +201,8 @@ class ButtonItem{
 		this.layer	= layer;
 		if(!this.sprite)	return this;
 
-		this.sprite.removeFromParent();
-		layer.addChild(this.sprite);
+		this.sprite.entity.removeFromParent();
+		layer.addChild(this.sprite.entity);
 		this.Apply();
 		return this;
 	}
