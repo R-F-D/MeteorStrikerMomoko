@@ -24,7 +24,10 @@ LockPanel = class LockPanel extends Button{
 			panel.isLockPanel	= true;
 			panel.idxStorage	= null;
 
-			panel.AddToLayer(panel.selector.layer).CreateSprite(rc.img.lockPanel).CreateLabel(15).SetVisible(false);
+			panel
+				.AddToLayer(panel.selector.layer)
+				.CreateSprite(rc.img.lockPanel)
+				.CreateLabel(15).SetVisible(false);
 		});
 	}
 
@@ -42,7 +45,7 @@ LockPanel = class LockPanel extends Button{
 	}
 
 
-	ApplyPosition(){
+	Apply(){
 		this.forEach(panel=>{
 			panel
 				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
