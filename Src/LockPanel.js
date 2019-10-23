@@ -28,6 +28,8 @@ LockPanel = class LockPanel extends Button{
 				.AddToLayer(panel.selector.layer)
 				.CreateSprite(rc.img.lockPanel)
 				.CreateLabel(15).SetVisible(false);
+
+			LockPanel.ExtendPanelItemObject(panel);
 		});
 	}
 
@@ -54,6 +56,13 @@ LockPanel = class LockPanel extends Button{
 		return this;
 	}
 
+	//ロックパネルアイテムの関数拡張
+	static ExtendPanelItemObject(panel){
+		panel.Spawn	= function(){
+			panel.SetVisible(true);
+			return this;
+		}
+	}
 
 	/** ロック解除判定の関数群
 	 * @readonly
@@ -67,5 +76,6 @@ LockPanel = class LockPanel extends Button{
 		}
 	}
 }
+
 
 })();	//File Scope
