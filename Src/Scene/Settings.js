@@ -94,7 +94,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		if(this.pager)	this.pager.SetChapter(0, false);
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();
+		this.ApplyCcSceneInstance(this).InitLayerList();
 
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }

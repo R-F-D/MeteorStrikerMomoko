@@ -26,7 +26,7 @@ Scene.Title	= class extends Scene.SceneBase {
 		};
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();
+		this.ApplyCcSceneInstance(this).InitLayerList();
 
 		this.playerIsTouched	= false;
 

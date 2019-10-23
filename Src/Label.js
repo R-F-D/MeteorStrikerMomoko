@@ -178,7 +178,7 @@ Label	= class Label{
 		if(this.icon)	this.icon.AddToLayer(layer);
 
 		if(this.bg.IsEnabled()){
-			this.bg.ApplicateLayer();
+			this.bg.ApplyLayer();
 		}
 
 		return this;
@@ -192,8 +192,8 @@ Label	= class Label{
 	 */
 	SetPosition(x,y){
 		this.entity.setPosition(x,y);
-		this.ApplicateIconPosition();
-		if(this.bg.IsEnabled())	this.bg.ApplicatePosition();
+		this.ApplyIconPosition();
+		if(this.bg.IsEnabled())	this.bg.ApplyPosition();
 
 		return this;
 	}
@@ -201,7 +201,7 @@ Label	= class Label{
 	/** アイコン位置の更新
 	 * @returns {this}
 	 */
-	ApplicateIconPosition(){
+	ApplyIconPosition(){
 		if(!this.icon)	return this;
 
 		const pos		= this.entity.getPosition();
@@ -251,7 +251,7 @@ Label	= class Label{
 		if(!isTemp)	this.text = text;
 		this.entity.setString(text);
 		if(this.icon){
-			this.ApplicateIconPosition();
+			this.ApplyIconPosition();
 			if(hidesIfEmpty && text=="")	this.icon.SetOpacity(0);
 			else							this.icon.SetOpacity(this.iconOpacity)
 		}
@@ -467,7 +467,7 @@ class LabelBg{
 		this.entity.attr({zIndex:this.Z, opacity:this.OPACITY, });
 		this.entity.setVisible(!!this.parent.entity.isVisible());
 
-		this.Init().ApplicateLayer();
+		this.Init().ApplyLayer();
 		return this;
 	}
 
@@ -562,7 +562,7 @@ class LabelBg{
 			this.entity.setScale(newScale.x,newScale.y);
 		}
 
-		this.ApplicatePosition();
+		this.ApplyPosition();
 		return this;
 	}
 
@@ -586,7 +586,7 @@ class LabelBg{
 	 * @returns
 	 * @memberof LabelBg
 	 */
-	ApplicatePosition(){
+	ApplyPosition(){
 		if(!this.IsEnabled())	return this;
 
 		let pos	= this.parent.entity.getPosition();
@@ -598,7 +598,7 @@ class LabelBg{
 	 * @returns
 	 * @memberof LabelBg
 	 */
-	ApplicateLayer(){
+	ApplyLayer(){
 		let layer	= this.parent.entity.getParent();
 		if(this.entity && layer){
 			this.entity.removeFromParent();

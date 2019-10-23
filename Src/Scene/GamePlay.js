@@ -106,7 +106,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.isShared	= false;
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();
+		this.ApplyCcSceneInstance(this).InitLayerList();
 
 		/** ラベル */
 		this.labels	= {

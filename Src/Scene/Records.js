@@ -57,7 +57,7 @@ Scene.Records	= class extends Scene.SceneBase {
 		});
 
 		/** ccSceneのインスタンス */
-		this.ApplicateCcSceneInstance(this).InitLayerList();
+		this.ApplyCcSceneInstance(this).InitLayerList();
 
 		//シークエンス設定
 		for(let i in this.Sequences){ this.Sequences[i] = Scene.Sequence.Create() }
