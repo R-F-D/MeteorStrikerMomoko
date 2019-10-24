@@ -111,6 +111,14 @@ var Selector	= class Selector{
 		return this;
 	}
 
+	Unlock(){
+		if(this._state!==Selector.States.Breakable)	return this;
+
+		this._state 	= Selector.States.Unlocked;
+		this.enabler	= true;
+		return this;
+	}
+
 	/** 状態
 	 * @readonly
 	 */
