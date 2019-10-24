@@ -24,17 +24,18 @@ LockPanel = class LockPanel extends Button{
 
 			panel.selector		= selectors[panel.tag];
 			panel.idxStorage	= null;
-			panel.description	= Label.CreateInstance(11)
-									.AddToLayer(panel.layer)
-									.SetVisible(false);
 
 			panel
 				.AddToLayer(panel.layer)
 				.CreateSprite(rc.img.lockPanel)
 				.CreateLabel(15)
-				.SetVisible(false)
-				.SetLocked(true);
+				.SetVisible(false);
 
+			panel.description	= Label.CreateInstance(11)
+				.AddToLayer(panel.label.entity)
+				.SetVisible(false);
+
+				panel.SetLocked(true);
 		});
 	}
 
@@ -73,6 +74,14 @@ LockPanel = class LockPanel extends Button{
 
 			panel.SetVisible(true).SetLabelText(texts[0]);
 			panel.description.SetVisible(true).SetString(texts[1]);
+
+			panel
+				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
+								panel.selector.area.y +PanelAdjust.y	);
+
+			const cSize = panel.label.entity.getContentSize();
+			panel.description.SetPosition(cSize.width/2,-cSize.height/2);
+
 			return this;
 		}
 
@@ -82,14 +91,17 @@ LockPanel = class LockPanel extends Button{
 				this
 					.SetIndex(0)
 					.SetLabelColor("#FFFF00","#000000",1);
+//					.OnTouchBegan(()=>this.description.SetVisible(false))
+//					.OnButtonUp(()=>this.description.SetVisible(true));
 				this.description.SetFontColor("#CCCCCC","#000000",1);
 			}
 			else{
 				this
 					.SetIndex(1)
-					.SetLabelColor("800000","#FFFFFF",1);
+					.SetLabelColor("800000","#FFE0C0",1)
+					.SetColorOnHover([0xFF,0xA0,0x00]);
 				this.label.entity.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
-				this.description.SetFontColor("#444444","#FFFFFF",1);
+				this.description.SetFontColor("#444444","#FFE0C0",1);
 			}
 			return this;
 		}

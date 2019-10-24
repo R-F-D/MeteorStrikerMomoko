@@ -147,6 +147,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 	OnUpdating(dt){
 		super.OnUpdating(dt);
 		_(this.selectors).forEach(s=>s.Update(dt));
+		this.lockPanel.Update(dt);
 		return this;
 	}
 
