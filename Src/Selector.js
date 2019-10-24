@@ -114,8 +114,8 @@ var Selector	= class Selector{
 	Unlock(){
 		if(this._state!==Selector.States.Breakable)	return this;
 
-		this._state 	= Selector.States.Unlocked;
 		this.SetEnabled(true);
+		this._state 	= Selector.States.Unlocked;
 		return this;
 	}
 
@@ -125,12 +125,9 @@ var Selector	= class Selector{
 	get state(){
 		if(this._state!==null)	return this._state;
 
-		if(_.isFunction(this.enabler)){
-			return this.enabler()	? Selector.States.Breakable	: Selector.States.Locked;
-		}
-		else{
-			return this.enabler		? Selector.States.Unlocked	: Selector.States.Locked;
-		}
+		if(_.isFunction(this.enabler))	this._state	= this.enabler()	? Selector.States.Breakable	: Selector.States.Locked;
+		else							this._state	= this.enabler		? Selector.States.Unlocked	: Selector.States.Locked;
+		return this._state;
 	}
 
 	/** 有効か（ロックパネル非表示なら真）
