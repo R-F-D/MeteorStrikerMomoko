@@ -89,9 +89,17 @@ LockPanel = class LockPanel extends Button{
 				this
 					.SetIndex(1)
 					.SetLabelColor("800000","#FFE0C0",1)
-					.SetColorOnHover([0xFF,0xA0,0x00]);
-				this.description.SetFontColor("#444444","#FFE0C0",1);
-			}
+					.SetColorOnHover([0xFF,0xA0,0x00])
+					.OnTouchBegan(()=>{
+						this.label.entity.RunActions( cc.scaleTo(0.5,0) );
+						this.sprite
+							.RunActions(
+								cc.scaleTo(0.5,0),
+								cc.callFunc(()=>this.SetVisible(false).selector.Unlock()),
+							);
+					});
+					this.description.SetFontColor("#444444","#FFE0C0",1);
+				}
 			return this;
 		}
 	}
