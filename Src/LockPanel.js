@@ -70,6 +70,10 @@ LockPanel = class LockPanel extends Button{
 			const cSize = panel.label.entity.getContentSize();
 			panel.description.SetPosition(cSize.width/2,-cSize.height/2);
 
+			if(!panel.isLocked){
+				panel.label.entity.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
+			}
+
 			return this;
 		}
 
@@ -79,8 +83,6 @@ LockPanel = class LockPanel extends Button{
 				this
 					.SetIndex(0)
 					.SetLabelColor("#FFFF00","#000000",1);
-//					.OnTouchBegan(()=>this.description.SetVisible(false))
-//					.OnButtonUp(()=>this.description.SetVisible(true));
 				this.description.SetFontColor("#CCCCCC","#000000",1);
 			}
 			else{
@@ -88,7 +90,6 @@ LockPanel = class LockPanel extends Button{
 					.SetIndex(1)
 					.SetLabelColor("800000","#FFE0C0",1)
 					.SetColorOnHover([0xFF,0xA0,0x00]);
-				this.label.entity.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
 				this.description.SetFontColor("#444444","#FFE0C0",1);
 			}
 			return this;
