@@ -255,7 +255,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 				//ロックパネル
 				if(!selector.isEnabled){
-					this.lockPanel.at(key).Spawn();
+					this.lockPanel.at(key).SetLocked(selector.state==Selector.States.Locked).Spawn();
 
 					selector
 						.SetOpacity(128)
