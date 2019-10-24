@@ -115,7 +115,7 @@ var Selector	= class Selector{
 		if(this._state!==Selector.States.Breakable)	return this;
 
 		this._state 	= Selector.States.Unlocked;
-		this.enabler	= true;
+		this.SetEnabled(true);
 		return this;
 	}
 
