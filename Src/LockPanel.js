@@ -1,7 +1,7 @@
 /* *******************************************************************************
 	設定画面のロックパネル
 ********************************************************************************/
-var _;
+var cc,_;
 var rc,L;
 var Store,Label,Button,Achievement,Achievements;
 var LockPanel	= LockPanel||{};
@@ -81,8 +81,8 @@ LockPanel = class LockPanel extends Button{
 			if(this.isLocked){
 				this
 					.SetIndex(0)
-					.SetLabelColor("#FFFF00","#000000",1)
-					.description.SetFontColor("#CCCCCC","#000000",1);
+					.SetLabelColor("#FFFF00","#000000",1);
+				this.description.SetFontColor("#CCCCCC","#000000",1);
 			}
 			else{
 				this
