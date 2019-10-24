@@ -52,18 +52,6 @@ LockPanel = class LockPanel extends Button{
 		return this;
 	}
 
-	Apply(){
-		this.forEach(panel=>{
-			panel
-				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
-								panel.selector.area.y +PanelAdjust.y	);
-			panel.description
-								.SetPosition(	panel.selector.area.x +PanelAdjust.x,
-									panel.selector.area.y +PanelAdjust.y-20	);
-			});
-		return this;
-	}
-
 	//ロックパネルアイテムの関数拡張
 	static ExtendPanelItemObject(panel){
 		panel.Spawn	= function(){

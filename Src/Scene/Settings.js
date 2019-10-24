@@ -233,8 +233,6 @@ Scene.Settings	= class extends Scene.SceneBase {
 			++i;
 		});
 
-		this.lockPanel.Apply();
-
 		return this;
 	}
 
