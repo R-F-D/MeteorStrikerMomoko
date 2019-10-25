@@ -284,8 +284,9 @@ class _Store{
 			/** フラグのセット (value)=>f(number,number,boolean) */
 			SetFlag:				(value,idxFlag,flag)=>{
 				if(!_.isNumber(idxFlag) || idxFlag<0) return value;
+
 				const mask	= 1 << Math.trunc(idxFlag);
-				value		= Math.abs(value);
+				value		= Math.trunc(Math.abs(value));
 
 				if(flag)	return value|mask;
 				else		return value & ~mask;
