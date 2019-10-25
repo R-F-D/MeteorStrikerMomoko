@@ -106,6 +106,7 @@ var Selector	= class Selector{
 
 		if(_.isFunction(enabler))	this.enabler	= enabler;
 		else						this.enabler	= !!enabler;
+		if(idxStorage!==null)	this.idxStorage	= idxStorage;
 
 		this.buttons.SetEnabled(this.isEnabled);
 		return this;
@@ -116,6 +117,7 @@ var Selector	= class Selector{
 
 		this.SetEnabled(true);
 		this._state 	= Selector.States.Unlocked;
+		if(_.isNumber(this.idxStorage))	Store.DynamicInsert( Store.Handles.Settings.UnlockFlags,	value=>Store.Gens.SetFlag(value,this.idxStorage,true)	);
 		return this;
 	}
 

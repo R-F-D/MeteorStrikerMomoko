@@ -59,8 +59,8 @@ const SelectorSettings	= {
 	Locale:		{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	SfxVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
-	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Meteorite,	},
-	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Navigator,	},
+	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Meteorite,	IdxStorage:0,	},
+	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Navigator,	IdxStorage:1,	},
 	Storage:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 };
 
@@ -249,7 +249,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 				selector
 					.SetVisible(true)
-					.SetEnabled(settings.IsEnabled)
+					.SetEnabled(settings.IsEnabled, settings.IdxStorage)
 					.SetOpacity(255)
 
 				//ロックパネル
