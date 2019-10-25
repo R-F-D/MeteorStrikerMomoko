@@ -223,6 +223,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 				.KeepsOn(SelectorSettings[tag].KeepsOn)
 				.Attr({zIndex:0x0100})
 				.SetArea(	SelectorAreaMargin.left,	size.height - (SelectorAreaMargin.top+i*64)	)
+				.SetEnabled(SelectorSettings[tag].IsEnabled, SelectorSettings[tag].IdxStorage)
 				.SetOnSelected((idxButon,tagButton)=>{
 					this.DispatchOnSelect(OptionSettings[tag],tagButton,0)
 				})
@@ -233,12 +234,14 @@ Scene.Settings	= class extends Scene.SceneBase {
 			++i;
 		});
 
+		this.LoadUnlockFlags();
 		return this;
 	}
 
 	DeploySelectors(page){
 		this.lockPanel.Reset();
 		_(this.selectors).forEach(s=>s.SetVisible(false));
+		this.LoadUnlockFlags();
 
 		_(SelectorSettings)
 			.forEach((settings,key)=>{
@@ -249,7 +252,6 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 				selector
 					.SetVisible(true)
-					.SetEnabled(settings.IsEnabled, settings.IdxStorage)
 					.SetOpacity(255)
 
 				//ロックパネル
@@ -277,6 +279,20 @@ Scene.Settings	= class extends Scene.SceneBase {
 		else										Store.Insert(mapping.OnSelected,mapping.Tag,null);
 		return this;
 	}
+
+	get unlockFlags(){
+		if(this._unlockFlags==null)	this._unlockFlags = Store.Select(Store.Handles.Settings.UnlockFlags,0);
+		return this._unlockFlags;
+	}
+
+	LoadUnlockFlags(){
+		_(this.selectors).forEach((selector)=>{
+			if(!_.isNumber(selector.idxStorage) || selector.idxStorage<0)	return;
+			if(this.unlockFlags & (1<<selector.idxStorage))	selector.Unlock();
+		});
+		return this;
+	}
+
 
 	/*選択肢の初期値*/
 	GetInitialSelectionIndexes(tag){
