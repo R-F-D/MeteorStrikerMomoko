@@ -287,8 +287,9 @@ Scene.Settings	= class extends Scene.SceneBase {
 
 	LoadUnlockFlags(){
 		_(this.selectors).forEach((selector)=>{
+			selector._OnUnlocked	= ()=>this.DeploySelectors(this.pager.GetPage());
 			if(!_.isNumber(selector.idxStorage) || selector.idxStorage<0)	return;
-			if(this.unlockFlags & (1<<selector.idxStorage))	selector.Unlock();
+			if(this.unlockFlags & (1<<selector.idxStorage))	selector.Unlock(false);
 		});
 		return this;
 	}

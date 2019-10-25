@@ -112,13 +112,25 @@ var Selector	= class Selector{
 		return this;
 	}
 
-	Unlock(){
+	Unlock(refreshes=true){
 		if(this._state!==Selector.States.Breakable)	return this;
 
 		this.SetEnabled(true);
 		this._state 	= Selector.States.Unlocked;
 		if(_.isNumber(this.idxStorage))	Store.DynamicInsert( Store.Handles.Settings.UnlockFlags,	value=>Store.Gens.SetFlag(value,this.idxStorage,true)	);
+
+		//Refresh
+		if(refreshes){
+			Log(refreshes);
+			if(_.isFunction(this._OnUnlocked))	this._OnUnlocked();
+
+		}
+
 		return this;
+	}
+
+	set OnUnlocked(callback){
+		if(_.isFunction(callback))	this._OnUnlocked = callback;
 	}
 
 	/** 状態
