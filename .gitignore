@@ -15,4 +15,6 @@ node_modules
 package*.json
 .eslint*
 .babelrc
+build.xml
+
 
