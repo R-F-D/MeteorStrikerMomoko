@@ -1,19 +1,26 @@
 #/bin/zsh
 
 #Publish Dir
-cp -r ./Res ./docs/Res
+cp -av Res ./docs
+rm ./doc/Src/game.min.js
+rm ./doc/Src/project.json
 
 #Babel
 #mkdir ../Babel/MeteorStriker
 #mkdir ../Babel/MeteorStriker/res
 #cp Frameworks ../Babel/MeteorStriker/
-cp project.json ../Babel/MeteorStriker/
-cp .cocos-project.json ../Babel/MeteorStriker/
-cp index_release.html ../Babel/MeteorStriker/index.html
+cp -va project.json ../Babel/MeteorStriker/
+cp -va .cocos-project.json ../Babel/MeteorStriker/
+cp -va index_release.html ../Babel/MeteorStriker/index.html
 babel Main.js -d ../Babel/MeteorStriker/
 babel Src -d ../Babel/MeteorStriker/Src
 
 #Cocos Compile
 cd ../Babel/MeteorStriker
 cocos compile -p web -m release -o ../../MeteorStriker/docs/
-rm ../../MeteorStriker/docs/build.xml
+cd ../../MeteorStriker/docs/
+rm ./build.xml
+mv ./game.min.js ./Src/
+mv ./project.json ./Src/
+cd ../
+
