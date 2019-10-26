@@ -1,3 +1,6 @@
+var cc;
+var g_resources,Scene;
+
 //Main
 cc.game.onStart = function(){
 	//Debug(()=>console.clear());
