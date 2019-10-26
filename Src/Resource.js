@@ -15,10 +15,10 @@ var rc	= (()=>{
 		bgLaunch		: [ "Text/bgLaunch.png",	1,	1,	],	//背景（シーン開始テキスト）
 		player			: [ "Actor/momoko.png",		4,	4,	],	//プレイヤーキャラクター
 		navigator		: [ "Text/navigator.png",	5,	5,	],	//ナビゲーターアイコン
-		aimCursor		: [ "Aim/aimcur.png",		2,	2,	],	//エイミングカーソル
+		aimCursor		: [ "Aim/aimCur.png",		2,	2,	],	//エイミングカーソル
 		aimBar			: [ "Aim/aimBar.png",		1,	1,	],	//エイミングゲージ
 		aimValue		: [ "Aim/aimValue.png",		4,	3,	],	//エイミング値
-		hitArea			: [ "Aim/hitarea.png",		1,	4,	],	//ヒット領域
+		hitArea			: [ "Aim/hitArea.png",		1,	4,	],	//ヒット領域
 		meteor			: [ "Actor/meteor.png",		2,	1,	],	//メテオ
 		distance		: [ "Text/distance.png",	1,	1,	],	//飛距離表示
 
