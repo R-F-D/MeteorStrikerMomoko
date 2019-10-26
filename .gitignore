@@ -3,6 +3,8 @@
 [Ff]rameworks/*
 ![Ff]rameworks/licenses
 !cocos2d-js-v*.js
+manifest.webapp
+CMakeLists.txt
 [Tt]mp/
 [Pp]rivate
 [Pp]rivate/
@@ -12,4 +14,5 @@
 node_modules
 package*.json
 .eslint*
+.babelrc
 
