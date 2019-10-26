@@ -9,9 +9,9 @@ rm ./doc/Src/project.json
 #mkdir ../Babel/MeteorStriker
 #mkdir ../Babel/MeteorStriker/res
 #cp Frameworks ../Babel/MeteorStriker/
+cp -va index.prod.html ../Babel/MeteorStriker/index.html
 cp -va project.prod.json ../Babel/MeteorStriker/project.json
 cp -va .cocos-project.json ../Babel/MeteorStriker/
-cp -va index_release.html ../Babel/MeteorStriker/index.html
 babel Main.js -d ../Babel/MeteorStriker/
 babel Src -d ../Babel/MeteorStriker/Src
 
