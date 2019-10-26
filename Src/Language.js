@@ -696,12 +696,12 @@ var LocalizedTexts	= (()=>{return{
 
 		//打撃を連続成功 Successive Hits Without Failure
 		"Achievement.Blowing.SuccessiveHits":{
-			_:	"Into Perpetual Hit Machines, L’ANTICA!",
-			ja:	"永久ヒットにしてゆくよ \"安定化\"",	//バベルシティグレイス
+			_:	"L’ANTICA!",
+			ja:	"\"安定化\"",	//バベルシティグレイス
 		},
 		"Achievement.Blowing.SuccessiveHits.Text":{
-			_:	"Hit $0 times in a row without failure.\nAnd TODAY, the time has come.",
-			ja:	"失敗せず$0回連続でヒットさせた。\nそうそして「今日」時が来たよ。",
+			_:	"Hit $0 times in a row without failure.\nInto Perpetual Hit Machines, ",
+			ja:	"失敗せず$0回連続でヒットさせた。\n永久ヒットにしてゆくよ。",
 		},
 
 		//エミット回数実績その1 Emit Rate #01

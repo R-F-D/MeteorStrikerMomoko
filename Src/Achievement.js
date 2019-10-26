@@ -18,14 +18,14 @@ var Achievements = (()=>{		//Achievements scoop
 	//打撃力
 	Achievements.Blowing	= {
 		ManyHard		:{	IsPublic:true,	Count:5,	Order:0x3100,	Rank:0,	Replacements:[],	},	//強打
-		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x3101,	Rank:1,	Replacements:[],	},	//強打でパーフェクト
+		HardAndPerfect	:{	IsPublic:true,	Count:3,	Order:0x3101,	Rank:2,	Replacements:[],	},	//強打でパーフェクト
 		SuccessiveHits	:{	IsPublic:true,	Count:19,	Order:0x3102,	Rank:1,	Replacements:[],	},	//連続ヒット
 	};
 	//エミット
 	Achievements.Emit	= {
 		Many01			:{	IsPublic:true,	Count:160,	Order:0x4200,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約35回
-		Many02			:{	IsPublic:true,	Count:170,	Order:0x4201,	Rank:0,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
-		Many03			:{	IsPublic:true,	Count:180,	Order:0x4202,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
+		Many02			:{	IsPublic:true,	Count:170,	Order:0x4201,	Rank:1,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約42回
+		Many03			:{	IsPublic:true,	Count:180,	Order:0x4202,	Rank:2,	Replacements:[()=>L.Text("Unit.Emit")],	},	// 約50回
 	};
 	//チェックポイント到達
 	Achievements.Check	= {
@@ -42,12 +42,12 @@ var Achievements = (()=>{		//Achievements scoop
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,	},	//初プレイ
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],	},	//シェア
 		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[],	},	//プレイ時間
-		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:0,	Replacements:[],	},	//起動日数
-		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:0,	Replacements:[],	},	//月曜日または9時台に起動
+		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:1,	Replacements:[],	},	//起動日数
+		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:1,	Replacements:[],	},	//月曜日または9時台に起動
 		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x8000,	Rank:0,	Replacements:null,	},	//桃子だけど
-		Navigate00		:{	IsPublic:true,	Count:10,	Order:0x7000,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:4,	Order:0x7002,	Rank:0,	Replacements:[],	},	//女神ナビ使用
+		Navigate00		:{	IsPublic:true,	Count:5,	Order:0x7000,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
+		Navigate01		:{	IsPublic:false,	Count:3,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
+		Navigate02		:{	IsPublic:false,	Count:3,	Order:0x7002,	Rank:0,	Replacements:[],	},	//女神ナビ使用
 	};
 
 
