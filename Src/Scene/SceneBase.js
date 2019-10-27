@@ -348,7 +348,7 @@ Scene.SceneBase	= class {
 
 		if(isForce){	//プレイ時間実績（強制更新時のみ）
 			const totalSec		= Number(Store.Select(Store.Handles.Action.TotalRunTime),0) + runSec;
-			if(this.achievementIsEnabled)	Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
+			Achievement.Unlock(Achievements.Action.PlayTime,totalSec);
 		}
 		return;
 	}
