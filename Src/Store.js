@@ -30,15 +30,15 @@ class _Store{
 				/** 平均エイミング精度 */
 				MeanAiming:					{Required:0,	Order:0x2004,	nDecimalDigits:1,	UnitKey:"Unit.Aim",		Conv:Store.Convs.LinesToMean,	},
 				/** 強打回数 */
-				NumHardBlowings:			{Required:0,	Order:0x2010,	},
+				NumHardBlowings:			{Required:0,	Order:0x2100,	},
 				/** 強打＆パーフェクト回数 */
-				NumHardAndPerfectBlowings:	{Required:0,	Order:0x2011,	},
+				NumHardAndPerfectBlowings:	{Required:0,	Order:0x2101,	},
 				/** 全力打撃回数 */
-				NumFullPowerBlowings:		{Required:0,	Order:0x2012,	},
+				NumFullPowerBlowings:		{Required:0,	Order:0x2102,	},
 				/** 最高打撃力 */
-				BestBlowing:				{Required:0,	Order:0x2013,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
+				BestBlowing:				{Required:0,	Order:0x2103,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	},
 				/** 平均打撃倍率 */
-				MeanBlowing:				{Required:0,	Order:0x2014,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	Conv:Store.Convs.LinesToMean,	},
+				MeanBlowing:				{Required:0,	Order:0x2104,	nDecimalDigits:1,	UnitKey:"Unit.Blow",	Conv:Store.Convs.LinesToMean,	},
 
 				/** 最大エミット倍率 */
 				MaxEmittings:				{Required:0,	Order:0x1110,	nDecimalDigits:1,	UnitKey:"Unit.Emit",	},
@@ -51,19 +51,19 @@ class _Store{
 			},
 			Action: {
 				/** クリア回数 */
-				NumPlays:					{Required:0,	Order:0x0100,	},
+				NumPlays:					{Required:0,	Order:0x0000,	},
 				/** リトライ回数 */
-				NumRetrys:					{Required:0,	Order:0x0101,	},
+				NumRetrys:					{Required:0,	Order:0x0001,	},
 				/** シェア回数 */
-				NumShares:					{Required:0,	Order:0x0102,	},
+				NumShares:					{Required:0,	Order:0x0002,	},
 				/** 実績解除数*/
-				TotalUnlockedAchievements:	{Required:0,	Order:0x0203,	nDecimalDigits:1,	Conv:()=>Store.Convs.GotAchievements(null,true)},
-				NumUnlockedAchievements:[	{Required:0,	Order:0x0207,	Conv:()=>Store.Convs.GotAchievements(0)},
-											{Required:0,	Order:0x0206,	Conv:()=>Store.Convs.GotAchievements(1)},
-											{Required:0,	Order:0x0205,	Conv:()=>Store.Convs.GotAchievements(2)},
-											{Required:0,	Order:0x0204,	Conv:()=>Store.Convs.GotAchievements(3)},		],
+				TotalUnlockedAchievements:	{Required:0,	Order:0x0100,	nDecimalDigits:1,	Conv:()=>Store.Convs.GotAchievements(null,true)},
+				NumUnlockedAchievements:[	{Required:0,	Order:0x0104,	Conv:()=>Store.Convs.GotAchievements(0)},
+											{Required:0,	Order:0x0103,	Conv:()=>Store.Convs.GotAchievements(1)},
+											{Required:0,	Order:0x0102,	Conv:()=>Store.Convs.GotAchievements(2)},
+											{Required:0,	Order:0x0101,	Conv:()=>Store.Convs.GotAchievements(3)},		],
 				/** 起動回数 */
-				NumBootings:				{Required:0,	Order:0x0110,	},
+				NumBootings:				{Required:0,	Order:0x0010,	},
 				/** 起動回数（1日1カウントまで） */
 				NumBootingDays:				{},
 				/** 初めて起動した時刻 */
@@ -71,9 +71,9 @@ class _Store{
 				/** 最後に起動した時刻 */
 				LastStartDay:				{},
 				/** 実行時間 */
-				RunTime:					{Required:0,	Order:0x0111,	Conv:Store.Convs.SecToTime,	},
+				RunTime:					{Required:0,	Order:0x0011,	Conv:Store.Convs.SecToTime,	},
 				/** 合計実行時間 */
-				TotalRunTime:				{Required:0,	Order:0x0112,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
+				TotalRunTime:				{Required:0,	Order:0x0012,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
 				/** ナビゲーション回数 */
 				NumNavigates:[				{Required:0,	Order:0x3000,	},		//ノーマル
 											{Required:1,	Order:0x3001,	},		//初めてのともだち

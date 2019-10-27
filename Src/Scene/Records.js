@@ -154,6 +154,8 @@ Scene.Records	= class extends Scene.SceneBase {
 				Debug(()=>{throw new Error("Too many records")});
 			}
 
+			let nBoardsEachColumn = _.range(RecordBoard.MaxColumns).map(()=>0);	//各列の表示板数
+
 			//ラベル
 			this.displayBoards
 				.forEach((board,i)=>{
@@ -163,6 +165,13 @@ Scene.Records	= class extends Scene.SceneBase {
 
 					const handle	= handles.shift();
 					if(!handle)	return;
+
+					//表示板の位置と板数チェック
+					let gridPos	= {};
+					gridPos.x	= (handle.Order & 0x0F00) >>8;
+					gridPos.y	= nBoardsEachColumn[gridPos.x];
+					if(gridPos.x >= RecordBoard.MaxColumns || gridPos.y >= RecordBoard.MaxRows)	Debug(()=>{throw new Error("Too many records")});
+
 
 					//カウンタと公開フラグ
 					//ヘッダテキスト＆カウンタ
@@ -186,8 +195,9 @@ Scene.Records	= class extends Scene.SceneBase {
 						text			= L.TextExists(`Records.${handle.Key}.Secret`) ? L.Text(`Records.${handle.Key}.Secret`) : L.Text("Records.Secret");
 					}
 
-					const x	= Math.trunc(i/RecordBoard.MaxRows) * (RecordBoard.Size.Width+32);
-					const y	= (i%RecordBoard.MaxRows) * (RecordBoard.Size.Height+1);
+					const x	= gridPos.x * (RecordBoard.Size.Width+32);
+					const y	= gridPos.y * (RecordBoard.Size.Height+1);
+
 					board.body.bg.lower			= {width:RecordBoard.Size.Width, height:RecordBoard.Size.Height};
 					board.body.bg.animationDelay= 0.05*i;
 					if(isPublic){
@@ -211,6 +221,8 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetPosition(PanelPosition.X+x+RecordBoard.Size.Width-2,size.height-PanelPosition.Y-y-RecordBoard.Size.Height+2)
 						.SetString(`${fmtCount}`);
 					board.body.bg.animationDelay	= 0.0;
+
+					++nBoardsEachColumn[gridPos.x];
 				});
 		})
 		.PushUpdatingFunctions((/*dt*/)=>{
