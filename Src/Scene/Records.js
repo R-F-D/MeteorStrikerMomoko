@@ -16,7 +16,7 @@ const LinkedLayerTags	= {
 
 const PanelPosition		= {X:16+64,Y:16};
 const RecordBoard	= {
-	MaxRows:			5,
+	MaxRows:			6,
 	MaxColumns:			2,
 	Size:				{Width:32*5, Height:32-1},
 	NumLogLines:		2,

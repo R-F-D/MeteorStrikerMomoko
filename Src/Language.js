@@ -498,6 +498,12 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"クリア回数",
 		},
 
+		//リトライ回数 Number of Retrys
+		"Records.Action.NumRetrys":{
+			_:	"Retrys",
+			ja:	"リトライ回数",
+		},
+
 		//起動回数 Number of Bootings
 		"Records.Action.NumBootings":{
 			_:	"Bootings",
