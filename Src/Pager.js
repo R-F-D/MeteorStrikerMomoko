@@ -253,7 +253,7 @@ var PageNavigator	= class PageNavigator{
 			.forEach((indicator,i)=>{
 				indicator.SetVisible(true).SetPosition( (size.width-indicatorWidth)/2 + i*(indicatorWidth/(this.pager.GetNumPages()-1)), 32);
 				if(i==this.pager.GetPage())	indicator.SetColor("#FFA000").SetScale(0.75).StopActions().RunActions( [cc.scaleTo(0.20, 0.5),cc.fadeTo (0.25,255),[null,cc.rotateBy(4,360)] ]);
-				else						indicator.SetColor("#FFFFFF").SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.25 ),cc.fadeTo (0.25,96)] );
+				else						indicator.SetColor("#FFFFFF").SetScale(0.25).SetRotate(0).StopActions().RunActions( [cc.scaleTo(0.25, 0.25 ),cc.fadeTo (0.25,96)] );
 			});
 		return this;
 	}
