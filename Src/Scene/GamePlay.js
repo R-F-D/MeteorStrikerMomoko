@@ -32,7 +32,7 @@ const LinkedLayerTags	= {
 /**隕石設定の情報*/
 const MeteoriteSettings	= {
 	Normal:		{Key:"Normal",		IdxSprite:0,	Storage:Store.Handles.Action.NumMeteoriteEngages[0],	},
-	Tryangle:	{Key:"Tryangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	},
+	Triangle:	{Key:"Triangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	},
 };
 /**ナビゲータ情報*/
 const NavigatorSettings	= {

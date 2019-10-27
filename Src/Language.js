@@ -287,7 +287,7 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"隕石",
 		},
 		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",						ja:"隕石",		},	//Meteorite
-		"Settings.Meteorite.Label.Tryangle":	{_:	"Tryangle",		en:	"△Tryangle",	ja:"△さんかく",	},	//Tryangle
+		"Settings.Meteorite.Label.Triangle":	{_:	"Triangle",		en:	"△Triangle",	ja:"△さんかく",	},	//Triangle
 
 		"Settings.Meteorite.Locked":	{
 			_:	"Unlocking achievement \"Momoko Dakedo.\"",
