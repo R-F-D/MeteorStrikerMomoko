@@ -73,12 +73,12 @@ class _Store{
 				/** 合計実行時間 */
 				TotalRunTime:				{Required:0,	Order:0x0111,	Conv:v=>Store.Convs.SecToTime(v,Store.Handles.Action.RunTime),	},
 				/** ナビゲーション回数 */
-				NumNavigates:[				{Required:0,	Order:0x3010,	},		//ノーマル
-											{Required:1,	Order:0x3011,	},		//初めてのともだち
-											{Required:1,	Order:0x3012,	},	],	//女神
+				NumNavigates:[				{Required:0,	Order:0x3000,	},		//ノーマル
+											{Required:1,	Order:0x3001,	},		//初めてのともだち
+											{Required:1,	Order:0x3002,	},	],	//女神
 				/** 隕石回数 */
-				NumMeteoriteEngages:[		{Required:0,	Order:0x3000,	},		//ノーマル隕石
-											{Required:1,	Order:0x3001,	},	],	//さんかく
+				NumMeteoriteEngages:[		{Required:0,	Order:0x3010,	},		//ノーマル隕石
+											{Required:1,	Order:0x3011,	},	],	//さんかく
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
 				NumTouchesPlayer:			{Required:1,	Order:0x3020,	},
 
