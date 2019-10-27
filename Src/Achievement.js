@@ -40,6 +40,7 @@ var Achievements = (()=>{		//Achievements scoop
 	Achievements.Action	= {
 		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Rank:3,	Replacements:null,	},	//コンプリート
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,	},	//初プレイ
+		Retry			:{	IsPublic:true,	Count:5,	Order:0x9000,	Rank:0,	Replacements:[],	},	//シェア
 		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],	},	//シェア
 		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[],	},	//プレイ時間
 		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:1,	Replacements:[],	},	//起動日数

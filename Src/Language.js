@@ -834,6 +834,16 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"隕石を食い止めて世界を救った。\n桃子がなんとかしなきゃ…!",
 		},
 
+		//リトライ Retry
+		"Achievement.Action.Retry":{
+			_:	"Good Luck Next Time!",
+			ja:	"次回も頑張ってもらうぞ！",	//シャニマス（天井社長）
+		},
+		"Achievement.Action.Retry.Text":{
+			_:	"Retryed games $0 times.\nIf I can't meet Momoko,\nor you've made a different choice...\nWhat happened to the Earth...?",
+			ja:	"ゲームを$0回リトライした。\nもし桃子ちゃんに会えてなかったり\n違う選択してたら…\n地球、どうなってたのかなって…",	//シャニマスED（園田智代子WING）
+		},
+
 		//結果シェア Share Result
 		"Achievement.Action.Share":{
 			_:	"Share Your Result",

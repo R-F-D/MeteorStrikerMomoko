@@ -785,6 +785,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.OnButtonUp(()=>{
 				this.ReplaceScene(Scene.GamePlay);
 				const nRetrys	= Store.DynamicInsert(Store.Handles.Action.NumRetrys);
+				Achievement.Unlock(Achievements.Action.Retry, nRetrys);
 			});
 
 		this.buttons.at("Share")

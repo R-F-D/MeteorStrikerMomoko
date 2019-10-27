@@ -287,7 +287,7 @@ Scene.Records	= class extends Scene.SceneBase {
 						.SetIconIndex( this.GetAchievementIconIndex(board.rank, board.isPublic, board.isUnlocked) )
 						.SetString(` ${title}`);
 					board.text
-						.SetNumLogLines(2)
+						.SetNumLogLines(3)
 						.SetPosition(PanelPosition.X+x+2,size.height-PanelPosition.Y-y-14-4)
 						.SetString(text);
 					board.foot
