@@ -40,17 +40,17 @@ var Achievements = (()=>{		//Achievements scoop
 	Achievements.Action	= {
 		Complete		:{	IsPublic:true,	Count:1,	Order:0x0000,	Rank:3,	Replacements:null,	},	//コンプリート
 		FirstPlay		:{	IsPublic:true,	Count:1,	Order:0x0001,	Rank:0,	Replacements:null,	},	//初プレイ
-		Retry			:{	IsPublic:true,	Count:5,	Order:0x9000,	Rank:0,	Replacements:[],	},	//シェア
-		Share			:{	IsPublic:true,	Count:3,	Order:0x0002,	Rank:0,	Replacements:[],	},	//シェア
-		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1000,	Rank:0,	Replacements:[],	},	//プレイ時間
-		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1001,	Rank:1,	Replacements:[],	},	//起動日数
-		Monday9			:{	IsPublic:true,	Count:1,	Order:0x1002,	Rank:1,	Replacements:[],	},	//月曜日または9時台に起動
-		Navigate00		:{	IsPublic:true,	Count:5,	Order:0x7000,	Rank:0,	Replacements:[],	},	//ノーマルナビ使用
-		Navigate01		:{	IsPublic:false,	Count:3,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ゴーレムナビ使用
-		Navigate02		:{	IsPublic:false,	Count:3,	Order:0x7002,	Rank:0,	Replacements:[],	},	//女神ナビ使用
-		Meteorite00		:{	IsPublic:true,	Count:6,	Order:0x8000,	Rank:0,	Replacements:[],	},	//隕石
-		Meteorite01		:{	IsPublic:false,	Count:3,	Order:0x8001,	Rank:0,	Replacements:[],	},	//さんかく
-		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x8002,	Rank:0,	Replacements:null,	},	//桃子だけど
+		Retry			:{	IsPublic:true,	Count:5,	Order:0x0002,	Rank:0,	Replacements:[],	},	//リトライ
+		Share			:{	IsPublic:true,	Count:3,	Order:0x1000,	Rank:0,	Replacements:[],	},	//シェア
+		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1001,	Rank:0,	Replacements:[],	},	//プレイ時間
+		BootDays		:{	IsPublic:true,	Count:5,	Order:0x1002,	Rank:1,	Replacements:[],	},	//起動日数
+		Monday9			:{	IsPublic:true,	Count:1,	Order:0x8002,	Rank:1,	Replacements:[],	},	//月曜日または9時台に起動
+		Navigate00		:{	IsPublic:true,	Count:5,	Order:0x7000,	Rank:0,	Replacements:[],	},	//ナビ回数・ノーマル
+		Navigate01		:{	IsPublic:false,	Count:3,	Order:0x7001,	Rank:0,	Replacements:[],	},	//ナビ回数・ゴーレム
+		Navigate02		:{	IsPublic:false,	Count:3,	Order:0x7002,	Rank:0,	Replacements:[],	},	//ナビ回数・女神
+		Meteorite00		:{	IsPublic:true,	Count:6,	Order:0x8000,	Rank:0,	Replacements:[],	},	//隕石回数・ノーマル
+		Meteorite01		:{	IsPublic:false,	Count:3,	Order:0x8001,	Rank:0,	Replacements:[],	},	//隕石回数・さんかく
+		TouchPlayer		:{	IsPublic:false,	Count:1,	Order:0x9000,	Rank:0,	Replacements:null,	},	//桃子だけど
 	};
 
 
