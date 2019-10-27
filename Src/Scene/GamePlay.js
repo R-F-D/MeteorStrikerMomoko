@@ -31,8 +31,8 @@ const LinkedLayerTags	= {
 };
 /**隕石設定の情報*/
 const MeteoriteSettings	= {
-	Normal:		{Key:"Normal",		IdxSprite:0,	},
-	Tryangle:	{Key:"Tryangle",	IdxSprite:1,	},
+	Normal:		{Key:"Normal",		IdxSprite:0,	Storage:Store.Handles.Action.NumMeteoriteEngages[0],	},
+	Tryangle:	{Key:"Tryangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	},
 };
 /**ナビゲータ情報*/
 const NavigatorSettings	= {
@@ -536,6 +536,8 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//初プレイ実績
 				const nPlays	= Store.DynamicInsert(Store.Handles.Action.NumPlays);
 				Achievement.Unlock(Achievements.Action.FirstPlay,nPlays);
+				//隕石交戦回数
+				const nNEngages	= Store.DynamicInsert(this.meteorite.Storage);
 				//ナビ実績
 				const nNavigates	= Store.DynamicInsert(this.navigator.Storage);
 				Achievement.Unlock(this.navigator.Achievement,nNavigates);

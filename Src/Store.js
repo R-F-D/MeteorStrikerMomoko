@@ -76,8 +76,11 @@ class _Store{
 				NumNavigates:[				{Required:0,	Order:0x3010,	},		//ノーマル
 											{Required:1,	Order:0x3011,	},		//初めてのともだち
 											{Required:1,	Order:0x3012,	},	],	//女神
+				/** 隕石回数 */
+				NumMeteoriteEngages:[		{Required:0,	Order:0x3000,	},		//ノーマル隕石
+											{Required:1,	Order:0x3001,	},	],	//さんかく
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
-				NumTouchesPlayer:			{Required:1,	Order:0x3000,	},
+				NumTouchesPlayer:			{Required:1,	Order:0x3020,	},
 
 			},
 			Settings:{

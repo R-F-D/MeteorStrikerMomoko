@@ -598,6 +598,21 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"桃子にタッチした回数",
 		},
 
+		//各隕石エンゲージ回数 Number of Meteorite Engagements
+		"Records.Action.NumMeteoriteEngages.00":{
+			_:	"Meteorite Engagements",
+			ja:	"隕石との交戦回数",
+		},
+		"Records.Action.NumMeteoriteEngages.01":{
+			_:	"△Triangle Engagements",
+			ja:	"△さんかくとの交戦回数",
+		},
+		"Records.Action.NumMeteoriteEngages.01.Secret":{
+			_:	"???????? Engagements",
+			ja:	"？？？？との交戦回数",
+		},
+
+
 	//----------------------------------------
 	// シェア Share
 	//----------------------------------------
