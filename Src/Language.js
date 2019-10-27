@@ -878,6 +878,26 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"タイトル画面で桃子にタッチした。\nそれじゃあ、またね。",
 		},
 
+		//隕石（ノーマル）破壊 Meteorite Engagement
+		"Achievement.Action.Meteorite00":{
+			_:	"Like A Meteorite Parade!",
+			ja:	"まるで隕石のPARADE!",	//流星PARADE
+		},
+		"Achievement.Action.Meteorite00.Text":{
+			_:	"Rejected meteorites $0 times.\nSee off the orange rocks.",
+			ja:	"隕石を$0回退けた。\nオレンジ色の岩を見送って。",	//
+		},
+
+		//さんかく破壊 Triangle Engagement
+		"Achievement.Action.Meteorite01":{
+			_:	"Triple Scales☆☆★",
+			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★
+		},
+		"Achievement.Action.Meteorite01.Text":{
+			_:	"Rejected triangles $0 times.\nI'm not afraid to enter atmosphere.",
+			ja:	"さんかくを$0回退けた。\n大気圏突入も怖くない。",	//
+		},
+
 		//ナビゲータ（ノーマル）使用
 		"Achievement.Action.Navigate00":{
 			_:	"Navigator Goes The Space",
@@ -885,7 +905,7 @@ var LocalizedTexts	= (()=>{return{
 		},
 		"Achievement.Action.Navigate00.Text":{
 			_:	"NAKATANI Iku navigated $0 times.\nI can lead you completely everywhere.",
-			ja:	"中谷育が$0回ナビゲートした。どんな道も万全に率いられる。",
+			ja:	"中谷育が$0回ナビゲートした。\nどんな道も万全に率いられる。",
 		},
 
 		//ナビゲータ（ゴーレム）使用
