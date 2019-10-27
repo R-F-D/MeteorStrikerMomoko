@@ -294,6 +294,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.aiming.SetVisible(true,true);
 				this.fx.player.SetVelocity(-1,-0.5,0.5,0);
 				this.fx.meteor.SetVelocity(8,3);
+
+				//リトライ実績
+				const nRetrys	= Store.Select(Store.Handles.Action.NumRetrys,0);
+				Achievement.Unlock(Achievements.Action.Retry, nRetrys);
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);
@@ -784,8 +788,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			)
 			.OnButtonUp(()=>{
 				this.ReplaceScene(Scene.GamePlay);
-				const nRetrys	= Store.DynamicInsert(Store.Handles.Action.NumRetrys);
-				Achievement.Unlock(Achievements.Action.Retry, nRetrys);
+				Store.DynamicInsert(Store.Handles.Action.NumRetrys);
 			});
 
 		this.buttons.at("Share")
