@@ -32,7 +32,8 @@ const LinkedLayerTags	= {
 /**隕石設定の情報*/
 const MeteoriteSettings	= {
 	Normal:		{Key:"Normal",		IdxSprite:0,	Storage:Store.Handles.Action.NumMeteoriteEngages[0],	Achievement:Achievements.Action.Meteorite00,	},
-	Triangle:	{Key:"Triangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	Achievement:Achievements.Action.Meteorite01,	},
+	Bear:		{Key:"Bear",		IdxSprite:2,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	Achievement:Achievements.Action.Meteorite01,	},
+	Triangle:	{Key:"Triangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[2],	Achievement:Achievements.Action.Meteorite02,	},
 };
 /**ナビゲータ情報*/
 const NavigatorSettings	= {

@@ -39,6 +39,7 @@ const OptionSettings	= {
 	],
 	Meteorite:[
 		{	Tag:"Normal",				OnSelected:Store.Handles.Settings.Meteorite,	},
+		{	Tag:"Bear",					OnSelected:Store.Handles.Settings.Meteorite,	},
 		{	Tag:"Triangle",				OnSelected:Store.Handles.Settings.Meteorite,	},
 	],
 	Navigator:[

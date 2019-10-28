@@ -80,9 +80,10 @@ class _Store{
 											{Required:1,	Order:0x3002,	},	],	//女神
 				/** 隕石回数 */
 				NumMeteoriteEngages:[		{Required:0,	Order:0x3010,	},		//ノーマル隕石
-											{Required:1,	Order:0x3011,	},	],	//さんかく
+											{Required:1,	Order:0x3011,	},		//クマくん
+											{Required:1,	Order:0x3012,	},	],	//さんかく
 				/** タイトル画面でプレイヤーキャラをタッチした回数 */
-				NumTouchesPlayer:			{Required:1,	Order:0x3020,	},
+				NumTouchesPlayer:			{Required:1,	Order:0x3100,	},
 
 			},
 			Settings:{

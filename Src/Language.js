@@ -287,6 +287,7 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"隕石",
 		},
 		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",						ja:"隕石",		},	//Meteorite
+		"Settings.Meteorite.Label.Bear":		{_:	"Teddy Bear",	en:	"Kuma-kun",		ja:"クマくん",	},	//Kuma-kun
 		"Settings.Meteorite.Label.Triangle":	{_:	"Triangle",		en:	"△Triangle",	ja:"△さんかく",	},	//Triangle
 
 		"Settings.Meteorite.Locked":	{
@@ -610,10 +611,19 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"隕石との交戦回数",
 		},
 		"Records.Action.NumMeteoriteEngages.01":{
+			_:	"Teddy Bear Engagements",
+			en:	"Kuma-kun Engagements",
+			ja:	"クマくんとの交戦回数",
+		},
+		"Records.Action.NumMeteoriteEngages.01.Secret":{
+			_:	"???????? Engagements",
+			ja:	"？？？？との交戦回数",
+		},
+		"Records.Action.NumMeteoriteEngages.02":{
 			_:	"△Triangle Engagements",
 			ja:	"△さんかくとの交戦回数",
 		},
-		"Records.Action.NumMeteoriteEngages.01.Secret":{
+		"Records.Action.NumMeteoriteEngages.02.Secret":{
 			_:	"???????? Engagements",
 			ja:	"？？？？との交戦回数",
 		},
@@ -904,12 +914,23 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"隕石を$0回退けた。\nオレンジ色の岩を見送って。",	//
 		},
 
-		//さんかく破壊 Triangle Engagement
+		//クマくん破壊 Kuma-kunEngagement
 		"Achievement.Action.Meteorite01":{
+			_:	"Bear",
+			ja:	"Bear",	//
+		},
+		"Achievement.Action.Meteorite01.Text":{
+			_:	"Rejected teddy bears $0 times.\n",
+			en:	"Rejected Kuma-kun $0 times.\n",
+			ja:	"クマくんを$0回退けた。\n",
+		},
+
+		//さんかく破壊 Triangle Engagement
+		"Achievement.Action.Meteorite02":{
 			_:	"Triple Scales☆☆★",
 			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★
 		},
-		"Achievement.Action.Meteorite01.Text":{
+		"Achievement.Action.Meteorite02.Text":{
 			_:	"Rejected triangles $0 times.\nI'm not afraid to enter atmosphere.",
 			ja:	"さんかくを$0回退けた。\n大気圏突入も怖くない。",	//
 		},
