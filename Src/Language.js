@@ -708,7 +708,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//強打を一定回数 Many Hardblows
 		"Achievement.Blowing.ManyHard":{
-			_:	"ART NEEDS HARD-BLOWS",	//ART NEEDS HAERT BEATS
+			_:	"Art Needs Hard-Brows",	//ART NEEDS HAERT BEATS
+			ja:	"ART NEEDS HARD-BLOWS",	//ART NEEDS HAERT BEATS
 		},
 		"Achievement.Blowing.ManyHard.Text":{
 			_:	"Hardblowed $0 times.\nExperience you have never.",
@@ -717,7 +718,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//強打かつパーフェクト Hardblow And Perfect Aim
 		"Achievement.Blowing.HardAndPerfect":{
-			_:	"Perfect³ Hard☆",
+			_:	"Perfect, Perfect, Perfect Hard",
+			en:	"Perfect³ Hard☆",
 			ja:	"パーフェクトっす³ ハード☆",	//しゅがーはぁとレボリューション
 		},
 		"Achievement.Blowing.HardAndPerfect.Text":{
@@ -776,7 +778,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//火星到達 Mars
 		"Achievement.Check.Mars":{
-			_:	"Echoes on Mars And They Start!",
+			_:	"Echoes on Mars and They Start!",
 			ja:	"マーズに響いてスタート!",	//プリンセスアラモード
 		},
 		"Achievement.Check.Mars.Text":{
@@ -797,7 +799,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//太陽到達 Sun
 		"Achievement.Check.Sun":{
-			_:	"BEYOND THE SUNLIGHT",	//BEYOND THE STARLIGHT
+			_:	"Beyond the Sunlight",	//BEYOND THE STARLIGHT
+			ja:	"BEYOND THE SUNLIGHT",	//BEYOND THE STARLIGHT
 		},
 		"Achievement.Check.Sun.Text":{
 			_:	"Flew the meteorite over $1$2.\nSend farther than anyone else.",
@@ -806,7 +809,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//諸星きらり到達 Kirarin Robot
 		"Achievement.Check.Kirari":{
-			_:	"Kirari, Passed Through The Row of Light",
+			_:	"Kirari, Passed Through the Row of Light",
 			ja:	"キラリ 光の列すり抜けたら",	//Kosmos,Cosmos
 		},
 		"Achievement.Check.Kirari.Text":{
@@ -816,7 +819,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//2.5億km到達 250,000,000km
 		"Achievement.Check.Unicorn":{
-			_:	"Tell Me The Pink Unicorn...",
+			_:	"Tell Me the Pink Unicorn...",
 			ja:	"教えてpink unicorn...",	//教え絵last note...
 		},
 		"Achievement.Check.Unicorn.Text":{
@@ -836,7 +839,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//初プレイ First Play
 		"Achievement.Action.FirstPlay":{
-			_:	"For Save The Earth Crisis",
+			_:	"For Save the Earth Crisis",
 			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
 		},
 		"Achievement.Action.FirstPlay.Text":{
@@ -877,7 +880,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//プレイ時間 Play Time
 		"Achievement.Action.PlayTime":{
-			_:	"In A Long Time",
+			_:	"In a Long Time",
 			ja:	"長い時間の中で",	//思い出をありがとう
 		},
 		"Achievement.Action.PlayTime.Text":{
@@ -917,7 +920,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//隕石（ノーマル）破壊 Meteorite Engagement
 		"Achievement.Action.Meteorite00":{
-			_:	"Like A Meteorite Parade!",
+			_:	"Like a Meteorite Parade!",
 			ja:	"まるで隕石のPARADE!",	//流星PARADE
 		},
 		"Achievement.Action.Meteorite00.Text":{
@@ -927,7 +930,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//クマくん破壊 Kuma-kunEngagement
 		"Achievement.Action.Meteorite01":{
-			_:	"Waltz of The Sky, Wind And Bear",
+			_:	"Waltz of The Sky, Wind and Bear",
 			ja:	"空と風と熊のワルツ",	//空と風と恋のワルツ
 		},
 		"Achievement.Action.Meteorite01.Text":{
@@ -938,7 +941,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//さんかく破壊 Triangle Engagement
 		"Achievement.Action.Meteorite02":{
-			_:	"Triple Scales☆☆★",
+			_:	"Triple Scales",
+			en:	"Triple Scales☆☆★",
 			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★
 		},
 		"Achievement.Action.Meteorite02.Text":{
