@@ -19,7 +19,7 @@ var rc	= (()=>{
 		aimBar			: [ "Aim/aimBar.png",		1,	1,	],	//エイミングゲージ
 		aimValue		: [ "Aim/aimValue.png",		4,	3,	],	//エイミング値
 		hitArea			: [ "Aim/hitArea.png",		1,	4,	],	//ヒット領域
-		meteor			: [ "Actor/meteor.png",		2,	1,	],	//メテオ
+		meteor			: [ "Actor/meteor.png",		2,	2,	],	//メテオ
 		distance		: [ "Text/distance.png",	1,	1,	],	//飛距離表示
 
 		txtLaunch		: [ "Text/txtLaunch.png",	1,	2,	],	//シーン入場テキスト
