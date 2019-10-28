@@ -56,6 +56,8 @@ class _Store{
 				NumRetrys:					{Required:0,	Order:0x0001,	},
 				/** シェア回数 */
 				NumShares:					{Required:0,	Order:0x0002,	},
+				/** シェア回数（好成績） */
+				NumSharesWithSuccessful:	{},
 				/** 実績解除数*/
 				TotalUnlockedAchievements:	{Required:0,	Order:0x0100,	nDecimalDigits:1,	Conv:()=>Store.Convs.GotAchievements(null,true)},
 				NumUnlockedAchievements:[	{Required:0,	Order:0x0104,	Conv:()=>Store.Convs.GotAchievements(0)},

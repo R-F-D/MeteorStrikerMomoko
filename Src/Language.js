@@ -855,13 +855,24 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//結果シェア Share Result
-		"Achievement.Action.Share":{
+		"Achievement.Action.Share01":{
 			_:	"Share Your Result",
 			ja:	"結果をシェアして",	//ドレミファクトリー！
 		},
-		"Achievement.Action.Share.Text":{
+		"Achievement.Action.Share01.Text":{
 			_:	"We post a tweet, tweet, tweet.",
 			ja:	"ツイートツイートツイート 投稿するんだ。",
+		},
+
+		//結果シェア（好成績） Share Result (Successful)
+		"Achievement.Action.Share02":{
+			_:	"See You in My Dream",
+			en:	"See You in My Dream♪",
+			ja:	"夢でおあいしましょう♪",	//デコレーション・ドリ〜ミンッ♪
+		},
+		"Achievement.Action.Share02.Text":{
+			_:	"Shared results $0 times.\n(Requires $1+ $2)\nAll, enjoy yourself!",
+			ja:	"結果を$0回シェアした。（要$1$2以上）\nみんな、思いっきり楽しんでってねー！",
 		},
 
 		//プレイ時間 Play Time

@@ -805,8 +805,10 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.OnButtonUp(()=>{
 				if(!this.isShared){
 					this.isShared	= true;
-					const nShares	= Store.DynamicInsert(Store.Handles.Action.NumShares);
-					Achievement.Unlock(Achievements.Action.Share, nShares);
+					const nShares	= [	Store.DynamicInsert(Store.Handles.Action.NumShares),
+										Store.DynamicInsert(Store.Handles.Action.NumSharesWithSuccessful)	];
+					Achievement.Unlock(Achievements.Action.Share01, nShares[0]);
+					Achievement.Unlock(Achievements.Action.Share02, nShares[1]);
 				}
 				this.labels.navigation.RemoveTempText();
 				cc.sys.openURL( L.Textf("About.Share.Format",[

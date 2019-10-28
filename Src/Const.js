@@ -16,6 +16,9 @@ const C={};
 		{	key:"Unicorn",	distance:256000000,	storage:2,		},
 	];
 
+	/**実績等で成功として扱う距離 */
+	C.SuccessfulLine	= 100000000;
+
 	/** @const ウェブサイトURL */
 	C.WebPage		= "https://r-f-d.github.io/MeteorStriker/";
 	/** @const ドキュメントページURL */
