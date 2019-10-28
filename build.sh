@@ -2,15 +2,15 @@
 
 #Publish Dir
 cp -av Res ./docs
-rm ./doc/Src/game.min.js
-rm ./doc/Src/project.json
+rm ./docs/Src/game.min.js
+rm ./docs/Src/project.json
 
 #Babel
 #mkdir ../Babel/MeteorStriker
 #mkdir ../Babel/MeteorStriker/res
 #cp Frameworks ../Babel/MeteorStriker/
 cp -va index.prod.html ../Babel/MeteorStriker/index.html
-cp -va project.prod.json ../Babel/MeteorStriker/project.json
+cp -va project.json ../Babel/MeteorStriker/
 cp -va .cocos-project.json ../Babel/MeteorStriker/
 babel Main.js -d ../Babel/MeteorStriker/
 babel Src -d ../Babel/MeteorStriker/Src
@@ -19,8 +19,9 @@ babel Src -d ../Babel/MeteorStriker/Src
 cd ../Babel/MeteorStriker
 cocos compile -p web -m release -o ../../MeteorStriker/docs/
 cd ../../MeteorStriker/docs/
-rm ./build.xml
 mv ./game.min.js ./Src/
-mv ./project.json ./Src/
+cp -va ../project.prod.json ./Src/project.json
+rm ./build.xml
+rm ./project.json
 cd ../
 
