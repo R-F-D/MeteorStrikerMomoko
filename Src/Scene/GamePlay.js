@@ -31,9 +31,9 @@ const LinkedLayerTags	= {
 };
 /**隕石設定の情報*/
 const MeteoriteSettings	= {
-	Normal:		{Key:"Normal",		IdxSprite:0,	Storage:Store.Handles.Action.NumMeteoriteEngages[0],	Achievement:Achievements.Action.Meteorite00,	},
-	Bear:		{Key:"Bear",		IdxSprite:2,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	Achievement:Achievements.Action.Meteorite01,	},
-	Triangle:	{Key:"Triangle",	IdxSprite:1,	Storage:Store.Handles.Action.NumMeteoriteEngages[2],	Achievement:Achievements.Action.Meteorite02,	},
+	Normal:		{Key:"Normal",		IdxSprite:0,	SpriteScale:2.0,	Storage:Store.Handles.Action.NumMeteoriteEngages[0],	Achievement:Achievements.Action.Meteorite00,	},
+	Bear:		{Key:"Bear",		IdxSprite:2,	SpriteScale:1.6,	Storage:Store.Handles.Action.NumMeteoriteEngages[1],	Achievement:Achievements.Action.Meteorite01,	},
+	Triangle:	{Key:"Triangle",	IdxSprite:1,	SpriteScale:2.0,	Storage:Store.Handles.Action.NumMeteoriteEngages[2],	Achievement:Achievements.Action.Meteorite02,	},
 };
 /**ナビゲータ情報*/
 const NavigatorSettings	= {
@@ -228,7 +228,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			this.sprites.meteor
 				.SetPosition(this.POSITIONS.METEOR.X+1417,this.POSITIONS.METEOR.Y+256)
-				.SetScale(2).SetVisible(true).SetIndex(this.meteorite.IdxSprite)
+				.SetScale(this.meteorite.SpriteScale).SetVisible(true).SetIndex(this.meteorite.IdxSprite)
 				.RunActions(cc.delayTime(3.0), cc.moveTo(3.0,cc.p(this.POSITIONS.METEOR.X,this.POSITIONS.METEOR.Y)));
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
