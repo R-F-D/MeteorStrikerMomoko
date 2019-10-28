@@ -332,6 +332,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 		if(removeSettings)		Store.RemoveSettings();
 		if(removesRecords)		Store.RemoveAll();
 		if(removesAchievements)	Achievement.RemoveAll();
+		window.location.reload();
 		return this;
 	}
 
