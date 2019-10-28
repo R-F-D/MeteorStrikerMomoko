@@ -916,13 +916,13 @@ var LocalizedTexts	= (()=>{return{
 
 		//クマくん破壊 Kuma-kunEngagement
 		"Achievement.Action.Meteorite01":{
-			_:	"Bear",
-			ja:	"Bear",	//
+			_:	"Waltz of The Sky, Wind And Bear",
+			ja:	"空と風と熊のワルツ",	//空と風と恋のワルツ
 		},
 		"Achievement.Action.Meteorite01.Text":{
-			_:	"Rejected teddy bears $0 times.\n",
-			en:	"Rejected Kuma-kun $0 times.\n",
-			ja:	"クマくんを$0回退けた。\n",
+			_:	"Rejected teddy bears $0 times.\n(N-No!)",
+			en:	"Rejected Kuma-kun $0 times.\n(N-No!)",
+			ja:	"クマくんを$0回退けた。\n（だっ だめ…！）",
 		},
 
 		//さんかく破壊 Triangle Engagement
