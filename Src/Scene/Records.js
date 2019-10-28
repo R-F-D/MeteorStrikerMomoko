@@ -387,6 +387,15 @@ Scene.Records	= class extends Scene.SceneBase {
 		};
 	}
 
+	OnUiLayerCreate(layer){
+		super.OnUiLayerCreate(layer);
+
+		//チャプタインジケータの画像変更
+		this.pageNavigator.chapterIndicators[0].SetIndex(4);
+		this.pageNavigator.chapterIndicators[1].SetIndex(5);
+		return this;
+	}
+
 }//class
 
 })();	//File Scope
