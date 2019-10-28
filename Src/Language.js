@@ -67,8 +67,8 @@ var LocalizedTexts	= (()=>{return{
 
 		//ヘルプボタン Help Button
 		"Title.Button.Help":{
-			_:	"How to play.",
-			ja:	"ゲームの遊び方",
+			_:	"How to play, and so on.",
+			ja:	"ゲームの遊び方など",
 		},
 
 		//設定ボタン Settings Button
