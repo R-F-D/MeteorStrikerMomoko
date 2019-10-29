@@ -891,11 +891,21 @@ var LocalizedTexts	= (()=>{return{
 		//起動日数 Booting Days
 		"Achievement.Action.BootDays":{
 			_:	"\"Tadaima\"",
-			ja:	"「ただいま」",	////HOME, SWEET FRIENDSHIP
+			ja:	"「ただいま」",	// HOME, SWEET FRIENDSHIP
 		},
 		"Achievement.Action.BootDays.Text":{
 			_:	"Booted the game for $0 days.\nFeel like a home game...",
 			ja:	"$0日間ゲームを起動した。\nFeel like a home game...",
+		},
+
+		//最終起動日からの時間経過
+		"Achievement.Action.DaysPassed":{
+			_:	"I Haven't Seen You Before...!",
+			ja:	"見ない顔ですねぇ…！",	//小宮果穂
+		},
+		"Achievement.Action.DaysPassed.Text":{
+			_:	"$0 days passed since the last booting,\nor started for $1 days in total\nMOMOKO...SAVES MANY WORLDS A LOT!",
+			ja:	"最後に起動してから$0日が経過、\nもしくは$1日間ゲームを起動した。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
 		},
 
 		//月曜日または9時台に起動
