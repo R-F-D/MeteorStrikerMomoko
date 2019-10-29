@@ -305,7 +305,7 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Locale.Label._":	{_:	"Universal",},			//Universal
 		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
 		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
-		"Settings.Locale.Label.tw":	{_:	"繁體中文\nT.Chinese",},//Traditional Chinese
+		"Settings.Locale.Label.tw":	{_:	"繁體中文\nTrad Chinese",},//Traditional Chinese
 		"Settings.Locale.Label.ko":	{_:	"한국\nKorean",},		//Korea
 
 		"Settings.Locale.Aleart":{	//Message When Switch Language
