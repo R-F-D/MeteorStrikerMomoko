@@ -39,7 +39,7 @@ var LocalizedTexts	= (()=>{return{
 		"Unit.Aim":		{_:"%", },					//エイミング精度の単位 Aim
 		"Unit.Blow":	{_:"%", },					//打撃倍率の単位 Charge
 		"Unit.Emit":	{_:"%", },					//エミット倍率の単位 Emit
-		"Unit.Counter":	{_:"$0", ja:"$0回",	tw:"次", ko:"회",},		//Records>カウンタの単位（デフォルト） Records > Counter(Default)
+		"Unit.Counter":	{_:"$0", ja:"$0回",	tw:"$0次", ko:"$0 회",},		//Records>カウンタの単位（デフォルト） Records > Counter(Default)
 
 	//----------------------------------------
 	// タイトル画面
