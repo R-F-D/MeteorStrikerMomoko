@@ -894,8 +894,8 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"「ただいま」",	// HOME, SWEET FRIENDSHIP
 		},
 		"Achievement.Action.BootDays.Text":{
-			_:	"Booted the game for $0 days.\nFeel like a home game...",
-			ja:	"$0日間ゲームを起動した。\nFeel like a home game...",
+			_:	"Booted the game a total of $0 days.\nFeel like a home game...",
+			ja:	"計$0日間ゲームを起動した。\nFeel like a home game...",
 		},
 
 		//最終起動日からの時間経過
@@ -904,8 +904,8 @@ var LocalizedTexts	= (()=>{return{
 			ja:	"見ない顔ですねぇ…！",	//小宮果穂
 		},
 		"Achievement.Action.DaysPassed.Text":{
-			_:	"$0 days passed since the last booting,\nor started for $1 days in total\nMOMOKO...SAVES MANY WORLDS A LOT!",
-			ja:	"最後に起動してから$0日が経過、\nもしくは$1日間ゲームを起動した。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
+			_:	"$0 days passed since the last booting,\nor started a total of $1 days.\nMOMOKO...SAVES MANY WORLDS A LOT!",
+			ja:	"最後に起動してから$0日が経過、\nもしくは計$1日間ゲームを起動した。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
 		},
 
 		//月曜日または9時台に起動
