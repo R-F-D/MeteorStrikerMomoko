@@ -17,9 +17,11 @@ const LinkedLayerTags	= {
 /** 選択肢の個別設定 */
 const OptionSettings	= {
 	Locale:[
-		{	Tag:Locale.UniversalCode,	OnSelected:()=>{L.ApplyPreset(Locale.UniversalCode)},	},
-		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en")},					},
-		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja")},					},
+		{	Tag:Locale.UniversalCode,	OnSelected:()=>{L.ApplyPreset(Locale.UniversalCode,true)},	},
+		{	Tag:"en",					OnSelected:()=>{L.ApplyPreset("en",true)},					},
+		{	Tag:"ja",					OnSelected:()=>{L.ApplyPreset("ja",false)},					},
+		{	Tag:"tw",					OnSelected:()=>{L.ApplyPreset("tw",true)},					},
+		{	Tag:"ko",					OnSelected:()=>{L.ApplyPreset("ko",true)},					},
 	],
 	SfxVolume:[
 		{	Tag:"0",					OnSelected:Store.Handles.Settings.SfxVolume,	},

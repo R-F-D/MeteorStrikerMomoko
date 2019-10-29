@@ -164,13 +164,19 @@ var LocalizedTexts,NumericSeparators;
 
 	/** プリセット適用
 	 * @param {string} [key=Locale.UniversalCode]
+	 * @param {boolean} [alerts=false]
 	 * @returns
 	 */
-	ApplyPreset(key=Locale.UniversalCode){
+	ApplyPreset(key=Locale.UniversalCode,alerts=false){
 		const preset	= this.GetPreset(key);
 		this.language			= preset.language;
 		this.numericSeparation	= preset.numericSeparation;
 		this.Save();
+
+		if(alerts){
+			const mes	= L.Text("Settings.Locale.Aleart");
+			if(mes)	alert(mes);
+		}
 		return this;
 	}
 
@@ -187,6 +193,8 @@ const LocalePresets	= {
 	_	:{	language:Locale.UniversalCode,	numericSeparation:Locale.UniversalCode,	},
 	en	:{	language:"en",	numericSeparation:"en",	},
 	ja	:{	language:"ja",	numericSeparation:"ja",	},
+	tw	:{	language:"tw",	numericSeparation:"tw",	},
+	ko	:{	language:"ko",	numericSeparation:"ko",	},
 };
 
 
