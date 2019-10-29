@@ -310,10 +310,10 @@ var LocalizedTexts	= (()=>{return{
 
 		"Settings.Locale.Aleart":{	//Message When Switch Language
 			_:	"Sorry.\nThe texts are machine translated.",
-			en:	"Sorry.\nThe texts are machine translated.",
+			en:	"Sorry.\nThe texts are machine translated.\n\nPlease send me your translation!",
 			//ja: No alert
-			tw:	"抱歉。\n這些文本是機器翻譯的。\n現在，大多數文本都未翻譯。",
-			ko:	"죄송합니다.\n텍스트는 기계 번역됩니다.\n이제 대부분의 텍스트가 번역되지 않았습니다.",
+			tw:	"抱歉。\n這些文本是機器翻譯的。\n現在，大多數文本都未翻譯。\n請給我您的翻譯！",
+			ko:	"죄송합니다.\n텍스트는 기계 번역됩니다.\n이제 대부분의 텍스트가 번역되지 않았습니다.\n번역을 보내주세요!",
 		},
 
 		//SFX音量設定 Sound Effect Volume
