@@ -144,7 +144,7 @@ class _Store{
 			Store._SetItem(handle.Key,value);
 			//成功時コールバック
 			if(resolve)	{
-				const result = resolve(handle.Key,value);
+				const result = resolve(handle.Key,value,oldValue);
 				return result===undefined ? value : result;	//コールバック関数が実行された場合は戻り値を返す（undefinedを除く）
 			}
 			return value;
