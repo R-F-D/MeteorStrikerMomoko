@@ -541,7 +541,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				//初プレイ実績
 				const nPlays	= Store.DynamicInsert(Store.Handles.Action.NumPlays);
 				Achievement.Unlock(Achievements.Action.FirstPlay,nPlays);
-				//隕石交戦回数実績
+				//隕石エンゲージ回数実績
 				const nEngages	= Store.DynamicInsert(this.meteorite.Storage);
 				Achievement.Unlock(this.meteorite.Achievement,nEngages);
 				//ナビ実績

@@ -773,32 +773,32 @@ var LocalizedTexts	= (()=>{return{
 		//各隕石エンゲージ回数 Number of Meteorite Engagements
 		"Records.Action.NumMeteoriteEngages.00":{
 			_:	"Meteorite Engagements",
-			ja:	"隕石との交戦回数",
+			ja:	"隕石とのエンゲージ回数",
 			tw:	"",
 			ko:	"",
 		},
 		"Records.Action.NumMeteoriteEngages.01":{
 			_:	"Teddy Bear Engagements",
 			en:	"Kuma-kun Engagements",
-			ja:	"クマくんとの交戦回数",
+			ja:	"クマくんとのエンゲージ回数",
 			tw:	"",
 			ko:	"",
 		},
 		"Records.Action.NumMeteoriteEngages.01.Secret":{
 			_:	"???????? Engagements",
-			ja:	"？？？？との交戦回数",
+			ja:	"？？？？とのエンゲージ回数",
 			tw:	"",
 			ko:	"",
 		},
 		"Records.Action.NumMeteoriteEngages.02":{
 			_:	"△Triangle Engagements",
-			ja:	"△さんかくとの交戦回数",
+			ja:	"△さんかくとのエンゲージ回数",
 			tw:	"",
 			ko:	"",
 		},
 		"Records.Action.NumMeteoriteEngages.02.Secret":{
 			_:	"???????? Engagements",
-			ja:	"？？？？との交戦回数",
+			ja:	"？？？？とのエンゲージ回数",
 			tw:	"",
 			ko:	"",
 		},
