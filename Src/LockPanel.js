@@ -32,7 +32,9 @@ LockPanel = class LockPanel extends Button{
 				.SetVisible(false);
 
 			panel.description	= Label.CreateInstance(11)
-				.AddToLayer(panel.label.entity)
+				.AddToLayer(panel.node)
+
+
 				.SetVisible(false);
 
 				panel.SetLocked(true);
@@ -66,9 +68,9 @@ LockPanel = class LockPanel extends Button{
 			panel
 				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
 								panel.selector.area.y +PanelAdjust.y	);
-
-			const cSize = panel.label.entity.getContentSize();
-			panel.description.SetPosition(cSize.width/2,-cSize.height/2);
+			panel.description
+				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
+								panel.selector.area.y +PanelAdjust.y-20	);
 
 			if(!panel.isLocked){
 				panel.label.entity.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );

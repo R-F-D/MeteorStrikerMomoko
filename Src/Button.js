@@ -170,6 +170,7 @@ class ButtonItem{
 	 * @memberof ButtonItem
 	 */
 	constructor(container){
+		this.node		= new cc.Node();
 		this.sprite		= null;
 		this.label		= null;
 		this.container	= container;
@@ -199,11 +200,13 @@ class ButtonItem{
 	AddToLayer(layer){
 		if(!layer)	return this;
 		this.layer	= layer;
-		if(!this.sprite)	return this;
 
-		this.sprite.entity.removeFromParent();
-		layer.addChild(this.sprite.entity);
-		this.Apply();
+		if(!this.node)	return this;
+		this.node.removeFromParent();
+		this.container.layer.addChild(this.node);
+
+		if(this.sprite)	this.sprite.AddToLayer(this.node);
+		if(this.label)	this.label.AddToLayer(this.node);
 		return this;
 	}
 
@@ -219,21 +222,20 @@ class ButtonItem{
 	}
 
 	Apply(){
+
 		if(this.sprite){
 			this.sprite
-				.AddToLayer(this.container.layer)
 				.Attr({zIndex:this.Z})
 				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
 				.SetOpacity(this.opacity);
 		}
 		if(this.label){
 			this.label
-				.AddToLayer(this.container.layer)
 				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
 				.SetVisible(this.isVisible);
 		}
 
-		this._ApplyEvents();
+		this.AddToLayer(this.layer)._ApplyEvents();
 		return this;
 	}
 
