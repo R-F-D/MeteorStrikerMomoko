@@ -261,7 +261,7 @@ class ButtonItem{
 
 	Attr(attributes){
 		if(this.sprite)	this.sprite.Attr(attributes);
-		if(this.label)	this.label.entity.attr(attributes);
+		if(this.label)	this.label.Attr(attributes);
 		return this;
 	}
 
@@ -378,7 +378,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacityOnHover,false,true)
 							.SetColor(this.colorOnHover,false,true)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					else{
 						if(this.isEnabled && this.listeners.onMouseOut)	this.listeners.onMouseOut();
@@ -386,7 +386,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					this._ApplyIndex();
 				}
@@ -453,7 +453,7 @@ class ButtonItem{
 						this.SetOpacity(this.opacity,true,false)
 							.SetColor(this.color,true,false)
 							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.entity.RunActions(cc.scaleTo(0.2,this.scale));
+						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
 						if(this.isEnabled && this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
 				},

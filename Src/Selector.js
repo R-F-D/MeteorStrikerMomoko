@@ -294,7 +294,7 @@ var Selector	= class Selector{
 
 	Attr(attributes){
 		if(this.buttons)	this.buttons.forEach(b=>b.Attr(attributes));
-		if(this.caption)	this.caption.entity.attr(attributes);
+		if(this.caption)	this.caption.Attr(attributes);
 		return this;
 	}
 

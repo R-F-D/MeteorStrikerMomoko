@@ -32,7 +32,7 @@ Label	= class Label{
 		this.forcedPushesToLog	= true;
 
 		this.entity	= cc.LabelTTF.create(text, typeof font=='string'?font:font.Family, fontSize);
-		this.entity.attr({zIndex:this.Z});
+		this.Attr({zIndex:this.Z});
 
 		//アイコン
 		this.icon	= null;
@@ -115,7 +115,7 @@ Label	= class Label{
 		}
 		//背景アニメーション中はテキストを表示しない
 		if(!this.bg.IsRunningActions()){
-			this.entity.attr({opacity:255});
+			this.Attr({opacity:255});
 		}
 
 		let isDirty		= false;
@@ -257,7 +257,7 @@ Label	= class Label{
 		}
 
 		if(this.bg.IsEnabled()){
-			this.entity.attr({opacity:0});
+			this.Attr({opacity:0});
 			this.bg.SetSize(true,undefined,undefined, (!hidesIfEmpty || text!="") );
 		}
 
@@ -398,6 +398,16 @@ Label	= class Label{
 		if(this.bg.IsEnabled())	this.bg.entity.setAnchorPoint(cc.p(x,y));
 		if(this.icon)	this.icon.entity.setAnchorPoint(1.0, y);
 
+		return this;
+	}
+
+	Attr(attributes){
+		this.entity.attr(attributes);
+		return this;
+	}
+
+	RunActions(...actions){
+		this.entity.RunActions(...actions);
 		return this;
 	}
 

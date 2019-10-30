@@ -73,7 +73,7 @@ LockPanel = class LockPanel extends Button{
 								panel.selector.area.y +PanelAdjust.y-20	);
 
 			if(!panel.isLocked){
-				panel.label.entity.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
+				panel.label.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
 			}
 
 			return this;
@@ -93,7 +93,7 @@ LockPanel = class LockPanel extends Button{
 					.SetLabelColor("800000","#FFE0C0",1)
 					.SetColorOnHover([0xFF,0xA0,0x00])
 					.OnTouchBegan(()=>{
-						this.label.entity.RunActions( cc.scaleTo(0.5,0) );
+						this.label.RunActions( cc.scaleTo(0.5,0) );
 						this.sprite
 							.RunActions(
 								cc.scaleTo(0.5,0),
