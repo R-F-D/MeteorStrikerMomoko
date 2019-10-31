@@ -226,12 +226,12 @@ class ButtonItem{
 		if(this.sprite){
 			this.sprite
 				.Attr({zIndex:this.Z})
-				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+				.SetPosition(null,null,this.polaerAngle,this.polarRadius)
 				.SetOpacity(this.opacity);
 		}
 		if(this.label){
 			this.label
-				.SetPosition(this.container.x+this.x,this.container.y+this.y,this.polaerAngle,this.polarRadius)
+				.SetPosition(null,null,this.polaerAngle,this.polarRadius)
 				.SetVisible(this.isVisible);
 		}
 
@@ -245,6 +245,8 @@ class ButtonItem{
 		this.y				= y!=null	? y	: this.y;
 		this.polaerAngle	= a!=null	? a	: this.polaerAngle;
 		this.polarRadius	= r!=null	? r	: this.polarRadius;
+
+		this.node.setPosition(this.container.x+this.x, this.container.y+this.y)
 		return this.Apply();
 	}
 	/**相対座標を設定*/

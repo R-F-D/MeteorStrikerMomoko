@@ -65,12 +65,8 @@ LockPanel = class LockPanel extends Button{
 			panel.SetVisible(true).SetLabelText(texts[0]);
 			panel.description.SetVisible(true).SetString(texts[1]);
 
-			panel
-				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
-								panel.selector.area.y +PanelAdjust.y	);
-			panel.description
-				.SetPosition(	panel.selector.area.x +PanelAdjust.x,
-								panel.selector.area.y +PanelAdjust.y-20	);
+			panel.SetPosition( panel.selector.area.x +PanelAdjust.x,	panel.selector.area.y +PanelAdjust.y	);
+			panel.description.SetPosition(0,-20);
 
 			if(!panel.isLocked){
 				panel.label.RunActions( [null,cc.fadeTo(0.5,64),cc.fadeTo(0,255)] );
