@@ -383,12 +383,17 @@ Scene.SceneBase	= class {
 
 		//起動日数実績
 		Store.Insert(	Store.Handles.Action.LastStartDay,	Scene.SceneBase._startAt.ToEpochDay(),	Store.Conds.NewValueIsGreater,	(h,val,oldval)=>{
-							const nDays			= Store.DynamicInsert(Store.Handles.Action.NumBootingDays);
+							const today		= Number(val);
+							const lastDay	= Number(oldval);
+
+							//合計起動日数
+							const nDays		= Store.DynamicInsert(Store.Handles.Action.NumBootingDays);
 							Achievement.Unlock(Achievements.Action.BootDays, nDays);
 
 							//最終起動日からの経過日数
-							const lastDay	= Number(oldval);
-							if(lastDay>0)	Achievement.Unlock(Achievements.Action.DaysPassed, Math.max(Number(val)-lastDay,nDays));
+							const nConsecutiveDays	= today-lastDay==1	? Store.DynamicInsert(Store.Handles.Action.NumConsecutiveBootingDays)
+																		: Store.Insert(Store.Handles.Action.NumConsecutiveBootingDays,1,null);
+							if(lastDay>0)	Achievement.Unlock(Achievements.Action.DaysPassed, Math.max(nConsecutiveDays,nDays));
 						});
 
 		//実行時間

@@ -45,7 +45,7 @@ var Achievements = (()=>{		//Achievements scoop
 		Share02			:{	IsPublic:true,	Count:3,	Order:0x1001,	Rank:0,	Replacements:[C.SuccessfulLine,()=>L.Text("Unit.Distance")],},	//シェア（好成績）
 		PlayTime		:{	IsPublic:true,	Count:765,	Order:0x1002,	Rank:0,	Replacements:[],	},	//プレイ時間
 		BootDays		:{	IsPublic:true,	Count:5,	Order:0x2000,	Rank:1,	Replacements:[],	},	//起動日数
-		DaysPassed		:{	IsPublic:true,	Count:7,	Order:0x2001,	Rank:0,	Replacements:[7],	},	//最終起動日からの経過日数
+		DaysPassed		:{	IsPublic:true,	Count:5,	Order:0x2001,	Rank:0,	Replacements:[5],	},	//最終起動日からの経過日数
 		Monday9			:{	IsPublic:true,	Count:1,	Order:0x2002,	Rank:0,	Replacements:[],	},	//月曜日または9時台に起動
 		Navigate00		:{	IsPublic:true,	Count:9,	Order:0x8000,	Rank:0,	Replacements:[],	},	//ナビ回数・ノーマル
 		Navigate01		:{	IsPublic:false,	Count:5,	Order:0x8001,	Rank:0,	Replacements:[],	},	//ナビ回数・ゴーレム

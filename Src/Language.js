@@ -1175,8 +1175,8 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Achievement.Action.DaysPassed.Text":{
-			_:	"$0 days passed since the last booting,\nor started a total of $1 days.\nMOMOKO...SAVES MANY WORLDS A LOT!",
-			ja:	"最後に起動してから$0日が経過、\nもしくは計$1日間ゲームを起動した。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
+			_:	"$0 days passed since the last booting\n(or started $1 consecutive days).\nMOMOKO...SAVES MANY WORLDS A LOT!",
+			ja:	"最後に起動してから$0日が経過した\n（連続$1日間の起動でも可）。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
 			tw:	"",
 			ko:	"",
 		},

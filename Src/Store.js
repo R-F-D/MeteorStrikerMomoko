@@ -66,8 +66,10 @@ class _Store{
 											{Required:0,	Order:0x0101,	Conv:()=>Store.Convs.GotAchievements(3)},		],
 				/** 起動回数 */
 				NumBootings:				{Required:0,	Order:0x0010,	},
-				/** 起動回数（1日1カウントまで） */
+				/** 起動日数 */
 				NumBootingDays:				{},
+				/** 連続起動日数（1日1カウントまで） */
+				NumConsecutiveBootingDays:	{},
 				/** 初めて起動した時刻 */
 				FirstStartAt:				{},
 				/** 最後に起動した時刻 */
