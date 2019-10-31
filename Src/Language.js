@@ -268,16 +268,16 @@ var LocalizedTexts	= (()=>{return{
 		//ロックパネル（ロック時） Locked
 		"Settings.LockPanel.Locked": {
 			_:	"This selector is locked.",
-			ja:	"この項目はロックされています。",
-			tw:	"",
-			ko:	"",
+			ja:	"この項目はロックされています",
+			tw:	"該選擇器已鎖定",
+			ko:	"이 선택기가 잠겨 있습니다.",
 		},
 		//ロックパネル（解除可能時） Unlock-able
 		"Settings.LockPanel.Breakable": {
 			_:	"Click/Tap here.",
-			ja:	"クリック/タップしてください。",
-			tw:	"",
-			ko:	"",
+			ja:	"クリック/タップしてください",
+			tw:	"請點擊此處",
+			ko:	"여기를 클릭/탭하 십시오.",
 		},
 		//ロックパネルの解除条件 Conditions of unlocking
 		"Settings.LockPanel.Cond": {
@@ -299,14 +299,14 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Locale":	{
 			_:	"Language",
 			ja:	"言語",
-			tw:	"",
-			ko:	"",
+			tw:	"語言",
+			ko:	"언어",
 		},
-		"Settings.Locale.Label._":	{_:	"Universal",},			//Universal
-		"Settings.Locale.Label.en":	{_:	"English",},			//English-Speaking Countries
-		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},	//Japan
-		"Settings.Locale.Label.tw":	{_:	"繁體中文\nTrad Chinese",},//Traditional Chinese
-		"Settings.Locale.Label.ko":	{_:	"한국\nKorean",},		//Korea
+		"Settings.Locale.Label._":	{_:	"Universal",},				//Universal
+		"Settings.Locale.Label.en":	{_:	"English",},				//English-Speaking Countries
+		"Settings.Locale.Label.ja":	{_:	"日本語\nJapanese",},		//Japan
+		"Settings.Locale.Label.tw":	{_:	"繁體中文\nTrad Chinese",},	//Traditional Chinese
+		"Settings.Locale.Label.ko":	{_:	"한국\nKorean",},			//Korea
 
 		"Settings.Locale.Aleart":{	//Message When Switch Language
 			_:	"Sorry.\nThe texts are machine translated.",
@@ -320,40 +320,40 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.SfxVolume":	{
 			_:	"SFX Volume",
 			ja:	"効果音音量",
-			tw:	"",
-			ko:	"",
+			tw:	"音效音量",
+			ko:	"효과음 볼륨",
 		},
-		"Settings.SfxVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	tw:"",	ko:"",	},	//Volume 0%(Off)
-		"Settings.SfxVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		tw:"",	ko:"",	},	//Volume 20%
-		"Settings.SfxVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	tw:"",	ko:"",	},	//Volume 40%
-		"Settings.SfxVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	tw:"",	ko:"",	},	//Volume 60%
-		"Settings.SfxVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	tw:"",	ko:"",	},	//Volume 80%
-		"Settings.SfxVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	tw:"",	ko:"",	},	//Volume 100%(Max)
+		"Settings.SfxVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	tw:"靜音",	ko:"끄기",	},	//Volume 0%(Off)
+		"Settings.SfxVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		tw:"♪",		ko:"♪",		},	//Volume 20%
+		"Settings.SfxVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	tw:"♪♪",	ko:"♪♪",	},	//Volume 40%
+		"Settings.SfxVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	tw:"♪♪♪",	ko:"♪♪♪",	},	//Volume 60%
+		"Settings.SfxVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	tw:"♪♪♪♪",	ko:"♪♪♪♪",	},	//Volume 80%
+		"Settings.SfxVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	tw:"♪♪♪♪♪",	ko:"♪♪♪♪♪",	},	//Volume 100%(Max)
 
 		//BGM音量設定 Background Music Volume
 		"Settings.BgmVolume":	{
 			_:	"Music Volume",
 			ja:	"BGM音量",
-			tw:	"",
-			ko:	"",
+			tw:	"背景音樂音量",
+			ko:	"배경 음악 볼륨",
 		},
-		"Settings.BgmVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	tw:"",	ko:"",	},	//Volume 0%(Off)
-		"Settings.BgmVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		tw:"",	ko:"",	},	//Volume 20%
-		"Settings.BgmVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	tw:"",	ko:"",	},	//Volume 40%
-		"Settings.BgmVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	tw:"",	ko:"",	},	//Volume 60%
-		"Settings.BgmVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	tw:"",	ko:"",	},	//Volume 80%
-		"Settings.BgmVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	tw:"",	ko:"",	},	//Volume 100%(Max)
+		"Settings.BgmVolume.Label.0":	{_: "0",	en:"Off",	ja:"なし",	tw:"靜音",	ko:"",		},	//Volume 0%(Off)
+		"Settings.BgmVolume.Label.1":	{_:	"1",	en:"♪",		ja:"♪",		tw:"♪",		ko:"♪",		},	//Volume 20%
+		"Settings.BgmVolume.Label.2":	{_:	"2",	en:"♪♪",	ja:"♪♪",	tw:"♪♪",	ko:"♪♪",	},	//Volume 40%
+		"Settings.BgmVolume.Label.3":	{_:	"3",	en:"♪♪♪",	ja:"♪♪♪",	tw:"♪♪♪",	ko:"♪♪♪",	},	//Volume 60%
+		"Settings.BgmVolume.Label.4":	{_:	"4",	en:"♪♪♪♪",	ja:"♪♪♪♪",	tw:"♪♪♪♪",	ko:"♪♪♪♪",	},	//Volume 80%
+		"Settings.BgmVolume.Label.5":	{_:	"5",	en:"♪♪♪♪♪",	ja:"♪♪♪♪♪",	tw:"♪♪♪♪♪",	ko:"♪♪♪♪♪",	},	//Volume 100%(Max)
 
 		//隕石設定 Meteorite
 		"Settings.Meteorite":	{
 			_:	"Meteorite",
 			ja:	"隕石",
-			tw:	"",
-			ko:	"",
+			tw:	"隕石",
+			ko:	"운석",
 		},
-		"Settings.Meteorite.Label.Normal":		{_:	"Meteorite",						ja:"隕石",		tw:"",	ko:"",	},	//Meteorite
-		"Settings.Meteorite.Label.Bear":		{_:	"Teddy Bear",	en:	"Kuma-kun",		ja:"クマくん",	tw:"",	ko:"",	},	//Kuma-kun
-		"Settings.Meteorite.Label.Triangle":	{_:	"Triangle",		en:	"△Triangle",	ja:"△さんかく",	tw:"",	ko:"",	},	//Triangle
+		"Settings.Meteorite.Label.Normal":		{_:"Meteorite",		en:"Meteorite",		ja:"隕石",			tw:"隕石",		ko:"운석",		},	//Meteorite
+		"Settings.Meteorite.Label.Bear":		{_:"Teddy Bear",	en:"Kuma-kun",		ja:"クマくん",		tw:"熊kun",		ko:"쿠마쿤",	},	//Kuma-kun
+		"Settings.Meteorite.Label.Triangle":	{_:"Triangle",		en:"△Triangle",    ja:"△さんかく",	  tw:"△三角",    ko:"△삼각",	},	//Triangle
 
 		"Settings.Meteorite.Locked":	{
 			_:	"Unlocking achievement \"Momoko Dakedo.\"",
@@ -366,12 +366,12 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Navigator":	{
 			_:	"Navigator",
 			ja:	"ナビゲーター",
-			tw:	"",
-			ko:	"",
+			tw:	"導航者",
+			ko:	"항해자",
 		},
-		"Settings.Navigator.Label.Normal":	{_:	"NAKATANI\nIku",			ja:"中谷育",				tw:"中谷育",	ko:"나카타니\n이쿠.",	},	//Iku
-		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	tw:"",	ko:"",	},	//Golem
-		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			tw:"",	ko:"",	},	//Goddess
+		"Settings.Navigator.Label.Normal":	{_:	"NAKATANI\nIku",			ja:"中谷育",				tw:"中谷育",		ko:"나카타니\n이쿠.",	},	//Iku
+		"Settings.Navigator.Label.Golem":	{_:	"First\nFriend",			ja:"初めての\nともだち",	tw:"第一個朋友",	ko:"첫 친구",			},	//Golem
+		"Settings.Navigator.Label.Goddess":	{_:	"Goddess of\nThe Earth",	ja:"大地の女神",			tw:"大地女神",		ko:"대지의 여신",		},	//Goddess
 
 		"Settings.Navigator.Locked":	{
 			_:	"Saving the Earth 5 times",
@@ -384,13 +384,13 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Storage":	{
 			_:	"Storage Management",
 			ja:	"ストレージ管理",
-			tw:	"",
-			ko:	"",
+			tw:	"倉儲管理",
+			ko:	"스토리지 관리",
 		},
-		"Settings.Storage.Label.RemoveSettings":	{_:	"Remove\nSettings",		ja:"設定の削除",	tw:"",	ko:"",	},	//Remove settings
-		"Settings.Storage.Label.RemoveRecords":		{_:	"Remove\nRecords",		ja:"記録の削除",	tw:"",	ko:"",	},	//Remove records
-		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	tw:"",	ko:"",	},	//Remove achievements
-		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		tw:"",	ko:"",	},	//Remove all data
+		"Settings.Storage.Label.RemoveSettings":	{_:	"Remove\nSettings",		ja:"設定の削除",	tw:"移除設定",	ko:"설정 제거",	},	//Remove settings
+		"Settings.Storage.Label.RemoveRecords":		{_:	"Remove\nRecords",		ja:"記録の削除",	tw:"移除記錄",	ko:"기록 제거",	},	//Remove records
+		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	tw:"移除成就",	ko:"과제 제거",	},	//Remove achievements
+		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		tw:"全部移除",	ko:"전체 제거",	},	//Remove all data
 
 		"Settings.Storage.Confirm.RemoveSettings":{		//Confirm: Remove settings
 			_:	"Are you sure you want to remove the game settings?",
