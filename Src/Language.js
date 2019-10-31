@@ -820,10 +820,10 @@ var LocalizedTexts	= (()=>{return{
 
 		//ツイート文字列 Tweet Text
 		"About.Share.Text":{
-			_:	"Momoko flew the meteorite to $0 $1 away!",
+			_:	"Momoko flew the meteorite to $0$1 away!",
 			ja:	"桃子ちゃんは隕石を$0$1吹っ飛ばしました！",
-			tw:	"",
-			ko:	"",
+			tw:	"桃子飛行了隕石$0$1！",
+			ko:	"모모코는 운석을 $0$1 떨어 뜨 렸습니다!",
 		},
 
 		//タグ Tag
@@ -1035,7 +1035,7 @@ var LocalizedTexts	= (()=>{return{
 		},
 		"Achievement.Check.Sun.Text":{
 			_:	"Flew the meteorite over $1$2.\nSend farther than anyone else.",
-			ja:	"隕石を$1$2以上吹っ飛ばした\n誰よりも飛ばせ。",
+			ja:	"隕石を$1$2以上吹っ飛ばした。\n誰よりも飛ばせ。",
 			tw:	"",
 			ko:	"",
 		},
@@ -1072,8 +1072,8 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Action.Complete":{
 			_:	"Special Meteor Strike!",
 			ja:	"必殺のメテオストライク!",	//必殺のメテオストライク！ 周防桃子
-			tw:	"",
-			ko:	"",
+			tw:	"必殺流星罷工!",
+			ko:	"필살의 미티어 스트라이크!",
 		},
 		"Achievement.Action.Complete.Text":{
 			_:	"Unlocked all achievements.\nThe meteorite was KO in one!",
