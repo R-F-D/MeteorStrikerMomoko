@@ -843,30 +843,30 @@ var LocalizedTexts	= (()=>{return{
 		//実績解除ラベル Label of Unlocking
 		"Achievement.Unlocked" :{
 			_:	"Achievement Unlocked!",
-			ja:	"実績解除!",
-			tw:	"",
-			ko:	"",
+			ja:	"実績解除！",
+			tw:	"成就解鎖！",
+			ko:	"과제 해제！",
 		},
 
 		//シークレット項目 Secret
 		"Achievement.Secret":{
 			_:	"??????????",
 			ja:	"？？？？？",
-			tw:	"",
-			ko:	"",
+			tw:	"？？？？？",
+			ko:	"？？？？？",
 		},
 		"Achievement.Secret.Text":{
 			_:	"?????????? ??????????",
 			ja:	"？？？？？？？？？？",
-			tw:	"",
-			ko:	"",
+			tw:	"？？？？？？？？？？",
+			ko:	"？？？？？？？？？？",
 		},
 
 		//パーフェクト一定回数 Many Perfect Blows
 		"Achievement.Aiming.ManyPerfect":{
 			_:	"Perfect Sun",
 			ja:	"パーフェクトサン",	//パーフェクトサン
-			tw:	"",
+			tw:	"Perfect Sun",
 			ko:	"",
 		},
 		"Achievement.Aiming.ManyPerfect.Text":{
@@ -938,8 +938,8 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"L’ANTICA!",
 		},
 		"Achievement.Blowing.SuccessiveHits.Text":{
-			_:	"Hit $0 times in a row without failure.\nInto Perpetual Hit Machines, ",
-			ja:	"失敗せず$0回連続でヒットさせた。\n永久ヒットにしてゆくよ。",
+			_:	"Hit $0 times in a row without failure.\nInto Perpetual Hit Machines, L’ANTICA!",
+			ja:	"失敗せず$0回連続でヒットさせた。\n永久ヒットにしてゆくよ。\"安定化\"",
 			tw:	"",
 			ko:	"",
 		},
@@ -948,8 +948,8 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Emit.Many01":{
 			_:	"Gentle Emt",
 			ja:	"ジェントルエミット",	//オーバーマスター
-			tw:	"",
-			ko:	"",
+			tw:	"Gentle放行",
+			ko:	"젠틀 에밋",
 		},
 		"Achievement.Emit.Many01.Text":{
 			_:	"Emitted $0$1 and more.\nNo such the theill-less emittings...",
@@ -962,8 +962,8 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Emit.Many02":{
 			_:	"Wild Emit",
 			ja:	"ワイルドエミット",	//オーバーマスター
-			tw:	"",
-			ko:	"",
+			tw:	"Wild放行",
+			ko:	"와일드 에밋",
 		},
 		"Achievement.Emit.Many02.Text":{
 			_:	"Emitted $0$1 and more.\nThe emittings breaked the taboos are...",
@@ -976,8 +976,8 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Emit.Many03":{
 			_:	"Dangerous Emit",
 			ja:	"デンジャラスエミット",	//オーバーマスター
-			tw:	"",
-			ko:	"",
+			tw:	"Dangerous放行",
+			ko:	"위험한 에밋",
 		},
 		"Achievement.Emit.Many03.Text":{
 			_:	"Emitted $0$1 and more.\nIsn’t it impossible?",
@@ -1157,8 +1157,8 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Action.BootDays":{
 			_:	"\"Tadaima\"",
 			ja:	"「ただいま」",	// HOME, SWEET FRIENDSHIP
-			tw:	"\"Tadaima\"",
-			ko:	"\"Tadaima\"",
+			tw:	"",
+			ko:	"",
 		},
 		"Achievement.Action.BootDays.Text":{
 			_:	"Booted the game a total of $0 days.\nFeel like a home game...",
@@ -1242,7 +1242,7 @@ var LocalizedTexts	= (()=>{return{
 		"Achievement.Action.Meteorite02":{
 			_:	"Triple Scales",
 			en:	"Triple Scales☆☆★",
-			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★
+			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★ ＋ 三つ鱗
 			tw:	"",
 			ko:	"",
 		},
