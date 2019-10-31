@@ -222,10 +222,10 @@ class ButtonItem{
 	}
 
 	Apply(){
+		this.node.attr({zIndex:this.Z});
 
 		if(this.sprite){
 			this.sprite
-				.Attr({zIndex:this.Z})
 				.SetPosition(null,null,this.polaerAngle,this.polarRadius)
 				.SetOpacity(this.opacity);
 		}
