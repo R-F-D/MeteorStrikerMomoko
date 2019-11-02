@@ -120,10 +120,7 @@ var Selector	= class Selector{
 		if(_.isNumber(this.idxStorage))	Store.DynamicInsert( Store.Handles.Settings.UnlockFlags,	value=>Store.Gens.SetFlag(value,this.idxStorage,true)	);
 
 		//Refresh
-		if(refreshes){
-			if(_.isFunction(this._OnUnlocked))	this._OnUnlocked();
-		}
-
+		if(refreshes && _.isFunction(this._OnUnlocked))	this._OnUnlocked();
 		return this;
 	}
 
@@ -230,16 +227,8 @@ var Selector	= class Selector{
 	 */
 	Turn(button,switchesOn){
 		if(!button)	return this;
-		if(switchesOn){
-			button
-				.SetColor([0xFF,0xA0,0x00])
-				.SetOpacity(255);
-		}
-		else{
-			button
-				.SetColor([0xFF,0xFF,0xFF])
-				.SetOpacity(255);
-		}
+		if(switchesOn)	button.SetColor([0xFF,0xA0,0x00]).SetOpacity(255);
+		else			button.SetColor([0xFF,0xFF,0xFF]).SetOpacity(255);
 		return this;
 	}
 

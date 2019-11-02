@@ -171,9 +171,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//結果表示 Result
-		"GamePlay.Navigator.Leave":{
+		"GamePlay.Navigator.Leave":{	//宇宙戦艦ヤマト OPナレーション
 			_:	"Momoko arrived at the Large Million Space\n$0 away from the Earth.",
-			ja:	"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",	//宇宙戦艦ヤマト OPナレーション
+			ja:	"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",
 			tw:	"",
 			ko:	"",
 		},
@@ -203,9 +203,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//チェックポイント：開始 Check Point : Start
-		"GamePlay.Navigator.BrowAway.Start":{
+		"GamePlay.Navigator.BrowAway.Start":{	//おねがいティーチャー
 			_:	"Please Momoko!",
-			ja:	"おねがい☆桃子ちゃん",	//おねがいティーチャー
+			ja:	"おねがい☆桃子ちゃん",
 			tw:	"",
 			ko:	"",
 		},
@@ -219,40 +219,39 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//チェックポイント：火星 Check Point : Mars
-		"GamePlay.Navigator.BrowAway.Mars":{
+		"GamePlay.Navigator.BrowAway.Mars":{	//宇宙よりも遠い場所
 			_:	"Here is a place futher than Mars.",
-			ja:	"火星よりも遠い場所だブーストがね",	//宇宙よりも遠い場所
+			ja:	"火星よりも遠い場所だブーストがね",
 			tw:	"",
 			ko:	"",
 		},
 
 		//チェックポイント：水星 Check Point : Mercury
-		"GamePlay.Navigator.BrowAway.Mercury":{
+		"GamePlay.Navigator.BrowAway.Mercury":{	//セーラームーン マーキュリー
 			_:	"I needa douse myself in water and repent.",
-			ja:	"水をかぶって反省しなきゃ…",	//セーラームーン マーキュリー
+			ja:	"水をかぶって反省しなきゃ…",
 			tw:	"",
 			ko:	"",
 		},
 
 		//チェックポイント：太陽 Check Point : Sun
-		"GamePlay.Navigator.BrowAway.Sun":{
+		"GamePlay.Navigator.BrowAway.Sun":{	//宇宙戦艦ヤマト#10
 			_:	"Farewell, the sun!\nFrom the theater with love.",
-			ja:	"さようなら太陽！\nシアターより愛をこめて",	//宇宙戦艦ヤマト#10
+			ja:	"さようなら太陽！\nシアターより愛をこめて",
 			tw:	"",
 			ko:	"",
 		},
 
 		//チェックポイント：きらりんロボ通過 Check Point : Kirarin Robot
-		"GamePlay.Navigator.BrowAway.Kirari":{
+		"GamePlay.Navigator.BrowAway.Kirari":{	//機動戦士ガンダム 台詞「人間よりMSが大切なんですか」
 			_:	"Listen Momoko.\nAre you more far than Kirarin Robot?",
-			ja:	"桃子ちゃんはきらりんロボより遠方なんですか？",	//機動戦士ガンダム 台詞「人間よりMSが大切なんですか」
+			ja:	"桃子ちゃんはきらりんロボより遠方なんですか？",
 			tw:	"",
 			ko:	"",
 		},
 
 		//チェックポイント：最終 Check Point : Last
-		//	（ガンダム）
-		"GamePlay.Navigator.BrowAway.Unicorn":{
+		"GamePlay.Navigator.BrowAway.Unicorn":{	//機動戦士ガンダム
 			_:	"I see them! I can see a pink unicorn!",
 			ja:	"みえるよ！ わたしにもピンクのユニコーンがみえる！",
 			tw:	"",
@@ -311,7 +310,7 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Locale.Aleart":{	//Message When Switch Language
 			_:	"Sorry.\nThe texts are machine translated.",
 			en:	"Sorry.\nThe texts are machine translated.\n\nPlease send me your translation!",
-			//ja: No alert
+			//ja: アラートなし No alert
 			tw:	"抱歉。\n這些文本是機器翻譯的。\n現在，大多數文本都未翻譯。\n請給我您的翻譯！",
 			ko:	"죄송합니다.\n텍스트는 기계 번역됩니다.\n이제 대부분의 텍스트가 번역되지 않았습니다.\n번역을 보내주세요!",
 		},
@@ -392,25 +391,25 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Storage.Label.RemoveAchievements":{_:	"Remove\nAchievements",	ja:"実績の削除",	tw:"移除成就",	ko:"과제 제거",	},	//Remove achievements
 		"Settings.Storage.Label.Remove":			{_:	"Remove All",			ja:"全削除",		tw:"全部移除",	ko:"전체 제거",	},	//Remove all data
 
-		"Settings.Storage.Confirm.RemoveSettings":{		//Confirm: Remove settings
+		"Settings.Storage.Confirm.RemoveSettings":{
 			_:	"Are you sure you want to remove the game settings?",
 			ja:	"ゲーム設定を削除しますか？",
 			tw:	"",
 			ko:	"",
 		},
-		"Settings.Storage.Confirm.RemoveRecords":{		//Confirm: Remove records
+		"Settings.Storage.Confirm.RemoveRecords":{
 			_:	"Are you sure you want to remove the play records?",
 			ja:	"プレイ記録を削除しますか？",
 			tw:	"",
 			ko:	"",
 		},
-		"Settings.Storage.Confirm.RemoveAchievements":{	//Confirm: Remove achievements
+		"Settings.Storage.Confirm.RemoveAchievements":{
 			_:	"Are you sure you want to remove the achievements?",
 			ja:	"実績を削除しますか？",
 			tw:	"",
 			ko:	"",
 		},
-		"Settings.Storage.Confirm.Remove":{				//Confirm: Remove all data
+		"Settings.Storage.Confirm.Remove":{
 			_:	"Are you sure you want to remove all data?",
 			ja:	"全てのデータを削除しますか？",
 			tw:	"",
@@ -863,9 +862,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//パーフェクト一定回数 Many Perfect Blows
-		"Achievement.Aiming.ManyPerfect":{
+		"Achievement.Aiming.ManyPerfect":{	//アイマスSPパーフェクトサン
 			_:	"Perfect Sun",
-			ja:	"パーフェクトサン",	//パーフェクトサン
+			ja:	"パーフェクトサン",
 			tw:	"Perfect Sun",
 			ko:	"",
 		},
@@ -877,8 +876,8 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//グッド以上を一定回数 Many Good/Perfect Blows
-		"Achievement.Aiming.ManyGood":{
-			_:	"Good-Aims, Baby",	//Good-Sleep,Baby
+		"Achievement.Aiming.ManyGood":{	//Good-Sleep,Baby
+			_:	"Good-Aims, Baby",
 		},
 		"Achievement.Aiming.ManyGood.Text":{
 			_:	"Got $0 good or better aims.\nHave a good dream.",
@@ -888,9 +887,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//100%エイム 100% Aim
-		"Achievement.Aiming.TruePerfect":{
+		"Achievement.Aiming.TruePerfect":{	//SSR「自称・カンペキ 輿水幸子」
 			_:	"Self-Styled Perfect",
-			ja:	"自称・カンペキ",	//輿水幸子
+			ja:	"自称・カンペキ",
 			tw:	"",
 			ko:	"",
 		},
@@ -902,9 +901,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//強打を一定回数 Many Hardblows
-		"Achievement.Blowing.ManyHard":{
+		"Achievement.Blowing.ManyHard":{	//ART NEEDS HAERT BEATS
 			_:	"Art Needs Hard-Brows",
-			ja:	"ART NEEDS HARD-BLOWS",	//ART NEEDS HAERT BEATS
+			ja:	"ART NEEDS HARD-BLOWS",
 			tw:	"ART NEEDS HARD-BLOWS",
 			ko:	"ART NEEDS HARD-BLOWS",
 		},
@@ -916,10 +915,10 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//強打かつパーフェクト Hardblow And Perfect Aim
-		"Achievement.Blowing.HardAndPerfect":{
+		"Achievement.Blowing.HardAndPerfect":{	//しゅがーはぁとレボリューション
 			_:	"Perfect, Perfect, Perfect Hard",
 			en:	"Perfect³ Hard☆",
-			ja:	"パーフェクトっす³ ハード☆",	//しゅがーはぁとレボリューション
+			ja:	"パーフェクトっす³ ハード☆",
 			tw:	"",
 			ko:	"",
 		},
@@ -931,9 +930,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//打撃を連続成功 Successive Hits Without Failure
-		"Achievement.Blowing.SuccessiveHits":{
+		"Achievement.Blowing.SuccessiveHits":{	//バベルシティグレイス
 			_:	"L’ANTICA!",
-			ja:	"\"安定化(あんていか)\"",	//バベルシティグレイス
+			ja:	"\"安定化(あんていか)\"",
 			tw:	"L’ANTICA!",
 			ko:	"L’ANTICA!",
 		},
@@ -945,9 +944,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//エミット回数実績その1 Emit Rate #01
-		"Achievement.Emit.Many01":{
+		"Achievement.Emit.Many01":{	//オーバーマスター
 			_:	"Gentle Emt",
-			ja:	"ジェントルエミット",	//オーバーマスター
+			ja:	"ジェントルエミット",
 			tw:	"Gentle放行",
 			ko:	"젠틀 에밋",
 		},
@@ -959,9 +958,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//エミット回数実績その2 Emit Rate #02
-		"Achievement.Emit.Many02":{
+		"Achievement.Emit.Many02":{	//オーバーマスター
 			_:	"Wild Emit",
-			ja:	"ワイルドエミット",	//オーバーマスター
+			ja:	"ワイルドエミット",
 			tw:	"Wild放行",
 			ko:	"와일드 에밋",
 		},
@@ -973,9 +972,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//エミット回数実績その3 Emit Rate #03
-		"Achievement.Emit.Many03":{
+		"Achievement.Emit.Many03":{	//オーバーマスター
 			_:	"Dangerous Emit",
-			ja:	"デンジャラスエミット",	//オーバーマスター
+			ja:	"デンジャラスエミット",
 			tw:	"Dangerous放行",
 			ko:	"위험한 에밋",
 		},
@@ -987,8 +986,8 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//金星到達 Venus
-		"Achievement.Check.Venus":{
-			_:	"Do You Know Venus?",	//ヴィーナスシンドローム
+		"Achievement.Check.Venus":{	//ヴィーナスシンドローム
+			_:	"Do You Know Venus?",
 		},
 		"Achievement.Check.Venus.Text":{
 			_:	"Flew the meteorite over $1$2.\nThe goddess striked the meteorite so",
@@ -998,9 +997,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//火星到達 Mars
-		"Achievement.Check.Mars":{
+		"Achievement.Check.Mars":{	//プリンセス・アラモード
 			_:	"Echoes on Mars and They Start!",
-			ja:	"マーズに響いてスタート!",	//プリンセスアラモード
+			ja:	"マーズに響いてスタート!",
 			tw:	"",
 			ko:	"",
 		},
@@ -1012,8 +1011,7 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//水星到達 Mercury
-		//	（Beyond The Dream）
-		"Achievement.Check.Mercury":{
+		"Achievement.Check.Mercury":{	//Beyond The Dream
 			_:	"Go Straight Ahead, Cross Over Mercury",
 			ja:	"進めまっすぐ 水星越えて",
 			tw:	"",
@@ -1027,9 +1025,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//太陽到達 Sun
-		"Achievement.Check.Sun":{
+		"Achievement.Check.Sun":{	//BEYOND THE STARLIGHT
 			_:	"Beyond the Sunlight",
-			ja:	"BEYOND THE SUNLIGHT",	//BEYOND THE STARLIGHT
+			ja:	"BEYOND THE SUNLIGHT",
 			tw:	"BEYOND THE SUNLIGHT",
 			ko:	"BEYOND THE SUNLIGHT",
 		},
@@ -1041,9 +1039,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//諸星きらり到達 Kirarin Robot
-		"Achievement.Check.Kirari":{
+		"Achievement.Check.Kirari":{	//Kosmos,Cosmos
 			_:	"Kirari, Passed Through the Row of Light",
-			ja:	"キラリ 光の列すり抜けたら",	//Kosmos,Cosmos
+			ja:	"キラリ 光の列すり抜けたら",
 			tw:	"",
 			ko:	"",
 		},
@@ -1055,9 +1053,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//2.5億km到達 250,000,000km
-		"Achievement.Check.Unicorn":{
+		"Achievement.Check.Unicorn":{	//教え絵last note...
 			_:	"Tell Me the Pink Unicorn...",
-			ja:	"教えてpink unicorn...",	//教え絵last note...
+			ja:	"教えてpink unicorn...",
 			tw:	"",
 			ko:	"",
 		},
@@ -1069,9 +1067,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//実績コンプリート
-		"Achievement.Action.Complete":{
+		"Achievement.Action.Complete":{	//必殺のメテオストライク！ 周防桃子
 			_:	"Special Meteor Strike!",
-			ja:	"必殺のメテオストライク!",	//必殺のメテオストライク！ 周防桃子
+			ja:	"必殺のメテオストライク!",
 			tw:	"必殺流星罷工!",
 			ko:	"필살의 미티어 스트라이크!",
 		},
@@ -1083,9 +1081,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//初プレイ First Play
-		"Achievement.Action.FirstPlay":{
+		"Achievement.Action.FirstPlay":{	//地球の危機を救うため 周防桃子
 			_:	"For Save the Earth Crisis",
-			ja:	"地球の危機を救うため",	//地球の危機を救うため 周防桃子
+			ja:	"地球の危機を救うため",
 			tw:	"",
 			ko:	"",
 		},
@@ -1097,23 +1095,23 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//リトライ Retry
-		"Achievement.Action.Retry":{
+		"Achievement.Action.Retry":{	//天井努
 			_:	"Good Luck Next Time!",
-			ja:	"次回も頑張ってもらうぞ！",	//シャニマス（天井社長）
+			ja:	"次回も頑張ってもらうぞ！",
 			tw:	"",
 			ko:	"",
 		},
-		"Achievement.Action.Retry.Text":{
+		"Achievement.Action.Retry.Text":{	//園田智代子 WING優勝
 			_:	"Retryed games $0 times.\nIf I can't meet Momoko,\nor you've made a different choice...\nWhat happened to the Earth...?",
-			ja:	"ゲームを$0回リトライした。\nもし桃子ちゃんに会えてなかったり\n違う選択してたら…\n地球、どうなってたのかなって…",	//シャニマスED（園田智代子WING）
+			ja:	"ゲームを$0回リトライした。\nもし桃子ちゃんに会えてなかったり\n違う選択してたら…\n地球、どうなってたのかなって…",
 			tw:	"",
 			ko:	"",
 		},
 
 		//結果シェア Share Result
-		"Achievement.Action.Share01":{
+		"Achievement.Action.Share01":{	//ドレミファクトリー！
 			_:	"Share Your Result",
-			ja:	"結果をシェアして",	//ドレミファクトリー！
+			ja:	"結果をシェアして",
 			tw:	"",
 			ko:	"",
 		},
@@ -1125,10 +1123,10 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//結果シェア（好成績） Share Result (Successful)
-		"Achievement.Action.Share02":{
+		"Achievement.Action.Share02":{	//デコレーション・ドリ〜ミンッ♪
 			_:	"See You in My Dream",
 			en:	"See You in My Dream♪",
-			ja:	"夢でおあいしましょう♪",	//デコレーション・ドリ〜ミンッ♪
+			ja:	"夢でおあいしましょう♪",
 			tw:	"",
 			ko:	"",
 		},
@@ -1140,9 +1138,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//プレイ時間 Play Time
-		"Achievement.Action.PlayTime":{
+		"Achievement.Action.PlayTime":{	//思い出をありがとう
 			_:	"In a Long Time",
-			ja:	"長い時間の中で",	//思い出をありがとう
+			ja:	"長い時間の中で",
 			tw:	"",
 			ko:	"",
 		},
@@ -1154,9 +1152,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//起動日数 Booting Days
-		"Achievement.Action.BootDays":{
+		"Achievement.Action.BootDays":{	// HOME, SWEET FRIENDSHIP
 			_:	"\"Tadaima\"",
-			ja:	"「ただいま」",	// HOME, SWEET FRIENDSHIP
+			ja:	"「ただいま」",
 			tw:	"",
 			ko:	"",
 		},
@@ -1168,13 +1166,13 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//最終起動日からの時間経過
-		"Achievement.Action.DaysPassed":{
+		"Achievement.Action.DaysPassed":{	//小宮果穂（轟！紅蘭偉魔空珠 番外地）
 			_:	"I Haven't Seen You Before...!",
-			ja:	"見ない顔ですねぇ…！",	//小宮果穂
+			ja:	"見ない顔ですねぇ…！",
 			tw:	"",
 			ko:	"",
 		},
-		"Achievement.Action.DaysPassed.Text":{
+		"Achievement.Action.DaysPassed.Text":{	//小宮果穂（五色爆発！合宿クライマックス！）
 			_:	"$0 days passed since the last booting\n(or started $1 consecutive days).\nMOMOKO...SAVES MANY WORLDS A LOT!",
 			ja:	"最後に起動してから$0日が経過した\n（連続$1日間の起動でも可）。\n桃子ちゃんはー……いろんな世界を、いっぱい救いまーす！",
 			tw:	"",
@@ -1182,9 +1180,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//月曜日または9時台に起動
-		"Achievement.Action.Monday9":{
+		"Achievement.Action.Monday9":{	///月曜日のクリームソーダ
 			_:	"Ice \"9 Letters\" on Monday",
-			ja:	"月曜日の9リームソーダ",	///月曜日のクリームソーダ
+			ja:	"月曜日の9リームソーダ",
 			tw:	"",
 			ko:	"",
 		},
@@ -1196,9 +1194,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//桃子だけど
-		"Achievement.Action.TouchPlayer":{
+		"Achievement.Action.TouchPlayer":{	//桃子だけど。
 			_:	"Momoko Dakedo.",
-			ja:	"桃子だけど。",	//桃子だけど。
+			ja:	"桃子だけど。",
 			tw:	"桃子Dakedo。",
 			ko:	"모모코Dakedo.",
 		},
@@ -1210,23 +1208,23 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//隕石（ノーマル）破壊 Meteorite Engagement
-		"Achievement.Action.Meteorite00":{
+		"Achievement.Action.Meteorite00":{	//流星PARADE
 			_:	"Like a Meteorite Parade!",
-			ja:	"まるで隕石のPARADE!",	//流星PARADE
+			ja:	"まるで隕石のPARADE!",
 			tw:	"",
 			ko:	"",
 		},
 		"Achievement.Action.Meteorite00.Text":{
 			_:	"Rejected meteorites $0 times.\nSee off the orange rocks.",
-			ja:	"隕石を$0回退けた。\nオレンジ色の岩を見送って。",	//
+			ja:	"隕石を$0回退けた。\nオレンジ色の岩を見送って。",
 			tw:	"",
 			ko:	"",
 		},
 
 		//クマくん破壊 Kuma-kunEngagement
-		"Achievement.Action.Meteorite01":{
+		"Achievement.Action.Meteorite01":{	//空と風と恋のワルツ
 			_:	"Waltz of The Sky, Wind and Bear",
-			ja:	"空と風と熊のワルツ",	//空と風と恋のワルツ
+			ja:	"空と風と熊のワルツ",
 			tw:	"",
 			ko:	"",
 		},
@@ -1239,24 +1237,24 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//さんかく破壊 Triangle Engagement
-		"Achievement.Action.Meteorite02":{
+		"Achievement.Action.Meteorite02":{	//ミツボシ☆☆★ ＋ 三つ鱗
 			_:	"Triple Scales",
 			en:	"Triple Scales☆☆★",
-			ja:	"ミツウロコ☆☆★",	//ミツボシ☆☆★ ＋ 三つ鱗
+			ja:	"ミツウロコ☆☆★",
 			tw:	"",
 			ko:	"",
 		},
 		"Achievement.Action.Meteorite02.Text":{
 			_:	"Rejected triangles $0 times.\nI'm not afraid to enter atmosphere.",
-			ja:	"さんかくを$0回退けた。\n大気圏突入も怖くない。",	//
+			ja:	"さんかくを$0回退けた。\n大気圏突入も怖くない。",
 			tw:	"",
 			ko:	"",
 		},
 
 		//ナビゲータ（ノーマル）使用
-		"Achievement.Action.Navigate00":{
+		"Achievement.Action.Navigate00":{	//エージェント夜を往く
 			_:	"Navigator Goes The Space",
-			ja:	"ナビゲーター宇宙を往く",	//エージェント夜を往く
+			ja:	"ナビゲーター宇宙を往く",
 			tw:	"",
 			ko:	"",
 		},
@@ -1268,8 +1266,8 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//ナビゲータ（ゴーレム）使用
-		"Achievement.Action.Navigate01":{
-			_:	"Wandering Golem Navigator",	//Wandering Dream Chaser
+		"Achievement.Action.Navigate01":{	//Wandering Dream Chaser
+			_:	"Wandering Golem Navigator",
 		},
 		"Achievement.Action.Navigate01.Text":{
 			_:	"First friend navigated $0 times.\nAs I have a something to reach for.",
@@ -1279,9 +1277,9 @@ var LocalizedTexts	= (()=>{return{
 		},
 
 		//ナビゲータ（女神）使用
-		"Achievement.Action.Navigate02":{
+		"Achievement.Action.Navigate02":{	//ヒカリのdestination
 			_:	"Navigation of Light",
-			ja:	"ヒカリのnavigation",	//ヒカリのdestination
+			ja:	"ヒカリのnavigation",
 			tw:	"",
 			ko:	"",
 		},

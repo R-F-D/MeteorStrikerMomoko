@@ -32,12 +32,10 @@ LockPanel = class LockPanel extends Button{
 				.SetVisible(false);
 
 			panel.description	= Label.CreateInstance(11)
-				.AddToLayer(panel.node)
+									.AddToLayer(panel.node)
+									.SetVisible(false);
 
-
-				.SetVisible(false);
-
-				panel.SetLocked(true);
+			panel.SetLocked(true);
 		});
 	}
 
