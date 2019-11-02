@@ -296,8 +296,8 @@ class ButtonItem{
 	SetOpacity(opacity,isSlowly=false,isTemp=false){
 		opacity	= DefinedOr(opacity,this.opacity,255);
 		if(!isTemp)	this.opacity = opacity;
-		if(!isSlowly)	this.node.setOpacity(opacity);
-		else			this.node.RunActions(cc.fadeTo(0.2,opacity));
+		if(!isSlowly)	this.sprite.SetOpacity(opacity);
+		else			this.sprite.RunActions(cc.fadeTo(0.2,opacity));
 		return this;
 	}
 
@@ -309,8 +309,8 @@ class ButtonItem{
 		color.b	= DefinedOr( color.b, this.color.b, 255);
 
 		if(!isTemp)	this.color = {r:color.r,g:color.g,b:color.b,};
-		if(!isSlowly)	this.node.setColor(cc.color(color.r,color.g,color.b,0xFF));
-		else			this.node.RunActions(cc.tintTo(0.2,color.r,color.g,color.b));
+		if(!isSlowly)	this.sprite.SetColor(cc.color(color.r,color.g,color.b,0xFF));
+		else			this.sprite.RunActions(cc.tintTo(0.2,color.r,color.g,color.b));
 		return this;
 	}
 	SetColorOnHover(color){

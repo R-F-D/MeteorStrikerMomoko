@@ -238,7 +238,7 @@ var Selector	= class Selector{
 		else{
 			button
 				.SetColor([0xFF,0xFF,0xFF])
-				.SetOpacity(192);
+				.SetOpacity(255);
 		}
 		return this;
 	}
