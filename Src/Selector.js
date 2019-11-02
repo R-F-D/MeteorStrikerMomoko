@@ -179,7 +179,10 @@ var Selector	= class Selector{
 		let dy	= 0;			//
 
 		this.buttons.forEach((button,i)=>{
-			const box	= button.sprite.entity.getBoundingBox();
+			const box	= {
+				width:	button.sprite.entity.getBoundingBox().width  * button.sprite.entity.parent.scaleX,
+				height:	button.sprite.entity.getBoundingBox().height * button.sprite.entity.parent.scaleY,
+			};
 			const anchor= button.sprite.entity.getAnchorPoint();
 
 			//選択肢1つ分だけ座標をずらす

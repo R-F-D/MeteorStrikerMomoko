@@ -106,7 +106,6 @@ Button	= class Button{
 
 	SetScale(scale=1.0){
 		this.scale=scale;
-		this.items.forEach(b=>b.SetScale(null));
 		return this;
 	}
 
@@ -224,17 +223,8 @@ class ButtonItem{
 	Apply(){
 		this.node.attr({zIndex:this.Z});
 
-		if(this.sprite){
-			this.sprite
-				.SetPosition(null,null,this.polaerAngle,this.polarRadius)
-				.SetOpacity(this.opacity);
-		}
-		if(this.label){
-			this.label
-				.SetPosition(null,null,this.polaerAngle,this.polarRadius)
-				.SetVisible(this.isVisible);
-		}
-
+		if(this.sprite)	this.sprite.SetOpacity(this.opacity);
+		if(this.label)	this.label.SetVisible(this.isVisible);
 		this.AddToLayer(this.layer)._ApplyEvents();
 		return this;
 	}
@@ -246,7 +236,16 @@ class ButtonItem{
 		this.polaerAngle	= a!=null	? a	: this.polaerAngle;
 		this.polarRadius	= r!=null	? r	: this.polarRadius;
 
-		this.node.setPosition(this.container.x+this.x, this.container.y+this.y)
+		if(this.polarRadius==0){
+			this.node.setPosition(this.container.x+this.x, this.container.y+this.y);
+		}
+		else{
+			this.node.setPosition(
+				this.container.x+this.x + Math.cos(this.polaerAngle) *this.polarRadius,
+				this.container.y+this.y + Math.sin(this.polaerAngle) *this.polarRadius,
+			);
+		}
+
 		return this.Apply();
 	}
 	/**相対座標を設定*/
@@ -289,8 +288,7 @@ class ButtonItem{
 	SetScale(scale,isTemp=false){
 		scale = DefinedOr(scale,this.scale,1.0);
 		if(!isTemp)	this.scale = scale;
-		if(this.sprite)	this.sprite.SetScale(scale*this.container.scale);
-		if(this.label)	this.label.entity.setScale(scale*this.container.scale);
+		this.node.setScale(scale*this.container.scale);
 		return this;
 	}
 
@@ -298,8 +296,8 @@ class ButtonItem{
 	SetOpacity(opacity,isSlowly=false,isTemp=false){
 		opacity	= DefinedOr(opacity,this.opacity,255);
 		if(!isTemp)	this.opacity = opacity;
-		if(!isSlowly)	this.sprite.SetOpacity(opacity);
-		else			this.sprite.RunActions(cc.fadeTo(0.2,opacity));
+		if(!isSlowly)	this.node.setOpacity(opacity);
+		else			this.node.RunActions(cc.fadeTo(0.2,opacity));
 		return this;
 	}
 
@@ -311,8 +309,8 @@ class ButtonItem{
 		color.b	= DefinedOr( color.b, this.color.b, 255);
 
 		if(!isTemp)	this.color = {r:color.r,g:color.g,b:color.b,};
-		if(!isSlowly)	this.sprite.SetColor(cc.color(color.r,color.g,color.b,0xFF));
-		else			this.sprite.RunActions(cc.tintTo(0.2,color.r,color.g,color.b));
+		if(!isSlowly)	this.node.setColor(cc.color(color.r,color.g,color.b,0xFF));
+		else			this.node.RunActions(cc.tintTo(0.2,color.r,color.g,color.b));
 		return this;
 	}
 	SetColorOnHover(color){
@@ -378,23 +376,21 @@ class ButtonItem{
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 						this.status			= Button.HOVER;
 						this.SetOpacity(this.opacityOnHover,false,true)
-							.SetColor(this.colorOnHover,false,true)
-							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
+							.SetColor(this.colorOnHover,false,true);
+						this.node.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					else{
 						if(this.isEnabled && this.listeners.onMouseOut)	this.listeners.onMouseOut();
 						this.status			= Button.OFF;
 						this.SetOpacity(this.opacity,true,false)
-							.SetColor(this.color,true,false)
-							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
+							.SetColor(this.color,true,false);
+						this.node.RunActions(cc.scaleTo(0.2,this.scale));
 					}
 					this._ApplyIndex();
 				}
 			},
 			onTouchesCanceled	: (/*touches,event*/)=>{
-				this.sprite.RunActions(cc.scaleTo(0.2,this.scale));
+				this.node.RunActions(cc.scaleTo(0.2,this.scale));
 				this.status			= Button.OFF;
 				this.SetOpacity(this.opacity,true,false);
 				this.SetColor(this.color,true,false);
@@ -453,9 +449,8 @@ class ButtonItem{
 						if(this.isEnabled && this.listeners.onTouchEnded)	this.listeners.onTouchEnded();
 						if(this.listeners.onButtonUp)	this.listensButtonUp	= true;
 						this.SetOpacity(this.opacity,true,false)
-							.SetColor(this.color,true,false)
-							.sprite.RunActions(cc.scaleTo(0.2,this.scale));
-						if(this.label)	this.label.RunActions(cc.scaleTo(0.2,this.scale));
+							.SetColor(this.color,true,false);
+						this.node.RunActions(cc.scaleTo(0.2,this.scale));
 						if(this.isEnabled && this.listeners.onMouseOut)	this.listeners.onMouseOut();
 					}
 				},
