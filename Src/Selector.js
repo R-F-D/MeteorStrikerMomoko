@@ -3,7 +3,7 @@
 ********************************************************************************/
 var cc,_;
 var rc,L;
-var Label,Locale,Button;
+var Label,Locale,Button,Store;
 
 // eslint-disable-next-line no-unused-vars
 var Selector	= class Selector{
@@ -121,9 +121,7 @@ var Selector	= class Selector{
 
 		//Refresh
 		if(refreshes){
-			Log(refreshes);
 			if(_.isFunction(this._OnUnlocked))	this._OnUnlocked();
-
 		}
 
 		return this;
