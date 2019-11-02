@@ -43,6 +43,7 @@ var rc	= (()=>{
 	/** サウンド */
 	sfx	: {
 		btnHover:		"Ui/hover.mp3",
+		btnClick:		"Ui/click.mp3",
 	},
 	bgm	: {
 		meteorite:		"meteorite.mp3",

@@ -364,6 +364,7 @@ class ButtonItem{
 					this.SetScale(this.scale*this.scaleOnActive,true);
 					this.SetOpacity(this.opacityOnHover,false,true);
 					this.SetColor(this.colorOnHover,false,true);
+					sound.Play(rc.sfx.btnClick);
 				}
 				return true;
 			},
@@ -440,7 +441,8 @@ class ButtonItem{
 						this.SetScale(this.scale*this.scaleOnActive,true)
 							.SetOpacity(this.opacityOnHover,false,true)
 							.SetColor(this.colorOnHover,false,true);
-						}
+						sound.Play(rc.sfx.btnClick);
+					}
 				},
 				onKeyReleased	: (code,event)=>{
 					if(!this.isEnabled)	return;
