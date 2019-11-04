@@ -44,6 +44,9 @@ var rc	= (()=>{
 	sfx	: {
 		btnHover:		"Ui/hover.mp3",
 		btnClick:		"Ui/click.mp3",
+		achievement:	"Ui/achievement.mp3",
+		hit:			"hit.mp3",
+		explosion:		"explosion.mp3",
 	},
 	bgm	: {
 		meteorite:		"meteorite.mp3",

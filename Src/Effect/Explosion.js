@@ -62,6 +62,7 @@ Effect.Explosion	= class extends Effect.EffectBase{
 						cc.delayTime(1),
 						cc.fadeTo(1,0)
 					);
+				sound.Play(rc.sfx.explosion);
 			}
 			return true;
 		});

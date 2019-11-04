@@ -126,6 +126,7 @@ var Achievement = new (class Achievement{
 				const title	= Array.isArray(achievement.Replacements)	? L.Textf(key,[achievement.Count].concat(achievement.Replacements))
 																		: L.Text (key);
 				this.label.PushLog(`${L.Text("Achievement.Unlocked")}\n${title}`);
+				sound.Play(rc.sfx.achievement);
 				Log(`Achievement: ${key}`);
 			}
 		);

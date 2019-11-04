@@ -39,7 +39,8 @@ Effect.Hit	= class extends Effect.EffectBase{
 				.SetVisible(true).SetScale(scale).SetColor(this.color);
 				v.index=0;
 			return true;
-		})
+		});
+		sound.Play(rc.sfx.hit);
 		return this;
 	}
 

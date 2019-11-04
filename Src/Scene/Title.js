@@ -182,6 +182,7 @@ Scene.Title	= class extends Scene.SceneBase {
 							Achievement.Unlock(Achievements.Action.TouchPlayer,nTouches);
 						}
 						this.playerIsTouched	= true;
+						sound.Play(rc.sfx.btnHover);
 					}
 				});
 				return true;
