@@ -1,8 +1,9 @@
 /* *******************************************************************************
 	ストレージ操作関数群
 ********************************************************************************/
-var cc,_;
+var cc,_,CryptoJS;
 var Achievement;
+var isDebug;
 
 class _Store{
 
@@ -126,9 +127,58 @@ class _Store{
 		return container;
 	}
 
-	static _SetItem(key,value)				{ cc.sys.localStorage.setItem(Store._Prefix+key,value);	return this;	}
-	static _GetItem(key,defaultValue=null)	{ return cc.sys.localStorage.getItem(Store._Prefix+key) || defaultValue;	}
-	static _RemoveItem(key)					{ cc.sys.localStorage.removeItem(Store._Prefix+key);	return this;		}
+	/**ハンドル識別子をストレージキー文字列に変換**/
+	static _ToStorageKey(key){
+		if(isDebug())	return Store._Prefix+key;
+		else			return CryptoJS.MD5(Store._Prefix+key).toString();
+	}
+
+	static _SetItem(key,value){
+		if(!isDebug())	value	= Store._Encode(value);
+		cc.sys.localStorage.setItem(Store._ToStorageKey(key),value);
+		return this;
+	}
+	static _GetItem(key,defaultValue=null){
+		const result	= cc.sys.localStorage.getItem(Store._ToStorageKey(key)) || defaultValue;
+		if(result==defaultValue || isDebug())	return result;
+		else									return Store._Decode(result,defaultValue);
+	}
+	static _RemoveItem(key)	{ cc.sys.localStorage.removeItem(Store._ToStorageKey(key));	return this;}
+
+	//値のエンコード（MD5＋Base64）
+	static _Encode(str){
+		if(str==null || isDebug())	return str;
+		str = `${Store._Prefix}${str}`;	//ソルト
+		const hash	= CryptoJS.MD5(str).toString();
+		const enc	= CryptoJS.enc.Base64.stringify( CryptoJS.enc.Utf8.parse(str) ).replace(/=+$/,"");	//Remove trail "="s
+		return `${hash}${enc}`;
+	}
+
+	//値のデコード（MD5＋Base64）
+	static _Decode(str,failed=null){
+		if(str==null || isDebug())	return str;
+		try{
+			const hash	= str.slice(0,32);
+			const enc	= str.slice(32);
+			if(hash.length!=32 && enc.length<=0)	throw new Error(`Failed to decrypt(slice): ${str}`);
+
+			//デコードしてソルトを取り除く
+			const decoded	= CryptoJS.enc.Base64.parse(enc).toString(CryptoJS.enc.Utf8);
+			const result	= decoded.slice(Store._Prefix.length);
+
+			//チェックサム
+			const salt		= decoded.slice(0,Store._Prefix.length);
+			const rehash	= CryptoJS.MD5(decoded).toString();
+			if(salt!=Store._Prefix || hash!=rehash)	throw new Error(`Failed to decrypt(checkthumb): ${str}`);
+
+			return result;
+		}
+		catch(e){
+			console.log(e);
+			return failed;
+		}
+	}
+
 
 	/** ローカルストレージにインサート
 	 * @param {Object} handle ストレージのハンドル
@@ -265,7 +315,6 @@ class _Store{
 			.filter(h=>h.Category == "Settings")
 			.forEach(h=>Store._RemoveItem(h.Key));
 	}
-
 
 
 	//----------------------------------------
