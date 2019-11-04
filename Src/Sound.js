@@ -128,6 +128,14 @@ class Sound{
 		return this;
 	}
 
+	get isReady(){
+		const isInited	=	( (!this.playsBgm || this.musicIsInitialized)
+							&&(!this.playsFx  || this.effectIsInitialized));
+		if(!isInited)	return false;
+
+		return true;
+	}
+
 	get playsFx()	{ return this.effectVolume > 0 }
 	get playsBgm()	{ return this.musicVolume > 0 }
 
