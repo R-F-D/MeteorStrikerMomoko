@@ -173,7 +173,7 @@ String.prototype.Number	= function(){return Number(this)}
 String.prototype.Int	= function(){return Math.trunc(Number(this))}
 
 //デバッグ
-var isDebug	= ()=>			{ return !!cc.game.config[cc.game.CONFIG_KEY.debugMode];	}
+var isDebug	= ()=>cc.game.config && cc.game.config[cc.game.CONFIG_KEY.debugMode];
 var Debug	= (callback)=>	{ if(isDebug()) callback();	}
 // eslint-disable-next-line no-unused-vars
 var Msg		= (arg)=>		{ Debug(()=>alert(JSON.stringify(arg)));	}
