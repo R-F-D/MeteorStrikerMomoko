@@ -41,6 +41,9 @@ Label	= class Label{
 
 		//背景
 		this.bg	= new LabelBg(this);
+
+		/** ログ更新時のコールバック */
+		this.OnRefreshLog	= null;
 	}
 
 	/** インスタンス生成
@@ -152,6 +155,7 @@ Label	= class Label{
 		if(isDirty){
 			if(this.logs.length==0)	this.SetString("",false,true);
 			else					this.SetString(_(this.logs).map("line").join("\n"));
+			if(this.OnRefreshLog || _.isFunction(this.OnRefreshLog))	this.OnRefreshLog();
 		}
 
 		return this;
