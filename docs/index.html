@@ -4,7 +4,15 @@
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
-	<title>メテオストライカー桃子 MeteorStriker Momoko</title>
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@R_F_D" />
+	<meta property="og:url" content="https://r-f-d.github.io/MeteorStriker/" />
+	<meta property="og:title" content="メテオストライカー桃子 - MeteorStriker Momoko" />
+	<meta property="og:description" content="誰もが持っている超能力。その力で世界を救おう！" />
+	<meta property="og:image" content="./Res/thumbnail.png" />
+
+	<title>メテオストライカー桃子 / MeteorStriker Momoko</title>
 	<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAADAFBMVEUAgAAwICBoUECggGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AYP8AIsBAIAD/39T/v6r/oIDbdli3TDH/WIkAAAAAAAAAAAAAAAAAAAAAAAD///+3kACOXwBgQADVt1oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wD/wQf/qQftfwPcVQDAwKBAQIAwMGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////AwMBAQIAgIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQUCBIiEyAwHhkPwBEHwRgQEBAICDAAAAAQP8QEBAAAAAAAAAAAAAAAAAAAAAAAAC3kACvhACOXwCGUgBallpVjFWYVRaMTRLExMSgoKBgYGCgwKDg4OAAAAAAAAAAAADGV2UZAAAAAXRSTlMAQObYZgAAALRJREFUeJyl02EOgyAMBWCPUDBl2T/o4wLc/3KjdJi5bALxJRprv1g1sG2nANt1huDeM9CS0l9yCbQlkt7Rag18Ni0iJzIAQIw5n0HOKyDGUpQAuUZEz/aqs0BHaMmsv0laVkCMInrsNUqY9cpoI0MAlJLSvhN5zy3eEymZBTbiDrAlwkzknAHniPonVzIJnjV8RKsV0IdYw6DdmwN9wQIhGAjB6mPZDUHfMsCjBUe+9tRv8ALgHFaBNbDs+QAAAABJRU5ErkJggg==" />
 
 	<style type="text/css">
@@ -13,12 +21,19 @@
 		body{
 			color:	#FFFFFF;
 			background-color:	#333333;
-			padding:	20px;
+			padding:	0px;
 			margin:	0px;
 		}
 		a{
 			color:	#EFB854;
 			text-decoration:none;
+		}
+		h2{
+			margin: 25px 20px 5px 20px;
+			text-decoration:underline #FF7777;
+		}
+		p,ul,ol,table{
+			margin-left:40px;
 		}
 		th,td{
 			border: 1px solid #000000;
@@ -26,58 +41,58 @@
 			padding:5px;
 		}
 	</style>
+
+	<script>
+		function Hover(elem,isHover){
+			const images	= ["./Res/enter01.png","./Res/enter02.png",];
+			if(isHover)	elem.src = images[1];
+			else		elem.src = images[0];
+		}
+	</script>
 </head>
 <body>
 
 	<h1>メテオストライカー桃子 / MeteorStriker Momoko</h1>
-	<a href="./game.html">→ ゲームをプレイ</a>
+	<a href="./game.html"><img id="enterImage" src="./Res/enter01.png" onmouseover="Hover(this,true)" onmouseout="Hover(this,false)"></a>
 
 	<h2>はじめに / Introduction</h2>
 	<p>
-		このゲームはインストールが必要ありません。<br>
-		ブラウザ上でプレイすることができます。<br>
-	</p>
-
-	<h2>注意事項 / Notice</h2>
-	<p>
-		<a href="https://millionlive.idolmaster.jp/theaterdays/">「アイドルマスター ミリオンライブ！」シリーズ</a>を原作とした
-		<a href="https://millionlive.idolmaster.jp/theaterdays/images/idol/fr/07.png">周防桃子</a>のファンゲームです。<br>
-		原作の権利者・関係者とは一切関係ありません。<br>
+		このゲームはインストールが必要ありません。ブラウザ上でプレイすることができます。<br>
+		上記の画像をクリック（タップ）してください。
 	</p>
 
 	<h2>あそびかた / How to Play</h2>
 	<p>
 		ステップは3つ！
-		<ul>
-			<li>まずは命中バーの中央を狙って長押し！
-			<li>次になるべくギリギリで離して強攻撃！
-			<li>ラストは連打でパワーアップ！
-		</ul>
-		詳しい遊び方については<a href="./doc.md">ゲームのドキュメント</a>をご覧ください。<br>
+	</p>
+	<ol>
+		<li>まずは命中バーの中央を狙って長押し！</li>
+		<li>次になるべくギリギリで離して強攻撃！</li>
+		<li>ラストは連打でパワーアップ！</li>
+	</ol>
+	<p>
+		詳しい遊び方については<a href="./doc.html">ゲームのドキュメント</a>をご覧ください。<br>
 	</p>
 
-	<h2>システム要件 / System Requirements</h2>
+	<h2>注意事項 / Notice</h2>
 	<p>
-		動作確認の取れているブラウザの一覧です。
-		<table>
-			<tr><th>Windows</th><td>Google Chrome</td></tr>
-			<tr><th>Mac</th><td>Google Chrome<br>Safari</td></tr>
-			<tr><th>iOS</th><td>Google Chrome<br>Safari</td></tr>
-		</table>
+		この作品は<a href="https://millionlive.idolmaster.jp/theaterdays/">「アイドルマスター ミリオンライブ！」シリーズ</a>を原作とし
+		<a href="https://millionlive.idolmaster.jp/theaterdays/images/idol/fr/07.png">周防桃子</a>をメインに据えたファンゲームです。<br>
+		原作の権利者・関係者とは一切関係ありません。<br>
 	</p>
 
 	<h2>日本以外の方へお願い / Request to Everyone Except Japan</h2>
+	<ul>
+		<li>日本語以外のテキストは機械翻訳されてたものです。翻訳ファイル募集中です。
+		<li>The texts are machine translated. Please send me your language file.
+		<li>這些文本是機器翻譯的。請給我您的翻譯！
+		<li>텍스트는 기계 번역됩니다. 번역을 보내주세요!
+	</ul>
 	<p>
-		<ul>
-			<li>日本語以外のテキストは機械翻訳されてたものです。翻訳ファイル募集中です。
-			<li>The texts are machine translated. Please send me your language file.
-			<li>這些文本是機器翻譯的。請給我您的翻譯！
-			<li>텍스트는 기계 번역됩니다. 번역을 보내주세요!
-		</ul>
-		詳細は<a href="https://github.com/R-F-D/MeteorStriker">GitHubリポジトリ</a>を参照してください。<br>
+			詳細は<a href="https://github.com/R-F-D/MeteorStriker">GitHubリポジトリ</a>を参照してください。<br>
 	</p>
 
-	<h2>作った人</h2>
+	<h2>作った人 / Developer</h2>
 	<p>
 		R.F.D./温泉ねずみ
 		<a href="https://twitter.com/R_F_D">[Twitter]</a>
