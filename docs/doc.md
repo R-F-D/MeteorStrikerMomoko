@@ -1,5 +1,6 @@
 ---
 title: メテオストライカー桃子 MeteorStriker Momoko
+layout: default
 ---
 # あそびかた How to Play
 1. 命中バーの中央を狙って長押し
@@ -38,6 +39,15 @@ title: メテオストライカー桃子 MeteorStriker Momoko
 |Date|Overview
 |--|--
 |2019-11-06|Release
+
+
+# システム要件 System Requirements
+動作確認の取れているブラウザの一覧です。
+|OS|Browsers
+|--|--
+|Windows|Google Chrome
+|Mac|Google Chrome, Safari
+|iOS|Google Chrome, Safari
 
 
 # オープンソースのライセンス表記 Licenses
