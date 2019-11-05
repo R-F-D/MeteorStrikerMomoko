@@ -315,6 +315,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Spawn(64,48);
 				this.labels.navigation.PushLog(L.Text("GamePlay.Navigator.Preliminary")).SetVisible(true);
+				sound.Play(rc.sfx.preliminary);
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
 				this.UpdatePlayerSprite(true);

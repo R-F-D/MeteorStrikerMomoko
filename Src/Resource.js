@@ -47,8 +47,9 @@ var rc	= (()=>{
 		achievement:	"Ui/achievement.mp3",
 		hit:			"hit.mp3",
 		explosion:		"explosion.mp3",
-		emit:			"emit.mp3",
 		fail:			"fail.mp3",
+		emit:			"emit.mp3",
+		preliminary:	"preliminary.mp3",
 		txtLaunch:		"Ui/hover.mp3",
 	},
 	bgm	: {
