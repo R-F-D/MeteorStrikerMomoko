@@ -3,7 +3,7 @@
 ********************************************************************************/
 var Effect	= Effect || {};
 var cc;
-var rc;
+var rc,sound;
 var Sprite;
 (function(){	//File Scope
 
