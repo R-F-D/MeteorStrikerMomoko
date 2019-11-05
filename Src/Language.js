@@ -379,6 +379,29 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"지구를 5번 보호합니다",
 		},
 
+		//データのトランスポート Storage Transporting
+		"Settings.Transport":	{
+			_:	"Data Transporting",
+			ja:	"データのトランスポート",
+			tw:	"資料傳輸",
+			ko:	"데이터 전송",
+		},
+		"Settings.Transport.Label.Import":	{_:"Import",	ja:"インポート",	tw:"匯入",	ko:"가져오기",	},	//Import
+		"Settings.Transport.Label.Export":	{_:"Export",	ja:"エクスポート",	tw:"匯出",	ko:"내보내기",	},	//Export
+
+		"Settings.Transport.Dialog.Import":{
+			_:	"Paste the saved text into the input field.",
+			ja:	"保存したテキストを入力欄にペーストしてください。",
+			tw:	"將保存的文本粘貼到輸入字段中。",
+			ko:	"데이터 전송.",
+		},
+		"Settings.Transport.Dialog.Export":{
+			_:	"Copy this text and save it.",
+			ja:	"以下のテキストをコピーし保存してください。",
+			tw:	"複製此文本並保存。",
+			ko:	"이 텍스트를 복사하여 저장하십시오.",
+		},
+
 		//ストレージ管理 Storage Management
 		"Settings.Storage":	{
 			_:	"Storage Management",

@@ -146,8 +146,8 @@ class _Store{
 	static _RemoveItem(key)	{ cc.sys.localStorage.removeItem(Store._ToStorageKey(key));	return this;}
 
 	//値のエンコード（MD5＋Base64）
-	static _Encode(str){
-		if(str==null || isDebug())	return str;
+	static _Encode(str,force=false){
+		if(str==null || (!force && isDebug()))	return str;
 		str = `${Store._Prefix}${str}`;	//ソルト
 		const hash	= CryptoJS.MD5(str).toString();
 		const enc	= CryptoJS.enc.Base64.stringify( CryptoJS.enc.Utf8.parse(str) ).replace(/=+$/,"");	//Remove trail "="s
@@ -155,8 +155,8 @@ class _Store{
 	}
 
 	//値のデコード（MD5＋Base64）
-	static _Decode(str,failed=null){
-		if(str==null || isDebug())	return str;
+	static _Decode(str,failed=null,force=false){
+		if(str==null || (!force && isDebug()))	return str;
 		try{
 			const hash	= str.slice(0,32);
 			const enc	= str.slice(32);

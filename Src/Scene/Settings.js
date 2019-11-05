@@ -49,6 +49,10 @@ const OptionSettings	= {
 		{	Tag:"Golem",				OnSelected:Store.Handles.Settings.Navigator,	},
 		{	Tag:"Goddess",				OnSelected:Store.Handles.Settings.Navigator,	},
 	],
+	Transport:[
+		{	Tag:"Import",				OnSelected:()=>Scene.Settings.Import(),	},
+		{	Tag:"Export",				OnSelected:()=>Scene.Settings.Export(),	},
+	],
 	Storage:[
 		{	Tag:"RemoveSettings",		OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveSettings",		true,false,false),	},
 		{	Tag:"RemoveRecords",		OnSelected:()=> Scene.Settings.RemoveStorageData( "RemoveRecords",		false,true,false),	},
@@ -64,6 +68,7 @@ const SelectorSettings	= {
 	BgmVolume:	{	Order:0,	KeepsOn:true,	IsEnabled:true,		},
 	Meteorite:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Meteorite,	IdxStorage:0,	},
 	Navigator:	{	Order:1,	KeepsOn:true,	IsEnabled:LockPanel.Enablers.Navigator,	IdxStorage:1,	},
+	Transport:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 	Storage:	{	Order:2,	KeepsOn:false,	IsEnabled:true,		},
 };
 
@@ -306,6 +311,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			BgmVolume:	()=> Store.Select(Store.Handles.Settings.BgmVolume,"3"),
 			Navigator:	()=> Store.Select(Store.Handles.Settings.Navigator,"0"),
 			Meteorite:	()=> Store.Select(Store.Handles.Settings.Meteorite,"0"),
+			Transport:	()=> {},
 			Storage:	()=> {},
 		};
 		const initialIndexes	= {
@@ -314,6 +320,7 @@ Scene.Settings	= class extends Scene.SceneBase {
 			BgmVolume:	()=> Number(_(OptionSettings.BgmVolume).findKey(m=> m.Tag==currentSettings.BgmVolume())	||0),
 			Navigator:	()=> Number(_(OptionSettings.Navigator).findKey(m=> m.Tag==currentSettings.Navigator())	||0),
 			Meteorite:	()=> Number(_(OptionSettings.Meteorite).findKey(m=> m.Tag==currentSettings.Meteorite())	||0),
+			Transport:	()=> null,
 			Storage:	()=> null,
 		};
 
@@ -338,8 +345,42 @@ Scene.Settings	= class extends Scene.SceneBase {
 		return this;
 	}
 
+	/** 記録と実績データのエクスポート
+	 * @static
+	 * @returns
+	 */
+	static Export(){
+		const pairs	= _.merge( Store.SelectAll(), Achievement.SelectAll() );
+		const enc	= Store._Encode( JSON.stringify(pairs), true);
+		window.prompt(L.Text("Settings.Transport.Dialog.Export"),enc);
+	}
+
+	/** 記録と実績のインポート
+	 * @static
+	 * @returns
+	 */
+	static Import(){
+		const input	= window.prompt(L.Text("Settings.Transport.Dialog.Import"));
+		const json	= Store._Decode(input,null,true);
+		if(!json)	return;
+
+		//Remove
+		Store.RemoveSettings();
+		Store.RemoveAll();
+		Achievement.RemoveAll();
+
+		//Insert
+		const pairs	= JSON.parse(json);
+		_(pairs).forEach((value,key)=>{
+			Store.Insert({Key:key},value,null)
+		});
+		return;
+	}
+
 }//class
 
 
 })();	//File Scope
+
+
 
