@@ -141,6 +141,7 @@ Label	= class Label{
 				this._MoveFromBufferToLog(this.forcedPushesToLog);
 				isDirty = true;
 				this.pushIntervalToLog	= 30;
+				if(this.OnRefreshLog || _.isFunction(this.OnRefreshLog))	this.OnRefreshLog();
 			}
 			this.pushIntervalToLog--;
 		}
@@ -155,7 +156,6 @@ Label	= class Label{
 		if(isDirty){
 			if(this.logs.length==0)	this.SetString("",false,true);
 			else					this.SetString(_(this.logs).map("line").join("\n"));
-			if(this.OnRefreshLog || _.isFunction(this.OnRefreshLog))	this.OnRefreshLog();
 		}
 
 		return this;
