@@ -222,6 +222,17 @@ var Achievement = new (class Achievement{
 		});
 	}
 
+	SelectAll(){
+		let pairs	= {};
+		_(Achievements).forEach(handles=>
+			_(handles).forEach(h=>{
+					const value	= Store.Select(h);
+					if(value!=null)	pairs[h.Key]	= value;
+				})
+		);
+		return pairs;
+	}
+
 })();
 
 

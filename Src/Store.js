@@ -316,6 +316,17 @@ class _Store{
 			.forEach(h=>Store._RemoveItem(h.Key));
 	}
 
+	static SelectAll(){
+		let pairs	= {};
+		Store._GetHandleArray()
+			.filter(h=>h.Category != "Settings")
+			.forEach(h=>{
+				const value	= Store.Select(h);
+				if(value!=null)	pairs[h.Key]	= value;
+			});
+		return pairs;
+	}
+
 
 	//----------------------------------------
 	//	コールバック
