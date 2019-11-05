@@ -22,7 +22,7 @@ const C={};
 	/** @const ウェブサイトURL */
 	C.WebPage		= "https://r-f-d.github.io/MeteorStriker/";
 	/** @const ドキュメントページURL */
-	C.DocumentPage	= "https://r-f-d.github.io/MeteorStriker/docs/";
+	C.DocumentPage	= "https://r-f-d.github.io/MeteorStriker/doc.html";
 
 
 return C;})();
