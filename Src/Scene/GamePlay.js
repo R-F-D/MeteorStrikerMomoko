@@ -233,8 +233,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 
 			this.sprites.distance.SetScale(1).SetVisible(false);
 			this.sprites.hitArea.SetVisible(false).SetPosition(48,140).SetScale(0);
-			this.sprites.bgGround.forEach(s=>s.SetPosition(0,512/2).SetOpacity(255).SetVisible(true));
 			this.sprites.bgSpace.forEach(s=>s.SetPosition(0,size.height/2).SetOpacity(255).SetVisible(false));
+			this.sprites.bgGround.forEach(sprite=>{
+				sprite
+					.SetPosition(0,512/2).SetOpacity(255).SetVisible(true)
+					.RunActions(
+						cc.delayTime(3),
+						cc.tintTo(1, 255,192,128),
+					);
+			});
 
 			//開始時テキスト
 			this.sprites.bgLaunch
@@ -371,6 +378,9 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 				this.nEmits.maxSimul	= 1;
 				this.acceptEmitting		= EmitEnergy.ACCEPTION_COUNT;
 				this.nEmits.total		= 0;
+
+				//背景のカラーを戻す
+				this.sprites.bgGround.forEach(sprite=>sprite.RunActions(cc.tintTo(2, 255,255,255)));
 
 				//実績
 				const currentArea	= this.aiming.GetCurrentArea();
