@@ -39,6 +39,7 @@ Effect.Emit	= class extends Effect.EffectBase{
 				v.index=0;
 			return true;
 		})
+		sound.Play(rc.sfx.emit);
 		return this;
 	}
 

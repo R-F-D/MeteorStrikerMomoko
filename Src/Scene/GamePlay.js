@@ -257,11 +257,15 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 							cc.scaleTo(0.5,1.5),
 							cc.moveTo(0.5,cc.p(size.width/2-16+i*32,size.height/2-1+18-i*36+40)),
 						],
-						cc.moveTo(1.0,cc.p(size.width/2+16+i*32,size.height/2+1+18-i*36+40)),
+						[
+							cc.moveTo(1.0,cc.p(size.width/2+16+i*32,size.height/2+1+18-i*36+40)),
+							cc.callFunc(()=> sound.Play(rc.sfx.btnHover) ),
+						],
 						[
 							cc.fadeTo(0.5,0),
 							cc.scaleTo(0.5,0.50),
 							cc.moveTo(0.5,cc.p(512+size.width/2+i*32,45+size.height/2+18-i*36+40)),
+							cc.callFunc(()=> sound.Play(rc.sfx.txtLaunch) ),
 						],
 						cc.callFunc(()=>this.sprites.txtLaunch[i].SetVisible(false))
 					);
@@ -348,6 +352,7 @@ Scene.GamePlay	= class extends Scene.SceneBase {
 		this.Sequences.DISCHARGE_FAILED
 			.PushStartingFunctions(()=>{
 				this.fx.preliminary.Destroy();
+				sound.Play(rc.sfx.fail);
 				Store.Insert(Store.Handles.GamePlay.NumSuccessiveHits,0,null);	//連続成功数の初期化
 			})
 			.PushUpdatingFunctions((/*dt*/)=>{
