@@ -24,8 +24,9 @@ layout: default
 
 
 # タイトル画面
+
 |メニュー|説明
-|--|--
+|---|---
 |Play|ゲームをプレイします。
 |設定<br>Settings|ゲームの設定を変更します。
 |実績と記録<br>Achievement and Records|ゲーム内実績と各種記録を閲覧します。
@@ -36,15 +37,17 @@ layout: default
 
 
 # リリースノート Release Notes
+
 |Date|Overview
-|--|--
+|---|---
 |2019-11-06|Release
 
 
 # システム要件 System Requirements
 動作確認の取れているブラウザの一覧です。
+
 |OS|Browsers
-|--|--
+|---|---
 |Windows|Google Chrome
 |Mac|Google Chrome, Safari
 |iOS|Google Chrome, Safari
