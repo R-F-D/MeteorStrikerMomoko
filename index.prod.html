@@ -43,17 +43,30 @@
 	</style>
 
 	<script>
-		function Hover(elem,isHover){
-			const images	= ["./Res/enter01.png","./Res/enter02.png",];
-			if(isHover)	elem.src = images[1];
-			else		elem.src = images[0];
+		let isHovered=false;
+		let idxBlinkImage = 0;
+		function Blink(elem){
+			if(isHovered)	return;
+			const images	= ["./Res/enter00.png","./Res/enter01.png",];
+			++idxBlinkImage;
+			if(images.length <= idxBlinkImage)	idxBlinkImage=0;
+			elem.src = images[idxBlinkImage];
 		}
+		function Hover(elem,isHover){
+			isHovered	= isHover;
+			const image	= "./Res/enter02.png";
+			if(isHover)	elem.src = image;
+			else		Blink(elem);
+		}
+		window.onload	= ()=>{
+			setInterval(Blink,500,document.getElementById("enterImage"));
+		};
 	</script>
 </head>
 <body>
 
 	<h1>メテオストライカー桃子 / MeteorStriker Momoko</h1>
-	<a href="./game.html"><img id="enterImage" src="./Res/enter01.png" onmouseover="Hover(this,true)" onmouseout="Hover(this,false)"></a>
+	<a href="./game.html"><img id="enterImage" src="./Res/enter00.png" onmouseover="Hover(this,true)" onmouseout="Hover(this,false)"></a>
 
 	<h2>はじめに / Introduction</h2>
 	<p>
@@ -94,6 +107,7 @@
 
 	<h2>作った人 / Developer</h2>
 	<p>
+		<img src="./Res/nnw.gif">
 		R.F.D./温泉ねずみ
 		<a href="https://twitter.com/R_F_D">[Twitter]</a>
 		<a href="https://github.com/R-F-D">[GitHub]</a>
