@@ -1,5 +1,5 @@
 ---
-title: メテオストライカー桃子 MeteorStriker Momoko
+title: あそびかた
 layout: default
 ---
 # あそびかた How to Play
