@@ -2,24 +2,45 @@
 title: プレス資料集
 layout: default
 ---
+Blog等で紹介していただける場合に、ぜひお使いください。
 
-# プレス資料集
 ## 概要
-「アイドルマスター ミリオンライブ！」シリーズを原作とした二次創作ゲーム。
-その登場人物の1人、周防桃子（すおうももこ）を主人公としている。<br>
-2017年5月にGREE版ミリオンライブで行われた「サイキックヒーローズガシャ」で登場したカード「地球の危機を救うため 周防桃子」「必殺のﾒﾃｵｽﾄﾗｲｸ! 周防桃子」が元ネタ。
+「アイドルマスター ミリオンライブ！」シリーズを原作とした二次創作ゲーム。<br>
+その登場人物の1人、周防桃子（すおうももこ）を主人公としている。
 
-## 連絡先
-- R.F.D./温泉ねずみ ([@R_F_D](https://twitter.com/R_F_D))
+2017年5月にGREE版ミリオンライブで行われた「サイキックヒーローズガシャ」で登場したカード「地球の危機を救うため 周防桃子」「必殺のメテオストライク! 周防桃子」が元ネタ。
+
+|項目|説明
+|--|--
+|プラットフォーム|各種ウェブブラウザ（OS・デバイス不問）
+|言語|日本語（デフォルト）<br>英語（機械翻訳）<br>繁体中国語、韓国語（機械翻訳、一部のみ対応）
+|プライバシーポリシー|ウェブサイトの表示に必要な情報を除き、取得・保存していない|
+|ゲームエンジン|Cocos2d-x
+|データ保持方法|Web Storage(Local Storage)（ブラウザ固有）
+
 
 ## リンク
-- [リリース告知ツイート](https://twitter.com/R_F_D/status/1192069223310188550)
-[[英語](https://twitter.com/R_F_D/status/1192071297389350912)]
-[[繁体中国語](https://twitter.com/R_F_D/status/1192073275184041984)]
-[[韓国語](https://twitter.com/R_F_D/status/1192072616401485824)]
-- [リザルトのシェアツイートのサンプル](https://twitter.com/R_F_D/status/1192069512733937664)
+- 関連ページ
+	- [メテオストライカー桃子 トップページ](https://r-f-d.github.io/MeteorStriker/)
+	- [ドキュメントページ](https://r-f-d.github.io/MeteorStriker/doc.html)
+- SNS
+	- [リリース告知ツイート](https://twitter.com/R_F_D/status/1192069223310188550)
+		([英語](https://twitter.com/R_F_D/status/1192071297389350912))
+		([繁体中国語](https://twitter.com/R_F_D/status/1192073275184041984))
+		([韓国語](https://twitter.com/R_F_D/status/1192072616401485824))
+	- [リザルトのシェアツイートのサンプル](https://twitter.com/R_F_D/status/1192069512733937664)
+	- ハッシュタグ 「[#メテオ桃子だけど](https://twitter.com/hashtag/メテオ桃子だけど)(日本語版)」 「[#MeteorMomoko](https://twitter.com/hashtag/MeteorMomoko)(外国語版共通)」
+
+
+## クレジット
+- 企画・開発・その他
+	- R.F.D./温泉ねずみ ([Twitter](https://twitter.com/R_F_D))
+- 製作
+	-  ODプロジェクト ([WebPage](odproject.net))
+
 
 ## 画像
+ゲーム画像はファーストリリース時のもの。
 ### タイトル
 [![タイトル00](Res/Press/playimage-title00.png)](Res/Press/playimage-title00.png)
 ### ゲームプレイ

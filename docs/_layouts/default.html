@@ -21,6 +21,9 @@
 			color:	#EFB854;
 			text-decoration:none;
 		}
+		h1 .siteTitle{
+			font-size: 75%;
+		}
 		h2{
 			margin: 25px 20px 5px 20px;
 			text-decoration:underline #FF7777;
@@ -37,6 +40,7 @@
 			background-color:	#444444;
 			padding:5px;
 		}
+		{{page.stylesheet}}
 	</style>
 
 </head>
@@ -45,7 +49,14 @@
 
 		<section>
 			<div id="title">
-				<h1>{{site.title}}</h1>
+				<h1>
+					{% if page.title %}
+						<span class="siteTitle">{{site.title}}</span><br>
+						<span class="pageTitle"></span>{{page.title}}
+					{% else %}
+						{{site.title}}
+					{% endif %}
+				</h1>
 				<hr>
 			</div>
 
