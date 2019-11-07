@@ -1,13 +1,16 @@
 ---
-title: あそびかた
+title: ドキュメント
 layout: default
 ---
-# あそびかた How to Play
+
+## あそびかた How to Play
+ステップは3つ！
+
 1. 命中バーの中央を狙って長押し
 1. なるべくギリギリで離す
 1. 連打でパワーアップ！
 
-## もうすこし くわしく
+### もうすこし くわしく
 ゲームを初めて起動したときは設定画面が表示されます。
 必要に応じて言語やオーディオ項目を選択してください。
 
@@ -23,7 +26,7 @@ layout: default
 1. Backボタン、Retryボタン、Tweetボタンが表示されます。ぜひ結果をシェアしたり、ゲームを再トライして高スコアを狙ってください！
 
 
-# タイトル画面
+## タイトル画面 Title
 
 |メニュー|説明
 |---|---
@@ -36,14 +39,14 @@ layout: default
 |桃子<br>Momoko|桃子だけど。
 
 
-# リリースノート Release Notes
+## リリースノート Release Notes
 
 |Date|Overview
 |---|---
 |2019-11-06|Release
 
 
-# システム要件 System Requirements
+## システム要件 System Requirements
 動作確認の取れているブラウザの一覧です。
 
 |OS|Browsers
@@ -53,6 +56,6 @@ layout: default
 |iOS|Google Chrome, Safari
 
 
-# オープンソースのライセンス表記 Licenses
+## オープンソースのライセンス表記 Licenses
 [GitHubリポジトリ](https://github.com/R-F-D/MeteorStriker)を参照してください。
 
