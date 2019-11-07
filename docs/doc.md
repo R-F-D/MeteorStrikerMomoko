@@ -43,7 +43,7 @@ layout: default
 
 |Date|Overview
 |---|---
-|2019-11-06|Release
+|2019-11-06|First Release
 
 
 ## システム要件 System Requirements
@@ -56,6 +56,11 @@ layout: default
 |iOS|Google Chrome, Safari
 
 
-## オープンソースのライセンス表記 Licenses
-[GitHubリポジトリ](https://github.com/R-F-D/MeteorStriker)を参照してください。
+## ゲームデータの保持方法
+各種ゲームデータ（記録・実績・設定）は個別のブラウザに記録されています。<br>
+ブラウザのデータを削除したり、別のブラウザを使用した場合はゲームデータが引き継がれません。<br>
+ご了承ください。
 
+
+## オープンソース及びアセットのライセンス表記 Licenses
+[GitHubリポジトリ](https://github.com/R-F-D/MeteorStriker)を参照してください。
