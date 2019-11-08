@@ -31,8 +31,8 @@ layout: default
 |メニュー|説明
 |---|---
 |ゲームをプレイ<br>Play|ゲームをプレイします。
-|設定<br>Settings|ゲームの設定を変更します。一定の条件を満たさないと変更できない項目もあります。
-|実績と記録<br>Achievement and Records|ゲーム内実績と各種記録を閲覧します。実績解除あるいは記録のカウントが無い状態では詳細が表示されない項目もあります。
+|設定<br>Settings|ゲームの設定を変更します。<br>一定の条件を満たさないと変更できない項目もあります。
+|実績と記録<br>Achievement and Records|ゲーム内実績と各種記録を閲覧します。<br>実績解除あるいは記録のカウントが無い状態では詳細が表示されない項目もあります。
 |ハッシュタグ検索<br>Hashtag Search|Twitterでハッシュタグ「#メテオ桃子だけど」（日本語以外では #MeteorMomoko）を検索します。
 |ウェブページ<br>Webpages|ゲームのトップページへ移動します。
 |ゲームの遊び方<br>How to Play|ゲームのドキュメントを表示します。
@@ -41,14 +41,14 @@ layout: default
 
 ## リリースノート Release Notes
 
-|Date|Overview
+|日付|概要
 |---|---
 |2019-11-06|First Release
 
 
 ## システム要件 System Requirements
 
-|OS|Browsers
+|OS|ブラウザ
 |---|---
 |Windows|Google Chrome
 |Mac|Google Chrome, Safari
@@ -74,7 +74,7 @@ layout: default
 
 
 ## プライバシーポリシー Privacy
-ウェブサイトの表示に必要なものを除き、取得・保存していません。
+ウェブサイトの表示に必要なものを除き、ユーザの個人情報を取得・保存していません。
 
 ## オープンソース及びアセットのライセンス表記 Licenses
 [GitHubリポジトリ](https://github.com/R-F-D/MeteorStriker)を参照してください。
