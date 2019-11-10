@@ -2087,7 +2087,8 @@ var _initSys = function () {
      * @param {String} url
      */
     sys.openURL = function(url){
-        window.open(url);
+        //window.open(url);
+        window.location.href = url;
     };
 
     /**
