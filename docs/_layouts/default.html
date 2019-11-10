@@ -4,7 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
-	<title>{{ page.title }}</title>
+	{% if page.title %}
+		<title>{{page.title}} / {{ site.title }}</title>
+	{% else %}
+		<title>{{ site.title }}</title>
+	{% endif %}
+	<title>{{ site.title }}</title>
 	<link rel="icon" type="{{site.favicon.type}}" href="{{site.favicon.href}}" />
 
 	{% include inc-ogp.html %}
