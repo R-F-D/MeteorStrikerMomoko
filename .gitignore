@@ -16,5 +16,8 @@ package*.json
 .eslint*
 .babelrc
 build.xml
+*.gem*
+_site
+.jekyll-cache
 
 

@@ -9,7 +9,7 @@ rm ./docs/Src/project.json
 #mkdir ../Babel/MeteorStriker
 #mkdir ../Babel/MeteorStriker/res
 #cp Frameworks ../Babel/MeteorStriker/
-cp -va index.prod.html ../Babel/MeteorStriker/index.html
+cp -va index.html ../Babel/MeteorStriker/index.html
 cp -va project.json ../Babel/MeteorStriker/
 cp -va .cocos-project.json ../Babel/MeteorStriker/
 babel Main.js -d ../Babel/MeteorStriker/
@@ -23,5 +23,6 @@ mv ./game.min.js ./Src/
 cp -va ../project.prod.json ./Src/project.json
 rm ./build.xml
 rm ./project.json
+rm ./index.html
 cd ../
 

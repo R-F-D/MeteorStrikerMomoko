@@ -4,54 +4,19 @@
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
+	<title>{{ page.title }}</title>
 	<link rel="icon" type="{{site.favicon.type}}" href="{{site.favicon.href}}" />
 
-	{% seo %}
+	{% include inc-ogp.html %}
 
-	<style type="text/css">
-		@import url('https://fonts.googleapis.com/css?family=VT323');
-		@import url('https://fonts.googleapis.com/css?family=Kosugi+Maru');
-		body{
-			color:	#FFFFFF;
-			background-color:	#333333;
-			padding:	0px;
-			margin:	0px;
-		}
-		a{
-			color:	#EFB854;
-			text-decoration:	none;
-		}
-		h1 .siteTitle{
-			font-size: 75%;
-		}
-		h2{
-			margin: 25px 20px 5px 20px;
-			text-decoration:underline #FF7777;
-		}
-		h3{
-			margin-left:40px;
-			text-decoration:underline #FF7777;
-		}
-		p,ul,ol,table{
-			margin-left:	40px;
-		}
-		th,td{
-			border: 1px solid #000000;
-			padding:5px;
-		}
-		thead th,
-		thead td{
-			background-color:	#555555;
-			font-size:	90%;
-			padding-top:	1px;
-			padding-bottom:	1px;
-		}
-		tbody th,
-		tbody td{
-			background-color:	#444444;
-		}
-		{{page.stylesheet}}
-	</style>
+	<!-- Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="{{ '/assets/default.css' | relative_url }}">
+	<style type="text/css">{{page.stylesheet}}</style>
+
+	<!-- JavaScript -->
+	{% for file in page.scripts %}
+	<script src="{{ '/assets/' | relative_url }}{{file}}"></script>
+	{% endfor %}
 
 </head>
 <body>

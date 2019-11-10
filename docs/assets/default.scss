@@ -1,0 +1,49 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css?family=Kosugi+Maru');
+
+body{
+	color:	#FFFFFF;
+	background-color:	#333333;
+	padding:	0px;
+	margin:	0px;
+	font-family:	Kosugi Maru;
+}
+a{
+	color:	#EFB854;
+	text-decoration:	none;
+}
+h1{
+	margin: 25px;
+
+	.siteTitle{
+		font-size: 75%;
+	}
+}
+h2{
+	margin: 25px 20px 5px 20px;
+	text-decoration:underline #FF7777;
+}
+h3{
+	margin-left:40px;
+	text-decoration:underline #FF7777;
+}
+p,ul,ol,table{
+	margin-left:	40px;
+}
+th,td{
+	border: 1px solid #000000;
+	padding:5px;
+
+	thead &{
+		background-color:	#555555;
+		font-size:	90%;
+		padding-top:	1px;
+		padding-bottom:	1px;
+	}
+	tbody &{
+		background-color:	#444444;
+	}
+
+}
