@@ -221,7 +221,7 @@ var LocalizedTexts	= (()=>{return{
 		//チェックポイント：火星 Check Point : Mars
 		"GamePlay.Navigator.BrowAway.Mars":{	//宇宙よりも遠い場所
 			_:	"Here is a place futher than Mars.",
-			ja:	"火星よりも遠い場所だブーストがね",
+			ja:	"火星よりも遠い場所だね",
 			tw:	"",
 			ko:	"",
 		},
@@ -1098,7 +1098,7 @@ var LocalizedTexts	= (()=>{return{
 		},
 		"Achievement.Action.Complete.Text":{
 			_:	"Unlocked all achievements.\nThe meteorite was KO in one!",
-			ja:	"全ての実績を解放した。\n隕石なんて一発でKOだったね!",
+			ja:	"全ての実績を解除した。\n隕石なんて一発でKOだったね!",
 			tw:	"",
 			ko:	"",
 		},
