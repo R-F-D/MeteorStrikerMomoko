@@ -3,9 +3,10 @@ title: プレス資料集
 layout: default
 stylesheet: img{width:128px;}
 ---
-Blog等で紹介していただける場合に、ぜひお使いください。
+画像等をまとめたページです。<br>
+SNS・Blog・動画サイト等で紹介していただける場合に、ぜひお使いください。
 
-## 概要
+## 概要 <i>Overview</i>
 「アイドルマスター ミリオンライブ！」シリーズを原作とした二次創作ゲーム。<br>
 その登場人物の1人、周防桃子（すおうももこ）を主人公としている。
 
@@ -20,7 +21,7 @@ Blog等で紹介していただける場合に、ぜひお使いください。
 |データ保持方法|Web Storage(Local Storage)（ブラウザ固有）
 
 
-## リンク
+## リンク <i>Links</i>
 - 関連ページ
 	- [メテオストライカー桃子 トップページ](https://r-f-d.github.io/MeteorStriker/)
 	- [ドキュメントページ](https://r-f-d.github.io/MeteorStriker/doc.html)
@@ -33,34 +34,34 @@ Blog等で紹介していただける場合に、ぜひお使いください。
 	- ハッシュタグ 「[#メテオ桃子だけど](https://twitter.com/hashtag/メテオ桃子だけど)(日本語版)」 「[#MeteorMomoko](https://twitter.com/hashtag/MeteorMomoko)(外国語版共通)」
 
 
-## クレジット
+## クレジット <i>Credits</i>
 - 企画・開発・その他
 	- R.F.D./温泉ねずみ ([Twitter](https://twitter.com/R_F_D))
 - 製作
 	-  ODプロジェクト ([WebPage](odproject.net))
 
 
-## 画像
+## 画像 <i>Images</i>
 ゲーム画像はファーストリリース時のもの。
-### タイトル
+### タイトル <i>Title</i>
 [![タイトル00](Res/Press/playimage-title00.png)](Res/Press/playimage-title00.png)
-### ゲームプレイ
+### ゲームプレイ <i>Game Play</i>
 [![ゲームプレイ00](Res/Press/playimage-play00.png)](Res/Press/playimage-play00.png)
 [![ゲームプレイ01](Res/Press/playimage-play01.png)](Res/Press/playimage-play01.png)
 [![ゲームプレイ02](Res/Press/playimage-play02.png)](Res/Press/playimage-play02.png)
 [![ゲームプレイ03](Res/Press/playimage-play03.png)](Res/Press/playimage-play03.png)
 [![ゲームプレイ04](Res/Press/playimage-play04.png)](Res/Press/playimage-play04.png)
 [![ゲームプレイ05](Res/Press/playimage-play05.png)](Res/Press/playimage-play05.png)
-### 実績と記録
+### 実績と記録 <i>Achievements and Records</i>
 [![実績と記録00）](Res/Press/playimage-records00.png)](Res/Press/playimage-records00.png)
 [![実績と記録01](Res/Press/playimage-records01.png)](Res/Press/playimage-records01.png)
-### 設定
+### 設定 <i>Settings</i>
 [![設定00](Res/Press/playimage-settings00.png)](Res/Press/playimage-settings00.png)
 [![設定01](Res/Press/playimage-settings01.png)](Res/Press/playimage-settings01.png)
-### その他
+### その他 <i>Others</i>
 [![その他00](Res/thumbnail.png)](Res/thumbnail.png)
 
 
-## 動画
+## 動画 <i>Movies<i>
 - [開発中のタイトル画面](https://twitter.com/R_F_D/status/1158364928475983872)
 

@@ -19,7 +19,7 @@ scripts: [enterImage.js,]
 </a>
 
 <p class="tagline">
-	<span class="emdash">――</span> {{site.description}}
+	<span class="emdash">―――</span> {{site.description}}
 </p>
 
 

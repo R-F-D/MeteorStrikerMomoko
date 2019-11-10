@@ -27,7 +27,7 @@
 				<h1>
 					{% if page.title %}
 						<span class="siteTitle">{{site.title}}</span><br>
-						<span class="pageTitle"></span>{{page.title}}
+						<span class="pageTitle">{{page.title}}</span>
 					{% else %}
 						{{site.title}}
 					{% endif %}
@@ -40,5 +40,10 @@
 		</section>
 
 	</div>
+
+	<footer>
+		<a href="./">&gt;&gt; {{site.title}}</a>
+	</footer>
+
 </body>
 </html>

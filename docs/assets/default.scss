@@ -9,10 +9,15 @@ body{
 	padding:	0px;
 	margin:	0px;
 	font-family:	Kosugi Maru;
+	line-height:	150%;
 }
 a{
 	color:	#EFB854;
 	text-decoration:	none;
+
+	&:hover{
+		text-decoration:	underline;
+	}
 }
 h1{
 	margin: 25px;
@@ -22,28 +27,56 @@ h1{
 	}
 }
 h2{
-	margin: 25px 20px 5px 20px;
-	text-decoration:underline #FF7777;
+	margin: 50px 25px 5px 20px;
+	padding-left:5px;
+	background:	linear-gradient(transparent 60%, #FFAF00 60%);
+	text-shadow: +1px +1px 5px #333,
+				 -1px +1px 5px #333,
+				 +1px -1px 5px #333,
+				 -1px -1px 5px #333;
 }
-h3{
-	margin-left:40px;
-	text-decoration:underline #FF7777;
+h3,h4{
+	margin:	5px 35px;
+	padding: 0px 5px;
+	background:	linear-gradient(transparent 95%, #FFAF00 95%);
+	display:	inline-block;
+}
+h2,h3,h4{
+	i{
+		font-style:	italic;
+		font-size:	75%;
+	}
+}
+footer{
+	text-align:center;
+	margin-top:75px;
+	margin-bottom:25px;
 }
 p,ul,ol,table{
-	margin-left:	40px;
+	section > &{
+		margin-left:	40px;
+	}
 }
 th,td{
 	border: 1px solid #000000;
-	padding:5px;
+	padding:8px;
 
 	thead &{
 		background-color:	#555555;
 		font-size:	90%;
-		padding-top:	1px;
-		padding-bottom:	1px;
+		padding-top:	0px;
+		padding-bottom:	0px;
 	}
 	tbody &{
 		background-color:	#444444;
 	}
+}
+.tagline{
+	font-family:serif;
+	font-style:italic;
+	padding:	10px 20px;
 
+	.emdash{
+		letter-spacing:	-2px;
+	}
 }
