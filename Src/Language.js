@@ -309,7 +309,7 @@ var LocalizedTexts	= (()=>{return{
 
 		"Settings.Locale.Aleart":{	//Message When Switch Language
 			_:	"Sorry.\nThe texts are machine translated.",
-			en:	"Sorry.\nThe texts are machine translated.\n\nPlease send me your translation!",
+			en:	"The original English texts were originally machine translated by R.F.D.,\nthe developer of this game.\n\nThe English texts were improved by MattMayuga.",
 			//ja: アラートなし No alert
 			tw:	"抱歉。\n這些文本是機器翻譯的。\n現在，大多數文本都未翻譯。\n請給我您的翻譯！",
 			ko:	"죄송합니다.\n텍스트는 기계 번역됩니다.\n이제 대부분의 텍스트가 번역되지 않았습니다.\n번역을 보내주세요!",
@@ -415,7 +415,7 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Storage.Label.Remove":			{_:	"Delete all",			ja:"全削除",		tw:"全部移除",	ko:"전체 제거",	},	//Remove all data
 
 		"Settings.Storage.Confirm.RemoveSettings":{
-			_:	"Are you sure you want to delete game settings",
+			_:	"Are you sure you want to delete game settings?",
 			ja:	"ゲーム設定を削除しますか？",
 			tw:	"",
 			ko:	"",
@@ -492,7 +492,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Records.GamePlay.NumPassings.01.Secret":{
-			_:	"???????? Passings",
+			_:	"???????? passes",
 			ja:	"？？？？通過回数",
 			tw:	"",
 			ko:	"",
@@ -618,7 +618,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//エミット最高倍率 Best Emitting Rate
 		"Records.GamePlay.MaxEmittings":{
-			_:	"Max Emitting Rate",
+			_:	"Max emitting rate",
 			ja:	"最高エミット倍率",
 			tw:	"",
 			ko:	"",
@@ -648,7 +648,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//リトライ回数 Number of Retrys
 		"Records.Action.NumRetrys":{
-			_:	"Retries",
+			_:	"Times retried",
 			ja:	"リトライ回数",
 			tw:	"",
 			ko:	"",
@@ -694,7 +694,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//実績解除率（トータル） Ratio of All Unlocked Achievements
 		"Records.Action.TotalUnlockedAchievements":{
-			_:	"Achievement Ratio",
+			_:	"Achievement progress",
 			ja:	"実績達成率",
 			tw:	"",
 			ko:	"",
@@ -974,7 +974,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"젠틀 에밋",
 		},
 		"Achievement.Emit.Many01.Text":{
-			_:	"Emitted $0$1 and above.\nWhat's a thrill-seeking emitt without a thrill...",
+			_:	"Emitted $0$1 and above.\nWhat's a thrill-seeking emit without a thrill...",
 			ja:	"エミット倍率$0$1以上を出した。\nスリルのないエミットなんて…",
 			tw:	"",
 			ko:	"",
@@ -1154,7 +1154,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Achievement.Action.Share02.Text":{
-			_:	"You shared results $0 times.\n($1 + $2 required)\nEveryone, have a great time!",
+			_:	"You shared your results $0 times.\n($1 + $2 required)\nEveryone, have a great time!",
 			ja:	"結果を$0回シェアした。（要$1$2以上）\nみんな、思いっきり楽しんでってねー！",
 			tw:	"",
 			ko:	"",
@@ -1168,7 +1168,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Achievement.Action.PlayTime.Text":{
-			_:	"Total play time was over $0 seconds.\nThank you for the memories.",
+			_:	"Your total play time was over $0 seconds.\nThank you for the memories.",
 			ja:	"合計プレイ時間が$0秒を越えた。思い出をありがとう。",
 			tw:	"",
 			ko:	"",
@@ -1182,7 +1182,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Achievement.Action.BootDays.Text":{
-			_:	"The game was booted up for $0 days in total.\nFeel like a home game...",
+			_:	"You started the game for $0 days in total.\nFeel like a home game...",
 			ja:	"計$0日間ゲームを起動した。\nFeel like a home game...",
 			tw:	"",
 			ko:	"",
