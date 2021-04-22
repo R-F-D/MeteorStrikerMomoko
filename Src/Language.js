@@ -172,7 +172,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//結果表示 Result
 		"GamePlay.Navigator.Leave":{	//宇宙戦艦ヤマト OPナレーション
-			_:	"Momoko-chan has now arrived in the Great Million\Universe, n$0 away from Earth!",
+			_:	"Momoko-chan has now arrived in the Great Million\nUniverse, $0 away from Earth!",
 			ja:	"桃子ちゃんは、地球から$0の\n彼方にある大ミリオン宇宙へ、いま到達したよ",
 			tw:	"",
 			ko:	"",
@@ -180,7 +180,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//リセットボタン説明 Reset Button
 		"GamePlay.Navigator.Result.Reset":{
-			_:	"Go back to the title screen",
+			_:	"Go back to the title screen.",
 			ja:	"タイトル画面にもどるよ",
 			tw:	"",
 			ko:	"",
@@ -188,7 +188,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//リトライボタン説明 Retry Button
 		"GamePlay.Navigator.Result.Retry":{
-			_:	"Play the game again",
+			_:	"Play the game again.",
 			ja:	"もういちどゲームをやるよ",
 			tw:	"",
 			ko:	"",
@@ -196,7 +196,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//シェアボタン説明 Share Button
 		"GamePlay.Navigator.Result.Share":{
-			_:	"Post your results on Twitter",
+			_:	"Post your results on Twitter.",
 			ja:	"Twitterに結果をつぶやくよ",
 			tw:	"",
 			ko:	"",
@@ -212,7 +212,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//チェックポイント：金星 Check Point : Venus
 		"GamePlay.Navigator.BrowAway.Venus":{
-			_:	"You've come to see Venus, Momoko?",
+			_:	"You've come to see Venus, Momoko-chan?",
 			ja:	"金星を見ておいでですか、桃子ちゃん",	//銀河英雄伝説#01
 			tw:	"",
 			ko:	"",
@@ -266,7 +266,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//ロックパネル（ロック時） Locked
 		"Settings.LockPanel.Locked": {
-			_:	"This item is locked.",
+			_:	"Item locked",
 			ja:	"この項目はロックされています",
 			tw:	"該選擇器已鎖定",
 			ko:	"이 선택기가 잠겨 있습니다.",
@@ -288,7 +288,7 @@ var LocalizedTexts	= (()=>{return{
 		},
 		//ロックパネルの達成された解除条件 Filled Conditions
 		"Settings.LockPanel.Filled": {
-			_:	"Filled: $0",
+			_:	"Achieved: $0",
 			ja:	"達成：$0",
 			tw:	"已清除: $0",
 			ko:	"클리어: $0",
@@ -355,7 +355,7 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Meteorite.Label.Triangle":	{_:"Triangle",		en:"△Triangle",    ja:"△さんかく",	  tw:"△三角",    ko:"△삼각",	},	//Triangle
 
 		"Settings.Meteorite.Locked":	{
-			_:	"Unlocking achievement \"Momoko Dakedo.\"",
+			_:	"Get the achievement \"Momoko Dakedo.\"",
 			ja:	"実績「桃子だけど。」の解除",
 			tw:	"解鎖成就\"桃子Dakedo。\"",
 			ko:	"과제\"모모코Dakedo.\"해제",
@@ -404,7 +404,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//ストレージ管理 Storage Management
 		"Settings.Storage":	{
-			_:	"Storage Management",
+			_:	"Storage management",
 			ja:	"ストレージ管理",
 			tw:	"倉儲管理",
 			ko:	"스토리지 관리",
@@ -778,7 +778,7 @@ var LocalizedTexts	= (()=>{return{
 			ko:	"",
 		},
 		"Records.Action.NumNavigates.02.Secret":{
-			_:	"???????? Navigates",
+			_:	"Times Navigated as ????????",
 			ja:	"？？？？のナビ回数",
 			tw:	"",
 			ko:	"",
