@@ -1,7 +1,7 @@
 # MeteorStriker Momoko
-"No good, everyone in the city is panicking... And... if we don't do something, that meteorite is going to hit the earth. Momoko has to do something about it...!" -Momoko Suou
+"No good, everyone in the city is panicking... And... if we don't do something, that meteorite is going to hit Earth. Momoko has to do something about it...!" -Momoko Suou
 
-In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has become a psychic superhero! This fangame was created by R-F-D, with the English text improved by MattMayuga.
+In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has become a psychic superhero! This fangame was created by R.F.D, with the English text improved by MattMayuga.
 
 # Links
 ## Web page
