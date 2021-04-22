@@ -56,7 +56,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//レコードボタン Records Button
 		"Title.Button.Records":{
-			_:	"View your achievements and records",
+			_:	"View your achievements and records.",
 			ja:	"実績と記録",
 			tw:	"成就和記錄",
 			ko:	"실적 및 기록",
@@ -72,7 +72,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//設定ボタン Settings Button
 		"Title.Button.Settings":{
-			_:	"Change the game settings",
+			_:	"Change the game settings.",
 			ja:	"設定",
 			tw:	"設定",
 			ko:	"설정",
@@ -80,7 +80,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//ウェブページボタン Webpage Button
 		"Title.Button.Home":{
-			_:	"The game's webpage",
+			_:	"The game's webpage.",
 			ja:	"ウェブページ",
 			tw:	"網頁",
 			ko:	"웹 페이지",
@@ -88,7 +88,7 @@ var LocalizedTexts	= (()=>{return{
 
 		//ハッシュタグ検索 Hashtag Search Button
 		"Title.Button.Search":{
-			_:	"Do a hashtag search",
+			_:	"Do a hashtag search.",
 			ja:	"ハッシュタグ検索",
 			tw:	"標籤搜索",
 			ko:	"해시 태그 검색",
@@ -308,8 +308,8 @@ var LocalizedTexts	= (()=>{return{
 		"Settings.Locale.Label.ko":	{_:	"한국\nKorean",},			//Korea
 
 		"Settings.Locale.Aleart":{	//Message When Switch Language
-			_:	"Sorry.\nThe texts are machine translated.",
-			en:	"The original English texts were originally machine translated by R.F.D.,\nthe developer of this game.\n\nThe English texts were improved by MattMayuga.",
+			_:	"Sorry.\nThe texts are machine-translated.",
+			en:	"The original English texts were originally machine-translated by R.F.D.,\nthe developer of this game.\n\nThe English texts were improved by MattMayuga.",
 			//ja: アラートなし No alert
 			tw:	"抱歉。\n這些文本是機器翻譯的。\n現在，大多數文本都未翻譯。\n請給我您的翻譯！",
 			ko:	"죄송합니다.\n텍스트는 기계 번역됩니다.\n이제 대부분의 텍스트가 번역되지 않았습니다.\n번역을 보내주세요!",
