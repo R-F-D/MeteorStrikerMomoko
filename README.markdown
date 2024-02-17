@@ -64,7 +64,7 @@ For information on this game in your language, please click on one of the links 
 
 ©窪岡俊之　THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2024 ALL RIGHTS RESERVED.
 
-THE IDOLM@STER、THE IDOLM@STER MILLION LIVE!、THE IDOLM@STER MILLION LIVE!: Theater Days、および関連するすべてのキャラクターと要素は、株式会社バンダイナムコエンターテインメントの商標および著作権です。
+アイドルマスター、アイドルマスター ミリオンライブ！、アイドルマスター ミリオンライブ！ シアターデイズ、および関連するすべてのキャラクターと要素は、株式会社バンダイナムコエンターテインメントの商標および著作権です。
 
 本製品は公式の製品ではないため、株式会社バンダイナムコエンターテインメントの承認や関係を持っていません。
 
@@ -88,7 +88,7 @@ In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has beco
 
 * [#MeteorMomoko](https://twitter.com/hashtag/MeteorMomoko)
 
-## レポジトリー Repositories
+### Repositories
 
 * [GitHub repository](https://github.com/MattMayuga/MeteorStriker)
 
@@ -105,7 +105,7 @@ In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has beco
 
 * 텍스트는 기계 번역됩니다. 번역을 보내주세요!
 
-## システム要件 System requirements
+## System requirements
 
 * **Windows**
 
