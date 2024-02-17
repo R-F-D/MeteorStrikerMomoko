@@ -29,7 +29,7 @@ For information on this game in your language, please click on one of the links 
 * [R.F.D.の独自レポジトリ](https://github.com/R-F-D/MeteorStriker)
 
 # 日本語をご存知の方以外へのお願い
-*Src/Language.js*をご確認ください。
+* Src/Language.js*をご確認ください。
 
 * 日本語と英語以外のテキストは機械翻訳されてたものです。翻訳ファイル募集中です。
 
@@ -132,7 +132,7 @@ In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has beco
 
 ©Toshiyuki Kubooka THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2024 ALL RIGHTS RESERVED.
 
-THE IDOLM@STER, THE IDOLM@STER MILLION LIVE!, THE IDOLM@STER MILLION LIVE!: Theater Days, and all related characters and elements are trademarks and copyright of Bandai Namco Entertainment Inc.
+THE IDOLM@STER, THE IDOLM@STER MILLION LIVE!, THE IDOLM@STER MILLION LIVE!: Theater Days, and all related characters and elements are trademarks and copyrights of Bandai Namco Entertainment Inc.
 
 NOT AN OFFICIAL THE IDOLM@STER PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH BANDAI NAMCO Entertainment Inc.
 
