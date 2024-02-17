@@ -62,7 +62,7 @@ For information on this game in your language, please click on one of the links 
  * Chromiumベースのブラウザ（Google Chrome、Edge、Operaなど）
    
 
-©窪岡俊之　THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2023 ALL RIGHTS RESERVED.
+©窪岡俊之　THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2024 ALL RIGHTS RESERVED.
 
 THE IDOLM@STER、THE IDOLM@STER MILLION LIVE!、THE IDOLM@STER MILLION LIVE!: Theater Days、および関連するすべてのキャラクターと要素は、株式会社バンダイナムコエンターテインメントの商標および著作権です。
 
@@ -130,7 +130,7 @@ In this game, you play as Momoko from THE iDOLM@STER MILLION LIVE!, who has beco
 　* Any Chromium-based browser such as Google Chrome, Edge, Opera, etc. 
    
 
-©Toshiyuki Kubooka THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2023 ALL RIGHTS RESERVED.
+©Toshiyuki Kubooka THE IDOLM@STER™& ©Bandai Namco Entertainment Inc. 2005, 2017, 2024 ALL RIGHTS RESERVED.
 
 THE IDOLM@STER, THE IDOLM@STER MILLION LIVE!, THE IDOLM@STER MILLION LIVE!: Theater Days, and all related characters and elements are trademarks and copyright of Bandai Namco Entertainment Inc.
 
